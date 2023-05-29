@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Flickr.Net.Core\FlickrNet.Core.csproj" />
+    <ProjectReference Include="..\Flickr.Net.Core\Flickr.Net.Core.csproj" />
   </ItemGroup>
 
 </Project>
