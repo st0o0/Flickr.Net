@@ -3,13 +3,18 @@ name: .NET Continuous Deployment
 on:
   push:
     branches: ["dev", "master"]
+  pull_request_target:
+    branches: ["dev", "master"]
+    types:
+      - closed
+  workflow_dispatch:
     
 env:
   DOTNET_VERSION: '7.0.x'
 
 jobs:
   if_merged:
-    if: ${{ github.event.pull_request.merged }}
+    if: ${{ github.event_name == 'push' || github.event.pull_request.merged == true }}
     runs-on: ubuntu-latest
     steps:
     - run: |
