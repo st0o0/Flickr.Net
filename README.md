@@ -1,0 +1,1 @@
+# FlickrNet.Core
