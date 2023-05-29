@@ -2,9 +2,7 @@ name: .NET Continuous Deployment
 
 on:
   push:
-    branches: [master, dev]
-    paths:
-      - src/**
+    branches: [dev, master]
 
 env:
   DOTNET_VERSION: '7.0.x'
