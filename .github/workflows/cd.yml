@@ -1,0 +1,92 @@
+name: .NET Continuous Deployment
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - src/Flickr.Net/**
+
+env:
+  DOTNET_VERSION: '7.0.x'
+
+jobs:
+  test:
+    name: Test Project
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+      - name: Test
+        run: dotnet test --logger "trx;LogFileName=test-results.trx" ./src/Flickr.Net/Flickr.Net.sln
+      - name: Test Report
+        uses: dorny/test-reporter@v1
+        if: allways()   # run this step even if previous step failed
+        with:
+          name: Dotnet Tests            # Name of the check run which will be created
+          path: "**/test-results.trx"  # Path to test results
+          reporter: dotnet-trx        # Format of test results
+          fail-on-error: true
+
+  semantic-release:
+    needs: test
+    name: Create a Package Release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3 # Need the full commit history for conventional commit
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+      - name: Bump version and push tag
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v6.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create a GitHub release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ steps.tag_version.outputs.new_tag }}
+          name: Release ${{ steps.tag_version.outputs.new_tag }}
+          body: ${{ steps.tag_version.outputs.changelog }}
+      - name: Create Nuget Package
+        run: dotnet build -c Release ./src/Flickr.Net/Flickr.Net.Core/Flickr.Net.Core.csproj && dotnet pack -c Release -p:PackageVersion=${{ steps.tag_version.outputs.new_version }} -o . ./src/Flickr.Net/Flickr.Net.Core/Flickr.Net.Core.csproj
+      - name: Upload Package for Publishing
+        uses: actions/upload-artifact@v3
+        with:
+          name: PackedLib
+          path: ./*.nupkg
+
+  github-publish:
+    needs: semantic-release
+    name: Publish to Github
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download built project
+        uses: actions/download-artifact@v3
+        with:
+          name: PackedLib
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+      - name: Push Package to GitHub
+        run: dotnet nuget push --api-key ${{secrets.GITHUB_TOKEN}} --source "https://nuget.pkg.github.com/st0o0/index.json" *.nupkg
+
+  nuget-publish:
+    needs: semantic-release
+    name: Publish to Nuget
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download built project
+        uses: actions/download-artifact@v3
+        with:
+          name: PackedLib
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+      - name: Push Package to Nuget
+        run: dotnet nuget push --api-key ${{secrets.NUGET_KEY}} --source "https://api.nuget.org/v3/index.json" *.nupkg
