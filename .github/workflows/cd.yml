@@ -11,7 +11,7 @@ env:
 
 jobs:
   test:
-    name: Test Project
+    name: Testing Solution
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -23,6 +23,10 @@ jobs:
         run: dotnet test --logger "trx;LogFileName=test-results.trx" ./src/Flickr.Net.sln
       - name: Test Report
         uses: dorny/test-reporter@v1
+        permissions:
+          id-token: write
+          contents: read
+          checks: write
         if: always()   # run this step even if previous step failed
         with:
           name: Dotnet Tests            # Name of the check run which will be created
