@@ -2,9 +2,9 @@ name: .NET Continuous Integration
 
 on:
   pull_request:
-    branches: [master, dev]
+    branches: [dev]
   push:
-    branches: [master, dev]
+    branches: [dev]
 
 jobs:
   test:
@@ -15,7 +15,18 @@ jobs:
           contents: read
           checks: write
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Setup git verison
+        uses: gittools/actions/gitversion/setup@v0
+        with:
+          versionSpec: '5.x'
+      - name: Calcuate git version
+        uses: gittools/actions/gitversion/execute@v0
+      - name: Display git version
+        run: echo env.nuGetVersion
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
