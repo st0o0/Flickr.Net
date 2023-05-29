@@ -48,9 +48,8 @@ jobs:
      - name: Calcuate git version
        uses: gittools/actions/gitversion/execute@v0
      - name: Display git version
-       run: |
-          echo "NuGetVersion: ${{ env.nuGetVersion }}"
-          echo "NuGetPreReleaseTag: ${{ env.nuGetPreReleaseTag }}"
+       run: | 
+          echo "NuGetVersion: ${{ env.GitVersion_NuGetVersion }}"
      - name: Create a GitHub release
        uses: ncipollo/release-action@v1
        with:
