@@ -16,6 +16,7 @@ jobs:
         echo The PR was merged
         
   test:
+    needs: if_merged
     name: Testing Solution
     runs-on: ubuntu-latest
     permissions:
