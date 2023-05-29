@@ -1,10 +1,8 @@
 name: .NET Continuous Deployment
 
 on:
-  pull_request:
+  push:
     branches: ["dev", "master"]
-    types: 
-      -closed
     
 env:
   DOTNET_VERSION: '7.0.x'
