@@ -3,6 +3,11 @@ name: .NET Continuous Deployment
 on:
   push:
     branches: ["dev", "master"]
+  pull_request_target:
+    branches: ["dev", "master"]
+    types:
+      - closed
+  workflow_dispatch:
     
 env:
   DOTNET_VERSION: '7.0.x'
