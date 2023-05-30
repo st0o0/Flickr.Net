@@ -53,7 +53,7 @@ steps:
       projects: '**/*.@(Test|Tests).csproj'
       arguments: >-
         --no-build
-        --configuration ${{ parameters.buildConfiguration }}
+        --configuration $(buildConfiguration)
         --logger "trx;LogFileName=testresults.trx"
       publishTestResults: true
         

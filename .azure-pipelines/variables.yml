@@ -7,7 +7,7 @@ variables:
   - name: vmImage
     value: ubuntu-22.04
   - name: solutionPath
-  - value: src/Flickr.Net.sln
+    value: src/Flickr.Net.sln
   - name: projectPath
     value: src/Flickr.Net.Core/Flickr.Net.Core.csproj
   - name: internalFeedName
