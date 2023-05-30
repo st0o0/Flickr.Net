@@ -42,7 +42,7 @@ stages:
               --configuration $(buildConfiguration)
               -p:Version=$(ciVersion)
               -p:CI_EMBED_SYMBOLS=true
-              $(projectPath)
+              $(solutionPath)
             displayName: Create CI nuget package
           - publish: $(Build.ArtifactStagingDirectory)/packages
             artifact: packages
