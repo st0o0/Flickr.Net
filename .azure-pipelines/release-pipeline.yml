@@ -25,38 +25,65 @@ steps:
     inputs:
       packageType: sdk
       version: $(netSdkVersion)
-  - pwsh: >
-      dotnet build
-      --configuration $(buildConfiguration)
-      -p:Version=$(releaseVersion)
-      $(projectPath)
-    displayName: Build project with release version
-  - pwsh: >
-      dotnet pack
-      --no-build
-      --output "$(Build.ArtifactStagingDirectory)/packages"
-      --configuration $(buildConfiguration)
-      -p:Version=$(releaseVersion)
-      $(projectPath)
-    displayName: Create release nuget package
-  - pwsh: >
-      dotnet nuget push
-      $(Build.ArtifactStagingDirectory)/packages/*.nupkg
-      --api-key $(NugetApiKey)
-      --skip-duplicate
-      --source https://api.nuget.org/v3/index.json
-    displayName: Publish package to NuGet
+
+  - task: gitversion/setup@0
+      displayName: 'Setup git version'
+      inputs:
+        versionSpec: '5.x'
+
+  - task: gitversion/execute@0
+    displayName: 'Calculate git version'
+    inputs:
+      targetPath: '$(System.DefaultWorkingDirectory)'
+      additionalArguments: '/updateprojectfiles'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Build projects [$(buildConfiguration)]'
+    inputs:
+      command: 'build'
+      projects: '$(projectPath)
+      arguments: '--configuration $(buildConfiguration) --no-restore'
+      versioningScheme: byEnvVar
+      versionEnvVar: 'GitVersion.SemVer'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Run unit tests'
+    inputs:
+      command: 'test'
+      projects: '**/*.@(Test|Tests).csproj'
+      arguments: >-
+        --no-build
+        --configuration ${{ parameters.buildConfiguration }}
+        --logger "trx;LogFileName=testresults.trx"
+      publishTestResults: true
+        
+  - task: DotNetCoreCLI@2
+    displayName: 'Create NuGet package'
+    inputs:
+      command: 'pack'
+      packagesToPack: '**/*.csproj;!**/*.Test.csproj'
+      versioningScheme: 'byEnvVar'
+      versionEnvVar: 'GitVersion.NuGetVersion'
+
+  - task: NuGetCommand@2
+    displayName: 'Push NuGet package'
+    inputs:
+      command: 'push'
+      packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+      vstsFeed: $(internalFeedName)
+      publishVstsFeed: $(internalFeedName)
+
   - task: GitHubRelease@0
     inputs:
       action: create
       target: $(Build.SourceVersion)
       tagSource: manual
-      tag: v$(releaseVersion)
-      tagPattern: v$(releaseVersion)
-      title: v$(releaseVersion)
+      tag: v$(GitVersion.NuGetVersion)
+      tagPattern: v$(GitVersion.NuGetVersion)
+      title: v$(GitVersion.NuGetVersion)
       githubConnection: githubRelease
       repositoryName: $(Build.Repository.Name)
-      isPreRelease: $(isPreRelease)
+      isPreRelease: false
       addChangeLog: false
       assets: $(Build.ArtifactStagingDirectory)/packages/*
     displayName: Create Github Release
