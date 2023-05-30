@@ -78,13 +78,13 @@ stages:
           - task: DotNetCoreCLI@2
             displayName: 'Run unit tests'
             inputs:
-            command: 'test'
-            projects: '**/*.@(Test|Tests).csproj'
-            arguments: >-
-              --no-build
-              --configuration ${{ parameters.buildConfiguration }}
-              --logger "trx;LogFileName=testresults.trx"
-            publishTestResults: true
+              command: 'test'
+              projects: '**/*.@(Test|Tests).csproj'
+              arguments: >-
+                --no-build
+                --configuration ${{ parameters.buildConfiguration }}
+                --logger "trx;LogFileName=testresults.trx"
+              publishTestResults: true
 
   - stage: PublishArtifacts
     dependsOn: Build
