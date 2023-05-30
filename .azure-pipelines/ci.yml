@@ -42,7 +42,7 @@ stages:
           - task: DotNetCoreCLI@2
             inputs:
               command: 'build'
-              projects: '$(projectPath)
+              projects: '$(projectPath)'
               arguments: '--configuration $(buildConfiguration) --no-restore'
               versioningScheme: byEnvVar
               versionEnvVar: 'GitVersion.SemVer'

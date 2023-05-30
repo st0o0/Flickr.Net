@@ -41,7 +41,7 @@ steps:
     displayName: 'Build projects [$(buildConfiguration)]'
     inputs:
       command: 'build'
-      projects: '$(projectPath)
+      projects: '$(projectPath)'
       arguments: '--configuration $(buildConfiguration) --no-restore'
       versioningScheme: byEnvVar
       versionEnvVar: 'GitVersion.SemVer'
