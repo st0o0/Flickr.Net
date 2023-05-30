@@ -103,8 +103,10 @@ stages:
             inputs:
               packageType: sdk
               version: $(netSdkVersion)
+              
           - task: NuGetAuthenticate@1
             displayName: 'NuGet Authenticate'
+
           - task: NuGetCommand@2
             displayName: Publish CI package to Azure artifacts
             inputs:
