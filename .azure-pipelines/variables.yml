@@ -1,5 +1,4 @@
 variables:
-  - group: Integration Tests Variables
   - name: netSdkVersion
     value: 7.0.x
   - name: buildConfiguration
