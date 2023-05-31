@@ -37,13 +37,14 @@ stages:
               additionalArguments: '/updateprojectfiles'
 
           - task: DotNetCoreCLI@2
+            displayName: 'Build projects [$(buildConfiguration)]'
             inputs:
               command: 'build'
               projects: '$(projectPath)'
               arguments: '--configuration $(buildConfiguration) --no-restore'
               versioningScheme: byEnvVar
               versionEnvVar: 'GitVersion.SemVer'
-              displayName: 'Build projects [$(buildConfiguration)]'
+              
           
           - task: DotNetCoreCLI@2
             displayName: 'Create NuGet package'
