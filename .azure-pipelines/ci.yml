@@ -28,14 +28,11 @@ stages:
             inputs:
               packageType: sdk
               version: $(netSdkVersion)
-          - task: gitversion/setup@0
-            displayName: 'Setup git version'
-            inputs:
-              versionSpec: '5.x'
-
-          - task: gitversion/execute@0
+            
+          - task: GitVersion@5
             displayName: 'Calculate git version'
             inputs:
+              versionSpec: '5.x'
               targetPath: '$(System.DefaultWorkingDirectory)'
               additionalArguments: '/updateprojectfiles'
 
