@@ -31,10 +31,10 @@ steps:
       version: '$(netSdkVersion)'
 
   - task: NuGetCommand@2
-    displayName: NuGet v2 Restore
+    displayName: NuGet Restore
     inputs:
       command: restore                      
-      restoreSolution: '**/*.sln'
+      restoreSolution: '$(solutionPath)'
       feedsToUse: 'select'
       vstsFeed: $(internalFeedName) 
       includeNuGetOrg: true     
