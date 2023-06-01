@@ -34,7 +34,7 @@ steps:
       displayName: 'Restore NuGet dependencies'
       inputs:
         command: 'restore'
-        projects: '**/*.csproj;!**/*.Test.csproj'
+        projects: '$(projectPath)'
         feedsToUse: 'select'
         vstsFeed: $(internalFeedName)
         includeNuGetOrg: true  
