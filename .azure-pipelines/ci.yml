@@ -28,6 +28,7 @@ stages:
             inputs:
               packageType: sdk
               version: $(netSdkVersion)
+              installationPath: ../share/dotnet
             
           - task: GitVersion@5
             displayName: 'Calculate git version'
