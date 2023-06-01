@@ -107,7 +107,7 @@ stages:
               command: 'test'
               projects: '**/*.@(Test|Tests).csproj'
               arguments: >-
-                --no-build
+                --no-restore
                 --configuration $(buildConfiguration) 
                 --collect:"XPlat Code Coverage"
                 -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura,opencover
