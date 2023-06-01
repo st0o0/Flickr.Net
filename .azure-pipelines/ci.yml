@@ -71,7 +71,7 @@ stages:
               packagesToPack: '**/*.csproj;!**/*.Test.csproj'
               versioningScheme: 'byEnvVar'
               versionEnvVar: 'GitVersion.NuGetVersion'
-              packDirectory: $(Build.ArtifactStagingDirectory)/packages/*.nupkg
+              packDirectory: $(Build.ArtifactStagingDirectory)/packages/
               configuration: $(buildConfiguration)
             
           - publish: $(Build.ArtifactStagingDirectory)/packages
@@ -107,6 +107,7 @@ stages:
               command: 'test'
               projects: '**/*.@(Test|Tests).csproj'
               arguments: >-
+                --no-build
                 --configuration $(buildConfiguration) 
                 --collect:"XPlat Code Coverage"
                 -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura,opencover
@@ -144,7 +145,7 @@ stages:
             displayName: Publish CI package to Azure artifacts
             inputs:
               command: 'push'
-              packagesToPush: $(Pipeline.Workspace)/packages/**/*.*upkg
+              packagesToPush: $(Pipeline.Workspace)/packages/*.*upkg
               nuGetFeedType: 'internal'
               vstsFeed: $(internalFeedName)
               publishVstsFeed: $(internalFeedName)

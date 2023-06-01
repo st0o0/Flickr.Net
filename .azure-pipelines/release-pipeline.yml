@@ -83,7 +83,7 @@ steps:
       packagesToPack: '**/*.csproj;!**/*.Test.csproj'
       versioningScheme: 'byEnvVar'
       versionEnvVar: 'GitVersion.NuGetVersion'
-      packDirectory: $(Build.ArtifactStagingDirectory)/packages/*.nupkg
+      packDirectory: $(Build.ArtifactStagingDirectory)/packages/
       configuration: $(buildConfiguration)
 
   - task: NuGetCommand@2
