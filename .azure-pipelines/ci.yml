@@ -32,7 +32,6 @@ stages:
             inputs:
               packageType: sdk
               version: $(netSdkVersion)
-              installationPath: ../share/dotnet
 
           - task: gitversion/setup@0
             displayName: 'Setup git version'
