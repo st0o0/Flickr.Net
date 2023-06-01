@@ -1,16 +1,7 @@
 trigger:
-  branches:
-    exclude:
-      - master
-      - gh-pages
-  paths:
-    exclude:
-      - '.github'
-      - docs
-      - README.md
-      - CHANGELOG.md
-      - CONTRIBUTING.md
-
+  pr:
+    - dev
+  
 variables:
   - template: variables.yml
 
