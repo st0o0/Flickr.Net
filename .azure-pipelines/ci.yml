@@ -93,21 +93,11 @@ stages:
               version: $(netSdkVersion)
 
           - task: DotNetCoreCLI@2
-            displayName: 'Restore NuGet dependencies'
-            inputs:
-              command: 'restore'
-              projects: '$(projectPath)'
-              feedsToUse: 'select'
-              vstsFeed: $(internalFeedName)
-              includeNuGetOrg: true
-
-          - task: DotNetCoreCLI@2
             displayName: 'Run unit tests'
             inputs:
               command: 'test'
               projects: '**/*.@(Test|Tests).csproj'
               arguments: >-
-                --no-restore
                 --configuration $(buildConfiguration) 
                 --collect:"XPlat Code Coverage"
                 -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura,opencover
