@@ -27,6 +27,10 @@ steps:
       version: '$(netSdkVersion)'
       installationPath: ../share/dotnet
 
+  - checkout: self
+    fetchDepth: 0
+    persistCredentials: true
+
   - task: GitVersion@5
     displayName: 'Calculate git version'
     inputs:
