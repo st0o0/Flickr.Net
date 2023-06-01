@@ -93,6 +93,7 @@ steps:
       packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
       vstsFeed: $(internalFeedName)
       publishVstsFeed: $(internalFeedName)
+      allowPackageConflicts: true
 
   - task: GitHubRelease@0
     inputs:
