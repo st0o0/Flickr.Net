@@ -4,7 +4,7 @@ variables:
   - name: buildConfiguration
     value: Release
   - name: vmImage
-    value: ubuntu-22.04
+    value: ubuntu-latest
   - name: solutionPath
     value: src/Flickr.Net.sln
   - name: projectPath
