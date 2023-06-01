@@ -29,7 +29,6 @@ steps:
   - task: GitVersion@5
     displayName: 'Calculate git version'
     inputs:
-      targetPath: '$(System.DefaultWorkingDirectory)'
       additionalArguments: '/updateprojectfiles'
       versionSpec: '5.x'
 
