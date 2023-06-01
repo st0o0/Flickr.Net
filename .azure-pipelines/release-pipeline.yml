@@ -76,6 +76,8 @@ steps:
       packagesToPack: '**/*.csproj;!**/*.Test.csproj'
       versioningScheme: 'byEnvVar'
       versionEnvVar: 'GitVersion.NuGetVersion'
+      packDestination: $(Build.ArtifactStagingDirectory)/packages/*.nupkg
+      configuration: $(buildConfiguration)
 
   - task: NuGetCommand@2
     displayName: 'Push NuGet package'

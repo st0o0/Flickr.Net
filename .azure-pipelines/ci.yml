@@ -68,7 +68,7 @@ stages:
               packagesToPack: '**/*.csproj;!**/*.Test.csproj'
               versioningScheme: 'byEnvVar'
               versionEnvVar: 'GitVersion.NuGetVersion'
-              packDestination: $(Build.ArtifactStagingDirectory)/packages
+              packDestination: $(Build.ArtifactStagingDirectory)/packages/*.nupkg
               configuration: $(buildConfiguration)
             
           - publish: $(Build.ArtifactStagingDirectory)/packages
