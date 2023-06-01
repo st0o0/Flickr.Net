@@ -33,14 +33,14 @@ stages:
               packageType: sdk
               version: $(netSdkVersion)
 
-          - task: NuGetCommand@2
-            displayName: NuGet Restore
+          - task: DotNetCoreCLI@2
+            displayName: 'Restore NuGet dependencies'
             inputs:
-              command: restore                      
-              restoreSolution: $(solutionPath)
+              command: 'restore'
+              projects: '**/*.csproj'
               feedsToUse: 'select'
               vstsFeed: $(internalFeedName)
-              includeNuGetOrg: true     
+              includeNuGetOrg: true  
 
           - task: gitversion/setup@0
             displayName: 'Setup git version'
