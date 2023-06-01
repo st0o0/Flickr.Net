@@ -8,6 +8,6 @@ variables:
   - name: solutionPath
     value: src/Flickr.Net.sln
   - name: projectPath
-    value: **/Flickr.Net.Core.csproj
+    value: '**/Flickr.Net.Core.csproj'
   - name: internalFeedName
     value: Flickr.Net/Flickr.Net
