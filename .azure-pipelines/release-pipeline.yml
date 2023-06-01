@@ -20,22 +20,25 @@ pool:
   vmImage: '$(vmImage)'
 
 steps:
+  - checkout: self
+    fetchDepth: 0
+    persistCredentials: true
+
   - task: UseDotNet@2
     displayName: Install .NET sdk
     inputs:
       packageType: sdk
       version: '$(netSdkVersion)'
-      installationPath: ../share/dotnet
 
-  - checkout: self
-    fetchDepth: 0
-    persistCredentials: true
+  - task: gitversion/setup@0
+    displayName: 'Setup git version'
+    inputs:
+      versionSpec: '5.x'
 
-  - task: GitVersion@5
+  - task: gitversion/execute@0
     displayName: 'Calculate git version'
     inputs:
       additionalArguments: '/updateprojectfiles'
-      versionSpec: '5.x'
 
   - task: DotNetCoreCLI@2
     displayName: 'Build projects [$(buildConfiguration)]'
