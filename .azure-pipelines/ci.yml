@@ -141,7 +141,7 @@ stages:
             displayName: Publish CI package to Azure artifacts
             inputs:
               command: 'push'
-              packagesToPush: $(Pipeline.Workspace)/packages/*.*upkg
+              packagesToPush: $(Pipeline.Workspace)/packages/**/*.*upkg
               nuGetFeedType: 'internal'
               vstsFeed: $(internalFeedName)
               publishVstsFeed: $(internalFeedName)
