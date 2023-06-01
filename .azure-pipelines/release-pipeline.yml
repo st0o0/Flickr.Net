@@ -106,6 +106,6 @@ steps:
       githubConnection: githubRelease
       repositoryName: $(Build.Repository.Name)
       isPreRelease: false
-      addChangeLog: false
+      addChangeLog: true
       assets: $(Build.ArtifactStagingDirectory)/packages/*
     displayName: Create Github Release
