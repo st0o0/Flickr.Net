@@ -31,13 +31,13 @@ steps:
       version: '$(netSdkVersion)'
 
   - task: DotNetCoreCLI@2
-      displayName: 'Restore NuGet dependencies'
-      inputs:
-        command: 'restore'
-        projects: '$(projectPath)'
-        feedsToUse: 'select'
-        vstsFeed: $(internalFeedName)
-        includeNuGetOrg: true  
+    displayName: 'Restore NuGet dependencies'
+    inputs:
+      command: 'restore'
+      projects: '$(projectPath)'
+      feedsToUse: 'select'
+      vstsFeed: $(internalFeedName)
+      includeNuGetOrg: true  
 
   - task: gitversion/setup@0
     displayName: 'Setup git version'
