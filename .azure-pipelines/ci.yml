@@ -81,7 +81,7 @@ stages:
       - job: Test
         displayName: Run test
         pool:
-          vmImage: ubuntu-22.04
+          vmImage: $(vmImage)
         steps:
           - task: UseDotNet@2
             displayName: Install .NET sdk
@@ -107,7 +107,7 @@ stages:
       - job: PublishArtifacts
         displayName: Publish artifacts
         pool:
-          vmImage: ubuntu-22.04
+          vmImage: $(vmImage)
         steps:
           - checkout: none
           - download: current
