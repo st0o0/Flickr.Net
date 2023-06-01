@@ -17,14 +17,14 @@ variables:
   - template: variables.yml
 
 pool:
-  vmImage: $(vmImage)
+  vmImage: '$(vmImage)'
 
 steps:
   - task: UseDotNet@2
     displayName: Install .NET sdk
     inputs:
       packageType: sdk
-      version: $(netSdkVersion)
+      version: '$(netSdkVersion)'
 
   - task: GitVersion@5
     displayName: 'Calculate git version'
