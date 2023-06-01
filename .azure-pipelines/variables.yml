@@ -1,0 +1,13 @@
+variables:
+  - name: netSdkVersion
+    value: 7.0.x
+  - name: buildConfiguration
+    value: Release
+  - name: vmImage
+    value: ubuntu-latest
+  - name: solutionPath
+    value: src/Flickr.Net.sln
+  - name: projectPath
+    value: src/Flickr.Net.Core/Flickr.Net.Core.csproj
+  - name: internalFeedName
+    value: Flickr.Net/Flickr.Net

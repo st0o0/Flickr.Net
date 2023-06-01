@@ -1,0 +1,111 @@
+trigger:
+  batch: true
+  branches:
+    include:
+      - master
+  paths:
+    exclude:
+      - '.github'
+      - docs
+      - README.md
+      - CHANGELOG.md
+      - CONTRIBUTING.md
+
+pr: none
+
+variables:
+  - template: variables.yml
+
+pool:
+  vmImage: '$(vmImage)'
+
+steps:
+  - checkout: self
+    fetchDepth: 0
+    persistCredentials: true
+
+  - task: UseDotNet@2
+    displayName: Install .NET sdk
+    inputs:
+      packageType: sdk
+      version: '$(netSdkVersion)'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Restore NuGet dependencies'
+    inputs:
+      command: 'restore'
+      projects: '$(projectPath)'
+      feedsToUse: 'select'
+      vstsFeed: $(internalFeedName)
+      includeNuGetOrg: true  
+
+  - task: gitversion/setup@0
+    displayName: 'Setup git version'
+    inputs:
+      versionSpec: '5.x'
+
+  - task: gitversion/execute@0
+    displayName: 'Calculate git version'
+    inputs:
+      additionalArguments: '/updateprojectfiles'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Build projects [$(buildConfiguration)]'
+    inputs:
+      command: 'build'
+      projects: '$(projectPath)'
+      arguments: '--configuration $(buildConfiguration) --no-restore'
+      versioningScheme: byEnvVar
+      versionEnvVar: 'GitVersion.SemVer'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Run unit tests'
+    inputs:
+      command: 'test'
+      projects: '**/*.@(Test|Tests).csproj'
+      arguments: >-
+        --configuration $(buildConfiguration) 
+        --collect:"XPlat Code Coverage"
+        -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura,opencover
+           DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.ExcludeByFile=**/obj/**
+      publishTestResults: true
+
+  - task: PublishCodeCoverageResults@1
+    displayName: 'Publish code coverage'
+    inputs:
+      codeCoverageTool: Cobertura
+      summaryFileLocation: $(Agent.TempDirectory)/*/coverage.cobertura.xml
+        
+  - task: DotNetCoreCLI@2
+    displayName: 'Create NuGet package'
+    inputs:
+      command: 'pack'
+      packagesToPack: '**/*.csproj;!**/*.Test.csproj'
+      versioningScheme: 'byEnvVar'
+      versionEnvVar: 'GitVersion.NuGetVersion'
+      packDirectory: $(Build.ArtifactStagingDirectory)/packages/
+      configuration: $(buildConfiguration)
+
+  - task: NuGetCommand@2
+    displayName: 'Push NuGet package'
+    inputs:
+      command: 'push'
+      packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+      vstsFeed: $(internalFeedName)
+      publishVstsFeed: $(internalFeedName)
+      allowPackageConflicts: true
+
+  - task: GitHubRelease@0
+    inputs:
+      action: create
+      target: $(Build.SourceVersion)
+      tagSource: manual
+      tag: v$(GitVersion.NuGetVersion)
+      tagPattern: v$(GitVersion.NuGetVersion)
+      title: v$(GitVersion.NuGetVersion)
+      githubConnection: githubRelease
+      repositoryName: $(Build.Repository.Name)
+      isPreRelease: false
+      addChangeLog: true
+      assets: $(Build.ArtifactStagingDirectory)/packages/*
+    displayName: Create Github Release
