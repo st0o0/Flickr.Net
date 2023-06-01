@@ -33,6 +33,15 @@ stages:
               packageType: sdk
               version: $(netSdkVersion)
 
+          - task: NuGetCommand@2
+            displayName: NuGet v2 Restore
+            inputs:
+              command: restore                      
+              restoreSolution: '**/*.sln'
+              feedsToUse: 'select'
+              vstsFeed: $(internalFeedName)
+              includeNuGetOrg: true     
+
           - task: gitversion/setup@0
             displayName: 'Setup git version'
             inputs:
@@ -51,13 +60,12 @@ stages:
               arguments: '--configuration $(buildConfiguration) --no-restore'
               versioningScheme: byEnvVar
               versionEnvVar: 'GitVersion.SemVer'
-              
           
           - task: DotNetCoreCLI@2
             displayName: 'Create NuGet package'
             inputs:
               command: 'pack'
-              packagesToPack: '**/*.csproj;!**/*.Test.csproj'
+              packagesToPack: '$(projectPath)'
               versioningScheme: 'byEnvVar'
               versionEnvVar: 'GitVersion.NuGetVersion'
               packDestination: $(Build.ArtifactStagingDirectory)/packages

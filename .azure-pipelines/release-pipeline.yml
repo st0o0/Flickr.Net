@@ -30,6 +30,15 @@ steps:
       packageType: sdk
       version: '$(netSdkVersion)'
 
+  - task: NuGetCommand@2
+    displayName: NuGet v2 Restore
+    inputs:
+      command: restore                      
+      restoreSolution: '**/*.sln'
+      feedsToUse: 'select'
+      vstsFeed: $(internalFeedName) 
+      includeNuGetOrg: true     
+
   - task: gitversion/setup@0
     displayName: 'Setup git version'
     inputs:
@@ -64,7 +73,7 @@ steps:
     displayName: 'Create NuGet package'
     inputs:
       command: 'pack'
-      packagesToPack: '**/*.csproj;!**/*.Test.csproj'
+      packagesToPack: '$(projectPath)'
       versioningScheme: 'byEnvVar'
       versionEnvVar: 'GitVersion.NuGetVersion'
 
