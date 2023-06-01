@@ -90,15 +90,31 @@ stages:
               version: $(netSdkVersion)
 
           - task: DotNetCoreCLI@2
+            displayName: 'Restore NuGet dependencies'
+            inputs:
+              command: 'restore'
+              projects: '$(projectPath)'
+              feedsToUse: 'select'
+              vstsFeed: $(internalFeedName)
+              includeNuGetOrg: true
+
+          - task: DotNetCoreCLI@2
             displayName: 'Run unit tests'
             inputs:
               command: 'test'
               projects: '**/*.@(Test|Tests).csproj'
               arguments: >-
-                --no-build
-                --configuration $(buildConfiguration)
-                --logger "trx;LogFileName=testresults.trx"
+                --configuration $(buildConfiguration) 
+                --collect:"XPlat Code Coverage"
+                -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura,opencover
+                   DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.ExcludeByFile=**/obj/**
               publishTestResults: true
+
+          - task: PublishCodeCoverageResults@1
+            displayName: 'Publish code coverage'
+            inputs:
+              codeCoverageTool: Cobertura
+              summaryFileLocation: $(Agent.TempDirectory)/*/coverage.cobertura.xml
 
   - stage: PublishArtifacts
     dependsOn: Build
