@@ -34,7 +34,7 @@ steps:
       displayName: 'Restore NuGet dependencies'
       inputs:
         command: 'restore'
-        projects: '**/*.csproj'
+        projects: '**/*.csproj;!**/*.Test.csproj'
         feedsToUse: 'select'
         vstsFeed: $(internalFeedName)
         includeNuGetOrg: true  
@@ -73,7 +73,7 @@ steps:
     displayName: 'Create NuGet package'
     inputs:
       command: 'pack'
-      packagesToPack: '$(projectPath)'
+      packagesToPack: '**/*.csproj;!**/*.Test.csproj'
       versioningScheme: 'byEnvVar'
       versionEnvVar: 'GitVersion.NuGetVersion'
 
