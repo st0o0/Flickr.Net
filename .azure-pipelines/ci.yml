@@ -12,7 +12,11 @@ trigger:
       - CONTRIBUTING.md
 
 pr:
-  - dev
+  branches:
+    include:
+      - dev
+  autoCancel: true
+  drafts: false
 
 variables:
   - template: variables.yml
