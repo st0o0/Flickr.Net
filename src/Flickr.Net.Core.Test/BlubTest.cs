@@ -1,4 +1,6 @@
-﻿namespace Flickr.Net.Core.Test;
+﻿using Flickr.Net.Core.Configuration;
+
+namespace Flickr.Net.Core.Test;
 
 public class BlubTest
 {

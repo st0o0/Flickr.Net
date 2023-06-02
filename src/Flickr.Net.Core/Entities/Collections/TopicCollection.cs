@@ -1,5 +1,6 @@
 ﻿using Flickr.Net.Core.Entities.Interfaces;
 using Flickr.Net.Core.Enums;
+using Flickr.Net.Core.Exceptions;
 
 namespace Flickr.Net.Core.Entities.Collections;
 
