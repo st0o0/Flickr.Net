@@ -1,4 +1,6 @@
-namespace FlickrNet.Core.Entities.Collections;
+using Flickr.Net.Core.Entities.Interfaces;
+
+namespace Flickr.Net.Core.Entities.Collections;
 
 /// <remarks/>
 public sealed class CollectionCollection : System.Collections.ObjectModel.Collection<Collection>, IFlickrParsable

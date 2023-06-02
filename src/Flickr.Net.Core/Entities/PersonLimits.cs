@@ -1,6 +1,6 @@
-﻿using FlickrNet.Core.Exceptions;
+﻿using Flickr.Net.Core.Entities.Interfaces;
 
-namespace FlickrNet.Core.Entities;
+namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// The limits for a person returned by <see cref="Flickr.PeopleGetLimits"/>.

@@ -1,4 +1,4 @@
-﻿namespace FlickrNet.Core.Exceptions;
+﻿namespace Flickr.Net.Core.Exceptions;
 
 /// <summary>
 /// Error: 99: User not logged in / Insufficient permissions

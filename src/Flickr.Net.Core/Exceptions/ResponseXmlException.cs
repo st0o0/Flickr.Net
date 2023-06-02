@@ -1,4 +1,4 @@
-namespace FlickrNet.Core.Exceptions;
+namespace Flickr.Net.Core.Exceptions;
 
 /// <summary>
 /// Exception thrown when an error parsing the returned XML.

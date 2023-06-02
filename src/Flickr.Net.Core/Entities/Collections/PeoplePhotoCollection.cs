@@ -1,4 +1,6 @@
-﻿namespace FlickrNet.Core.Entities.Collections;
+﻿using Flickr.Net.Core.Entities.Interfaces;
+
+namespace Flickr.Net.Core.Entities.Collections;
 
 /// <summary>
 /// A collection of photos returned by the <see cref="Flickr.PandaGetPhotos(string)"/> methods.

@@ -1,6 +1,7 @@
+using Flickr.Net.Core.Entities.Interfaces;
 using System.Collections.ObjectModel;
 
-namespace FlickrNet.Core.Entities;
+namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// Summary description for CollectionInfo.

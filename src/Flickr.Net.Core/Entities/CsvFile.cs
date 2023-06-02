@@ -1,4 +1,6 @@
-﻿namespace FlickrNet.Core.Entities;
+﻿using Flickr.Net.Core.Entities.Interfaces;
+
+namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// The details of a CSV files containing archived stats available for download from Flickr.

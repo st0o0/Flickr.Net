@@ -1,4 +1,4 @@
-﻿namespace FlickrNet.Core.Internals.Caching;
+﻿namespace Flickr.Net.Core.Internals.Caching;
 
 /// <summary>
 /// A cache item containing details of a REST response from Flickr.

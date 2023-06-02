@@ -1,6 +1,7 @@
-﻿using System.Xml;
+﻿using Flickr.Net.Core.Entities.Interfaces;
+using System.Xml;
 
-namespace FlickrNet.Core.Entities;
+namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// Information about public groups for a user.

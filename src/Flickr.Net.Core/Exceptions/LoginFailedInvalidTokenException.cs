@@ -1,4 +1,4 @@
-﻿namespace FlickrNet.Core.Exceptions;
+﻿namespace Flickr.Net.Core.Exceptions;
 
 /// <summary>
 /// Error: 98: Login failed / Invalid auth token

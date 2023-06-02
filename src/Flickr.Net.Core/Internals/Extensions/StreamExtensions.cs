@@ -1,4 +1,4 @@
-﻿namespace FlickrNet.Core.Internals.Extensions;
+﻿namespace Flickr.Net.Core.Internals.Extensions;
 
 internal static class StreamExtensions
 {

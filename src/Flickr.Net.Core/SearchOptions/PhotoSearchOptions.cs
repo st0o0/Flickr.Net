@@ -1,6 +1,8 @@
+using Flickr.Net.Core.Enums;
+using Flickr.Net.Core.Internals;
 using System.Collections.ObjectModel;
 
-namespace FlickrNet.Core.SearchOptions;
+namespace Flickr.Net.Core.SearchOptions;
 
 /// <summary>
 /// Summary description for PhotoSearchOptions.
@@ -461,6 +463,7 @@ public class PhotoSearchOptions
             }
             parameters.Add("license", string.Join(",", licenseArray.ToArray()));
         }
+
         if (PerPage != 0)
         {
             parameters.Add("per_page", PerPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));

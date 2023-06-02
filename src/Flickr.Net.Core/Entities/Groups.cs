@@ -1,8 +1,10 @@
+using Flickr.Net.Core.Entities.Interfaces;
+using Flickr.Net.Core.Enums;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace FlickrNet.Core.Entities;
+namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// Provides details of a particular group.

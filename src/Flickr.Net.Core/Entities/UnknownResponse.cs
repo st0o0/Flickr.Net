@@ -1,6 +1,7 @@
-﻿using System.Xml;
+﻿using Flickr.Net.Core.Entities.Interfaces;
+using System.Xml;
 
-namespace FlickrNet.Core.Entities;
+namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// Contains the raw response from Flickr when an unknown method has been called. Used by <see cref="Flickr.TestGeneric"/>.

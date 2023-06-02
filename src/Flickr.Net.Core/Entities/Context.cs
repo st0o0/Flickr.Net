@@ -1,7 +1,9 @@
+using Flickr.Net.Core.Entities.Interfaces;
+using Flickr.Net.Core.Enums;
 using System.Collections.ObjectModel;
 using System.Xml;
 
-namespace FlickrNet.Core.Entities;
+namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// The context of the current photo, as returned by

@@ -1,4 +1,4 @@
-namespace FlickrNet.Core.Exceptions;
+namespace Flickr.Net.Core.Exceptions;
 
 /// <summary>
 /// Exception thrown when a communication error occurs with a web call.

@@ -1,6 +1,7 @@
-﻿using System.Text;
+﻿using Flickr.Net.Core.Entities.Interfaces;
+using System.Text;
 
-namespace FlickrNet.Core.Entities;
+namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// The access authentication token return by Flickr after a successful authentication.

@@ -1,4 +1,4 @@
-﻿namespace FlickrNet.Core.Internals.Caching;
+﻿namespace Flickr.Net.Core.Internals.Caching;
 
 /// <summary>
 /// An item that can be stored in a cache.

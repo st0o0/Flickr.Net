@@ -1,7 +1,10 @@
-﻿using System.Security.Cryptography;
+﻿using Flickr.Net.Core.Entities;
+using Flickr.Net.Core.Enums;
+using Flickr.Net.Core.Internals;
+using System.Security.Cryptography;
 using System.Text;
 
-namespace FlickrNet.Core;
+namespace Flickr.Net.Core;
 
 public partial class Flickr
 {

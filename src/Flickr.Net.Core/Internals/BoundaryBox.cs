@@ -1,4 +1,6 @@
-namespace FlickrNet.Core.Internals;
+using Flickr.Net.Core.Enums;
+
+namespace Flickr.Net.Core.Internals;
 
 /// <summary>
 /// Summary description for BoundaryBox.

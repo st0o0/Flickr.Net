@@ -1,8 +1,8 @@
-﻿using FlickrNet.Core.Exceptions;
+﻿using Flickr.Net.Core.Exceptions;
 using System.Net;
 using System.Net.Http.Headers;
 
-namespace FlickrNet.Core.Internals;
+namespace Flickr.Net.Core.Internals;
 
 public static partial class FlickrResponder
 {

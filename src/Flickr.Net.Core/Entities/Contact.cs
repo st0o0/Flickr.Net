@@ -1,4 +1,6 @@
-﻿namespace FlickrNet.Core.Entities;
+﻿using Flickr.Net.Core.Entities.Interfaces;
+
+namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// Contains details of a contact for a particular user.

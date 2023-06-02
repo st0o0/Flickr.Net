@@ -1,4 +1,4 @@
-﻿namespace FlickrNet.Core.Internals;
+﻿namespace Flickr.Net.Core.Internals;
 
 /// <summary>
 /// Summary description for SafeNativeMethods.

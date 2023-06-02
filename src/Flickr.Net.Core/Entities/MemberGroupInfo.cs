@@ -1,4 +1,7 @@
-﻿namespace FlickrNet.Core.Entities;
+﻿using Flickr.Net.Core.Entities.Interfaces;
+using Flickr.Net.Core.Enums;
+
+namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// Information about a group the authenticated user is a member of.

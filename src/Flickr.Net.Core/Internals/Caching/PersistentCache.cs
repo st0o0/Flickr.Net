@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Diagnostics;
 
-namespace FlickrNet.Core.Internals.Caching;
+namespace Flickr.Net.Core.Internals.Caching;
 
 /// <summary>
 /// A threadsafe cache that is backed by disk storage.

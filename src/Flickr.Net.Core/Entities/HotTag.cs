@@ -1,4 +1,6 @@
-﻿namespace FlickrNet.Core.Entities;
+﻿using Flickr.Net.Core.Entities.Interfaces;
+
+namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// A hot tag. Returned by <see cref="Flickr.TagsGetHotList()"/>.

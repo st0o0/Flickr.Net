@@ -1,4 +1,4 @@
-namespace FlickrNet.Core.Configuration;
+namespace Flickr.Net.Core.Configuration;
 
 public class FlickrConfigurationSettings
 {

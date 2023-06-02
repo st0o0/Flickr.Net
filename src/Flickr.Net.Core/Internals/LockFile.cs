@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace FlickrNet.Core.Internals;
+namespace Flickr.Net.Core.Internals;
 
 /// <summary>
 /// A non-reentrant mutex that is implemented using

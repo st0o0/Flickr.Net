@@ -1,4 +1,4 @@
-﻿namespace FlickrNet.Core.Enums;
+﻿namespace Flickr.Net.Core.Enums;
 
 /// <summary>
 /// DateGranularity, used for setting taken date in <see cref="Flickr.PhotosSetDates(string, DateTime, DateGranularity)"/>

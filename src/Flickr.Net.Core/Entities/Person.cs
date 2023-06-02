@@ -1,4 +1,6 @@
-namespace FlickrNet.Core.Entities;
+using Flickr.Net.Core.Entities.Interfaces;
+
+namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// The <see cref="Person"/> class contains details returned by the <see cref="Flickr.PeopleGetInfo"/>

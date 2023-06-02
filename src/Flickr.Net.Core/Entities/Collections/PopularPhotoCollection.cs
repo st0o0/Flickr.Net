@@ -1,4 +1,6 @@
-﻿namespace FlickrNet.Core.Entities.Collections;
+﻿using Flickr.Net.Core.Entities.Interfaces;
+
+namespace Flickr.Net.Core.Entities.Collections;
 
 /// <summary>
 /// A list of popular photos as returned by <see cref="Flickr.StatsGetPopularPhotos(DateTime, PopularitySort, int, int)"/>

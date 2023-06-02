@@ -1,6 +1,7 @@
-﻿using System.Xml;
+﻿using Flickr.Net.Core.Entities.Interfaces;
+using System.Xml;
 
-namespace FlickrNet.Core.Entities;
+namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// A photo in the context of a favorite. Returned as part of a call to <see cref="Flickr.FavoritesGetContext(string, string)"/>.

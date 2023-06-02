@@ -1,4 +1,6 @@
-﻿namespace FlickrNet.Core.Entities;
+﻿using Flickr.Net.Core.Entities.Interfaces;
+
+namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// The referrer details returned by <see cref="Flickr.StatsGetCollectionReferrers(DateTime, string, string, int, int)"/>,

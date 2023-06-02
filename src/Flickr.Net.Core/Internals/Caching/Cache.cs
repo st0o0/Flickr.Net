@@ -1,7 +1,7 @@
-using FlickrNet.Core.Configuration;
+using Flickr.Net.Core.Configuration;
 using System.Diagnostics.CodeAnalysis;
 
-namespace FlickrNet.Core.Internals.Caching;
+namespace Flickr.Net.Core.Internals.Caching;
 
 /// <summary>
 /// Internal Cache class

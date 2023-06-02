@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-namespace FlickrNet.Core.Enums;
+namespace Flickr.Net.Core.Enums;
 
 /// <summary>
 /// The various pricay settings for a group.

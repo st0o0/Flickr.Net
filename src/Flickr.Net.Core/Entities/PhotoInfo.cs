@@ -1,4 +1,7 @@
-﻿namespace FlickrNet.Core.Entities;
+﻿using Flickr.Net.Core.Entities.Interfaces;
+using Flickr.Net.Core.Enums;
+
+namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// Detailed information returned by <see cref="Flickr.PhotosGetInfo(string)"/> or <see cref="Flickr.PhotosGetInfo(string, string)"/> methods.

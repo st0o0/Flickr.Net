@@ -1,6 +1,8 @@
+using Flickr.Net.Core.Entities.Interfaces;
+using Flickr.Net.Core.Enums;
 using System.Xml;
 
-namespace FlickrNet.Core.Entities;
+namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// Activity class used for <see cref="Flickr.ActivityUserPhotos()"/>
@@ -111,13 +113,7 @@ public sealed class ActivityItem : IFlickrParsable
     /// <summary>
     /// The activity item owners buddy icon.
     /// </summary>
-    public string OwnerBuddyIcon
-    {
-        get
-        {
-            return UtilityMethods.BuddyIcon(OwnerServer, OwnerFarm, OwnerId);
-        }
-    }
+    public string OwnerBuddyIcon => UtilityMethods.BuddyIcon(OwnerServer, OwnerFarm, OwnerId);
 
     /// <summary>
     /// If the type is a photoset then this contains the number of photos in the set. Otherwise returns -1.
@@ -251,33 +247,22 @@ public sealed class ActivityItem : IFlickrParsable
             switch (reader.LocalName)
             {
                 case "type":
-                    switch (reader.Value)
+                    ItemType = reader.Value switch
                     {
-                        case "photoset":
-                            ItemType = ActivityItemType.Photoset;
-                            break;
-
-                        case "photo":
-                            ItemType = ActivityItemType.Photo;
-                            break;
-
-                        case "gallery":
-                            ItemType = ActivityItemType.Gallery;
-                            break;
-                    }
+                        "photoset" => ActivityItemType.Photoset,
+                        "photo" => ActivityItemType.Photo,
+                        "gallery" => ActivityItemType.Gallery,
+                        _ => ActivityItemType.Unknown,
+                    };
                     break;
 
                 case "media":
-                    switch (reader.Value)
+                    Media = reader.Value switch
                     {
-                        case "photo":
-                            Media = MediaType.Photos;
-                            break;
-
-                        case "video":
-                            Media = MediaType.Videos;
-                            break;
-                    }
+                        "photo" => MediaType.Photos,
+                        "video" => MediaType.Videos,
+                        _ => MediaType.None,
+                    };
                     break;
 
                 case "owner":

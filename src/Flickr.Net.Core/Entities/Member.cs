@@ -1,4 +1,7 @@
-namespace FlickrNet.Core.Entities;
+using Flickr.Net.Core.Entities.Interfaces;
+using Flickr.Net.Core.Enums;
+
+namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// Details for a Flickr member, as returned by the <see cref="Flickr.GroupsMembersGetList(string)"/> method.

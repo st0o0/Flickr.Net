@@ -1,9 +1,8 @@
-namespace FlickrNet.Core.Entities;
+using Flickr.Net.Core.Entities.Interfaces;
+using Flickr.Net.Core.Enums;
+using Flickr.Net.Core.Internals;
 
-using FlickrNet.Core.Entities.Interfaces;
-using FlickrNet.Core.Enums;
-using FlickrNet.Core.Internals;
-using System;
+namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// Successful authentication returns a <see cref="Auth"/> object.

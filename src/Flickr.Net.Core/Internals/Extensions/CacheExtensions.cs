@@ -1,6 +1,6 @@
-﻿using FlickrNet.Core.Internals.Caching;
+﻿using Flickr.Net.Core.Internals.Caching;
 
-namespace FlickrNet.Core.Internals.Extensions;
+namespace Flickr.Net.Core.Internals.Extensions;
 
 public static class CacheExtensions
 {

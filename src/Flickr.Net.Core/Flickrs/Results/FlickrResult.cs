@@ -1,6 +1,6 @@
-﻿using FlickrNet.Core.Exceptions;
+﻿using Flickr.Net.Core.Entities.Interfaces;
 
-namespace FlickrNet.Core.Flickrs.Results;
+namespace Flickr.Net.Core.Flickrs.Results;
 
 internal class FlickrResultArgs<T> : EventArgs where T : IFlickrParsable
 {

@@ -1,4 +1,4 @@
-namespace FlickrNet.Core.Enums;
+namespace Flickr.Net.Core.Enums;
 
 /// <summary>
 /// The sort order for the <see cref="Flickr.PhotosSearch(PhotoSearchOptions)"/>,

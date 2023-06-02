@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace FlickrNet.Core.Enums;
+namespace Flickr.Net.Core.Enums;
 
 /// <summary>
 /// Which photo search extras to be included. Can be combined to include more than one

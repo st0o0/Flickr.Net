@@ -1,12 +1,14 @@
-using FlickrNet.Core.Exceptions;
-using FlickrNet.Core.SearchOptions;
+using Flickr.Net.Core.Entities;
+using Flickr.Net.Core.Enums;
+using Flickr.Net.Core.Exceptions;
+using Flickr.Net.Core.SearchOptions;
 using System.ComponentModel;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
 
-namespace FlickrNet.Core.Internals;
+namespace Flickr.Net.Core.Internals;
 
 /// <summary>
 /// Internal class providing certain utility functions to other classes.

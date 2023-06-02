@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace FlickrNet.Core.Internals;
+namespace Flickr.Net.Core.Internals;
 
 /// <summary>
 /// Flickr library interaction with the web goes in here.

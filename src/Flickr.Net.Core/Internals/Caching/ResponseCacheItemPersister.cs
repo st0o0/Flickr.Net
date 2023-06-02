@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace FlickrNet.Core.Internals.Caching;
+namespace Flickr.Net.Core.Internals.Caching;
 
 internal class ResponseCacheItemPersister : CacheItemPersister
 {

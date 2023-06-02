@@ -1,4 +1,7 @@
-﻿namespace FlickrNet.Core.Entities.Collections;
+﻿using Flickr.Net.Core.Entities.Interfaces;
+using Flickr.Net.Core.Enums;
+
+namespace Flickr.Net.Core.Entities.Collections;
 
 /// <summary>
 /// The list of replies for a particular topic.

@@ -1,7 +1,7 @@
-﻿using FlickrNet.Core.Exceptions;
+﻿using Flickr.Net.Core.Entities.Interfaces;
 using System.Collections.ObjectModel;
 
-namespace FlickrNet.Core.Entities;
+namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// The shape data supplied by <see cref="Flickr.PlacesGetInfo"/>.

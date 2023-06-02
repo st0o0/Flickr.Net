@@ -1,4 +1,6 @@
-﻿namespace FlickrNet.Core.Entities.Collections;
+﻿using Flickr.Net.Core.Entities.Interfaces;
+
+namespace Flickr.Net.Core.Entities.Collections;
 
 /// <summary>
 /// Collection containing information about the types of 'places' available from the Flickr API.

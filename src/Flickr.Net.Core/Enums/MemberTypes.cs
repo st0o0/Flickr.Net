@@ -1,4 +1,4 @@
-namespace FlickrNet.Core.Enums;
+namespace Flickr.Net.Core.Enums;
 
 /// <summary>
 /// The type of a member. Passed as a parameter to <see cref="Flickr.GroupsMembersGetList(string)"/> and returned for each <see cref="Member"/> as well.

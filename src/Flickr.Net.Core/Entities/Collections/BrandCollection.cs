@@ -1,7 +1,8 @@
-﻿using System.Collections.ObjectModel;
+﻿using Flickr.Net.Core.Entities.Interfaces;
+using System.Collections.ObjectModel;
 using System.Xml;
 
-namespace FlickrNet.Core.Entities.Collections;
+namespace Flickr.Net.Core.Entities.Collections;
 
 /// <summary>
 /// A collection of camera brands
