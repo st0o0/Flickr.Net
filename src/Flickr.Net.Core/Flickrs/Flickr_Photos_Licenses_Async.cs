@@ -4,6 +4,7 @@ using Flickr.Net.Core.Enums;
 
 namespace Flickr.Net.Core;
 
+// TODO:
 public partial class Flickr
 {
     /// <summary>

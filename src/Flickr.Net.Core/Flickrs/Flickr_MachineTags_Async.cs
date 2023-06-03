@@ -3,6 +3,7 @@ using Flickr.Net.Core.Internals;
 
 namespace Flickr.Net.Core;
 
+// TODO:
 public partial class Flickr
 {
     /// <summary>

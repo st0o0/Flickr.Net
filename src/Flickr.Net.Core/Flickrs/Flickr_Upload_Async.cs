@@ -5,24 +5,12 @@ using Flickr.Net.Core.Internals;
 
 namespace Flickr.Net.Core;
 
-// TODO:
-public partial class Flickr
+public partial class Flickr : IFlickrUpload
 {
-    /// <summary>
-    /// UploadPicture method that does all the uploading work.
-    /// </summary>
-    /// <param name="stream">The <see cref="Stream"/> object containing the pphoto to be uploaded.</param>
-    /// <param name="fileName">The filename of the file to upload. Used as the title if title is null.</param>
-    /// <param name="title">The title of the photo (optional).</param>
-    /// <param name="description">The description of the photograph (optional).</param>
-    /// <param name="tags">The tags for the photograph (optional).</param>
-    /// <param name="isPublic">false for private, true for public.</param>
-    /// <param name="isFamily">true if visible to family.</param>
-    /// <param name="isFriend">true if visible to friends only.</param>
-    /// <param name="contentType">The content type of the photo, i.e. Photo, Screenshot or Other.</param>
-    /// <param name="safetyLevel">The safety level of the photo, i.e. Safe, Moderate or Restricted.</param>
-    /// <param name="hiddenFromSearch">Is the photo hidden from public searches.</param>
-    public async Task<string> UploadPictureAsync(Stream stream, string fileName, string title, string description, string tags, bool isPublic, bool isFamily, bool isFriend, ContentType contentType, SafetyLevel safetyLevel, HiddenFromSearch hiddenFromSearch, IProgress<double> progress = default, CancellationToken cancellationToken = default)
+    public async Task<string> UploadPictureAsync(Stream stream, string fileName, string title,
+         string description, string tags, bool isPublic, bool isFamily, bool isFriend,
+         ContentType contentType, SafetyLevel safetyLevel, HiddenFromSearch hiddenFromSearch,
+         IProgress<double> progress, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -34,10 +22,12 @@ public partial class Flickr
         {
             parameters.Add("title", title);
         }
+
         if (description != null && description.Length > 0)
         {
             parameters.Add("description", description);
         }
+
         if (tags != null && tags.Length > 0)
         {
             parameters.Add("tags", tags);
@@ -51,16 +41,16 @@ public partial class Flickr
         {
             parameters.Add("safety_level", safetyLevel.ToString("D"));
         }
+
         if (contentType != ContentType.None)
         {
             parameters.Add("content_type", contentType.ToString("D"));
         }
+
         if (hiddenFromSearch != HiddenFromSearch.None)
         {
             parameters.Add("hidden", hiddenFromSearch.ToString("D"));
         }
-
-        parameters.Add("api_key", _apiToken ?? string.Empty);
 
         if (!string.IsNullOrEmpty(OAuthAccessToken))
         {
@@ -78,13 +68,7 @@ public partial class Flickr
         return await UploadDataAsync(stream, fileName, progress, uploadUri, parameters, cancellationToken);
     }
 
-    /// <summary>
-    /// Replace an existing photo on Flickr.
-    /// </summary>
-    /// <param name="stream">The <see cref="Stream"/> object containing the photo to be uploaded.</param>
-    /// <param name="fileName">The filename of the file to replace the existing item with.</param>
-    /// <param name="photoId">The ID of the photo to replace.</param>
-    public async Task<string> ReplacePictureAsync(Stream stream, string fileName, string photoId, IProgress<double> progress = default, CancellationToken cancellationToken = default)
+    public async Task<string> ReplacePictureAsync(Stream stream, string fileName, string photoId, IProgress<double> progress, CancellationToken cancellationToken)
     {
         Uri replaceUri = new(ReplaceUrl);
 
@@ -203,4 +187,34 @@ public partial class Flickr
         //    },
         //    this);
     }
+}
+
+public interface IFlickrUpload
+{
+    /// <summary>
+    /// UploadPicture method that does all the uploading work.
+    /// </summary>
+    /// <param name="stream">The <see cref="Stream"/> object containing the pphoto to be uploaded.</param>
+    /// <param name="fileName">The filename of the file to upload. Used as the title if title is null.</param>
+    /// <param name="title">The title of the photo (optional).</param>
+    /// <param name="description">The description of the photograph (optional).</param>
+    /// <param name="tags">The tags for the photograph (optional).</param>
+    /// <param name="isPublic">false for private, true for public.</param>
+    /// <param name="isFamily">true if visible to family.</param>
+    /// <param name="isFriend">true if visible to friends only.</param>
+    /// <param name="contentType">The content type of the photo, i.e. Photo, Screenshot or Other.</param>
+    /// <param name="safetyLevel">The safety level of the photo, i.e. Safe, Moderate or Restricted.</param>
+    /// <param name="hiddenFromSearch">Is the photo hidden from public searches.</param>
+    Task<string> UploadPictureAsync(Stream stream, string fileName, string title = null,
+        string description = null, string tags = null, bool isPublic = false, bool isFamily = false, bool isFriend = false,
+        ContentType contentType = ContentType.None, SafetyLevel safetyLevel = SafetyLevel.None, HiddenFromSearch hiddenFromSearch = HiddenFromSearch.None,
+        IProgress<double> progress = default, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Replace an existing photo on Flickr.
+    /// </summary>
+    /// <param name="stream">The <see cref="Stream"/> object containing the photo to be uploaded.</param>
+    /// <param name="fileName">The filename of the file to replace the existing item with.</param>
+    /// <param name="photoId">The ID of the photo to replace.</param>
+    Task<string> ReplacePictureAsync(Stream stream, string fileName, string photoId, IProgress<double> progress = default, CancellationToken cancellationToken = default);
 }

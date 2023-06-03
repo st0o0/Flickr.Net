@@ -72,6 +72,31 @@ public partial class Flickr
     protected Cache Cache => _cache;
 
     /// <summary>
+    /// property for all places functions
+    /// </summary>
+    public IFlickrPlaces Places => this;
+
+    /// <summary>
+    /// property for all tags functions
+    /// </summary>
+    public IFlickrTags Tags => this;
+
+    /// <summary>
+    /// property for all test functions
+    /// </summary>
+    public IFlickrTest Test => this;
+
+    /// <summary>
+    /// property for all upload functions
+    /// </summary>
+    public IFlickrUpload Upload => this;
+
+    /// <summary>
+    /// property for all urls functions
+    /// </summary>
+    public IFlickrUrls Urls => this;
+
+    /// <summary>
     /// The base URL for all Flickr REST method calls.
     /// </summary>
     public static Uri BaseUri => new("https://api.flickr.com/services/rest/");
