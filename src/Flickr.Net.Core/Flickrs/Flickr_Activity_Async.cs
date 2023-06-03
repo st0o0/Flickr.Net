@@ -1,20 +1,8 @@
-﻿using Flickr.Net.Core.Entities.Collections;
-using Flickr.Net.Core.Enums;
+﻿namespace Flickr.Net.Core;
 
-namespace Flickr.Net.Core;
-
-// TODO:
-public partial class Flickr
-{
-    /// <summary>
-    /// Returns a list of recent activity on photos commented on by the calling user.
-    /// </summary>
-    /// <remarks>
-    /// <b>Do not poll this method more than once an hour.</b>
-    /// </remarks>
-    /// <param name="page">The page of the activity to return.</param>
-    /// <param name="perPage">The number of activities to return per page.</param>
-    public async Task<ActivityItemCollection> ActivityUserCommentsAsync(int page = 0, int perPage = 0, CancellationToken cancellationToken = default)
+public partial class Flickr : IFlickrActivity
+{    
+    async Task<ActivityItemCollection> IFlickrActivity.ActivityUserCommentsAsync(int page, int perPage , CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -36,17 +24,7 @@ public partial class Flickr
         return await GetResponseAsync<ActivityItemCollection>(parameters, cancellationToken);
     }
 
-    /// <summary>
-    /// Returns a list of recent activity on photos belonging to the calling user.
-    /// </summary>
-    /// <remarks>
-    /// <b>Do not poll this method more than once an hour.</b>
-    /// </remarks>
-    /// <param name="timePeriod">The number of days or hours you want to get activity for.</param>
-    /// <param name="timeType">'d' for days, 'h' for hours.</param>
-    /// <param name="page">The page numver of the activity to return.</param>
-    /// <param name="perPage">The number of activities to return per page.</param>
-    public async Task<ActivityItemCollection> ActivityUserPhotosAsync(int timePeriod, TimeType timeType = TimeType.Hours, int page = 0, int perPage = 0, CancellationToken cancellationToken = default)
+    async Task<ActivityItemCollection> IFlickrActivity.ActivityUserPhotosAsync(int timePeriod, TimeType timeType, int page, int perPage , CancellationToken cancellationToken )
     {
         if (timePeriod == 0)
         {
@@ -80,4 +58,29 @@ public partial class Flickr
 
         return await GetResponseAsync<ActivityItemCollection>(parameters, cancellationToken);
     }
+}
+
+public interface IFlickrActivity
+{
+    /// <summary>
+    /// Returns a list of recent activity on photos commented on by the calling user.
+    /// </summary>
+    /// <remarks>
+    /// <b>Do not poll this method more than once an hour.</b>
+    /// </remarks>
+    /// <param name="page">The page of the activity to return.</param>
+    /// <param name="perPage">The number of activities to return per page.</param>
+    Task<ActivityItemCollection> ActivityUserCommentsAsync(int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Returns a list of recent activity on photos belonging to the calling user.
+    /// </summary>
+    /// <remarks>
+    /// <b>Do not poll this method more than once an hour.</b>
+    /// </remarks>
+    /// <param name="timePeriod">The number of days or hours you want to get activity for.</param>
+    /// <param name="timeType">'d' for days, 'h' for hours.</param>
+    /// <param name="page">The page numver of the activity to return.</param>
+    /// <param name="perPage">The number of activities to return per page.</param>
+    Task<ActivityItemCollection> ActivityUserPhotosAsync(int timePeriod, TimeType timeType = TimeType.Hours, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 }

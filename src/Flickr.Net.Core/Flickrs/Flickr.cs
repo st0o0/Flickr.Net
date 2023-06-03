@@ -70,6 +70,21 @@ public partial class Flickr
     protected Cache Cache => _cache;
 
     /// <summary>
+    /// property for all activity function
+    /// </summary>
+    public IFlickrActivity Activity => this;
+
+    /// <summary>
+    /// property for all blogs function
+    /// </summary>
+    public IFlickrBlogs Blogs => this;
+
+    /// <summary>
+    /// property for all cameras function
+    /// </summary>
+    public IFlickrCameras Cameras => this;
+
+    /// <summary>
     /// property for all places functions
     /// </summary>
     public IFlickrPlaces Places => this;
