@@ -1,14 +1,10 @@
-﻿using Flickr.Net.Core.Entities;
-using Flickr.Net.Core.Entities.Collections;
-using Flickr.Net.Core.Enums;
-using Flickr.Net.Core.Internals;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 
 namespace Flickr.Net.Core;
 
 public partial class Flickr : IFlickrTags
 {
-    async Task<PhotoCollection> IFlickrTags.GetClusterPhotosAsync(Cluster cluster, PhotoSearchExtras extras, CancellationToken cancellationToken = default)
+    async Task<PhotoCollection> IFlickrTags.GetClusterPhotosAsync(Cluster cluster, PhotoSearchExtras extras, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
