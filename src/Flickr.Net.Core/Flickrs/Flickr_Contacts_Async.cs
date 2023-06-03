@@ -22,6 +22,7 @@ public partial class Flickr
         {
             { "method", "flickr.contacts.getList" }
         };
+
         if (filter != ContactType.None)
         {
             parameters.Add("filter", filter.ToString().ToLower());
@@ -36,6 +37,7 @@ public partial class Flickr
         {
             parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
+        
         return await GetResponseAsync<ContactCollection>(parameters, cancellationToken);
     }
 

@@ -143,7 +143,6 @@ public partial class Flickr : IFlickrPlaces
         Dictionary<string, string> parameters = new()
         {
             { "method", "flickr.places.getTopPlacesList" },
-
             { "place_type_id", placeType.ToString("D") }
         };
 

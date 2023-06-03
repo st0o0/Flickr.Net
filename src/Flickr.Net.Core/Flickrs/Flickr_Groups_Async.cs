@@ -105,7 +105,6 @@ public partial class Flickr
         Dictionary<string, string> parameters = new()
         {
             { "method", "flickr.groups.search" },
-            { "api_key", ApiKey },
             { "text", text }
         };
 
@@ -139,7 +138,6 @@ public partial class Flickr
         Dictionary<string, string> parameters = new()
         {
             { "method", "flickr.groups.members.getList" },
-            { "api_key", ApiKey }
         };
 
         if (page > 0)

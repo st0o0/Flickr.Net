@@ -1,8 +1,6 @@
 using Flickr.Net.Core.Configuration;
-using Flickr.Net.Core.Entities.Interfaces;
 using Flickr.Net.Core.Exceptions;
 using Flickr.Net.Core.Exceptions.Handlers;
-using Flickr.Net.Core.Internals;
 using Flickr.Net.Core.Internals.Caching;
 using Flickr.Net.Core.Internals.HttpContents;
 using System.Diagnostics.CodeAnalysis;

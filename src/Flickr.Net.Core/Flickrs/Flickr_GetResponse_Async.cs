@@ -1,6 +1,4 @@
-﻿using Flickr.Net.Core.Entities.Interfaces;
-using Flickr.Net.Core.Internals;
-using Flickr.Net.Core.Internals.Caching;
+﻿using Flickr.Net.Core.Internals.Caching;
 using System.Diagnostics;
 
 namespace Flickr.Net.Core;
@@ -11,7 +9,7 @@ public partial class Flickr
     {
         CheckApiKey();
 
-        parameters["api_key"] = ApiKey;
+        parameters.Add("api_key", ApiKey);
 
         // If OAuth Token exists or no authentication required then use new OAuth
         if (!string.IsNullOrEmpty(OAuthAccessToken))

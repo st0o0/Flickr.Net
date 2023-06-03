@@ -29,7 +29,6 @@ public partial class Flickr
         Dictionary<string, string> parameters = new()
         {
             { "method", "flickr.reflection.getMethodInfo" },
-            { "api_key", ApiKey },
             { "method_name", methodName }
         };
 

@@ -87,6 +87,7 @@ public partial class Flickr
             { "callback", callback },
             { "verify", verify }
         };
+
         if (!string.IsNullOrEmpty(verifyToken))
         {
             parameters.Add("verify_token", verifyToken);
@@ -107,6 +108,7 @@ public partial class Flickr
             }
             parameters.Add("woe_ids", string.Join(",", woeIdList.ToArray()));
         }
+
         if (placeIds != null && placeIds.Length > 0)
         {
             parameters.Add("place_ids", string.Join(",", placeIds));
@@ -153,6 +155,7 @@ public partial class Flickr
             { "callback", callback },
             { "verify", verify }
         };
+        
         if (!string.IsNullOrEmpty(verifyToken))
         {
             parameters.Add("verif_token", verifyToken);
