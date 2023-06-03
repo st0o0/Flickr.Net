@@ -1,20 +1,8 @@
-﻿using Flickr.Net.Core.Entities;
+﻿namespace Flickr.Net.Core;
 
-namespace Flickr.Net.Core;
-
-// TODO:
-public partial class Flickr
+public partial class Flickr : IFlickrPhotosNotes
 {
-    /// <summary>
-    /// Add a note to a picture.
-    /// </summary>
-    /// <param name="photoId">The photo id to add the note to.</param>
-    /// <param name="noteX">The X co-ordinate of the upper left corner of the note.</param>
-    /// <param name="noteY">The Y co-ordinate of the upper left corner of the note.</param>
-    /// <param name="noteWidth">The width of the note.</param>
-    /// <param name="noteHeight">The height of the note.</param>
-    /// <param name="noteText">The text in the note.</param>
-    public async Task<string> PhotosNotesAddAsync(string photoId, int noteX, int noteY, int noteWidth, int noteHeight, string noteText, CancellationToken cancellationToken = default)
+    async Task<string> IFlickrPhotosNotes.PhotosNotesAddAsync(string photoId, int noteX, int noteY, int noteWidth, int noteHeight, string noteText, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -32,11 +20,7 @@ public partial class Flickr
         return result.GetAttributeValue("*", "id");
     }
 
-    /// <summary>
-    /// Delete an existing note.
-    /// </summary>
-    /// <param name="noteId">The ID of the note.</param>
-    public async Task PhotosNotesDeleteAsync(string noteId, CancellationToken cancellationToken = default)
+    async Task IFlickrPhotosNotes.PhotosNotesDeleteAsync(string noteId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -47,16 +31,7 @@ public partial class Flickr
         await GetResponseAsync<NoResponse>(parameters, cancellationToken);
     }
 
-    /// <summary>
-    /// Edit and update a note.
-    /// </summary>
-    /// <param name="noteId">The ID of the note to update.</param>
-    /// <param name="noteX">The X co-ordinate of the upper left corner of the note.</param>
-    /// <param name="noteY">The Y co-ordinate of the upper left corner of the note.</param>
-    /// <param name="noteWidth">The width of the note.</param>
-    /// <param name="noteHeight">The height of the note.</param>
-    /// <param name="noteText">The new text in the note.</param>
-    public async Task PhotosNotesEditAsync(string noteId, int noteX, int noteY, int noteWidth, int noteHeight, string noteText, CancellationToken cancellationToken = default)
+    async Task IFlickrPhotosNotes.PhotosNotesEditAsync(string noteId, int noteX, int noteY, int noteWidth, int noteHeight, string noteText, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -71,4 +46,35 @@ public partial class Flickr
 
         await GetResponseAsync<NoResponse>(parameters, cancellationToken);
     }
+}
+
+public interface IFlickrPhotosNotes
+{
+    /// <summary>
+    /// Add a note to a picture.
+    /// </summary>
+    /// <param name="photoId">The photo id to add the note to.</param>
+    /// <param name="noteX">The X co-ordinate of the upper left corner of the note.</param>
+    /// <param name="noteY">The Y co-ordinate of the upper left corner of the note.</param>
+    /// <param name="noteWidth">The width of the note.</param>
+    /// <param name="noteHeight">The height of the note.</param>
+    /// <param name="noteText">The text in the note.</param>
+    Task<string> PhotosNotesAddAsync(string photoId, int noteX, int noteY, int noteWidth, int noteHeight, string noteText, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Delete an existing note.
+    /// </summary>
+    /// <param name="noteId">The ID of the note.</param>
+    Task PhotosNotesDeleteAsync(string noteId, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Edit and update a note.
+    /// </summary>
+    /// <param name="noteId">The ID of the note to update.</param>
+    /// <param name="noteX">The X co-ordinate of the upper left corner of the note.</param>
+    /// <param name="noteY">The Y co-ordinate of the upper left corner of the note.</param>
+    /// <param name="noteWidth">The width of the note.</param>
+    /// <param name="noteHeight">The height of the note.</param>
+    /// <param name="noteText">The new text in the note.</param>
+    Task PhotosNotesEditAsync(string noteId, int noteX, int noteY, int noteWidth, int noteHeight, string noteText, CancellationToken cancellationToken = default);
 }

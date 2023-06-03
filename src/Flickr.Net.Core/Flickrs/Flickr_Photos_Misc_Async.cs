@@ -1,20 +1,8 @@
-﻿using Flickr.Net.Core.Entities;
-using Flickr.Net.Core.Entities.Collections;
+﻿namespace Flickr.Net.Core;
 
-namespace Flickr.Net.Core;
-
-// TODO:
-public partial class Flickr
+public partial class Flickr : IFlickrPhotosMisc
 {
-    /// <summary>
-    /// Rotates a photo on Flickr.
-    /// </summary>
-    /// <remarks>
-    /// Does not rotate the original photo.
-    /// </remarks>
-    /// <param name="photoId">The ID of the photo.</param>
-    /// <param name="degrees">The number of degrees to rotate by. Valid values are 90, 180 and 270.</param>
-    public async Task PhotosTransformRotateAsync(string photoId, int degrees, CancellationToken cancellationToken = default)
+    async Task IFlickrPhotosMisc.RotateAsync(string photoId, int degrees, CancellationToken cancellationToken)
     {
         if (photoId == null)
         {
@@ -36,11 +24,7 @@ public partial class Flickr
         await GetResponseAsync<NoResponse>(parameters, cancellationToken);
     }
 
-    /// <summary>
-    /// Checks the status of one or more asynchronous photo upload tickets.
-    /// </summary>
-    /// <param name="tickets">A list of ticket ids</param>
-    public async Task<TicketCollection> PhotosUploadCheckTicketsAsync(string[] tickets, CancellationToken cancellationToken = default)
+    async Task<TicketCollection> IFlickrPhotosMisc.CheckTicketsAsync(string[] tickets, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -50,4 +34,23 @@ public partial class Flickr
 
         return await GetResponseAsync<TicketCollection>(parameters, cancellationToken);
     }
+}
+
+public interface IFlickrPhotosMisc
+{
+    /// <summary>
+    /// Rotates a photo on Flickr.
+    /// </summary>
+    /// <remarks>
+    /// Does not rotate the original photo.
+    /// </remarks>
+    /// <param name="photoId">The ID of the photo.</param>
+    /// <param name="degrees">The number of degrees to rotate by. Valid values are 90, 180 and 270.</param>
+    Task RotateAsync(string photoId, int degrees, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Checks the status of one or more asynchronous photo upload tickets.
+    /// </summary>
+    /// <param name="tickets">A list of ticket ids</param>
+    Task<TicketCollection> CheckTicketsAsync(string[] tickets, CancellationToken cancellationToken = default);
 }

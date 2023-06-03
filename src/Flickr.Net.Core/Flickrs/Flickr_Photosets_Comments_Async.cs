@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Flickr.Net.Core;
+﻿namespace Flickr.Net.Core;
 
 public partial class Flickr
 {
@@ -13,7 +7,7 @@ public partial class Flickr
     /// </summary>
     /// <param name="photosetId">The ID of the photoset to add the comment to.</param>
     /// <param name="commentText">The text of the comment. Can contain some HTML.</param>
-    public async Task<string> PhotosetsCommentsAddCommentAsync(string photosetId, string commentText, CancellationToken cancellationToken = default)
+    public async Task<string> PhotosetsCommentsAddCommentAsync(string photosetId, string commentText, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -31,7 +25,7 @@ public partial class Flickr
     /// Deletes a comment from a photoset.
     /// </summary>
     /// <param name="commentId">The ID of the comment to delete.</param>
-    public async Task PhotosetsCommentsDeleteCommentAsync(string commentId, CancellationToken cancellationToken = default)
+    public async Task PhotosetsCommentsDeleteCommentAsync(string commentId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -47,7 +41,7 @@ public partial class Flickr
     /// </summary>
     /// <param name="commentId">The ID of the comment to edit.</param>
     /// <param name="commentText">The new text for the comment.</param>
-    public async Task PhotosetsCommentsEditCommentAsync(string commentId, string commentText, CancellationToken cancellationToken = default)
+    public async Task PhotosetsCommentsEditCommentAsync(string commentId, string commentText, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -63,7 +57,7 @@ public partial class Flickr
     /// Gets a list of comments for a photoset.
     /// </summary>
     /// <param name="photosetId">The id of the photoset to return the comments for.</param>
-    public async Task<PhotosetCommentCollection> PhotosetsCommentsGetListAsync(string photosetId, CancellationToken cancellationToken = default)
+    public async Task<PhotosetCommentCollection> PhotosetsCommentsGetListAsync(string photosetId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {

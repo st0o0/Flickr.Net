@@ -1,6 +1,4 @@
-﻿using Flickr.Net.Core.Entities;
-
-namespace Flickr.Net.Core;
+﻿namespace Flickr.Net.Core;
 
 // TODO:
 public partial class Flickr

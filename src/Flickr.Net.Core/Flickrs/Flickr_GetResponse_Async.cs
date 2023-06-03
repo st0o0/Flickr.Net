@@ -21,7 +21,7 @@ public partial class Flickr
             }
         }
 
-        string url = CalculateUri(parameters, !string.IsNullOrEmpty(_sharedSecret));
+        string url = CalculateUri(parameters, !string.IsNullOrEmpty(_settings.SharedSecret));
 
         _lastRequest = url;
 

@@ -1,8 +1,4 @@
-﻿using Flickr.Net.Core.Entities;
-using Flickr.Net.Core.Entities.Collections;
-using Flickr.Net.Core.Enums;
-
-namespace Flickr.Net.Core;
+﻿namespace Flickr.Net.Core;
 
 // TODO:
 public partial class Flickr
@@ -155,7 +151,7 @@ public partial class Flickr
             { "callback", callback },
             { "verify", verify }
         };
-        
+
         if (!string.IsNullOrEmpty(verifyToken))
         {
             parameters.Add("verif_token", verifyToken);

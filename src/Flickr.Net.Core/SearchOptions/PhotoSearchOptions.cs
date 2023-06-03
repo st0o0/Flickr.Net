@@ -1,5 +1,3 @@
-using Flickr.Net.Core.Enums;
-using Flickr.Net.Core.Internals;
 using System.Collections.ObjectModel;
 
 namespace Flickr.Net.Core.SearchOptions;

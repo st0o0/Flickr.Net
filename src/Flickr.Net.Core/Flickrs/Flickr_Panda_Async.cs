@@ -1,18 +1,9 @@
-﻿using Flickr.Net.Core.Entities;
-using Flickr.Net.Core.Entities.Collections;
-using Flickr.Net.Core.Enums;
-using Flickr.Net.Core.Internals;
+﻿namespace Flickr.Net.Core;
 
-namespace Flickr.Net.Core;
-
-// TODO:
-public partial class Flickr
+public partial class Flickr : IFlickrPanda
 {
-    /// <summary>
-    /// Get a list of current 'Pandas' supported by Flickr.
-    /// </summary>
-    /// <returns>An array of panda names.</returns>
-    public async Task<string[]> PandaGetListAsync(CancellationToken cancellationToken = default)
+    async Task<string[]> IFlickrPanda.GetListAsync(CancellationToken cancellationToken)
+
     {
         Dictionary<string, string> parameters = new()
         {
@@ -23,14 +14,7 @@ public partial class Flickr
         return result.GetElementArray("panda");
     }
 
-    /// <summary>
-    /// Gets a list of photos for the given panda.
-    /// </summary>
-    /// <param name="pandaName">The name of the panda to return photos for.</param>
-    /// <param name="extras">The extras to return with the photos.</param>
-    /// <param name="perPage">The number of photos to return per page.</param>
-    /// <param name="page">The age to return.</param>
-    public async Task<PandaPhotoCollection> PandaGetPhotosAsync(string pandaName, PhotoSearchExtras extras = PhotoSearchExtras.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default)
+    async Task<PandaPhotoCollection> IFlickrPanda.GetPhotosAsync(string pandaName, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -55,4 +39,22 @@ public partial class Flickr
 
         return await GetResponseAsync<PandaPhotoCollection>(parameters, cancellationToken);
     }
+}
+
+public interface IFlickrPanda
+{
+    /// <summary>
+    /// Get a list of current 'Pandas' supported by Flickr.
+    /// </summary>
+    /// <returns>An array of panda names.</returns>
+    Task<string[]> GetListAsync(CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Gets a list of photos for the given panda.
+    /// </summary>
+    /// <param name="pandaName">The name of the panda to return photos for.</param>
+    /// <param name="extras">The extras to return with the photos.</param>
+    /// <param name="perPage">The number of photos to return per page.</param>
+    /// <param name="page">The age to return.</param>
+    Task<PandaPhotoCollection> GetPhotosAsync(string pandaName, PhotoSearchExtras extras = PhotoSearchExtras.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 }

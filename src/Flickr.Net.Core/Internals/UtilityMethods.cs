@@ -1,5 +1,3 @@
-using Flickr.Net.Core.Entities;
-using Flickr.Net.Core.Enums;
 using Flickr.Net.Core.Exceptions;
 using Flickr.Net.Core.SearchOptions;
 using System.ComponentModel;

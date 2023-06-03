@@ -26,8 +26,6 @@ public partial class Flickr
 {
     private readonly Cache _cache;
     private readonly FlickrConfigurationSettings _settings;
-    private readonly string _apiToken;
-    private string _sharedSecret;
     private string _lastRequest;
 
     /// <summary>
@@ -181,7 +179,7 @@ public partial class Flickr
     {
         get
         {
-            return _sharedSecret != null && _apiToken != null;
+            return _settings.SharedSecret != null && _settings.ApiKey != null;
         }
     }
 

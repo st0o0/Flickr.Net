@@ -1,6 +1,4 @@
-﻿using Flickr.Net.Core.Entities.Interfaces;
-
-namespace Flickr.Net.Core.Entities;
+﻿namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// Contains the details of a comment made on a photo.

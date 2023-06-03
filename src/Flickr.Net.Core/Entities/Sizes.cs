@@ -1,7 +1,4 @@
-﻿using Flickr.Net.Core.Entities.Interfaces;
-using Flickr.Net.Core.Enums;
-
-namespace Flickr.Net.Core.Entities;
+﻿namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// Contains details about all the sizes available for a given photograph.

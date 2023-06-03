@@ -1,6 +1,4 @@
-﻿using Flickr.Net.Core.Entities;
-
-namespace Flickr.Net.Core.Enums;
+﻿namespace Flickr.Net.Core.Enums;
 
 /// <summary>
 /// The type of the <see cref="ActivityItem"/>.

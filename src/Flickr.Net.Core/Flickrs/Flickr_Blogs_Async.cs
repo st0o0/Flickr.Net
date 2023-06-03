@@ -2,7 +2,7 @@
 
 public partial class Flickr : IFlickrBlogs
 {
-    async Task<BlogCollection> IFlickrBlogs.GetListAsync(CancellationToken cancellationToken )
+    async Task<BlogCollection> IFlickrBlogs.GetListAsync(CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -14,7 +14,7 @@ public partial class Flickr : IFlickrBlogs
         return await GetResponseAsync<BlogCollection>(parameters, cancellationToken);
     }
 
-    async Task<BlogServiceCollection> IFlickrBlogs.GetServicesAsync(CancellationToken cancellationToken )
+    async Task<BlogServiceCollection> IFlickrBlogs.GetServicesAsync(CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {

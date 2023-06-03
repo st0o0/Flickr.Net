@@ -1,4 +1,3 @@
-using Flickr.Net.Core.Entities.Interfaces;
 using System.Collections.ObjectModel;
 using System.Xml;
 

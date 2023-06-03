@@ -1,5 +1,4 @@
-﻿using Flickr.Net.Core.Entities.Interfaces;
-using System.Text;
+﻿using System.Text;
 
 namespace Flickr.Net.Core.Entities;
 

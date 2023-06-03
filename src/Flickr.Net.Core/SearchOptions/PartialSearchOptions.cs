@@ -1,6 +1,3 @@
-using Flickr.Net.Core.Enums;
-using Flickr.Net.Core.Internals;
-
 namespace Flickr.Net.Core.SearchOptions;
 
 /// <summary>

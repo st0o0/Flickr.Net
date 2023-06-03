@@ -1,6 +1,4 @@
-﻿using Flickr.Net.Core.Entities.Interfaces;
-
-namespace Flickr.Net.Core.Entities;
+﻿namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// The <see cref="PhotoPerson"/> class contains details returned by the <see cref="Flickr.PhotosPeopleGetList"/>

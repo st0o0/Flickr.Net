@@ -3,7 +3,6 @@
 // TODO:
 public partial class Flickr
 {
-
     /// <summary>
     /// Get a list of referring domains for a collection.
     /// </summary>

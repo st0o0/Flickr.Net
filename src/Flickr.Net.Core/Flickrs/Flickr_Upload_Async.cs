@@ -1,9 +1,4 @@
-﻿using Flickr.Net.Core.Entities;
-using Flickr.Net.Core.Entities.Interfaces;
-using Flickr.Net.Core.Enums;
-using Flickr.Net.Core.Internals;
-
-namespace Flickr.Net.Core;
+﻿namespace Flickr.Net.Core;
 
 public partial class Flickr : IFlickrUpload
 {
@@ -57,12 +52,12 @@ public partial class Flickr : IFlickrUpload
             parameters.Remove("api_key");
             OAuthGetBasicParameters(parameters);
             parameters.Add("oauth_token", OAuthAccessToken);
-            string sig = OAuthCalculateSignature("POST", uploadUri.AbsoluteUri, parameters, OAuthAccessTokenSecret);
+            string sig = ((IFlickrOAuth)this).CalculateSignature("POST", uploadUri.AbsoluteUri, parameters, OAuthAccessTokenSecret);
             parameters.Add("oauth_signature", sig);
         }
         else
         {
-            parameters.Add("auth_token", _apiToken ?? string.Empty);
+            parameters.Add("auth_token", _settings.ApiKey ?? string.Empty);
         }
 
         return await UploadDataAsync(stream, fileName, progress, uploadUri, parameters, cancellationToken);
@@ -78,19 +73,19 @@ public partial class Flickr : IFlickrUpload
             { "api_key", ApiKey }
         };
 
-        parameters.Add("api_key", _apiToken ?? string.Empty);
+        parameters.Add("api_key", _settings.ApiKey ?? string.Empty);
 
         if (!string.IsNullOrEmpty(OAuthAccessToken))
         {
             parameters.Remove("api_key");
             OAuthGetBasicParameters(parameters);
             parameters.Add("oauth_token", OAuthAccessToken);
-            string sig = OAuthCalculateSignature("POST", replaceUri.AbsoluteUri, parameters, OAuthAccessTokenSecret);
+            string sig = ((IFlickrOAuth)this).CalculateSignature("POST", replaceUri.AbsoluteUri, parameters, OAuthAccessTokenSecret);
             parameters.Add("oauth_signature", sig);
         }
         else
         {
-            parameters.Add("auth_token", _apiToken ?? string.Empty);
+            parameters.Add("auth_token", _settings.ApiKey ?? string.Empty);
         }
 
         return await UploadDataAsync(stream, fileName, progress, replaceUri, parameters, cancellationToken);

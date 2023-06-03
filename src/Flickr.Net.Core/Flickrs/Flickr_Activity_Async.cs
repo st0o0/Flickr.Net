@@ -1,8 +1,8 @@
 ﻿namespace Flickr.Net.Core;
 
 public partial class Flickr : IFlickrActivity
-{    
-    async Task<ActivityItemCollection> IFlickrActivity.ActivityUserCommentsAsync(int page, int perPage , CancellationToken cancellationToken)
+{
+    async Task<ActivityItemCollection> IFlickrActivity.UserCommentsAsync(int page, int perPage, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -24,7 +24,7 @@ public partial class Flickr : IFlickrActivity
         return await GetResponseAsync<ActivityItemCollection>(parameters, cancellationToken);
     }
 
-    async Task<ActivityItemCollection> IFlickrActivity.ActivityUserPhotosAsync(int timePeriod, TimeType timeType, int page, int perPage , CancellationToken cancellationToken )
+    async Task<ActivityItemCollection> IFlickrActivity.UserPhotosAsync(int timePeriod, TimeType timeType, int page, int perPage, CancellationToken cancellationToken)
     {
         if (timePeriod == 0)
         {
@@ -70,7 +70,7 @@ public interface IFlickrActivity
     /// </remarks>
     /// <param name="page">The page of the activity to return.</param>
     /// <param name="perPage">The number of activities to return per page.</param>
-    Task<ActivityItemCollection> ActivityUserCommentsAsync(int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<ActivityItemCollection> UserCommentsAsync(int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Returns a list of recent activity on photos belonging to the calling user.
@@ -82,5 +82,5 @@ public interface IFlickrActivity
     /// <param name="timeType">'d' for days, 'h' for hours.</param>
     /// <param name="page">The page numver of the activity to return.</param>
     /// <param name="perPage">The number of activities to return per page.</param>
-    Task<ActivityItemCollection> ActivityUserPhotosAsync(int timePeriod, TimeType timeType = TimeType.Hours, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<ActivityItemCollection> UserPhotosAsync(int timePeriod, TimeType timeType = TimeType.Hours, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 }

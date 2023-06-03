@@ -1,6 +1,4 @@
-﻿using Flickr.Net.Core.Entities.Interfaces;
-
-namespace Flickr.Net.Core.Entities;
+﻿namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// Used by the FlickrNet library when Flickr does not return anything in the body of a response, e.g. for update methods.

@@ -1,10 +1,4 @@
-﻿using Flickr.Net.Core.Entities;
-using Flickr.Net.Core.Entities.Collections;
-using Flickr.Net.Core.Enums;
-using Flickr.Net.Core.Internals;
-using System.ComponentModel.DataAnnotations;
-
-namespace Flickr.Net.Core;
+﻿namespace Flickr.Net.Core;
 
 // TODO:
 public partial class Flickr
@@ -14,7 +8,7 @@ public partial class Flickr
     /// </summary>
     /// <param name="photosetId">The ID of the photoset to add the photo to.</param>
     /// <param name="photoId">The ID of the photo to add.</param>
-    public async Task PhotosetsAddPhotoAsync(string photosetId, string photoId, CancellationToken cancellationToken = default)
+    public async Task PhotosetsAddPhotoAsync(string photosetId, string photoId, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -34,7 +28,7 @@ public partial class Flickr
     /// <param name="title">The title of the photoset.</param>
     /// <param name="description">THe description of the photoset.</param>
     /// <param name="primaryPhotoId">The ID of the photo which will be the primary photo for the photoset. This photo will also be added to the set.</param>
-    public async Task<Photoset> PhotosetsCreateAsync(string title, string primaryPhotoId, string description = null, CancellationToken cancellationToken = default)
+    public async Task<Photoset> PhotosetsCreateAsync(string title, string primaryPhotoId, string description, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -57,7 +51,7 @@ public partial class Flickr
     /// Deletes the specified photoset.
     /// </summary>
     /// <param name="photosetId">The ID of the photoset to delete.</param>
-    public async Task PhotosetsDeleteAsync(string photosetId, CancellationToken cancellationToken = default)
+    public async Task PhotosetsDeleteAsync(string photosetId, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -76,7 +70,7 @@ public partial class Flickr
     /// <param name="photosetId">The ID of the photoset to update.</param>
     /// <param name="title">The new title for the photoset.</param>
     /// <param name="description">The new description for the photoset.</param>
-    public async Task PhotosetsEditMetaAsync(string photosetId, string title, string description = null, CancellationToken cancellationToken = default)
+    public async Task PhotosetsEditMetaAsync(string photosetId, string title, string description, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -106,7 +100,7 @@ public partial class Flickr
     /// <param name="photosetId">The ID of the photoset to update.</param>
     /// <param name="primaryPhotoId">The ID of the new primary photo for the photoset.</param>
     /// <param name="photoIds">An array of photo IDs.</param>
-    public async Task PhotosetsEditPhotosAsync(string photosetId, string primaryPhotoId, string[] photoIds, CancellationToken cancellationToken = default)
+    public async Task PhotosetsEditPhotosAsync(string photosetId, string primaryPhotoId, string[] photoIds, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -126,7 +120,7 @@ public partial class Flickr
     /// </summary>
     /// <param name="photoId">The photo id of the photo in the set.</param>
     /// <param name="photosetId">The id of the set.</param>
-    public async Task<Context> PhotosetsGetContextAsync(string photoId, string photosetId, CancellationToken cancellationToken = default)
+    public async Task<Context> PhotosetsGetContextAsync(string photoId, string photosetId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -142,7 +136,7 @@ public partial class Flickr
     /// Gets the information about a photoset.
     /// </summary>
     /// <param name="photosetId">The ID of the photoset to return information for.</param>
-    public async Task<Photoset> PhotosetsGetInfoAsync(string photosetId, CancellationToken cancellationToken = default)
+    public async Task<Photoset> PhotosetsGetInfoAsync(string photosetId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -159,7 +153,7 @@ public partial class Flickr
     /// <param name="userId">The ID of the user to return the photosets of.</param>
     /// <param name="page">The page of the results to return. Defaults to page 1.</param>
     /// <param name="perPage">The number of photosets to return per page. Defaults to 500.</param>
-    public async Task<PhotosetCollection> PhotosetsGetListAsync(string userId, int page, int perPage, CancellationToken cancellationToken = default)
+    public async Task<PhotosetCollection> PhotosetsGetListAsync(string userId, int page, int perPage, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -198,7 +192,7 @@ public partial class Flickr
     /// <param name="page">The page to return, defaults to 1.</param>
     /// <param name="perPage">The number of photos to return per page.</param>
     /// <param name="media">Filter on the type of media.</param>
-    public async Task<PhotosetPhotoCollection> PhotosetsGetPhotosAsync(string photosetId, PhotoSearchExtras extras = PhotoSearchExtras.None, PrivacyFilter privacyFilter = PrivacyFilter.None, int page = 0, int perPage = 0, MediaType media = MediaType.None, CancellationToken cancellationToken = default)
+    public async Task<PhotosetPhotoCollection> PhotosetsGetPhotosAsync(string photosetId, PhotoSearchExtras extras, PrivacyFilter privacyFilter, int page, int perPage, MediaType media, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -244,7 +238,7 @@ public partial class Flickr
     /// <param name="photosetIds">An array of photoset IDs,
     /// ordered with the set to show first, first in the list.
     /// Any set IDs not given in the list will be set to appear at the end of the list, ordered by their IDs.</param>
-    public async Task PhotosetsOrderSetsAsync(IEnumerable<string> photosetIds, CancellationToken cancellationToken = default)
+    public async Task PhotosetsOrderSetsAsync(IEnumerable<string> photosetIds, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -263,7 +257,7 @@ public partial class Flickr
     /// </remarks>
     /// <param name="photosetId">The ID of the photoset to remove the photo from.</param>
     /// <param name="photoId">The ID of the photo to remove.</param>
-    public async Task PhotosetsRemovePhotoAsync(string photosetId, string photoId, CancellationToken cancellationToken = default)
+    public async Task PhotosetsRemovePhotoAsync(string photosetId, string photoId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -283,7 +277,7 @@ public partial class Flickr
     /// </remarks>
     /// <param name="photosetId">The ID of the photoset to remove the photo from.</param>
     /// <param name="photoIds">The IDs of the photo to remove.</param>
-    public async Task PhotosetsRemovePhotosAsync(string photosetId, IEnumerable<string> photoIds, CancellationToken cancellationToken = default)
+    public async Task PhotosetsRemovePhotosAsync(string photosetId, IEnumerable<string> photoIds, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -303,7 +297,7 @@ public partial class Flickr
     /// </remarks>
     /// <param name="photosetId">The ID of the photoset to reorder the photo for.</param>
     /// <param name="photoIds">The IDs of the photo to reorder.</param>
-    public async Task PhotosetsReorderPhotosAsync(string photosetId, IEnumerable<string> photoIds, CancellationToken cancellationToken = default)
+    public async Task PhotosetsReorderPhotosAsync(string photosetId, IEnumerable<string> photoIds, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -323,7 +317,7 @@ public partial class Flickr
     /// </remarks>
     /// <param name="photosetId">The ID of the photoset to set the primary photo for.</param>
     /// <param name="photoId">The IDs of the photo to become the primary photo.</param>
-    public async Task PhotosetsSetPrimaryPhotoAsync(string photosetId, string photoId, CancellationToken cancellationToken = default)
+    public async Task PhotosetsSetPrimaryPhotoAsync(string photosetId, string photoId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {

@@ -1,6 +1,4 @@
-﻿using Flickr.Net.Core.Entities.Interfaces;
-
-namespace Flickr.Net.Core.Entities;
+﻿namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// A machine tag predicate. "namespace:predicate=value".

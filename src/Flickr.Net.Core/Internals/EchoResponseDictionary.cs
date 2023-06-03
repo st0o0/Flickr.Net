@@ -1,6 +1,4 @@
-﻿using Flickr.Net.Core.Entities.Interfaces;
-
-namespace Flickr.Net.Core.Internals;
+﻿namespace Flickr.Net.Core.Internals;
 
 /// <summary>
 /// The response returned by the <see cref="Flickr.TestEcho"/> method.

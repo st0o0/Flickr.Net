@@ -1,22 +1,10 @@
-﻿using Flickr.Net.Core.Entities.Collections;
-using Flickr.Net.Core.Enums;
-using Flickr.Net.Core.Internals;
-using Flickr.Net.Core.SearchOptions;
+﻿using Flickr.Net.Core.SearchOptions;
 
 namespace Flickr.Net.Core;
 
-// TODO:
-public partial class Flickr
+public partial class Flickr : IFlickrInterestingness
 {
-    /// <summary>
-    /// Gets a list of photos from the most recent interstingness list.
-    /// </summary>
-    /// <param name="date">The date to return the interestingness photos for.</param>
-    /// <param name="extras">The extra parameters to return along with the search results.
-    /// See <see cref="PhotoSearchOptions"/> for more details.</param>
-    /// <param name="perPage">The number of results to return per page.</param>
-    /// <param name="page">The page of the results to return.</param>
-    public async Task<PhotoCollection> InterestingnessGetListAsync(DateTime? date = null, PhotoSearchExtras extras = PhotoSearchExtras.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default)
+    async Task<PhotoCollection> IFlickrInterestingness.GetListAsync(DateTime? date, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -45,4 +33,17 @@ public partial class Flickr
 
         return await GetResponseAsync<PhotoCollection>(parameters, cancellationToken);
     }
+}
+
+public interface IFlickrInterestingness
+{
+    /// <summary>
+    /// Gets a list of photos from the most recent interstingness list.
+    /// </summary>
+    /// <param name="date">The date to return the interestingness photos for.</param>
+    /// <param name="extras">The extra parameters to return along with the search results.
+    /// See <see cref="PhotoSearchOptions"/> for more details.</param>
+    /// <param name="perPage">The number of results to return per page.</param>
+    /// <param name="page">The page of the results to return.</param>
+    Task<PhotoCollection> GetListAsync(DateTime? date, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken);
 }

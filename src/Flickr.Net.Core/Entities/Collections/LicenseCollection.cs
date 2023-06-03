@@ -1,6 +1,4 @@
-﻿using Flickr.Net.Core.Entities.Interfaces;
-
-namespace Flickr.Net.Core.Entities.Collections;
+﻿namespace Flickr.Net.Core.Entities.Collections;
 
 /// <summary>
 /// A class which encapsulates a single property, an array of

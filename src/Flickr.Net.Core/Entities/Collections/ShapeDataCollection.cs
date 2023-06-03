@@ -1,6 +1,4 @@
-﻿using Flickr.Net.Core.Entities.Interfaces;
-using Flickr.Net.Core.Enums;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 
 namespace Flickr.Net.Core.Entities.Collections;
 

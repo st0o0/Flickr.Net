@@ -1,5 +1,3 @@
-using Flickr.Net.Core.Enums;
-
 namespace Flickr.Net.Core.Internals;
 
 /// <summary>

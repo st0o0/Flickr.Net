@@ -61,7 +61,7 @@ public static partial class FlickrResponder
         }
         if (!string.IsNullOrEmpty(flickr.OAuthAccessTokenSecret) && !parameters.ContainsKey("oauth_signature"))
         {
-            string sig = flickr.OAuthCalculateSignature("POST", baseUrl, parameters, flickr.OAuthAccessTokenSecret);
+            string sig = ((IFlickrOAuth)flickr).CalculateSignature("POST", baseUrl, parameters, flickr.OAuthAccessTokenSecret);
             parameters.Add("oauth_signature", sig);
         }
 

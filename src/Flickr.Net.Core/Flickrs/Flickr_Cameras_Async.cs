@@ -4,8 +4,8 @@ public partial class Flickr : IFlickrCameras
 {
     async Task<BrandCollection> IFlickrCameras.GetBrandsAsync(CancellationToken cancellationToken)
     {
-        Dictionary<string, string> parameters = new() 
-        { 
+        Dictionary<string, string> parameters = new()
+        {
             { "method", "flickr.cameras.getBrands" }
         };
 

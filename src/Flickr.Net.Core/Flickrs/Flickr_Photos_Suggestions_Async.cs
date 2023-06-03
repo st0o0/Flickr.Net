@@ -1,17 +1,8 @@
-﻿using Flickr.Net.Core.Entities;
-using Flickr.Net.Core.Entities.Collections;
-using Flickr.Net.Core.Enums;
+﻿namespace Flickr.Net.Core;
 
-namespace Flickr.Net.Core;
-
-// TODO:
-public partial class Flickr
+public partial class Flickr : IFlickrPhotosSuggestions
 {
-    /// <summary>
-    /// Approve a location suggestion for a photo.
-    /// </summary>
-    /// <param name="suggestionId">The suggestion to approve.</param>
-    public async Task PhotosSuggestionsApproveSuggestionAsync(string suggestionId, CancellationToken cancellationToken = default)
+    async Task IFlickrPhotosSuggestions.ApproveSuggestionAsync(string suggestionId, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -29,13 +20,7 @@ public partial class Flickr
         await GetResponseAsync<NoResponse>(parameters, cancellationToken);
     }
 
-    /// <summary>
-    /// Get a list of suggestions for a photo.
-    /// </summary>
-    /// <param name="photoId">The photo id of the photo to list the suggestions for.</param>
-    /// <param name="status">The type of status to filter by.</param>
-    /// <returns></returns>
-    public async Task<SuggestionCollection> PhotosSuggestionsGetListAsync(string photoId, SuggestionStatus status, CancellationToken cancellationToken = default)
+    async Task<SuggestionCollection> IFlickrPhotosSuggestions.GetListAsync(string photoId, SuggestionStatus status, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -49,11 +34,7 @@ public partial class Flickr
         return await GetResponseAsync<SuggestionCollection>(parameters, cancellationToken);
     }
 
-    /// <summary>
-    /// Rejects a suggestion made for a location on a photo. Currently doesn't appear to actually work. Just use <see cref="Flickr.PhotosSuggestionsRemoveSuggestion"/> instead.
-    /// </summary>
-    /// <param name="suggestionId">The ID of the suggestion to remove.</param>
-    public async Task PhotosSuggestionsRejectSuggestionAsync(string suggestionId, CancellationToken cancellationToken = default)
+    async Task IFlickrPhotosSuggestions.RejectSuggestionAsync(string suggestionId, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -71,11 +52,7 @@ public partial class Flickr
         await GetResponseAsync<NoResponse>(parameters, cancellationToken);
     }
 
-    /// <summary>
-    /// Remove a location suggestion from a photo.
-    /// </summary>
-    /// <param name="suggestionId">The suggestion to remove.</param>
-    public async Task PhotosSuggestionsRemoveSuggestionAsync(string suggestionId, CancellationToken cancellationToken = default)
+    async Task IFlickrPhotosSuggestions.RemoveSuggestionAsync(string suggestionId, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -93,17 +70,7 @@ public partial class Flickr
         await GetResponseAsync<NoResponse>(parameters, cancellationToken);
     }
 
-    /// <summary>
-    /// Suggest a particular location for a photo.
-    /// </summary>
-    /// <param name="photoId">The id of the photo.</param>
-    /// <param name="latitude">The latitude of the location to suggest.</param>
-    /// <param name="longitude">The longitude of the location to suggest.</param>
-    /// <param name="accuracy">The accuracy of the location to suggest.</param>
-    /// <param name="woeId">The WOE ID of the location to suggest.</param>
-    /// <param name="placeId">The Flickr place id of the location to suggest.</param>
-    /// <param name="note">A note to add to the suggestion.</param>
-    public async Task PhotosSuggestionsSuggestLocationAsync(string photoId, double latitude, double longitude, GeoAccuracy accuracy = GeoAccuracy.None, string woeId = null, string placeId = null, string note = null, CancellationToken cancellationToken = default)
+    async Task IFlickrPhotosSuggestions.SuggestLocationAsync(string photoId, double latitude, double longitude, GeoAccuracy accuracy, string woeId, string placeId, string note, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -137,4 +104,45 @@ public partial class Flickr
 
         await GetResponseAsync<NoResponse>(parameters, cancellationToken);
     }
+}
+
+public interface IFlickrPhotosSuggestions
+{
+    /// <summary>
+    /// Approve a location suggestion for a photo.
+    /// </summary>
+    /// <param name="suggestionId">The suggestion to approve.</param>
+    Task ApproveSuggestionAsync(string suggestionId, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Get a list of suggestions for a photo.
+    /// </summary>
+    /// <param name="photoId">The photo id of the photo to list the suggestions for.</param>
+    /// <param name="status">The type of status to filter by.</param>
+    /// <returns></returns>
+    Task<SuggestionCollection> GetListAsync(string photoId, SuggestionStatus status, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Rejects a suggestion made for a location on a photo. Currently doesn't appear to actually work. Just use <see cref="Flickr.PhotosSuggestionsRemoveSuggestion"/> instead.
+    /// </summary>
+    /// <param name="suggestionId">The ID of the suggestion to remove.</param>
+    Task RejectSuggestionAsync(string suggestionId, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Remove a location suggestion from a photo.
+    /// </summary>
+    /// <param name="suggestionId">The suggestion to remove.</param>
+    Task RemoveSuggestionAsync(string suggestionId, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Suggest a particular location for a photo.
+    /// </summary>
+    /// <param name="photoId">The id of the photo.</param>
+    /// <param name="latitude">The latitude of the location to suggest.</param>
+    /// <param name="longitude">The longitude of the location to suggest.</param>
+    /// <param name="accuracy">The accuracy of the location to suggest.</param>
+    /// <param name="woeId">The WOE ID of the location to suggest.</param>
+    /// <param name="placeId">The Flickr place id of the location to suggest.</param>
+    /// <param name="note">A note to add to the suggestion.</param>
+    Task SuggestLocationAsync(string photoId, double latitude, double longitude, GeoAccuracy accuracy = GeoAccuracy.None, string woeId = null, string placeId = null, string note = null, CancellationToken cancellationToken = default);
 }

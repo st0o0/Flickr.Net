@@ -1,5 +1,3 @@
-using Flickr.Net.Core.Entities.Interfaces;
-
 namespace Flickr.Net.Core.Entities.Collections;
 
 /// <remarks/>

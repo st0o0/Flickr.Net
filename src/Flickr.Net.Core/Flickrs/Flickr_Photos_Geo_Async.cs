@@ -1,27 +1,8 @@
-﻿using Flickr.Net.Core.Entities;
-using Flickr.Net.Core.Entities.Collections;
-using Flickr.Net.Core.Enums;
-using Flickr.Net.Core.Internals;
+﻿namespace Flickr.Net.Core;
 
-namespace Flickr.Net.Core;
-
-// TODO:
-public partial class Flickr
+public partial class Flickr : IFlickrPhotosGeo
 {
-    /// <summary>
-    /// Correct the places hierarchy for all the photos for a user at a given latitude, longitude and accuracy.
-    /// </summary>
-    /// <remarks>
-    /// Batch corrections are processed in a delayed queue so it may take a few minutes before the changes are reflected in a user's photos.
-    /// </remarks>
-    /// <param name="latitude">The latitude of the photos to be update whose valid range is -90 to 90. Anything more than 6 decimal places will be truncated.</param>
-    /// <param name="longitude">The longitude of the photos to be updated whose valid range is -180 to 180. Anything more than 6 decimal places will be truncated.</param>
-    /// <param name="accuracy">Recorded accuracy level of the photos to be updated.
-    /// World level is 1, Country is ~3, Region ~6, City ~11, Street ~16. Current range is 1-16.
-    /// Defaults to 16 if not specified.</param>
-    /// <param name="placeId">A Flickr Places ID. (While optional, you must pass either a valid Places ID or a WOE ID.)</param>
-    /// <param name="woeId">A Where On Earth (WOE) ID. (While optional, you must pass either a valid Places ID or a WOE ID.)</param>
-    public async Task PhotosGeoBatchCorrectLocationAsync(double latitude, double longitude, GeoAccuracy accuracy, string placeId = null, string woeId = null, CancellationToken cancellationToken = default)
+    async Task IFlickrPhotosGeo.PhotosGeoBatchCorrectLocationAsync(double latitude, double longitude, GeoAccuracy accuracy, string placeId, string woeId, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -46,13 +27,7 @@ public partial class Flickr
         await GetResponseAsync<NoResponse>(parameters, cancellationToken);
     }
 
-    /// <summary>
-    /// Correct the places hierarchy for a given photo.
-    /// </summary>
-    /// <param name="photoId">The ID of the photo whose WOE location is being corrected.</param>
-    /// <param name="placeId">A Flickr Places ID. (While optional, you must pass either a valid Places ID or a WOE ID.)</param>
-    /// <param name="woeId">A Where On Earth (WOE) ID. (While optional, you must pass either a valid Places ID or a WOE ID.)</param>
-    public async Task PhotosGeoCorrectLocationAsync(string photoId, string placeId, string woeId, CancellationToken cancellationToken = default)
+    async Task IFlickrPhotosGeo.PhotosGeoCorrectLocationAsync(string photoId, string placeId, string woeId, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -75,11 +50,7 @@ public partial class Flickr
         await GetResponseAsync<NoResponse>(parameters, cancellationToken);
     }
 
-    /// <summary>
-    /// Returns the location data for a give photo.
-    /// </summary>
-    /// <param name="photoId">The ID of the photo to return the location information for.</param>
-    public async Task<PlaceInfo> PhotosGeoGetLocationAsync(string photoId, CancellationToken cancellationToken = default)
+    async Task<PlaceInfo> IFlickrPhotosGeo.PhotosGeoGetLocationAsync(string photoId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -91,11 +62,7 @@ public partial class Flickr
         return result.Location;
     }
 
-    /// <summary>
-    /// Get permissions for a photo.
-    /// </summary>
-    /// <param name="photoId">The id of the photo to get permissions for.</param>
-    public async Task<GeoPermissions> PhotosGeoGetPermsAsync(string photoId, CancellationToken cancellationToken = default)
+    async Task<GeoPermissions> IFlickrPhotosGeo.PhotosGeoGetPermsAsync(string photoId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -106,19 +73,7 @@ public partial class Flickr
         return await GetResponseAsync<GeoPermissions>(parameters, cancellationToken);
     }
 
-    /// <summary>
-    /// Return a list of photos for a user at a specific latitude, longitude and accuracy.
-    /// </summary>
-    /// <param name="latitude">The latitude whose valid range is -90 to 90. Anything more than 6 decimal places will be truncated.</param>
-    /// <param name="longitude">The longitude whose valid range is -180 to 180. Anything more than 6 decimal places will be truncated.</param>
-    /// <param name="accuracy">Recorded accuracy level of the location information.
-    /// World level is 1, Country is ~3, Region ~6, City ~11, Street ~16. Current range is 1-16.
-    /// Defaults to 16 if not specified.</param>
-    /// <param name="extras"></param>
-    /// <param name="perPage">Number of photos to return per page. If this argument is omitted, it defaults to 100.
-    /// The maximum allowed value is 500.</param>
-    /// <param name="page">The page of results to return. If this argument is omitted, it defaults to 1.</param>
-    public async Task<PhotoCollection> PhotosGeoPhotosForLocationAsync(double latitude, double longitude, GeoAccuracy accuracy = GeoAccuracy.None, PhotoSearchExtras extras = PhotoSearchExtras.None, int perPage = 0, int page = 0, CancellationToken cancellationToken = default)
+    async Task<PhotoCollection> IFlickrPhotosGeo.PhotosGeoPhotosForLocationAsync(double latitude, double longitude, GeoAccuracy accuracy, PhotoSearchExtras extras, int perPage, int page, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -152,11 +107,7 @@ public partial class Flickr
         return await GetResponseAsync<PhotoCollection>(parameters, cancellationToken);
     }
 
-    /// <summary>
-    /// Removes Location information.
-    /// </summary>
-    /// <param name="photoId">The photo ID of the photo to remove information from.</param>
-    public async Task PhotosGeoRemoveLocationAsync(string photoId, CancellationToken cancellationToken = default)
+    async Task IFlickrPhotosGeo.PhotosGeoRemoveLocationAsync(string photoId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -167,16 +118,7 @@ public partial class Flickr
         await GetResponseAsync<NoResponse>(parameters, cancellationToken);
     }
 
-    /// <summary>
-    /// Indicate the state of a photo's geotagginess beyond latitude and longitude.
-    /// </summary>
-    /// <remarks>
-    /// Note : photos passed to this method must already be geotagged (using the flickr.photos.geo.setLocation method).
-    /// </remarks>
-    /// <param name="photoId">The id of the photo to set context data for.</param>
-    /// <param name="context">Context is a numeric value representing the photo's geotagginess beyond latitude and longitude.
-    /// For example, you may wish to indicate that a photo was taken "indoors" or "outdoors". </param>
-    public async Task PhotosGeoSetContextAsync(string photoId, GeoContext context, CancellationToken cancellationToken = default)
+    async Task IFlickrPhotosGeo.PhotosGeoSetContextAsync(string photoId, GeoContext context, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -188,14 +130,7 @@ public partial class Flickr
         await GetResponseAsync<NoResponse>(parameters, cancellationToken);
     }
 
-    /// <summary>
-    /// Sets the geo location for a photo.
-    /// </summary>
-    /// <param name="photoId">The ID of the photo to set to location for.</param>
-    /// <param name="latitude">The latitude of the geo location. A double number ranging from -180.00 to 180.00. Digits beyond 6 decimal places will be truncated.</param>
-    /// <param name="longitude">The longitude of the geo location. A double number ranging from -180.00 to 180.00. Digits beyond 6 decimal places will be truncated.</param>
-    /// <param name="accuracy">The accuracy of the photos geo location.</param>
-    public async Task PhotosGeoSetLocationAsync(string photoId, double latitude, double longitude, GeoAccuracy accuracy = GeoAccuracy.None, CancellationToken cancellationToken = default)
+    async Task IFlickrPhotosGeo.PhotosGeoSetLocationAsync(string photoId, double latitude, double longitude, GeoAccuracy accuracy, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -213,15 +148,7 @@ public partial class Flickr
         await GetResponseAsync<NoResponse>(parameters, cancellationToken);
     }
 
-    /// <summary>
-    /// Set the permission for who can see geotagged photos on Flickr.
-    /// </summary>
-    /// <param name="photoId">The ID of the photo permissions to update.</param>
-    /// <param name="isPublic"></param>
-    /// <param name="isContact"></param>
-    /// <param name="isFamily"></param>
-    /// <param name="isFriend"></param>
-    public async Task PhotosGeoSetPermsAsync(string photoId, bool isPublic, bool isContact, bool isFamily, bool isFriend, CancellationToken cancellationToken = default)
+    async Task IFlickrPhotosGeo.PhotosGeoSetPermsAsync(string photoId, bool isPublic, bool isContact, bool isFamily, bool isFriend, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -235,4 +162,92 @@ public partial class Flickr
 
         await GetResponseAsync<NoResponse>(parameters, cancellationToken);
     }
+}
+
+public interface IFlickrPhotosGeo
+{
+    /// <summary>
+    /// Correct the places hierarchy for all the photos for a user at a given latitude, longitude and accuracy.
+    /// </summary>
+    /// <remarks>
+    /// Batch corrections are processed in a delayed queue so it may take a few minutes before the changes are reflected in a user's photos.
+    /// </remarks>
+    /// <param name="latitude">The latitude of the photos to be update whose valid range is -90 to 90. Anything more than 6 decimal places will be truncated.</param>
+    /// <param name="longitude">The longitude of the photos to be updated whose valid range is -180 to 180. Anything more than 6 decimal places will be truncated.</param>
+    /// <param name="accuracy">Recorded accuracy level of the photos to be updated.
+    /// World level is 1, Country is ~3, Region ~6, City ~11, Street ~16. Current range is 1-16.
+    /// Defaults to 16 if not specified.</param>
+    /// <param name="placeId">A Flickr Places ID. (While optional, you must pass either a valid Places ID or a WOE ID.)</param>
+    /// <param name="woeId">A Where On Earth (WOE) ID. (While optional, you must pass either a valid Places ID or a WOE ID.)</param>
+    Task PhotosGeoBatchCorrectLocationAsync(double latitude, double longitude, GeoAccuracy accuracy, string placeId = null, string woeId = null, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Correct the places hierarchy for a given photo.
+    /// </summary>
+    /// <param name="photoId">The ID of the photo whose WOE location is being corrected.</param>
+    /// <param name="placeId">A Flickr Places ID. (While optional, you must pass either a valid Places ID or a WOE ID.)</param>
+    /// <param name="woeId">A Where On Earth (WOE) ID. (While optional, you must pass either a valid Places ID or a WOE ID.)</param>
+    Task PhotosGeoCorrectLocationAsync(string photoId, string placeId, string woeId, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Returns the location data for a give photo.
+    /// </summary>
+    /// <param name="photoId">The ID of the photo to return the location information for.</param>
+    Task<PlaceInfo> PhotosGeoGetLocationAsync(string photoId, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Get permissions for a photo.
+    /// </summary>
+    /// <param name="photoId">The id of the photo to get permissions for.</param>
+    Task<GeoPermissions> PhotosGeoGetPermsAsync(string photoId, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Return a list of photos for a user at a specific latitude, longitude and accuracy.
+    /// </summary>
+    /// <param name="latitude">The latitude whose valid range is -90 to 90. Anything more than 6 decimal places will be truncated.</param>
+    /// <param name="longitude">The longitude whose valid range is -180 to 180. Anything more than 6 decimal places will be truncated.</param>
+    /// <param name="accuracy">Recorded accuracy level of the location information.
+    /// World level is 1, Country is ~3, Region ~6, City ~11, Street ~16. Current range is 1-16.
+    /// Defaults to 16 if not specified.</param>
+    /// <param name="extras"></param>
+    /// <param name="perPage">Number of photos to return per page. If this argument is omitted, it defaults to 100.
+    /// The maximum allowed value is 500.</param>
+    /// <param name="page">The page of results to return. If this argument is omitted, it defaults to 1.</param>
+    Task<PhotoCollection> PhotosGeoPhotosForLocationAsync(double latitude, double longitude, GeoAccuracy accuracy = GeoAccuracy.None, PhotoSearchExtras extras = PhotoSearchExtras.None, int perPage = 0, int page = 0, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Removes Location information.
+    /// </summary>
+    /// <param name="photoId">The photo ID of the photo to remove information from.</param>
+    Task PhotosGeoRemoveLocationAsync(string photoId, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Indicate the state of a photo's geotagginess beyond latitude and longitude.
+    /// </summary>
+    /// <remarks>
+    /// Note : photos passed to this method must already be geotagged (using the flickr.photos.geo.setLocation method).
+    /// </remarks>
+    /// <param name="photoId">The id of the photo to set context data for.</param>
+    /// <param name="context">Context is a numeric value representing the photo's geotagginess beyond latitude and longitude.
+    /// For example, you may wish to indicate that a photo was taken "indoors" or "outdoors". </param>
+    Task PhotosGeoSetContextAsync(string photoId, GeoContext context, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Sets the geo location for a photo.
+    /// </summary>
+    /// <param name="photoId">The ID of the photo to set to location for.</param>
+    /// <param name="latitude">The latitude of the geo location. A double number ranging from -180.00 to 180.00. Digits beyond 6 decimal places will be truncated.</param>
+    /// <param name="longitude">The longitude of the geo location. A double number ranging from -180.00 to 180.00. Digits beyond 6 decimal places will be truncated.</param>
+    /// <param name="accuracy">The accuracy of the photos geo location.</param>
+    Task PhotosGeoSetLocationAsync(string photoId, double latitude, double longitude, GeoAccuracy accuracy = GeoAccuracy.None, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Set the permission for who can see geotagged photos on Flickr.
+    /// </summary>
+    /// <param name="photoId">The ID of the photo permissions to update.</param>
+    /// <param name="isPublic"></param>
+    /// <param name="isContact"></param>
+    /// <param name="isFamily"></param>
+    /// <param name="isFriend"></param>
+    Task PhotosGeoSetPermsAsync(string photoId, bool isPublic, bool isContact, bool isFamily, bool isFriend, CancellationToken cancellationToken = default);
 }

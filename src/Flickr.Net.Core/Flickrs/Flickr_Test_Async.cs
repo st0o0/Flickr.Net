@@ -1,7 +1,4 @@
-﻿using Flickr.Net.Core.Entities;
-using Flickr.Net.Core.Internals;
-
-namespace Flickr.Net.Core;
+﻿namespace Flickr.Net.Core;
 
 // TODO:
 public partial class Flickr : IFlickrTest

@@ -1,7 +1,4 @@
-﻿using Flickr.Net.Core.Entities.Interfaces;
-using Flickr.Net.Core.Enums;
-
-namespace Flickr.Net.Core.Entities;
+﻿namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// A suggestion for the correct location for a particular photo.

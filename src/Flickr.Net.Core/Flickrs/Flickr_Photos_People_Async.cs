@@ -1,21 +1,8 @@
-﻿using Flickr.Net.Core.Entities;
-using Flickr.Net.Core.Entities.Collections;
+﻿namespace Flickr.Net.Core;
 
-namespace Flickr.Net.Core;
-
-// TODO:
-public partial class Flickr
+public partial class Flickr : IFlickrPhotosPeople
 {
-    /// <summary>
-    /// Add a person to a photo. Coordinates and sizes of boxes are optional; they are measured in pixels, based on the 500px image size shown on individual photo pages.
-    /// </summary>
-    /// <param name="photoId">The id of the photo to add a person to.</param>
-    /// <param name="userId">The NSID of the user to add to the photo.</param>
-    /// <param name="personX">The left-most pixel co-ordinate of the box around the person.</param>
-    /// <param name="personY">The top-most pixel co-ordinate of the box around the person.</param>
-    /// <param name="personWidth">The width (in pixels) of the box around the person.</param>
-    /// <param name="personHeight">The height (in pixels) of the box around the person.</param>
-    public async Task PhotosPeopleAddAsync(string photoId, string userId, int? personX = null, int? personY = null, int? personWidth = null, int? personHeight = null, CancellationToken cancellationToken = default)
+    async Task IFlickrPhotosPeople.AddAsync(string photoId, string userId, int? personX, int? personY, int? personWidth, int? personHeight, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -49,12 +36,7 @@ public partial class Flickr
         await GetResponseAsync<NoResponse>(parameters, cancellationToken);
     }
 
-    /// <summary>
-    /// Remove a person from a photo.
-    /// </summary>
-    /// <param name="photoId">The id of the photo to remove a person from.</param>
-    /// <param name="userId">The NSID of the person to remove from the photo.</param>
-    public async Task PhotosPeopleDeleteAsync(string photoId, string userId, CancellationToken cancellationToken = default)
+    async Task IFlickrPhotosPeople.DeleteAsync(string photoId, string userId, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -68,12 +50,7 @@ public partial class Flickr
         await GetResponseAsync<NoResponse>(parameters, cancellationToken);
     }
 
-    /// <summary>
-    /// Remove the bounding box from a person in a photo
-    /// </summary>
-    /// <param name="photoId">The id of the photo to edit a person in.</param>
-    /// <param name="userId">The NSID of the person whose bounding box you want to remove.</param>
-    public async Task PhotosPeopleDeleteCoordsAsync(string photoId, string userId, CancellationToken cancellationToken = default)
+    async Task IFlickrPhotosPeople.DeleteCoordsAsync(string photoId, string userId, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -87,16 +64,7 @@ public partial class Flickr
         await GetResponseAsync<NoResponse>(parameters, cancellationToken);
     }
 
-    /// <summary>
-    /// Edit the bounding box of an existing person on a photo.
-    /// </summary>
-    /// <param name="photoId">The id of the photo to edit a person in.</param>
-    /// <param name="userId">The NSID of the person to edit in a photo.</param>
-    /// <param name="personX">The left-most pixel co-ordinate of the box around the person.</param>
-    /// <param name="personY">The top-most pixel co-ordinate of the box around the person.</param>
-    /// <param name="personWidth">The width (in pixels) of the box around the person.</param>
-    /// <param name="personHeight">The height (in pixels) of the box around the person.</param>
-    public async Task PhotosPeopleEditCoordsAsync(string photoId, string userId, int personX, int personY, int personWidth, int personHeight, CancellationToken cancellationToken = default)
+    async Task IFlickrPhotosPeople.EditCoordsAsync(string photoId, string userId, int personX, int personY, int personWidth, int personHeight, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -114,11 +82,7 @@ public partial class Flickr
         await GetResponseAsync<NoResponse>(parameters, cancellationToken);
     }
 
-    /// <summary>
-    /// Get a list of people in a given photo.
-    /// </summary>
-    /// <param name="photoId">The id of the photo to get a list of people for.</param>
-    public async Task<PhotoPersonCollection> PhotosPeopleGetListAsync(string photoId, CancellationToken cancellationToken = default)
+    async Task<PhotoPersonCollection> IFlickrPhotosPeople.GetListAsync(string photoId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -128,4 +92,49 @@ public partial class Flickr
 
         return await GetResponseAsync<PhotoPersonCollection>(parameters, cancellationToken);
     }
+}
+
+public interface IFlickrPhotosPeople
+{
+    /// <summary>
+    /// Add a person to a photo. Coordinates and sizes of boxes are optional; they are measured in pixels, based on the 500px image size shown on individual photo pages.
+    /// </summary>
+    /// <param name="photoId">The id of the photo to add a person to.</param>
+    /// <param name="userId">The NSID of the user to add to the photo.</param>
+    /// <param name="personX">The left-most pixel co-ordinate of the box around the person.</param>
+    /// <param name="personY">The top-most pixel co-ordinate of the box around the person.</param>
+    /// <param name="personWidth">The width (in pixels) of the box around the person.</param>
+    /// <param name="personHeight">The height (in pixels) of the box around the person.</param>
+    Task AddAsync(string photoId, string userId, int? personX = null, int? personY = null, int? personWidth = null, int? personHeight = null, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Remove a person from a photo.
+    /// </summary>
+    /// <param name="photoId">The id of the photo to remove a person from.</param>
+    /// <param name="userId">The NSID of the person to remove from the photo.</param>
+    Task DeleteAsync(string photoId, string userId, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Remove the bounding box from a person in a photo
+    /// </summary>
+    /// <param name="photoId">The id of the photo to edit a person in.</param>
+    /// <param name="userId">The NSID of the person whose bounding box you want to remove.</param>
+    Task DeleteCoordsAsync(string photoId, string userId, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Edit the bounding box of an existing person on a photo.
+    /// </summary>
+    /// <param name="photoId">The id of the photo to edit a person in.</param>
+    /// <param name="userId">The NSID of the person to edit in a photo.</param>
+    /// <param name="personX">The left-most pixel co-ordinate of the box around the person.</param>
+    /// <param name="personY">The top-most pixel co-ordinate of the box around the person.</param>
+    /// <param name="personWidth">The width (in pixels) of the box around the person.</param>
+    /// <param name="personHeight">The height (in pixels) of the box around the person.</param>
+    Task EditCoordsAsync(string photoId, string userId, int personX, int personY, int personWidth, int personHeight, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Get a list of people in a given photo.
+    /// </summary>
+    /// <param name="photoId">The id of the photo to get a list of people for.</param>
+    Task<PhotoPersonCollection> GetListAsync(string photoId, CancellationToken cancellationToken = default);
 }

@@ -1,5 +1,4 @@
-﻿using Flickr.Net.Core.Entities.Interfaces;
-using Flickr.Net.Core.Exceptions;
+﻿using Flickr.Net.Core.Exceptions;
 using System.Collections.ObjectModel;
 
 namespace Flickr.Net.Core.Entities;

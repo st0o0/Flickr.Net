@@ -1,14 +1,8 @@
-﻿using Flickr.Net.Core.Entities.Collections;
+﻿namespace Flickr.Net.Core;
 
-namespace Flickr.Net.Core;
-
-// TODO:
-public partial class Flickr
+public partial class Flickr : IFlickrCommons
 {
-    /// <summary>
-    /// Gets a collection of Flickr Commons institutions.
-    /// </summary>
-    public async Task<InstitutionCollection> CommonsGetInstitutionsAsync(CancellationToken cancellationToken = default)
+    async Task<InstitutionCollection> IFlickrCommons.GetInstitutionsAsync(CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -17,4 +11,12 @@ public partial class Flickr
 
         return await GetResponseAsync<InstitutionCollection>(parameters, cancellationToken);
     }
+}
+
+public interface IFlickrCommons
+{
+    /// <summary>
+    /// Gets a collection of Flickr Commons institutions.
+    /// </summary>
+    Task<InstitutionCollection> GetInstitutionsAsync(CancellationToken cancellationToken = default);
 }
