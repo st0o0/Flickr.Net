@@ -181,9 +181,12 @@ public interface IFlickrGalleries
     /// <summary>
     /// Add a photo to a gallery.
     /// </summary>
-    /// <param name="galleryId">The ID of the gallery to add a photo to.
-    /// Note: this is the compound ID returned in methods like <see cref="Flickr.GalleriesGetList(string, int, int)"/>,
-    /// and <see cref="Flickr.GalleriesGetListForPhoto(string, int, int)"/>.</param>
+    /// <param name="galleryId">
+    /// The ID of the gallery to add a photo to.
+    /// Note: this is the compound ID returned in methods like <see
+    ///       cref="Flickr.GalleriesGetList(string, int, int)"/>, and <see
+    ///       cref="Flickr.GalleriesGetListForPhoto(string, int, int)"/>.
+    /// </param>
     /// <param name="photoId">The photo ID to add to the gallery</param>
     /// <param name="comment">A short comment or story to accompany the photo.</param>
     Task GalleriesAddPhotoAsync(string galleryId, string photoId, string comment = null, CancellationToken cancellationToken = default);
@@ -207,21 +210,23 @@ public interface IFlickrGalleries
     /// <summary>
     /// Edit the comment for a gallery photo.
     /// </summary>
-    /// <param name="galleryId">The ID of the gallery to add a photo to.
-    /// Note: this is the compound ID returned in methods like <see cref="Flickr.GalleriesGetList(string, int, int)"/>,
-    /// and <see cref="Flickr.GalleriesGetListForPhoto(string, int, int)"/>.</param>
+    /// <param name="galleryId">
+    /// The ID of the gallery to add a photo to.
+    /// Note: this is the compound ID returned in methods like <see
+    ///       cref="Flickr.GalleriesGetList(string, int, int)"/>, and <see
+    ///       cref="Flickr.GalleriesGetListForPhoto(string, int, int)"/>.
+    /// </param>
     /// <param name="photoId">The photo ID to add to the gallery.</param>
     /// <param name="comment">The updated comment the photo.</param>
     Task GalleriesEditPhotoAsync(string galleryId, string photoId, string comment, CancellationToken cancellationToken = default);
 
-    /// <summary>
-    /// Modify the photos in a gallery. Use this method to add, remove and re-order photos.
-    /// </summary>
-    /// <param name="galleryId">The id of the gallery to modify. The gallery must belong to the calling user.</param>
-    /// <param name="primaryPhotoId">The id of the photo to use as the 'primary' photo for the gallery. This id must also be passed along in photo_ids list argument.</param>
-    /// <param name="photoIds">An enumeration of photo ids to include in the gallery.
-    /// They will appear in the set in the order sent. This list must contain the primary photo id.
-    /// This list of photos replaces the existing list.</param>
+    /// <summary> Modify the photos in a gallery. Use this method to add, remove and re-order
+    /// photos. </summary <param name="galleryId"> The id of the gallery to modify. The gallery must
+    /// belong to the calling user. </param> <param name="primaryPhotoId"> The id of the photo to
+    /// use as the 'primary' photo for the gallery. This id must also be passed along in photo_ids
+    /// list argument. </param> <param name="photoIds"> An enumeration of photo ids to include in
+    /// the gallery. They will appear in the set in the order sent. This list must contain the
+    /// primary photo id. This list of photos replaces the existing list. </param>
     Task GalleriesEditPhotosAsync(string galleryId, string primaryPhotoId, IEnumerable<string> photoIds, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -239,11 +244,17 @@ public interface IFlickrGalleries
     Task<GalleryCollection> GalleriesGetListAsync(string userId, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Return the list of galleries to which a photo has been added. Galleries are returned sorted by date which the photo was added to the gallery.
+    /// Return the list of galleries to which a photo has been added. Galleries are returned sorted
+    /// by date which the photo was added to the gallery.
     /// </summary>
     /// <param name="photoId">The ID of the photo to fetch a list of galleries for.</param>
-    /// <param name="page">The page of results to return. If this argument is omitted, it defaults to 1.</param>
-    /// <param name="perPage">Number of galleries to return per page. If this argument is omitted, it defaults to 100. The maximum allowed value is 500.</param>
+    /// <param name="page">
+    /// The page of results to return. If this argument is omitted, it defaults to 1.
+    /// </param>
+    /// <param name="perPage">
+    /// Number of galleries to return per page. If this argument is omitted, it defaults to 100. The
+    /// maximum allowed value is 500.
+    /// </param>
     Task<GalleryCollection> GalleriesGetListForPhotoAsync(string photoId, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>

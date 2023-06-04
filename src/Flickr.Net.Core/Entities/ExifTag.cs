@@ -21,8 +21,7 @@ public sealed class ExifTag : IFlickrParsable
     public string Tag { get; set; }
 
     /// <summary>
-    /// The label, or description for the tag, such as Aperture
-    /// or Manufacturer
+    /// The label, or description for the tag, such as Aperture or Manufacturer
     /// </summary>
     public string Label { get; set; }
 
@@ -32,13 +31,14 @@ public sealed class ExifTag : IFlickrParsable
     public string Raw { get; set; }
 
     /// <summary>
-    /// An optional clean version of the <see cref="Raw"/> property.
-    /// May be null if the <c>Raw</c> property is in a suitable format already.
+    /// An optional clean version of the <see cref="Raw"/> property. May be null if the <c>Raw</c>
+    /// property is in a suitable format already.
     /// </summary>
     public string Clean { get; set; }
 
     /// <summary>
-    /// Get the value of the <see cref="Clean"/> property, or the value of <see cref="Raw"/> if Clean is empty or null.
+    /// Get the value of the <see cref="Clean"/> property, or the value of <see cref="Raw"/> if
+    /// Clean is empty or null.
     /// </summary>
     public string CleanOrRaw
     {

@@ -3,7 +3,6 @@ using System.Xml;
 namespace Flickr.Net.Core.Entities;
 
 /// <summary>
-///
 /// </summary>
 public sealed class CollectionSet : IFlickrParsable
 {

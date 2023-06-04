@@ -3,12 +3,14 @@
 namespace Flickr.Net.Core.Entities;
 
 /// <summary>
-/// A photo in the context of a favorite. Returned as part of a call to <see cref="Flickr.FavoritesGetContext(string, string)"/>.
+/// A photo in the context of a favorite. Returned as part of a call to <see
+/// cref="Flickr.FavoritesGetContext(string, string)"/>.
 /// </summary>
 public sealed class FavoriteContextPhoto : Photo, IFlickrParsable
 {
     /// <summary>
-    /// The thumbnail url for the image. Will be the same as <see cref="Photo.ThumbnailUrl"/> if that is also set.
+    /// The thumbnail url for the image. Will be the same as <see cref="Photo.ThumbnailUrl"/> if
+    /// that is also set.
     /// </summary>
     public string FavoriteThumbnailUrl { get; set; }
 

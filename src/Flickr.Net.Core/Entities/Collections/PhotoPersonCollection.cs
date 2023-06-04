@@ -15,17 +15,13 @@ public sealed class PhotoPersonCollection : System.Collections.ObjectModel.Colle
     /// <summary>
     /// The width of the photo used for positioning the people.
     /// </summary>
-    /// <remarks>
-    /// This will usually be the medium or the medium-640 image.
-    /// </remarks>
+    /// <remarks>This will usually be the medium or the medium-640 image.</remarks>
     public int PhotoWidth { get; set; }
 
     /// <summary>
     /// The height of the photo used for positioning the people.
     /// </summary>
-    /// <remarks>
-    /// This will usually be the medium or the medium-640 image.
-    /// </remarks>
+    /// <remarks>This will usually be the medium or the medium-640 image.</remarks>
     public int PhotoHeight { get; set; }
 
     void IFlickrParsable.Load(XmlReader reader)

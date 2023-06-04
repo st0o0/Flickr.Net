@@ -97,7 +97,8 @@ public partial class Flickr : IFlickrPhotosPeople
 public interface IFlickrPhotosPeople
 {
     /// <summary>
-    /// Add a person to a photo. Coordinates and sizes of boxes are optional; they are measured in pixels, based on the 500px image size shown on individual photo pages.
+    /// Add a person to a photo. Coordinates and sizes of boxes are optional; they are measured in
+    /// pixels, based on the 500px image size shown on individual photo pages.
     /// </summary>
     /// <param name="photoId">The id of the photo to add a person to.</param>
     /// <param name="userId">The NSID of the user to add to the photo.</param>

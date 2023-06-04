@@ -88,7 +88,8 @@ public sealed class Collection : IFlickrParsable
 
         reader.MoveToElement();
 
-        // If this is an empty collection then skip to next item, which wont be a child, but may be a sibling.
+        // If this is an empty collection then skip to next item, which wont be a child, but may be
+        // a sibling.
         if (reader.IsEmptyElement)
         {
             reader.Skip();

@@ -12,7 +12,9 @@ public sealed class GroupInfo : IFlickrParsable
     /// </summary>
     public string GroupId { get; set; }
 
-    /// <summary>The group name.</summary>
+    /// <summary>
+    /// The group name.
+    /// </summary>
     public string GroupName { get; set; }
 
     /// <summary>

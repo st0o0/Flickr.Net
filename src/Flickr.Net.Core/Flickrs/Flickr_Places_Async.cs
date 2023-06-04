@@ -415,65 +415,92 @@ public interface IFlickrPlaces
     Task<Place> FindByLatLonAsync(double latitude, double longitude, GeoAccuracy accuracy = GeoAccuracy.None, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Return a list of locations with public photos that are parented by a Where on Earth (WOE) or Places ID.
+    /// Return a list of locations with public photos that are parented by a Where on Earth (WOE) or
+    /// Places ID.
     /// </summary>
-    /// <param name="placeId">A Flickr Places ID. (While optional, you must pass either a valid Places ID or a WOE ID.)</param>
-    /// <param name="woeId">A Where On Earth (WOE) ID. (While optional, you must pass either a valid Places ID or a WOE ID.)</param>
+    /// <param name="placeId">
+    /// A Flickr Places ID. (While optional, you must pass either a valid Places ID or a WOE ID.)
+    /// </param>
+    /// <param name="woeId">
+    /// A Where On Earth (WOE) ID. (While optional, you must pass either a valid Places ID or a WOE ID.)
+    /// </param>
     Task<PlaceCollection> GetChildrenWithPhotosPublicAsync(string placeId, string woeId = null, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get informations about a place.
     /// </summary>
-    /// <param name="placeId">A Flickr Places ID. (While optional, you must pass either a valid Places ID or a WOE ID.)</param>
-    /// <param name="woeId">A Where On Earth (WOE) ID. (While optional, you must pass either a valid Places ID or a WOE ID.)</param>
+    /// <param name="placeId">
+    /// A Flickr Places ID. (While optional, you must pass either a valid Places ID or a WOE ID.)
+    /// </param>
+    /// <param name="woeId">
+    /// A Where On Earth (WOE) ID. (While optional, you must pass either a valid Places ID or a WOE ID.)
+    /// </param>
     Task<PlaceInfo> GetInfoAsync(string placeId, string woeId = null, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Lookup information about a place, by its flickr.com/places URL.
     /// </summary>
-    /// <param name="url">A flickr.com/places URL in the form of /country/region/city. For example: /Canada/Quebec/Montreal</param>
+    /// <param name="url">
+    /// A flickr.com/places URL in the form of /country/region/city. For example: /Canada/Quebec/Montreal
+    /// </param>
     Task<PlaceInfo> GetInfoByUrlAsync(string url, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets a list of valid Place Type key/value pairs.
     /// </summary>
     /// <remarks>
-    /// All Flickr.Net methods use the <see cref="PlaceType"/> enumeration so this method doesn't serve much purpose.
+    /// All Flickr.Net methods use the <see cref="PlaceType"/> enumeration so this method doesn't
+    /// serve much purpose.
     /// </remarks>
     Task<PlaceTypeInfoCollection> GetPlaceTypesAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Return an historical list of all the shape data generated for a Places or Where on Earth (WOE) ID.
+    /// Return an historical list of all the shape data generated for a Places or Where on Earth
+    /// (WOE) ID.
     /// </summary>
-    /// <param name="placeId">A Flickr Places ID. (While optional, you must pass either a valid Places ID or a WOE ID.)</param>
-    /// <param name="woeId">A Where On Earth (WOE) ID. (While optional, you must pass either a valid Places ID or a WOE ID.)</param>
+    /// <param name="placeId">
+    /// A Flickr Places ID. (While optional, you must pass either a valid Places ID or a WOE ID.)
+    /// </param>
+    /// <param name="woeId">
+    /// A Where On Earth (WOE) ID. (While optional, you must pass either a valid Places ID or a WOE ID.)
+    /// </param>
     Task<ShapeDataCollection> GetShapeHistoryAsync(string placeId, string woeId = null, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Return the top 100 most geotagged places for a day.
     /// </summary>
-    /// <param name="placeType">The type for a specific place type to cluster photos by. </param>
+    /// <param name="placeType">The type for a specific place type to cluster photos by.</param>
     /// <param name="date">A valid date. The default is yesterday.</param>
-    /// <param name="placeId">Limit your query to only those top places belonging to a specific Flickr Places identifier.</param>
-    /// <param name="woeId">Limit your query to only those top places belonging to a specific Where on Earth (WOE) identifier.</param>
+    /// <param name="placeId">
+    /// Limit your query to only those top places belonging to a specific Flickr Places identifier.
+    /// </param>
+    /// <param name="woeId">
+    /// Limit your query to only those top places belonging to a specific Where on Earth (WOE) identifier.
+    /// </param>
     Task<PlaceCollection> GetTopPlacesListAsync(PlaceType placeType, DateTime? date = null, string placeId = null, string woeId = null, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Return a list of the top 100 unique places clustered by a given placetype for set of tags or machine tags.
+    /// Return a list of the top 100 unique places clustered by a given placetype for set of tags or
+    /// machine tags.
     /// </summary>
     /// <param name="boundaryBox">The boundary box to search for places in.</param>
-    /// <param name="placeType">The ID for a specific place type to cluster photos by. </param>
+    /// <param name="placeType">The ID for a specific place type to cluster photos by.</param>
     Task<PlaceCollection> PlacesForBoundingBoxAsync(BoundaryBox boundaryBox, PlaceType placeType, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Return a list of the top 100 unique places clustered by a given placetype for set of tags or machine tags.
+    /// Return a list of the top 100 unique places clustered by a given placetype for set of tags or
+    /// machine tags.
     /// </summary>
-    /// <param name="placeType">The ID for a specific place type to cluster photos by. </param>
-    /// <param name="woeId">A Where on Earth identifier to use to filter photo clusters. </param>
-    /// <param name="placeId">A Flickr Places identifier to use to filter photo clusters. </param>
-    /// <param name="threshold">The minimum number of photos that a place type must have to be included.
-    /// If the number of photos is lowered then the parent place type for that place will be used.</param>
-    /// <param name="contactType">The type of contacts to return places for. Either all, or friends and family only.</param>
+    /// <param name="placeType">The ID for a specific place type to cluster photos by.</param>
+    /// <param name="woeId">A Where on Earth identifier to use to filter photo clusters.</param>
+    /// <param name="placeId">A Flickr Places identifier to use to filter photo clusters.</param>
+    /// <param name="threshold">
+    /// The minimum number of photos that a place type must have to be included. If the number of
+    /// photos is lowered then the parent place type for that place will be used.
+    /// </param>
+    /// <param name="contactType">
+    /// The type of contacts to return places for. Either all, or friends and family only.
+    /// </param>
     /// <param name="minUploadDate">Minimum upload date.</param>
     /// <param name="maxUploadDate">Maximum upload date.</param>
     /// <param name="minTakenDate">Minimum taken date.</param>
@@ -484,16 +511,21 @@ public interface IFlickrPlaces
         CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Return a list of the top 100 unique places clustered by a given placetype for set of tags or machine tags.
+    /// Return a list of the top 100 unique places clustered by a given placetype for set of tags or
+    /// machine tags.
     /// </summary>
-    /// <param name="placeType">The ID for a specific place type to cluster photos by. </param>
-    /// <param name="woeId">A Where on Earth identifier to use to filter photo clusters. </param>
-    /// <param name="placeId">A Flickr Places identifier to use to filter photo clusters. </param>
-    /// <param name="threshold">The minimum number of photos that a place type must have to be included.
-    /// If the number of photos is lowered then the parent place type for that place will be used.</param>
+    /// <param name="placeType">The ID for a specific place type to cluster photos by.</param>
+    /// <param name="woeId">A Where on Earth identifier to use to filter photo clusters.</param>
+    /// <param name="placeId">A Flickr Places identifier to use to filter photo clusters.</param>
+    /// <param name="threshold">
+    /// The minimum number of photos that a place type must have to be included. If the number of
+    /// photos is lowered then the parent place type for that place will be used.
+    /// </param>
     /// <param name="tags">A list of tags. Photos with one or more of the tags listed will be returned.</param>
-    /// <param name="tagMode">Either 'any' for an OR combination of tags, or 'all' for an AND combination.
-    /// Defaults to 'any' if not specified.</param>
+    /// <param name="tagMode">
+    /// Either 'any' for an OR combination of tags, or 'all' for an AND combination. Defaults to
+    /// 'any' if not specified.
+    /// </param>
     /// <param name="machineTags"></param>
     /// <param name="machineTagMode"></param>
     /// <param name="minUploadDate">Minimum upload date.</param>
@@ -511,16 +543,26 @@ public interface IFlickrPlaces
     /// </summary>
     /// <param name="placeType">The type of places to return.</param>
     /// <param name="woeId">A Where on Earth identifier to use to filter photo clusters.</param>
-    /// <param name="placeId">A Flickr Places identifier to use to filter photo clusters. </param>
-    /// <param name="threshold">The minimum number of photos that a place type must have to be included.
-    /// If the number of photos is lowered then the parent place type for that place will be used.
-    /// For example if you only have 3 photos taken in the locality of Montreal (WOE ID 3534)
-    /// but your threshold is set to 5 then those photos will be "rolled up"
-    /// and included instead with a place record for the region of Quebec (WOE ID 2344924).</param>
-    /// <param name="minUploadDate">Minimum upload date. Photos with an upload date greater than or equal to this value will be returned.</param>
-    /// <param name="maxUploadDate">Maximum upload date. Photos with an upload date less than or equal to this value will be returned. </param>
-    /// <param name="minTakenDate">Minimum taken date. Photos with an taken date greater than or equal to this value will be returned. </param>
-    /// <param name="maxTakenDate">Maximum taken date. Photos with an taken date less than or equal to this value will be returned. </param>
+    /// <param name="placeId">A Flickr Places identifier to use to filter photo clusters.</param>
+    /// <param name="threshold">
+    /// The minimum number of photos that a place type must have to be included. If the number of
+    /// photos is lowered then the parent place type for that place will be used. For example if you
+    /// only have 3 photos taken in the locality of Montreal (WOE ID 3534) but your threshold is set
+    /// to 5 then those photos will be "rolled up" and included instead with a place record for the
+    /// region of Quebec (WOE ID 2344924).
+    /// </param>
+    /// <param name="minUploadDate">
+    /// Minimum upload date. Photos with an upload date greater than or equal to this value will be returned.
+    /// </param>
+    /// <param name="maxUploadDate">
+    /// Maximum upload date. Photos with an upload date less than or equal to this value will be returned.
+    /// </param>
+    /// <param name="minTakenDate">
+    /// Minimum taken date. Photos with an taken date greater than or equal to this value will be returned.
+    /// </param>
+    /// <param name="maxTakenDate">
+    /// Maximum taken date. Photos with an taken date less than or equal to this value will be returned.
+    /// </param>
     Task<PlaceCollection> PlacesForUserAsync(PlaceType placeType = PlaceType.None, string woeId = null, string placeId = null, int threshold = 0,
         DateTime? minUploadDate = null, DateTime? maxUploadDate = null, DateTime? minTakenDate = null, DateTime? maxTakenDate = null,
         CancellationToken cancellationToken = default);
@@ -528,14 +570,26 @@ public interface IFlickrPlaces
     /// <summary>
     /// Return a list of the top 100 unique tags for a Flickr Places or Where on Earth (WOE) ID.
     /// </summary>
-    /// <param name="placeId">A Flickr Places identifier to use to filter photo clusters.
-    /// (While optional, you must pass either a valid Places ID or a WOE ID.)</param>
-    /// <param name="woeId">A Where on Earth identifier to use to filter photo clusters.
-    /// (While optional, you must pass either a valid Places ID or a WOE ID.)</param>
-    /// <param name="minUploadDate">Minimum upload date. Photos with an upload date greater than or equal to this value will be returned.</param>
-    /// <param name="maxUploadDate">Maximum upload date. Photos with an upload date less than or equal to this value will be returned.</param>
-    /// <param name="minTakenDate">Minimum taken date. Photos with an taken date greater than or equal to this value will be returned.</param>
-    /// <param name="maxTakenDate">Maximum taken date. Photos with an taken date less than or equal to this value will be returned.</param>
+    /// <param name="placeId">
+    /// A Flickr Places identifier to use to filter photo clusters. (While optional, you must pass
+    /// either a valid Places ID or a WOE ID.)
+    /// </param>
+    /// <param name="woeId">
+    /// A Where on Earth identifier to use to filter photo clusters. (While optional, you must pass
+    /// either a valid Places ID or a WOE ID.)
+    /// </param>
+    /// <param name="minUploadDate">
+    /// Minimum upload date. Photos with an upload date greater than or equal to this value will be returned.
+    /// </param>
+    /// <param name="maxUploadDate">
+    /// Maximum upload date. Photos with an upload date less than or equal to this value will be returned.
+    /// </param>
+    /// <param name="minTakenDate">
+    /// Minimum taken date. Photos with an taken date greater than or equal to this value will be returned.
+    /// </param>
+    /// <param name="maxTakenDate">
+    /// Maximum taken date. Photos with an taken date less than or equal to this value will be returned.
+    /// </param>
     Task<TagCollection> TagsForPlaceAsync(string placeId, string woeId = null, DateTime? minUploadDate = null, DateTime? maxUploadDate = null,
         DateTime? minTakenDate = null, DateTime? maxTakenDate = null,
         CancellationToken cancellationToken = default);

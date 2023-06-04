@@ -123,7 +123,8 @@ public interface IFlickrPhotosSuggestions
     Task<SuggestionCollection> GetListAsync(string photoId, SuggestionStatus status, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Rejects a suggestion made for a location on a photo. Currently doesn't appear to actually work. Just use <see cref="Flickr.PhotosSuggestionsRemoveSuggestion"/> instead.
+    /// Rejects a suggestion made for a location on a photo. Currently doesn't appear to actually
+    /// work. Just use <see cref="Flickr.PhotosSuggestionsRemoveSuggestion"/> instead.
     /// </summary>
     /// <param name="suggestionId">The ID of the suggestion to remove.</param>
     Task RejectSuggestionAsync(string suggestionId, CancellationToken cancellationToken = default);

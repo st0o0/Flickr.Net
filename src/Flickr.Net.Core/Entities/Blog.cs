@@ -6,9 +6,9 @@
 public sealed class Blog : IFlickrParsable
 {
     /// <summary>
-    /// The ID Flickr has assigned to the blog. Use this to post to the blog using
-    /// <see cref="Flickr.BlogsPostPhoto(string, string, string, string)"/> or
-    /// <see cref="Flickr.BlogsPostPhoto(string, string, string, string, string)"/>.
+    /// The ID Flickr has assigned to the blog. Use this to post to the blog using <see
+    /// cref="Flickr.BlogsPostPhoto(string, string, string, string)"/> or <see
+    /// cref="Flickr.BlogsPostPhoto(string, string, string, string, string)"/>.
     /// </summary>
     public string BlogId { get; set; }
 
@@ -23,8 +23,8 @@ public sealed class Blog : IFlickrParsable
     public string BlogUrl { get; set; }
 
     /// <summary>
-    /// If Flickr stores the password for this then this will be 0, meaning you do not need to pass in the
-    /// password when posting.
+    /// If Flickr stores the password for this then this will be 0, meaning you do not need to pass
+    /// in the password when posting.
     /// </summary>
     public bool NeedsPassword { get; set; }
 

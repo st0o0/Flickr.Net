@@ -26,7 +26,7 @@ public sealed class Contact : IFlickrParsable
     public string Location { get; set; }
 
     /// <summary>
-    /// The URL path alias for the contact.  Only returned for auehtnicated calls to <see cref="Flickr.ContactsGetList()"/>.
+    /// The URL path alias for the contact. Only returned for auehtnicated calls to <see cref="Flickr.ContactsGetList()"/>.
     /// </summary>
     public string PathAlias { get; set; }
 

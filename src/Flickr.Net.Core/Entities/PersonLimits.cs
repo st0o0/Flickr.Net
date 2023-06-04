@@ -5,13 +5,12 @@ namespace Flickr.Net.Core.Entities;
 /// <summary>
 /// The limits for a person returned by <see cref="Flickr.PeopleGetLimits"/>.
 /// </summary>
-/// <remarks>
-/// For more details on limits see help here: https://www.flickr.com/help/limits/
-/// </remarks>
+/// <remarks>For more details on limits see help here: https://www.flickr.com/help/limits/</remarks>
 public class PersonLimits : IFlickrParsable
 {
     /// <summary>
-    /// Maximum size in pixels for photos displayed on the site (0 means that no limit is in place). No limit is placed on the dimension of photos uploaded
+    /// Maximum size in pixels for photos displayed on the site (0 means that no limit is in place).
+    /// No limit is placed on the dimension of photos uploaded
     /// </summary>
     public int MaximumDisplayPixels { get; set; }
 

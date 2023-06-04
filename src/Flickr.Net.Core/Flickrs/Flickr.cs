@@ -17,9 +17,9 @@ namespace Flickr.Net.Core;
 /// </remarks>
 /// <example>
 /// <code>
-/// FlickrNet.Flickr flickr = new FlickrNet.Flickr();
-/// User user = flickr.PeopleFindByEmail("cal@iamcal.com");
-/// Console.WriteLine("User Id is " + u.UserId);
+///FlickrNet.Flickr flickr = new FlickrNet.Flickr();
+///User user = flickr.PeopleFindByEmail("cal@iamcal.com");
+///Console.WriteLine("User Id is " + u.UserId);
 /// </code>
 /// </example>
 public partial class Flickr
@@ -48,8 +48,8 @@ public partial class Flickr
     }
 
     /// <summary>
-    /// Creates a new instance of the <see cref="Flickr"/> class with an API key and a Shared Secret.
-    /// This is only useful really useful for calling the Auth functions as all other
+    /// Creates a new instance of the <see cref="Flickr"/> class with an API key and a Shared
+    /// Secret. This is only useful really useful for calling the Auth functions as all other
     /// authenticationed methods also require the API Token.
     /// </summary>
     /// <param name="apiKey">Your Flickr API Key.</param>
@@ -113,14 +113,13 @@ public partial class Flickr
     public static Uri BaseUri => new("https://api.flickr.com/services/rest/");
 
     /// <summary>
-    /// Get or set the API Key to be used by all calls. API key is mandatory for all
-    /// calls to Flickr.
+    /// Get or set the API Key to be used by all calls. API key is mandatory for all calls to Flickr.
     /// </summary>
     public string ApiKey => _settings.ApiKey;
 
     /// <summary>
-    /// API shared secret is required for all calls that require signing, which includes
-    /// all methods that require authentication, as well as the actual flickr.auth.* calls.
+    /// API shared secret is required for all calls that require signing, which includes all methods
+    /// that require authentication, as well as the actual flickr.auth.* calls.
     /// </summary>
     public string ApiSecret => _settings.SharedSecret;
 
@@ -135,8 +134,8 @@ public partial class Flickr
     public string OAuthAccessTokenSecret { get; set; }
 
     /// <summary>
-    /// Gets or sets whether the cache should be disabled. Use only in extreme cases where you are sure you
-    /// don't want any caching.
+    /// Gets or sets whether the cache should be disabled. Use only in extreme cases where you are
+    /// sure you don't want any caching.
     /// </summary>
     public bool CacheDisabled => _settings.CacheDisabled;
 
@@ -157,8 +156,8 @@ public partial class Flickr
     public string CacheLocation => _settings.CacheLocation;
 
     /// <summary>
-    /// <see cref="CacheSizeLimit"/> is the cache file size in bytes for downloaded
-    /// pictures. The default is 50MB (or 50 * 1024 * 1025 in bytes).
+    /// <see cref="CacheSizeLimit"/> is the cache file size in bytes for downloaded pictures. The
+    /// default is 50MB (or 50 * 1024 * 1025 in bytes).
     /// </summary>
     public static long CacheSizeLimit
     {
@@ -172,8 +171,8 @@ public partial class Flickr
     public int HttpTimeout { get; set; } = 3600000;
 
     /// <summary>
-    /// Checks to see if a shared secret and an api token are stored in the object.
-    /// Does not check if these values are valid values.
+    /// Checks to see if a shared secret and an api token are stored in the object. Does not check
+    /// if these values are valid values.
     /// </summary>
     public bool IsAuthenticated
     {
@@ -184,8 +183,8 @@ public partial class Flickr
     }
 
     /// <summary>
-    /// Returns the raw XML returned from the last response.
-    /// Only set it the response was not returned from cache.
+    /// Returns the raw XML returned from the last response. Only set it the response was not
+    /// returned from cache.
     /// </summary>
     public byte[] LastResponse { get; private set; }
 
@@ -231,10 +230,15 @@ public partial class Flickr
     }
 
     /// <summary>
-    /// Calculates the Flickr method cal URL based on the passed in parameters, and also generates the signature if required.
+    /// Calculates the Flickr method cal URL based on the passed in parameters, and also generates
+    /// the signature if required.
     /// </summary>
-    /// <param name="parameters">A Dictionary containing a list of parameters to add to the method call.</param>
-    /// <param name="includeSignature">Boolean use to decide whether to generate the api call signature as well.</param>
+    /// <param name="parameters">
+    /// A Dictionary containing a list of parameters to add to the method call.
+    /// </param>
+    /// <param name="includeSignature">
+    /// Boolean use to decide whether to generate the api call signature as well.
+    /// </param>
     /// <returns>The <see cref="Uri"/> for the method call.</returns>
     public string CalculateUri(Dictionary<string, string> parameters, bool includeSignature)
     {

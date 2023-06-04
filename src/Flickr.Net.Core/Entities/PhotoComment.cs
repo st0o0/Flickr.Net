@@ -1,8 +1,8 @@
 ﻿namespace Flickr.Net.Core.Entities;
 
 /// <summary>
-/// Contains the details of a comment made on a photo.
-/// returned by the <see cref="Flickr.PhotosCommentsGetList"/> method.
+/// Contains the details of a comment made on a photo. returned by the <see
+/// cref="Flickr.PhotosCommentsGetList"/> method.
 /// </summary>
 public sealed class PhotoComment : IFlickrParsable
 {

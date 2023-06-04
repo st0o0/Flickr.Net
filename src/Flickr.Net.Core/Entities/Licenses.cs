@@ -6,15 +6,19 @@ namespace Flickr.Net.Core.Entities;
 public sealed class License : IFlickrParsable
 {
     /// <summary>
-    ///     The ID of the license. Used by <see cref="Flickr.PhotosGetInfo(string)"/> and
-    ///     <see cref="Flickr.PhotosGetInfo(string, string)"/>.
+    /// The ID of the license. Used by <see cref="Flickr.PhotosGetInfo(string)"/> and <see
+    /// cref="Flickr.PhotosGetInfo(string, string)"/>.
     /// </summary>
     public LicenseType LicenseId { get; set; }
 
-    /// <summary>The name of the license.</summary>
+    /// <summary>
+    /// The name of the license.
+    /// </summary>
     public string LicenseName { get; set; }
 
-    /// <summary>The URL for the license text.</summary>
+    /// <summary>
+    /// The URL for the license text.
+    /// </summary>
     public string LicenseUrl { get; set; }
 
     void IFlickrParsable.Load(System.Xml.XmlReader reader)

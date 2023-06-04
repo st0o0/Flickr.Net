@@ -1,7 +1,8 @@
 ﻿namespace Flickr.Net.Core.Entities.Collections;
 
 /// <summary>
-/// A list of popular photos as returned by <see cref="Flickr.StatsGetPopularPhotos(DateTime, PopularitySort, int, int)"/>
+/// A list of popular photos as returned by <see cref="Flickr.StatsGetPopularPhotos(DateTime,
+/// PopularitySort, int, int)"/>
 /// </summary>
 public sealed class PopularPhotoCollection : System.Collections.ObjectModel.Collection<PopularPhoto>, IFlickrParsable
 {
@@ -21,7 +22,8 @@ public sealed class PopularPhotoCollection : System.Collections.ObjectModel.Coll
     public int PerPage { get; set; }
 
     /// <summary>
-    /// The total number of photos that match the query. Call the method again to retrieve each page of results if Total > PerPage.
+    /// The total number of photos that match the query. Call the method again to retrieve each page
+    /// of results if Total &gt; PerPage.
     /// </summary>
     public int Total { get; set; }
 

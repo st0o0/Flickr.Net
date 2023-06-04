@@ -8,9 +8,7 @@ public sealed class PhotosetCollection : System.Collections.ObjectModel.Collecti
     /// <summary>
     /// Can the user create more photosets.
     /// </summary>
-    /// <remarks>
-    /// 1 meants yes, 0 means no.
-    /// </remarks>
+    /// <remarks>1 meants yes, 0 means no.</remarks>
     public bool CanCreate { get; set; }
 
     /// <summary>

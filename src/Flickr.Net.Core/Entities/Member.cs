@@ -1,7 +1,8 @@
 namespace Flickr.Net.Core.Entities;
 
 /// <summary>
-/// Details for a Flickr member, as returned by the <see cref="Flickr.GroupsMembersGetList(string)"/> method.
+/// Details for a Flickr member, as returned by the <see
+/// cref="Flickr.GroupsMembersGetList(string)"/> method.
 /// </summary>
 public sealed class Member : IFlickrParsable
 {
@@ -43,7 +44,8 @@ public sealed class Member : IFlickrParsable
 
     void IFlickrParsable.Load(System.Xml.XmlReader reader)
     {
-        // To parse: <member nsid="123456@N01" username="foo" iconserver="1" iconfarm="1" membertype="2"/>
+        // To parse:
+        // <member nsid="123456@N01" username="foo" iconserver="1" iconfarm="1" membertype="2"/>
         MemberId = reader.GetAttribute("nsid");
         UserName = reader.GetAttribute("username");
         IconServer = reader.GetAttribute("iconserver");

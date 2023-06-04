@@ -1,8 +1,8 @@
 ﻿namespace Flickr.Net.Core.Entities.Collections;
 
 /// <summary>
-/// A class which encapsulates a single property, an array of
-/// <see cref="License"/> objects in its <see cref="LicenseCollection"/> property.
+/// A class which encapsulates a single property, an array of <see cref="License"/> objects in its
+/// <see cref="LicenseCollection"/> property.
 /// </summary>
 public sealed class LicenseCollection : System.Collections.ObjectModel.Collection<License>, IFlickrParsable
 {

@@ -3,9 +3,7 @@
 /// <summary>
 /// The details of a CSV files containing archived stats available for download from Flickr.
 /// </summary>
-/// <remarks>
-/// Only available till the 1st June 2010.
-/// </remarks>
+/// <remarks>Only available till the 1st June 2010.</remarks>
 public sealed class CsvFile : IFlickrParsable
 {
     /// <summary>

@@ -7,7 +7,8 @@ namespace Flickr.Net.Core.Entities;
 public sealed class Auth : IFlickrParsable
 {
     /// <summary>
-    /// The authentication token returned by the <see cref="Flickr.AuthGetToken"/> or <see cref="Flickr.AuthCheckToken(string)"/> methods.
+    /// The authentication token returned by the <see cref="Flickr.AuthGetToken"/> or <see
+    /// cref="Flickr.AuthCheckToken(string)"/> methods.
     /// </summary>
     public string Token { get; set; }
 
