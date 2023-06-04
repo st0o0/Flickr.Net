@@ -1,6 +1,5 @@
 ﻿namespace Flickr.Net.Core;
 
-// TODO:
 public partial class Flickr : IFlickrTest
 {
     /// <summary>
@@ -32,7 +31,10 @@ public partial class Flickr : IFlickrTest
     /// <summary>
     /// Echos back all parameters passed in.
     /// </summary>
-    /// <param name="parameters">A dictionary of extra parameters to pass in. Note, the "method" and "api_key" parameters will always be passed in.</param>
+    /// <param name="parameters">
+    /// A dictionary of extra parameters to pass in. Note, the "method" and "api_key" parameters
+    /// will always be passed in.
+    /// </param>
     async Task<EchoResponseDictionary> IFlickrTest.EchoAsync(Dictionary<string, string> parameters, CancellationToken cancellationToken)
     {
         parameters.Add("method", "flickr.test.echo");

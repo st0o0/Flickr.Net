@@ -1,28 +1,8 @@
 ﻿namespace Flickr.Net.Core;
 
-// TODO:
-public partial class Flickr
+public partial class Flickr : IFlickrReflection
 {
-    /// <summary>
-    /// Gets an array of supported method names for Flickr.
-    /// </summary>
-    /// <remarks>
-    /// Note: Not all methods might be supported by the FlickrNet Library.</remarks>
-    public async Task<MethodCollection> ReflectionGetMethodsAsync(CancellationToken cancellationToken = default)
-    {
-        Dictionary<string, string> parameters = new()
-        {
-            { "method", "flickr.reflection.getMethods" }
-        };
-
-        return await GetResponseAsync<MethodCollection>(parameters, cancellationToken);
-    }
-
-    /// <summary>
-    /// Gets the method details for a given method.
-    /// </summary>
-    /// <param name="methodName">The name of the method to retrieve.</param>
-    public async Task<Method> ReflectionGetMethodInfoAsync(string methodName, CancellationToken cancellationToken = default)
+    async Task<Method> IFlickrReflection.GetMethodInfoAsync(string methodName, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -32,4 +12,29 @@ public partial class Flickr
 
         return await GetResponseAsync<Method>(parameters, cancellationToken);
     }
+
+    async Task<MethodCollection> IFlickrReflection.GetMethodsAsync(CancellationToken cancellationToken)
+    {
+        Dictionary<string, string> parameters = new()
+        {
+            { "method", "flickr.reflection.getMethods" }
+        };
+
+        return await GetResponseAsync<MethodCollection>(parameters, cancellationToken);
+    }
+}
+
+public interface IFlickrReflection
+{
+    /// <summary>
+    /// Gets the method details for a given method.
+    /// </summary>
+    /// <param name="methodName">The name of the method to retrieve.</param>
+    Task<Method> GetMethodInfoAsync(string methodName, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Gets an array of supported method names for Flickr.
+    /// </summary>
+    /// <remarks>Note: Not all methods might be supported by the FlickrNet Library.</remarks>
+    Task<MethodCollection> GetMethodsAsync(CancellationToken cancellationToken = default);
 }
