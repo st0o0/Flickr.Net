@@ -10,4 +10,10 @@ public class BlubTest
         var t = new FlickrConfigurationSettings();
         Assert.NotNull(t);
     }
+
+    private void TESTTEST()
+    {
+        var t = new Flickr(null, null);
+        //t.
+    }
 }

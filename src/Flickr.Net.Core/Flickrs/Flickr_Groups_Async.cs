@@ -2,7 +2,9 @@
 
 public partial class Flickr : IFlickrGroups
 {
-    async Task<GroupFullInfo> IFlickrGroups.GroupsGetInfoAsync(string groupId, CancellationToken cancellationToken)
+    IFlickrGroupsDiscuss IFlickrGroups.Discuss => this;
+
+    async Task<GroupFullInfo> IFlickrGroups.GetInfoAsync(string groupId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -13,7 +15,7 @@ public partial class Flickr : IFlickrGroups
         return await GetResponseAsync<GroupFullInfo>(parameters, cancellationToken);
     }
 
-    async Task IFlickrGroups.GroupsJoinAsync(string groupId, bool acceptsRules, CancellationToken cancellationToken)
+    async Task IFlickrGroups.JoinAsync(string groupId, bool acceptsRules, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -31,7 +33,7 @@ public partial class Flickr : IFlickrGroups
         await GetResponseAsync<NoResponse>(parameters, cancellationToken);
     }
 
-    async Task IFlickrGroups.GroupsJoinRequestAsync(string groupId, string message, bool acceptRules, CancellationToken cancellationToken)
+    async Task IFlickrGroups.JoinRequestAsync(string groupId, string message, bool acceptRules, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -50,7 +52,7 @@ public partial class Flickr : IFlickrGroups
         await GetResponseAsync<NoResponse>(parameters, cancellationToken);
     }
 
-    async Task IFlickrGroups.GroupsLeaveAsync(string groupId, bool deletePhotos, CancellationToken cancellationToken)
+    async Task IFlickrGroups.LeaveAsync(string groupId, bool deletePhotos, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -68,7 +70,7 @@ public partial class Flickr : IFlickrGroups
         await GetResponseAsync<NoResponse>(parameters, cancellationToken);
     }
 
-    async Task<GroupSearchResultCollection> IFlickrGroups.GroupsSearchAsync(string text, int page, int perPage, CancellationToken cancellationToken)
+    async Task<GroupSearchResultCollection> IFlickrGroups.SearchAsync(string text, int page, int perPage, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -89,7 +91,7 @@ public partial class Flickr : IFlickrGroups
         return await GetResponseAsync<GroupSearchResultCollection>(parameters, cancellationToken);
     }
 
-    async Task<MemberCollection> IFlickrGroups.GroupsMembersGetListAsync(string groupId, MemberTypes memberTypes, int page, int perPage, CancellationToken cancellationToken)
+    async Task<MemberCollection> IFlickrGroups.MembersGetListAsync(string groupId, MemberTypes memberTypes, int page, int perPage, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -118,7 +120,7 @@ public partial class Flickr : IFlickrGroups
         return await GetResponseAsync<MemberCollection>(parameters, cancellationToken);
     }
 
-    async Task IFlickrGroups.GroupsPoolsAddAsync(string photoId, string groupId, CancellationToken cancellationToken)
+    async Task IFlickrGroups.PoolsAddAsync(string photoId, string groupId, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -132,7 +134,7 @@ public partial class Flickr : IFlickrGroups
         await GetResponseAsync<NoResponse>(parameters, cancellationToken);
     }
 
-    async Task<Context> IFlickrGroups.GroupsPoolsGetContextAsync(string photoId, string groupId, CancellationToken cancellationToken)
+    async Task<Context> IFlickrGroups.PoolsGetContextAsync(string photoId, string groupId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -144,7 +146,7 @@ public partial class Flickr : IFlickrGroups
         return await GetResponseAsync<Context>(parameters, cancellationToken);
     }
 
-    async Task<MemberGroupInfoCollection> IFlickrGroups.GroupsPoolsGetGroupsAsync(int page, int perPage, CancellationToken cancellationToken)
+    async Task<MemberGroupInfoCollection> IFlickrGroups.PoolsGetGroupsAsync(int page, int perPage, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -164,7 +166,7 @@ public partial class Flickr : IFlickrGroups
         return await GetResponseAsync<MemberGroupInfoCollection>(parameters, cancellationToken);
     }
 
-    async Task<PhotoCollection> IFlickrGroups.GroupsPoolsGetPhotosAsync(string groupId, string tags, string userId, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken)
+    async Task<PhotoCollection> IFlickrGroups.PoolsGetPhotosAsync(string groupId, string tags, string userId, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -200,7 +202,7 @@ public partial class Flickr : IFlickrGroups
         return await GetResponseAsync<PhotoCollection>(parameters, cancellationToken);
     }
 
-    async Task IFlickrGroups.GroupsPoolsRemoveAsync(string photoId, string groupId, CancellationToken cancellationToken)
+    async Task IFlickrGroups.PoolsRemoveAsync(string photoId, string groupId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -215,18 +217,20 @@ public partial class Flickr : IFlickrGroups
 
 public interface IFlickrGroups
 {
+    IFlickrGroupsDiscuss Discuss { get; }
+
     /// <summary>
     /// Returns a <see cref="GroupFullInfo"/> object containing details about a group.
     /// </summary>
     /// <param name="groupId">The id of the group to return.</param>
-    Task<GroupFullInfo> GroupsGetInfoAsync(string groupId, CancellationToken cancellationToken = default);
+    Task<GroupFullInfo> GetInfoAsync(string groupId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Specify a group for the authenticated user to join.
     /// </summary>
     /// <param name="groupId">The group id of the group to join.</param>
     /// <param name="acceptsRules">Specify true to signify that the user accepts the groups rules.</param>
-    Task GroupsJoinAsync(string groupId, bool acceptsRules = false, CancellationToken cancellationToken = default);
+    Task JoinAsync(string groupId, bool acceptsRules = false, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Sends a request to the group admins to join an invite only group.
@@ -234,14 +238,14 @@ public interface IFlickrGroups
     /// <param name="groupId">The ID of the group the user wishes to join.</param>
     /// <param name="message">The message to send to the administrator.</param>
     /// <param name="acceptRules">A boolean confirming the user has accepted the rules of the group.</param>
-    Task GroupsJoinRequestAsync(string groupId, string message, bool acceptRules = false, CancellationToken cancellationToken = default);
+    Task JoinRequestAsync(string groupId, string message, bool acceptRules = false, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Specify a group for the authenticated user to leave.
     /// </summary>
     /// <param name="groupId">The group id of the group to leave.</param>
     /// <param name="deletePhotos">Specify true to delete all of the users photos when they leave the group.</param>
-    Task GroupsLeaveAsync(string groupId, bool deletePhotos = false, CancellationToken cancellationToken = default);
+    Task LeaveAsync(string groupId, bool deletePhotos = false, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Search the list of groups on Flickr for the text.
@@ -249,7 +253,7 @@ public interface IFlickrGroups
     /// <param name="text">The text to search for.</param>
     /// <param name="page">The page of the results to return.</param>
     /// <param name="perPage">The number of groups to list per page.</param>
-    Task<GroupSearchResultCollection> GroupsSearchAsync(string text, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<GroupSearchResultCollection> SearchAsync(string text, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get a list of the members of a group.
@@ -261,14 +265,14 @@ public interface IFlickrGroups
     /// <param name="page">The page of the results to return (default is 1).</param>
     /// <param name="perPage">The number of members to return per page (default is 100, max is 500).</param>
     /// <param name="memberTypes">The types of members to be returned. Can be more than one.</param>
-    Task<MemberCollection> GroupsMembersGetListAsync(string groupId, MemberTypes memberTypes = MemberTypes.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<MemberCollection> MembersGetListAsync(string groupId, MemberTypes memberTypes = MemberTypes.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Adds a photo to a pool you have permission to add photos to.
     /// </summary>
     /// <param name="photoId">The id of one of your photos to be added.</param>
     /// <param name="groupId">The id of a group you are a member of.</param>
-    Task GroupsPoolsAddAsync(string photoId, string groupId, CancellationToken cancellationToken = default);
+    Task PoolsAddAsync(string photoId, string groupId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets the context for a photo from within a group. This provides the
@@ -276,14 +280,14 @@ public interface IFlickrGroups
     /// </summary>
     /// <param name="photoId">The Photo ID for the photo you want the context for.</param>
     /// <param name="groupId">The group ID for the group you want the context to be relevant to.</param>
-    Task<Context> GroupsPoolsGetContextAsync(string photoId, string groupId, CancellationToken cancellationToken = default);
+    Task<Context> PoolsGetContextAsync(string photoId, string groupId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Returns a list of groups to which you can add photos.
     /// </summary>
     /// <param name="page">The page of the results to return.</param>
     /// <param name="perPage">The number of groups to list per page.</param>
-    Task<MemberGroupInfoCollection> GroupsPoolsGetGroupsAsync(int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<MemberGroupInfoCollection> PoolsGetGroupsAsync(int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets a list of photos for a given group.
@@ -295,12 +299,12 @@ public interface IFlickrGroups
     /// <param name="extras">The <see cref="PhotoSearchExtras"/> specifying which extras to return. All other overloads default to returning all extras.</param>
     /// <param name="perPage">The number of photos per page.</param>
     /// <param name="page">The page to return.</param>
-    Task<PhotoCollection> GroupsPoolsGetPhotosAsync(string groupId, string tags = null, string userId = null, PhotoSearchExtras extras = PhotoSearchExtras.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<PhotoCollection> PoolsGetPhotosAsync(string groupId, string tags = null, string userId = null, PhotoSearchExtras extras = PhotoSearchExtras.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Remove a picture from a group.
     /// </summary>
     /// <param name="photoId">The id of one of your pictures you wish to remove.</param>
     /// <param name="groupId">The id of the group to remove the picture from.</param
-    Task GroupsPoolsRemoveAsync(string photoId, string groupId, CancellationToken cancellationToken = default);
+    Task PoolsRemoveAsync(string photoId, string groupId, CancellationToken cancellationToken = default);
 }

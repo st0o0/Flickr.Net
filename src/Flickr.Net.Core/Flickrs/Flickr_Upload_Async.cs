@@ -2,7 +2,7 @@
 
 public partial class Flickr : IFlickrUpload
 {
-    public async Task<string> UploadPictureAsync(Stream stream, string fileName, string title,
+    async Task<string> IFlickrUpload.UploadPictureAsync(Stream stream, string fileName, string title,
          string description, string tags, bool isPublic, bool isFamily, bool isFriend,
          ContentType contentType, SafetyLevel safetyLevel, HiddenFromSearch hiddenFromSearch,
          IProgress<double> progress, CancellationToken cancellationToken)
@@ -63,7 +63,7 @@ public partial class Flickr : IFlickrUpload
         return await UploadDataAsync(stream, fileName, progress, uploadUri, parameters, cancellationToken);
     }
 
-    public async Task<string> ReplacePictureAsync(Stream stream, string fileName, string photoId, IProgress<double> progress, CancellationToken cancellationToken)
+    async Task<string> IFlickrUpload.ReplacePictureAsync(Stream stream, string fileName, string photoId, IProgress<double> progress, CancellationToken cancellationToken)
     {
         Uri replaceUri = new(ReplaceUrl);
 

@@ -5,6 +5,21 @@ namespace Flickr.Net.Core;
 
 public partial class Flickr : IFlickrPhotos
 {
+
+    IFlickrPhotosComments IFlickrPhotos.Comments => this;
+
+    IFlickrPhotosGeo IFlickrPhotos.Geo => this;
+
+    IFlickrPhotosLicenses IFlickrPhotos.License => this;
+
+    IFlickrPhotosMisc IFlickrPhotos.Misc => this;
+
+    IFlickrPhotosNotes IFlickrPhotos.Notes => this;
+
+    IFlickrPhotosPeople IFlickrPhotos.People => this;
+    
+    IFlickrPhotosSuggestions IFlickrPhotos.Suggestions => this;
+
     async Task IFlickrPhotos.AddTagAsync(string photoId, string[] tags, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
@@ -531,6 +546,41 @@ public partial class Flickr : IFlickrPhotos
 
 public interface IFlickrPhotos
 {
+    /// <summary>
+    /// property for all photo comment functions
+    /// </summary>
+    IFlickrPhotosComments Comments { get; }
+
+    /// <summary>
+    /// property for all photo geo functions
+    /// </summary>
+    IFlickrPhotosGeo Geo { get; }
+
+    /// <summary>
+    /// property for all photo license functions
+    /// </summary>
+    IFlickrPhotosLicenses License { get; }
+
+    /// <summary>
+    /// property for all photo misc functions
+    /// </summary>
+    IFlickrPhotosMisc Misc { get; }
+
+    /// <summary>
+    /// property for all photo note functions
+    /// </summary>
+    IFlickrPhotosNotes Notes { get; }
+
+    /// <summary>
+    /// property for all photo people functions
+    /// </summary>
+    IFlickrPhotosPeople People { get; }
+
+    /// <summary>
+    /// property for all photo suggestions functions
+    /// </summary>
+    IFlickrPhotosSuggestions Suggestions { get; }
+
     /// <summary>
     /// Add a selection of tags to a photo.
     /// </summary>

@@ -68,24 +68,114 @@ public partial class Flickr
     protected Cache Cache => _cache;
 
     /// <summary>
-    /// property for all activity function
+    /// property for all activity functions
     /// </summary>
     public IFlickrActivity Activity => this;
 
     /// <summary>
-    /// property for all blogs function
+    /// property for all blog functions
     /// </summary>
     public IFlickrBlogs Blogs => this;
 
     /// <summary>
-    /// property for all cameras function
+    /// property for all camera functions
     /// </summary>
     public IFlickrCameras Cameras => this;
 
     /// <summary>
-    /// property for all places functions
+    /// property for all collection functions
+    /// </summary>
+    public IFlickrCollections Collections => this;
+
+    /// <summary>
+    /// property for all common functions
+    /// </summary>
+    public IFlickrCommons Commons => this;
+
+    /// <summary>
+    /// property for all contact functions
+    /// </summary>
+    public IFlickrContacts Contacts => this;
+    
+    /// <summary>
+    /// property for all favorites functions
+    /// </summary>
+    public IFlickrFavorites Favorites => this;
+
+    /// <summary>
+    /// property for all gallerie functions
+    /// </summary>
+    public IFlickrGalleries Galleries => this;
+
+    /// <summary>
+    /// property for all group functions
+    /// </summary>
+    public IFlickrGroups Groups => this;
+
+    /// <summary>
+    /// property for all interestingness functions
+    /// </summary>
+    public IFlickrInterestingness Interestingness => this;
+
+    /// <summary>
+    /// property for all machinetag functions
+    /// </summary>
+    public IFlickrMachineTags MachineTags => this;
+
+    /// <summary>
+    /// property for all oauth functions
+    /// </summary>
+    public IFlickrOAuth OAuth => this;
+
+    /// <summary>
+    /// property for all panda functions
+    /// </summary>
+    public IFlickrPanda Panda => this;
+
+    /// <summary>
+    /// property for all people functions
+    /// </summary>
+    public IFlickrPeople People => this;
+
+    /// <summary>
+    /// property for all photo functions
+    /// </summary>
+    public IFlickrPhotos Photos => this;
+
+    /// <summary>
+    /// property for all photosets functions
+    /// </summary>
+    public IFlickrPhotosets Photosets => this;
+
+    /// <summary>
+    /// property for all place functions
     /// </summary>
     public IFlickrPlaces Places => this;
+
+    /// <summary>
+    /// property for all pref functions
+    /// </summary>
+    public IFlickrPrefs Prefs => this;
+
+    /// <summary>
+    /// property for all profile functions
+    /// </summary>
+    public IFlickrProfile Profile => this;
+
+    /// <summary>
+    /// property for all push functions
+    /// </summary>
+    public IFlickrPush Push => this;
+
+    /// <summary>
+    /// property for all reflection functions
+    /// </summary>
+    public IFlickrReflection Reflection => this;
+
+    /// <summary>
+    /// property for all stats functions
+    /// </summary>
+    public IFlickrStats Stats => this;
 
     /// <summary>
     /// property for all tags functions
@@ -98,12 +188,12 @@ public partial class Flickr
     public IFlickrTest Test => this;
 
     /// <summary>
-    /// property for all upload functions
+    /// property for upload and replace functions
     /// </summary>
     public IFlickrUpload Upload => this;
 
     /// <summary>
-    /// property for all urls functions
+    /// property for all url functions
     /// </summary>
     public IFlickrUrls Urls => this;
 
@@ -240,7 +330,7 @@ public partial class Flickr
     /// Boolean use to decide whether to generate the api call signature as well.
     /// </param>
     /// <returns>The <see cref="Uri"/> for the method call.</returns>
-    public string CalculateUri(Dictionary<string, string> parameters, bool includeSignature)
+    internal string CalculateUri(Dictionary<string, string> parameters, bool includeSignature)
     {
         if (includeSignature)
         {

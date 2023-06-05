@@ -2,6 +2,8 @@
 
 public partial class Flickr : IFlickrPhotosets
 {
+    IFlickrPhotosetsComments IFlickrPhotosets.Comments => this;
+
     async Task IFlickrPhotosets.PhotosetsAddPhotoAsync(string photosetId, string photoId, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
@@ -238,6 +240,11 @@ public partial class Flickr : IFlickrPhotosets
 
 public interface IFlickrPhotosets
 {
+        /// <summary>
+    /// property for all photosets comment functions
+    /// </summary>
+    IFlickrPhotosetsComments Comments { get; }
+
     /// <summary>
     /// Add a photo to a photoset.
     /// </summary>
