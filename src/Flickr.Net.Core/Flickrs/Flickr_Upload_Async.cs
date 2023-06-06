@@ -47,12 +47,12 @@ public partial class Flickr : IFlickrUpload
             parameters.Add("hidden", hiddenFromSearch.ToString("D"));
         }
 
-        if (!string.IsNullOrEmpty(OAuthAccessToken))
+        if (!string.IsNullOrEmpty(FlickrSettings.OAuthAccessToken))
         {
             parameters.Remove("api_key");
             OAuthGetBasicParameters(parameters);
-            parameters.Add("oauth_token", OAuthAccessToken);
-            string sig = ((IFlickrOAuth)this).CalculateSignature("POST", uploadUri.AbsoluteUri, parameters, OAuthAccessTokenSecret);
+            parameters.Add("oauth_token", FlickrSettings.OAuthAccessToken);
+            string sig = ((IFlickrOAuth)this).CalculateSignature("POST", uploadUri.AbsoluteUri, parameters, FlickrSettings.OAuthAccessTokenSecret);
             parameters.Add("oauth_signature", sig);
         }
         else
@@ -70,17 +70,17 @@ public partial class Flickr : IFlickrUpload
         Dictionary<string, string> parameters = new()
         {
             { "photo_id", photoId },
-            { "api_key", ApiKey }
+            { "api_key", FlickrSettings.ApiKey }
         };
 
         parameters.Add("api_key", _settings.ApiKey ?? string.Empty);
 
-        if (!string.IsNullOrEmpty(OAuthAccessToken))
+        if (!string.IsNullOrEmpty(FlickrSettings.OAuthAccessToken))
         {
             parameters.Remove("api_key");
             OAuthGetBasicParameters(parameters);
-            parameters.Add("oauth_token", OAuthAccessToken);
-            string sig = ((IFlickrOAuth)this).CalculateSignature("POST", replaceUri.AbsoluteUri, parameters, OAuthAccessTokenSecret);
+            parameters.Add("oauth_token", FlickrSettings.OAuthAccessToken);
+            string sig = ((IFlickrOAuth)this).CalculateSignature("POST", replaceUri.AbsoluteUri, parameters, FlickrSettings.OAuthAccessTokenSecret);
             parameters.Add("oauth_signature", sig);
         }
         else

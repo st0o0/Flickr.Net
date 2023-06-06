@@ -59,7 +59,7 @@ public partial class Flickr : IFlickrOAuth
     string IFlickrOAuth.CalculateSignature(string method, string url, Dictionary<string, string> parameters, string tokenSecret)
     {
         string baseString = "";
-        string key = ApiSecret + "&" + tokenSecret;
+        string key = FlickrSettings.ApiSecret + "&" + tokenSecret;
         byte[] keyBytes = Encoding.UTF8.GetBytes(key);
 
         SortedList<string, string> sorted = new();
@@ -123,7 +123,7 @@ public partial class Flickr : IFlickrOAuth
             { "oauth_timestamp", oauthtimestamp },
             { "oauth_version", "1.0" },
             { "oauth_signature_method", "HMAC-SHA1" },
-            { "oauth_consumer_key", ApiKey }
+            { "oauth_consumer_key", FlickrSettings.ApiKey }
         };
         return parameters;
     }

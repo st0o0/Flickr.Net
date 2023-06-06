@@ -9,25 +9,25 @@ public partial class Flickr
     {
         CheckApiKey();
 
-        parameters.Add("api_key", ApiKey);
+        parameters.Add("api_key", FlickrSettings.ApiKey);
 
         // If OAuth Token exists or no authentication required then use new OAuth
-        if (!string.IsNullOrEmpty(OAuthAccessToken))
+        if (!string.IsNullOrEmpty(FlickrSettings.OAuthAccessToken))
         {
             OAuthGetBasicParameters(parameters);
-            if (!string.IsNullOrEmpty(OAuthAccessToken))
+            if (!string.IsNullOrEmpty(FlickrSettings.OAuthAccessToken))
             {
-                parameters["oauth_token"] = OAuthAccessToken;
+                parameters["oauth_token"] = FlickrSettings.OAuthAccessToken;
             }
         }
 
-        string url = CalculateUri(parameters, !string.IsNullOrEmpty(_settings.SharedSecret));
+        string url = CalculateUri(parameters, !string.IsNullOrEmpty(FlickrSettings.ApiSecret));
 
         _lastRequest = url;
 
         byte[] result;
 
-        if (InstanceCacheDisabled)
+        if (FlickrCachingSettings.InstanceCacheDisabled)
         {
             result = await FlickrResponder.GetDataResponseAsync(this, BaseUri.AbsoluteUri, parameters, cancellationToken);
         }

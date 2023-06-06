@@ -1,6 +1,6 @@
-namespace Flickr.Net.Core.Configuration;
+namespace FlickrNet.Core.Configuration;
 
-public class FlickrConfigurationSettings
+public class FlickrConfiguration
 {
     public string ApiKey { get; set; }
     public string SharedSecret { get; set; }

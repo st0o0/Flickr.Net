@@ -55,13 +55,13 @@ public static partial class FlickrResponder
         }
 
         // If OAuth Access Token is set then add token and generate signature.
-        if (!string.IsNullOrEmpty(flickr.OAuthAccessToken) && !parameters.ContainsKey("oauth_token"))
+        if (!string.IsNullOrEmpty(flickr.FlickrSettings.OAuthAccessToken) && !parameters.ContainsKey("oauth_token"))
         {
-            parameters.Add("oauth_token", flickr.OAuthAccessToken);
+            parameters.Add("oauth_token", flickr.FlickrSettings.OAuthAccessToken);
         }
-        if (!string.IsNullOrEmpty(flickr.OAuthAccessTokenSecret) && !parameters.ContainsKey("oauth_signature"))
+        if (!string.IsNullOrEmpty(flickr.FlickrSettings.OAuthAccessTokenSecret) && !parameters.ContainsKey("oauth_signature"))
         {
-            string sig = ((IFlickrOAuth)flickr).CalculateSignature("POST", baseUrl, parameters, flickr.OAuthAccessTokenSecret);
+            string sig = ((IFlickrOAuth)flickr).CalculateSignature("POST", baseUrl, parameters, flickr.FlickrSettings.OAuthAccessTokenSecret);
             parameters.Add("oauth_signature", sig);
         }
 

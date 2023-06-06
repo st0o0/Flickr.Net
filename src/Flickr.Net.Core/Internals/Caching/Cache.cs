@@ -1,4 +1,4 @@
-using Flickr.Net.Core.Configuration;
+using FlickrNet.Core.Settings;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Flickr.Net.Core.Internals.Caching;
@@ -11,9 +11,9 @@ public class Cache
     private static PersistentCache responses;
     private static readonly object lockObject = new();
 
-    private readonly FlickrConfigurationSettings _settings;
+    private readonly FlickrCachingSettings _settings;
 
-    public Cache(FlickrConfigurationSettings settings)
+    public Cache(FlickrCachingSettings settings)
     {
         _settings = settings;
     }
@@ -45,7 +45,7 @@ public class Cache
     [DisallowNull]
     public string CacheLocation => _settings.CacheLocation;
 
-    internal static long CacheSizeLimit { get; set; } = 52428800;
+    internal long CacheSizeLimit => _settings.CacheSizeLimit; 
 
     /// <summary>
     /// The default timeout for cachable objects within the cache.
