@@ -91,17 +91,15 @@ public class PhotoSearchOptions
     /// Search for the given machine tags.
     /// </summary>
     /// <remarks>
-    /// See https://www.flickr.com/services/api/flickr.photos.search.html for details
-    /// on how to search for machine tags.
+    /// See https://www.flickr.com/services/api/flickr.photos.search.html for details on how to
+    /// search for machine tags.
     /// </remarks>
     public string MachineTags { get; set; }
 
     /// <summary>
     /// The machine tag mode.
     /// </summary>
-    /// <remarks>
-    /// Allowed values are any and all. It defaults to any if none specified.
-    /// </remarks>
+    /// <remarks>Allowed values are any and all. It defaults to any if none specified.</remarks>
     public MachineTagMode MachineTagMode { get; set; }
 
     /// <summary>
@@ -110,26 +108,26 @@ public class PhotoSearchOptions
     public string Text { get; set; }
 
     /// <summary>
-    /// Minimum date uploaded. Defaults to <see cref="DateTime.MinValue"/> which
-    /// signifies that the value is not to be used.
+    /// Minimum date uploaded. Defaults to <see cref="DateTime.MinValue"/> which signifies that the
+    /// value is not to be used.
     /// </summary>
     public DateTime MinUploadDate { get; set; }
 
     /// <summary>
-    /// Maximum date uploaded. Defaults to <see cref="DateTime.MinValue"/> which
-    /// signifies that the value is not to be used.
+    /// Maximum date uploaded. Defaults to <see cref="DateTime.MinValue"/> which signifies that the
+    /// value is not to be used.
     /// </summary>
     public DateTime MaxUploadDate { get; set; }
 
     /// <summary>
-    /// Minimum date taken. Defaults to <see cref="DateTime.MinValue"/> which
-    /// signifies that the value is not to be used.
+    /// Minimum date taken. Defaults to <see cref="DateTime.MinValue"/> which signifies that the
+    /// value is not to be used.
     /// </summary>
     public DateTime MinTakenDate { get; set; }
 
     /// <summary>
-    /// Maximum date taken. Defaults to <see cref="DateTime.MinValue"/> which
-    /// signifies that the value is not to be used.
+    /// Maximum date taken. Defaults to <see cref="DateTime.MinValue"/> which signifies that the
+    /// value is not to be used.
     /// </summary>
     public DateTime MaxTakenDate { get; set; }
 
@@ -181,9 +179,7 @@ public class PhotoSearchOptions
     /// <summary>
     /// The accuracy of the search for geo location photos.
     /// </summary>
-    /// <remarks>
-    /// Can also be set as a property of the <see cref="BoundaryBox"/> property.
-    /// </remarks>
+    /// <remarks>Can also be set as a property of the <see cref="BoundaryBox"/> property.</remarks>
     public GeoAccuracy Accuracy
     {
         get { return BoundaryBox == null ? GeoAccuracy.None : BoundaryBox.Accuracy; }
@@ -197,9 +193,7 @@ public class PhotoSearchOptions
     /// <summary>
     /// Which type of safe search to perform.
     /// </summary>
-    /// <remarks>
-    /// An unauthenticated search will only ever return safe photos.
-    /// </remarks>
+    /// <remarks>An unauthenticated search will only ever return safe photos.</remarks>
     public SafetyLevel SafeSearch { get; set; }
 
     /// <summary>
@@ -213,8 +207,7 @@ public class PhotoSearchOptions
     public RadiusUnit RadiusUnits { get; set; }
 
     /// <summary>
-    /// Specify the radius of a particular geo-location search.
-    /// Maximum of 20 miles, 32 kilometers.
+    /// Specify the radius of a particular geo-location search. Maximum of 20 miles, 32 kilometers.
     /// </summary>
     public float? Radius { get; set; }
 
@@ -234,7 +227,8 @@ public class PhotoSearchOptions
     public bool? HasGeo { get; set; }
 
     /// <summary>
-    /// Fitler the search results on a particular users contacts. You must set UserId for this option to be honoured.
+    /// Fitler the search results on a particular users contacts. You must set UserId for this
+    /// option to be honoured.
     /// </summary>
     public ContactSearch Contacts { get; set; }
 
@@ -357,7 +351,8 @@ public class PhotoSearchOptions
     /// A list of the new color codes.
     /// </summary>
     /// <remarks>
-    /// Acceptable values are "0"-"9" and "a"-"e". Or you can use a color name such as "yellow", "blue", "green" etc.
+    /// Acceptable values are "0"-"9" and "a"-"e". Or you can use a color name such as "yellow",
+    /// "blue", "green" etc.
     /// </remarks>
     public ICollection<string> ColorCodes { get; set; }
 
@@ -392,7 +387,8 @@ public class PhotoSearchOptions
     }
 
     /// <summary>
-    /// Takes the various properties of this instance and adds them to a <see cref="Dictionary{K,V}"/> instanced passed in, ready for sending to Flickr.
+    /// Takes the various properties of this instance and adds them to a <see
+    /// cref="Dictionary{K,V}"/> instanced passed in, ready for sending to Flickr.
     /// </summary>
     /// <param name="parameters">The <see cref="Dictionary{K,V}"/> to add the options to.</param>
     public void AddToDictionary(ref Dictionary<string, string> parameters)

@@ -16,8 +16,8 @@ public class PartialSearchOptions
     private PrivacyFilter privacyFilter = PrivacyFilter.None;
 
     /// <summary>
-    /// Minimum date uploaded. Defaults to <see cref="DateTime.MinValue"/> which
-    /// signifies that the value is not to be used.
+    /// Minimum date uploaded. Defaults to <see cref="DateTime.MinValue"/> which signifies that the
+    /// value is not to be used.
     /// </summary>
     public DateTime MinUploadDate
     {
@@ -26,8 +26,8 @@ public class PartialSearchOptions
     }
 
     /// <summary>
-    /// Maximum date uploaded. Defaults to <see cref="DateTime.MinValue"/> which
-    /// signifies that the value is not to be used.
+    /// Maximum date uploaded. Defaults to <see cref="DateTime.MinValue"/> which signifies that the
+    /// value is not to be used.
     /// </summary>
     public DateTime MaxUploadDate
     {
@@ -36,8 +36,8 @@ public class PartialSearchOptions
     }
 
     /// <summary>
-    /// Minimum date taken. Defaults to <see cref="DateTime.MinValue"/> which
-    /// signifies that the value is not to be used.
+    /// Minimum date taken. Defaults to <see cref="DateTime.MinValue"/> which signifies that the
+    /// value is not to be used.
     /// </summary>
     public DateTime MinTakenDate
     {
@@ -46,8 +46,8 @@ public class PartialSearchOptions
     }
 
     /// <summary>
-    /// Maximum date taken. Defaults to <see cref="DateTime.MinValue"/> which
-    /// signifies that the value is not to be used.
+    /// Maximum date taken. Defaults to <see cref="DateTime.MinValue"/> which signifies that the
+    /// value is not to be used.
     /// </summary>
     public DateTime MaxTakenDate
     {
@@ -136,7 +136,8 @@ public class PartialSearchOptions
     }
 
     /// <summary>
-    /// Constructor taking a perPage and page parameter and a default <see cref="PhotoSearchExtras"/> parameter.
+    /// Constructor taking a perPage and page parameter and a default <see
+    /// cref="PhotoSearchExtras"/> parameter.
     /// </summary>
     /// <param name="perPage">The number of photos to return per page (maximum).</param>
     /// <param name="page">The page number to return.</param>

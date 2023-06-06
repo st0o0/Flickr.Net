@@ -1,5 +1,8 @@
 ﻿namespace Flickr.Net.Core;
 
+/// <summary>
+/// The flickr.
+/// </summary>
 public partial class Flickr : IFlickrUrls
 {
     async Task<string> IFlickrUrls.GetGroupAsync(string groupId, CancellationToken cancellationToken)
@@ -81,24 +84,34 @@ public partial class Flickr : IFlickrUrls
     }
 }
 
+/// <summary>
+/// The flickr urls.
+/// </summary>
 public interface IFlickrUrls
 {
     /// <summary>
     /// Returns the url to a group's page.
     /// </summary>
     /// <param name="groupId">The NSID of the group to fetch the url for.</param>
+    /// <param name="cancellationToken"></param>
     Task<string> GetGroupAsync(string groupId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Returns the url to a user's photos.
     /// </summary>
-    /// <param name="userId">The NSID of the user to fetch the url for. If omitted, the calling user is assumed.</param>
+    /// <param name="userId">
+    /// The NSID of the user to fetch the url for. If omitted, the calling user is assumed.
+    /// </param>
+    /// <param name="cancellationToken"></param>
     Task<string> GetUserPhotosAsync(string userId = null, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Returns the url to a user's profile.
     /// </summary>
-    /// <param name="userId">The NSID of the user to fetch the url for. If omitted, the calling user is assumed.</param>
+    /// <param name="userId">
+    /// The NSID of the user to fetch the url for. If omitted, the calling user is assumed.
+    /// </param>
+    /// <param name="cancellationToken"></param>
     /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
     Task<string> GetUserProfileAsync(string userId = null, CancellationToken cancellationToken = default);
 
@@ -106,17 +119,20 @@ public interface IFlickrUrls
     /// Returns gallery info, by url.
     /// </summary>
     /// <param name="url">The gallery's URL.</param>
+    /// <param name="cancellationToken"></param>
     Task<Gallery> LookupGalleryAsync(string url, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Returns a group NSID, given the url to a group's page or photo pool.
     /// </summary>
     /// <param name="urlToFind">The url to the group's page or photo pool.</param>
+    /// <param name="cancellationToken"></param>
     Task<string> LookupGroupAsync(string urlToFind, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Returns a user NSID, given the url to a user's photos or profile.
     /// </summary>
     /// <param name="urlToFind">Thr url to the user's profile or photos page.</param>
+    /// <param name="cancellationToken"></param>
     Task<FoundUser> LookupUserAsync(string urlToFind, CancellationToken cancellationToken = default);
 }

@@ -3,9 +3,7 @@
 /// <summary>
 /// Information about the types of 'places' available from the Flickr API.
 /// </summary>
-/// <remarks>
-/// Use the <see cref="PlaceInfo"/> enumeration were possible.
-/// </remarks>
+/// <remarks>Use the <see cref="PlaceInfo"/> enumeration were possible.</remarks>
 public sealed class PlaceTypeInfo : IFlickrParsable
 {
     /// <summary>

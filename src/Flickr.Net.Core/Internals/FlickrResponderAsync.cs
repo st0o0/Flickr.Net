@@ -3,16 +3,20 @@ using System.Net;
 using System.Net.Http.Headers;
 
 namespace Flickr.Net.Core.Internals;
+/// <summary>
+/// The flickr responder.
+/// </summary>
 
 public static partial class FlickrResponder
 {
     /// <summary>
-    /// Gets a data response for the given base url and parameters,
-    /// either using OAuth or not depending on which parameters were passed in.
+    /// Gets a data response for the given base url and parameters, either using OAuth or not
+    /// depending on which parameters were passed in.
     /// </summary>
     /// <param name="flickr">The current instance of the <see cref="Flickr"/> class.</param>
     /// <param name="baseUrl">The base url to be called.</param>
     /// <param name="parameters">A dictionary of parameters.</param>
+    /// <param name="cancellationToken"></param>
     /// <param name="callback"></param>
     /// <returns></returns>
     public static async Task<byte[]> GetDataResponseAsync(Flickr flickr, string baseUrl, Dictionary<string, string> parameters, CancellationToken cancellationToken = default)

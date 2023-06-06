@@ -30,7 +30,10 @@ public static partial class FlickrResponder
     /// <summary>
     /// Calculates for form encoded POST data to be included in the body of an OAuth call.
     /// </summary>
-    /// <remarks>This will include all non-OAuth parameters. The OAuth parameter will be included in the Authentication header.</remarks>
+    /// <remarks>
+    /// This will include all non-OAuth parameters. The OAuth parameter will be included in the
+    /// Authentication header.
+    /// </remarks>
     /// <param name="parameters"></param>
     /// <returns></returns>
     public static string OAuthCalculatePostData(Dictionary<string, string> parameters)

@@ -3,8 +3,7 @@
 /// <summary>
 /// The status of a location suggestion.
 /// </summary>
-/// <remarks>
-/// </remarks>
+/// <remarks></remarks>
 public enum SuggestionStatus
 {
     /// <summary>

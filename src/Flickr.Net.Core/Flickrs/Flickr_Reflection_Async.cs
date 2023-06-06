@@ -1,5 +1,8 @@
 ﻿namespace Flickr.Net.Core;
 
+/// <summary>
+/// The flickr.
+/// </summary>
 public partial class Flickr : IFlickrReflection
 {
     async Task<Method> IFlickrReflection.GetMethodInfoAsync(string methodName, CancellationToken cancellationToken)
@@ -24,12 +27,16 @@ public partial class Flickr : IFlickrReflection
     }
 }
 
+/// <summary>
+/// The flickr reflection.
+/// </summary>
 public interface IFlickrReflection
 {
     /// <summary>
     /// Gets the method details for a given method.
     /// </summary>
     /// <param name="methodName">The name of the method to retrieve.</param>
+    /// <param name="cancellationToken"></param>
     Task<Method> GetMethodInfoAsync(string methodName, CancellationToken cancellationToken = default);
 
     /// <summary>

@@ -1,5 +1,8 @@
 ﻿namespace Flickr.Net.Core;
 
+/// <summary>
+/// The flickr.
+/// </summary>
 public partial class Flickr : IFlickrGroups
 {
     IFlickrGroupsDiscuss IFlickrGroups.Discuss => this;
@@ -215,6 +218,9 @@ public partial class Flickr : IFlickrGroups
     }
 }
 
+/// <summary>
+/// The flickr groups.
+/// </summary>
 public interface IFlickrGroups
 {
     IFlickrGroupsDiscuss Discuss { get; }
@@ -223,6 +229,7 @@ public interface IFlickrGroups
     /// Returns a <see cref="GroupFullInfo"/> object containing details about a group.
     /// </summary>
     /// <param name="groupId">The id of the group to return.</param>
+    /// <param name="cancellationToken"></param>
     Task<GroupFullInfo> GetInfoAsync(string groupId, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -230,6 +237,7 @@ public interface IFlickrGroups
     /// </summary>
     /// <param name="groupId">The group id of the group to join.</param>
     /// <param name="acceptsRules">Specify true to signify that the user accepts the groups rules.</param>
+    /// <param name="cancellationToken"></param>
     Task JoinAsync(string groupId, bool acceptsRules = false, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -238,13 +246,17 @@ public interface IFlickrGroups
     /// <param name="groupId">The ID of the group the user wishes to join.</param>
     /// <param name="message">The message to send to the administrator.</param>
     /// <param name="acceptRules">A boolean confirming the user has accepted the rules of the group.</param>
+    /// <param name="cancellationToken"></param>
     Task JoinRequestAsync(string groupId, string message, bool acceptRules = false, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Specify a group for the authenticated user to leave.
     /// </summary>
     /// <param name="groupId">The group id of the group to leave.</param>
-    /// <param name="deletePhotos">Specify true to delete all of the users photos when they leave the group.</param>
+    /// <param name="deletePhotos">
+    /// Specify true to delete all of the users photos when they leave the group.
+    /// </param>
+    /// <param name="cancellationToken"></param>
     Task LeaveAsync(string groupId, bool deletePhotos = false, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -253,17 +265,25 @@ public interface IFlickrGroups
     /// <param name="text">The text to search for.</param>
     /// <param name="page">The page of the results to return.</param>
     /// <param name="perPage">The number of groups to list per page.</param>
+    /// <param name="cancellationToken"></param>
     Task<GroupSearchResultCollection> SearchAsync(string text, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get a list of the members of a group.
     /// </summary>
     /// <remarks>
-    /// The call must be signed on behalf of a Flickr member, and the ability to see the group membership will be determined by the Flickr member's group privileges.
+    /// The call must be signed on behalf of a Flickr member, and the ability to see the group
+    /// membership will be determined by the Flickr member's group privileges.
     /// </remarks>
-    /// <param name="groupId">Return a list of members for this group. The group must be viewable by the Flickr member on whose behalf the API call is made.</param>
+    /// <param name="groupId">
+    /// Return a list of members for this group. The group must be viewable by the Flickr member on
+    /// whose behalf the API call is made.
+    /// </param>
     /// <param name="page">The page of the results to return (default is 1).</param>
-    /// <param name="perPage">The number of members to return per page (default is 100, max is 500).</param>
+    /// <param name="perPage">
+    /// The number of members to return per page (default is 100, max is 500).
+    /// </param>
+    /// <param name="cancellationToken"></param>
     /// <param name="memberTypes">The types of members to be returned. Can be more than one.</param>
     Task<MemberCollection> MembersGetListAsync(string groupId, MemberTypes memberTypes = MemberTypes.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
@@ -272,14 +292,16 @@ public interface IFlickrGroups
     /// </summary>
     /// <param name="photoId">The id of one of your photos to be added.</param>
     /// <param name="groupId">The id of a group you are a member of.</param>
+    /// <param name="cancellationToken"></param>
     Task PoolsAddAsync(string photoId, string groupId, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Gets the context for a photo from within a group. This provides the
-    /// id and thumbnail url for the next and previous photos in the group.
+    /// Gets the context for a photo from within a group. This provides the id and thumbnail url for
+    /// the next and previous photos in the group.
     /// </summary>
     /// <param name="photoId">The Photo ID for the photo you want the context for.</param>
     /// <param name="groupId">The group ID for the group you want the context to be relevant to.</param>
+    /// <param name="cancellationToken"></param>
     Task<Context> PoolsGetContextAsync(string photoId, string groupId, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -287,24 +309,29 @@ public interface IFlickrGroups
     /// </summary>
     /// <param name="page">The page of the results to return.</param>
     /// <param name="perPage">The number of groups to list per page.</param>
+    /// <param name="cancellationToken"></param>
     Task<MemberGroupInfoCollection> PoolsGetGroupsAsync(int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets a list of photos for a given group.
     /// </summary>
     /// <param name="groupId">The group ID for the group.</param>
-    /// <param name="tags">Space seperated list of tags that photos returned must have.
-    /// Currently only supports 1 tag at a time.</param>
+    /// <param name="tags">
+    /// Space seperated list of tags that photos returned must have. Currently only supports 1 tag
+    /// at a time.
+    /// </param>
     /// <param name="userId">The group member to return photos for.</param>
-    /// <param name="extras">The <see cref="PhotoSearchExtras"/> specifying which extras to return. All other overloads default to returning all extras.</param>
+    /// <param name="extras">
+    /// The <see cref="PhotoSearchExtras"/> specifying which extras to return. All other overloads
+    /// default to returning all extras.
+    /// </param>
     /// <param name="perPage">The number of photos per page.</param>
+    /// <param name="cancellationToken"></param>
     /// <param name="page">The page to return.</param>
     Task<PhotoCollection> PoolsGetPhotosAsync(string groupId, string tags = null, string userId = null, PhotoSearchExtras extras = PhotoSearchExtras.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
-    /// <summary>
-    /// Remove a picture from a group.
-    /// </summary>
-    /// <param name="photoId">The id of one of your pictures you wish to remove.</param>
-    /// <param name="groupId">The id of the group to remove the picture from.</param
+    /// <summary> Remove a picture from a group. </summary> <param name="photoId">The id of one of
+    /// your pictures you wish to remove.</param> <param name="groupId">The id of the group to
+    /// remove the picture from.</param
     Task PoolsRemoveAsync(string photoId, string groupId, CancellationToken cancellationToken = default);
 }

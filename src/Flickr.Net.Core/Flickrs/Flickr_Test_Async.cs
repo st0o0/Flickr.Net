@@ -1,5 +1,8 @@
 ﻿namespace Flickr.Net.Core;
 
+/// <summary>
+/// The flickr.
+/// </summary>
 public partial class Flickr : IFlickrTest
 {
     /// <summary>
@@ -35,6 +38,7 @@ public partial class Flickr : IFlickrTest
     /// A dictionary of extra parameters to pass in. Note, the "method" and "api_key" parameters
     /// will always be passed in.
     /// </param>
+    /// <param name="cancellationToken"></param>
     async Task<EchoResponseDictionary> IFlickrTest.EchoAsync(Dictionary<string, string> parameters, CancellationToken cancellationToken)
     {
         parameters.Add("method", "flickr.test.echo");
@@ -42,6 +46,9 @@ public partial class Flickr : IFlickrTest
     }
 }
 
+/// <summary>
+/// The flickr test.
+/// </summary>
 public interface IFlickrTest
 {
     Task<FoundUser> LoginAsync(CancellationToken cancellationToken = default);

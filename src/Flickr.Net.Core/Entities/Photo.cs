@@ -3,6 +3,9 @@ using System.Xml;
 
 namespace Flickr.Net.Core.Entities;
 
+/// <summary>
+/// The photo.
+/// </summary>
 /// <remarks/>
 public class Photo : IFlickrParsable
 {
@@ -31,33 +34,63 @@ public class Photo : IFlickrParsable
     public Collection<string> Tags { get; set; }
 
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets the photo id.
+    /// </summary>
     public string PhotoId { get; set; }
 
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets the user id.
+    /// </summary>
     public string UserId { get; set; }
 
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets the secret.
+    /// </summary>
     public string Secret { get; set; }
 
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets the server.
+    /// </summary>
     public string Server { get; set; }
 
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets the farm.
+    /// </summary>
     public string Farm { get; set; }
 
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets the title.
+    /// </summary>
     public string Title { get; set; }
 
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets a value indicating whether is public.
+    /// </summary>
     public bool IsPublic { get; set; }
 
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets a value indicating whether is friend.
+    /// </summary>
     public bool IsFriend { get; set; }
 
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets a value indicating whether is family.
+    /// </summary>
     public bool IsFamily { get; set; }
 
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets the license.
+    /// </summary>
     public LicenseType License { get; set; }
 
     /// <summary>
@@ -105,12 +138,21 @@ public class Photo : IFlickrParsable
     public DateTime? DateFavorited { get; set; }
 
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets the owner name.
+    /// </summary>
     public string OwnerName { get; set; }
 
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets the icon server.
+    /// </summary>
     public string IconServer { get; set; }
 
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets the icon farm.
+    /// </summary>
     public string IconFarm { get; set; }
 
     /// <summary>

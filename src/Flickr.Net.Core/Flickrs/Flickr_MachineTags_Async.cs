@@ -1,5 +1,8 @@
 ﻿namespace Flickr.Net.Core;
 
+/// <summary>
+/// The flickr.
+/// </summary>
 public partial class Flickr : IFlickrMachineTags
 {
     async Task<NamespaceCollection> IFlickrMachineTags.GetNamespacesAsync(string predicate, int page, int perPage, CancellationToken cancellationToken)
@@ -135,31 +138,61 @@ public partial class Flickr : IFlickrMachineTags
     }
 }
 
+/// <summary>
+/// The flickr machine tags.
+/// </summary>
 public interface IFlickrMachineTags
 {
     /// <summary>
     /// Return a list of unique namespaces, optionally limited by a given predicate, in alphabetical order.
     /// </summary>
-    /// <param name="predicate">Limit the list of namespaces returned to those that have the following predicate.</param>
-    /// <param name="page">The page of results to return. If this argument is omitted, it defaults to 1.</param>
-    /// <param name="perPage">Number of photos to return per page. If this argument is omitted, it defaults to 100. The maximum allowed value is 500.</param>
+    /// <param name="predicate">
+    /// Limit the list of namespaces returned to those that have the following predicate.
+    /// </param>
+    /// <param name="page">
+    /// The page of results to return. If this argument is omitted, it defaults to 1.
+    /// </param>
+    /// <param name="perPage">
+    /// Number of photos to return per page. If this argument is omitted, it defaults to 100. The
+    /// maximum allowed value is 500.
+    /// </param>
+    /// <param name="cancellationToken"></param>
     Task<NamespaceCollection> GetNamespacesAsync(string predicate = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Return a list of unique namespace and predicate pairs, optionally limited by predicate or namespace, in alphabetical order.
+    /// Return a list of unique namespace and predicate pairs, optionally limited by predicate or
+    /// namespace, in alphabetical order.
     /// </summary>
-    /// <param name="namespaceName">Limit the list of pairs returned to those that have the following namespace.</param>
-    /// <param name="predicate">Limit the list of pairs returned to those that have the following predicate.</param>
-    /// <param name="page">The page of results to return. If this argument is omitted, it defaults to 1.</param>
-    /// <param name="perPage">Number of pairs to return per page. If this argument is omitted, it defaults to 100. The maximum allowed value is 500.</param>
+    /// <param name="namespaceName">
+    /// Limit the list of pairs returned to those that have the following namespace.
+    /// </param>
+    /// <param name="predicate">
+    /// Limit the list of pairs returned to those that have the following predicate.
+    /// </param>
+    /// <param name="page">
+    /// The page of results to return. If this argument is omitted, it defaults to 1.
+    /// </param>
+    /// <param name="perPage">
+    /// Number of pairs to return per page. If this argument is omitted, it defaults to 100. The
+    /// maximum allowed value is 500.
+    /// </param>
+    /// <param name="cancellationToken"></param>
     Task<PairCollection> GetPairsAsync(string namespaceName = null, string predicate = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Return a list of unique predicates, optionally limited by a given namespace, in alphabetical order.
     /// </summary>
-    /// <param name="namespaceName">Limit the list of predicates returned to those that have the following namespace.</param>
-    /// <param name="page">The page of results to return. If this argument is omitted, it defaults to 1.</param>
-    /// <param name="perPage">Number of namespaces to return per page. If this argument is omitted, it defaults to 100. The maximum allowed value is 500.</param>
+    /// <param name="namespaceName">
+    /// Limit the list of predicates returned to those that have the following namespace.
+    /// </param>
+    /// <param name="page">
+    /// The page of results to return. If this argument is omitted, it defaults to 1.
+    /// </param>
+    /// <param name="perPage">
+    /// Number of namespaces to return per page. If this argument is omitted, it defaults to 100.
+    /// The maximum allowed value is 500.
+    /// </param>
+    /// <param name="cancellationToken"></param>
     Task<PredicateCollection> GetPredicatesAsync(string namespaceName = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -167,9 +200,17 @@ public interface IFlickrMachineTags
     /// </summary>
     /// <param name="namespaceName">The namespace that all values should be restricted to.</param>
     /// <param name="predicate">The predicate that all values should be restricted to.</param>
-    /// <param name="addedSince">Only return machine tags values that have been added since this timestamp.</param>
-    /// <param name="page">The page of results to return. If this argument is omitted, it defaults to 1.</param>
-    /// <param name="perPage">Number of values to return per page. If this argument is omitted, it defaults to 100. The maximum allowed value is 500.</param>
+    /// <param name="addedSince">
+    /// Only return machine tags values that have been added since this timestamp.
+    /// </param>
+    /// <param name="cancellationToken"></param>
+    /// <param name="page">
+    /// The page of results to return. If this argument is omitted, it defaults to 1.
+    /// </param>
+    /// <param name="perPage">
+    /// Number of values to return per page. If this argument is omitted, it defaults to 100. The
+    /// maximum allowed value is 500.
+    /// </param>
     Task<ValueCollection> GetRecentValuesAsync(string namespaceName = null, string predicate = null, DateTime? addedSince = null, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -177,7 +218,13 @@ public interface IFlickrMachineTags
     /// </summary>
     /// <param name="namespaceName">The namespace that all values should be restricted to.</param>
     /// <param name="predicate">The predicate that all values should be restricted to.</param>
-    /// <param name="page">The page of results to return. If this argument is omitted, it defaults to 1.</param>
-    /// <param name="perPage">Number of values to return per page. If this argument is omitted, it defaults to 100. The maximum allowed value is 500.</param>
+    /// <param name="page">
+    /// The page of results to return. If this argument is omitted, it defaults to 1.
+    /// </param>
+    /// <param name="perPage">
+    /// Number of values to return per page. If this argument is omitted, it defaults to 100. The
+    /// maximum allowed value is 500.
+    /// </param>
+    /// <param name="cancellationToken"></param>
     Task<ValueCollection> GetValuesAsync(string namespaceName, string predicate, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 }

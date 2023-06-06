@@ -1,5 +1,8 @@
 ﻿namespace Flickr.Net.Core;
 
+/// <summary>
+/// The flickr.
+/// </summary>
 public partial class Flickr : IFlickrPhotosComments
 {
     async Task<string> IFlickrPhotosComments.AddCommentAsync(string photoId, string commentText, CancellationToken cancellationToken)
@@ -87,6 +90,9 @@ public partial class Flickr : IFlickrPhotosComments
     }
 }
 
+/// <summary>
+/// The flickr photos comments.
+/// </summary>
 public interface IFlickrPhotosComments
 {
     /// <summary>
@@ -94,12 +100,14 @@ public interface IFlickrPhotosComments
     /// </summary>
     /// <param name="photoId">The ID of the photo to add the comment to.</param>
     /// <param name="commentText">The text of the comment. Can contain some HTML.</param>
+    /// <param name="cancellationToken"></param>
     Task<string> AddCommentAsync(string photoId, string commentText, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Deletes a comment from a photo.
     /// </summary>
     /// <param name="commentId">The ID of the comment to delete.</param>
+    /// <param name="cancellationToken"></param>
     Task DeleteCommentAsync(string commentId, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -107,23 +115,32 @@ public interface IFlickrPhotosComments
     /// </summary>
     /// <param name="commentId">The ID of the comment to edit.</param>
     /// <param name="commentText">The new text for the comment.</param>
+    /// <param name="cancellationToken"></param>
     Task EditCommentAsync(string commentId, string commentText, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets a list of comments for a photo.
     /// </summary>
     /// <param name="photoId">The id of the photo to return the comments for.</param>
+    /// <param name="cancellationToken"></param>
     Task<PhotoCommentCollection> GetListAsync(string photoId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Return the list of photos belonging to your contacts that have been commented on recently.
     /// </summary>
-    /// <param name="dateLastComment">Limits the resultset to photos that have been commented on since this date.
-    /// The default, and maximum, offset is (1) hour.</param>
+    /// <param name="dateLastComment">
+    /// Limits the resultset to photos that have been commented on since this date. The default, and
+    /// maximum, offset is (1) hour.
+    /// </param>
     /// <param name="contactsFilter">A list of contact NSIDs to limit the scope of the query to.</param>
     /// <param name="extras"></param>
-    /// <param name="page">The page of results to return. If this argument is omitted, it defaults to 1.</param>
-    /// <param name="perPage">Number of photos to return per page. If this argument is omitted, it defaults to 100.
-    /// The maximum allowed value is 500.</param>
+    /// <param name="page">
+    /// The page of results to return. If this argument is omitted, it defaults to 1.
+    /// </param>
+    /// <param name="perPage">
+    /// Number of photos to return per page. If this argument is omitted, it defaults to 100. The
+    /// maximum allowed value is 500.
+    /// </param>
+    /// <param name="cancellationToken"></param>
     Task<PhotoCollection> GetRecentForContactsAsync(DateTime? dateLastComment = null, string[] contactsFilter = null, PhotoSearchExtras extras = PhotoSearchExtras.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 }

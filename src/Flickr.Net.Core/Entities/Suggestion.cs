@@ -3,9 +3,7 @@
 /// <summary>
 /// A suggestion for the correct location for a particular photo.
 /// </summary>
-/// <remarks>
-/// There is currently no UI support for this feature in Flickr.
-/// </remarks>
+/// <remarks>There is currently no UI support for this feature in Flickr.</remarks>
 public sealed class Suggestion : IFlickrParsable
 {
     /// <summary>

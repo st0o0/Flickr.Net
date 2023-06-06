@@ -1,5 +1,8 @@
 ﻿namespace Flickr.Net.Core;
 
+/// <summary>
+/// The flickr.
+/// </summary>
 public partial class Flickr : IFlickrPhotosMisc
 {
     async Task IFlickrPhotosMisc.RotateAsync(string photoId, int degrees, CancellationToken cancellationToken)
@@ -36,21 +39,26 @@ public partial class Flickr : IFlickrPhotosMisc
     }
 }
 
+/// <summary>
+/// The flickr photos misc.
+/// </summary>
 public interface IFlickrPhotosMisc
 {
     /// <summary>
     /// Rotates a photo on Flickr.
     /// </summary>
-    /// <remarks>
-    /// Does not rotate the original photo.
-    /// </remarks>
+    /// <remarks>Does not rotate the original photo.</remarks>
     /// <param name="photoId">The ID of the photo.</param>
-    /// <param name="degrees">The number of degrees to rotate by. Valid values are 90, 180 and 270.</param>
+    /// <param name="degrees">
+    /// The number of degrees to rotate by. Valid values are 90, 180 and 270.
+    /// </param>
+    /// <param name="cancellationToken"></param>
     Task RotateAsync(string photoId, int degrees, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Checks the status of one or more asynchronous photo upload tickets.
     /// </summary>
     /// <param name="tickets">A list of ticket ids</param>
+    /// <param name="cancellationToken"></param>
     Task<TicketCollection> CheckTicketsAsync(string[] tickets, CancellationToken cancellationToken = default);
 }

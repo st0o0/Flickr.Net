@@ -3,6 +3,9 @@ using System.Text;
 
 namespace Flickr.Net.Core;
 
+/// <summary>
+/// The flickr.
+/// </summary>
 public partial class Flickr : IFlickrOAuth
 {
     async Task<Auth> IFlickrOAuth.CheckTokenAsync(CancellationToken cancellationToken)
@@ -96,7 +99,8 @@ public partial class Flickr : IFlickrOAuth
     }
 
     /// <summary>
-    /// Populates the given dictionary with the basic OAuth parameters, oauth_timestamp, oauth_noonce etc.
+    /// Populates the given dictionary with the basic OAuth parameters, oauth_timestamp,
+    /// oauth_noonce etc.
     /// </summary>
     /// <param name="parameters">Dictionary to be populated with the OAuth parameters.</param>
     private void OAuthGetBasicParameters(Dictionary<string, string> parameters)
@@ -129,6 +133,9 @@ public partial class Flickr : IFlickrOAuth
     }
 }
 
+/// <summary>
+/// The flickr o auth.
+/// </summary>
 public interface IFlickrOAuth
 {
     /// <summary>
@@ -142,6 +149,7 @@ public interface IFlickrOAuth
     /// </summary>
     /// <remarks>Specify 'oob' as the callback url for no callback to be performed.</remarks>
     /// <param name="callbackUrl">The callback Uri, or 'oob' if no callback is to be performed.</param>
+    /// <param name="cancellationToken"></param>
     Task<OAuthRequestToken> GetRequestTokenAsync(string callbackUrl, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -149,6 +157,7 @@ public interface IFlickrOAuth
     /// </summary>
     /// <param name="requestToken"></param>
     /// <param name="verifier"></param>
+    /// <param name="cancellationToken"></param>
     Task<OAuthRequestToken> GetAccessTokenAsync(OAuthRequestToken requestToken, string verifier, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -157,12 +166,15 @@ public interface IFlickrOAuth
     /// <param name="method">POST or GET method.</param>
     /// <param name="url">The URL the request will be sent to.</param>
     /// <param name="parameters">Parameters to be added to the signature.</param>
-    /// <param name="tokenSecret">The token secret (either request or access) for generating the SHA-1 key.</param>
+    /// <param name="tokenSecret">
+    /// The token secret (either request or access) for generating the SHA-1 key.
+    /// </param>
     /// <returns>Base64 encoded SHA-1 hash.</returns>
     string CalculateSignature(string method, string url, Dictionary<string, string> parameters, string tokenSecret);
 
     /// <summary>
-    /// Returns the authorization URL for OAuth authorization, based off the request token and permissions provided.
+    /// Returns the authorization URL for OAuth authorization, based off the request token and
+    /// permissions provided.
     /// </summary>
     /// <param name="requestToken">The request token to include in the authorization url.</param>
     /// <param name="perms">The permissions being requested.</param>

@@ -3,6 +3,9 @@ using System.Xml;
 
 namespace Flickr.Net.Core.Entities;
 
+/// <summary>
+/// The collection.
+/// </summary>
 /// <remarks/>
 public sealed class Collection : IFlickrParsable
 {
@@ -10,18 +13,33 @@ public sealed class Collection : IFlickrParsable
     private readonly Collection<Collection> _subcollections = new();
 
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets the collection id.
+    /// </summary>
     public string CollectionId { get; set; }
 
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets the title.
+    /// </summary>
     public string Title { get; set; }
 
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets the description.
+    /// </summary>
     public string Description { get; set; }
 
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets the icon large.
+    /// </summary>
     public string IconLarge { get; set; }
 
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets the icon small.
+    /// </summary>
     public string IconSmall { get; set; }
 
     /// <summary>

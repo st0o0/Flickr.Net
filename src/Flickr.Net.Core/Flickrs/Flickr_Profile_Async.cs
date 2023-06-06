@@ -1,5 +1,8 @@
 ﻿namespace Flickr.Net.Core;
 
+/// <summary>
+/// The flickr.
+/// </summary>
 public partial class Flickr : IFlickrProfile
 {
     async Task<Profile> IFlickrProfile.GetProfileAsync(string userId, CancellationToken cancellationToken)
@@ -14,12 +17,16 @@ public partial class Flickr : IFlickrProfile
     }
 }
 
+/// <summary>
+/// The flickr profile.
+/// </summary>
 public interface IFlickrProfile
 {
     /// <summary>
     /// Get a users profile properties.
     /// </summary>
     /// <param name="userId">The id of the user to get the profile for.</param>
+    /// <param name="cancellationToken"></param>
     /// <returns>A <see cref="Profile"/> instance containing the details of the users profile.</returns>
     Task<Profile> GetProfileAsync(string userId, CancellationToken cancellationToken = default);
 }

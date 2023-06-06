@@ -15,9 +15,7 @@ public sealed class PlaceInfo : IFlickrParsable
     /// <summary>
     /// The web page URL that corresponds to this place.
     /// </summary>
-    /// <remarks>
-    /// The 'URL' returned is only a sudo url such as '/Canada/Quebec/Montreal'.
-    /// </remarks>
+    /// <remarks>The 'URL' returned is only a sudo url such as '/Canada/Quebec/Montreal'.</remarks>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings",
         Justification = "Although called 'URL' by the Flickr API it is not an actual URI.")]
     public string PlaceUrl { get; set; }

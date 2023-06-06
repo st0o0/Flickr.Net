@@ -1,5 +1,8 @@
 ﻿namespace Flickr.Net.Core;
 
+/// <summary>
+/// The flickr.
+/// </summary>
 public partial class Flickr : IFlickrPhotosNotes
 {
     async Task<string> IFlickrPhotosNotes.PhotosNotesAddAsync(string photoId, int noteX, int noteY, int noteWidth, int noteHeight, string noteText, CancellationToken cancellationToken)
@@ -48,6 +51,9 @@ public partial class Flickr : IFlickrPhotosNotes
     }
 }
 
+/// <summary>
+/// The flickr photos notes.
+/// </summary>
 public interface IFlickrPhotosNotes
 {
     /// <summary>
@@ -59,12 +65,14 @@ public interface IFlickrPhotosNotes
     /// <param name="noteWidth">The width of the note.</param>
     /// <param name="noteHeight">The height of the note.</param>
     /// <param name="noteText">The text in the note.</param>
+    /// <param name="cancellationToken"></param>
     Task<string> PhotosNotesAddAsync(string photoId, int noteX, int noteY, int noteWidth, int noteHeight, string noteText, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Delete an existing note.
     /// </summary>
     /// <param name="noteId">The ID of the note.</param>
+    /// <param name="cancellationToken"></param>
     Task PhotosNotesDeleteAsync(string noteId, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -76,5 +84,6 @@ public interface IFlickrPhotosNotes
     /// <param name="noteWidth">The width of the note.</param>
     /// <param name="noteHeight">The height of the note.</param>
     /// <param name="noteText">The new text in the note.</param>
+    /// <param name="cancellationToken"></param>
     Task PhotosNotesEditAsync(string noteId, int noteX, int noteY, int noteWidth, int noteHeight, string noteText, CancellationToken cancellationToken = default);
 }

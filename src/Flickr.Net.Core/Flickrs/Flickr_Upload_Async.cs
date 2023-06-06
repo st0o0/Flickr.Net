@@ -1,5 +1,8 @@
 ﻿namespace Flickr.Net.Core;
 
+/// <summary>
+/// The flickr.
+/// </summary>
 public partial class Flickr : IFlickrUpload
 {
     async Task<string> IFlickrUpload.UploadPictureAsync(Stream stream, string fileName, string title,
@@ -70,10 +73,8 @@ public partial class Flickr : IFlickrUpload
         Dictionary<string, string> parameters = new()
         {
             { "photo_id", photoId },
-            { "api_key", FlickrSettings.ApiKey }
+            { "api_key", FlickrSettings.ApiKey ?? string.Empty }
         };
-
-        parameters.Add("api_key", _settings.ApiKey ?? string.Empty);
 
         if (!string.IsNullOrEmpty(FlickrSettings.OAuthAccessToken))
         {
@@ -141,56 +142,36 @@ public partial class Flickr : IFlickrUpload
         //                bufferSize = bufferSize * 2;
         //            }
 
-        //            dataBuffer.UploadProgress += (o, e) => { if (OnUploadProgress != null) { OnUploadProgress(this, e); } };
-        //            dataBuffer.CopyTo(reqStream, bufferSize);
-        //            reqStream.Close();
-        //        }
+        // dataBuffer.UploadProgress += (o, e) => { if (OnUploadProgress != null) {
+        // OnUploadProgress(this, e); } }; dataBuffer.CopyTo(reqStream, bufferSize);
+        // reqStream.Close(); }
 
-        //        req.BeginGetResponse(
-        //            r2 =>
-        //            {
-        //                FlickrResult<string> result = new FlickrResult<string>();
+        // req.BeginGetResponse( r2 => { FlickrResult<string> result = new FlickrResult<string>();
 
-        //                try
-        //                {
-        //                    WebResponse res = req.EndGetResponse(r2);
-        //                    StreamReader sr = new(res.GetResponseStream());
-        //                    string responseXml = sr.ReadToEnd();
-        //                    sr.Close();
+        // try { WebResponse res = req.EndGetResponse(r2); StreamReader sr =
+        // new(res.GetResponseStream()); string responseXml = sr.ReadToEnd(); sr.Close();
 
-        //                    UnknownResponse t = new();
-        //                    ((IFlickrParsable)t).Load(responseXml);
-        //                    result.Result = t.GetElementValue("photoid");
-        //                    result.HasError = false;
-        //                }
-        //                catch (Exception ex)
-        //                {
-        //                    if (ex is WebException)
-        //                    {
-        //                        OAuthException oauthEx = new(ex);
-        //                        result.Error = string.IsNullOrEmpty(oauthEx.Message) ? ex : oauthEx;
-        //                    }
-        //                    else
-        //                    {
-        //                        result.Error = ex;
-        //                    }
-        //                }
+        // UnknownResponse t = new(); ((IFlickrParsable)t).Load(responseXml); result.Result =
+        // t.GetElementValue("photoid"); result.HasError = false; } catch (Exception ex) { if (ex is
+        // WebException) { OAuthException oauthEx = new(ex); result.Error =
+        // string.IsNullOrEmpty(oauthEx.Message) ? ex : oauthEx; } else { result.Error = ex; } }
 
-        //                callback(result);
-        //            },
-        //            this);
-        //    },
-        //    this);
+        // callback(result); }, this); }, this);
     }
 }
 
+/// <summary>
+/// The flickr upload.
+/// </summary>
 public interface IFlickrUpload
 {
     /// <summary>
     /// UploadPicture method that does all the uploading work.
     /// </summary>
     /// <param name="stream">The <see cref="Stream"/> object containing the pphoto to be uploaded.</param>
-    /// <param name="fileName">The filename of the file to upload. Used as the title if title is null.</param>
+    /// <param name="fileName">
+    /// The filename of the file to upload. Used as the title if title is null.
+    /// </param>
     /// <param name="title">The title of the photo (optional).</param>
     /// <param name="description">The description of the photograph (optional).</param>
     /// <param name="tags">The tags for the photograph (optional).</param>
@@ -200,6 +181,8 @@ public interface IFlickrUpload
     /// <param name="contentType">The content type of the photo, i.e. Photo, Screenshot or Other.</param>
     /// <param name="safetyLevel">The safety level of the photo, i.e. Safe, Moderate or Restricted.</param>
     /// <param name="hiddenFromSearch">Is the photo hidden from public searches.</param>
+    /// <param name="progress"></param>
+    /// <param name="cancellationToken"></param>
     Task<string> UploadPictureAsync(Stream stream, string fileName, string title = null,
         string description = null, string tags = null, bool isPublic = false, bool isFamily = false, bool isFriend = false,
         ContentType contentType = ContentType.None, SafetyLevel safetyLevel = SafetyLevel.None, HiddenFromSearch hiddenFromSearch = HiddenFromSearch.None,
@@ -211,5 +194,7 @@ public interface IFlickrUpload
     /// <param name="stream">The <see cref="Stream"/> object containing the photo to be uploaded.</param>
     /// <param name="fileName">The filename of the file to replace the existing item with.</param>
     /// <param name="photoId">The ID of the photo to replace.</param>
+    /// <param name="progress"></param>
+    /// <param name="cancellationToken"></param>
     Task<string> ReplacePictureAsync(Stream stream, string fileName, string photoId, IProgress<double> progress = default, CancellationToken cancellationToken = default);
 }

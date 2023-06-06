@@ -109,7 +109,8 @@ public static class UtilityMethods
     }
 
     /// <summary>
-    /// Converts a <see cref="long"/>, representing a unix timestamp number into a <see cref="DateTime"/> object.
+    /// Converts a <see cref="long"/>, representing a unix timestamp number into a <see
+    /// cref="DateTime"/> object.
     /// </summary>
     /// <param name="timestamp">The unix timestamp.</param>
     /// <returns>The <see cref="DateTime"/> object the time represents.</returns>
@@ -123,9 +124,9 @@ public static class UtilityMethods
     /// </summary>
     /// <example>
     /// <code>
-    ///     PhotoSearchExtras extras = PhotoSearchExtras.DateTaken &amp; PhotoSearchExtras.IconServer;
-    ///     string val = Utils.ExtrasToString(extras);
-    ///     Console.WriteLine(val);
+    ///PhotoSearchExtras extras = PhotoSearchExtras.DateTaken &amp; PhotoSearchExtras.IconServer;
+    ///string val = Utils.ExtrasToString(extras);
+    ///Console.WriteLine(val);
     /// </code>
     /// outputs: "date_taken,icon_server";
     /// </example>
@@ -151,6 +152,11 @@ public static class UtilityMethods
         return string.Join(",", extraList.ToArray());
     }
 
+    /// <summary>
+    /// Colors the codes to string.
+    /// </summary>
+    /// <param name="codes">The codes.</param>
+    /// <returns>A string.</returns>
     public static string ColorCodesToString(IEnumerable<string> codes)
     {
         List<string> colorList = new();
@@ -265,7 +271,9 @@ public static class UtilityMethods
     /// Adds the partial options to the passed in <see cref="Hashtable"/>.
     /// </summary>
     /// <param name="options">The options to convert to an array.</param>
-    /// <param name="parameters">The <see cref="Hashtable"/> to add the option key value pairs to.</param>
+    /// <param name="parameters">
+    /// The <see cref="Hashtable"/> to add the option key value pairs to.
+    /// </param>
     public static void PartialOptionsIntoArray(PartialSearchOptions options, Dictionary<string, string> parameters)
     {
         ArgumentNullException.ThrowIfNull(options, nameof(options));
@@ -382,6 +390,13 @@ public static class UtilityMethods
 
     private const string PhotoUrlFormat = "https://farm{0}.staticflickr.com/{1}/{2}_{3}{4}.{5}";
 
+    /// <summary>
+    /// Urls the format.
+    /// </summary>
+    /// <param name="p">The p.</param>
+    /// <param name="size">The size.</param>
+    /// <param name="extension">The extension.</param>
+    /// <returns>A string.</returns>
     public static string UrlFormat(Photo p, string size, string extension)
     {
         if (size == "_o" || size == "original")
@@ -394,6 +409,13 @@ public static class UtilityMethods
         }
     }
 
+    /// <summary>
+    /// Urls the format.
+    /// </summary>
+    /// <param name="p">The p.</param>
+    /// <param name="size">The size.</param>
+    /// <param name="extension">The extension.</param>
+    /// <returns>A string.</returns>
     public static string UrlFormat(PhotoInfo p, string size, string extension)
     {
         if (size == "_o" || size == "original")
@@ -406,11 +428,28 @@ public static class UtilityMethods
         }
     }
 
+    /// <summary>
+    /// Urls the format.
+    /// </summary>
+    /// <param name="p">The p.</param>
+    /// <param name="size">The size.</param>
+    /// <param name="extension">The extension.</param>
+    /// <returns>A string.</returns>
     public static string UrlFormat(Photoset p, string size, string extension)
     {
         return UrlFormat(p.Farm, p.Server, p.PrimaryPhotoId, p.Secret, size, extension);
     }
 
+    /// <summary>
+    /// Urls the format.
+    /// </summary>
+    /// <param name="farm">The farm.</param>
+    /// <param name="server">The server.</param>
+    /// <param name="photoid">The photoid.</param>
+    /// <param name="secret">The secret.</param>
+    /// <param name="size">The size.</param>
+    /// <param name="extension">The extension.</param>
+    /// <returns>A string.</returns>
     public static string UrlFormat(string farm, string server, string photoid, string secret, string size, string extension)
     {
         string sizeAbbreviation = size switch
@@ -431,6 +470,11 @@ public static class UtilityMethods
         return string.Format(System.Globalization.CultureInfo.InvariantCulture, format, parameters);
     }
 
+    /// <summary>
+    /// Parses the id to member type.
+    /// </summary>
+    /// <param name="memberTypeId">The member type id.</param>
+    /// <returns>A MemberTypes.</returns>
     public static MemberTypes ParseIdToMemberType(string memberTypeId)
     {
         return memberTypeId switch
@@ -454,6 +498,11 @@ public static class UtilityMethods
         };
     }
 
+    /// <summary>
+    /// Members the type to string.
+    /// </summary>
+    /// <param name="memberTypes">The member types.</param>
+    /// <returns>A string.</returns>
     public static string MemberTypeToString(MemberTypes memberTypes)
     {
         List<string> types = new();
@@ -498,6 +547,11 @@ public static class UtilityMethods
         return BitConverter.ToString(hashedBytes).Replace("-", string.Empty).ToLower();
     }
 
+    /// <summary>
+    /// Mies the sql to date.
+    /// </summary>
+    /// <param name="p">The p.</param>
+    /// <returns>A DateTime.</returns>
     public static DateTime MySqlToDate(string p)
     {
         string format1 = "yyyy-MM-dd";
@@ -562,6 +616,11 @@ public static class UtilityMethods
         return output;
     }
 
+    /// <summary>
+    /// Dates the to my sql.
+    /// </summary>
+    /// <param name="date">The date.</param>
+    /// <returns>A string.</returns>
     public static string DateToMySql(DateTime date)
     {
         return date.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.DateTimeFormatInfo.InvariantInfo);
@@ -584,7 +643,8 @@ public static class UtilityMethods
     }
 
     /// <summary>
-    /// If an unknown element is found and the DLL is a debug DLL then a <see cref="ParsingException"/> is thrown.
+    /// If an unknown element is found and the DLL is a debug DLL then a <see
+    /// cref="ParsingException"/> is thrown.
     /// </summary>
     /// <param name="reader">The <see cref="XmlReader"/> containing the unknown xml node.</param>
     [System.Diagnostics.Conditional("DEBUG")]
@@ -605,7 +665,8 @@ public static class UtilityMethods
     }
 
     /// <summary>
-    /// Returns the buddy icon for a given set of server, farm and userid. If no server is present then returns the standard buddy icon.
+    /// Returns the buddy icon for a given set of server, farm and userid. If no server is present
+    /// then returns the standard buddy icon.
     /// </summary>
     /// <param name="server"></param>
     /// <param name="farm"></param>
@@ -627,7 +688,8 @@ public static class UtilityMethods
     /// Converts a URL parameter encoded string into a dictionary.
     /// </summary>
     /// <remarks>
-    /// e.g. ab=cd&amp;ef=gh will return a dictionary of { "ab" => "cd", "ef" => "gh" }.</remarks>
+    /// e.g. ab=cd&amp;ef=gh will return a dictionary of { "ab" =&gt; "cd", "ef" =&gt; "gh" }.
+    /// </remarks>
     /// <param name="response"></param>
     /// <returns></returns>
     public static Dictionary<string, string> StringToDictionary(string response)
@@ -653,7 +715,10 @@ public static class UtilityMethods
     /// <summary>
     /// Escapes a string for use with OAuth.
     /// </summary>
-    /// <remarks>The only valid characters are Alphanumerics and "-", "_", "." and "~". Everything else is hex encoded.</remarks>
+    /// <remarks>
+    /// The only valid characters are Alphanumerics and "-", "_", "." and "~". Everything else is
+    /// hex encoded.
+    /// </remarks>
     /// <param name="text">The text to escape.</param>
     /// <returns>The escaped string.</returns>
     public static string EscapeOAuthString(string text)
@@ -675,6 +740,11 @@ public static class UtilityMethods
         return value;
     }
 
+    /// <summary>
+    /// Cleans the collection id.
+    /// </summary>
+    /// <param name="collectionId">The collection id.</param>
+    /// <returns>A string.</returns>
     public static string CleanCollectionId(string collectionId)
     {
         return collectionId.IndexOf("-", StringComparison.Ordinal) < 0

@@ -1,5 +1,8 @@
 ﻿namespace Flickr.Net.Core;
 
+/// <summary>
+/// The flickr.
+/// </summary>
 public partial class Flickr : IFlickrPrefs
 {
     async Task<ContentType> IFlickrPrefs.GetContentTypeAsync(CancellationToken cancellationToken)
@@ -67,6 +70,9 @@ public partial class Flickr : IFlickrPrefs
     }
 }
 
+/// <summary>
+/// The flickr prefs.
+/// </summary>
 public interface IFlickrPrefs
 {
     /// <summary>

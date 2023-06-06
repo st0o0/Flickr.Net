@@ -13,6 +13,10 @@ public class Cache
 
     private readonly FlickrCachingSettings _settings;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Cache"/> class.
+    /// </summary>
+    /// <param name="settings">The settings.</param>
     public Cache(FlickrCachingSettings settings)
     {
         _settings = settings;
@@ -45,7 +49,7 @@ public class Cache
     [DisallowNull]
     public string CacheLocation => _settings.CacheLocation;
 
-    internal long CacheSizeLimit => _settings.CacheSizeLimit; 
+    internal long CacheSizeLimit => _settings.CacheSizeLimit;
 
     /// <summary>
     /// The default timeout for cachable objects within the cache.

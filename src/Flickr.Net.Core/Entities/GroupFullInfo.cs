@@ -12,15 +12,27 @@ namespace Flickr.Net.Core.Entities;
 public sealed class GroupFullInfo : IFlickrParsable
 {
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets the group id.
+    /// </summary>
     public string GroupId { get; set; }
 
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets the group name.
+    /// </summary>
     public string GroupName { get; set; }
 
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets the description.
+    /// </summary>
     public string Description { get; set; }
 
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets the members.
+    /// </summary>
     public int Members { get; set; }
 
     /// <summary>
@@ -100,9 +112,15 @@ public sealed class GroupFullInfo : IFlickrParsable
     }
 
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets the privacy.
+    /// </summary>
     public PoolPrivacy Privacy { get; set; }
 
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets the throttle info.
+    /// </summary>
     public GroupThrottleInfo ThrottleInfo { get; set; }
 
     /// <summary>

@@ -1,5 +1,8 @@
 ﻿namespace Flickr.Net.Core;
 
+/// <summary>
+/// The flickr.
+/// </summary>
 public partial class Flickr : IFlickrGroupsDiscuss
 {
     async Task IFlickrGroupsDiscuss.RepliesAddAsync(string topicId, string message, CancellationToken cancellationToken)
@@ -102,7 +105,7 @@ public partial class Flickr : IFlickrGroupsDiscuss
         return await GetResponseAsync<TopicReply>(parameters, cancellationToken);
     }
 
-    async Task<TopicReplyCollection> IFlickrGroupsDiscuss.RepliesGetListAsync(string topicId, int perPage, int page , CancellationToken cancellationToken)
+    async Task<TopicReplyCollection> IFlickrGroupsDiscuss.RepliesGetListAsync(string topicId, int perPage, int page, CancellationToken cancellationToken)
     {
         if (string.IsNullOrEmpty(topicId))
         {
@@ -201,6 +204,9 @@ public partial class Flickr : IFlickrGroupsDiscuss
     }
 }
 
+/// <summary>
+/// The flickr groups discuss.
+/// </summary>
 public interface IFlickrGroupsDiscuss
 {
     /// <summary>
@@ -208,6 +214,8 @@ public interface IFlickrGroupsDiscuss
     /// </summary>
     /// <param name="topicId">The id of the topic to add the reply to.</param>
     /// <param name="message">The message content to add.</param>
+    /// <param name="cancellationToken"></param>
+    /// <return></return>
     Task RepliesAddAsync(string topicId, string message, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -215,6 +223,8 @@ public interface IFlickrGroupsDiscuss
     /// </summary>
     /// <param name="topicId">The id of the topic to delete the reply from.</param>
     /// <param name="replyId">The id of the reply to delete.</param>
+    /// <param name="cancellationToken"></param>
+    /// <return></return>
     Task RepliesDeleteAsync(string topicId, string replyId, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -223,6 +233,8 @@ public interface IFlickrGroupsDiscuss
     /// <param name="topicId">The id of the topic whose reply you want to edit.</param>
     /// <param name="replyId">The id of the reply to edit.</param>
     /// <param name="message">The new message content to replace the reply with.</param>
+    /// <param name="cancellationToken"></param>
+    /// <return></return>
     Task RepliesEditAsync(string topicId, string replyId, string message, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -230,6 +242,8 @@ public interface IFlickrGroupsDiscuss
     /// </summary>
     /// <param name="topicId">The id of the topic for whose reply you want the details of.</param>
     /// <param name="replyId">The id of the reply you want the details of.</param>
+    /// <param name="cancellationToken"></param>
+    /// <return></return>
     Task<TopicReply> RepliesGetInfoAsync(string topicId, string replyId, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -238,6 +252,8 @@ public interface IFlickrGroupsDiscuss
     /// <param name="topicId">The id of the topic to get the replies for.</param>
     /// <param name="page">The page of replies you wish to get.</param>
     /// <param name="perPage">The number of replies per page you wish to get.</param>
+    /// <param name="cancellationToken"></param>
+    /// <return></return>
     Task<TopicReplyCollection> RepliesGetListAsync(string topicId, int perPage, int page = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -246,6 +262,8 @@ public interface IFlickrGroupsDiscuss
     /// <param name="groupId">The id of the group to add a new topic too.</param>
     /// <param name="subject">The subject line of the new topic.</param>
     /// <param name="message">The message content of the new topic.</param>
+    /// <param name="cancellationToken"></param>
+    /// <return></return>
     Task TopicsAddAsync(string groupId, string subject, string message, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -254,11 +272,15 @@ public interface IFlickrGroupsDiscuss
     /// <param name="groupId">The id of the group.</param>
     /// <param name="page">The page of topics you wish to return.</param>
     /// <param name="perPage">The number of topics per page to return.</param>
+    /// <param name="cancellationToken"></param>
+    /// <return></return>
     Task<TopicCollection> TopicsGetListAsync(string groupId, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets information on a particular topic with a group.
     /// </summary>
     /// <param name="topicId">The id of the topic you with information on.</param>
+    /// <param name="cancellationToken"></param>
+    /// <return></return>
     Task<Topic> TopicsGetInfoAsync(string topicId, CancellationToken cancellationToken = default);
 }

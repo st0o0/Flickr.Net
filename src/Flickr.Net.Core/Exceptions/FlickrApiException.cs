@@ -7,7 +7,8 @@ namespace Flickr.Net.Core.Exceptions;
 public class FlickrApiException : FlickrException
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="FlickrApiException"/> class with a specific code and message.
+    /// Initializes a new instance of the <see cref="FlickrApiException"/> class with a specific
+    /// code and message.
     /// </summary>
     /// <remarks>
     /// The code and message returned from Flickr are used to generate the exceptions message.
@@ -29,7 +30,8 @@ public class FlickrApiException : FlickrException
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="FlickrApiException"/> class with a specified error message.
+    /// Initializes a new instance of the <see cref="FlickrApiException"/> class with a specified
+    /// error message.
     /// </summary>
     /// <param name="message"></param>
     public FlickrApiException(string message)
@@ -38,7 +40,8 @@ public class FlickrApiException : FlickrException
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="FlickrApiException"/> class with a specified error message and a reference to the inner exception that is the cause of this exception.
+    /// Initializes a new instance of the <see cref="FlickrApiException"/> class with a specified
+    /// error message and a reference to the inner exception that is the cause of this exception.
     /// </summary>
     /// <param name="message"></param>
     /// <param name="innerException"></param>

@@ -1,5 +1,8 @@
 ﻿namespace Flickr.Net.Core;
 
+/// <summary>
+/// The flickr.
+/// </summary>
 public partial class Flickr : IFlickrCameras
 {
     async Task<BrandCollection> IFlickrCameras.GetBrandsAsync(CancellationToken cancellationToken)
@@ -24,6 +27,9 @@ public partial class Flickr : IFlickrCameras
     }
 }
 
+/// <summary>
+/// The flickr cameras.
+/// </summary>
 public interface IFlickrCameras
 {
     /// <summary>
@@ -36,6 +42,7 @@ public interface IFlickrCameras
     /// Get a list of camera models for a particular brand id.
     /// </summary>
     /// <param name="brandId">The ID of the brand you want the models of.</param>
+    /// <param name="cancellationToken"></param>
     /// <returns></returns>
     Task<CameraCollection> GetBrandModelsAsync(string brandId, CancellationToken cancellationToken = default);
 }

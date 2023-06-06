@@ -1,5 +1,8 @@
 ﻿namespace Flickr.Net.Core;
 
+/// <summary>
+/// The flickr.
+/// </summary>
 public partial class Flickr : IFlickrGalleries
 {
     async Task IFlickrGalleries.GalleriesAddPhotoAsync(string galleryId, string photoId, string comment, CancellationToken cancellationToken)
@@ -176,6 +179,9 @@ public partial class Flickr : IFlickrGalleries
     }
 }
 
+/// <summary>
+/// The flickr galleries.
+/// </summary>
 public interface IFlickrGalleries
 {
     /// <summary>
@@ -189,6 +195,8 @@ public interface IFlickrGalleries
     /// </param>
     /// <param name="photoId">The photo ID to add to the gallery</param>
     /// <param name="comment">A short comment or story to accompany the photo.</param>
+    /// <param name="cancellationToken"></param>
+    /// <return></return>
     Task GalleriesAddPhotoAsync(string galleryId, string photoId, string comment = null, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -197,6 +205,7 @@ public interface IFlickrGalleries
     /// <param name="title">The name of the gallery.</param>
     /// <param name="description">A short description for the gallery.</param>
     /// <param name="primaryPhotoId">The first photo to add to your gallery.</param>
+    /// <param name="cancellationToken"></param>
     Task GalleriesCreateAsync(string title, string description, string primaryPhotoId = null, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -205,6 +214,7 @@ public interface IFlickrGalleries
     /// <param name="galleryId">The gallery ID to update.</param>
     /// <param name="title">The new title for the gallery.</param>
     /// <param name="description">The new description for the gallery.</param>
+    /// <param name="cancellationToken"></param>
     Task GalleriesEditMetaAsync(string galleryId, string title, string description = null, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -218,6 +228,8 @@ public interface IFlickrGalleries
     /// </param>
     /// <param name="photoId">The photo ID to add to the gallery.</param>
     /// <param name="comment">The updated comment the photo.</param>
+    /// <param name="cancellationToken"></param>
+    /// <return></return>
     Task GalleriesEditPhotoAsync(string galleryId, string photoId, string comment, CancellationToken cancellationToken = default);
 
     /// <summary> Modify the photos in a gallery. Use this method to add, remove and re-order
@@ -226,13 +238,16 @@ public interface IFlickrGalleries
     /// use as the 'primary' photo for the gallery. This id must also be passed along in photo_ids
     /// list argument. </param> <param name="photoIds"> An enumeration of photo ids to include in
     /// the gallery. They will appear in the set in the order sent. This list must contain the
-    /// primary photo id. This list of photos replaces the existing list. </param>
+    /// primary photo id. This list of photos replaces the existing list. </param> <param
+    /// name="cancellationToken"></param> <return></return>
     Task GalleriesEditPhotosAsync(string galleryId, string primaryPhotoId, IEnumerable<string> photoIds, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get the information about a gallery.
     /// </summary>
     /// <param name="galleryId">The gallery ID you are requesting information for.</param>
+    /// <param name="cancellationToken"></param>
+    /// <return></return>
     Task<Gallery> GalleriesGetInfoAsync(string galleryId, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -241,6 +256,8 @@ public interface IFlickrGalleries
     /// <param name="userId">The user to return the galleries for.</param>
     /// <param name="page"></param>
     /// <param name="perPage"></param>
+    /// <param name="cancellationToken"></param>
+    /// <return></return>
     Task<GalleryCollection> GalleriesGetListAsync(string userId, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -255,6 +272,8 @@ public interface IFlickrGalleries
     /// Number of galleries to return per page. If this argument is omitted, it defaults to 100. The
     /// maximum allowed value is 500.
     /// </param>
+    /// <param name="cancellationToken"></param>
+    /// <return></return>
     Task<GalleryCollection> GalleriesGetListForPhotoAsync(string photoId, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -262,6 +281,8 @@ public interface IFlickrGalleries
     /// </summary>
     /// <param name="galleryId">The ID of the gallery of photos to return.</param>
     /// <param name="extras">A list of extra information to fetch for each returned record.</param>
+    /// <param name="cancellationToken"></param>
+    /// <return></return>
     Task<GalleryPhotoCollection> GalleriesGetPhotosAsync(string galleryId, PhotoSearchExtras extras = PhotoSearchExtras.None, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -270,5 +291,7 @@ public interface IFlickrGalleries
     /// <param name="galleryId"></param>
     /// <param name="photoId"></param>
     /// <param name="fullResponse"></param>
+    /// <param name="cancellationToken"></param>
+    /// <return></return>
     Task GalleriesRemovePhoto(string galleryId, string photoId, string fullResponse = null, CancellationToken cancellationToken = default);
 }

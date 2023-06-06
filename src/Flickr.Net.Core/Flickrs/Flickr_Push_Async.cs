@@ -1,5 +1,8 @@
 ﻿namespace Flickr.Net.Core;
 
+/// <summary>
+/// The flickr.
+/// </summary>
 public partial class Flickr : IFlickrPush
 {
     async Task<SubscriptionCollection> IFlickrPush.PushGetSubscriptionsAsync(CancellationToken cancellationToken)
@@ -152,6 +155,9 @@ public partial class Flickr : IFlickrPush
     }
 }
 
+/// <summary>
+/// The flickr push.
+/// </summary>
 public interface IFlickrPush
 {
     /// <summary>
@@ -191,6 +197,7 @@ public interface IFlickrPush
     /// A list of strings to be used for tag subscriptions. Photos with one or more of the tags
     /// listed will be included in the subscription. Only valid if the topic is 'tags'
     /// </param>
+    /// <param name="cancellationToken"></param>
     Task PushSubscribeAsync(string topic, string callback, string verify, string verifyToken = null,
                                    int? leaseSeconds = null, IEnumerable<int> woeIds = null, IEnumerable<string> placeIds = null, double? latitude = null,
                                    double? longitude = null, int? radius = null, RadiusUnit radiusUnits = RadiusUnit.None, GeoAccuracy accuracy = GeoAccuracy.None,
@@ -205,5 +212,6 @@ public interface IFlickrPush
     /// <param name="verifyToken">
     /// The verification token to include in the unsubscribe verification process.
     /// </param>
+    /// <param name="cancellationToken"></param>
     Task PushUnsubscribeAsync(string topic, string callback, string verify, string verifyToken = null, CancellationToken cancellationToken = default);
 }

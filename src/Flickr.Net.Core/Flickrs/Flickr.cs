@@ -99,7 +99,7 @@ public partial class Flickr
     /// property for all contact functions
     /// </summary>
     public IFlickrContacts Contacts => this;
-    
+
     /// <summary>
     /// property for all favorites functions
     /// </summary>
@@ -200,8 +200,14 @@ public partial class Flickr
     /// </summary>
     public IFlickrUrls Urls => this;
 
+    /// <summary>
+    /// Gets the flickr caching settings.
+    /// </summary>
     public FlickrCachingSettings FlickrCachingSettings => _cachingSettings;
 
+    /// <summary>
+    /// Gets the flickr settings.
+    /// </summary>
     public FlickrSettings FlickrSettings => _settings;
 
     /// <summary>

@@ -1,5 +1,8 @@
 ﻿namespace Flickr.Net.Core;
 
+/// <summary>
+/// The flickr.
+/// </summary>
 public partial class Flickr : IFlickrCommons
 {
     async Task<InstitutionCollection> IFlickrCommons.GetInstitutionsAsync(CancellationToken cancellationToken)
@@ -13,6 +16,9 @@ public partial class Flickr : IFlickrCommons
     }
 }
 
+/// <summary>
+/// The flickr commons.
+/// </summary>
 public interface IFlickrCommons
 {
     /// <summary>

@@ -1,11 +1,10 @@
 ﻿namespace Flickr.Net.Core.Entities;
 
 /// <summary>
-/// The number of views of each type that a users account has had for a given date (or overall if no date specified).
+/// The number of views of each type that a users account has had for a given date (or overall if no
+/// date specified).
 /// </summary>
-/// <remarks>
-/// Used by <see cref="Flickr.StatsGetTotalViews(DateTime)"/>.
-/// </remarks>
+/// <remarks>Used by <see cref="Flickr.StatsGetTotalViews(DateTime)"/>.</remarks>
 public sealed class StatViews : IFlickrParsable
 {
     /// <summary>

@@ -1,5 +1,8 @@
 ﻿namespace Flickr.Net.Core;
 
+/// <summary>
+/// The flickr.
+/// </summary>
 public partial class Flickr : IFlickrPanda
 {
     async Task<string[]> IFlickrPanda.GetListAsync(CancellationToken cancellationToken)
@@ -41,6 +44,9 @@ public partial class Flickr : IFlickrPanda
     }
 }
 
+/// <summary>
+/// The flickr panda.
+/// </summary>
 public interface IFlickrPanda
 {
     /// <summary>
@@ -55,6 +61,7 @@ public interface IFlickrPanda
     /// <param name="pandaName">The name of the panda to return photos for.</param>
     /// <param name="extras">The extras to return with the photos.</param>
     /// <param name="perPage">The number of photos to return per page.</param>
+    /// <param name="cancellationToken"></param>
     /// <param name="page">The age to return.</param>
     Task<PandaPhotoCollection> GetPhotosAsync(string pandaName, PhotoSearchExtras extras = PhotoSearchExtras.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 }

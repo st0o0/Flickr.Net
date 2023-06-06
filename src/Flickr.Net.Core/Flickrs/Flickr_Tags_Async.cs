@@ -2,6 +2,9 @@
 
 namespace Flickr.Net.Core;
 
+/// <summary>
+/// The flickr.
+/// </summary>
 public partial class Flickr : IFlickrTags
 {
     async Task<PhotoCollection> IFlickrTags.GetClusterPhotosAsync(Cluster cluster, PhotoSearchExtras extras, CancellationToken cancellationToken)
@@ -145,6 +148,9 @@ public partial class Flickr : IFlickrTags
     }
 }
 
+/// <summary>
+/// The flickr tags.
+/// </summary>
 public interface IFlickrTags
 {
     /// <summary>
@@ -152,44 +158,63 @@ public interface IFlickrTags
     /// </summary>
     /// <param name="cluster">The <see cref="Cluster"/> instance to return the photos for.</param>
     /// <param name="extras">Extra information to return with each photo.</param>
+    /// <param name="cancellationToken"></param>
     Task<PhotoCollection> GetClusterPhotosAsync(Cluster cluster, PhotoSearchExtras extras, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gives you a list of tag clusters for the given tag.
     /// </summary>
     /// <param name="tag">The tag to fetch clusters for.</param>
+    /// <param name="cancellationToken"></param>
     Task<ClusterCollection> GetClustersAsync(string tag, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Returns a list of hot tags for the given period.
     /// </summary>
-    /// <param name="period">The period for which to fetch hot tags. Valid values are day and week (defaults to day).</param>
-    /// <param name="count">The number of tags to return. Defaults to 20. Maximum allowed value is 200.</param>
+    /// <param name="period">
+    /// The period for which to fetch hot tags. Valid values are day and week (defaults to day).
+    /// </param>
+    /// <param name="count">
+    /// The number of tags to return. Defaults to 20. Maximum allowed value is 200.
+    /// </param>
+    /// <param name="cancellationToken"></param>
     Task<HotTagCollection> GetHotListAsync(string period = null, int? count = null, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get the tag list for a given photo.
     /// </summary>
     /// <param name="photoId">The id of the photo to return tags for.</param>
+    /// <param name="cancellationToken"></param>
     Task<Collection<PhotoInfoTag>> GetListPhotoAsync(string photoId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get the tag list for a given user (or the currently logged in user).
     /// </summary>
-    /// <param name="userId">The NSID of the user to fetch the tag list for. If this argument is not specified, the currently logged in user (if any) is assumed.</param>
+    /// <param name="userId">
+    /// The NSID of the user to fetch the tag list for. If this argument is not specified, the
+    /// currently logged in user (if any) is assumed.
+    /// </param>
+    /// <param name="cancellationToken"></param>
     Task<TagCollection> GetListUserAsync(string userId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get the popular tags for a given user (or the currently logged in user).
     /// </summary>
-    /// <param name="userId">The NSID of the user to fetch the tag list for. If this argument is not specified, the currently logged in user (if any) is assumed.</param>
-    /// <param name="count">Number of popular tags to return. defaults to 10 when this argument is not present.</param>
+    /// <param name="userId">
+    /// The NSID of the user to fetch the tag list for. If this argument is not specified, the
+    /// currently logged in user (if any) is assumed.
+    /// </param>
+    /// <param name="count">
+    /// Number of popular tags to return. defaults to 10 when this argument is not present.
+    /// </param>
+    /// <param name="cancellationToken"></param>
     Task<TagCollection> GetListUserPopularAsync(string userId = null, int? count = null, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets a list of 'cleaned' tags and the raw values for a specific tag.
     /// </summary>
     /// <param name="tag">The tag to return the raw version of.</param>
+    /// <param name="cancellationToken"></param>
     Task<RawTagCollection> GetListUserRawAsync(string tag = null, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -202,5 +227,6 @@ public interface IFlickrTags
     /// Returns a list of tags 'related' to the given tag, based on clustered usage analysis.
     /// </summary>
     /// <param name="tag">The tag to fetch related tags for.</param>
+    /// <param name="cancellationToken"></param>
     Task<TagCollection> GetRelatedAsync(string tag, CancellationToken cancellationToken = default);
 }

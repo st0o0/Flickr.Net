@@ -1,25 +1,35 @@
 ﻿namespace Flickr.Net.Core.Entities;
 
 /// <summary>
-/// The <see cref="PhotoPerson"/> class contains details returned by the <see cref="Flickr.PhotosPeopleGetList"/>
-/// method.
+/// The <see cref="PhotoPerson"/> class contains details returned by the <see
+/// cref="Flickr.PhotosPeopleGetList"/> method.
 /// </summary>
 public sealed class PhotoPerson : IFlickrParsable
 {
-    /// <summary>The user id of the user.</summary>
+    /// <summary>
+    /// The user id of the user.
+    /// </summary>
     /// <remarks/>
     public string UserId { get; set; }
 
-    /// <summary>The server that will serve up the users Buddy Icon.</summary>
+    /// <summary>
+    /// The server that will serve up the users Buddy Icon.
+    /// </summary>
     public string IconServer { get; set; }
 
-    /// <summary>The server farm that will serve up the users Buddy Icon.</summary>
+    /// <summary>
+    /// The server farm that will serve up the users Buddy Icon.
+    /// </summary>
     public string IconFarm { get; set; }
 
-    /// <summary>The users username, also known as their screenname.</summary>
+    /// <summary>
+    /// The users username, also known as their screenname.
+    /// </summary>
     public string UserName { get; set; }
 
-    /// <summary>The users real name, as entered in their profile.</summary>
+    /// <summary>
+    /// The users real name, as entered in their profile.
+    /// </summary>
     public string RealName { get; set; }
 
     /// <summary>

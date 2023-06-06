@@ -1,5 +1,8 @@
 ﻿namespace Flickr.Net.Core;
 
+/// <summary>
+/// The flickr.
+/// </summary>
 public partial class Flickr : IFlickrPhotosPeople
 {
     async Task IFlickrPhotosPeople.AddAsync(string photoId, string userId, int? personX, int? personY, int? personWidth, int? personHeight, CancellationToken cancellationToken)
@@ -94,6 +97,9 @@ public partial class Flickr : IFlickrPhotosPeople
     }
 }
 
+/// <summary>
+/// The flickr photos people.
+/// </summary>
 public interface IFlickrPhotosPeople
 {
     /// <summary>
@@ -106,6 +112,8 @@ public interface IFlickrPhotosPeople
     /// <param name="personY">The top-most pixel co-ordinate of the box around the person.</param>
     /// <param name="personWidth">The width (in pixels) of the box around the person.</param>
     /// <param name="personHeight">The height (in pixels) of the box around the person.</param>
+    /// <param name="cancellationToken"></param>
+    /// <return></return>
     Task AddAsync(string photoId, string userId, int? personX = null, int? personY = null, int? personWidth = null, int? personHeight = null, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -113,6 +121,8 @@ public interface IFlickrPhotosPeople
     /// </summary>
     /// <param name="photoId">The id of the photo to remove a person from.</param>
     /// <param name="userId">The NSID of the person to remove from the photo.</param>
+    /// <param name="cancellationToken"></param>
+    /// <return></return>
     Task DeleteAsync(string photoId, string userId, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -120,6 +130,8 @@ public interface IFlickrPhotosPeople
     /// </summary>
     /// <param name="photoId">The id of the photo to edit a person in.</param>
     /// <param name="userId">The NSID of the person whose bounding box you want to remove.</param>
+    /// <param name="cancellationToken"></param>
+    /// <return></return>
     Task DeleteCoordsAsync(string photoId, string userId, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -131,11 +143,15 @@ public interface IFlickrPhotosPeople
     /// <param name="personY">The top-most pixel co-ordinate of the box around the person.</param>
     /// <param name="personWidth">The width (in pixels) of the box around the person.</param>
     /// <param name="personHeight">The height (in pixels) of the box around the person.</param>
+    /// <param name="cancellationToken"></param>
+    /// <return></return>
     Task EditCoordsAsync(string photoId, string userId, int personX, int personY, int personWidth, int personHeight, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get a list of people in a given photo.
     /// </summary>
     /// <param name="photoId">The id of the photo to get a list of people for.</param>
+    /// <param name="cancellationToken"></param>
+    /// <return></return>
     Task<PhotoPersonCollection> GetListAsync(string photoId, CancellationToken cancellationToken = default);
 }

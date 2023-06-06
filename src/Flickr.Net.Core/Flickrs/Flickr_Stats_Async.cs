@@ -1,5 +1,8 @@
 ﻿namespace Flickr.Net.Core;
 
+/// <summary>
+/// The flickr.
+/// </summary>
 public partial class Flickr : IFlickrStats
 {
     async Task<StatDomainCollection> IFlickrStats.StatsGetCollectionDomainsAsync(DateTime date, string collectionId, int page, int perPage, CancellationToken cancellationToken)
@@ -328,6 +331,9 @@ public partial class Flickr : IFlickrStats
     }
 }
 
+/// <summary>
+/// The flickr stats.
+/// </summary>
 public interface IFlickrStats
 {
     /// <summary>
@@ -348,6 +354,7 @@ public interface IFlickrStats
     /// Number of domains to return per page. If this argument is omitted, it defaults to 25. The
     /// maximum allowed value is 100.
     /// </param>
+    /// <param name="cancellationToken"></param>
     Task<StatDomainCollection> StatsGetCollectionDomainsAsync(DateTime date, string collectionId = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -365,6 +372,7 @@ public interface IFlickrStats
     /// <param name="perPage">
     /// The number of referrers to return per page. The default is 25 and the maximum is 100.
     /// </param>
+    /// <param name="cancellationToken"></param>
     Task<StatReferrerCollection> StatsGetCollectionReferrersAsync(DateTime date, string domain, string collectionId = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -373,6 +381,7 @@ public interface IFlickrStats
     /// </summary>
     /// <param name="date">The date to return stats for.</param>
     /// <param name="collectionId">The collection to return stats for.</param>
+    /// <param name="cancellationToken"></param>
     Task<Stats> StatsGetCollectionStatsAsync(DateTime date, string collectionId, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -398,6 +407,7 @@ public interface IFlickrStats
     /// Number of domains to return per page. If this argument is omitted, it defaults to 25. The
     /// maximum allowed value is 100.
     /// </param>
+    /// <param name="cancellationToken"></param>
     Task<StatDomainCollection> StatsGetPhotoDomainsAsync(DateTime date, string photoId = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -415,6 +425,7 @@ public interface IFlickrStats
     /// <param name="perPage">
     /// The number of referrers to return per page. The default is 25 and the maximum is 100.
     /// </param>
+    /// <param name="cancellationToken"></param>
     Task<StatReferrerCollection> StatsGetPhotoReferrersAsync(DateTime date, string domain, string photoId = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -434,6 +445,7 @@ public interface IFlickrStats
     /// Number of domains to return per page. If this argument is omitted, it defaults to 25. The
     /// maximum allowed value is 100.
     /// </param>
+    /// <param name="cancellationToken"></param>
     Task<StatDomainCollection> StatsGetPhotosetDomainsAsync(DateTime date, string photosetId = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -451,6 +463,7 @@ public interface IFlickrStats
     /// <param name="perPage">
     /// The number of referrers to return per page. The default is 25 and the maximum is 100.
     /// </param>
+    /// <param name="cancellationToken"></param>
     Task<StatReferrerCollection> StatsGetPhotosetReferrersAsync(DateTime date, string domain, string photosetId = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -459,6 +472,7 @@ public interface IFlickrStats
     /// </summary>
     /// <param name="date">The date to return stats for.</param>
     /// <param name="photosetId">The photoset to return stats for.</param>
+    /// <param name="cancellationToken"></param>
     Task<Stats> StatsGetPhotosetStatsAsync(DateTime date, string photosetId, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -466,6 +480,7 @@ public interface IFlickrStats
     /// </summary>
     /// <param name="date">The date to return stats for.</param>
     /// <param name="photoId">The photo to return stats for.</param>
+    /// <param name="cancellationToken"></param>
     Task<Stats> StatsGetPhotoStatsAsync(DateTime date, string photoId, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -482,6 +497,7 @@ public interface IFlickrStats
     /// Number of domains to return per page. If this argument is omitted, it defaults to 25. The
     /// maximum allowed value is 100.
     /// </param>
+    /// <param name="cancellationToken"></param>
     Task<StatDomainCollection> StatsGetPhotostreamDomainsAsync(DateTime date, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -496,6 +512,7 @@ public interface IFlickrStats
     /// <param name="perPage">
     /// The number of referrers to return per page. The default is 25 and the maximum is 100.
     /// </param>
+    /// <param name="cancellationToken"></param>
     Task<StatReferrerCollection> StatsGetPhotostreamReferrersAsync(DateTime date, string domain, int page, int perPage, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -503,6 +520,7 @@ public interface IFlickrStats
     /// cref="Stats.Views"/> will be populated.
     /// </summary>
     /// <param name="date">The date to return stats for.</param>
+    /// <param name="cancellationToken"></param>
     Task<Stats> StatsGetPhotostreamStatsAsync(DateTime date, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -524,11 +542,13 @@ public interface IFlickrStats
     /// Number of photos to return per page. If this argument is omitted, it defaults to 25. The
     /// maximum allowed value is 100.
     /// </param>
+    /// <param name="cancellationToken"></param>
     Task<PopularPhotoCollection> StatsGetPopularPhotosAsync(DateTime date, PopularitySort sort, int page, int perPage, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get the overall view counts for an account on a given date.
     /// </summary>
     /// <param name="date">The date to return the overall view count for.</param>
+    /// <param name="cancellationToken"></param>
     Task<StatViews> StatsGetTotalViewsAsync(DateTime date, CancellationToken cancellationToken = default);
 }

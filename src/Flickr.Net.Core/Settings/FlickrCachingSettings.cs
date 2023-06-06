@@ -1,6 +1,9 @@
 using FlickrNet.Core.Configuration;
 
 namespace FlickrNet.Core.Settings;
+/// <summary>
+/// The flickr caching settings.
+/// </summary>
 
 public class FlickrCachingSettings
 {
@@ -12,8 +15,8 @@ public class FlickrCachingSettings
     }
 
     /// <summary>
-    /// Gets or sets whether the cache should be disabled. Use only in extreme cases where you are sure you
-    /// don't want any caching.
+    /// Gets or sets whether the cache should be disabled. Use only in extreme cases where you are
+    /// sure you don't want any caching.
     /// </summary>
     public bool CacheDisabled => _config.CacheDisabled;
 
@@ -34,8 +37,8 @@ public class FlickrCachingSettings
     public string CacheLocation => _config.CacheLocation;
 
     /// <summary>
-    /// <see cref="CacheSizeLimit"/> is the cache file size in bytes for downloaded
-    /// pictures. The default is 50MB (or 50 * 1024 * 1025 in bytes).
+    /// <see cref="CacheSizeLimit"/> is the cache file size in bytes for downloaded pictures. The
+    /// default is 50MB (or 50 * 1024 * 1025 in bytes).
     /// </summary>
     public long CacheSizeLimit { get; set; } = 52428800;
 }
