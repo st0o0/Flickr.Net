@@ -1,8 +1,8 @@
 ﻿namespace Flickr.Net.Core.Entities;
 
 /// <summary>
-/// Detailed information returned by <see cref="Flickr.PhotosGetInfo(string)"/> or <see
-/// cref="Flickr.PhotosGetInfo(string, string)"/> methods.
+/// Detailed information returned by <see cref="Flickr.PhotosGetInfo(string)"/> or 
+/// <see cref="Flickr.PhotosGetInfo(string, string)"/> methods.
 /// </summary>
 public sealed class PhotoInfo : IFlickrParsable
 {
@@ -314,8 +314,8 @@ public sealed class PhotoInfo : IFlickrParsable
     /// The URL for the small 320 version of this photo.
     /// </summary>
     /// <remarks>
-    /// There is no guarentee that this size of the image actually exists. Use <see
-    /// cref="Flickr.PhotosGetSizes"/> to get a list of existing photo URLs.
+    /// There is no guarentee that this size of the image actually exists. Use 
+    /// <see cref="Flickr.PhotosGetSizes"/> to get a list of existing photo URLs.
     /// </remarks>
     public string Small320Url
     {
@@ -326,8 +326,8 @@ public sealed class PhotoInfo : IFlickrParsable
     /// The URL for the medium version of this photo.
     /// </summary>
     /// <remarks>
-    /// There is no guarentee that this size of the image actually exists. Use <see
-    /// cref="Flickr.PhotosGetSizes"/> to get a list of existing photo URLs.
+    /// There is no guarentee that this size of the image actually exists. Use 
+    /// <see cref="Flickr.PhotosGetSizes"/> to get a list of existing photo URLs.
     /// </remarks>
     public string MediumUrl
     {
@@ -338,8 +338,8 @@ public sealed class PhotoInfo : IFlickrParsable
     /// The URL for the medium 640 version of this photo.
     /// </summary>
     /// <remarks>
-    /// There is no guarentee that this size of the image actually exists. Use <see
-    /// cref="Flickr.PhotosGetSizes"/> to get a list of existing photo URLs.
+    /// There is no guarentee that this size of the image actually exists. Use 
+    /// <see cref="Flickr.PhotosGetSizes"/> to get a list of existing photo URLs.
     /// </remarks>
     public string Medium640Url
     {
@@ -350,8 +350,8 @@ public sealed class PhotoInfo : IFlickrParsable
     /// The URL for the medium 800 version of this photo.
     /// </summary>
     /// <remarks>
-    /// There is no guarentee that this size of the image actually exists. Use <see
-    /// cref="Flickr.PhotosGetSizes"/> to get a list of existing photo URLs.
+    /// There is no guarentee that this size of the image actually exists. Use 
+    /// <see cref="Flickr.PhotosGetSizes"/> to get a list of existing photo URLs.
     /// </remarks>
     public string Medium800Url
     {
@@ -362,8 +362,8 @@ public sealed class PhotoInfo : IFlickrParsable
     /// The URL for the large version of this photo.
     /// </summary>
     /// <remarks>
-    /// There is no guarentee that this size of the image actually exists. Use <see
-    /// cref="Flickr.PhotosGetSizes"/> to get a list of existing photo URLs.
+    /// There is no guarentee that this size of the image actually exists. Use 
+    /// <see cref="Flickr.PhotosGetSizes"/> to get a list of existing photo URLs.
     /// </remarks>
     public string LargeUrl
     {
@@ -374,8 +374,8 @@ public sealed class PhotoInfo : IFlickrParsable
     /// The URL for the large square version of this photo.
     /// </summary>
     /// <remarks>
-    /// There is no guarentee that this size of the image actually exists. Use <see
-    /// cref="Flickr.PhotosGetSizes"/> to get a list of existing photo URLs.
+    /// There is no guarentee that this size of the image actually exists. Use 
+    /// <see cref="Flickr.PhotosGetSizes"/> to get a list of existing photo URLs.
     /// </remarks>
     public string LargeSquareUrl
     {
@@ -879,8 +879,8 @@ public sealed class PhotoInfoNote : IFlickrParsable
 #else
 
     /// <summary>
-    /// The <see cref="System.Drawing.Size"/> of this note. Derived from <see cref="Width"/> and
-    /// <see cref="Height"/>.
+    /// The <see cref="System.Drawing.Size"/> of this note. Derived from 
+    /// <see cref="Width"/> and <see cref="Height"/>.
     /// </summary>
     public System.Drawing.Size Size
     {
@@ -891,8 +891,8 @@ public sealed class PhotoInfoNote : IFlickrParsable
     }
 
     /// <summary>
-    /// The location of this note on the medium sized thumbnail of this photo. Derived from <see
-    /// cref="XPosition"/> and <see cref="YPosition"/>.
+    /// The location of this note on the medium sized thumbnail of this photo. Derived from 
+    /// <see cref="XPosition"/> and <see cref="YPosition"/>.
     /// </summary>
     public System.Drawing.Point Location
     {

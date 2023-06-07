@@ -109,8 +109,8 @@ public static class UtilityMethods
     }
 
     /// <summary>
-    /// Converts a <see cref="long"/>, representing a unix timestamp number into a <see
-    /// cref="DateTime"/> object.
+    /// Converts a <see cref="long"/>, representing a unix timestamp number into a 
+    /// <see cref="DateTime"/> object.
     /// </summary>
     /// <param name="timestamp">The unix timestamp.</param>
     /// <returns>The <see cref="DateTime"/> object the time represents.</returns>
@@ -643,8 +643,8 @@ public static class UtilityMethods
     }
 
     /// <summary>
-    /// If an unknown element is found and the DLL is a debug DLL then a <see
-    /// cref="ParsingException"/> is thrown.
+    /// If an unknown element is found and the DLL is a debug DLL then a 
+    /// <see cref="ParsingException"/> is thrown.
     /// </summary>
     /// <param name="reader">The <see cref="XmlReader"/> containing the unknown xml node.</param>
     [System.Diagnostics.Conditional("DEBUG")]

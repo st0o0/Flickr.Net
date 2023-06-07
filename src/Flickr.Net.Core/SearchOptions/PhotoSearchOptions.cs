@@ -387,8 +387,8 @@ public class PhotoSearchOptions
     }
 
     /// <summary>
-    /// Takes the various properties of this instance and adds them to a <see
-    /// cref="Dictionary{K,V}"/> instanced passed in, ready for sending to Flickr.
+    /// Takes the various properties of this instance and adds them to a 
+    /// <see cref="Dictionary{K,V}"/> instanced passed in, ready for sending to Flickr.
     /// </summary>
     /// <param name="parameters">The <see cref="Dictionary{K,V}"/> to add the options to.</param>
     public void AddToDictionary(ref Dictionary<string, string> parameters)

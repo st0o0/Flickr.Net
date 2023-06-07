@@ -136,8 +136,8 @@ public class PartialSearchOptions
     }
 
     /// <summary>
-    /// Constructor taking a perPage and page parameter and a default <see
-    /// cref="PhotoSearchExtras"/> parameter.
+    /// Constructor taking a perPage and page parameter and a default 
+    /// <see cref="PhotoSearchExtras"/> parameter.
     /// </summary>
     /// <param name="perPage">The number of photos to return per page (maximum).</param>
     /// <param name="page">The page number to return.</param>

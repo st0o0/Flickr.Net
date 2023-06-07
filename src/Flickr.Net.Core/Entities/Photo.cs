@@ -94,14 +94,14 @@ public class Photo : IFlickrParsable
     public LicenseType License { get; set; }
 
     /// <summary>
-    /// The width of the original image. Only returned if <see
-    /// cref="PhotoSearchExtras.OriginalDimensions"/> is specified.
+    /// The width of the original image. Only returned if 
+    /// <see cref="PhotoSearchExtras.OriginalDimensions"/> is specified.
     /// </summary>
     public int OriginalWidth { get; set; }
 
     /// <summary>
-    /// The height of the original image. Only returned if <see
-    /// cref="PhotoSearchExtras.OriginalDimensions"/> is specified.
+    /// The height of the original image. Only returned if 
+    /// <see cref="PhotoSearchExtras.OriginalDimensions"/> is specified.
     /// </summary>
     public int OriginalHeight { get; set; }
 
@@ -111,14 +111,14 @@ public class Photo : IFlickrParsable
     public DateTime DateUploaded { get; set; }
 
     /// <summary>
-    /// Converts the raw lastupdate field to a <see cref="DateTime"/>. Returns <see
-    /// cref="DateTime.MinValue"/> if the raw value was not returned.
+    /// Converts the raw lastupdate field to a <see cref="DateTime"/>. Returns 
+    /// <see cref="DateTime.MinValue"/> if the raw value was not returned.
     /// </summary>
     public DateTime LastUpdated { get; set; }
 
     /// <summary>
-    /// Converts the raw datetaken field to a <see cref="DateTime"/>. Returns <see
-    /// cref="DateTime.MinValue"/> if the raw value was not returned.
+    /// Converts the raw datetaken field to a <see cref="DateTime"/>. Returns 
+    /// <see cref="DateTime.MinValue"/> if the raw value was not returned.
     /// </summary>
     public DateTime DateTaken { get; set; }
 
@@ -201,14 +201,14 @@ public class Photo : IFlickrParsable
     }
 
     /// <summary>
-    /// The width of the square thumbnail image. Only returned if <see
-    /// cref="PhotoSearchExtras.SquareUrl"/> is specified.
+    /// The width of the square thumbnail image. Only returned if 
+    /// <see cref="PhotoSearchExtras.SquareUrl"/> is specified.
     /// </summary>
     public int? SquareThumbnailWidth { get; set; }
 
     /// <summary>
-    /// The height of the square thumbnail image. Only returned if <see
-    /// cref="PhotoSearchExtras.SquareUrl"/> is specified.
+    /// The height of the square thumbnail image. Only returned if 
+    /// <see cref="PhotoSearchExtras.SquareUrl"/> is specified.
     /// </summary>
     public int? SquareThumbnailHeight { get; set; }
 
@@ -231,14 +231,14 @@ public class Photo : IFlickrParsable
     }
 
     /// <summary>
-    /// The width of the square thumbnail image. Only returned if <see
-    /// cref="PhotoSearchExtras.SquareUrl"/> is specified.
+    /// The width of the square thumbnail image. Only returned if 
+    /// <see cref="PhotoSearchExtras.SquareUrl"/> is specified.
     /// </summary>
     public int? LargeSquareThumbnailWidth { get; set; }
 
     /// <summary>
-    /// The height of the square thumbnail image. Only returned if <see
-    /// cref="PhotoSearchExtras.SquareUrl"/> is specified.
+    /// The height of the square thumbnail image. Only returned if 
+    /// <see cref="PhotoSearchExtras.SquareUrl"/> is specified.
     /// </summary>
     public int? LargeSquareThumbnailHeight { get; set; }
 
@@ -261,14 +261,14 @@ public class Photo : IFlickrParsable
     }
 
     /// <summary>
-    /// The width of the thumbnail image. Only returned if <see
-    /// cref="PhotoSearchExtras.ThumbnailUrl"/> is specified.
+    /// The width of the thumbnail image. Only returned if 
+    /// <see cref="PhotoSearchExtras.ThumbnailUrl"/> is specified.
     /// </summary>
     public int? ThumbnailWidth { get; set; }
 
     /// <summary>
-    /// The height of the thumbnail image. Only returned if <see
-    /// cref="PhotoSearchExtras.ThumbnailUrl"/> is specified.
+    /// The height of the thumbnail image. Only returned if 
+    /// <see cref="PhotoSearchExtras.ThumbnailUrl"/> is specified.
     /// </summary>
     public int? ThumbnailHeight { get; set; }
 
@@ -319,14 +319,14 @@ public class Photo : IFlickrParsable
     }
 
     /// <summary>
-    /// The width of the small 320 image. Only returned if <see
-    /// cref="PhotoSearchExtras.Small320Url"/> is specified.
+    /// The width of the small 320 image. Only returned if 
+    /// <see cref="PhotoSearchExtras.Small320Url"/> is specified.
     /// </summary>
     public int? Small320Width { get; set; }
 
     /// <summary>
-    /// The height of the small 320 image. Only returned if <see
-    /// cref="PhotoSearchExtras.Small320Url"/> is specified.
+    /// The height of the small 320 image. Only returned if 
+    /// <see cref="PhotoSearchExtras.Small320Url"/> is specified.
     /// </summary>
     public int? Small320Height { get; set; }
 
@@ -353,14 +353,15 @@ public class Photo : IFlickrParsable
     }
 
     /// <summary>
-    /// The width of the medium image. Only returned if <see cref="PhotoSearchExtras.Medium640Url"/>
+    /// The width of the medium image. Only returned if 
+    /// <see cref="PhotoSearchExtras.Medium640Url"/>
     /// is specified.
     /// </summary>
     public int? Medium640Width { get; set; }
 
     /// <summary>
-    /// The height of the medium image. Only returned if <see
-    /// cref="PhotoSearchExtras.Medium640Url"/> is specified.
+    /// The height of the medium image. Only returned if 
+    /// <see cref="PhotoSearchExtras.Medium640Url"/> is specified.
     /// </summary>
     public int? Medium640Height { get; set; }
 
@@ -368,8 +369,8 @@ public class Photo : IFlickrParsable
     /// The URL for the medium 640 copy of a photo.
     /// </summary>
     /// <remarks>
-    /// There is a chance that extremely small images will not have a medium 640 copy. Use <see
-    /// cref="Flickr.PhotosGetSizes"/> to get the available URLs for a photo.
+    /// There is a chance that extremely small images will not have a medium 640 copy. Use 
+    /// <see cref="Flickr.PhotosGetSizes"/> to get the available URLs for a photo.
     /// </remarks>
     public string Medium800Url
     {
@@ -387,14 +388,16 @@ public class Photo : IFlickrParsable
     }
 
     /// <summary>
-    /// The width of the medium image. Only returned if <see cref="PhotoSearchExtras.Medium640Url"/>
+    /// The width of the medium image. Only returned if 
+    /// <see cref="PhotoSearchExtras.Medium640Url"/>
     /// is specified.
     /// </summary>
     public int? Medium800Width { get; set; }
 
     /// <summary>
-    /// The height of the medium image. Only returned if <see
-    /// cref="PhotoSearchExtras.Medium640Url"/> is specified.
+    /// The height of the medium image. Only returned if 
+    /// <see cref="PhotoSearchExtras.Medium640Url"/> 
+    /// is specified.
     /// </summary>
     public int? Medium800Height { get; set; }
 
@@ -432,8 +435,9 @@ public class Photo : IFlickrParsable
     /// The URL for the medium copy of a photo.
     /// </summary>
     /// <remarks>
-    /// There is a chance that extremely small images will not have a medium copy. Use <see
-    /// cref="Flickr.PhotosGetSizes"/> to get the available URLs for a photo.
+    /// There is a chance that extremely small images will not have a medium copy. Use 
+    /// <see cref="Flickr.PhotosGetSizes"/> 
+    /// to get the available URLs for a photo.
     /// </remarks>
     public string MediumUrl
     {
@@ -465,8 +469,9 @@ public class Photo : IFlickrParsable
     /// The URL for the large copy of a photo.
     /// </summary>
     /// <remarks>
-    /// There is a chance that small images will not have a large copy. Use <see
-    /// cref="Flickr.PhotosGetSizes"/> to get the available URLs for a photo.
+    /// There is a chance that small images will not have a large copy. Use 
+    /// <see cref="Flickr.PhotosGetSizes"/> 
+    /// to get the available URLs for a photo.
     /// </remarks>
     public string LargeUrl
     {
@@ -484,14 +489,16 @@ public class Photo : IFlickrParsable
     }
 
     /// <summary>
-    /// The width of the large image, if one exists. Only returned if <see
-    /// cref="PhotoSearchExtras.LargeUrl"/> is specified and a large image exists.
+    /// The width of the large image, if one exists. Only returned if 
+    /// <see cref="PhotoSearchExtras.LargeUrl"/> 
+    /// is specified and a large image exists.
     /// </summary>
     public int? LargeWidth { get; set; }
 
     /// <summary>
-    /// The height of the large image, if one exists. Only returned if <see
-    /// cref="PhotoSearchExtras.LargeUrl"/> is specified and a large image exists.
+    /// The height of the large image, if one exists. Only returned if 
+    /// <see cref="PhotoSearchExtras.LargeUrl"/> 
+    /// is specified and a large image exists.
     /// </summary>
     public int? LargeHeight { get; set; }
 

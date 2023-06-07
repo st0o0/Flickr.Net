@@ -7,8 +7,8 @@ namespace Flickr.Net.Core.Entities;
 /// The shape data supplied by <see cref="Flickr.PlacesGetInfo"/>.
 /// </summary>
 /// <remarks>
-/// See <a
-/// href="http://code.flickr.com/blog/2008/10/30/the-shape-of-alpha/">http://code.flickr.com/blog/2008/10/30/the-shape-of-alpha/</a>
+/// See 
+/// <a href="http://code.flickr.com/blog/2008/10/30/the-shape-of-alpha/">http://code.flickr.com/blog/2008/10/30/the-shape-of-alpha/</a>
 /// for more details.
 /// </remarks>
 public sealed class ShapeData : IFlickrParsable
