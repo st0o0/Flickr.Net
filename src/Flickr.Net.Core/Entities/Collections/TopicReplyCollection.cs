@@ -1,11 +1,10 @@
-﻿namespace FlickrNet.Core.Entities.Collections;
+﻿namespace Flickr.Net.Core.Entities.Collections;
 
 /// <summary>
 /// The list of replies for a particular topic.
 /// </summary>
 /// <remarks>
-/// Includes most of the properties of the topic as well, such as <see cref="TopicId"/>
-/// and <see cref="Subject"/>
+/// Includes most of the properties of the topic as well, such as <see cref="TopicId"/> and <see cref="Subject"/>
 /// </remarks>
 public class TopicReplyCollection : System.Collections.ObjectModel.Collection<TopicReply>, IFlickrParsable
 {

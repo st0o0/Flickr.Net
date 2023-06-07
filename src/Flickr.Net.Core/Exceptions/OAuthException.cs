@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace FlickrNet.Core.Exceptions;
+namespace Flickr.Net.Core.Exceptions;
 
 /// <summary>
 /// An OAuth error occurred when calling one of the OAuth authentication flow methods.

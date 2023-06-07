@@ -1,4 +1,4 @@
-﻿namespace FlickrNet.Core.Exceptions;
+﻿namespace Flickr.Net.Core.Exceptions;
 
 /// <summary>
 /// An internal class used for catching caching exceptions.
@@ -24,7 +24,8 @@ public class CacheException : Exception
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CacheException"/> class with a specified error message and a reference to the inner exception that is the cause of this exception.
+    /// Initializes a new instance of the <see cref="CacheException"/> class with a specified error
+    /// message and a reference to the inner exception that is the cause of this exception.
     /// </summary>
     /// <param name="message"></param>
     /// <param name="innerException"></param>

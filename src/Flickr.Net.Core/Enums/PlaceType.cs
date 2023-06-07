@@ -1,4 +1,4 @@
-﻿namespace FlickrNet.Core.Enums;
+﻿namespace Flickr.Net.Core.Enums;
 
 /// <summary>
 /// Used by <see cref="Flickr.PlacesPlacesForUser()"/>.

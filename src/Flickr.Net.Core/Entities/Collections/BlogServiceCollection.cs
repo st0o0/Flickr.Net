@@ -1,6 +1,6 @@
 ﻿using System.Xml;
 
-namespace FlickrNet.Core.Entities.Collections;
+namespace Flickr.Net.Core.Entities.Collections;
 
 /// <summary>
 /// A list of the blog services that Flickr aupports.

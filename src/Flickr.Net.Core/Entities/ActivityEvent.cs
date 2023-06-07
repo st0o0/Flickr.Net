@@ -1,6 +1,6 @@
 using System.Xml;
 
-namespace FlickrNet.Core.Entities;
+namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// A user event on a photo, e.g. Comment or Favourite etc.

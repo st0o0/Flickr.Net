@@ -1,4 +1,4 @@
-﻿namespace FlickrNet.Core.Entities;
+﻿namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// A set of properties for the photoset.

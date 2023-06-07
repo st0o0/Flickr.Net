@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-namespace FlickrNet.Core.Enums;
+namespace Flickr.Net.Core.Enums;
 
 /// <summary>
 /// The various pricay settings for a group.
@@ -15,8 +15,8 @@ public enum PoolPrivacy
     None = 0,
 
     /// <summary>
-    /// The group is a private group. You cannot view pictures or posts until you are a
-    /// member. The group is also invite only.
+    /// The group is a private group. You cannot view pictures or posts until you are a member. The
+    /// group is also invite only.
     /// </summary>
     [XmlEnum("1")]
     Private = 1,

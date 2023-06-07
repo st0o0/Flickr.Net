@@ -1,10 +1,9 @@
 using System.Xml;
 
-namespace FlickrNet.Core.Entities;
+namespace Flickr.Net.Core.Entities;
 
 /// <summary>
-/// Activity class used for <see cref="Flickr.ActivityUserPhotos()"/>
-/// and <see cref="Flickr.ActivityUserComments"/>.
+/// Activity class used for <see cref="Flickr.ActivityUserPhotos()"/> and <see cref="Flickr.ActivityUserComments"/>.
 /// </summary>
 public sealed class ActivityItem : IFlickrParsable
 {
@@ -49,25 +48,19 @@ public sealed class ActivityItem : IFlickrParsable
     /// <summary>
     /// The number of new comments within the given time frame.
     /// </summary>
-    /// <remarks>
-    /// Only applicable for <see cref="Flickr.ActivityUserPhotos()"/>.
-    /// </remarks>
+    /// <remarks>Only applicable for <see cref="Flickr.ActivityUserPhotos()"/>.</remarks>
     public int NewComments { get; set; }
 
     /// <summary>
     /// The number of old comments within the given time frame.
     /// </summary>
-    /// <remarks>
-    /// Only applicable for <see cref="Flickr.ActivityUserPhotos()"/>.
-    /// </remarks>
+    /// <remarks>Only applicable for <see cref="Flickr.ActivityUserPhotos()"/>.</remarks>
     public int OldComments { get; set; }
 
     /// <summary>
     /// The number of comments on the item.
     /// </summary>
-    /// <remarks>
-    /// Only applicable for <see cref="Flickr.ActivityUserComments"/>.
-    /// </remarks>
+    /// <remarks>Only applicable for <see cref="Flickr.ActivityUserComments"/>.</remarks>
     public int Comments { get; set; }
 
     /// <summary>
@@ -78,9 +71,7 @@ public sealed class ActivityItem : IFlickrParsable
     /// <summary>
     /// You want more! You got it!
     /// </summary>
-    /// <remarks>
-    /// Actually, not sure what this it for!
-    /// </remarks>
+    /// <remarks>Actually, not sure what this it for!</remarks>
     public bool More { get; set; }
 
     /// <summary>
@@ -111,50 +102,42 @@ public sealed class ActivityItem : IFlickrParsable
     /// <summary>
     /// The activity item owners buddy icon.
     /// </summary>
-    public string OwnerBuddyIcon
-    {
-        get
-        {
-            return UtilityMethods.BuddyIcon(OwnerServer, OwnerFarm, OwnerId);
-        }
-    }
+    public string OwnerBuddyIcon => UtilityMethods.BuddyIcon(OwnerServer, OwnerFarm, OwnerId);
 
     /// <summary>
-    /// If the type is a photoset then this contains the number of photos in the set. Otherwise returns -1.
+    /// If the type is a photoset then this contains the number of photos in the set. Otherwise
+    /// returns -1.
     /// </summary>
     public int? Photos { get; set; }
 
     /// <summary>
-    /// If this is a photoset then returns the primary photo id, otherwise will be null (<code>Nothing</code> in VB.Net).
+    /// If this is a photoset then returns the primary photo id, otherwise will be null (
+    /// <code>Nothing</code>
+    /// in VB.Net).
     /// </summary>
     public string PrimaryPhotoId { get; set; }
 
     /// <summary>
     /// The number of new notes within the given time frame.
     /// </summary>
-    /// <remarks>
-    /// Only applicable for photos and when calling <see cref="Flickr.ActivityUserPhotos()"/>.
-    /// </remarks>
+    /// <remarks>Only applicable for photos and when calling <see cref="Flickr.ActivityUserPhotos()"/>.</remarks>
     public int? NewNotes { get; set; }
 
     /// <summary>
     /// The number of old notes within the given time frame.
     /// </summary>
-    /// <remarks>
-    /// Only applicable for photos and when calling <see cref="Flickr.ActivityUserPhotos()"/>.
-    /// </remarks>
+    /// <remarks>Only applicable for photos and when calling <see cref="Flickr.ActivityUserPhotos()"/>.</remarks>
     public int? OldNotes { get; set; }
 
     /// <summary>
     /// The number of comments on the photo.
     /// </summary>
-    /// <remarks>
-    /// Only applicable for photos and when calling <see cref="Flickr.ActivityUserComments"/>.
-    /// </remarks>
+    /// <remarks>Only applicable for photos and when calling <see cref="Flickr.ActivityUserComments"/>.</remarks>
     public int? Notes { get; set; }
 
     /// <summary>
-    /// If the type is a photo then this contains the number of favourites in the set. Otherwise returns -1.
+    /// If the type is a photo then this contains the number of favourites in the set. Otherwise
+    /// returns -1.
     /// </summary>
     public int? Favorites { get; set; }
 
@@ -251,33 +234,22 @@ public sealed class ActivityItem : IFlickrParsable
             switch (reader.LocalName)
             {
                 case "type":
-                    switch (reader.Value)
+                    ItemType = reader.Value switch
                     {
-                        case "photoset":
-                            ItemType = ActivityItemType.Photoset;
-                            break;
-
-                        case "photo":
-                            ItemType = ActivityItemType.Photo;
-                            break;
-
-                        case "gallery":
-                            ItemType = ActivityItemType.Gallery;
-                            break;
-                    }
+                        "photoset" => ActivityItemType.Photoset,
+                        "photo" => ActivityItemType.Photo,
+                        "gallery" => ActivityItemType.Gallery,
+                        _ => ActivityItemType.Unknown,
+                    };
                     break;
 
                 case "media":
-                    switch (reader.Value)
+                    Media = reader.Value switch
                     {
-                        case "photo":
-                            Media = MediaType.Photos;
-                            break;
-
-                        case "video":
-                            Media = MediaType.Videos;
-                            break;
-                    }
+                        "photo" => MediaType.Photos,
+                        "video" => MediaType.Videos,
+                        _ => MediaType.None,
+                    };
                     break;
 
                 case "owner":

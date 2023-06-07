@@ -1,13 +1,11 @@
 using System.Collections.ObjectModel;
 using System.Xml;
 
-namespace FlickrNet.Core.Entities;
+namespace Flickr.Net.Core.Entities;
 
 /// <summary>
-/// The context of the current photo, as returned by
-/// <see cref="Flickr.PhotosGetContext"/>,
-/// <see cref="Flickr.PhotosetsGetContext"/>
-///  and <see cref="Flickr.GroupsPoolsGetContext"/> methods.
+/// The context of the current photo, as returned by <see cref="Flickr.PhotosGetContext"/>, <see
+/// cref="Flickr.PhotosetsGetContext"/> and <see cref="Flickr.GroupsPoolsGetContext"/> methods.
 /// </summary>
 public sealed class Context : IFlickrParsable
 {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 
-namespace FlickrNet.Core.Entities.Collections;
+namespace Flickr.Net.Core.Entities.Collections;
 
 /// <summary>
 /// A collection of <see cref="Gallery"/> instances.
@@ -33,7 +33,8 @@ public sealed class GalleryCollection : Collection<Gallery>, IFlickrParsable
     public string UserId { get; set; }
 
     /// <summary>
-    /// The ID photo that these galleries contain if called from <see cref="Flickr.GalleriesGetListForPhoto(string, int, int)"/>.
+    /// The ID photo that these galleries contain if called from <see
+    /// cref="Flickr.GalleriesGetListForPhoto(string, int, int)"/>.
     /// </summary>
     public string PhotoId { get; set; }
 

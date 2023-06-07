@@ -1,4 +1,4 @@
-namespace FlickrNet.Core.Internals;
+namespace Flickr.Net.Core.Internals;
 
 /// <summary>
 /// Summary description for BoundaryBox.
@@ -73,10 +73,18 @@ public class BoundaryBox
     /// <summary>
     /// Constructor for the <see cref="BoundaryBox"/>.
     /// </summary>
-    /// <param name="minimumLongitude">The minimum longitude of the boundary box. Range of -180 to 180 allowed.</param>
-    /// <param name="minimumLatitude">The minimum latitude of the boundary box. Range of -90 to 90 allowed.</param>
-    /// <param name="maximumLongitude">The maximum longitude of the boundary box. Range of -180 to 180 allowed.</param>
-    /// <param name="maximumLatitude">The maximum latitude of the boundary box. Range of -90 to 90 allowed.</param>
+    /// <param name="minimumLongitude">
+    /// The minimum longitude of the boundary box. Range of -180 to 180 allowed.
+    /// </param>
+    /// <param name="minimumLatitude">
+    /// The minimum latitude of the boundary box. Range of -90 to 90 allowed.
+    /// </param>
+    /// <param name="maximumLongitude">
+    /// The maximum longitude of the boundary box. Range of -180 to 180 allowed.
+    /// </param>
+    /// <param name="maximumLatitude">
+    /// The maximum latitude of the boundary box. Range of -90 to 90 allowed.
+    /// </param>
     /// <param name="accuracy">The <see cref="GeoAccuracy"/> of the search parameter.</param>
     public BoundaryBox(double minimumLongitude, double minimumLatitude, double maximumLongitude, double maximumLatitude, GeoAccuracy accuracy)
         : this(minimumLongitude, minimumLatitude, maximumLongitude, maximumLatitude)
@@ -87,10 +95,18 @@ public class BoundaryBox
     /// <summary>
     /// Constructor for the <see cref="BoundaryBox"/>.
     /// </summary>
-    /// <param name="minimumLongitude">The minimum longitude of the boundary box. Range of -180 to 180 allowed.</param>
-    /// <param name="minimumLatitude">The minimum latitude of the boundary box. Range of -90 to 90 allowed.</param>
-    /// <param name="maximumLongitude">The maximum longitude of the boundary box. Range of -180 to 180 allowed.</param>
-    /// <param name="maximumLatitude">The maximum latitude of the boundary box. Range of -90 to 90 allowed.</param>
+    /// <param name="minimumLongitude">
+    /// The minimum longitude of the boundary box. Range of -180 to 180 allowed.
+    /// </param>
+    /// <param name="minimumLatitude">
+    /// The minimum latitude of the boundary box. Range of -90 to 90 allowed.
+    /// </param>
+    /// <param name="maximumLongitude">
+    /// The maximum longitude of the boundary box. Range of -180 to 180 allowed.
+    /// </param>
+    /// <param name="maximumLatitude">
+    /// The maximum latitude of the boundary box. Range of -90 to 90 allowed.
+    /// </param>
     public BoundaryBox(double minimumLongitude, double minimumLatitude, double maximumLongitude, double maximumLatitude)
     {
         MinimumLatitude = minimumLatitude;
@@ -166,7 +182,8 @@ public class BoundaryBox
     }
 
     /// <summary>
-    /// The minimum longitude of the boundary box, i.e. bottom left hand corner. Range of -180 to 180 allowed.
+    /// The minimum longitude of the boundary box, i.e. bottom left hand corner. Range of -180 to
+    /// 180 allowed.
     /// </summary>
     public double MinimumLongitude
     {

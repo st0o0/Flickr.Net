@@ -1,4 +1,4 @@
-namespace FlickrNet.Core.Entities.Collections;
+namespace Flickr.Net.Core.Entities.Collections;
 
 /// <summary>
 /// EXIF data for the selected photo.

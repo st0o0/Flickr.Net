@@ -1,5 +1,5 @@
-﻿global using FlickrNet.Core.Entities;
-global using FlickrNet.Core.Entities.Collections;
-global using FlickrNet.Core.Entities.Interfaces;
-global using FlickrNet.Core.Enums;
-global using FlickrNet.Core.Internals;
+﻿global using Flickr.Net.Core.Entities;
+global using Flickr.Net.Core.Entities.Collections;
+global using Flickr.Net.Core.Entities.Interfaces;
+global using Flickr.Net.Core.Enums;
+global using Flickr.Net.Core.Internals;

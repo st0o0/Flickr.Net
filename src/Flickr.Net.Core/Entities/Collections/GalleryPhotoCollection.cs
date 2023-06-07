@@ -1,4 +1,4 @@
-﻿namespace FlickrNet.Core.Entities.Collections;
+﻿namespace Flickr.Net.Core.Entities.Collections;
 
 /// <summary>
 /// A list of gallery photos as returned by <see cref="Flickr.GalleriesGetPhotos(string, PhotoSearchExtras)"/>
@@ -21,7 +21,8 @@ public sealed class GalleryPhotoCollection : System.Collections.ObjectModel.Coll
     public int PerPage { get; set; }
 
     /// <summary>
-    /// The total number of photos that match the query. Call the method again to retrieve each page of results if Total > PerPage.
+    /// The total number of photos that match the query. Call the method again to retrieve each page
+    /// of results if Total &gt; PerPage.
     /// </summary>
     public int Total { get; set; }
 

@@ -1,4 +1,4 @@
-﻿namespace FlickrNet.Core.Exceptions;
+﻿namespace Flickr.Net.Core.Exceptions;
 
 /// <summary>
 /// No photo with the photo ID supplied to the method could be found.

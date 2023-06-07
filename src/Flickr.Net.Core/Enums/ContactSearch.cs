@@ -1,4 +1,4 @@
-﻿namespace FlickrNet.Core.Enums;
+﻿namespace Flickr.Net.Core.Enums;
 
 /// <summary>
 /// Allows you to perform a search on a users contacts.

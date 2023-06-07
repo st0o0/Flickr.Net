@@ -1,4 +1,4 @@
-﻿namespace FlickrNet.Core.Entities;
+﻿namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// The details of a referring domain. Used in the Flickr Stats API.

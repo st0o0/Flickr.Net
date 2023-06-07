@@ -1,8 +1,10 @@
-﻿namespace FlickrNet.Core.Entities;
+﻿namespace Flickr.Net.Core.Entities;
 
 /// <summary>
-/// The stats returned by <see cref="Flickr.StatsGetPhotoStats"/>,
-/// <see cref="Flickr.StatsGetPhotostreamStats"/>, <see cref="Flickr.StatsGetPhotosetStats"/>
+/// The stats returned by 
+/// <see cref="Flickr.StatsGetPhotoStats"/>, 
+/// <see cref="Flickr.StatsGetPhotostreamStats"/>, 
+/// <see cref="Flickr.StatsGetPhotosetStats"/> 
 /// and <see cref="Flickr.StatsGetCollectionStats"/>
 /// </summary>
 public sealed class Stats : IFlickrParsable

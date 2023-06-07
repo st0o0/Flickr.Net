@@ -1,4 +1,4 @@
-﻿namespace FlickrNet.Core.Entities;
+﻿namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// Contains details of a category, including groups belonging to the category and sub categories.
@@ -22,9 +22,7 @@ public sealed class GroupCategory : IFlickrParsable
     /// <summary>
     /// A forward slash delimited list of the parents of the current group.
     /// </summary>
-    /// <remarks>
-    /// Can be matched against the list of PathIds to jump directly to a parent group.
-    /// </remarks>
+    /// <remarks>Can be matched against the list of PathIds to jump directly to a parent group.</remarks>
     /// <example>
     /// Group Id 91, Romance will return "/Life/Romance" as the Path and "/90/91" as its PathIds
     /// </example>
@@ -33,9 +31,7 @@ public sealed class GroupCategory : IFlickrParsable
     /// <summary>
     /// A forward slash delimited list of the ids of the parents of the current group.
     /// </summary>
-    /// <remarks>
-    /// Can be matched against the Path to jump directly to a parent group.
-    /// </remarks>
+    /// <remarks>Can be matched against the Path to jump directly to a parent group.</remarks>
     /// <example>
     /// Group Id 91, Romance will return "/Life/Romance" as the Path and "/90/91" as its PathIds
     /// </example>

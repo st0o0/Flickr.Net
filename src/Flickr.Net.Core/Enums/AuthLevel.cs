@@ -1,4 +1,4 @@
-﻿namespace FlickrNet.Core.Enums;
+﻿namespace Flickr.Net.Core.Enums;
 
 /// <summary>
 /// Used to specify the authentication levels needed for the Auth methods.
@@ -22,8 +22,8 @@ public enum AuthLevel
     Write,
 
     /// <summary>
-    /// Read, write and delete access is required by your application.
-    /// Deleting does not mean just the ability to delete photos, but also other meta data such as tags.
+    /// Read, write and delete access is required by your application. Deleting does not mean just
+    /// the ability to delete photos, but also other meta data such as tags.
     /// </summary>
     Delete
 }

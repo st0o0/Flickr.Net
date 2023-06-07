@@ -1,4 +1,4 @@
-﻿namespace FlickrNet.Core.Enums;
+﻿namespace Flickr.Net.Core.Enums;
 
 /// <summary>
 /// The type of the <see cref="ActivityEvent"/>.

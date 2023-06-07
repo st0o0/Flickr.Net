@@ -1,21 +1,16 @@
 using System.Diagnostics;
 
-namespace FlickrNet.Core.Internals;
+namespace Flickr.Net.Core.Internals;
 
 /// <summary>
-/// A non-reentrant mutex that is implemented using
-/// a lock file, and thus works across processes,
-/// sessions, and machines (as long as the underlying
-/// FS provides robust r/w locking).
+/// A non-reentrant mutex that is implemented using a lock file, and thus works across processes,
+/// sessions, and machines (as long as the underlying FS provides robust r/w locking).
 ///
 /// To use:
 ///
 /// FileLock fLock = new FileLock(@"c:\foo\my.lock");
 ///
-/// using (fLock.Acquire())
-/// {
-///        // protected operations
-/// }
+/// using (fLock.Acquire()) { // protected operations }
 /// </summary>
 internal class LockFile : IDisposable
 {
@@ -76,8 +71,8 @@ internal class LockFile : IDisposable
     {
         lock (this)
         {
-            // Doesn't hurt to pulse. Note that waiting threads will not actually
-            // continue to execute until this critical section is exited.
+            // Doesn't hurt to pulse. Note that waiting threads will not actually continue to
+            // execute until this critical section is exited.
             Monitor.PulseAll(this);
 
             if (stream == null)

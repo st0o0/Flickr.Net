@@ -1,19 +1,27 @@
 using System.Xml;
 
-namespace FlickrNet.Core.Entities;
+namespace Flickr.Net.Core.Entities;
 
 /// <summary>
-///
 /// </summary>
 public sealed class CollectionSet : IFlickrParsable
 {
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets the set id.
+    /// </summary>
     public string SetId { get; set; }
 
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets the title.
+    /// </summary>
     public string Title { get; set; }
 
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets the description.
+    /// </summary>
     public string Description { get; set; }
 
     void IFlickrParsable.Load(XmlReader reader)

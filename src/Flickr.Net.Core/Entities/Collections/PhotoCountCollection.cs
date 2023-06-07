@@ -1,4 +1,4 @@
-﻿namespace FlickrNet.Core.Entities.Collections;
+﻿namespace Flickr.Net.Core.Entities.Collections;
 
 /// <summary>
 /// The information about the number of photos a user has.
@@ -31,14 +31,20 @@ public sealed class PhotoCountCollection : System.Collections.ObjectModel.Collec
 /// </summary>
 public sealed class PhotoCount : IFlickrParsable
 {
-    /// <summary>Total number of photos between the FromDate and the ToDate.</summary>
+    /// <summary>
+    /// Total number of photos between the FromDate and the ToDate.
+    /// </summary>
     /// <remarks/>
     public int Count { get; set; }
 
-    /// <summary>The From date as a <see cref="DateTime"/> object.</summary>
+    /// <summary>
+    /// The From date as a <see cref="DateTime"/> object.
+    /// </summary>
     public DateTime FromDate { get; set; }
 
-    /// <summary>The To date as a <see cref="DateTime"/> object.</summary>
+    /// <summary>
+    /// The To date as a <see cref="DateTime"/> object.
+    /// </summary>
     public DateTime ToDate { get; set; }
 
     void IFlickrParsable.Load(System.Xml.XmlReader reader)

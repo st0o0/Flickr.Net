@@ -1,4 +1,4 @@
-﻿namespace FlickrNet.Core.Enums;
+﻿namespace Flickr.Net.Core.Enums;
 
 /// <summary>
 /// Safety level of the photographic image.

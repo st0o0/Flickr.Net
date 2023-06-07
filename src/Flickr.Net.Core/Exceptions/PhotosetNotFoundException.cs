@@ -1,4 +1,4 @@
-﻿namespace FlickrNet.Core.Exceptions;
+﻿namespace Flickr.Net.Core.Exceptions;
 
 /// <summary>
 /// No photoset with the photoset ID supplied to the method could be found.

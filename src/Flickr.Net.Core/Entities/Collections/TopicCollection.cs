@@ -1,6 +1,6 @@
-﻿using FlickrNet.Core.Exceptions;
+﻿using Flickr.Net.Core.Exceptions;
 
-namespace FlickrNet.Core.Entities.Collections;
+namespace Flickr.Net.Core.Entities.Collections;
 
 /// <summary>
 /// A collection of topics for a particular group.

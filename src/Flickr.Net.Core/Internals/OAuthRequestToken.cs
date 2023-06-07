@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace FlickrNet.Core.Internals;
+namespace Flickr.Net.Core.Internals;
 
 /// <summary>
 /// Class containing details of the OAUth request token returned by Flickr.

@@ -1,8 +1,11 @@
 using System.Collections.ObjectModel;
 using System.Xml;
 
-namespace FlickrNet.Core.Entities;
+namespace Flickr.Net.Core.Entities;
 
+/// <summary>
+/// The collection.
+/// </summary>
 /// <remarks/>
 public sealed class Collection : IFlickrParsable
 {
@@ -10,18 +13,33 @@ public sealed class Collection : IFlickrParsable
     private readonly Collection<Collection> _subcollections = new();
 
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets the collection id.
+    /// </summary>
     public string CollectionId { get; set; }
 
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets the title.
+    /// </summary>
     public string Title { get; set; }
 
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets the description.
+    /// </summary>
     public string Description { get; set; }
 
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets the icon large.
+    /// </summary>
     public string IconLarge { get; set; }
 
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets the icon small.
+    /// </summary>
     public string IconSmall { get; set; }
 
     /// <summary>
@@ -88,7 +106,8 @@ public sealed class Collection : IFlickrParsable
 
         reader.MoveToElement();
 
-        // If this is an empty collection then skip to next item, which wont be a child, but may be a sibling.
+        // If this is an empty collection then skip to next item, which wont be a child, but may be
+        // a sibling.
         if (reader.IsEmptyElement)
         {
             reader.Skip();

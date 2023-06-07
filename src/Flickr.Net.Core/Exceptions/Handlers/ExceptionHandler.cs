@@ -1,6 +1,6 @@
 ﻿using System.Xml;
 
-namespace FlickrNet.Core.Exceptions.Handlers;
+namespace Flickr.Net.Core.Exceptions.Handlers;
 
 /// <summary>
 /// A handler that is used to generate an exception from the response sent back by Flickr.
@@ -11,7 +11,9 @@ public static class ExceptionHandler
     /// Creates a <see cref="FlickrApiException"/> from the response sent back from Flickr.
     /// </summary>
     /// <param name="reader">The <see cref="XmlReader"/> containing the response from Flickr.</param>
-    /// <returns>The <see cref="FlickrApiException"/> created from the information returned by Flickr.</returns>
+    /// <returns>
+    /// The <see cref="FlickrApiException"/> created from the information returned by Flickr.
+    /// </returns>
     public static Exception CreateResponseException(XmlReader reader)
     {
         if (reader == null)

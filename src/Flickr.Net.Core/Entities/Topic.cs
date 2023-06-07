@@ -1,4 +1,4 @@
-﻿namespace FlickrNet.Core.Entities;
+﻿namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// Details of a topic
@@ -66,7 +66,8 @@ public class Topic : IFlickrParsable
     public bool CanDelete { get; set; }
 
     /// <summary>
-    /// Can the calling user reply to this topic. Flickr currently returns False in all instances, so do not rely on this issue.
+    /// Can the calling user reply to this topic. Flickr currently returns False in all instances,
+    /// so do not rely on this issue.
     /// </summary>
     public bool CanReply { get; set; }
 

@@ -1,10 +1,8 @@
-﻿namespace FlickrNet.Core.Internals.Caching;
+﻿namespace Flickr.Net.Core.Internals.Caching;
 
 /// <summary>
-/// An interface that knows how to read/write subclasses
-/// of ICacheItem.  Obviously there will be a tight
-/// coupling between concrete implementations of ICacheItem
-/// and concrete implementations of ICacheItemPersister.
+/// An interface that knows how to read/write subclasses of ICacheItem. Obviously there will be a
+/// tight coupling between concrete implementations of ICacheItem and concrete implementations of ICacheItemPersister.
 /// </summary>
 public abstract class CacheItemPersister
 {

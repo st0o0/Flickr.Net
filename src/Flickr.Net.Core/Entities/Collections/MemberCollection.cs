@@ -1,4 +1,4 @@
-namespace FlickrNet.Core.Entities.Collections;
+namespace Flickr.Net.Core.Entities.Collections;
 
 /// <summary>
 /// A collection of members returned by the <see cref="Flickr.GroupsMembersGetList(string)"/> method.

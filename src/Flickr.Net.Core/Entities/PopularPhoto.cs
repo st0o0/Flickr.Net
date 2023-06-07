@@ -1,7 +1,8 @@
-﻿namespace FlickrNet.Core.Entities;
+﻿namespace Flickr.Net.Core.Entities;
 
 /// <summary>
-/// Details about a popular photo, including the statistics for its views, comments and favourites for the date.
+/// Details about a popular photo, including the statistics for its views, comments and favourites
+/// for the date.
 /// </summary>
 public class PopularPhoto : Photo, IFlickrParsable
 {

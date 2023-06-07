@@ -2,13 +2,12 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace FlickrNet.Core.Entities;
+namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// Provides details of a particular group.
 /// </summary>
-/// <remarks>Used by <see cref="Flickr.GroupsBrowse()"/> and
-/// <see cref="Flickr.GroupsBrowse(string)"/>.</remarks>
+/// <remarks>Used by <see cref="Flickr.GroupsBrowse()"/> and <see cref="Flickr.GroupsBrowse(string)"/>.</remarks>
 public class Group
 {
     /// <summary>

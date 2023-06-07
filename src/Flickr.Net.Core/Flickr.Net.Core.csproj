@@ -25,6 +25,8 @@
         <PackageTags>Flickr;Api;Photo;Video</PackageTags>
         <PackAsTool>False</PackAsTool>
         <Company />
+        <GenerateDocumentationFile>True</GenerateDocumentationFile>
+        <DocumentationFile>$(ProjectDir)..\..\doc\SandCastleDocuments.xml</DocumentationFile>
     </PropertyGroup>
 
 </Project>

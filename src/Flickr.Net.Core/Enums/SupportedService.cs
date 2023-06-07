@@ -1,11 +1,11 @@
-﻿namespace FlickrNet.Core.Enums;
+﻿namespace Flickr.Net.Core.Enums;
 
 /// <summary>
 /// A list of service the Flickr.Net API Supports.
 /// </summary>
 /// <remarks>
-/// Not all methods are supported by all service. Behaviour of the library may be unpredictable if not using Flickr
-/// as your service.
+/// Not all methods are supported by all service. Behaviour of the library may be unpredictable if
+/// not using Flickr as your service.
 /// </remarks>
 public enum SupportedService
 {

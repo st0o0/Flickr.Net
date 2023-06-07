@@ -1,4 +1,4 @@
-﻿namespace FlickrNet.Core.Entities;
+﻿namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// A user created gallery of other peoples photos.
@@ -140,7 +140,8 @@ public sealed class Gallery : IFlickrParsable
     }
 
     /// <summary>
-    /// The URL of the medium image for the primary image for this gallery. For large sizes call <see cref="Flickr.PhotosGetSizes(string)"/>
+    /// The URL of the medium image for the primary image for this gallery. For large sizes call
+    /// <see cref="Flickr.PhotosGetSizes(string)"/>
     /// </summary>
     public string PrimaryPhotoMediumUrl
     {

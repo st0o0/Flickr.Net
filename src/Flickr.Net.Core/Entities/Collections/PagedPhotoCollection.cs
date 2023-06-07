@@ -1,7 +1,8 @@
-﻿namespace FlickrNet.Core.Entities.Collections;
+﻿namespace Flickr.Net.Core.Entities.Collections;
 
 /// <summary>
-/// Abstract class containing a collection of <see cref="Photo"/> instances along with paged information about the result set.
+/// Abstract class containing a collection of <see cref="Photo"/> instances along with paged
+/// information about the result set.
 /// </summary>
 public abstract class PagedPhotoCollection : System.Collections.ObjectModel.Collection<Photo>
 {

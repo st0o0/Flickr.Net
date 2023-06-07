@@ -1,4 +1,4 @@
-namespace FlickrNet.Core.Exceptions;
+namespace Flickr.Net.Core.Exceptions;
 
 /// <summary>
 /// Exception thrown when an error parsing the returned XML.
@@ -15,7 +15,8 @@ public class ResponseXmlException : FlickrException
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="ResponseXmlException"/> class with a specified error message.
+    /// Initializes a new instance of the <see cref="ResponseXmlException"/> class with a specified
+    /// error message.
     /// </summary>
     /// <param name="message"></param>
     public ResponseXmlException(string message)
@@ -24,7 +25,8 @@ public class ResponseXmlException : FlickrException
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="ResponseXmlException"/> class with a specified error message and a reference to the inner exception that is the cause of this exception.
+    /// Initializes a new instance of the <see cref="ResponseXmlException"/> class with a specified
+    /// error message and a reference to the inner exception that is the cause of this exception.
     /// </summary>
     /// <param name="message"></param>
     /// <param name="innerException"></param>

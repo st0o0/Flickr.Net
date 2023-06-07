@@ -1,6 +1,6 @@
 ﻿using System.Xml;
 
-namespace FlickrNet.Core.Entities;
+namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// The details of a particular camera model.

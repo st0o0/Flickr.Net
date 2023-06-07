@@ -1,17 +1,16 @@
 using System.ComponentModel;
 
-namespace FlickrNet.Core.Enums;
+namespace Flickr.Net.Core.Enums;
 
 /// <summary>
-/// Which photo search extras to be included. Can be combined to include more than one
-/// value.
+/// Which photo search extras to be included. Can be combined to include more than one value.
 /// </summary>
 /// <example>
-/// The following code sets options to return both the license and owner name along with
-/// the other search results.
+/// The following code sets options to return both the license and owner name along with the other
+/// search results.
 /// <code>
-/// PhotoSearchOptions options = new PhotoSearchOptions();
-/// options.Extras = PhotoSearchExtras.License &amp; PhotoSearchExtras.OwnerName
+///PhotoSearchOptions options = new PhotoSearchOptions();
+///options.Extras = PhotoSearchExtras.License &amp; PhotoSearchExtras.OwnerName
 /// </code>
 /// </example>
 [Flags]

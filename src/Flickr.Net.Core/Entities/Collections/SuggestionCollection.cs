@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 
-namespace FlickrNet.Core.Entities.Collections;
+namespace Flickr.Net.Core.Entities.Collections;
 
 /// <summary>
 /// The collection of location suggestions returned by <see cref="Flickr.PhotosSuggestionsGetList"/>.

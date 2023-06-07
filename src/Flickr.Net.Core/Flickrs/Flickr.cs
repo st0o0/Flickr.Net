@@ -1,13 +1,13 @@
+using Flickr.Net.Core.Exceptions;
+using Flickr.Net.Core.Exceptions.Handlers;
+using Flickr.Net.Core.Internals.Caching;
+using Flickr.Net.Core.Internals.HttpContents;
 using FlickrNet.Core.Configuration;
-using FlickrNet.Core.Exceptions;
-using FlickrNet.Core.Exceptions.Handlers;
-using FlickrNet.Core.Internals.Caching;
-using FlickrNet.Core.Internals.HttpContents;
-using System.Diagnostics.CodeAnalysis;
+using FlickrNet.Core.Settings;
 using System.Text;
 using System.Xml;
 
-namespace FlickrNet.Core;
+namespace Flickr.Net.Core;
 
 /// <summary>
 /// The main Flickr class.
@@ -17,27 +17,26 @@ namespace FlickrNet.Core;
 /// </remarks>
 /// <example>
 /// <code>
-/// FlickrNet.Flickr flickr = new FlickrNet.Flickr();
-/// User user = flickr.PeopleFindByEmail("cal@iamcal.com");
-/// Console.WriteLine("User Id is " + u.UserId);
+///FlickrNet.Flickr flickr = new FlickrNet.Flickr();
+///User user = flickr.PeopleFindByEmail("cal@iamcal.com");
+///Console.WriteLine("User Id is " + u.UserId);
 /// </code>
 /// </example>
 public partial class Flickr
 {
     private readonly Cache _cache;
-    private readonly FlickrConfigurationSettings _settings;
-    private readonly string _apiToken;
-    private string _sharedSecret;
+    private readonly FlickrSettings _settings;
+    private readonly FlickrCachingSettings _cachingSettings;
     private string _lastRequest;
 
     /// <summary>
     /// Constructor loads configuration settings from app.config or web.config file if they exist.
     /// </summary>
-    public Flickr(FlickrConfigurationSettings settings)
+    public Flickr(FlickrConfiguration config)
     {
-        _cache = new Cache(settings);
-        _settings = settings;
-        InstanceCacheDisabled = settings.CacheDisabled;
+        _cachingSettings = new FlickrCachingSettings(config);
+        _cache = new Cache(_cachingSettings);
+        _settings = new FlickrSettings(config);
     }
 
     /// <summary>
@@ -50,14 +49,14 @@ public partial class Flickr
     }
 
     /// <summary>
-    /// Creates a new instance of the <see cref="Flickr"/> class with an API key and a Shared Secret.
-    /// This is only useful really useful for calling the Auth functions as all other
+    /// Creates a new instance of the <see cref="Flickr"/> class with an API key and a Shared
+    /// Secret. This is only useful really useful for calling the Auth functions as all other
     /// authenticationed methods also require the API Token.
     /// </summary>
     /// <param name="apiKey">Your Flickr API Key.</param>
     /// <param name="sharedSecret">Your Flickr Shared Secret.</param>
     public Flickr(string apiKey, string sharedSecret)
-        : this(new FlickrConfigurationSettings() { ApiKey = apiKey, SharedSecret = sharedSecret })
+        : this(new FlickrConfiguration() { ApiKey = apiKey, SharedSecret = sharedSecret })
     {
     }
 
@@ -67,87 +66,165 @@ public partial class Flickr
 
     protected static string AuthUrl => "https://www.flickr.com/services/auth/";
 
+    protected static Uri BaseUri => new("https://api.flickr.com/services/rest/");
+
     protected Cache Cache => _cache;
 
     /// <summary>
-    /// The base URL for all Flickr REST method calls.
+    /// property for all activity functions
     /// </summary>
-    public static Uri BaseUri => new("https://api.flickr.com/services/rest/");
+    public IFlickrActivity Activity => this;
 
     /// <summary>
-    /// Get or set the API Key to be used by all calls. API key is mandatory for all
-    /// calls to Flickr.
+    /// property for all blog functions
     /// </summary>
-    public string ApiKey => _settings.ApiKey;
+    public IFlickrBlogs Blogs => this;
 
     /// <summary>
-    /// API shared secret is required for all calls that require signing, which includes
-    /// all methods that require authentication, as well as the actual flickr.auth.* calls.
+    /// property for all camera functions
     /// </summary>
-    public string ApiSecret => _settings.SharedSecret;
+    public IFlickrCameras Cameras => this;
 
     /// <summary>
-    /// OAuth Access Token. Needed for authenticated access using OAuth to Flickr.
+    /// property for all collection functions
     /// </summary>
-    public string OAuthAccessToken { get; set; }
+    public IFlickrCollections Collections => this;
 
     /// <summary>
-    /// OAuth Access Token Secret. Needed for authenticated access using OAuth to Flickr.
+    /// property for all common functions
     /// </summary>
-    public string OAuthAccessTokenSecret { get; set; }
+    public IFlickrCommons Commons => this;
 
     /// <summary>
-    /// Gets or sets whether the cache should be disabled. Use only in extreme cases where you are sure you
-    /// don't want any caching.
+    /// property for all contact functions
     /// </summary>
-    public bool CacheDisabled => _settings.CacheDisabled;
+    public IFlickrContacts Contacts => this;
 
     /// <summary>
-    /// Override if the cache is disabled for this particular instance of <see cref="Flickr"/>.
+    /// property for all favorites functions
     /// </summary>
-    public bool InstanceCacheDisabled { get; set; }
+    public IFlickrFavorites Favorites => this;
 
     /// <summary>
-    /// All GET calls to Flickr are cached by the Flickr.Net API. Set the <see cref="CacheTimeout"/>
-    /// to determine how long these calls should be cached (make this as long as possible!)
+    /// property for all gallerie functions
     /// </summary>
-    public TimeSpan CacheTimeout => _settings.CacheTimeout;
+    public IFlickrGalleries Galleries => this;
 
     /// <summary>
-    /// Sets or gets the location to store the Cache files.
+    /// property for all group functions
     /// </summary>
-    public string CacheLocation => _settings.CacheLocation;
+    public IFlickrGroups Groups => this;
 
     /// <summary>
-    /// <see cref="CacheSizeLimit"/> is the cache file size in bytes for downloaded
-    /// pictures. The default is 50MB (or 50 * 1024 * 1025 in bytes).
+    /// property for all interestingness functions
     /// </summary>
-    public static long CacheSizeLimit
-    {
-        get { return Cache.CacheSizeLimit; }
-        set { Cache.CacheSizeLimit = value; }
-    }
+    public IFlickrInterestingness Interestingness => this;
 
     /// <summary>
-    /// Internal timeout for all web requests in milliseconds. Defaults to 30 seconds.
+    /// property for all machinetag functions
     /// </summary>
-    public int HttpTimeout { get; set; } = 3600000;
+    public IFlickrMachineTags MachineTags => this;
 
     /// <summary>
-    /// Checks to see if a shared secret and an api token are stored in the object.
-    /// Does not check if these values are valid values.
+    /// property for all oauth functions
+    /// </summary>
+    public IFlickrOAuth OAuth => this;
+
+    /// <summary>
+    /// property for all panda functions
+    /// </summary>
+    public IFlickrPanda Panda => this;
+
+    /// <summary>
+    /// property for all people functions
+    /// </summary>
+    public IFlickrPeople People => this;
+
+    /// <summary>
+    /// property for all photo functions
+    /// </summary>
+    public IFlickrPhotos Photos => this;
+
+    /// <summary>
+    /// property for all photosets functions
+    /// </summary>
+    public IFlickrPhotosets Photosets => this;
+
+    /// <summary>
+    /// property for all place functions
+    /// </summary>
+    public IFlickrPlaces Places => this;
+
+    /// <summary>
+    /// property for all pref functions
+    /// </summary>
+    public IFlickrPrefs Prefs => this;
+
+    /// <summary>
+    /// property for all profile functions
+    /// </summary>
+    public IFlickrProfile Profile => this;
+
+    /// <summary>
+    /// property for all push functions
+    /// </summary>
+    public IFlickrPush Push => this;
+
+    /// <summary>
+    /// property for all reflection functions
+    /// </summary>
+    public IFlickrReflection Reflection => this;
+
+    /// <summary>
+    /// property for all stats functions
+    /// </summary>
+    public IFlickrStats Stats => this;
+
+    /// <summary>
+    /// property for all tags functions
+    /// </summary>
+    public IFlickrTags Tags => this;
+
+    /// <summary>
+    /// property for all test functions
+    /// </summary>
+    public IFlickrTest Test => this;
+
+    /// <summary>
+    /// property for upload and replace functions
+    /// </summary>
+    public IFlickrUpload Upload => this;
+
+    /// <summary>
+    /// property for all url functions
+    /// </summary>
+    public IFlickrUrls Urls => this;
+
+    /// <summary>
+    /// Gets the flickr caching settings.
+    /// </summary>
+    public FlickrCachingSettings FlickrCachingSettings => _cachingSettings;
+
+    /// <summary>
+    /// Gets the flickr settings.
+    /// </summary>
+    public FlickrSettings FlickrSettings => _settings;
+
+    /// <summary>
+    /// Checks to see if a shared secret and an api token are stored in the object. Does not check
+    /// if these values are valid values.
     /// </summary>
     public bool IsAuthenticated
     {
         get
         {
-            return _sharedSecret != null && _apiToken != null;
+            return _settings.ApiSecret != null && _settings.ApiKey != null;
         }
     }
 
     /// <summary>
-    /// Returns the raw XML returned from the last response.
-    /// Only set it the response was not returned from cache.
+    /// Returns the raw XML returned from the last response. Only set it the response was not
+    /// returned from cache.
     /// </summary>
     public byte[] LastResponse { get; private set; }
 
@@ -159,32 +236,29 @@ public partial class Flickr
         get { return _lastRequest; }
     }
 
-    [MemberNotNull(nameof(ApiKey))]
     internal void CheckApiKey()
     {
-        if (string.IsNullOrEmpty(ApiKey))
+        if (string.IsNullOrEmpty(_settings.ApiKey))
         {
             throw new ApiKeyRequiredException();
         }
     }
 
-    [MemberNotNull(nameof(ApiSecret))]
     internal void CheckSigned()
     {
         CheckApiKey();
 
-        if (string.IsNullOrEmpty(ApiSecret))
+        if (string.IsNullOrEmpty(_settings.ApiSecret))
         {
             throw new SignatureRequiredException();
         }
     }
 
-    [MemberNotNull(nameof(ApiSecret))]
     internal void CheckRequiresAuthentication()
     {
         CheckSigned();
 
-        if (!string.IsNullOrEmpty(OAuthAccessToken) && !string.IsNullOrEmpty(OAuthAccessTokenSecret))
+        if (!string.IsNullOrEmpty(_settings.OAuthAccessToken) && !string.IsNullOrEmpty(_settings.OAuthAccessTokenSecret))
         {
             return;
         }
@@ -193,12 +267,17 @@ public partial class Flickr
     }
 
     /// <summary>
-    /// Calculates the Flickr method cal URL based on the passed in parameters, and also generates the signature if required.
+    /// Calculates the Flickr method cal URL based on the passed in parameters, and also generates
+    /// the signature if required.
     /// </summary>
-    /// <param name="parameters">A Dictionary containing a list of parameters to add to the method call.</param>
-    /// <param name="includeSignature">Boolean use to decide whether to generate the api call signature as well.</param>
+    /// <param name="parameters">
+    /// A Dictionary containing a list of parameters to add to the method call.
+    /// </param>
+    /// <param name="includeSignature">
+    /// Boolean use to decide whether to generate the api call signature as well.
+    /// </param>
     /// <returns>The <see cref="Uri"/> for the method call.</returns>
-    public string CalculateUri(Dictionary<string, string> parameters, bool includeSignature)
+    internal string CalculateUri(Dictionary<string, string> parameters, bool includeSignature)
     {
         if (includeSignature)
         {
@@ -221,7 +300,7 @@ public partial class Flickr
     {
         var sorted = parameters.OrderBy(p => p.Key);
 
-        var sb = new StringBuilder(ApiSecret);
+        var sb = new StringBuilder(_settings.ApiKey);
         foreach (var pair in sorted)
         {
             sb.Append(pair.Key);

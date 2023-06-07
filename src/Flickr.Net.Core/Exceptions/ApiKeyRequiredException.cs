@@ -1,4 +1,4 @@
-namespace FlickrNet.Core.Exceptions;
+namespace Flickr.Net.Core.Exceptions;
 
 /// <summary>
 /// Exception thrown is no API key is supplied.
@@ -14,7 +14,8 @@ public class ApiKeyRequiredException : FlickrException
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="ApiKeyRequiredException"/> class with a specified error message.
+    /// Initializes a new instance of the <see cref="ApiKeyRequiredException"/> class with a
+    /// specified error message.
     /// </summary>
     /// <param name="message"></param>
     public ApiKeyRequiredException(string message) : base(message)
@@ -22,7 +23,8 @@ public class ApiKeyRequiredException : FlickrException
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="ApiKeyRequiredException"/> class with a specified error message and a reference to the inner exception that is the cause of this exception.
+    /// Initializes a new instance of the <see cref="ApiKeyRequiredException"/> class with a
+    /// specified error message and a reference to the inner exception that is the cause of this exception.
     /// </summary>
     /// <param name="message"></param>
     /// <param name="innerException"></param>

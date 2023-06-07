@@ -1,4 +1,4 @@
-﻿namespace FlickrNet.Core.Enums;
+﻿namespace Flickr.Net.Core.Enums;
 
 /// <summary>
 /// The context to set a geotagged photo as. Used by <see cref="Flickr.PhotosGeoSetContext"/>.

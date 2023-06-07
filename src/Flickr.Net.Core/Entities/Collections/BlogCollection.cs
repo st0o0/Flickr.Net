@@ -1,6 +1,6 @@
 using System.Collections.ObjectModel;
 
-namespace FlickrNet.Core.Entities.Collections;
+namespace Flickr.Net.Core.Entities.Collections;
 
 /// <summary>
 /// Contains a list of <see cref="Blog"/> items for the user.

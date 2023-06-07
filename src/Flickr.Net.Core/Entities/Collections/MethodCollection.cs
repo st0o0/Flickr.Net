@@ -1,6 +1,6 @@
 using System.Xml;
 
-namespace FlickrNet.Core.Entities.Collections;
+namespace Flickr.Net.Core.Entities.Collections;
 
 /// <summary>
 /// Summary description for Methods.
@@ -24,8 +24,8 @@ public sealed class MethodCollection : System.Collections.ObjectModel.Collection
 /// A method supported by the Flickr API.
 /// </summary>
 /// <remarks>
-/// See <a href="https://www.flickr.com/services/api">Flickr API Documentation</a> for a complete list
-/// of methods.
+/// See <a href="https://www.flickr.com/services/api">Flickr API Documentation</a> for a complete
+/// list of methods.
 /// </remarks>
 public sealed class Method : IFlickrParsable
 {

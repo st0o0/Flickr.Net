@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 
-namespace FlickrNet.Core.Entities;
+namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// A tag cluster (a tag and a group of common sibling tags).

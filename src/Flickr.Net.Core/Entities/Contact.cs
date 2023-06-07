@@ -1,4 +1,4 @@
-﻿namespace FlickrNet.Core.Entities;
+﻿namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// Contains details of a contact for a particular user.
@@ -21,12 +21,12 @@ public sealed class Contact : IFlickrParsable
     public string RealName { get; set; }
 
     /// <summary>
-    /// The location of the contact. Only returned for auehtnicated calls to <see cref="Flickr.ContactsGetList()"/>.
+    /// The location of the contact. Only returned for authenticated calls to <see cref="Flickr.ContactsGetList()"/>.
     /// </summary>
     public string Location { get; set; }
 
     /// <summary>
-    /// The URL path alias for the contact.  Only returned for auehtnicated calls to <see cref="Flickr.ContactsGetList()"/>.
+    /// The URL path alias for the contact. Only returned for authenticated calls to <see cref="Flickr.ContactsGetList()"/>.
     /// </summary>
     public string PathAlias { get; set; }
 

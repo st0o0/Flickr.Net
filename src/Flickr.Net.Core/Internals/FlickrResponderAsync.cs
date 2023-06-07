@@ -1,18 +1,22 @@
-﻿using FlickrNet.Core.Exceptions;
+﻿using Flickr.Net.Core.Exceptions;
 using System.Net;
 using System.Net.Http.Headers;
 
-namespace FlickrNet.Core.Internals;
+namespace Flickr.Net.Core.Internals;
+/// <summary>
+/// The flickr responder.
+/// </summary>
 
 public static partial class FlickrResponder
 {
     /// <summary>
-    /// Gets a data response for the given base url and parameters,
-    /// either using OAuth or not depending on which parameters were passed in.
+    /// Gets a data response for the given base url and parameters, either using OAuth or not
+    /// depending on which parameters were passed in.
     /// </summary>
     /// <param name="flickr">The current instance of the <see cref="Flickr"/> class.</param>
     /// <param name="baseUrl">The base url to be called.</param>
     /// <param name="parameters">A dictionary of parameters.</param>
+    /// <param name="cancellationToken"></param>
     /// <param name="callback"></param>
     /// <returns></returns>
     public static async Task<byte[]> GetDataResponseAsync(Flickr flickr, string baseUrl, Dictionary<string, string> parameters, CancellationToken cancellationToken = default)
@@ -55,13 +59,13 @@ public static partial class FlickrResponder
         }
 
         // If OAuth Access Token is set then add token and generate signature.
-        if (!string.IsNullOrEmpty(flickr.OAuthAccessToken) && !parameters.ContainsKey("oauth_token"))
+        if (!string.IsNullOrEmpty(flickr.FlickrSettings.OAuthAccessToken) && !parameters.ContainsKey("oauth_token"))
         {
-            parameters.Add("oauth_token", flickr.OAuthAccessToken);
+            parameters.Add("oauth_token", flickr.FlickrSettings.OAuthAccessToken);
         }
-        if (!string.IsNullOrEmpty(flickr.OAuthAccessTokenSecret) && !parameters.ContainsKey("oauth_signature"))
+        if (!string.IsNullOrEmpty(flickr.FlickrSettings.OAuthAccessTokenSecret) && !parameters.ContainsKey("oauth_signature"))
         {
-            string sig = flickr.OAuthCalculateSignature("POST", baseUrl, parameters, flickr.OAuthAccessTokenSecret);
+            string sig = ((IFlickrOAuth)flickr).CalculateSignature("POST", baseUrl, parameters, flickr.FlickrSettings.OAuthAccessTokenSecret);
             parameters.Add("oauth_signature", sig);
         }
 

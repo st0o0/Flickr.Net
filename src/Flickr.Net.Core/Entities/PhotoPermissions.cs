@@ -1,6 +1,6 @@
 using System.Xml;
 
-namespace FlickrNet.Core.Entities;
+namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// Permissions for the selected photo.
@@ -8,21 +8,39 @@ namespace FlickrNet.Core.Entities;
 public sealed class PhotoPermissions : IFlickrParsable
 {
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets the photo id.
+    /// </summary>
     public string PhotoId { get; set; }
 
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets a value indicating whether is public.
+    /// </summary>
     public bool IsPublic { get; set; }
 
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets a value indicating whether is friend.
+    /// </summary>
     public bool IsFriend { get; set; }
 
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets a value indicating whether is family.
+    /// </summary>
     public bool IsFamily { get; set; }
 
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets the permission comment.
+    /// </summary>
     public PermissionComment PermissionComment { get; set; }
 
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets the permission add meta.
+    /// </summary>
     public PermissionAddMeta PermissionAddMeta { get; set; }
 
     void IFlickrParsable.Load(XmlReader reader)

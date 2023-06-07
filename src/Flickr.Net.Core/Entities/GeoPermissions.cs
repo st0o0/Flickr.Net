@@ -1,6 +1,6 @@
 using System.Xml;
 
-namespace FlickrNet.Core.Entities;
+namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// Permissions for the selected photo.

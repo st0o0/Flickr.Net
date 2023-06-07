@@ -1,26 +1,35 @@
-namespace FlickrNet.Core.Entities;
+namespace Flickr.Net.Core.Entities;
 
 /// <summary>
-/// The <see cref="Person"/> class contains details returned by the <see cref="Flickr.PeopleGetInfo"/>
-/// method.
+/// The <see cref="Person"/> class contains details returned by the <see
+/// cref="Flickr.PeopleGetInfo"/> method.
 /// </summary>
 public sealed class Person : IFlickrParsable
 {
-    /// <summary>The user id of the user.</summary>
+    /// <summary>
+    /// The user id of the user.
+    /// </summary>
     /// <remarks/>
     public string UserId { get; set; }
 
-    /// <summary>Does the user posses a pro account.
-    /// 0 = free acouunt, 1 = pro account holder.</summary>
+    /// <summary>
+    /// Does the user posses a pro account. 0 = free acouunt, 1 = pro account holder.
+    /// </summary>
     public bool IsPro { get; set; }
 
-    /// <summary>The server that will serve up the users Buddy Icon.</summary>
+    /// <summary>
+    /// The server that will serve up the users Buddy Icon.
+    /// </summary>
     public string IconServer { get; set; }
 
-    /// <summary>The server farm that will serve up the users Buddy Icon.</summary>
+    /// <summary>
+    /// The server farm that will serve up the users Buddy Icon.
+    /// </summary>
     public string IconFarm { get; set; }
 
-    /// <summary>The gender of the user on Flickr. May be null, or X for unspecified.</summary>
+    /// <summary>
+    /// The gender of the user on Flickr. May be null, or X for unspecified.
+    /// </summary>
     public string Gender { get; set; }
 
     /// <summary>
@@ -44,17 +53,17 @@ public sealed class Person : IFlickrParsable
     public bool? IsFamily { get; set; }
 
     /// <summary>
-    /// Has the person marked the calling user as a contact.  Will be null if not an authenticated call.
+    /// Has the person marked the calling user as a contact. Will be null if not an authenticated call.
     /// </summary>
     public bool? IsReverseContact { get; set; }
 
     /// <summary>
-    /// Has the person marked the calling user as a friend.  Will be null if not an authenticated call.
+    /// Has the person marked the calling user as a friend. Will be null if not an authenticated call.
     /// </summary>
     public bool? IsReverseFriend { get; set; }
 
     /// <summary>
-    /// Has the person marked the calling user as family.  Will be null if not an authenticated call.
+    /// Has the person marked the calling user as family. Will be null if not an authenticated call.
     /// </summary>
     public bool? IsReverseFamily { get; set; }
 
@@ -68,20 +77,30 @@ public sealed class Person : IFlickrParsable
     /// </summary>
     public bool? HasStats { get; set; }
 
-    /// <summary>The users username, also known as their screenname.</summary>
+    /// <summary>
+    /// The users username, also known as their screenname.
+    /// </summary>
     public string UserName { get; set; }
 
-    /// <summary>The users real name, as entered in their profile.</summary>
+    /// <summary>
+    /// The users real name, as entered in their profile.
+    /// </summary>
     public string RealName { get; set; }
 
-    /// <summary>The SHA1 hash of the users email address - used for FOAF networking.</summary>
+    /// <summary>
+    /// The SHA1 hash of the users email address - used for FOAF networking.
+    /// </summary>
     public string MailboxSha1Hash { get; set; }
 
-    /// <summary>Consists of your current location followed by country.</summary>
+    /// <summary>
+    /// Consists of your current location followed by country.
+    /// </summary>
     /// <example>e.g. Newcastle, UK.</example>
     public string Location { get; set; }
 
-    /// <summary>Sub element containing a summary of the users photo information.</summary>
+    /// <summary>
+    /// Sub element containing a summary of the users photo information.
+    /// </summary>
     /// <remarks/>
     public PersonPhotosSummary PhotosSummary { get; set; }
 
@@ -91,20 +110,17 @@ public sealed class Person : IFlickrParsable
     public string PathAlias { get; set; }
 
     /// <summary>
-    /// The users photo location on Flickr
-    /// https://www.flickr.com/photos/username/
+    /// The users photo location on Flickr https://www.flickr.com/photos/username/
     /// </summary>
     public string PhotosUrl { get; set; }
 
     /// <summary>
-    /// The users profile location on Flickr
-    /// https://www.flickr.com/people/username/
+    /// The users profile location on Flickr https://www.flickr.com/people/username/
     /// </summary>
     public string ProfileUrl { get; set; }
 
     /// <summary>
-    /// The users profile location on Flickr
-    /// https://m.flickr.com/photostream.gne?id=ID
+    /// The users profile location on Flickr https://m.flickr.com/photostream.gne?id=ID
     /// </summary>
     public string MobileUrl { get; set; }
 
@@ -132,9 +148,7 @@ public sealed class Person : IFlickrParsable
     /// <summary>
     /// The description of the user, as taken from the users profil page.
     /// </summary>
-    /// <remarks>
-    /// Will likely contain HTML.
-    /// </remarks>
+    /// <remarks>Will likely contain HTML.</remarks>
     public string Description { get; set; }
 
     void IFlickrParsable.Load(System.Xml.XmlReader reader)
@@ -287,17 +301,25 @@ public sealed class Person : IFlickrParsable
 /// </summary>
 public sealed class PersonPhotosSummary : IFlickrParsable
 {
-    /// <summary>The first date the user uploaded a picture, converted into <see cref="DateTime"/> format.</summary>
+    /// <summary>
+    /// The first date the user uploaded a picture, converted into <see cref="DateTime"/> format.
+    /// </summary>
     public DateTime FirstDate { get; set; }
 
-    /// <summary>The first date the user took a picture, converted into <see cref="DateTime"/> format.</summary>
+    /// <summary>
+    /// The first date the user took a picture, converted into <see cref="DateTime"/> format.
+    /// </summary>
     public DateTime FirstTakenDate { get; set; }
 
-    /// <summary>The total number of photos for the user.</summary>
+    /// <summary>
+    /// The total number of photos for the user.
+    /// </summary>
     /// <remarks/>
     public int PhotoCount { get; set; }
 
-    /// <summary>The total number of photos for the user.</summary>
+    /// <summary>
+    /// The total number of photos for the user.
+    /// </summary>
     /// <remarks/>
     public int Views { get; set; }
 

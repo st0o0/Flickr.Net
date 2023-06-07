@@ -1,11 +1,9 @@
-﻿namespace FlickrNet.Core.Entities.Collections;
+﻿namespace Flickr.Net.Core.Entities.Collections;
 
 /// <summary>
 /// Collection containing information about the types of 'places' available from the Flickr API.
 /// </summary>
-/// <remarks>
-/// Use the <see cref="PlaceInfo"/> enumeration were possible.
-/// </remarks>
+/// <remarks>Use the <see cref="PlaceInfo"/> enumeration were possible.</remarks>
 public sealed class PlaceTypeInfoCollection : System.Collections.ObjectModel.Collection<PlaceTypeInfo>, IFlickrParsable
 {
     void IFlickrParsable.Load(System.Xml.XmlReader reader)

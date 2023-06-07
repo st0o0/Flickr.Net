@@ -1,7 +1,8 @@
-﻿namespace FlickrNet.Core.Entities;
+﻿namespace Flickr.Net.Core.Entities;
 
 /// <summary>
-/// Used by the FlickrNet library when Flickr does not return anything in the body of a response, e.g. for update methods.
+/// Used by the FlickrNet library when Flickr does not return anything in the body of a response,
+/// e.g. for update methods.
 /// </summary>
 public sealed class NoResponse : IFlickrParsable
 {

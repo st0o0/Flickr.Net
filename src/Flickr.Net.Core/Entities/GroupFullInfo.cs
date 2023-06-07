@@ -1,27 +1,38 @@
 ﻿using System.Xml;
 
-namespace FlickrNet.Core.Entities;
+namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// Provides details of a particular group.
 /// </summary>
 /// <remarks>
-/// Used by the Url methods and <see cref="Flickr.GroupsGetInfo"/> method.
-/// The reason for a <see cref="Group"/> and <see cref="GroupFullInfo"/> are due to xml serialization
-/// incompatabilities.
+/// Used by the Url methods and <see cref="Flickr.GroupsGetInfo"/> method. The reason for a <see
+/// cref="Group"/> and <see cref="GroupFullInfo"/> are due to xml serialization incompatabilities.
 /// </remarks>
 public sealed class GroupFullInfo : IFlickrParsable
 {
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets the group id.
+    /// </summary>
     public string GroupId { get; set; }
 
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets the group name.
+    /// </summary>
     public string GroupName { get; set; }
 
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets the description.
+    /// </summary>
     public string Description { get; set; }
 
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets the members.
+    /// </summary>
     public int Members { get; set; }
 
     /// <summary>
@@ -101,9 +112,15 @@ public sealed class GroupFullInfo : IFlickrParsable
     }
 
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets the privacy.
+    /// </summary>
     public PoolPrivacy Privacy { get; set; }
 
     /// <remarks/>
+    /// <summary>
+    /// Gets or sets the throttle info.
+    /// </summary>
     public GroupThrottleInfo ThrottleInfo { get; set; }
 
     /// <summary>
@@ -117,8 +134,8 @@ public sealed class GroupFullInfo : IFlickrParsable
     public string Rules { get; set; }
 
     /// <summary>
-    /// Methods for automatically converting a <see cref="GroupFullInfo"/> object into
-    /// and instance of a <see cref="Group"/> object.
+    /// Methods for automatically converting a <see cref="GroupFullInfo"/> object into and instance
+    /// of a <see cref="Group"/> object.
     /// </summary>
     /// <param name="groupInfo">The incoming object.</param>
     /// <returns>The <see cref="Group"/> instance.</returns>
@@ -133,8 +150,7 @@ public sealed class GroupFullInfo : IFlickrParsable
     }
 
     /// <summary>
-    /// Converts the current <see cref="GroupFullInfo"/> into an instance of the
-    /// <see cref="Group"/> class.
+    /// Converts the current <see cref="GroupFullInfo"/> into an instance of the <see cref="Group"/> class.
     /// </summary>
     /// <returns>A <see cref="Group"/> instance.</returns>
     public Group ToGroup()

@@ -1,13 +1,15 @@
-﻿using FlickrNet.Core.Exceptions;
+﻿using Flickr.Net.Core.Exceptions;
 using System.Collections.ObjectModel;
 
-namespace FlickrNet.Core.Entities;
+namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// The shape data supplied by <see cref="Flickr.PlacesGetInfo"/>.
 /// </summary>
 /// <remarks>
-/// See <a href="http://code.flickr.com/blog/2008/10/30/the-shape-of-alpha/">http://code.flickr.com/blog/2008/10/30/the-shape-of-alpha/</a> for more details.
+/// See 
+/// <a href="http://code.flickr.com/blog/2008/10/30/the-shape-of-alpha/">http://code.flickr.com/blog/2008/10/30/the-shape-of-alpha/</a>
+/// for more details.
 /// </remarks>
 public sealed class ShapeData : IFlickrParsable
 {
@@ -168,7 +170,8 @@ public struct PointD
     }
 
     /// <summary>
-    /// For predefined value types, the equality operator (==) returns true if the values of its operands are equal, false otherwise.
+    /// For predefined value types, the equality operator (==) returns true if the values of its
+    /// operands are equal, false otherwise.
     /// </summary>
     /// <param name="point1"></param>
     /// <param name="point2"></param>
@@ -179,7 +182,8 @@ public struct PointD
     }
 
     /// <summary>
-    /// For predefined value types, the equality operator (!=) returns false if the values of its operands are equal, true otherwise.
+    /// For predefined value types, the equality operator (!=) returns false if the values of its
+    /// operands are equal, true otherwise.
     /// </summary>
     /// <param name="point1"></param>
     /// <param name="point2"></param>
@@ -190,7 +194,6 @@ public struct PointD
     }
 
     /// <summary>
-    ///
     /// </summary>
     /// <param name="obj"></param>
     /// <returns></returns>
@@ -210,7 +213,6 @@ public struct PointD
     }
 
     /// <summary>
-    ///
     /// </summary>
     /// <returns></returns>
     public override int GetHashCode()
@@ -219,7 +221,6 @@ public struct PointD
     }
 
     /// <summary>
-    ///
     /// </summary>
     /// <returns></returns>
     public override string ToString()

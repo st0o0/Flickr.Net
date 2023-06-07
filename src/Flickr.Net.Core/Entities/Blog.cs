@@ -1,4 +1,4 @@
-﻿namespace FlickrNet.Core.Entities;
+﻿namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// Provides details of a specific blog, as configured by the user.
@@ -6,7 +6,7 @@
 public sealed class Blog : IFlickrParsable
 {
     /// <summary>
-    /// The ID Flickr has assigned to the blog. Use this to post to the blog using
+    /// The ID Flickr has assigned to the blog. Use this to post to the blog using 
     /// <see cref="Flickr.BlogsPostPhoto(string, string, string, string)"/> or
     /// <see cref="Flickr.BlogsPostPhoto(string, string, string, string, string)"/>.
     /// </summary>
@@ -23,8 +23,8 @@ public sealed class Blog : IFlickrParsable
     public string BlogUrl { get; set; }
 
     /// <summary>
-    /// If Flickr stores the password for this then this will be 0, meaning you do not need to pass in the
-    /// password when posting.
+    /// If Flickr stores the password for this then this will be 0, meaning you do not need to pass
+    /// in the password when posting.
     /// </summary>
     public bool NeedsPassword { get; set; }
 

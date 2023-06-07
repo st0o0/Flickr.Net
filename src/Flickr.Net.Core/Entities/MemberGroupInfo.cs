@@ -1,4 +1,4 @@
-﻿namespace FlickrNet.Core.Entities;
+﻿namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// Information about a group the authenticated user is a member of.
@@ -10,7 +10,9 @@ public sealed class MemberGroupInfo : IFlickrParsable
     /// </summary>
     public string GroupId { get; set; }
 
-    /// <summary>The group name.</summary>
+    /// <summary>
+    /// The group name.
+    /// </summary>
     public string GroupName { get; set; }
 
     /// <summary>

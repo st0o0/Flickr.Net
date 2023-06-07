@@ -1,6 +1,6 @@
 ﻿using System.Xml;
 
-namespace FlickrNet.Core.Entities;
+namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// Detailed information about a place. Returned by <see cref="Flickr.PlacesGetInfo"/>.
@@ -15,9 +15,7 @@ public sealed class PlaceInfo : IFlickrParsable
     /// <summary>
     /// The web page URL that corresponds to this place.
     /// </summary>
-    /// <remarks>
-    /// The 'URL' returned is only a sudo url such as '/Canada/Quebec/Montreal'.
-    /// </remarks>
+    /// <remarks>The 'URL' returned is only a sudo url such as '/Canada/Quebec/Montreal'.</remarks>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings",
         Justification = "Although called 'URL' by the Flickr API it is not an actual URI.")]
     public string PlaceUrl { get; set; }

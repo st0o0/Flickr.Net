@@ -1,4 +1,4 @@
-namespace FlickrNet.Core.Exceptions;
+namespace Flickr.Net.Core.Exceptions;
 
 /// <summary>
 /// Exception thrown when a communication error occurs with a web call.
@@ -15,7 +15,8 @@ public class FlickrWebException : FlickrException
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="FlickrWebException"/> class with a specified error message.
+    /// Initializes a new instance of the <see cref="FlickrWebException"/> class with a specified
+    /// error message.
     /// </summary>
     /// <param name="message"></param>
     public FlickrWebException(string message)
@@ -24,7 +25,8 @@ public class FlickrWebException : FlickrException
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="FlickrWebException"/> class with a specified error message and a reference to the inner exception that is the cause of this exception.
+    /// Initializes a new instance of the <see cref="FlickrWebException"/> class with a specified
+    /// error message and a reference to the inner exception that is the cause of this exception.
     /// </summary>
     /// <param name="message"></param>
     /// <param name="innerException"></param>

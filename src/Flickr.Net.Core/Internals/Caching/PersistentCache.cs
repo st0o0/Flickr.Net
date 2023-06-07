@@ -1,21 +1,19 @@
 using System.Collections;
 using System.Diagnostics;
 
-namespace FlickrNet.Core.Internals.Caching;
+namespace Flickr.Net.Core.Internals.Caching;
 
 /// <summary>
 /// A threadsafe cache that is backed by disk storage.
 ///
-/// All public methods that read or write state must be
-/// protected by the lockFile.  Private methods should
-/// not acquire the lockFile as it is not reentrant.
+/// All public methods that read or write state must be protected by the lockFile. Private methods
+/// should not acquire the lockFile as it is not reentrant.
 /// </summary>
 public sealed class PersistentCache : IDisposable
 {
-    // The in-memory representation of the cache.
-    // Use SortedList instead of Hashtable only to maintain backward
-    // compatibility with previous serialization scheme.  If we
-    // abandon backward compatibility, we should switch to Hashtable.
+    // The in-memory representation of the cache. Use SortedList instead of Hashtable only to
+    // maintain backward compatibility with previous serialization scheme. If we abandon backward
+    // compatibility, we should switch to Hashtable.
     private Dictionary<string, ICacheItem> dataTable = new();
 
     private readonly CacheItemPersister persister;
@@ -29,11 +27,12 @@ public sealed class PersistentCache : IDisposable
     private DateTime timestamp;  // last-modified time of dataFile when cache data was last known to be in sync
     private long length;         // length of dataFile when cache data was last known to be in sync
 
-    // The file-based mutex.  Named (dataFile.FullName + ".lock")
+    // The file-based mutex. Named (dataFile.FullName + ".lock")
     private readonly LockFile lockFile;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="PersistentCache"/> for the given filename and cache type.
+    /// Initializes a new instance of the <see cref="PersistentCache"/> for the given filename and
+    /// cache type.
     /// </summary>
     /// <param name="filename"></param>
     /// <param name="persister"></param>
@@ -45,8 +44,7 @@ public sealed class PersistentCache : IDisposable
     }
 
     /// <summary>
-    /// Return all items in the cache.  Works similarly to
-    /// ArrayList.ToArray(Type).
+    /// Return all items in the cache. Works similarly to ArrayList.ToArray(Type).
     /// </summary>
     public ICacheItem[] ToArray(Type valueType)
     {

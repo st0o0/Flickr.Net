@@ -1,7 +1,7 @@
-﻿using FlickrNet.Core.Internals.Extensions;
+﻿using Flickr.Net.Core.Internals.Extensions;
 using System.Net;
 
-namespace FlickrNet.Core.Internals.HttpContents;
+namespace Flickr.Net.Core.Internals.HttpContents;
 
 internal class StreamedContent : HttpContent
 {

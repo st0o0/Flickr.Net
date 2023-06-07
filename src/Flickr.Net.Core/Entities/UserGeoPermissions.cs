@@ -1,10 +1,10 @@
 ﻿using System.Xml;
 
-namespace FlickrNet.Core.Entities;
+namespace Flickr.Net.Core.Entities;
 
 /// <summary>
-/// The default privacy level for geographic information attached to the user's photos
-/// and whether or not the user has chosen to use geo-related EXIF information to automatically geotag their photos.
+/// The default privacy level for geographic information attached to the user's photos and whether
+/// or not the user has chosen to use geo-related EXIF information to automatically geotag their photos.
 /// </summary>
 public sealed class UserGeoPermissions : IFlickrParsable
 {
@@ -19,7 +19,8 @@ public sealed class UserGeoPermissions : IFlickrParsable
     public GeoPermissionType GeoPermissions { get; set; }
 
     /// <summary>
-    /// Whether or not the user has chosen to use geo-related EXIF information to automatically geotag their photos.
+    /// Whether or not the user has chosen to use geo-related EXIF information to automatically
+    /// geotag their photos.
     /// </summary>
     public bool ImportGeoExif { get; set; }
 
