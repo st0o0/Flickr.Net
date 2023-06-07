@@ -26,7 +26,7 @@
         <PackAsTool>False</PackAsTool>
         <Company />
         <GenerateDocumentationFile>True</GenerateDocumentationFile>
-        <DocumentationFile>$(ProjectDir)..\..\doc\SandCastleDocuments.xml</DocumentationFile>
+        <DocumentationFile>$(ProjectDir)..\..\docs\SandCastleDocuments.xml</DocumentationFile>
     </PropertyGroup>
 
 </Project>
