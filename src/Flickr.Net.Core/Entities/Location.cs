@@ -1,0 +1,1 @@
+namespace Flickr.Net.Core.Entities;
