@@ -76,10 +76,8 @@ public sealed class PersistentCache : IDisposable
                 oldItem = InternalSet(key, value);
                 Persist();
             }
-            if (oldItem != null)
-            {
-                oldItem.OnItemFlushed();
-            }
+
+            oldItem?.OnItemFlushed();
         }
     }
 
@@ -174,10 +172,7 @@ public sealed class PersistentCache : IDisposable
         foreach (ICacheItem flushedItem in flushed)
         {
             Debug.Assert(flushedItem != null, "Flushed item was null--programmer error");
-            if (flushedItem != null)
-            {
-                flushedItem.OnItemFlushed();
-            }
+            flushedItem?.OnItemFlushed();
         }
     }
 
@@ -365,9 +360,6 @@ public sealed class PersistentCache : IDisposable
 
     void IDisposable.Dispose()
     {
-        if (lockFile != null)
-        {
-            lockFile.Dispose();
-        }
+        lockFile?.Dispose();
     }
 }

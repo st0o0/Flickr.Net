@@ -56,11 +56,16 @@ public interface IFlickrBlogs
     /// Gets a list of blogs that have been set up by the user. Requires authentication.
     /// </summary>
     /// <remarks></remarks>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<BlogCollection> GetListAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Return a list of Flickr supported blogging services.
     /// </summary>
+    /// ///
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<BlogServiceCollection> GetServicesAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -72,5 +77,6 @@ public interface IFlickrBlogs
     /// <param name="description">The body of the blog post.</param>
     /// <param name="blogPassword">The password of the blog if it is not already stored in flickr.</param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<NoResponse> PostPhotoAsync(string blogId, string photoId, string title, string description, string blogPassword = null, CancellationToken cancellationToken = default);
 }

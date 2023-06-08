@@ -592,7 +592,7 @@ public interface IFlickrPhotos
     /// <param name="photoId">The photo id of the photo.</param>
     /// <param name="tags">An array of strings containing the tags.</param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task AddTagAsync(string photoId, string[] tags, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -601,16 +601,16 @@ public interface IFlickrPhotos
     /// <remarks>Requires Delete permissions. Also note, photos cannot be recovered once deleted.</remarks>
     /// <param name="photoId">The ID of the photo to delete.</param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task DeleteAsync(string photoId, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Get all the contexts (group, set and photostream 'next' and 'previous'
+    /// Get all the contexts (group, set and photo stream 'next' and 'previous'
     /// pictures) for a photo.
     /// </summary>
     /// <param name="photoId">The photo id of the photo to get the contexts for.</param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task<AllContexts> GetAllContextsAsync(string photoId, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -625,12 +625,12 @@ public interface IFlickrPhotos
     /// If true includes yourself in the group of people to return photos for.
     /// </param>
     /// <param name="extras">Optional extras that can be returned by this call.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns></returns>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// Throws a <see cref="ArgumentOutOfRangeException"/> exception if the cound is not between 10
+    /// Throws a <see cref="ArgumentOutOfRangeException"/> exception if the count is not between 10
     /// and 50, or 0.
     /// </exception>
-    /// <param name="cancellationToken"></param>
-    /// <return></return>
     Task<PhotoCollection> GetContactsPhotosAsync(int count = 0, bool justFriends = false, bool singlePhoto = false, bool includeSelf = false, PhotoSearchExtras extras = PhotoSearchExtras.None, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -644,29 +644,29 @@ public interface IFlickrPhotos
     /// <param name="singlePhoto">True to return just a single photo for each contact.</param>
     /// <param name="includeSelf">True to include photos from the user ID specified as well.</param>
     /// <param name="extras">A list of extra details to return for each photo.</param>
-    /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns></returns>
     Task<PhotoCollection> GetContactsPublicPhotosAsync(string userId, int count = 0, bool justFriends = false, bool singlePhoto = false, bool includeSelf = false, PhotoSearchExtras extras = PhotoSearchExtras.None, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Gets the context of the photo in the users photostream.
+    /// Gets the context of the photo in the users photo stream.
     /// </summary>
     /// <param name="photoId">The ID of the photo to return the context for.</param>
-    /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns></returns>
     Task<Context> GetContextAsync(string photoId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Returns count of photos between each pair of dates in the list.
     /// </summary>
+    /// <param name="dates">Comma-delimited list of dates in unix time stamp format. Optional.</param>
+    /// <param name="takenDates">Comma-delimited list of dates in unix time stamp format. Optional.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns></returns>
     /// <remarks>
     /// If you pass in DateA, DateB and DateC it returns a list of the number of photos between
     /// DateA and DateB, followed by the number between DateB and DateC. More parameters means more sets.
     /// </remarks>
-    /// <param name="dates">Comma-delimited list of dates in unix timestamp format. Optional.</param>
-    /// <param name="takenDates">Comma-delimited list of dates in unix timestamp format. Optional.</param>
-    /// <param name="cancellationToken"></param>
-    /// <return></return>
     Task<PhotoCountCollection> GetCountsAsync(DateTime[] dates = null, DateTime[] takenDates = null, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -676,8 +676,8 @@ public interface IFlickrPhotos
     /// <param name="secret">
     /// The secret of the photo. If the secret is specified then authentication checks are bypassed.
     /// </param>
-    /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns></returns>
     Task<ExifTagCollection> GetExifAsync(string photoId, string secret = null, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -686,8 +686,8 @@ public interface IFlickrPhotos
     /// <param name="photoId">The photo ID of the photo.</param>
     /// <param name="perPage">How many favourites to return per page. Default is 10.</param>
     /// <param name="page">The page to return. Default is 1.</param>
-    /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns></returns>
     Task<PhotoFavoriteCollection> GetFavoritesAsync(string photoId, int perPage = 0, int page = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -699,7 +699,7 @@ public interface IFlickrPhotos
     /// skipped. This enables the 'sharing' of individual photos by passing around the id and secret.
     /// </param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task<PhotoInfo> GetInfoAsync(string photoId, string secret = null, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -707,7 +707,7 @@ public interface IFlickrPhotos
     /// </summary>
     /// <param name="options">A selection of options to filter/sort by.</param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task<PhotoCollection> GetNotInSetAsync(PartialSearchOptions options, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -715,7 +715,7 @@ public interface IFlickrPhotos
     /// </summary>
     /// <param name="photoId">The id of the photo to get permissions for.</param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task<PhotoPermissions> GetPermsAsync(string photoId, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -727,7 +727,7 @@ public interface IFlickrPhotos
     /// <param name="perPage"></param>
     /// <param name="page"></param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task<PhotoCollection> GetPopularAsync(string userId, PhotoSearchExtras extras = PhotoSearchExtras.None, PopularSorting sort = PopularSorting.None, int perPage = 0, int page = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -744,7 +744,7 @@ public interface IFlickrPhotos
     /// maximum allowed value is 500.
     /// </param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task<PhotoCollection> GetRecentAsync(int page = 0, int perPage = 0, PhotoSearchExtras extras = PhotoSearchExtras.None, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -752,7 +752,7 @@ public interface IFlickrPhotos
     /// </summary>
     /// <param name="photoId">The id of the photo to fetch size information for.</param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task<SizeCollection> GetSizesAsync(string photoId, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -762,7 +762,7 @@ public interface IFlickrPhotos
     /// The <see cref="PartialSearchOptions"/> containing the list of options supported by this method.
     /// </param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task<PhotoCollection> GetUntaggedAsync(PartialSearchOptions options, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -770,7 +770,7 @@ public interface IFlickrPhotos
     /// </summary>
     /// <param name="options">A limited set of options are supported.</param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task<PhotoCollection> GetWithoutGeoDataAsync(PartialSearchOptions options, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -782,7 +782,7 @@ public interface IFlickrPhotos
     /// </remarks>
     /// <param name="options">The options to filter/sort the results by.</param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task<PhotoCollection> GetWithGeoDataAsync(PartialSearchOptions options, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -800,17 +800,17 @@ public interface IFlickrPhotos
     /// The page of results to return. If this argument is omitted, it defaults to 1.
     /// </param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task<PhotoCollection> RecentlyUpdatedAsync(DateTime minDate, PhotoSearchExtras extras = PhotoSearchExtras.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Remove an existing tag.
     /// </summary>
     /// <param name="tagId">
-    /// The id of the tag, as returned by <see cref="Flickr.Photos.GetInfoAsync()"/> or similar method.
+    /// The id of the tag, as returned by <see cref="IFlickrPhotos.GetInfoAsync"/> or similar method.
     /// </param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task RemoveTagAsync(string tagId, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -818,7 +818,7 @@ public interface IFlickrPhotos
     /// </summary>
     /// <param name="options">The parameters to search for.</param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task<PhotoCollection> SearchAsync(PhotoSearchOptions options, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -827,12 +827,12 @@ public interface IFlickrPhotos
     /// <param name="photoId">The ID of the photos to set.</param>
     /// <param name="contentType">The new content type.</param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task SetContentTypeAsync(string photoId, ContentType contentType, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Set the date the photo was posted (uploaded) and the date the photo was taken. Changing the
-    /// date posted will affect the order in which photos are seen in your photostream.
+    /// date posted will affect the order in which photos are seen in your photo stream.
     /// </summary>
     /// <remarks>
     /// All dates are assumed to be GMT. It is the developers responsibility to change dates to the
@@ -843,7 +843,7 @@ public interface IFlickrPhotos
     /// <param name="dateTaken">The new date to set the date taken too.</param>
     /// <param name="granularity">The granularity of the date taken.</param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task SetDatesAsync(string photoId, DateTime? datePosted = null, DateTime? dateTaken = null, DateGranularity granularity = DateGranularity.Circa, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -854,7 +854,7 @@ public interface IFlickrPhotos
     /// <param name="description">The new description of the photograph.</param>
     /// <exception cref="FlickrApiException">Thrown when the photo id cannot be found.</exception>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task SetMetaAsync(string photoId, string title = null, string description = null, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -871,7 +871,7 @@ public interface IFlickrPhotos
     /// Who can add metadata (notes and tags). See <see cref="PermissionAddMeta"/> for more details.
     /// </param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task SetPermsAsync(string photoId, bool isPublic = false, bool isFriend = false, bool isFamily = false, PermissionComment? permComment = null, PermissionAddMeta? permAddMeta = null, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -881,7 +881,7 @@ public interface IFlickrPhotos
     /// <param name="safetyLevel">The new content type.</param>
     /// <param name="hidden">The new hidden value.</param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task SetSafetyLevelAsync(string photoId, SafetyLevel safetyLevel = SafetyLevel.None, HiddenFromSearch hidden = HiddenFromSearch.None, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -889,11 +889,11 @@ public interface IFlickrPhotos
     /// </summary>
     /// <remarks>
     /// This will remove all old tags and add these new ones specified. See <see
-    /// cref="PhotosAddTags(string, string)"/> to just add new tags without deleting old ones.
+    /// cref="IFlickrPhotos.AddTagAsync"/> to just add new tags without deleting old ones.
     /// </remarks>
     /// <param name="photoId">The id of the photo to update.</param>
     /// <param name="tags">An array of tags.</param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task SetTagsAsync(string photoId, string[] tags, CancellationToken cancellationToken = default);
 }

@@ -355,6 +355,7 @@ public interface IFlickrStats
     /// maximum allowed value is 100.
     /// </param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<StatDomainCollection> StatsGetCollectionDomainsAsync(DateTime date, string collectionId = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -373,6 +374,7 @@ public interface IFlickrStats
     /// The number of referrers to return per page. The default is 25 and the maximum is 100.
     /// </param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<StatReferrerCollection> StatsGetCollectionReferrersAsync(DateTime date, string domain, string collectionId = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -382,12 +384,15 @@ public interface IFlickrStats
     /// <param name="date">The date to return stats for.</param>
     /// <param name="collectionId">The collection to return stats for.</param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<Stats> StatsGetCollectionStatsAsync(DateTime date, string collectionId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets the collection of CSV files of archived stats from Flickr.
     /// </summary>
     /// <remarks>Archived files only available till the 1st June 2010.</remarks>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<CsvFileCollection> StatsGetCsvFilesAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -408,6 +413,7 @@ public interface IFlickrStats
     /// maximum allowed value is 100.
     /// </param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<StatDomainCollection> StatsGetPhotoDomainsAsync(DateTime date, string photoId = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -426,6 +432,7 @@ public interface IFlickrStats
     /// The number of referrers to return per page. The default is 25 and the maximum is 100.
     /// </param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<StatReferrerCollection> StatsGetPhotoReferrersAsync(DateTime date, string domain, string photoId = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -446,6 +453,7 @@ public interface IFlickrStats
     /// maximum allowed value is 100.
     /// </param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<StatDomainCollection> StatsGetPhotosetDomainsAsync(DateTime date, string photosetId = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -464,6 +472,7 @@ public interface IFlickrStats
     /// The number of referrers to return per page. The default is 25 and the maximum is 100.
     /// </param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<StatReferrerCollection> StatsGetPhotosetReferrersAsync(DateTime date, string domain, string photosetId = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -473,6 +482,7 @@ public interface IFlickrStats
     /// <param name="date">The date to return stats for.</param>
     /// <param name="photosetId">The photoset to return stats for.</param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<Stats> StatsGetPhotosetStatsAsync(DateTime date, string photosetId, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -481,6 +491,7 @@ public interface IFlickrStats
     /// <param name="date">The date to return stats for.</param>
     /// <param name="photoId">The photo to return stats for.</param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<Stats> StatsGetPhotoStatsAsync(DateTime date, string photoId, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -498,6 +509,7 @@ public interface IFlickrStats
     /// maximum allowed value is 100.
     /// </param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<StatDomainCollection> StatsGetPhotostreamDomainsAsync(DateTime date, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -513,6 +525,7 @@ public interface IFlickrStats
     /// The number of referrers to return per page. The default is 25 and the maximum is 100.
     /// </param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<StatReferrerCollection> StatsGetPhotostreamReferrersAsync(DateTime date, string domain, int page, int perPage, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -521,6 +534,7 @@ public interface IFlickrStats
     /// </summary>
     /// <param name="date">The date to return stats for.</param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<Stats> StatsGetPhotostreamStatsAsync(DateTime date, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -543,6 +557,7 @@ public interface IFlickrStats
     /// maximum allowed value is 100.
     /// </param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<PopularPhotoCollection> StatsGetPopularPhotosAsync(DateTime date, PopularitySort sort, int page, int perPage, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -550,5 +565,6 @@ public interface IFlickrStats
     /// </summary>
     /// <param name="date">The date to return the overall view count for.</param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<StatViews> StatsGetTotalViewsAsync(DateTime date, CancellationToken cancellationToken = default);
 }

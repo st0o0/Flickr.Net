@@ -199,7 +199,7 @@ public interface IFlickrPhotosGeo
     /// A Where On Earth (WOE) ID. (While optional, you must pass either a valid Places ID or a WOE ID.)
     /// </param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task PhotosGeoBatchCorrectLocationAsync(double latitude, double longitude, GeoAccuracy accuracy, string placeId = null, string woeId = null, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -213,7 +213,7 @@ public interface IFlickrPhotosGeo
     /// A Where On Earth (WOE) ID. (While optional, you must pass either a valid Places ID or a WOE ID.)
     /// </param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task PhotosGeoCorrectLocationAsync(string photoId, string placeId, string woeId, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -221,7 +221,7 @@ public interface IFlickrPhotosGeo
     /// </summary>
     /// <param name="photoId">The ID of the photo to return the location information for.</param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task<PlaceInfo> PhotosGeoGetLocationAsync(string photoId, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -229,7 +229,7 @@ public interface IFlickrPhotosGeo
     /// </summary>
     /// <param name="photoId">The id of the photo to get permissions for.</param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task<GeoPermissions> PhotosGeoGetPermsAsync(string photoId, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -254,7 +254,7 @@ public interface IFlickrPhotosGeo
     /// The page of results to return. If this argument is omitted, it defaults to 1.
     /// </param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task<PhotoCollection> PhotosGeoPhotosForLocationAsync(double latitude, double longitude, GeoAccuracy accuracy = GeoAccuracy.None, PhotoSearchExtras extras = PhotoSearchExtras.None, int perPage = 0, int page = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -262,7 +262,7 @@ public interface IFlickrPhotosGeo
     /// </summary>
     /// <param name="photoId">The photo ID of the photo to remove information from.</param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task PhotosGeoRemoveLocationAsync(string photoId, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -278,7 +278,7 @@ public interface IFlickrPhotosGeo
     /// longitude. For example, you may wish to indicate that a photo was taken "indoors" or "outdoors".
     /// </param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task PhotosGeoSetContextAsync(string photoId, GeoContext context, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -295,7 +295,7 @@ public interface IFlickrPhotosGeo
     /// </param>
     /// <param name="accuracy">The accuracy of the photos geo location.</param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task PhotosGeoSetLocationAsync(string photoId, double latitude, double longitude, GeoAccuracy accuracy = GeoAccuracy.None, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -307,6 +307,6 @@ public interface IFlickrPhotosGeo
     /// <param name="isFamily"></param>
     /// <param name="isFriend"></param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task PhotosGeoSetPermsAsync(string photoId, bool isPublic, bool isContact, bool isFamily, bool isFriend, CancellationToken cancellationToken = default);
 }

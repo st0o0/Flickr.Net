@@ -24,5 +24,7 @@ public interface IFlickrCommons
     /// <summary>
     /// Gets a collection of Flickr Commons institutions.
     /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<InstitutionCollection> GetInstitutionsAsync(CancellationToken cancellationToken = default);
 }

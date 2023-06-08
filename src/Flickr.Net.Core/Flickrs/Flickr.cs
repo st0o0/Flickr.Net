@@ -43,8 +43,7 @@ public partial class Flickr
     /// Create a new instance of the <see cref="Flickr"/> class with no authentication.
     /// </summary>
     /// <param name="apiKey">Your Flickr API Key.</param>
-    public Flickr(string apiKey)
-        : this(apiKey, null)
+    public Flickr(string apiKey) : this(apiKey, null)
     {
     }
 
@@ -55,19 +54,28 @@ public partial class Flickr
     /// </summary>
     /// <param name="apiKey">Your Flickr API Key.</param>
     /// <param name="sharedSecret">Your Flickr Shared Secret.</param>
-    public Flickr(string apiKey, string sharedSecret)
-        : this(new FlickrConfiguration() { ApiKey = apiKey, SharedSecret = sharedSecret })
+    public Flickr(string apiKey, string sharedSecret) : this(new FlickrConfiguration() { ApiKey = apiKey, SharedSecret = sharedSecret })
     {
     }
 
+    /// <summary>
+    /// </summary>
     protected static string UploadUrl => "https://up.flickr.com/services/upload/";
 
+    /// <summary>
+    /// </summary>
     protected static string ReplaceUrl => "https://up.flickr.com/services/replace/";
 
+    /// <summary>
+    /// </summary>
     protected static string AuthUrl => "https://www.flickr.com/services/auth/";
 
+    /// <summary>
+    /// </summary>
     protected static Uri BaseUri => new("https://api.flickr.com/services/rest/");
 
+    /// <summary>
+    /// </summary>
     protected Cache Cache => _cache;
 
     /// <summary>

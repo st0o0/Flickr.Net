@@ -141,6 +141,7 @@ public interface IFlickrOAuth
     /// <summary>
     /// Checks the OAuth token, returns user information and permissions if valid.
     /// </summary>
+    /// <param name="cancellationToken"></param>
     /// <returns></returns>
     Task<Auth> CheckTokenAsync(CancellationToken cancellationToken = default);
 
@@ -150,6 +151,7 @@ public interface IFlickrOAuth
     /// <remarks>Specify 'oob' as the callback url for no callback to be performed.</remarks>
     /// <param name="callbackUrl">The callback Uri, or 'oob' if no callback is to be performed.</param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<OAuthRequestToken> GetRequestTokenAsync(string callbackUrl, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -158,6 +160,7 @@ public interface IFlickrOAuth
     /// <param name="requestToken"></param>
     /// <param name="verifier"></param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<OAuthRequestToken> GetAccessTokenAsync(OAuthRequestToken requestToken, string verifier, CancellationToken cancellationToken = default);
 
     /// <summary>

@@ -257,7 +257,7 @@ public interface IFlickrPhotosets
     /// <param name="photosetId">The ID of the photoset to add the photo to.</param>
     /// <param name="photoId">The ID of the photo to add.</param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task PhotosetsAddPhotoAsync(string photosetId, string photoId, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -270,7 +270,7 @@ public interface IFlickrPhotosets
     /// be added to the set.
     /// </param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task<Photoset> PhotosetsCreateAsync(string title, string primaryPhotoId, string description = null, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -278,6 +278,7 @@ public interface IFlickrPhotosets
     /// </summary>
     /// <param name="photosetId">The ID of the photoset to delete.</param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task PhotosetsDeleteAsync(string photosetId, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -287,7 +288,7 @@ public interface IFlickrPhotosets
     /// <param name="title">The new title for the photoset.</param>
     /// <param name="description">The new description for the photoset.</param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task PhotosetsEditMetaAsync(string photosetId, string title, string description = null, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -301,7 +302,7 @@ public interface IFlickrPhotosets
     /// <param name="primaryPhotoId">The ID of the new primary photo for the photoset.</param>
     /// <param name="photoIds">An array of photo IDs.</param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task PhotosetsEditPhotosAsync(string photosetId, string primaryPhotoId, string[] photoIds, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -310,7 +311,7 @@ public interface IFlickrPhotosets
     /// <param name="photoId">The photo id of the photo in the set.</param>
     /// <param name="photosetId">The id of the set.</param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task<Context> PhotosetsGetContextAsync(string photoId, string photosetId, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -318,7 +319,7 @@ public interface IFlickrPhotosets
     /// </summary>
     /// <param name="photosetId">The ID of the photoset to return information for.</param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task<Photoset> PhotosetsGetInfoAsync(string photosetId, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -328,7 +329,7 @@ public interface IFlickrPhotosets
     /// <param name="page">The page of the results to return. Defaults to page 1.</param>
     /// <param name="perPage">The number of photosets to return per page. Defaults to 500.</param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task<PhotosetCollection> PhotosetsGetListAsync(string userId, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -341,7 +342,7 @@ public interface IFlickrPhotosets
     /// <param name="perPage">The number of photos to return per page.</param>
     /// <param name="media">Filter on the type of media.</param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task<PhotosetPhotoCollection> PhotosetsGetPhotosAsync(string photosetId, PhotoSearchExtras extras = PhotoSearchExtras.None, PrivacyFilter privacyFilter = PrivacyFilter.None, int page = 0, int perPage = 0, MediaType media = MediaType.None, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -352,7 +353,7 @@ public interface IFlickrPhotosets
     /// not given in the list will be set to appear at the end of the list, ordered by their IDs.
     /// </param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task PhotosetsOrderSetsAsync(IEnumerable<string> photosetIds, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -362,7 +363,7 @@ public interface IFlickrPhotosets
     /// <param name="photosetId">The ID of the photoset to remove the photo from.</param>
     /// <param name="photoId">The ID of the photo to remove.</param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task PhotosetsRemovePhotoAsync(string photosetId, string photoId, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -372,7 +373,7 @@ public interface IFlickrPhotosets
     /// <param name="photosetId">The ID of the photoset to remove the photo from.</param>
     /// <param name="photoIds">The IDs of the photo to remove.</param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task PhotosetsRemovePhotosAsync(string photosetId, IEnumerable<string> photoIds, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -382,7 +383,7 @@ public interface IFlickrPhotosets
     /// <param name="photosetId">The ID of the photoset to reorder the photo for.</param>
     /// <param name="photoIds">The IDs of the photo to reorder.</param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task PhotosetsReorderPhotosAsync(string photosetId, IEnumerable<string> photoIds, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -392,6 +393,6 @@ public interface IFlickrPhotosets
     /// <param name="photosetId">The ID of the photoset to set the primary photo for.</param>
     /// <param name="photoId">The IDs of the photo to become the primary photo.</param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task PhotosetsSetPrimaryPhotoAsync(string photosetId, string photoId, CancellationToken cancellationToken = default);
 }

@@ -85,7 +85,7 @@ public partial class Flickr : IFlickrUrls
 }
 
 /// <summary>
-/// The flickr urls.
+/// The flickr urls interface.
 /// </summary>
 public interface IFlickrUrls
 {
@@ -93,7 +93,8 @@ public interface IFlickrUrls
     /// Returns the url to a group's page.
     /// </summary>
     /// <param name="groupId">The NSID of the group to fetch the url for.</param>
-    /// <param name="cancellationToken"></param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns></returns>
     Task<string> GetGroupAsync(string groupId, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -103,6 +104,7 @@ public interface IFlickrUrls
     /// The NSID of the user to fetch the url for. If omitted, the calling user is assumed.
     /// </param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<string> GetUserPhotosAsync(string userId = null, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -112,7 +114,7 @@ public interface IFlickrUrls
     /// The NSID of the user to fetch the url for. If omitted, the calling user is assumed.
     /// </param>
     /// <param name="cancellationToken"></param>
-    /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
+    /// <returns></returns>
     Task<string> GetUserProfileAsync(string userId = null, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -120,6 +122,7 @@ public interface IFlickrUrls
     /// </summary>
     /// <param name="url">The gallery's URL.</param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<Gallery> LookupGalleryAsync(string url, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -127,12 +130,14 @@ public interface IFlickrUrls
     /// </summary>
     /// <param name="urlToFind">The url to the group's page or photo pool.</param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<string> LookupGroupAsync(string urlToFind, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Returns a user NSID, given the url to a user's photos or profile.
     /// </summary>
-    /// <param name="urlToFind">Thr url to the user's profile or photos page.</param>
+    /// <param name="urlToFind">The url to the user's profile or photos page.</param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<FoundUser> LookupUserAsync(string urlToFind, CancellationToken cancellationToken = default);
 }

@@ -113,7 +113,7 @@ public interface IFlickrPhotosPeople
     /// <param name="personWidth">The width (in pixels) of the box around the person.</param>
     /// <param name="personHeight">The height (in pixels) of the box around the person.</param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task AddAsync(string photoId, string userId, int? personX = null, int? personY = null, int? personWidth = null, int? personHeight = null, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -122,7 +122,7 @@ public interface IFlickrPhotosPeople
     /// <param name="photoId">The id of the photo to remove a person from.</param>
     /// <param name="userId">The NSID of the person to remove from the photo.</param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task DeleteAsync(string photoId, string userId, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -131,7 +131,7 @@ public interface IFlickrPhotosPeople
     /// <param name="photoId">The id of the photo to edit a person in.</param>
     /// <param name="userId">The NSID of the person whose bounding box you want to remove.</param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task DeleteCoordsAsync(string photoId, string userId, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -144,7 +144,7 @@ public interface IFlickrPhotosPeople
     /// <param name="personWidth">The width (in pixels) of the box around the person.</param>
     /// <param name="personHeight">The height (in pixels) of the box around the person.</param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task EditCoordsAsync(string photoId, string userId, int personX, int personY, int personWidth, int personHeight, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -152,6 +152,6 @@ public interface IFlickrPhotosPeople
     /// </summary>
     /// <param name="photoId">The id of the photo to get a list of people for.</param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task<PhotoPersonCollection> GetListAsync(string photoId, CancellationToken cancellationToken = default);
 }

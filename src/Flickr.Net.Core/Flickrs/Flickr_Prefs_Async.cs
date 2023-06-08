@@ -78,6 +78,8 @@ public interface IFlickrPrefs
     /// <summary>
     /// Gets the currently authenticated users default content type.
     /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<ContentType> GetContentTypeAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -85,20 +87,28 @@ public interface IFlickrPrefs
     /// and whether or not the user has chosen to use geo-related EXIF information to automatically
     /// geotag their photos.
     /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<UserGeoPermissions> GetGeoPermsAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets the currently authenticated users default hidden from search setting.
     /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<HiddenFromSearch> GetHiddenAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Returns the default privacy level preference for the user.
     /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<PrivacyFilter> GetPrivacyAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets the currently authenticated users default safety level.
     /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<SafetyLevel> GetSafetyLevelAsync(CancellationToken cancellationToken = default);
 }

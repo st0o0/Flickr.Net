@@ -101,6 +101,7 @@ public interface IFlickrPhotosComments
     /// <param name="photoId">The ID of the photo to add the comment to.</param>
     /// <param name="commentText">The text of the comment. Can contain some HTML.</param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<string> AddCommentAsync(string photoId, string commentText, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -108,6 +109,7 @@ public interface IFlickrPhotosComments
     /// </summary>
     /// <param name="commentId">The ID of the comment to delete.</param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task DeleteCommentAsync(string commentId, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -116,6 +118,7 @@ public interface IFlickrPhotosComments
     /// <param name="commentId">The ID of the comment to edit.</param>
     /// <param name="commentText">The new text for the comment.</param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task EditCommentAsync(string commentId, string commentText, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -123,6 +126,7 @@ public interface IFlickrPhotosComments
     /// </summary>
     /// <param name="photoId">The id of the photo to return the comments for.</param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<PhotoCommentCollection> GetListAsync(string photoId, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -142,5 +146,6 @@ public interface IFlickrPhotosComments
     /// maximum allowed value is 500.
     /// </param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<PhotoCollection> GetRecentForContactsAsync(DateTime? dateLastComment = null, string[] contactsFilter = null, PhotoSearchExtras extras = PhotoSearchExtras.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 }

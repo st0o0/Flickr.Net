@@ -411,7 +411,7 @@ public interface IFlickrPlaces
     /// </summary>
     /// <param name="query">The string to search for. Must not be null.</param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task<PlaceCollection> FindAsync(string query, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -421,7 +421,7 @@ public interface IFlickrPlaces
     /// <param name="longitude">The longitude, between -90 and 90.</param>
     /// <param name="accuracy">The level the locality will be for.</param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task<Place> FindByLatLonAsync(double latitude, double longitude, GeoAccuracy accuracy = GeoAccuracy.None, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -435,6 +435,7 @@ public interface IFlickrPlaces
     /// A Where On Earth (WOE) ID. (While optional, you must pass either a valid Places ID or a WOE ID.)
     /// </param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<PlaceCollection> GetChildrenWithPhotosPublicAsync(string placeId, string woeId = null, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -447,6 +448,7 @@ public interface IFlickrPlaces
     /// A Where On Earth (WOE) ID. (While optional, you must pass either a valid Places ID or a WOE ID.)
     /// </param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<PlaceInfo> GetInfoAsync(string placeId, string woeId = null, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -456,6 +458,7 @@ public interface IFlickrPlaces
     /// A flickr.com/places URL in the form of /country/region/city. For example: /Canada/Quebec/Montreal
     /// </param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<PlaceInfo> GetInfoByUrlAsync(string url, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -465,6 +468,8 @@ public interface IFlickrPlaces
     /// All Flickr.Net methods use the <see cref="PlaceType"/> enumeration so this method doesn't
     /// serve much purpose.
     /// </remarks>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<PlaceTypeInfoCollection> GetPlaceTypesAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -478,6 +483,7 @@ public interface IFlickrPlaces
     /// A Where On Earth (WOE) ID. (While optional, you must pass either a valid Places ID or a WOE ID.)
     /// </param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<ShapeDataCollection> GetShapeHistoryAsync(string placeId, string woeId = null, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -492,6 +498,7 @@ public interface IFlickrPlaces
     /// Limit your query to only those top places belonging to a specific Where on Earth (WOE) identifier.
     /// </param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<PlaceCollection> GetTopPlacesListAsync(PlaceType placeType, DateTime? date = null, string placeId = null, string woeId = null, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -501,6 +508,7 @@ public interface IFlickrPlaces
     /// <param name="boundaryBox">The boundary box to search for places in.</param>
     /// <param name="placeType">The ID for a specific place type to cluster photos by.</param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<PlaceCollection> PlacesForBoundingBoxAsync(BoundaryBox boundaryBox, PlaceType placeType, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -522,6 +530,7 @@ public interface IFlickrPlaces
     /// <param name="minTakenDate">Minimum taken date.</param>
     /// <param name="maxTakenDate">Maximum taken date.</param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<PlaceCollection> PlacesForContactsAsync(PlaceType placeType = PlaceType.None, string woeId = null, string placeId = null, int threshold = 0,
         ContactSearch contactType = ContactSearch.None, DateTime? minUploadDate = null,
         DateTime? maxUploadDate = null, DateTime? minTakenDate = null, DateTime? maxTakenDate = null,
@@ -550,6 +559,7 @@ public interface IFlickrPlaces
     /// <param name="minTakenDate">Minimum taken date.</param>
     /// <param name="maxTakenDate">Maximum taken date.</param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<PlaceCollection> PlacesForTagsAsync(PlaceType placeType, string woeId = null, string placeId = null, int threshold = 0,
         IEnumerable<string> tags = null, TagMode tagMode = TagMode.None, IEnumerable<string> machineTags = null,
         MachineTagMode machineTagMode = MachineTagMode.None, DateTime? minUploadDate = null,
@@ -582,6 +592,7 @@ public interface IFlickrPlaces
     /// Maximum taken date. Photos with an taken date less than or equal to this value will be returned.
     /// </param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<PlaceCollection> PlacesForUserAsync(PlaceType placeType = PlaceType.None, string woeId = null, string placeId = null, int threshold = 0,
         DateTime? minUploadDate = null, DateTime? maxUploadDate = null, DateTime? minTakenDate = null, DateTime? maxTakenDate = null,
         CancellationToken cancellationToken = default);
@@ -610,6 +621,7 @@ public interface IFlickrPlaces
     /// Maximum taken date. Photos with an taken date less than or equal to this value will be returned.
     /// </param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<TagCollection> TagsForPlaceAsync(string placeId, string woeId = null, DateTime? minUploadDate = null, DateTime? maxUploadDate = null,
         DateTime? minTakenDate = null, DateTime? maxTakenDate = null,
         CancellationToken cancellationToken = default);

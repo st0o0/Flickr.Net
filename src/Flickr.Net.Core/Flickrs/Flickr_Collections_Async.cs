@@ -54,6 +54,7 @@ public interface IFlickrCollections
     /// </summary>
     /// <param name="collectionId">The ID for the collection to return.</param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<CollectionInfo> GetInfoAsync(string collectionId, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -66,5 +67,6 @@ public interface IFlickrCollections
     /// The ID of the user to fetch the tree for, or null if using the authenticated user.
     /// </param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<CollectionCollection> GetTreeAsync(string collectionId = null, string userId = null, CancellationToken cancellationToken = default);
 }

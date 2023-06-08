@@ -35,6 +35,7 @@ public interface IFlickrCameras
     /// <summary>
     /// Gets a list of camera brands.
     /// </summary>
+    /// <param name="cancellationToken"></param>
     /// <returns></returns>
     Task<BrandCollection> GetBrandsAsync(CancellationToken cancellationToken = default);
 

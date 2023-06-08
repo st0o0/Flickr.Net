@@ -183,6 +183,7 @@ public interface IFlickrUpload
     /// <param name="hiddenFromSearch">Is the photo hidden from public searches.</param>
     /// <param name="progress"></param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<string> UploadPictureAsync(Stream stream, string fileName, string title = null,
         string description = null, string tags = null, bool isPublic = false, bool isFamily = false, bool isFriend = false,
         ContentType contentType = ContentType.None, SafetyLevel safetyLevel = SafetyLevel.None, HiddenFromSearch hiddenFromSearch = HiddenFromSearch.None,
@@ -196,5 +197,6 @@ public interface IFlickrUpload
     /// <param name="photoId">The ID of the photo to replace.</param>
     /// <param name="progress"></param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<string> ReplacePictureAsync(Stream stream, string fileName, string photoId, IProgress<double> progress = default, CancellationToken cancellationToken = default);
 }

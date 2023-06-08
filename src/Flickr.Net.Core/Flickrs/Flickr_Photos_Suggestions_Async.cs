@@ -119,6 +119,7 @@ public interface IFlickrPhotosSuggestions
     /// </summary>
     /// <param name="suggestionId">The suggestion to approve.</param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task ApproveSuggestionAsync(string suggestionId, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -132,10 +133,11 @@ public interface IFlickrPhotosSuggestions
 
     /// <summary>
     /// Rejects a suggestion made for a location on a photo. Currently doesn't appear to actually
-    /// work. Just use <see cref="Flickr.PhotosSuggestionsRemoveSuggestion"/> instead.
+    /// work. Just use <see cref="IFlickrPhotosSuggestions.RemoveSuggestionAsync"/> instead.
     /// </summary>
     /// <param name="suggestionId">The ID of the suggestion to remove.</param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task RejectSuggestionAsync(string suggestionId, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -143,6 +145,7 @@ public interface IFlickrPhotosSuggestions
     /// </summary>
     /// <param name="suggestionId">The suggestion to remove.</param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task RemoveSuggestionAsync(string suggestionId, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -156,5 +159,6 @@ public interface IFlickrPhotosSuggestions
     /// <param name="placeId">The Flickr place id of the location to suggest.</param>
     /// <param name="note">A note to add to the suggestion.</param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task SuggestLocationAsync(string photoId, double latitude, double longitude, GeoAccuracy accuracy = GeoAccuracy.None, string woeId = null, string placeId = null, string note = null, CancellationToken cancellationToken = default);
 }

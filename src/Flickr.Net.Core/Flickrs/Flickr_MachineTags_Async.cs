@@ -157,6 +157,7 @@ public interface IFlickrMachineTags
     /// maximum allowed value is 500.
     /// </param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<NamespaceCollection> GetNamespacesAsync(string predicate = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -177,6 +178,7 @@ public interface IFlickrMachineTags
     /// maximum allowed value is 500.
     /// </param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<PairCollection> GetPairsAsync(string namespaceName = null, string predicate = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -193,6 +195,7 @@ public interface IFlickrMachineTags
     /// The maximum allowed value is 500.
     /// </param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<PredicateCollection> GetPredicatesAsync(string namespaceName = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -201,16 +204,10 @@ public interface IFlickrMachineTags
     /// <param name="namespaceName">The namespace that all values should be restricted to.</param>
     /// <param name="predicate">The predicate that all values should be restricted to.</param>
     /// <param name="addedSince">
-    /// Only return machine tags values that have been added since this timestamp.
+    /// Only return machine tags values that have been added since this time stamp.
     /// </param>
     /// <param name="cancellationToken"></param>
-    /// <param name="page">
-    /// The page of results to return. If this argument is omitted, it defaults to 1.
-    /// </param>
-    /// <param name="perPage">
-    /// Number of values to return per page. If this argument is omitted, it defaults to 100. The
-    /// maximum allowed value is 500.
-    /// </param>
+    /// <returns></returns>
     Task<ValueCollection> GetRecentValuesAsync(string namespaceName = null, string predicate = null, DateTime? addedSince = null, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -226,5 +223,6 @@ public interface IFlickrMachineTags
     /// maximum allowed value is 500.
     /// </param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<ValueCollection> GetValuesAsync(string namespaceName, string predicate, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 }

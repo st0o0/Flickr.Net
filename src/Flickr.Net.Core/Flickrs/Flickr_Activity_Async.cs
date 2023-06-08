@@ -75,6 +75,7 @@ public interface IFlickrActivity
     /// <param name="page">The page of the activity to return.</param>
     /// <param name="perPage">The number of activities to return per page.</param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<ActivityItemCollection> UserCommentsAsync(int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -83,8 +84,9 @@ public interface IFlickrActivity
     /// <remarks><b>Do not poll this method more than once an hour.</b></remarks>
     /// <param name="timePeriod">The number of days or hours you want to get activity for.</param>
     /// <param name="timeType">'d' for days, 'h' for hours.</param>
-    /// <param name="page">The page numver of the activity to return.</param>
+    /// <param name="page">The page number of the activity to return.</param>
     /// <param name="perPage">The number of activities to return per page.</param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<ActivityItemCollection> UserPhotosAsync(int timePeriod, TimeType timeType = TimeType.Hours, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 }

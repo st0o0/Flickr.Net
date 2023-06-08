@@ -66,6 +66,7 @@ public interface IFlickrPhotosNotes
     /// <param name="noteHeight">The height of the note.</param>
     /// <param name="noteText">The text in the note.</param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<string> PhotosNotesAddAsync(string photoId, int noteX, int noteY, int noteWidth, int noteHeight, string noteText, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -73,6 +74,7 @@ public interface IFlickrPhotosNotes
     /// </summary>
     /// <param name="noteId">The ID of the note.</param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task PhotosNotesDeleteAsync(string noteId, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -85,5 +87,6 @@ public interface IFlickrPhotosNotes
     /// <param name="noteHeight">The height of the note.</param>
     /// <param name="noteText">The new text in the note.</param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task PhotosNotesEditAsync(string noteId, int noteX, int noteY, int noteWidth, int noteHeight, string noteText, CancellationToken cancellationToken = default);
 }

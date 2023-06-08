@@ -159,6 +159,7 @@ public interface IFlickrTags
     /// <param name="cluster">The <see cref="Cluster"/> instance to return the photos for.</param>
     /// <param name="extras">Extra information to return with each photo.</param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<PhotoCollection> GetClusterPhotosAsync(Cluster cluster, PhotoSearchExtras extras, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -166,6 +167,7 @@ public interface IFlickrTags
     /// </summary>
     /// <param name="tag">The tag to fetch clusters for.</param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<ClusterCollection> GetClustersAsync(string tag, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -178,6 +180,7 @@ public interface IFlickrTags
     /// The number of tags to return. Defaults to 20. Maximum allowed value is 200.
     /// </param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<HotTagCollection> GetHotListAsync(string period = null, int? count = null, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -185,6 +188,7 @@ public interface IFlickrTags
     /// </summary>
     /// <param name="photoId">The id of the photo to return tags for.</param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<Collection<PhotoInfoTag>> GetListPhotoAsync(string photoId, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -195,6 +199,7 @@ public interface IFlickrTags
     /// currently logged in user (if any) is assumed.
     /// </param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<TagCollection> GetListUserAsync(string userId, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -208,6 +213,7 @@ public interface IFlickrTags
     /// Number of popular tags to return. defaults to 10 when this argument is not present.
     /// </param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<TagCollection> GetListUserPopularAsync(string userId = null, int? count = null, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -215,11 +221,13 @@ public interface IFlickrTags
     /// </summary>
     /// <param name="tag">The tag to return the raw version of.</param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<RawTagCollection> GetListUserRawAsync(string tag = null, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Returns a collection of the most frequently used tags for the authenticated user.
     /// </summary>
+    /// <param name="cancellationToken"></param>
     /// <returns></returns>
     Task<TagCollection> GetMostFrequentlyUsedAsync(CancellationToken cancellationToken = default);
 
@@ -228,5 +236,6 @@ public interface IFlickrTags
     /// </summary>
     /// <param name="tag">The tag to fetch related tags for.</param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<TagCollection> GetRelatedAsync(string tag, CancellationToken cancellationToken = default);
 }

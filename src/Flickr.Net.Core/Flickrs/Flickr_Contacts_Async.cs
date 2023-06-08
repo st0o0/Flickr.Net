@@ -119,7 +119,7 @@ public interface IFlickrContacts
     /// maximum allowed value is 1000.
     /// </param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task<ContactCollection> GetListAsync(ContactType filter = ContactType.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -131,7 +131,7 @@ public interface IFlickrContacts
     /// but so long as this notice is present you should write your code accordingly.
     /// </remarks>
     /// <param name="dateLastUpdated">
-    /// Limits the resultset to contacts that have uploaded photos since this date. The default
+    /// Limits the result set to contacts that have uploaded photos since this date. The default
     /// offset is (1) hour and the maximum (24) hours.
     /// </param>
     /// <param name="filter">
@@ -139,11 +139,11 @@ public interface IFlickrContacts
     /// are: "ff" friends and family, and "all" all your contacts. Default value is "all".
     /// </param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task<ContactCollection> GetListRecentlyUploadedAsync(ContactSearch filter = ContactSearch.AllContacts, DateTime? dateLastUpdated = null, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Gets a list of the given users contact, or those that are publically avaiable.
+    /// Gets a list of the given users contact, or those that are publicly available.
     /// </summary>
     /// <param name="userId">The Id of the user who's contacts you want to return.</param>
     /// <param name="page">
@@ -154,7 +154,7 @@ public interface IFlickrContacts
     /// maximum allowed value is 1000.
     /// </param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <returns></returns>
     Task<ContactCollection> GetPublicListAsync(string userId, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>

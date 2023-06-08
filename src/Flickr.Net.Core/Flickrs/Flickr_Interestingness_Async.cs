@@ -44,15 +44,16 @@ public partial class Flickr : IFlickrInterestingness
 public interface IFlickrInterestingness
 {
     /// <summary>
-    /// Gets a list of photos from the most recent interstingness list.
+    /// Gets a list of photos from the most recent interestingness list.
     /// </summary>
     /// <param name="date">The date to return the interestingness photos for.</param>
     /// <param name="extras">
-    /// The extra parameters to return along with the search results. See 
-    /// <see cref="PhotoSearchOptions"/> for more details.
+    /// The extra parameters to return along with the search results. See <see
+    /// cref="PhotoSearchOptions"/> for more details.
     /// </param>
     /// <param name="perPage">The number of results to return per page.</param>
-    /// <param name="cancellationToken"></param>
     /// <param name="page">The page of the results to return.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<PhotoCollection> GetListAsync(DateTime? date, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken);
 }

@@ -24,9 +24,8 @@ internal class FlickrResultArgs<T> : EventArgs where T : IFlickrParsable
         set
         {
             error = value;
-            FlickrApiException flickrApiException = value as FlickrApiException;
 
-            if (flickrApiException != null)
+            if (value is FlickrApiException flickrApiException)
             {
                 ErrorCode = flickrApiException.Code;
                 ErrorMessage = flickrApiException.OriginalMessage;

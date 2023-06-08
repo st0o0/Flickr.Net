@@ -186,6 +186,7 @@ public interface IFlickrPeople
     /// </summary>
     /// <param name="emailAddress">The email address to search on.</param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     /// <exception cref="FlickrApiException">
     /// A FlickrApiException is raised if the email address is not found.
     /// </exception>
@@ -196,6 +197,7 @@ public interface IFlickrPeople
     /// </summary>
     /// <param name="userName">The screen name or username of the user.</param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     /// <exception cref="FlickrApiException">
     /// A FlickrApiException is raised if the email address is not found.
     /// </exception>
@@ -206,6 +208,7 @@ public interface IFlickrPeople
     /// </summary>
     /// <param name="userId">The user whose groups you wish to return.</param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<GroupInfoCollection> GetGroupsAsync(string userId, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -213,11 +216,13 @@ public interface IFlickrPeople
     /// </summary>
     /// <param name="userId">The user id to find.</param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<Person> GetInfoAsync(string userId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Returns the limits for a person. See <see cref="PersonLimits"/> for more details.
     /// </summary>
+    /// <param name="cancellationToken"></param>
     /// <returns></returns>
     Task<PersonLimits> GetLimitsAsync(CancellationToken cancellationToken = default);
 
@@ -252,6 +257,7 @@ public interface IFlickrPeople
     /// maximum allowed value is 500.
     /// </param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<PhotoCollection> GetPhotosAsync(string userId, SafetyLevel safeSearch = SafetyLevel.None, DateTime? minUploadDate = null, DateTime? maxUploadDate = null, DateTime? minTakenDate = null, DateTime? maxTakenDate = null, ContentTypeSearch contentType = ContentTypeSearch.None, PrivacyFilter privacyFilter = PrivacyFilter.None, PhotoSearchExtras extras = PhotoSearchExtras.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -260,13 +266,16 @@ public interface IFlickrPeople
     /// <param name="userId">The user ID to get photos of.</param>
     /// <param name="extras">A list of extras to return for each photo.</param>
     /// <param name="perPage">The number of photos to return per page.</param>
-    /// <param name="cancellationToken"></param>
     /// <param name="page">The page of photos to return. Default is 1.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<PeoplePhotoCollection> GetPhotosOfAsync(string userId, PhotoSearchExtras extras = PhotoSearchExtras.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets the upload status of the authenticated user.
     /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<UserStatus> GetUploadStatusAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -274,5 +283,6 @@ public interface IFlickrPeople
     /// </summary>
     /// <param name="userId">The user id to get groups for.</param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<GroupInfoCollection> GetPublicGroupsAsync(string userId, CancellationToken cancellationToken = default);
 }

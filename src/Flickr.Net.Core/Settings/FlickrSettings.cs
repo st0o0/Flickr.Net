@@ -1,10 +1,10 @@
 using FlickrNet.Core.Configuration;
 
 namespace FlickrNet.Core.Settings;
+
 /// <summary>
 /// The flickr settings.
 /// </summary>
-
 public class FlickrSettings
 {
     private readonly FlickrConfiguration _config;

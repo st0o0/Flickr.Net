@@ -1,12 +1,13 @@
-﻿using Flickr.Net.Core.Exceptions;
+﻿using Flickr.Net.Core.Entities;
+using Flickr.Net.Core.Exceptions;
 using System.Net;
 using System.Net.Http.Headers;
 
 namespace Flickr.Net.Core.Internals;
+
 /// <summary>
 /// The flickr responder.
 /// </summary>
-
 public static partial class FlickrResponder
 {
     /// <summary>
@@ -49,20 +50,17 @@ public static partial class FlickrResponder
     {
         // Remove api key if it exists.
         if (parameters.ContainsKey("api_key"))
-        {
             parameters.Remove("api_key");
-        }
 
         if (parameters.ContainsKey("api_sig"))
-        {
             parameters.Remove("api_sig");
-        }
 
         // If OAuth Access Token is set then add token and generate signature.
         if (!string.IsNullOrEmpty(flickr.FlickrSettings.OAuthAccessToken) && !parameters.ContainsKey("oauth_token"))
         {
             parameters.Add("oauth_token", flickr.FlickrSettings.OAuthAccessToken);
         }
+
         if (!string.IsNullOrEmpty(flickr.FlickrSettings.OAuthAccessTokenSecret) && !parameters.ContainsKey("oauth_signature"))
         {
             string sig = ((IFlickrOAuth)flickr).CalculateSignature("POST", baseUrl, parameters, flickr.FlickrSettings.OAuthAccessTokenSecret);
@@ -109,19 +107,15 @@ public static partial class FlickrResponder
 
         message.Method = HttpMethod.Post;
         message.Content = new StringContent(data);
+
         if (!string.IsNullOrEmpty(contentType))
         {
             message.Content.Headers.ContentType = MediaTypeHeaderValue.Parse(contentType);
         }
+
         HttpResponseMessage response = await client.SendAsync(message, cancellationToken);
-        try
-        {
-            response.EnsureSuccessStatusCode();
-        }
-        catch (Exception)
-        {
-            throw;
-        }
+
+        response.EnsureSuccessStatusCode();
 
         return await response.Content.ReadAsByteArrayAsync(cancellationToken);
     }

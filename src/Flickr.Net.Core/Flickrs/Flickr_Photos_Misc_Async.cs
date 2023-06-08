@@ -53,6 +53,7 @@ public interface IFlickrPhotosMisc
     /// The number of degrees to rotate by. Valid values are 90, 180 and 270.
     /// </param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task RotateAsync(string photoId, int degrees, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -60,5 +61,6 @@ public interface IFlickrPhotosMisc
     /// </summary>
     /// <param name="tickets">A list of ticket ids</param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<TicketCollection> CheckTicketsAsync(string[] tickets, CancellationToken cancellationToken = default);
 }

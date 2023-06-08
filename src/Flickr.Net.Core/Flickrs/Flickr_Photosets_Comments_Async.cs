@@ -65,6 +65,7 @@ public interface IFlickrPhotosetsComments
     /// <param name="photosetId">The ID of the photoset to add the comment to.</param>
     /// <param name="commentText">The text of the comment. Can contain some HTML.</param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<string> PhotosetsCommentsAddCommentAsync(string photosetId, string commentText, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -72,6 +73,7 @@ public interface IFlickrPhotosetsComments
     /// </summary>
     /// <param name="commentId">The ID of the comment to delete.</param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task PhotosetsCommentsDeleteCommentAsync(string commentId, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -80,6 +82,7 @@ public interface IFlickrPhotosetsComments
     /// <param name="commentId">The ID of the comment to edit.</param>
     /// <param name="commentText">The new text for the comment.</param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task PhotosetsCommentsEditCommentAsync(string commentId, string commentText, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -87,5 +90,6 @@ public interface IFlickrPhotosetsComments
     /// </summary>
     /// <param name="photosetId">The id of the photoset to return the comments for.</param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<PhotosetCommentCollection> PhotosetsCommentsGetListAsync(string photosetId, CancellationToken cancellationToken = default);
 }

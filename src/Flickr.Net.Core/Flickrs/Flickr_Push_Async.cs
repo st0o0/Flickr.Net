@@ -163,11 +163,15 @@ public interface IFlickrPush
     /// <summary>
     /// Get a list of subscriptions for the calling user.
     /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<SubscriptionCollection> PushGetSubscriptionsAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get a list of topics that are available for subscription.
     /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<string[]> PushGetTopicsAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -198,6 +202,7 @@ public interface IFlickrPush
     /// listed will be included in the subscription. Only valid if the topic is 'tags'
     /// </param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task PushSubscribeAsync(string topic, string callback, string verify, string verifyToken = null,
                                    int? leaseSeconds = null, IEnumerable<int> woeIds = null, IEnumerable<string> placeIds = null, double? latitude = null,
                                    double? longitude = null, int? radius = null, RadiusUnit radiusUnits = RadiusUnit.None, GeoAccuracy accuracy = GeoAccuracy.None,
@@ -213,5 +218,6 @@ public interface IFlickrPush
     /// The verification token to include in the unsubscribe verification process.
     /// </param>
     /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task PushUnsubscribeAsync(string topic, string callback, string verify, string verifyToken = null, CancellationToken cancellationToken = default);
 }
