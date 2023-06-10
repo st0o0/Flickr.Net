@@ -48,8 +48,8 @@ public interface IFlickrInterestingness
     /// </summary>
     /// <param name="date">The date to return the interestingness photos for.</param>
     /// <param name="extras">
-    /// The extra parameters to return along with the search results. See 
-    /// <see cref="PhotoSearchOptions"/> for more details.
+    /// The extra parameters to return along with the search results. See <see
+    /// cref="PhotoSearchOptions"/> for more details.
     /// </param>
     /// <param name="perPage">The number of results to return per page.</param>
     /// <param name="cancellationToken"></param>

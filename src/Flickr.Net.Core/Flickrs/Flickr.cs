@@ -60,14 +60,24 @@ public partial class Flickr
     {
     }
 
+    /// <summary>
+    /// </summary>
     protected static string UploadUrl => "https://up.flickr.com/services/upload/";
 
+    /// <summary>
+    /// </summary>
     protected static string ReplaceUrl => "https://up.flickr.com/services/replace/";
 
+    /// <summary>
+    /// </summary>
     protected static string AuthUrl => "https://www.flickr.com/services/auth/";
 
+    /// <summary>
+    /// </summary>
     protected static Uri BaseUri => new("https://api.flickr.com/services/rest/");
 
+    /// <summary>
+    /// </summary>
     protected Cache Cache => _cache;
 
     /// <summary>

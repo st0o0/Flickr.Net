@@ -1,8 +1,11 @@
-﻿namespace Flickr.Net.Core.Entities;
+﻿using System.Collections.ObjectModel;
+
+namespace Flickr.Net.Core.Entities;
 
 /// <summary>
-/// Detailed information returned by <see cref="Flickr.PhotosGetInfo(string)"/> or 
-/// <see cref="Flickr.PhotosGetInfo(string, string)"/> methods.
+/// Detailed information returned by <see cref="IFlickrPhotos.GetInfoAsync(string, string,
+/// CancellationToken)"/> or <see cref="IFlickrPhotos.GetInfoAsync(string, string,
+/// CancellationToken)"/> methods.
 /// </summary>
 public sealed class PhotoInfo : IFlickrParsable
 {
@@ -11,9 +14,9 @@ public sealed class PhotoInfo : IFlickrParsable
     /// </summary>
     public PhotoInfo()
     {
-        Notes = new System.Collections.ObjectModel.Collection<PhotoInfoNote>();
-        Tags = new System.Collections.ObjectModel.Collection<PhotoInfoTag>();
-        Urls = new System.Collections.ObjectModel.Collection<PhotoInfoUrl>();
+        Notes = new Collection<PhotoInfoNote>();
+        Tags = new Collection<PhotoInfoTag>();
+        Urls = new Collection<PhotoInfoUrl>();
     }
 
     /// <summary>
@@ -204,17 +207,17 @@ public sealed class PhotoInfo : IFlickrParsable
     /// <summary>
     /// The notes for the photo.
     /// </summary>
-    public System.Collections.ObjectModel.Collection<PhotoInfoNote> Notes { get; set; }
+    public Collection<PhotoInfoNote> Notes { get; set; }
 
     /// <summary>
     /// The tags for the photo.
     /// </summary>
-    public System.Collections.ObjectModel.Collection<PhotoInfoTag> Tags { get; set; }
+    public Collection<PhotoInfoTag> Tags { get; set; }
 
     /// <summary>
     /// The urls for this photo.
     /// </summary>
-    public System.Collections.ObjectModel.Collection<PhotoInfoUrl> Urls { get; set; }
+    public Collection<PhotoInfoUrl> Urls { get; set; }
 
     /// <summary>
     /// The date the photo was posted/uploaded.
@@ -271,7 +274,8 @@ public sealed class PhotoInfo : IFlickrParsable
     /// Does this photo contain tagged people.
     /// </summary>
     /// <remarks>
-    /// Call <see cref="Flickr.PhotosPeopleGetList"/> to get the people found in this photo.
+    /// Call <see cref="IFlickrPhotosPeople.GetListAsync(string, CancellationToken)"/> to get the
+    /// people found in this photo.
     /// </remarks>
     public bool HasPeople { get; set; }
 
@@ -314,8 +318,9 @@ public sealed class PhotoInfo : IFlickrParsable
     /// The URL for the small 320 version of this photo.
     /// </summary>
     /// <remarks>
-    /// There is no guarentee that this size of the image actually exists. Use 
-    /// <see cref="Flickr.PhotosGetSizes"/> to get a list of existing photo URLs.
+    /// There is no guarentee that this size of the image actually exists. Use <see
+    /// cref="IFlickrPhotos.GetSizesAsync(string, CancellationToken)"/> to get a list of existing
+    /// photo URLs.
     /// </remarks>
     public string Small320Url
     {
@@ -326,8 +331,9 @@ public sealed class PhotoInfo : IFlickrParsable
     /// The URL for the medium version of this photo.
     /// </summary>
     /// <remarks>
-    /// There is no guarentee that this size of the image actually exists. Use 
-    /// <see cref="Flickr.PhotosGetSizes"/> to get a list of existing photo URLs.
+    /// There is no guarentee that this size of the image actually exists. Use <see
+    /// cref="IFlickrPhotos.GetSizesAsync(string, CancellationToken)"/> to get a list of existing
+    /// photo URLs.
     /// </remarks>
     public string MediumUrl
     {
@@ -338,8 +344,9 @@ public sealed class PhotoInfo : IFlickrParsable
     /// The URL for the medium 640 version of this photo.
     /// </summary>
     /// <remarks>
-    /// There is no guarentee that this size of the image actually exists. Use 
-    /// <see cref="Flickr.PhotosGetSizes"/> to get a list of existing photo URLs.
+    /// There is no guarentee that this size of the image actually exists. Use <see
+    /// cref="IFlickrPhotos.GetSizesAsync(string, CancellationToken)"/> to get a list of existing
+    /// photo URLs.
     /// </remarks>
     public string Medium640Url
     {
@@ -350,8 +357,9 @@ public sealed class PhotoInfo : IFlickrParsable
     /// The URL for the medium 800 version of this photo.
     /// </summary>
     /// <remarks>
-    /// There is no guarentee that this size of the image actually exists. Use 
-    /// <see cref="Flickr.PhotosGetSizes"/> to get a list of existing photo URLs.
+    /// There is no guarentee that this size of the image actually exists. Use <see
+    /// cref="IFlickrPhotos.GetSizesAsync(string, CancellationToken)"/> to get a list of existing
+    /// photo URLs.
     /// </remarks>
     public string Medium800Url
     {
@@ -362,8 +370,9 @@ public sealed class PhotoInfo : IFlickrParsable
     /// The URL for the large version of this photo.
     /// </summary>
     /// <remarks>
-    /// There is no guarentee that this size of the image actually exists. Use 
-    /// <see cref="Flickr.PhotosGetSizes"/> to get a list of existing photo URLs.
+    /// There is no guarentee that this size of the image actually exists. Use <see
+    /// cref="IFlickrPhotos.GetSizesAsync(string, CancellationToken)"/> to get a list of existing
+    /// photo URLs.
     /// </remarks>
     public string LargeUrl
     {
@@ -374,8 +383,9 @@ public sealed class PhotoInfo : IFlickrParsable
     /// The URL for the large square version of this photo.
     /// </summary>
     /// <remarks>
-    /// There is no guarentee that this size of the image actually exists. Use 
-    /// <see cref="Flickr.PhotosGetSizes"/> to get a list of existing photo URLs.
+    /// There is no guarentee that this size of the image actually exists. Use <see
+    /// cref="IFlickrPhotos.GetSizesAsync(string, CancellationToken)"/> to get a list of existing
+    /// photo URLs.
     /// </remarks>
     public string LargeSquareUrl
     {
@@ -810,7 +820,3 @@ public sealed class PhotoInfo : IFlickrParsable
         reader.Read();
     }
 }
-
-
-
-

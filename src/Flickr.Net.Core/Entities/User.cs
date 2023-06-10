@@ -18,7 +18,8 @@ public sealed class FoundUser : IFlickrParsable
     public string UserName { get; set; }
 
     /// <summary>
-    /// The full name of the user. Only returned by <see cref="Flickr.AuthGetToken"/>.
+    /// The full name of the user. Only returned by <see
+    /// cref="IFlickrOAuth.GetAccessTokenAsync(OAuthRequestToken, string, CancellationToken)"/>.
     /// </summary>
     public string FullName { get; set; }
 

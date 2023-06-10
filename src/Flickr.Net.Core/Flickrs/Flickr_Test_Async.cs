@@ -5,9 +5,6 @@
 /// </summary>
 public partial class Flickr : IFlickrTest
 {
-    /// <summary>
-    /// Test the logged in state of the current Filckr object.
-    /// </summary>
     async Task<FoundUser> IFlickrTest.LoginAsync(CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
@@ -18,9 +15,6 @@ public partial class Flickr : IFlickrTest
         return await GetResponseAsync<FoundUser>(parameters, cancellationToken);
     }
 
-    /// <summary>
-    /// Null test.
-    /// </summary>
     async Task IFlickrTest.NullAsync(CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
@@ -31,14 +25,6 @@ public partial class Flickr : IFlickrTest
         await GetResponseAsync<NoResponse>(parameters, cancellationToken);
     }
 
-    /// <summary>
-    /// Echos back all parameters passed in.
-    /// </summary>
-    /// <param name="parameters">
-    /// A dictionary of extra parameters to pass in. Note, the "method" and "api_key" parameters
-    /// will always be passed in.
-    /// </param>
-    /// <param name="cancellationToken"></param>
     async Task<EchoResponseDictionary> IFlickrTest.EchoAsync(Dictionary<string, string> parameters, CancellationToken cancellationToken)
     {
         parameters.Add("method", "flickr.test.echo");
@@ -51,9 +37,23 @@ public partial class Flickr : IFlickrTest
 /// </summary>
 public interface IFlickrTest
 {
+    /// <summary>
+    /// Test the logged in state of the current Filckr object.
+    /// </summary>
     Task<FoundUser> LoginAsync(CancellationToken cancellationToken = default);
 
+    /// <summary>
+    /// Null test.
+    /// </summary>
     Task NullAsync(CancellationToken cancellationToken = default);
 
+    /// <summary>
+    /// Echos back all parameters passed in.
+    /// </summary>
+    /// <param name="parameters">
+    /// A dictionary of extra parameters to pass in. Note, the "method" and "api_key" parameters
+    /// will always be passed in.
+    /// </param>
+    /// <param name="cancellationToken"></param>
     Task<EchoResponseDictionary> EchoAsync(Dictionary<string, string> parameters, CancellationToken cancellationToken = default);
 }

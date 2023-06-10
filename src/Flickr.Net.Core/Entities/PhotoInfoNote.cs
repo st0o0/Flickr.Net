@@ -56,8 +56,8 @@ public sealed class PhotoInfoNote : IFlickrParsable
     public string NoteText { get; set; }
 
     /// <summary>
-    /// The <see cref="System.Drawing.Size"/> of this note. Derived from 
-    /// <see cref="Width"/> and <see cref="Height"/>.
+    /// The <see cref="System.Drawing.Size"/> of this note. Derived from <see cref="Width"/> and
+    /// <see cref="Height"/>.
     /// </summary>
     public System.Drawing.Size Size
     {
@@ -68,8 +68,8 @@ public sealed class PhotoInfoNote : IFlickrParsable
     }
 
     /// <summary>
-    /// The location of this note on the medium sized thumbnail of this photo. Derived from 
-    /// <see cref="XPosition"/> and <see cref="YPosition"/>.
+    /// The location of this note on the medium sized thumbnail of this photo. Derived from <see
+    /// cref="XPosition"/> and <see cref="YPosition"/>.
     /// </summary>
     public System.Drawing.Point Location
     {
@@ -78,7 +78,6 @@ public sealed class PhotoInfoNote : IFlickrParsable
             return new System.Drawing.Point(XPosition, YPosition);
         }
     }
-
 
     void IFlickrParsable.Load(System.Xml.XmlReader reader)
     {

@@ -17,7 +17,6 @@ public static partial class FlickrResponder
     /// <param name="baseUrl">The base url to be called.</param>
     /// <param name="parameters">A dictionary of parameters.</param>
     /// <param name="cancellationToken"></param>
-    /// <param name="callback"></param>
     /// <returns></returns>
     public static async Task<byte[]> GetDataResponseAsync(Flickr flickr, string baseUrl, Dictionary<string, string> parameters, CancellationToken cancellationToken = default)
     {

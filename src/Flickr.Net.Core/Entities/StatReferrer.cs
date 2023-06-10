@@ -1,11 +1,10 @@
 ﻿namespace Flickr.Net.Core.Entities;
 
 /// <summary>
-/// The referrer details returned by 
-/// <see cref="Flickr.StatsGetCollectionReferrers(DateTime, string, string, int, int)"/>,
-/// <see cref="Flickr.StatsGetPhotoReferrers(DateTime, string, string, int, int)"/>,
-/// <see cref="Flickr.StatsGetPhotosetReferrers(DateTime, string, string, int, int)"/>
-/// and <see cref="Flickr.StatsGetPhotostreamReferrers(DateTime, string, int, int)"/>.
+/// The referrer details returned by <see cref="Flickr.StatsGetCollectionReferrers(DateTime, string,
+/// string, int, int)"/>, <see cref="Flickr.StatsGetPhotoReferrers(DateTime, string, string, int,
+/// int)"/>, <see cref="Flickr.StatsGetPhotosetReferrers(DateTime, string, string, int, int)"/> and
+/// <see cref="Flickr.StatsGetPhotostreamReferrers(DateTime, string, int, int)"/>.
 /// </summary>
 public sealed class StatReferrer : IFlickrParsable
 {
