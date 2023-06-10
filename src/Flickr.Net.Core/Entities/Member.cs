@@ -2,7 +2,7 @@ namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// Details for a Flickr member, as returned by the <see
-/// cref="Flickr.GroupsMembersGetList(string)"/> method.
+/// cref="IFlickrGroupsMembers.GetListAsync(string, MemberTypes, int, int, CancellationToken)"/> method.
 /// </summary>
 public sealed class Member : IFlickrParsable
 {

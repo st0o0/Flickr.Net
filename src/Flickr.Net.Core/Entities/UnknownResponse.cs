@@ -3,7 +3,7 @@
 namespace Flickr.Net.Core.Entities;
 
 /// <summary>
-/// Contains the raw response from Flickr when an unknown method has been called. Used by <see cref="Flickr.TestGeneric"/>.
+/// Contains the raw response from Flickr when an unknown method has been called. Used by <see cref="IFlickrTest.EchoAsync(Dictionary{string, string}, CancellationToken)"/>.
 /// </summary>
 public sealed class UnknownResponse : IFlickrParsable
 {

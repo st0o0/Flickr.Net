@@ -1,7 +1,7 @@
 ﻿namespace Flickr.Net.Core.Entities;
 
 /// <summary>
-/// An instance of a photo returned by <see cref="Flickr.GalleriesGetPhotos(string, PhotoSearchExtras)"/>.
+/// An instance of a photo returned by <see cref="IFlickrGalleries.GetPhotosAsync(string, PhotoSearchExtras, CancellationToken)"/>.
 /// </summary>
 public class GalleryPhoto : Photo, IFlickrParsable
 {

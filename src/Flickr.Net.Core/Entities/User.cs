@@ -64,7 +64,7 @@ public sealed class FoundUser : IFlickrParsable
 }
 
 /// <summary>
-/// The upload status of the user, as returned by <see cref="Flickr.PeopleGetUploadStatus"/>.
+/// The upload status of the user, as returned by <see cref="IFlickrPeople.GetUploadStatusAsync(CancellationToken)"/>.
 /// </summary>
 public sealed class UserStatus : IFlickrParsable
 {

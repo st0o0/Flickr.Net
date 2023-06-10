@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 namespace Flickr.Net.Core.Entities;
 
 /// <summary>
-/// The shape data supplied by <see cref="Flickr.PlacesGetInfo"/>.
+/// The shape data supplied by <see cref="IFlickrPlaces.GetInfoAsync(string, string, CancellationToken)"/>.
 /// </summary>
 /// <remarks>
 /// See <a

@@ -2,7 +2,7 @@
 
 /// <summary>
 /// Contains the details of a comment made on a photo. returned by the <see
-/// cref="Flickr.PhotosCommentsGetList"/> method.
+/// cref="IFlickrPhotosComments.GetListAsync(string, CancellationToken)"/> method.
 /// </summary>
 public sealed class PhotoComment : IFlickrParsable
 {

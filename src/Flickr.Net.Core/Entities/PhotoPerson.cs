@@ -2,7 +2,7 @@
 
 /// <summary>
 /// The <see cref="PhotoPerson"/> class contains details returned by the <see
-/// cref="Flickr.PhotosPeopleGetList"/> method.
+/// cref="IFlickrPhotosPeople.GetListAsync(string, CancellationToken)"/> method.
 /// </summary>
 public sealed class PhotoPerson : IFlickrParsable
 {

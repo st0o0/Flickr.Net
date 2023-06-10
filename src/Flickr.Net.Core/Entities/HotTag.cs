@@ -1,7 +1,7 @@
 ﻿namespace Flickr.Net.Core.Entities;
 
 /// <summary>
-/// A hot tag. Returned by <see cref="Flickr.TagsGetHotList()"/>.
+/// A hot tag. Returned by <see cref="IFlickrTags.GetHotListAsync(string, int?, CancellationToken)"/>.
 /// </summary>
 public sealed class HotTag : IFlickrParsable
 {

@@ -183,7 +183,7 @@
         </member>
         <member name="T:Flickr.Net.Core.Entities.ActivityItem">
             <summary>
-            Activity class used for <see cref="!:Flickr.ActivityUserPhotos()"/> and <see cref="!:Flickr.ActivityUserComments"/>.
+            Activity class used for <see cref="M:Flickr.Net.Core.IFlickrActivity.UserPhotosAsync(System.Int32,Flickr.Net.Core.Enums.TimeType,System.Int32,System.Int32,System.Threading.CancellationToken)"/> and <see cref="M:Flickr.Net.Core.IFlickrActivity.UserCommentsAsync(System.Int32,System.Int32,System.Threading.CancellationToken)"/>.
             </summary>
         </member>
         <member name="M:Flickr.Net.Core.Entities.ActivityItem.#ctor">
@@ -225,19 +225,23 @@
             <summary>
             The number of new comments within the given time frame.
             </summary>
-            <remarks>Only applicable for <see cref="!:Flickr.ActivityUserPhotos()"/>.</remarks>
+            <remarks>
+            Only applicable for <see cref="M:Flickr.Net.Core.IFlickrActivity.UserPhotosAsync(System.Int32,Flickr.Net.Core.Enums.TimeType,System.Int32,System.Int32,System.Threading.CancellationToken)"/>.
+            </remarks>
         </member>
         <member name="P:Flickr.Net.Core.Entities.ActivityItem.OldComments">
             <summary>
             The number of old comments within the given time frame.
             </summary>
-            <remarks>Only applicable for <see cref="!:Flickr.ActivityUserPhotos()"/>.</remarks>
+            <remarks>
+            Only applicable for <see cref="M:Flickr.Net.Core.IFlickrActivity.UserPhotosAsync(System.Int32,Flickr.Net.Core.Enums.TimeType,System.Int32,System.Int32,System.Threading.CancellationToken)"/>.
+            </remarks>
         </member>
         <member name="P:Flickr.Net.Core.Entities.ActivityItem.Comments">
             <summary>
             The number of comments on the item.
             </summary>
-            <remarks>Only applicable for <see cref="!:Flickr.ActivityUserComments"/>.</remarks>
+            <remarks>Only applicable for <see cref="M:Flickr.Net.Core.IFlickrActivity.UserCommentsAsync(System.Int32,System.Int32,System.Threading.CancellationToken)"/>.</remarks>
         </member>
         <member name="P:Flickr.Net.Core.Entities.ActivityItem.Views">
             <summary>
@@ -297,19 +301,26 @@
             <summary>
             The number of new notes within the given time frame.
             </summary>
-            <remarks>Only applicable for photos and when calling <see cref="!:Flickr.ActivityUserPhotos()"/>.</remarks>
+            <remarks>
+            Only applicable for photos and when calling <see cref="M:Flickr.Net.Core.IFlickrActivity.UserPhotosAsync(System.Int32,Flickr.Net.Core.Enums.TimeType,System.Int32,System.Int32,System.Threading.CancellationToken)"/>.
+            </remarks>
         </member>
         <member name="P:Flickr.Net.Core.Entities.ActivityItem.OldNotes">
             <summary>
             The number of old notes within the given time frame.
             </summary>
-            <remarks>Only applicable for photos and when calling <see cref="!:Flickr.ActivityUserPhotos()"/>.</remarks>
+            <remarks>
+            Only applicable for photos and when calling <see cref="M:Flickr.Net.Core.IFlickrActivity.UserPhotosAsync(System.Int32,Flickr.Net.Core.Enums.TimeType,System.Int32,System.Int32,System.Threading.CancellationToken)"/>.
+            </remarks>
         </member>
         <member name="P:Flickr.Net.Core.Entities.ActivityItem.Notes">
             <summary>
             The number of comments on the photo.
             </summary>
-            <remarks>Only applicable for photos and when calling <see cref="!:Flickr.ActivityUserComments"/>.</remarks>
+            <remarks>
+            Only applicable for photos and when calling <see
+            cref="M:Flickr.Net.Core.IFlickrActivity.UserCommentsAsync(System.Int32,System.Int32,System.Threading.CancellationToken)"/>.
+            </remarks>
         </member>
         <member name="P:Flickr.Net.Core.Entities.ActivityItem.Favorites">
             <summary>
@@ -335,6 +346,26 @@
         <member name="P:Flickr.Net.Core.Entities.ActivityItem.SmallUrl">
             <summary>
             The URL for the small thumbnail of a photo or the primary photo for a photoset or gallery.
+            </summary>
+        </member>
+        <member name="T:Flickr.Net.Core.Entities.AllContexts">
+            <summary>
+            All contexts that a photo is in.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.AllContexts.Sets">
+            <summary>
+            An array of <see cref="T:Flickr.Net.Core.Entities.ContextSet"/> objects for the current photo.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.AllContexts.Groups">
+            <summary>
+            An array of <see cref="T:Flickr.Net.Core.Entities.ContextGroup"/> objects for the current photo.
+            </summary>
+        </member>
+        <member name="M:Flickr.Net.Core.Entities.AllContexts.#ctor">
+            <summary>
+            Default constructor.
             </summary>
         </member>
         <member name="T:Flickr.Net.Core.Entities.Auth">
@@ -367,8 +398,7 @@
         <member name="P:Flickr.Net.Core.Entities.Blog.BlogId">
             <summary>
             The ID Flickr has assigned to the blog. Use this to post to the blog using <see
-            cref="!:Flickr.BlogsPostPhoto(string, string, string, string)"/> or <see
-            cref="!:Flickr.BlogsPostPhoto(string, string, string, string, string)"/>.
+            cref="M:Flickr.Net.Core.IFlickrBlogs.PostPhotoAsync(System.String,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)"/>.
             </summary>
         </member>
         <member name="P:Flickr.Net.Core.Entities.Blog.BlogName">
@@ -389,7 +419,7 @@
         </member>
         <member name="P:Flickr.Net.Core.Entities.Blog.Service">
             <summary>
-            The service that his blog uses. See <see cref="!:Flickr.BlogsGetServices()"/>
+            The service that his blog uses. See <see cref="M:Flickr.Net.Core.IFlickrBlogs.GetServicesAsync(System.Threading.CancellationToken)"/>
             </summary>
         </member>
         <member name="T:Flickr.Net.Core.Entities.BlogService">
@@ -556,7 +586,7 @@
         <member name="P:Flickr.Net.Core.Entities.CollectionInfo.ChildCount">
             <summary>
             The number of child collections this collection contains. Call <see
-            cref="!:Flickr.CollectionsGetTree()"/> for children.
+            cref="M:Flickr.Net.Core.IFlickrCollections.GetTreeAsync(System.String,System.String,System.Threading.CancellationToken)"/> for children.
             </summary>
         </member>
         <member name="P:Flickr.Net.Core.Entities.CollectionInfo.DateCreated">
@@ -1876,17 +1906,20 @@
         </member>
         <member name="P:Flickr.Net.Core.Entities.Contact.RealName">
             <summary>
-            The users real name. Only returned for authenticated calls to <see cref="!:Flickr.ContactsGetList()"/>.
+            The users real name. Only returned for authenticated calls to <see
+            cref="M:Flickr.Net.Core.IFlickrContacts.GetListAsync(Flickr.Net.Core.Enums.ContactType,System.Int32,System.Int32,System.Threading.CancellationToken)"/>.
             </summary>
         </member>
         <member name="P:Flickr.Net.Core.Entities.Contact.Location">
             <summary>
-            The location of the contact. Only returned for authenticated calls to <see cref="!:Flickr.ContactsGetList()"/>.
+            The location of the contact. Only returned for authenticated calls to <see
+            cref="M:Flickr.Net.Core.IFlickrContacts.GetListAsync(Flickr.Net.Core.Enums.ContactType,System.Int32,System.Int32,System.Threading.CancellationToken)"/>.
             </summary>
         </member>
         <member name="P:Flickr.Net.Core.Entities.Contact.PathAlias">
             <summary>
-            The URL path alias for the contact. Only returned for authenticated calls to <see cref="!:Flickr.ContactsGetList()"/>.
+            The URL path alias for the contact. Only returned for authenticated calls to <see
+            cref="M:Flickr.Net.Core.IFlickrContacts.GetListAsync(Flickr.Net.Core.Enums.ContactType,System.Int32,System.Int32,System.Threading.CancellationToken)"/>.
             </summary>
         </member>
         <member name="P:Flickr.Net.Core.Entities.Contact.IconServer">
@@ -1911,7 +1944,8 @@
         </member>
         <member name="P:Flickr.Net.Core.Entities.Contact.PhotosUploaded">
             <summary>
-            The number of photos uploaded. Only returned by <see cref="!:Flickr.ContactsGetListRecentlyUploaded()"/>
+            The number of photos uploaded. Only returned by <see
+            cref="M:Flickr.Net.Core.IFlickrContacts.GetListRecentlyUploadedAsync(Flickr.Net.Core.Enums.ContactSearch,System.Nullable{System.DateTime},System.Threading.CancellationToken)"/>
             </summary>
         </member>
         <member name="P:Flickr.Net.Core.Entities.Contact.IsFriend">
@@ -1931,8 +1965,8 @@
         </member>
         <member name="T:Flickr.Net.Core.Entities.Context">
             <summary>
-            The context of the current photo, as returned by <see cref="!:Flickr.PhotosGetContext"/>, <see
-            cref="!:Flickr.PhotosetsGetContext"/> and <see cref="!:Flickr.GroupsPoolsGetContext"/> methods.
+            The context of the current photo, as returned by <see cref="M:Flickr.Net.Core.IFlickrPhotos.GetContextAsync(System.String,System.Threading.CancellationToken)"/>, <see
+            cref="M:Flickr.Net.Core.IFlickrPhotosets.GetContextAsync(System.String,System.String,System.Threading.CancellationToken)"/> and <see cref="M:Flickr.Net.Core.IFlickrGroupsPools.GetContextAsync(System.String,System.String,System.Threading.CancellationToken)"/> methods.
             </summary>
         </member>
         <member name="P:Flickr.Net.Core.Entities.Context.Count">
@@ -1948,6 +1982,21 @@
         <member name="P:Flickr.Net.Core.Entities.Context.PreviousPhoto">
             <summary>
             The previous photo in the context.
+            </summary>
+        </member>
+        <member name="T:Flickr.Net.Core.Entities.ContextGroup">
+            <summary>
+            A group context got a photo.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.ContextGroup.GroupId">
+            <summary>
+            The Group ID for the group that the selected photo is in.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.ContextGroup.Title">
+            <summary>
+            The title of the group that then selected photo is in.
             </summary>
         </member>
         <member name="T:Flickr.Net.Core.Entities.ContextPhoto">
@@ -1995,26 +2044,6 @@
             The media type of this item.
             </summary>
         </member>
-        <member name="T:Flickr.Net.Core.Entities.AllContexts">
-            <summary>
-            All contexts that a photo is in.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.AllContexts.Sets">
-            <summary>
-            An array of <see cref="T:Flickr.Net.Core.Entities.ContextSet"/> objects for the current photo.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.AllContexts.Groups">
-            <summary>
-            An array of <see cref="T:Flickr.Net.Core.Entities.ContextGroup"/> objects for the current photo.
-            </summary>
-        </member>
-        <member name="M:Flickr.Net.Core.Entities.AllContexts.#ctor">
-            <summary>
-            Default constructor.
-            </summary>
-        </member>
         <member name="T:Flickr.Net.Core.Entities.ContextSet">
             <summary>
             A set context for a photo.
@@ -2028,21 +2057,6 @@
         <member name="P:Flickr.Net.Core.Entities.ContextSet.Title">
             <summary>
             The title of the set the selected photo is in.
-            </summary>
-        </member>
-        <member name="T:Flickr.Net.Core.Entities.ContextGroup">
-            <summary>
-            A group context got a photo.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.ContextGroup.GroupId">
-            <summary>
-            The Group ID for the group that the selected photo is in.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.ContextGroup.Title">
-            <summary>
-            The title of the group that then selected photo is in.
             </summary>
         </member>
         <member name="T:Flickr.Net.Core.Entities.CsvFile">
@@ -2136,7 +2150,7 @@
         <member name="T:Flickr.Net.Core.Entities.FavoriteContextPhoto">
             <summary>
             A photo in the context of a favorite. Returned as part of a call to <see
-            cref="!:Flickr.FavoritesGetContext(string, string)"/>.
+            cref="M:Flickr.Net.Core.IFlickrFavorites.GetContextAsync(System.String,System.String,System.Threading.CancellationToken)"/>.
             </summary>
         </member>
         <member name="P:Flickr.Net.Core.Entities.FavoriteContextPhoto.FavoriteThumbnailUrl">
@@ -2268,12 +2282,12 @@
         <member name="P:Flickr.Net.Core.Entities.Gallery.PrimaryPhotoMediumUrl">
             <summary>
             The URL of the medium image for the primary image for this gallery. For large sizes call
-            <see cref="!:Flickr.PhotosGetSizes(string)"/>
+            <see cref="M:Flickr.Net.Core.IFlickrPhotos.GetSizesAsync(System.String,System.Threading.CancellationToken)"/>
             </summary>
         </member>
         <member name="T:Flickr.Net.Core.Entities.GalleryPhoto">
             <summary>
-            An instance of a photo returned by <see cref="!:Flickr.GalleriesGetPhotos(string, PhotoSearchExtras)"/>.
+            An instance of a photo returned by <see cref="M:Flickr.Net.Core.IFlickrGalleries.GetPhotosAsync(System.String,Flickr.Net.Core.Enums.PhotoSearchExtras,System.Threading.CancellationToken)"/>.
             </summary>
         </member>
         <member name="P:Flickr.Net.Core.Entities.GalleryPhoto.Comment">
@@ -2346,7 +2360,7 @@
         </member>
         <member name="P:Flickr.Net.Core.Entities.GroupCategory.Subcategories">
             <summary>
-            An array of <see cref="T:Flickr.Net.Core.Entities.Subcategory"/> items.
+            An array of <see cref="T:Flickr.Net.Core.Entities.SubCategory"/> items.
             </summary>
         </member>
         <member name="P:Flickr.Net.Core.Entities.GroupCategory.Groups">
@@ -2354,32 +2368,12 @@
             An array of <see cref="T:Flickr.Net.Core.Entities.Group"/> items, listing the groups within this category.
             </summary>
         </member>
-        <member name="T:Flickr.Net.Core.Entities.Subcategory">
-            <summary>
-            Holds details of a sub category, including its id, name and the number of groups in it.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.Subcategory.SubcategoryId">
-            <summary>
-            The id of the category.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.Subcategory.SubcategoryName">
-            <summary>
-            The name of the category.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.Subcategory.GroupCount">
-            <summary>
-            The number of groups found within the category.
-            </summary>
-        </member>
         <member name="T:Flickr.Net.Core.Entities.GroupFullInfo">
             <summary>
             Provides details of a particular group.
             </summary>
             <remarks>
-            Used by the Url methods and <see cref="!:Flickr.GroupsGetInfo"/> method. The reason for a <see
+            Used by the Url methods and <see cref="M:Flickr.Net.Core.IFlickrGroups.GetInfoAsync(System.String,System.Threading.CancellationToken)"/> method. The reason for a <see
             cref="T:Flickr.Net.Core.Entities.Group"/> and <see cref="T:Flickr.Net.Core.Entities.GroupFullInfo"/> are due to xml serialization incompatabilities.
             </remarks>
         </member>
@@ -2587,7 +2581,6 @@
             <summary>
             Provides details of a particular group.
             </summary>
-            <remarks>Used by <see cref="!:Flickr.GroupsBrowse()"/> and <see cref="!:Flickr.GroupsBrowse(string)"/>.</remarks>
         </member>
         <member name="P:Flickr.Net.Core.Entities.Group.GroupId">
             <summary>
@@ -2676,7 +2669,7 @@
         </member>
         <member name="T:Flickr.Net.Core.Entities.HotTag">
             <summary>
-            A hot tag. Returned by <see cref="!:Flickr.TagsGetHotList()"/>.
+            A hot tag. Returned by <see cref="M:Flickr.Net.Core.IFlickrTags.GetHotListAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)"/>.
             </summary>
         </member>
         <member name="P:Flickr.Net.Core.Entities.HotTag.Tag">
@@ -2745,8 +2738,8 @@
         </member>
         <member name="P:Flickr.Net.Core.Entities.License.LicenseId">
             <summary>
-            The ID of the license. Used by <see cref="!:Flickr.PhotosGetInfo(string)"/> and <see
-            cref="!:Flickr.PhotosGetInfo(string, string)"/>.
+            The ID of the license. Used by <see cref="M:Flickr.Net.Core.IFlickrPhotos.GetInfoAsync(System.String,System.String,System.Threading.CancellationToken)"/> and <see
+            cref="M:Flickr.Net.Core.IFlickrPhotos.GetInfoAsync(System.String,System.String,System.Threading.CancellationToken)"/>.
             </summary>
         </member>
         <member name="P:Flickr.Net.Core.Entities.License.LicenseName">
@@ -2762,7 +2755,7 @@
         <member name="T:Flickr.Net.Core.Entities.Member">
             <summary>
             Details for a Flickr member, as returned by the <see
-            cref="!:Flickr.GroupsMembersGetList(string)"/> method.
+            cref="M:Flickr.Net.Core.IFlickrGroupsMembers.GetListAsync(System.String,Flickr.Net.Core.Enums.MemberTypes,System.Int32,System.Int32,System.Threading.CancellationToken)"/> method.
             </summary>
         </member>
         <member name="P:Flickr.Net.Core.Entities.Member.MemberId">
@@ -2953,10 +2946,37 @@
             The namespace part of this pair.
             </summary>
         </member>
+        <member name="T:Flickr.Net.Core.Entities.PersonPhotosSummary">
+            <summary>
+            A summary of a users photos.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.PersonPhotosSummary.FirstDate">
+            <summary>
+            The first date the user uploaded a picture, converted into <see cref="T:System.DateTime"/> format.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.PersonPhotosSummary.FirstTakenDate">
+            <summary>
+            The first date the user took a picture, converted into <see cref="T:System.DateTime"/> format.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.PersonPhotosSummary.PhotoCount">
+            <summary>
+            The total number of photos for the user.
+            </summary>
+            <remarks/>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.PersonPhotosSummary.Views">
+            <summary>
+            The total number of photos for the user.
+            </summary>
+            <remarks/>
+        </member>
         <member name="T:Flickr.Net.Core.Entities.Person">
             <summary>
             The <see cref="T:Flickr.Net.Core.Entities.Person"/> class contains details returned by the <see
-            cref="!:Flickr.PeopleGetInfo"/> method.
+            cref="M:Flickr.Net.Core.IFlickrPeople.GetInfoAsync(System.String,System.Threading.CancellationToken)"/> method.
             </summary>
         </member>
         <member name="P:Flickr.Net.Core.Entities.Person.UserId">
@@ -3098,36 +3118,9 @@
             </summary>
             <remarks>Will likely contain HTML.</remarks>
         </member>
-        <member name="T:Flickr.Net.Core.Entities.PersonPhotosSummary">
-            <summary>
-            A summary of a users photos.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.PersonPhotosSummary.FirstDate">
-            <summary>
-            The first date the user uploaded a picture, converted into <see cref="T:System.DateTime"/> format.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.PersonPhotosSummary.FirstTakenDate">
-            <summary>
-            The first date the user took a picture, converted into <see cref="T:System.DateTime"/> format.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.PersonPhotosSummary.PhotoCount">
-            <summary>
-            The total number of photos for the user.
-            </summary>
-            <remarks/>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.PersonPhotosSummary.Views">
-            <summary>
-            The total number of photos for the user.
-            </summary>
-            <remarks/>
-        </member>
         <member name="T:Flickr.Net.Core.Entities.PersonLimits">
             <summary>
-            The limits for a person returned by <see cref="!:Flickr.PeopleGetLimits"/>.
+            The limits for a person returned by <see cref="M:Flickr.Net.Core.IFlickrPeople.GetLimitsAsync(System.Threading.CancellationToken)"/>.
             </summary>
             <remarks>For more details on limits see help here: https://www.flickr.com/help/limits/</remarks>
         </member>
@@ -3672,7 +3665,7 @@
         <member name="T:Flickr.Net.Core.Entities.PhotoComment">
             <summary>
             Contains the details of a comment made on a photo. returned by the <see
-            cref="!:Flickr.PhotosCommentsGetList"/> method.
+            cref="M:Flickr.Net.Core.IFlickrPhotosComments.GetListAsync(System.String,System.Threading.CancellationToken)"/> method.
             </summary>
         </member>
         <member name="P:Flickr.Net.Core.Entities.PhotoComment.CommentId">
@@ -4265,7 +4258,7 @@
         <member name="T:Flickr.Net.Core.Entities.PhotoPerson">
             <summary>
             The <see cref="T:Flickr.Net.Core.Entities.PhotoPerson"/> class contains details returned by the <see
-            cref="!:Flickr.PhotosPeopleGetList"/> method.
+            cref="M:Flickr.Net.Core.IFlickrPhotosPeople.GetListAsync(System.String,System.Threading.CancellationToken)"/> method.
             </summary>
         </member>
         <member name="P:Flickr.Net.Core.Entities.PhotoPerson.UserId">
@@ -4509,7 +4502,7 @@
             <summary>
             The number of photos the calling user has for this place.
             </summary>
-            <remarks>Only returned for <see cref="!:Flickr.PlacesPlacesForUser()"/>.</remarks>
+            <remarks>Only returned for <see cref="M:Flickr.Net.Core.IFlickrPlaces.PlacesForUserAsync(Flickr.Net.Core.Enums.PlaceType,System.String,System.String,System.Int32,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)"/>.</remarks>
         </member>
         <member name="M:Flickr.Net.Core.Entities.Place.Flickr#Net#Core#Entities#Interfaces#IFlickrParsable#Load(System.Xml.XmlReader)">
             <summary>
@@ -4519,7 +4512,7 @@
         </member>
         <member name="T:Flickr.Net.Core.Entities.PlaceInfo">
             <summary>
-            Detailed information about a place. Returned by <see cref="!:Flickr.PlacesGetInfo"/>.
+            Detailed information about a place. Returned by <see cref="M:Flickr.Net.Core.IFlickrPlaces.GetInfoAsync(System.String,System.String,System.Threading.CancellationToken)"/>.
             </summary>
         </member>
         <member name="P:Flickr.Net.Core.Entities.PlaceInfo.PlaceId">
@@ -4788,7 +4781,7 @@
         </member>
         <member name="T:Flickr.Net.Core.Entities.ShapeData">
             <summary>
-            The shape data supplied by <see cref="!:Flickr.PlacesGetInfo"/>.
+            The shape data supplied by <see cref="M:Flickr.Net.Core.IFlickrPlaces.GetInfoAsync(System.String,System.String,System.Threading.CancellationToken)"/>.
             </summary>
             <remarks>
             See <a
@@ -4949,10 +4942,8 @@
         </member>
         <member name="T:Flickr.Net.Core.Entities.StatReferrer">
             <summary>
-            The referrer details returned by <see cref="!:Flickr.StatsGetCollectionReferrers(DateTime, string,
-            string, int, int)"/>, <see cref="!:Flickr.StatsGetPhotoReferrers(DateTime, string, string, int,
-            int)"/>, <see cref="!:Flickr.StatsGetPhotosetReferrers(DateTime, string, string, int, int)"/> and
-            <see cref="!:Flickr.StatsGetPhotostreamReferrers(DateTime, string, int, int)"/>.
+            The referrer details returned by <see cref="M:Flickr.Net.Core.IFlickrStats.GetCollectionReferrersAsync(System.DateTime,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)"/>, <see cref="M:Flickr.Net.Core.IFlickrStats.GetPhotoReferrersAsync(System.DateTime,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)"/>, <see cref="M:Flickr.Net.Core.IFlickrStats.GetPhotosetReferrersAsync(System.DateTime,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)"/> and
+            <see cref="M:Flickr.Net.Core.IFlickrStats.GetPhotostreamReferrersAsync(System.DateTime,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)"/>.
             </summary>
         </member>
         <member name="P:Flickr.Net.Core.Entities.StatReferrer.Url">
@@ -4972,8 +4963,8 @@
         </member>
         <member name="T:Flickr.Net.Core.Entities.Stats">
             <summary>
-            The stats returned by <see cref="!:Flickr.StatsGetPhotoStats"/>, <see
-            cref="!:Flickr.StatsGetPhotostreamStats"/>, <see cref="!:Flickr.StatsGetPhotosetStats"/> and <see cref="!:Flickr.StatsGetCollectionStats"/>
+            The stats returned by <see cref="M:Flickr.Net.Core.IFlickrStats.GetPhotoStatsAsync(System.DateTime,System.String,System.Threading.CancellationToken)"/>, <see
+            cref="M:Flickr.Net.Core.IFlickrStats.GetPhotostreamStatsAsync(System.DateTime,System.Threading.CancellationToken)"/>, <see cref="M:Flickr.Net.Core.IFlickrStats.GetPhotosetStatsAsync(System.DateTime,System.String,System.Threading.CancellationToken)"/> and <see cref="M:Flickr.Net.Core.IFlickrStats.GetCollectionStatsAsync(System.DateTime,System.String,System.Threading.CancellationToken)"/>
             </summary>
         </member>
         <member name="P:Flickr.Net.Core.Entities.Stats.Views">
@@ -4996,7 +4987,7 @@
             The number of views of each type that a users account has had for a given date (or overall if no
             date specified).
             </summary>
-            <remarks>Used by <see cref="!:Flickr.StatsGetTotalViews(DateTime)"/>.</remarks>
+            <remarks>Used by <see cref="M:Flickr.Net.Core.IFlickrStats.GetTotalViewsAsync(System.DateTime,System.Threading.CancellationToken)"/>.</remarks>
         </member>
         <member name="P:Flickr.Net.Core.Entities.StatViews.TotalViews">
             <summary>
@@ -5026,6 +5017,26 @@
         <member name="P:Flickr.Net.Core.Entities.StatViews.GalleryViews">
             <summary>
             The number of gallery views.
+            </summary>
+        </member>
+        <member name="T:Flickr.Net.Core.Entities.SubCategory">
+            <summary>
+            Holds details of a sub category, including its id, name and the number of groups in it.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.SubCategory.SubcategoryId">
+            <summary>
+            The id of the category.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.SubCategory.SubcategoryName">
+            <summary>
+            The name of the category.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.SubCategory.GroupCount">
+            <summary>
+            The number of groups found within the category.
             </summary>
         </member>
         <member name="T:Flickr.Net.Core.Entities.Subscription">
@@ -5131,7 +5142,7 @@
         </member>
         <member name="T:Flickr.Net.Core.Entities.Tag">
             <summary>
-            A simple tag class, containing a tag name and optional count (for <see cref="!:Flickr.TagsGetListUserPopular()"/>)
+            A simple tag class, containing a tag name and optional count (for <see cref="M:Flickr.Net.Core.IFlickrTags.GetListUserPopularAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)"/>)
             </summary>
         </member>
         <member name="P:Flickr.Net.Core.Entities.Tag.TagName">
@@ -5141,7 +5152,7 @@
         </member>
         <member name="P:Flickr.Net.Core.Entities.Tag.Count">
             <summary>
-            The poularity of the tag. Will be 0 if not returned via <see cref="!:Flickr.TagsGetListUserPopular()"/>
+            The poularity of the tag. Will be 0 if not returned via <see cref="M:Flickr.Net.Core.IFlickrTags.GetListUserPopularAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)"/>
             </summary>
         </member>
         <member name="T:Flickr.Net.Core.Entities.RawTagCollection">
@@ -5151,7 +5162,7 @@
         </member>
         <member name="T:Flickr.Net.Core.Entities.RawTag">
             <summary>
-            Raw tags, as returned by the <see cref="!:Flickr.TagsGetListUserRaw(string)"/> method.
+            Raw tags, as returned by the <see cref="M:Flickr.Net.Core.IFlickrTags.GetListUserRawAsync(System.String,System.Threading.CancellationToken)"/> method.
             </summary>
         </member>
         <member name="M:Flickr.Net.Core.Entities.RawTag.#ctor">
@@ -5397,7 +5408,7 @@
         </member>
         <member name="T:Flickr.Net.Core.Entities.UnknownResponse">
             <summary>
-            Contains the raw response from Flickr when an unknown method has been called. Used by <see cref="!:Flickr.TestGeneric"/>.
+            Contains the raw response from Flickr when an unknown method has been called. Used by <see cref="M:Flickr.Net.Core.IFlickrTest.EchoAsync(System.Collections.Generic.Dictionary{System.String,System.String},System.Threading.CancellationToken)"/>.
             </summary>
         </member>
         <member name="P:Flickr.Net.Core.Entities.UnknownResponse.ResponseXml">
@@ -5458,12 +5469,13 @@
         </member>
         <member name="P:Flickr.Net.Core.Entities.FoundUser.FullName">
             <summary>
-            The full name of the user. Only returned by <see cref="!:Flickr.AuthGetToken"/>.
+            The full name of the user. Only returned by <see
+            cref="M:Flickr.Net.Core.IFlickrOAuth.GetAccessTokenAsync(Flickr.Net.Core.Internals.OAuthRequestToken,System.String,System.Threading.CancellationToken)"/>.
             </summary>
         </member>
         <member name="T:Flickr.Net.Core.Entities.UserStatus">
             <summary>
-            The upload status of the user, as returned by <see cref="!:Flickr.PeopleGetUploadStatus"/>.
+            The upload status of the user, as returned by <see cref="M:Flickr.Net.Core.IFlickrPeople.GetUploadStatusAsync(System.Threading.CancellationToken)"/>.
             </summary>
         </member>
         <member name="P:Flickr.Net.Core.Entities.UserStatus.UserId">
@@ -5907,7 +5919,7 @@
         </member>
         <member name="T:Flickr.Net.Core.Enums.GeoAccuracy">
             <summary>
-            Geo-taggin accuracy. Used in <see cref="!:PhotoSearchOptions.Accuracy"/> and <see cref="P:Flickr.Net.Core.Internals.BoundaryBox.Accuracy"/>.
+            Geo-taggin accuracy. Used in <see cref="P:Flickr.Net.Core.SearchOptions.PhotoSearchOptions.Accuracy"/> and <see cref="P:Flickr.Net.Core.Internals.BoundaryBox.Accuracy"/>.
             </summary>
             <remarks>Level descriptions are only approximate.</remarks>
         </member>
@@ -6627,6 +6639,26 @@
             The popular sorting.
             </summary>
         </member>
+        <member name="F:Flickr.Net.Core.Enums.PopularSorting.None">
+            <summary>
+            </summary>
+        </member>
+        <member name="F:Flickr.Net.Core.Enums.PopularSorting.Faves">
+            <summary>
+            </summary>
+        </member>
+        <member name="F:Flickr.Net.Core.Enums.PopularSorting.Views">
+            <summary>
+            </summary>
+        </member>
+        <member name="F:Flickr.Net.Core.Enums.PopularSorting.Comments">
+            <summary>
+            </summary>
+        </member>
+        <member name="F:Flickr.Net.Core.Enums.PopularSorting.Interesting">
+            <summary>
+            </summary>
+        </member>
         <member name="T:Flickr.Net.Core.Enums.PrivacyFilter">
             <summary>
             When searching for photos you can filter on the privacy of the photos.
@@ -6805,6 +6837,14 @@
         <member name="T:Flickr.Net.Core.Enums.TimeType">
             <summary>
             The time type.
+            </summary>
+        </member>
+        <member name="F:Flickr.Net.Core.Enums.TimeType.Hours">
+            <summary>
+            </summary>
+        </member>
+        <member name="F:Flickr.Net.Core.Enums.TimeType.Days">
+            <summary>
             </summary>
         </member>
         <member name="T:Flickr.Net.Core.Exceptions.ApiKeyRequiredException">
@@ -7760,9 +7800,6 @@
             </param>
             <param name="userId">The user id of the users whose favorites you wish to search.</param>
             <param name="cancellationToken"></param>
-            <param name="numPrevious">The number of previous favorites to list. Defaults to 1.</param>
-            <param name="numNext">The number of next favorites to list. Defaults to 1.</param>
-            <param name="extras">Any extras to return for each photo in the previous and next list.</param>
             <returns></returns>
         </member>
         <member name="M:Flickr.Net.Core.IFlickrFavorites.GetListAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},Flickr.Net.Core.Enums.PhotoSearchExtras,System.Int32,System.Int32,System.Threading.CancellationToken)">
@@ -7782,13 +7819,9 @@
             Gets the public favourites for a specified user.
             </summary>
             <remarks>
-            This function difers from <see cref="!:Flickr.FavoritesGetList(string)"/> in that the user id
-            is not optional.
+            This function differs from <see cref="M:Flickr.Net.Core.IFlickrFavorites.GetListAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},Flickr.Net.Core.Enums.PhotoSearchExtras,System.Int32,System.Int32,System.Threading.CancellationToken)"/> in that the user id is not optional.
             </remarks>
             <param name="userId">The is of the user whose favourites you wish to return.</param>
-            <param name="minFavoriteDate">Minimum date that a photo was favorited on.</param>
-            <param name="maxFavoriteDate">Maximum date that a photo was favorited on.</param>
-            <param name="extras">The extras to return for each photo.</param>
             <param name="perPage">The number of photos to return per page.</param>
             <param name="cancellationToken"></param>
             <param name="page">The specific page to return.</param>
@@ -7805,22 +7838,22 @@
             The flickr galleries.
             </summary>
         </member>
-        <member name="M:Flickr.Net.Core.IFlickrGalleries.GalleriesAddPhotoAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Flickr.Net.Core.IFlickrGalleries.AddPhotoAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             Add a photo to a gallery.
             </summary>
             <param name="galleryId">
             The ID of the gallery to add a photo to.
             Note: this is the compound ID returned in methods like <see
-                  cref="!:Flickr.GalleriesGetList(string, int, int)"/>, and <see
-                  cref="!:Flickr.GalleriesGetListForPhoto(string, int, int)"/>.
+                  cref="M:Flickr.Net.Core.IFlickrGalleries.GetListAsync(System.String,System.Int32,System.Int32,System.Threading.CancellationToken)"/>, and <see
+                  cref="M:Flickr.Net.Core.IFlickrGalleries.GetListForPhotoAsync(System.String,System.Int32,System.Int32,System.Threading.CancellationToken)"/>.
             </param>
             <param name="photoId">The photo ID to add to the gallery</param>
             <param name="comment">A short comment or story to accompany the photo.</param>
             <param name="cancellationToken"></param>
             <return></return>
         </member>
-        <member name="M:Flickr.Net.Core.IFlickrGalleries.GalleriesCreateAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Flickr.Net.Core.IFlickrGalleries.CreateAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             Create a new gallery for the calling user.
             </summary>
@@ -7829,7 +7862,7 @@
             <param name="primaryPhotoId">The first photo to add to your gallery.</param>
             <param name="cancellationToken"></param>
         </member>
-        <member name="M:Flickr.Net.Core.IFlickrGalleries.GalleriesEditMetaAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Flickr.Net.Core.IFlickrGalleries.EditMetaAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             Modify the meta-data for a gallery.
             </summary>
@@ -7838,23 +7871,41 @@
             <param name="description">The new description for the gallery.</param>
             <param name="cancellationToken"></param>
         </member>
-        <member name="M:Flickr.Net.Core.IFlickrGalleries.GalleriesEditPhotoAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Flickr.Net.Core.IFlickrGalleries.EditPhotoAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             Edit the comment for a gallery photo.
             </summary>
             <param name="galleryId">
             The ID of the gallery to add a photo to.
             Note: this is the compound ID returned in methods like <see
-                  cref="!:Flickr.GalleriesGetList(string, int, int)"/>, and <see
-                  cref="!:Flickr.GalleriesGetListForPhoto(string, int, int)"/>.
+                  cref="M:Flickr.Net.Core.IFlickrGalleries.GetListAsync(System.String,System.Int32,System.Int32,System.Threading.CancellationToken)"/>, and <see
+                  cref="M:Flickr.Net.Core.IFlickrGalleries.GetListForPhotoAsync(System.String,System.Int32,System.Int32,System.Threading.CancellationToken)"/>.
             </param>
             <param name="photoId">The photo ID to add to the gallery.</param>
             <param name="comment">The updated comment the photo.</param>
             <param name="cancellationToken"></param>
             <return></return>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:Flickr.Net.Core.IFlickrGalleries.GalleriesEditPhotosAsync(System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)" -->
-        <member name="M:Flickr.Net.Core.IFlickrGalleries.GalleriesGetInfoAsync(System.String,System.Threading.CancellationToken)">
+        <member name="M:Flickr.Net.Core.IFlickrGalleries.EditPhotosAsync(System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
+            <summary>
+            Modify the photos in a gallery. Use this method to add, remove and re-order photos.
+            </summary>
+            <param name="galleryId">
+            The id of the gallery to modify. The gallery must belong to the calling user.
+            </param>
+            <param name="primaryPhotoId">
+            The id of the photo to use as the 'primary' photo for the gallery. This id must also be
+            passed along in photo_ids list argument.
+            </param>
+            <param name="photoIds">
+            An enumeration of photo ids to include in the gallery. They will appear in the set in the
+            order sent. This list must contain the primary photo id. This list of photos replaces the
+            existing list.
+            </param>
+            <param name="cancellationToken"></param>
+            <return></return>
+        </member>
+        <member name="M:Flickr.Net.Core.IFlickrGalleries.GetInfoAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Get the information about a gallery.
             </summary>
@@ -7862,7 +7913,7 @@
             <param name="cancellationToken"></param>
             <return></return>
         </member>
-        <member name="M:Flickr.Net.Core.IFlickrGalleries.GalleriesGetListAsync(System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:Flickr.Net.Core.IFlickrGalleries.GetListAsync(System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
             <summary>
             Gets a list of galleries for the specified user.
             </summary>
@@ -7872,7 +7923,7 @@
             <param name="cancellationToken"></param>
             <return></return>
         </member>
-        <member name="M:Flickr.Net.Core.IFlickrGalleries.GalleriesGetListForPhotoAsync(System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:Flickr.Net.Core.IFlickrGalleries.GetListForPhotoAsync(System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
             <summary>
             Return the list of galleries to which a photo has been added. Galleries are returned sorted
             by date which the photo was added to the gallery.
@@ -7888,7 +7939,7 @@
             <param name="cancellationToken"></param>
             <return></return>
         </member>
-        <member name="M:Flickr.Net.Core.IFlickrGalleries.GalleriesGetPhotosAsync(System.String,Flickr.Net.Core.Enums.PhotoSearchExtras,System.Threading.CancellationToken)">
+        <member name="M:Flickr.Net.Core.IFlickrGalleries.GetPhotosAsync(System.String,Flickr.Net.Core.Enums.PhotoSearchExtras,System.Threading.CancellationToken)">
             <summary>
             Return the list of photos for a gallery.
             </summary>
@@ -7897,7 +7948,7 @@
             <param name="cancellationToken"></param>
             <return></return>
         </member>
-        <member name="M:Flickr.Net.Core.IFlickrGalleries.GalleriesRemovePhoto(System.String,System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Flickr.Net.Core.IFlickrGalleries.RemovePhoto(System.String,System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             Remove a photo from a gallery (and optionally update the gallery description).
             </summary>
@@ -8134,10 +8185,17 @@
             default to returning all extras.
             </param>
             <param name="perPage">The number of photos per page.</param>
-            <param name="cancellationToken"></param>
             <param name="page">The page to return.</param>
+            <param name="cancellationToken"></param>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:Flickr.Net.Core.IFlickrGroupsPools.RemoveAsync(System.String,System.String,System.Threading.CancellationToken)" -->
+        <member name="M:Flickr.Net.Core.IFlickrGroupsPools.RemoveAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Remove a picture from a group.
+            </summary>
+            <param name="photoId">The id of one of your pictures you wish to remove.</param>
+            <param name="groupId">The id of the group to remove the picture from.</param>
+            <param name="cancellationToken"></param>
+        </member>
         <member name="T:Flickr.Net.Core.IFlickrInterestingness">
             <summary>
             The flickr interestingness.
@@ -8223,13 +8281,6 @@
             Only return machine tags values that have been added since this timestamp.
             </param>
             <param name="cancellationToken"></param>
-            <param name="page">
-            The page of results to return. If this argument is omitted, it defaults to 1.
-            </param>
-            <param name="perPage">
-            Number of values to return per page. If this argument is omitted, it defaults to 100. The
-            maximum allowed value is 500.
-            </param>
         </member>
         <member name="M:Flickr.Net.Core.IFlickrMachineTags.GetValuesAsync(System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
             <summary>
@@ -8867,7 +8918,7 @@
             Remove an existing tag.
             </summary>
             <param name="tagId">
-            The id of the tag, as returned by <see cref="!:Flickr.Photos.GetInfoAsync()"/> or similar method.
+            The id of the tag, as returned by <see cref="M:Flickr.Net.Core.IFlickrPhotos.GetInfoAsync(System.String,System.String,System.Threading.CancellationToken)"/> or similar method.
             </param>
             <param name="cancellationToken"></param>
             <return></return>
@@ -8949,7 +9000,7 @@
             </summary>
             <remarks>
             This will remove all old tags and add these new ones specified. See <see
-            cref="!:PhotosAddTags(string, string)"/> to just add new tags without deleting old ones.
+            cref="M:Flickr.Net.Core.IFlickrPhotos.AddTagAsync(System.String,System.String[],System.Threading.CancellationToken)"/> to just add new tags without deleting old ones.
             </remarks>
             <param name="photoId">The id of the photo to update.</param>
             <param name="tags">An array of tags.</param>
@@ -10464,7 +10515,6 @@
             <param name="baseUrl">The base url to be called.</param>
             <param name="parameters">A dictionary of parameters.</param>
             <param name="cancellationToken"></param>
-            <param name="callback"></param>
             <returns></returns>
         </member>
         <member name="T:Flickr.Net.Core.Internals.LockFile">
@@ -10895,7 +10945,7 @@
         </member>
         <member name="P:Flickr.Net.Core.SearchOptions.PhotoSearchOptions.TagMode">
             <summary>
-            Tag mode can either be 'all', or 'any'. Defaults to <see cref="!:FlickrNet.TagMode.AllTags"/>
+            Tag mode can either be 'all', or 'any'. Defaults to <see cref="F:Flickr.Net.Core.Enums.TagMode.AllTags"/>
             </summary>
         </member>
         <member name="P:Flickr.Net.Core.SearchOptions.PhotoSearchOptions.MachineTags">

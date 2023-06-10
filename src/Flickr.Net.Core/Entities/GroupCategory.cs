@@ -10,7 +10,7 @@ public sealed class GroupCategory : IFlickrParsable
     /// </summary>
     public GroupCategory()
     {
-        Subcategories = new System.Collections.ObjectModel.Collection<Subcategory>();
+        Subcategories = new System.Collections.ObjectModel.Collection<SubCategory>();
         Groups = new System.Collections.ObjectModel.Collection<Group>();
     }
 
@@ -38,9 +38,9 @@ public sealed class GroupCategory : IFlickrParsable
     public string PathIds { get; set; }
 
     /// <summary>
-    /// An array of <see cref="Subcategory"/> items.
+    /// An array of <see cref="SubCategory"/> items.
     /// </summary>
-    public System.Collections.ObjectModel.Collection<Subcategory> Subcategories { get; set; }
+    public System.Collections.ObjectModel.Collection<SubCategory> Subcategories { get; set; }
 
     /// <summary>
     /// An array of <see cref="Group"/> items, listing the groups within this category.
@@ -82,7 +82,7 @@ public sealed class GroupCategory : IFlickrParsable
         {
             if (reader.LocalName == "subcat")
             {
-                Subcategory c = new();
+                SubCategory c = new();
                 ((IFlickrParsable)c).Load(reader);
                 Subcategories.Add(c);
             }
@@ -99,55 +99,3 @@ public sealed class GroupCategory : IFlickrParsable
     }
 }
 
-/// <summary>
-/// Holds details of a sub category, including its id, name and the number of groups in it.
-/// </summary>
-public sealed class Subcategory : IFlickrParsable
-{
-    /// <summary>
-    /// The id of the category.
-    /// </summary>
-    public string SubcategoryId { get; set; }
-
-    /// <summary>
-    /// The name of the category.
-    /// </summary>
-    public string SubcategoryName { get; set; }
-
-    /// <summary>
-    /// The number of groups found within the category.
-    /// </summary>
-    public int GroupCount { get; set; }
-
-    void IFlickrParsable.Load(System.Xml.XmlReader reader)
-    {
-        if (reader.LocalName != "category")
-        {
-            UtilityMethods.CheckParsingException(reader);
-        }
-
-        while (reader.MoveToNextAttribute())
-        {
-            switch (reader.LocalName)
-            {
-                case "id":
-                    SubcategoryId = reader.Value;
-                    break;
-
-                case "name":
-                    SubcategoryName = reader.Value;
-                    break;
-
-                case "count":
-                    GroupCount = int.Parse(reader.Value, System.Globalization.NumberFormatInfo.InvariantInfo);
-                    break;
-
-                default:
-                    UtilityMethods.CheckParsingException(reader);
-                    break;
-            }
-        }
-
-        reader.Read();
-    }
-}

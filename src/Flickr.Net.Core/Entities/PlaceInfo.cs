@@ -3,7 +3,7 @@
 namespace Flickr.Net.Core.Entities;
 
 /// <summary>
-/// Detailed information about a place. Returned by <see cref="Flickr.PlacesGetInfo"/>.
+/// Detailed information about a place. Returned by <see cref="IFlickrPlaces.GetInfoAsync(string, string, CancellationToken)"/>.
 /// </summary>
 public sealed class PlaceInfo : IFlickrParsable
 {

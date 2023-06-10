@@ -141,7 +141,7 @@ public sealed class Gallery : IFlickrParsable
 
     /// <summary>
     /// The URL of the medium image for the primary image for this gallery. For large sizes call
-    /// <see cref="Flickr.PhotosGetSizes(string)"/>
+    /// <see cref="IFlickrPhotos.GetSizesAsync(string, CancellationToken)"/>
     /// </summary>
     public string PrimaryPhotoMediumUrl
     {

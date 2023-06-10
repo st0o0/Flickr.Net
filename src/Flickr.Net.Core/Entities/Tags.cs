@@ -4,7 +4,7 @@ using System.Xml;
 namespace Flickr.Net.Core.Entities;
 
 /// <summary>
-/// A simple tag class, containing a tag name and optional count (for <see cref="Flickr.TagsGetListUserPopular()"/>)
+/// A simple tag class, containing a tag name and optional count (for <see cref="IFlickrTags.GetListUserPopularAsync(string, int?, CancellationToken)"/>)
 /// </summary>
 public sealed class Tag : IFlickrParsable
 {
@@ -14,7 +14,7 @@ public sealed class Tag : IFlickrParsable
     public string TagName { get; set; }
 
     /// <summary>
-    /// The poularity of the tag. Will be 0 if not returned via <see cref="Flickr.TagsGetListUserPopular()"/>
+    /// The poularity of the tag. Will be 0 if not returned via <see cref="IFlickrTags.GetListUserPopularAsync(string, int?, CancellationToken)"/>
     /// </summary>
     public int Count { get; set; }
 
@@ -63,7 +63,7 @@ public sealed class RawTagCollection : Collection<RawTag>, IFlickrParsable
 }
 
 /// <summary>
-/// Raw tags, as returned by the <see cref="Flickr.TagsGetListUserRaw(string)"/> method.
+/// Raw tags, as returned by the <see cref="IFlickrTags.GetListUserRawAsync(string, CancellationToken)"/> method.
 /// </summary>
 public sealed class RawTag : IFlickrParsable
 {
