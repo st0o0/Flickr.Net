@@ -150,7 +150,7 @@ public partial class Flickr : IFlickrPhotosets
 
         if (extras != PhotoSearchExtras.None)
         {
-            parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            parameters.Add("extras", extras.ToFlickrString());
         }
 
         if (privacyFilter != PrivacyFilter.None)

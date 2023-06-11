@@ -1,5 +1,6 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
+using Flickr.Net.Core.Internals.Extensions;
 
 namespace Flickr.Net.Core;
 
@@ -93,7 +94,7 @@ public partial class Flickr : IFlickrOAuth
 
     string IFlickrOAuth.CalculateAuthorizationUrl(string requestToken, AuthLevel perms, bool mobile)
     {
-        string permsString = (perms == AuthLevel.None) ? "" : "&perms=" + UtilityMethods.AuthLevelToString(perms);
+        string permsString = (perms == AuthLevel.None) ? "" : "&perms=" + perms.ToFlickrString();
 
         return "https://" + (mobile ? "m" : "www") + ".flickr.com/services/oauth/authorize?oauth_token=" + requestToken + permsString;
     }

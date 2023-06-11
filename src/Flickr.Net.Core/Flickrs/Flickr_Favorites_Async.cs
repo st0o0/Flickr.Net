@@ -54,7 +54,7 @@ public partial class Flickr : IFlickrFavorites
 
         if (extras != PhotoSearchExtras.None)
         {
-            parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            parameters.Add("extras", extras.ToFlickrString());
         }
 
         if (perPage > 0)

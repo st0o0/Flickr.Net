@@ -92,7 +92,7 @@ public partial class Flickr : IFlickrPhotos
 
         if (extras != PhotoSearchExtras.None)
         {
-            parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            parameters.Add("extras", extras.ToFlickrString());
         }
 
         return await GetResponseAsync<PhotoCollection>(parameters, cancellationToken);
@@ -128,7 +128,7 @@ public partial class Flickr : IFlickrPhotos
 
         if (extras != PhotoSearchExtras.None)
         {
-            parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            parameters.Add("extras", extras.ToFlickrString());
         }
 
         return await GetResponseAsync<PhotoCollection>(parameters, cancellationToken);
@@ -290,7 +290,7 @@ public partial class Flickr : IFlickrPhotos
 
         if (extras != PhotoSearchExtras.None)
         {
-            parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            parameters.Add("extras", extras.ToFlickrString());
         }
 
         if (page > 0)
@@ -325,7 +325,7 @@ public partial class Flickr : IFlickrPhotos
 
         if (extras != PhotoSearchExtras.None)
         {
-            parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            parameters.Add("extras", extras.ToFlickrString());
         }
 
         return await GetResponseAsync<PhotoCollection>(parameters, cancellationToken);
@@ -388,7 +388,7 @@ public partial class Flickr : IFlickrPhotos
 
         if (extras != PhotoSearchExtras.None)
         {
-            parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            parameters.Add("extras", extras.ToFlickrString());
         }
 
         if (perPage > 0)

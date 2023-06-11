@@ -112,7 +112,7 @@ public partial class Flickr : IFlickrPeople
 
         if (extras != PhotoSearchExtras.None)
         {
-            parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            parameters.Add("extras", extras.ToFlickrString());
         }
 
         if (page > 0)
@@ -138,7 +138,7 @@ public partial class Flickr : IFlickrPeople
 
         if (extras != PhotoSearchExtras.None)
         {
-            parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            parameters.Add("extras", extras.ToFlickrString());
         }
 
         if (perPage > 0)

@@ -74,7 +74,7 @@ public sealed class PhotoInfoTag : IFlickrParsable
 
         reader.Read();
 
-        TagText = reader.ReadContentAsString();
+        TagText = reader.NodeType == XmlNodeType.Text ? reader.ReadContentAsString() : null;
 
         reader.Skip();
     }

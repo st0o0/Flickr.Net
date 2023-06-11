@@ -1,4 +1,5 @@
 ﻿using Flickr.Net.Core.Exceptions;
+using Flickr.Net.Core.Internals.Extensions;
 
 namespace Flickr.Net.Core;
 
@@ -267,7 +268,7 @@ public partial class Flickr : IFlickrPlaces
 
         if (tagMode != TagMode.None)
         {
-            parameters.Add("tag_mode", UtilityMethods.TagModeToString(tagMode));
+            parameters.Add("tag_mode", tagMode.ToFlickrString());
         }
 
         if (machineTags != null && machineTags.Any())
@@ -277,7 +278,7 @@ public partial class Flickr : IFlickrPlaces
 
         if (machineTagMode != MachineTagMode.None)
         {
-            parameters.Add("machine_tag_mode", UtilityMethods.MachineTagModeToString(machineTagMode));
+            parameters.Add("machine_tag_mode", machineTagMode.ToFlickrString());
         }
 
         if (minTakenDate.HasValue && minTakenDate != DateTime.MinValue)

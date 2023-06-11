@@ -10418,6 +10418,18 @@
             The response returned by the <see cref="M:Flickr.Net.Core.IFlickrTest.EchoAsync(System.Collections.Generic.Dictionary{System.String,System.String},System.Threading.CancellationToken)"/> method.
             </summary>
         </member>
+        <member name="T:Flickr.Net.Core.Internals.Extensions.AuthLevelExtensions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Flickr.Net.Core.Internals.Extensions.AuthLevelExtensions.ToFlickrString(Flickr.Net.Core.Enums.AuthLevel)">
+            <summary>
+            Converts <see cref="T:Flickr.Net.Core.Enums.AuthLevel"/> to a string.
+            </summary>
+            <param name="level">The level to convert.</param>
+            <returns></returns>
+        </member>
         <member name="T:Flickr.Net.Core.Internals.Extensions.CacheExtensions">
             <summary>
             The cache extensions.
@@ -10433,6 +10445,30 @@
             The URL can either be an image URL for a downloaded picture, or a request URL (see <see
             cref="P:Flickr.Net.Core.Flickr.LastRequest"/> for getting the last URL).
             </remarks>
+        </member>
+        <member name="T:Flickr.Net.Core.Internals.Extensions.MachineTagModeExtensions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Flickr.Net.Core.Internals.Extensions.MachineTagModeExtensions.ToFlickrString(Flickr.Net.Core.Enums.MachineTagMode)">
+            <summary>
+            Convert a <see cref="T:Flickr.Net.Core.Enums.MachineTagMode"/> to a string used when passing to Flickr.
+            </summary>
+            <param name="machineTagMode">The machine tag mode to convert.</param>
+            <returns>The string to pass to Flickr.</returns>
+        </member>
+        <member name="T:Flickr.Net.Core.Internals.Extensions.TagModeExtensions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Flickr.Net.Core.Internals.Extensions.TagModeExtensions.ToFlickrString(Flickr.Net.Core.Enums.TagMode)">
+            <summary>
+            Convert a <see cref="T:Flickr.Net.Core.Enums.TagMode"/> to a string used when passing to Flickr.
+            </summary>
+            <param name="tagMode">The tag mode to convert.</param>
+            <returns>The string to pass to Flickr.</returns>
         </member>
         <member name="T:Flickr.Net.Core.Internals.FlickrResponder">
             <summary>
@@ -10516,27 +10552,6 @@
             Internal class providing certain utility functions to other classes.
             </summary>
         </member>
-        <member name="M:Flickr.Net.Core.Internals.UtilityMethods.AuthLevelToString(Flickr.Net.Core.Enums.AuthLevel)">
-            <summary>
-            Converts <see cref="T:Flickr.Net.Core.Enums.AuthLevel"/> to a string.
-            </summary>
-            <param name="level">The level to convert.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Flickr.Net.Core.Internals.UtilityMethods.TagModeToString(Flickr.Net.Core.Enums.TagMode)">
-            <summary>
-            Convert a <see cref="T:Flickr.Net.Core.Enums.TagMode"/> to a string used when passing to Flickr.
-            </summary>
-            <param name="tagMode">The tag mode to convert.</param>
-            <returns>The string to pass to Flickr.</returns>
-        </member>
-        <member name="M:Flickr.Net.Core.Internals.UtilityMethods.MachineTagModeToString(Flickr.Net.Core.Enums.MachineTagMode)">
-            <summary>
-            Convert a <see cref="T:Flickr.Net.Core.Enums.MachineTagMode"/> to a string used when passing to Flickr.
-            </summary>
-            <param name="machineTagMode">The machine tag mode to convert.</param>
-            <returns>The string to pass to Flickr.</returns>
-        </member>
         <member name="M:Flickr.Net.Core.Internals.UtilityMethods.UrlEncode(System.String)">
             <summary>
             Encodes a URL quesrystring data component.
@@ -10565,21 +10580,6 @@
             </summary>
             <param name="timestamp">The unix timestamp.</param>
             <returns>The <see cref="T:System.DateTime"/> object the time represents.</returns>
-        </member>
-        <member name="M:Flickr.Net.Core.Internals.UtilityMethods.ExtrasToString(Flickr.Net.Core.Enums.PhotoSearchExtras)">
-             <summary>
-             Utility method to convert the <see cref="T:Flickr.Net.Core.Enums.PhotoSearchExtras"/> enum to a string.
-             </summary>
-             <example>
-             <code>
-            PhotoSearchExtras extras = PhotoSearchExtras.DateTaken &amp; PhotoSearchExtras.IconServer;
-            string val = Utils.ExtrasToString(extras);
-            Console.WriteLine(val);
-             </code>
-             outputs: "date_taken,icon_server";
-             </example>
-             <param name="extras"></param>
-             <returns></returns>
         </member>
         <member name="M:Flickr.Net.Core.Internals.UtilityMethods.ColorCodesToString(System.Collections.Generic.IEnumerable{System.String})">
             <summary>
@@ -11225,6 +11225,26 @@
             <summary>
             Internal timeout for all web requests in milliseconds. Defaults to 30 seconds.
             </summary>
+        </member>
+        <member name="T:PhotoSearchExtrasExtensions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:PhotoSearchExtrasExtensions.ToFlickrString(Flickr.Net.Core.Enums.PhotoSearchExtras)">
+             <summary>
+             Utility method to convert the <see cref="T:Flickr.Net.Core.Enums.PhotoSearchExtras"/> enum to a string.
+             </summary>
+             <example>
+             <code>
+            PhotoSearchExtras extras = PhotoSearchExtras.DateTaken &amp; PhotoSearchExtras.IconServer;
+            string val = Utils.ExtrasToString(extras);
+            Console.WriteLine(val);
+             </code>
+             outputs: "date_taken,icon_server";
+             </example>
+             <param name="extras"></param>
+             <returns></returns>
         </member>
     </members>
 </doc>

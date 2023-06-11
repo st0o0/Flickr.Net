@@ -157,7 +157,7 @@ public partial class Flickr : IFlickrGalleries
 
         if (extras != PhotoSearchExtras.None)
         {
-            parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            parameters.Add("extras", extras.ToFlickrString());
         }
 
         return await GetResponseAsync<GalleryPhotoCollection>(parameters, cancellationToken);

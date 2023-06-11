@@ -163,7 +163,7 @@ public class PartialSearchOptions
 
     internal string ExtrasString
     {
-        get { return UtilityMethods.ExtrasToString(Extras); }
+        get { return extras.ToFlickrString(); }
     }
 
     internal string SortOrderString

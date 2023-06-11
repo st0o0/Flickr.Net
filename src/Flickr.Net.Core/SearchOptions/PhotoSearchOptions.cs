@@ -1,4 +1,4 @@
-using System.Collections.ObjectModel;
+using Flickr.Net.Core.Internals.Extensions;
 
 namespace Flickr.Net.Core.SearchOptions;
 
@@ -279,7 +279,7 @@ public class PhotoSearchOptions
 
     internal string ExtrasString
     {
-        get { return UtilityMethods.ExtrasToString(Extras); }
+        get { return Extras.ToFlickrString(); }
     }
 
     internal string ColorCodeString
@@ -415,7 +415,7 @@ public class PhotoSearchOptions
 
         if (TagMode != TagMode.None)
         {
-            parameters.Add("tag_mode", UtilityMethods.TagModeToString(TagMode));
+            parameters.Add("tag_mode", TagMode.ToFlickrString());
         }
 
         if (!string.IsNullOrEmpty(MachineTags))
@@ -425,7 +425,7 @@ public class PhotoSearchOptions
 
         if (MachineTagMode != MachineTagMode.None)
         {
-            parameters.Add("machine_tag_mode", UtilityMethods.MachineTagModeToString(MachineTagMode));
+            parameters.Add("machine_tag_mode", MachineTagMode.ToFlickrString());
         }
 
         if (MinUploadDate != DateTime.MinValue)

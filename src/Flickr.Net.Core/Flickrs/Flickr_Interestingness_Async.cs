@@ -31,7 +31,7 @@ public partial class Flickr : IFlickrInterestingness
 
         if (extras != PhotoSearchExtras.None)
         {
-            parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            parameters.Add("extras", extras.ToFlickrString());
         }
 
         return await GetResponseAsync<PhotoCollection>(parameters, cancellationToken);
