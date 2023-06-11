@@ -1,6 +1,4 @@
-﻿using System.Xml;
-
-namespace Flickr.Net.Core.Entities;
+﻿namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// The default privacy level for geographic information attached to the user's photos and whether

@@ -38,6 +38,7 @@ public interface IFlickrPhotosLicenses
     /// <summary>
     /// Gets a list of all current licenses.
     /// </summary>
+    /// <param name="cancellationToken"></param>
     Task<LicenseCollection> GetInfoAsync(CancellationToken cancellationToken = default);
 
     /// <summary>

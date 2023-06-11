@@ -51,11 +51,11 @@ public interface IFlickrGroupsMembers
     /// Return a list of members for this group. The group must be viewable by the Flickr member on
     /// whose behalf the API call is made.
     /// </param>
+    /// <param name="memberTypes">The types of members to be returned. Can be more than one.</param>
     /// <param name="page">The page of the results to return (default is 1).</param>
     /// <param name="perPage">
     /// The number of members to return per page (default is 100, max is 500).
     /// </param>
     /// <param name="cancellationToken"></param>
-    /// <param name="memberTypes">The types of members to be returned. Can be more than one.</param>
     Task<MemberCollection> GetListAsync(string groupId, MemberTypes memberTypes = MemberTypes.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 }

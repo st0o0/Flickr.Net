@@ -852,8 +852,8 @@ public interface IFlickrPhotos
     /// <param name="photoId">The numerical photoId of the photograph.</param>
     /// <param name="title">The new title of the photograph.</param>
     /// <param name="description">The new description of the photograph.</param>
-    /// <exception cref="FlickrApiException">Thrown when the photo id cannot be found.</exception>
     /// <param name="cancellationToken"></param>
+    /// <exception cref="FlickrApiException">Thrown when the photo id cannot be found.</exception>
     /// <return></return>
     Task SetMetaAsync(string photoId, string title = null, string description = null, CancellationToken cancellationToken = default);
 

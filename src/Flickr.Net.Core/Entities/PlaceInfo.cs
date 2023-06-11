@@ -1,6 +1,4 @@
-﻿using System.Xml;
-
-namespace Flickr.Net.Core.Entities;
+﻿namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// Detailed information about a place. Returned by <see cref="IFlickrPlaces.GetInfoAsync(string, string, CancellationToken)"/>.

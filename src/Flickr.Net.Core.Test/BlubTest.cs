@@ -1,4 +1,4 @@
-﻿using FlickrNet.Core.Configuration;
+﻿using Flickr.Net.Core.Configuration;
 
 namespace Flickr.Net.Core.Test;
 /// <summary>

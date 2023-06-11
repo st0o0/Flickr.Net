@@ -1,6 +1,4 @@
-﻿using System.Xml;
-
-namespace Flickr.Net.Core.Entities;
+﻿namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// Contains the raw response from Flickr when an unknown method has been called. Used by <see cref="IFlickrTest.EchoAsync(Dictionary{string, string}, CancellationToken)"/>.

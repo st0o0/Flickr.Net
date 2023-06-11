@@ -1,6 +1,3 @@
-using System.Collections.ObjectModel;
-using System.Xml;
-
 namespace Flickr.Net.Core.Entities;
 
 /// <summary>

@@ -55,12 +55,14 @@ public interface IFlickrBlogs
     /// <summary>
     /// Gets a list of blogs that have been set up by the user. Requires authentication.
     /// </summary>
+    /// <param name="cancellationToken"></param>
     /// <remarks></remarks>
     Task<BlogCollection> GetListAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Return a list of Flickr supported blogging services.
     /// </summary>
+    /// <param name="cancellationToken"></param>
     Task<BlogServiceCollection> GetServicesAsync(CancellationToken cancellationToken = default);
 
     /// <summary>

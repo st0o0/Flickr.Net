@@ -1,9 +1,7 @@
-﻿using System.Collections.ObjectModel;
-
-namespace Flickr.Net.Core.Entities.Collections;
+﻿namespace Flickr.Net.Core.Entities.Collections;
 
 /// <summary>
-/// The collection of location suggestions returned by <see cref="Flickr.PhotosSuggestionsGetList"/>.
+/// The collection of location suggestions returned by <see cref="IFlickrPhotosSuggestions.GetListAsync(string, SuggestionStatus, CancellationToken)"/>.
 /// </summary>
 public sealed class SuggestionCollection : Collection<Suggestion>, IFlickrParsable
 {

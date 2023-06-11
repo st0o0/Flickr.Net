@@ -40,11 +40,13 @@ public interface IFlickrTest
     /// <summary>
     /// Test the logged in state of the current Filckr object.
     /// </summary>
+    /// <param name="cancellationToken"></param>
     Task<FoundUser> LoginAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Null test.
     /// </summary>
+    /// <param name="cancellationToken"></param>
     Task NullAsync(CancellationToken cancellationToken = default);
 
     /// <summary>

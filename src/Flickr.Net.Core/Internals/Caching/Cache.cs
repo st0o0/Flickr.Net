@@ -1,4 +1,4 @@
-using FlickrNet.Core.Settings;
+using Flickr.Net.Core.Settings;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Flickr.Net.Core.Internals.Caching;

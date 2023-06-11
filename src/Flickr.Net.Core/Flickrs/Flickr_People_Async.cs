@@ -218,6 +218,7 @@ public interface IFlickrPeople
     /// <summary>
     /// Returns the limits for a person. See <see cref="PersonLimits"/> for more details.
     /// </summary>
+    /// <param name="cancellationToken"></param>
     /// <returns></returns>
     Task<PersonLimits> GetLimitsAsync(CancellationToken cancellationToken = default);
 
@@ -259,14 +260,15 @@ public interface IFlickrPeople
     /// </summary>
     /// <param name="userId">The user ID to get photos of.</param>
     /// <param name="extras">A list of extras to return for each photo.</param>
+    /// <param name="page">The page of photos to return. Default is 1.</param>
     /// <param name="perPage">The number of photos to return per page.</param>
     /// <param name="cancellationToken"></param>
-    /// <param name="page">The page of photos to return. Default is 1.</param>
     Task<PeoplePhotoCollection> GetPhotosOfAsync(string userId, PhotoSearchExtras extras = PhotoSearchExtras.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets the upload status of the authenticated user.
     /// </summary>
+    /// <param name="cancellationToken"></param>
     Task<UserStatus> GetUploadStatusAsync(CancellationToken cancellationToken = default);
 
     /// <summary>

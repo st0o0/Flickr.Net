@@ -1,7 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Xml;
-
-namespace Flickr.Net.Core.Entities;
+﻿namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// The total number of favorites for a user, along with the next and previous favorite photos.

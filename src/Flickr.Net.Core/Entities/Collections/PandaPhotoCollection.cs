@@ -1,7 +1,7 @@
 ﻿namespace Flickr.Net.Core.Entities.Collections;
 
 /// <summary>
-/// A collection of photos returned by the <see cref="Flickr.PandaGetPhotos(string)"/> methods.
+/// A collection of photos returned by the <see cref="IFlickrPanda.GetPhotosAsync(string, PhotoSearchExtras, int, int, CancellationToken)"/> methods.
 /// </summary>
 public sealed class PandaPhotoCollection : System.Collections.ObjectModel.Collection<Photo>, IFlickrParsable
 {

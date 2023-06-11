@@ -141,6 +141,7 @@ public interface IFlickrOAuth
     /// <summary>
     /// Checks the OAuth token, returns user information and permissions if valid.
     /// </summary>
+    /// <param name="cancellationToken"></param>
     /// <returns></returns>
     Task<Auth> CheckTokenAsync(CancellationToken cancellationToken = default);
 

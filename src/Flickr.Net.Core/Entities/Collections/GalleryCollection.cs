@@ -1,6 +1,4 @@
-﻿using System.Collections.ObjectModel;
-
-namespace Flickr.Net.Core.Entities.Collections;
+﻿namespace Flickr.Net.Core.Entities.Collections;
 
 /// <summary>
 /// A collection of <see cref="Gallery"/> instances.
@@ -28,13 +26,13 @@ public sealed class GalleryCollection : Collection<Gallery>, IFlickrParsable
     public int Total { get; set; }
 
     /// <summary>
-    /// The owner of these galleries if called from <see cref="Flickr.GalleriesGetList(string, int, int)"/>.
+    /// The owner of these galleries if called from <see cref="IFlickrGalleries.GetListAsync(string, int, int, CancellationToken)"/>.
     /// </summary>
     public string UserId { get; set; }
 
     /// <summary>
     /// The ID photo that these galleries contain if called from <see
-    /// cref="Flickr.GalleriesGetListForPhoto(string, int, int)"/>.
+    /// cref="IFlickrGalleries.GetListForPhotoAsync(string, int, int, CancellationToken)"/>.
     /// </summary>
     public string PhotoId { get; set; }
 

@@ -51,8 +51,8 @@ public interface IFlickrInterestingness
     /// The extra parameters to return along with the search results. See <see
     /// cref="PhotoSearchOptions"/> for more details.
     /// </param>
+    /// <param name="page">The page of the results to return.</param>
     /// <param name="perPage">The number of results to return per page.</param>
     /// <param name="cancellationToken"></param>
-    /// <param name="page">The page of the results to return.</param>
     Task<PhotoCollection> GetListAsync(DateTime? date, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken);
 }

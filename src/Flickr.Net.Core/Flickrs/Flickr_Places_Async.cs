@@ -461,6 +461,7 @@ public interface IFlickrPlaces
     /// <summary>
     /// Gets a list of valid Place Type key/value pairs.
     /// </summary>
+    /// <param name="cancellationToken"></param>
     /// <remarks>
     /// All Flickr.Net methods use the <see cref="PlaceType"/> enumeration so this method doesn't
     /// serve much purpose.

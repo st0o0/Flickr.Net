@@ -163,11 +163,13 @@ public interface IFlickrPush
     /// <summary>
     /// Get a list of subscriptions for the calling user.
     /// </summary>
+    /// <param name="cancellationToken"></param>
     Task<SubscriptionCollection> GetSubscriptionsAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get a list of topics that are available for subscription.
     /// </summary>
+    /// <param name="cancellationToken"></param>
     Task<string[]> GetTopicsAsync(CancellationToken cancellationToken = default);
 
     /// <summary>

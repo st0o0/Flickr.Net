@@ -52,6 +52,7 @@ public interface IFlickrPanda
     /// <summary>
     /// Get a list of current 'Pandas' supported by Flickr.
     /// </summary>
+    /// <param name="cancellationToken"></param>
     /// <returns>An array of panda names.</returns>
     Task<string[]> GetListAsync(CancellationToken cancellationToken = default);
 
@@ -61,7 +62,7 @@ public interface IFlickrPanda
     /// <param name="pandaName">The name of the panda to return photos for.</param>
     /// <param name="extras">The extras to return with the photos.</param>
     /// <param name="perPage">The number of photos to return per page.</param>
-    /// <param name="cancellationToken"></param>
     /// <param name="page">The age to return.</param>
+    /// <param name="cancellationToken"></param>
     Task<PandaPhotoCollection> GetPhotosAsync(string pandaName, PhotoSearchExtras extras = PhotoSearchExtras.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 }

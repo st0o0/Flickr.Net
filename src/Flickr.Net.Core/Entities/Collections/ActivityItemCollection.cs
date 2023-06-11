@@ -1,6 +1,4 @@
-﻿using System.Collections.ObjectModel;
-
-namespace Flickr.Net.Core.Entities.Collections;
+﻿namespace Flickr.Net.Core.Entities.Collections;
 
 /// <summary>
 /// A list of <see cref="ActivityItem"/> items.

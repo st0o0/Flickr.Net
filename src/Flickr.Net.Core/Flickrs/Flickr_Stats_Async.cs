@@ -387,6 +387,7 @@ public interface IFlickrStats
     /// <summary>
     /// Gets the collection of CSV files of archived stats from Flickr.
     /// </summary>
+    /// <param name="cancellationToken"></param>
     /// <remarks>Archived files only available till the 1st June 2010.</remarks>
     Task<CsvFileCollection> GetCsvFilesAsync(CancellationToken cancellationToken = default);
 

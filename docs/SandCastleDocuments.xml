@@ -4,103 +4,39 @@
         <name>Flickr.Net.Core</name>
     </assembly>
     <members>
-        <member name="T:FlickrNet.Core.Configuration.FlickrConfiguration">
+        <member name="T:Flickr.Net.Core.Configuration.FlickrConfiguration">
             <summary>
             The flickr configuration.
             </summary>
         </member>
-        <member name="P:FlickrNet.Core.Configuration.FlickrConfiguration.ApiKey">
+        <member name="P:Flickr.Net.Core.Configuration.FlickrConfiguration.ApiKey">
             <summary>
             Gets or sets the api key.
             </summary>
         </member>
-        <member name="P:FlickrNet.Core.Configuration.FlickrConfiguration.SharedSecret">
+        <member name="P:Flickr.Net.Core.Configuration.FlickrConfiguration.SharedSecret">
             <summary>
             Gets or sets the shared secret.
             </summary>
         </member>
-        <member name="P:FlickrNet.Core.Configuration.FlickrConfiguration.CacheDisabled">
+        <member name="P:Flickr.Net.Core.Configuration.FlickrConfiguration.CacheDisabled">
             <summary>
             Gets or sets a value indicating whether cache disabled.
             </summary>
         </member>
-        <member name="P:FlickrNet.Core.Configuration.FlickrConfiguration.CacheLocation">
+        <member name="P:Flickr.Net.Core.Configuration.FlickrConfiguration.CacheLocation">
             <summary>
             Gets or sets the cache location.
             </summary>
         </member>
-        <member name="P:FlickrNet.Core.Configuration.FlickrConfiguration.CacheSize">
+        <member name="P:Flickr.Net.Core.Configuration.FlickrConfiguration.CacheSize">
             <summary>
             Gets or sets the cache size.
             </summary>
         </member>
-        <member name="P:FlickrNet.Core.Configuration.FlickrConfiguration.CacheTimeout">
+        <member name="P:Flickr.Net.Core.Configuration.FlickrConfiguration.CacheTimeout">
             <summary>
             Gets or sets the cache timeout.
-            </summary>
-        </member>
-        <member name="T:FlickrNet.Core.Settings.FlickrCachingSettings">
-            <summary>
-            The flickr caching settings.
-            </summary>
-        </member>
-        <member name="P:FlickrNet.Core.Settings.FlickrCachingSettings.CacheDisabled">
-            <summary>
-            Gets or sets whether the cache should be disabled. Use only in extreme cases where you are
-            sure you don't want any caching.
-            </summary>
-        </member>
-        <member name="P:FlickrNet.Core.Settings.FlickrCachingSettings.InstanceCacheDisabled">
-            <summary>
-            Override if the cache is disabled for this particular instance of <see cref="N:Flickr"/>.
-            </summary>
-        </member>
-        <member name="P:FlickrNet.Core.Settings.FlickrCachingSettings.CacheTimeout">
-            <summary>
-            All GET calls to Flickr are cached by the Flickr.Net API. Set the <see cref="P:FlickrNet.Core.Settings.FlickrCachingSettings.CacheTimeout"/>
-            to determine how long these calls should be cached (make this as long as possible!)
-            </summary>
-        </member>
-        <member name="P:FlickrNet.Core.Settings.FlickrCachingSettings.CacheLocation">
-            <summary>
-            Sets or gets the location to store the Cache files.
-            </summary>
-        </member>
-        <member name="P:FlickrNet.Core.Settings.FlickrCachingSettings.CacheSizeLimit">
-            <summary>
-            <see cref="P:FlickrNet.Core.Settings.FlickrCachingSettings.CacheSizeLimit"/> is the cache file size in bytes for downloaded pictures. The
-            default is 50MB (or 50 * 1024 * 1025 in bytes).
-            </summary>
-        </member>
-        <member name="T:FlickrNet.Core.Settings.FlickrSettings">
-            <summary>
-            The flickr settings.
-            </summary>
-        </member>
-        <member name="P:FlickrNet.Core.Settings.FlickrSettings.ApiKey">
-            <summary>
-            Get or set the API Key to be used by all calls. API key is mandatory for all calls to Flickr.
-            </summary>
-        </member>
-        <member name="P:FlickrNet.Core.Settings.FlickrSettings.ApiSecret">
-            <summary>
-            API shared secret is required for all calls that require signing, which includes all methods
-            that require authentication, as well as the actual flickr.auth.* calls.
-            </summary>
-        </member>
-        <member name="P:FlickrNet.Core.Settings.FlickrSettings.OAuthAccessToken">
-            <summary>
-            OAuth Access Token. Needed for authenticated access using OAuth to Flickr.
-            </summary>
-        </member>
-        <member name="P:FlickrNet.Core.Settings.FlickrSettings.OAuthAccessTokenSecret">
-            <summary>
-            OAuth Access Token Secret. Needed for authenticated access using OAuth to Flickr.
-            </summary>
-        </member>
-        <member name="P:FlickrNet.Core.Settings.FlickrSettings.HttpTimeout">
-            <summary>
-            Internal timeout for all web requests in milliseconds. Defaults to 30 seconds.
             </summary>
         </member>
         <member name="T:Flickr.Net.Core.Entities.ActivityEvent">
@@ -629,28 +565,6 @@
             An array of the 12 photos used to create a collection's mosaic.
             </summary>
         </member>
-        <member name="T:Flickr.Net.Core.Entities.CollectionSet">
-            <summary>
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.CollectionSet.SetId">
-            <remarks/>
-            <summary>
-            Gets or sets the set id.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.CollectionSet.Title">
-            <remarks/>
-            <summary>
-            Gets or sets the title.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.CollectionSet.Description">
-            <remarks/>
-            <summary>
-            Gets or sets the description.
-            </summary>
-        </member>
         <member name="T:Flickr.Net.Core.Entities.Collections.ActivityItemCollection">
             <summary>
             A list of <see cref="T:Flickr.Net.Core.Entities.ActivityItem"/> items.
@@ -784,18 +698,18 @@
         </member>
         <member name="P:Flickr.Net.Core.Entities.Collections.GalleryCollection.UserId">
             <summary>
-            The owner of these galleries if called from <see cref="!:Flickr.GalleriesGetList(string, int, int)"/>.
+            The owner of these galleries if called from <see cref="M:Flickr.Net.Core.IFlickrGalleries.GetListAsync(System.String,System.Int32,System.Int32,System.Threading.CancellationToken)"/>.
             </summary>
         </member>
         <member name="P:Flickr.Net.Core.Entities.Collections.GalleryCollection.PhotoId">
             <summary>
             The ID photo that these galleries contain if called from <see
-            cref="!:Flickr.GalleriesGetListForPhoto(string, int, int)"/>.
+            cref="M:Flickr.Net.Core.IFlickrGalleries.GetListForPhotoAsync(System.String,System.Int32,System.Int32,System.Threading.CancellationToken)"/>.
             </summary>
         </member>
         <member name="T:Flickr.Net.Core.Entities.Collections.GalleryPhotoCollection">
             <summary>
-            A list of gallery photos as returned by <see cref="!:Flickr.GalleriesGetPhotos(string, PhotoSearchExtras)"/>
+            A list of gallery photos as returned by <see cref="M:Flickr.Net.Core.IFlickrGalleries.GetPhotosAsync(System.String,Flickr.Net.Core.Enums.PhotoSearchExtras,System.Threading.CancellationToken)"/>
             </summary>
         </member>
         <member name="P:Flickr.Net.Core.Entities.Collections.GalleryPhotoCollection.Page">
@@ -826,7 +740,7 @@
         </member>
         <member name="T:Flickr.Net.Core.Entities.Collections.GroupSearchResultCollection">
             <summary>
-            Returned by <see cref="!:Flickr.GroupsSearch(string)"/> methods.
+            Returned by <see cref="M:Flickr.Net.Core.IFlickrGroups.SearchAsync(System.String,System.Int32,System.Int32,System.Threading.CancellationToken)"/> methods.
             </summary>
         </member>
         <member name="P:Flickr.Net.Core.Entities.Collections.GroupSearchResultCollection.Page">
@@ -847,61 +761,6 @@
         <member name="P:Flickr.Net.Core.Entities.Collections.GroupSearchResultCollection.Total">
             <summary>
             The total number of groups that where returned for the search.
-            </summary>
-        </member>
-        <member name="T:Flickr.Net.Core.Entities.Collections.GroupSearchResult">
-            <summary>
-            A class which encapsulates a single group search result.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.Collections.GroupSearchResult.GroupId">
-            <summary>
-            The group id for the result.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.Collections.GroupSearchResult.GroupName">
-            <summary>
-            The group name for the result.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.Collections.GroupSearchResult.EighteenPlus">
-            <summary>
-            True if the group is an over eighteen (adult) group only.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.Collections.GroupSearchResult.Privacy">
-            <summary>
-            THe privacy setting for this groups photo pool.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.Collections.GroupSearchResult.IconServer">
-            <summary>
-            Group icon server.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.Collections.GroupSearchResult.IconFarm">
-            <summary>
-            Group icon farm.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.Collections.GroupSearchResult.Members">
-            <summary>
-            Number of members in the group.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.Collections.GroupSearchResult.PoolCount">
-            <summary>
-            The number of photos in this groups pool.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.Collections.GroupSearchResult.TopicCount">
-            <summary>
-            The number of topics in this groups discussion list.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.Collections.GroupSearchResult.GroupIconUrl">
-            <summary>
-            The url for the group's icon.
             </summary>
         </member>
         <member name="T:Flickr.Net.Core.Entities.Collections.HotTagCollection">
@@ -932,7 +791,7 @@
         </member>
         <member name="T:Flickr.Net.Core.Entities.Collections.MemberCollection">
             <summary>
-            A collection of members returned by the <see cref="!:Flickr.GroupsMembersGetList(string)"/> method.
+            A collection of members returned by the <see cref="M:Flickr.Net.Core.IFlickrGroupsMembers.GetListAsync(System.String,Flickr.Net.Core.Enums.MemberTypes,System.Int32,System.Int32,System.Threading.CancellationToken)"/> method.
             </summary>
         </member>
         <member name="P:Flickr.Net.Core.Entities.Collections.MemberCollection.Page">
@@ -986,125 +845,6 @@
         <member name="T:Flickr.Net.Core.Entities.Collections.MethodCollection">
             <summary>
             Summary description for Methods.
-            </summary>
-        </member>
-        <member name="T:Flickr.Net.Core.Entities.Collections.Method">
-            <summary>
-            A method supported by the Flickr API.
-            </summary>
-            <remarks>
-            See <a href="https://www.flickr.com/services/api">Flickr API Documentation</a> for a complete
-            list of methods.
-            </remarks>
-        </member>
-        <member name="M:Flickr.Net.Core.Entities.Collections.Method.#ctor">
-            <summary>
-            Default constructor.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.Collections.Method.Name">
-            <summary>
-            The name of the method.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.Collections.Method.NeedsLogin">
-            <summary>
-            Does the method require the call to be authenticated.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.Collections.Method.NeedsSigning">
-            <summary>
-            Does the method request the call to be signed.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.Collections.Method.RequiredPermissions">
-            <summary>
-            The minimum level of permissions required for this method call.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.Collections.Method.Description">
-            <summary>
-            The description of the method.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.Collections.Method.Response">
-            <summary>
-            An example response for the method.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.Collections.Method.Explanation">
-            <summary>
-            An explanation of the example response for the method.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.Collections.Method.Arguments">
-            <summary>
-            The arguments of the method.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.Collections.Method.Errors">
-            <summary>
-            The possible errors that could be returned by the method.
-            </summary>
-        </member>
-        <member name="T:Flickr.Net.Core.Entities.Collections.MethodPermission">
-            <summary>
-            An enumeration listing the permission levels required for calling the Flickr API methods.
-            </summary>
-        </member>
-        <member name="F:Flickr.Net.Core.Entities.Collections.MethodPermission.None">
-            <summary>
-            No permissions required.
-            </summary>
-        </member>
-        <member name="F:Flickr.Net.Core.Entities.Collections.MethodPermission.Read">
-            <summary>
-            A minimum of 'read' permissions required.
-            </summary>
-        </member>
-        <member name="F:Flickr.Net.Core.Entities.Collections.MethodPermission.Write">
-            <summary>
-            A minimum of 'write' permissions required.
-            </summary>
-        </member>
-        <member name="T:Flickr.Net.Core.Entities.Collections.MethodArgument">
-            <summary>
-            An argument for a method.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.Collections.MethodArgument.Name">
-            <summary>
-            The name of the argument.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.Collections.MethodArgument.IsOptional">
-            <summary>
-            Is the argument optional or not.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.Collections.MethodArgument.Description">
-            <summary>
-            The description of the argument.
-            </summary>
-        </member>
-        <member name="T:Flickr.Net.Core.Entities.Collections.MethodError">
-            <summary>
-            A possible error that a method can return.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.Collections.MethodError.Code">
-            <summary>
-            The code for the error.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.Collections.MethodError.Message">
-            <summary>
-            The message for a method error.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.Collections.MethodError.Description">
-            <summary>
-            The description of a method error.
             </summary>
         </member>
         <member name="T:Flickr.Net.Core.Entities.Collections.NamespaceCollection">
@@ -1195,7 +935,7 @@
         </member>
         <member name="T:Flickr.Net.Core.Entities.Collections.PandaPhotoCollection">
             <summary>
-            A collection of photos returned by the <see cref="!:Flickr.PandaGetPhotos(string)"/> methods.
+            A collection of photos returned by the <see cref="M:Flickr.Net.Core.IFlickrPanda.GetPhotosAsync(System.String,Flickr.Net.Core.Enums.PhotoSearchExtras,System.Int32,System.Int32,System.Threading.CancellationToken)"/> methods.
             </summary>
         </member>
         <member name="P:Flickr.Net.Core.Entities.Collections.PandaPhotoCollection.Interval">
@@ -1220,17 +960,17 @@
         </member>
         <member name="T:Flickr.Net.Core.Entities.Collections.PeoplePhotoCollection">
             <summary>
-            A collection of photos returned by the <see cref="!:Flickr.PandaGetPhotos(string)"/> methods.
+            A collection of photos returned by the <see cref="M:Flickr.Net.Core.IFlickrPanda.GetPhotosAsync(System.String,Flickr.Net.Core.Enums.PhotoSearchExtras,System.Int32,System.Int32,System.Threading.CancellationToken)"/> methods.
             </summary>
         </member>
         <member name="P:Flickr.Net.Core.Entities.Collections.PeoplePhotoCollection.Pages">
             <summary>
-            Only populate for authenticated calls to <see cref="!:Flickr.PeopleGetPhotosOf()"/>
+            Only populate for authenticated calls to <see cref="M:Flickr.Net.Core.IFlickrPeople.GetPhotosOfAsync(System.String,Flickr.Net.Core.Enums.PhotoSearchExtras,System.Int32,System.Int32,System.Threading.CancellationToken)"/>
             </summary>
         </member>
         <member name="P:Flickr.Net.Core.Entities.Collections.PeoplePhotoCollection.Total">
             <summary>
-            Only populate for authenticated calls to <see cref="!:Flickr.PeopleGetPhotosOf()"/>
+            Only populate for authenticated calls to <see cref="M:Flickr.Net.Core.IFlickrPeople.GetPhotosOfAsync(System.String,Flickr.Net.Core.Enums.PhotoSearchExtras,System.Int32,System.Int32,System.Threading.CancellationToken)"/>
             </summary>
         </member>
         <member name="P:Flickr.Net.Core.Entities.Collections.PeoplePhotoCollection.Page">
@@ -1267,27 +1007,6 @@
         <member name="T:Flickr.Net.Core.Entities.Collections.PhotoCountCollection">
             <summary>
             The information about the number of photos a user has.
-            </summary>
-        </member>
-        <member name="T:Flickr.Net.Core.Entities.Collections.PhotoCount">
-            <summary>
-            The specifics of a particular count.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.Collections.PhotoCount.Count">
-            <summary>
-            Total number of photos between the FromDate and the ToDate.
-            </summary>
-            <remarks/>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.Collections.PhotoCount.FromDate">
-            <summary>
-            The From date as a <see cref="T:System.DateTime"/> object.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.Collections.PhotoCount.ToDate">
-            <summary>
-            The To date as a <see cref="T:System.DateTime"/> object.
             </summary>
         </member>
         <member name="T:Flickr.Net.Core.Entities.Collections.PhotoFavoriteCollection">
@@ -1426,8 +1145,7 @@
         </member>
         <member name="T:Flickr.Net.Core.Entities.Collections.PopularPhotoCollection">
             <summary>
-            A list of popular photos as returned by <see cref="!:Flickr.StatsGetPopularPhotos(DateTime,
-            PopularitySort, int, int)"/>
+            A list of popular photos as returned by <see cref="M:Flickr.Net.Core.IFlickrStats.GetPopularPhotosAsync(System.DateTime,Flickr.Net.Core.Enums.PopularitySort,System.Int32,System.Int32,System.Threading.CancellationToken)"/>
             </summary>
         </member>
         <member name="P:Flickr.Net.Core.Entities.Collections.PopularPhotoCollection.Page">
@@ -1583,7 +1301,7 @@
         </member>
         <member name="T:Flickr.Net.Core.Entities.Collections.SuggestionCollection">
             <summary>
-            The collection of location suggestions returned by <see cref="!:Flickr.PhotosSuggestionsGetList"/>.
+            The collection of location suggestions returned by <see cref="M:Flickr.Net.Core.IFlickrPhotosSuggestions.GetListAsync(System.String,Flickr.Net.Core.Enums.SuggestionStatus,System.Threading.CancellationToken)"/>.
             </summary>
         </member>
         <member name="P:Flickr.Net.Core.Entities.Collections.SuggestionCollection.Total">
@@ -1887,6 +1605,28 @@
         <member name="P:Flickr.Net.Core.Entities.Collections.ValueCollection.Pages">
             <summary>
             The number of pages of namespaces that are available.
+            </summary>
+        </member>
+        <member name="T:Flickr.Net.Core.Entities.CollectionSet">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.CollectionSet.SetId">
+            <remarks/>
+            <summary>
+            Gets or sets the set id.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.CollectionSet.Title">
+            <remarks/>
+            <summary>
+            Gets or sets the title.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.CollectionSet.Description">
+            <remarks/>
+            <summary>
+            Gets or sets the description.
             </summary>
         </member>
         <member name="T:Flickr.Net.Core.Entities.Contact">
@@ -2325,6 +2065,26 @@
             Are family allowed to see the Geo Location information for this photo.
             </summary>
         </member>
+        <member name="T:Flickr.Net.Core.Entities.Group">
+            <summary>
+            Provides details of a particular group.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.Group.GroupId">
+            <summary>
+            The id of the group.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.Group.GroupName">
+            <summary>
+            The name of the group
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.Group.Members">
+            <summary>
+            The number of memebers of the group.
+            </summary>
+        </member>
         <member name="T:Flickr.Net.Core.Entities.GroupCategory">
             <summary>
             Contains details of a category, including groups belonging to the category and sub categories.
@@ -2577,46 +2337,6 @@
             The URL for the group web page.
             </summary>
         </member>
-        <member name="T:Flickr.Net.Core.Entities.Group">
-            <summary>
-            Provides details of a particular group.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.Group.GroupId">
-            <summary>
-            The id of the group.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.Group.GroupName">
-            <summary>
-            The name of the group
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.Group.Members">
-            <summary>
-            The number of memebers of the group.
-            </summary>
-        </member>
-        <member name="T:Flickr.Net.Core.Entities.GroupThrottleInfo">
-            <summary>
-            Throttle information about a group (i.e. posting limit)
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.GroupThrottleInfo.Count">
-            <summary>
-            The number of posts in each period allowed to this group.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.GroupThrottleInfo.Mode">
-            <summary>
-            The posting limit mode for a group.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.GroupThrottleInfo.Remaining">
-            <summary>
-            The number of remainging posts allowed by this user. If unauthenticated then this will be zero.
-            </summary>
-        </member>
         <member name="T:Flickr.Net.Core.Entities.GroupInfoRestrictions">
             <summary>
             The restrictions that apply to a group's pool.
@@ -2665,6 +2385,81 @@
         <member name="P:Flickr.Net.Core.Entities.GroupInfoRestrictions.GeoInfoRequired">
             <summary>
             Must the item have geo information.
+            </summary>
+        </member>
+        <member name="T:Flickr.Net.Core.Entities.GroupSearchResult">
+            <summary>
+            A class which encapsulates a single group search result.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.GroupSearchResult.GroupId">
+            <summary>
+            The group id for the result.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.GroupSearchResult.GroupName">
+            <summary>
+            The group name for the result.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.GroupSearchResult.EighteenPlus">
+            <summary>
+            True if the group is an over eighteen (adult) group only.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.GroupSearchResult.Privacy">
+            <summary>
+            THe privacy setting for this groups photo pool.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.GroupSearchResult.IconServer">
+            <summary>
+            Group icon server.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.GroupSearchResult.IconFarm">
+            <summary>
+            Group icon farm.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.GroupSearchResult.Members">
+            <summary>
+            Number of members in the group.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.GroupSearchResult.PoolCount">
+            <summary>
+            The number of photos in this groups pool.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.GroupSearchResult.TopicCount">
+            <summary>
+            The number of topics in this groups discussion list.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.GroupSearchResult.GroupIconUrl">
+            <summary>
+            The url for the group's icon.
+            </summary>
+        </member>
+        <member name="T:Flickr.Net.Core.Entities.GroupThrottleInfo">
+            <summary>
+            Throttle information about a group (i.e. posting limit)
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.GroupThrottleInfo.Count">
+            <summary>
+            The number of posts in each period allowed to this group.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.GroupThrottleInfo.Mode">
+            <summary>
+            The posting limit mode for a group.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.GroupThrottleInfo.Remaining">
+            <summary>
+            The number of remainging posts allowed by this user. If unauthenticated then this will be zero.
             </summary>
         </member>
         <member name="T:Flickr.Net.Core.Entities.HotTag">
@@ -2856,6 +2651,105 @@
         <member name="P:Flickr.Net.Core.Entities.MemberGroupInfo.TopicCount">
             <summary>
             The number of discussion topics in this group.
+            </summary>
+        </member>
+        <member name="T:Flickr.Net.Core.Entities.Method">
+            <summary>
+            A method supported by the Flickr API.
+            </summary>
+            <remarks>
+            See <a href="https://www.flickr.com/services/api">Flickr API Documentation</a> for a complete
+            list of methods.
+            </remarks>
+        </member>
+        <member name="M:Flickr.Net.Core.Entities.Method.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.Method.Name">
+            <summary>
+            The name of the method.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.Method.NeedsLogin">
+            <summary>
+            Does the method require the call to be authenticated.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.Method.NeedsSigning">
+            <summary>
+            Does the method request the call to be signed.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.Method.RequiredPermissions">
+            <summary>
+            The minimum level of permissions required for this method call.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.Method.Description">
+            <summary>
+            The description of the method.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.Method.Response">
+            <summary>
+            An example response for the method.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.Method.Explanation">
+            <summary>
+            An explanation of the example response for the method.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.Method.Arguments">
+            <summary>
+            The arguments of the method.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.Method.Errors">
+            <summary>
+            The possible errors that could be returned by the method.
+            </summary>
+        </member>
+        <member name="T:Flickr.Net.Core.Entities.MethodArgument">
+            <summary>
+            An argument for a method.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.MethodArgument.Name">
+            <summary>
+            The name of the argument.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.MethodArgument.IsOptional">
+            <summary>
+            Is the argument optional or not.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.MethodArgument.Description">
+            <summary>
+            The description of the argument.
+            </summary>
+        </member>
+        <member name="T:Flickr.Net.Core.Entities.MethodError">
+            <summary>
+            A possible error that a method can return.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.MethodError.Code">
+            <summary>
+            The code for the error.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.MethodError.Message">
+            <summary>
+            The message for a method error.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.MethodError.Description">
+            <summary>
+            The description of a method error.
             </summary>
         </member>
         <member name="T:Flickr.Net.Core.Entities.Namespace">
@@ -3726,6 +3620,27 @@
         <member name="P:Flickr.Net.Core.Entities.PhotoComment.AuthorIsDeleted">
             <summary>
             The account of the author of this comment has been deleted.
+            </summary>
+        </member>
+        <member name="T:Flickr.Net.Core.Entities.PhotoCount">
+            <summary>
+            The specifics of a particular count.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.PhotoCount.Count">
+            <summary>
+            Total number of photos between the FromDate and the ToDate.
+            </summary>
+            <remarks/>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.PhotoCount.FromDate">
+            <summary>
+            The From date as a <see cref="T:System.DateTime"/> object.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.PhotoCount.ToDate">
+            <summary>
+            The To date as a <see cref="T:System.DateTime"/> object.
             </summary>
         </member>
         <member name="T:Flickr.Net.Core.Entities.PhotoFavorite">
@@ -5893,8 +5808,7 @@
         </member>
         <member name="T:Flickr.Net.Core.Enums.DateGranularity">
             <summary>
-            DateGranularity, used for setting taken date in <see cref="!:Flickr.PhotosSetDates(string,
-            DateTime, DateGranularity)"/> or <see cref="!:Flickr.PhotosSetDates(string, DateTime, DateTime, DateGranularity)"/>.
+            DateGranularity, used for setting taken date in <see cref="M:Flickr.Net.Core.IFlickrPhotos.SetDatesAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},Flickr.Net.Core.Enums.DateGranularity,System.Threading.CancellationToken)"/>.
             </summary>
         </member>
         <member name="F:Flickr.Net.Core.Enums.DateGranularity.FullDate">
@@ -6010,7 +5924,7 @@
         </member>
         <member name="T:Flickr.Net.Core.Enums.GeoContext">
             <summary>
-            The context to set a geotagged photo as. Used by <see cref="!:Flickr.PhotosGeoSetContext"/>.
+            The context to set a geotagged photo as. Used by <see cref="M:Flickr.Net.Core.IFlickrPhotosGeo.SetContextAsync(System.String,Flickr.Net.Core.Enums.GeoContext,System.Threading.CancellationToken)"/>.
             </summary>
         </member>
         <member name="F:Flickr.Net.Core.Enums.GeoContext.NotDefined">
@@ -6230,7 +6144,7 @@
         </member>
         <member name="T:Flickr.Net.Core.Enums.MemberTypes">
             <summary>
-            The type of a member. Passed as a parameter to <see cref="!:Flickr.GroupsMembersGetList(string)"/>
+            The type of a member. Passed as a parameter to <see cref="M:Flickr.Net.Core.IFlickrGroupsMembers.GetListAsync(System.String,Flickr.Net.Core.Enums.MemberTypes,System.Int32,System.Int32,System.Threading.CancellationToken)"/>
             and returned for each <see cref="F:Flickr.Net.Core.Enums.MemberTypes.Member"/> as well.
             </summary>
         </member>
@@ -6257,6 +6171,26 @@
         <member name="F:Flickr.Net.Core.Enums.MemberTypes.Narwhal">
             <summary>
             Some strange kind of super-admin. Unsupported by the API.
+            </summary>
+        </member>
+        <member name="T:Flickr.Net.Core.Enums.MethodPermission">
+            <summary>
+            An enumeration listing the permission levels required for calling the Flickr API methods.
+            </summary>
+        </member>
+        <member name="F:Flickr.Net.Core.Enums.MethodPermission.None">
+            <summary>
+            No permissions required.
+            </summary>
+        </member>
+        <member name="F:Flickr.Net.Core.Enums.MethodPermission.Read">
+            <summary>
+            A minimum of 'read' permissions required.
+            </summary>
+        </member>
+        <member name="F:Flickr.Net.Core.Enums.MethodPermission.Write">
+            <summary>
+            A minimum of 'write' permissions required.
             </summary>
         </member>
         <member name="T:Flickr.Net.Core.Enums.PermissionAddMeta">
@@ -6499,8 +6433,8 @@
         </member>
         <member name="T:Flickr.Net.Core.Enums.PhotoSearchSortOrder">
             <summary>
-            The sort order for the <see cref="!:Flickr.PhotosSearch(PhotoSearchOptions)"/>, <see
-            cref="!:Flickr.PhotosGetWithGeoData()"/>, <see cref="!:Flickr.PhotosGetWithoutGeoData()"/> methods.
+            The sort order for the <see cref="M:Flickr.Net.Core.IFlickrPhotos.SearchAsync(Flickr.Net.Core.SearchOptions.PhotoSearchOptions,System.Threading.CancellationToken)"/>, <see
+            cref="M:Flickr.Net.Core.IFlickrPhotos.GetWithGeoDataAsync(Flickr.Net.Core.SearchOptions.PartialSearchOptions,System.Threading.CancellationToken)"/>, <see cref="M:Flickr.Net.Core.IFlickrPhotos.GetWithoutGeoDataAsync(Flickr.Net.Core.SearchOptions.PartialSearchOptions,System.Threading.CancellationToken)"/> methods.
             </summary>
         </member>
         <member name="F:Flickr.Net.Core.Enums.PhotoSearchSortOrder.None">
@@ -6545,7 +6479,7 @@
         </member>
         <member name="T:Flickr.Net.Core.Enums.PlaceType">
             <summary>
-            Used by <see cref="!:Flickr.PlacesPlacesForUser()"/>.
+            Used by <see cref="M:Flickr.Net.Core.IFlickrPlaces.PlacesForUserAsync(Flickr.Net.Core.Enums.PlaceType,System.String,System.String,System.Int32,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)"/>.
             </summary>
         </member>
         <member name="F:Flickr.Net.Core.Enums.PlaceType.None">
@@ -6611,7 +6545,7 @@
         </member>
         <member name="T:Flickr.Net.Core.Enums.PopularitySort">
             <summary>
-            Sorting used for <see cref="!:Flickr.StatsGetPopularPhotos(DateTime, PopularitySort, int, int)"/>
+            Sorting used for <see cref="M:Flickr.Net.Core.IFlickrStats.GetPopularPhotosAsync(System.DateTime,Flickr.Net.Core.Enums.PopularitySort,System.Int32,System.Int32,System.Threading.CancellationToken)"/>
             </summary>
         </member>
         <member name="F:Flickr.Net.Core.Enums.PopularitySort.None">
@@ -7375,7 +7309,7 @@
             The flickr.
             </summary>
         </member>
-        <member name="M:Flickr.Net.Core.Flickr.#ctor(FlickrNet.Core.Configuration.FlickrConfiguration)">
+        <member name="M:Flickr.Net.Core.Flickr.#ctor(Flickr.Net.Core.Configuration.FlickrConfiguration)">
             <summary>
             Constructor loads configuration settings from app.config or web.config file if they exist.
             </summary>
@@ -7637,12 +7571,14 @@
             <summary>
             Gets a list of blogs that have been set up by the user. Requires authentication.
             </summary>
+            <param name="cancellationToken"></param>
             <remarks></remarks>
         </member>
         <member name="M:Flickr.Net.Core.IFlickrBlogs.GetServicesAsync(System.Threading.CancellationToken)">
             <summary>
             Return a list of Flickr supported blogging services.
             </summary>
+            <param name="cancellationToken"></param>
         </member>
         <member name="M:Flickr.Net.Core.IFlickrBlogs.PostPhotoAsync(System.String,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
             <summary>
@@ -7664,6 +7600,7 @@
             <summary>
             Gets a list of camera brands.
             </summary>
+            <param name="cancellationToken"></param>
             <returns></returns>
         </member>
         <member name="M:Flickr.Net.Core.IFlickrCameras.GetBrandModelsAsync(System.String,System.Threading.CancellationToken)">
@@ -7707,6 +7644,7 @@
             <summary>
             Gets a collection of Flickr Commons institutions.
             </summary>
+            <param name="cancellationToken"></param>
         </member>
         <member name="T:Flickr.Net.Core.IFlickrContacts">
             <summary>
@@ -7810,9 +7748,9 @@
             <param name="minFavoriteDate">Minimum date that a photo was favorited on.</param>
             <param name="maxFavoriteDate">Maximum date that a photo was favorited on.</param>
             <param name="extras">The extras to return for each photo.</param>
+            <param name="page">The page to download this time.</param>
             <param name="perPage">Number of photos to include per page.</param>
             <param name="cancellationToken"></param>
-            <param name="page">The page to download this time.</param>
         </member>
         <member name="M:Flickr.Net.Core.IFlickrFavorites.GetPublicListAsync(System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
             <summary>
@@ -7822,9 +7760,9 @@
             This function differs from <see cref="M:Flickr.Net.Core.IFlickrFavorites.GetListAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},Flickr.Net.Core.Enums.PhotoSearchExtras,System.Int32,System.Int32,System.Threading.CancellationToken)"/> in that the user id is not optional.
             </remarks>
             <param name="userId">The is of the user whose favourites you wish to return.</param>
+            <param name="page">The specific page to return.</param>
             <param name="perPage">The number of photos to return per page.</param>
             <param name="cancellationToken"></param>
-            <param name="page">The specific page to return.</param>
         </member>
         <member name="M:Flickr.Net.Core.IFlickrFavorites.RemoveAsync(System.String,System.Threading.CancellationToken)">
             <summary>
@@ -8133,12 +8071,12 @@
             Return a list of members for this group. The group must be viewable by the Flickr member on
             whose behalf the API call is made.
             </param>
+            <param name="memberTypes">The types of members to be returned. Can be more than one.</param>
             <param name="page">The page of the results to return (default is 1).</param>
             <param name="perPage">
             The number of members to return per page (default is 100, max is 500).
             </param>
             <param name="cancellationToken"></param>
-            <param name="memberTypes">The types of members to be returned. Can be more than one.</param>
         </member>
         <member name="T:Flickr.Net.Core.IFlickrGroupsPools">
             <summary>
@@ -8184,8 +8122,8 @@
             The <see cref="T:Flickr.Net.Core.Enums.PhotoSearchExtras"/> specifying which extras to return. All other overloads
             default to returning all extras.
             </param>
-            <param name="perPage">The number of photos per page.</param>
             <param name="page">The page to return.</param>
+            <param name="perPage">The number of photos per page.</param>
             <param name="cancellationToken"></param>
         </member>
         <member name="M:Flickr.Net.Core.IFlickrGroupsPools.RemoveAsync(System.String,System.String,System.Threading.CancellationToken)">
@@ -8210,9 +8148,9 @@
             The extra parameters to return along with the search results. See <see
             cref="T:Flickr.Net.Core.SearchOptions.PhotoSearchOptions"/> for more details.
             </param>
+            <param name="page">The page of the results to return.</param>
             <param name="perPage">The number of results to return per page.</param>
             <param name="cancellationToken"></param>
-            <param name="page">The page of the results to return.</param>
         </member>
         <member name="T:Flickr.Net.Core.IFlickrMachineTags">
             <summary>
@@ -8306,6 +8244,7 @@
             <summary>
             Checks the OAuth token, returns user information and permissions if valid.
             </summary>
+            <param name="cancellationToken"></param>
             <returns></returns>
         </member>
         <member name="M:Flickr.Net.Core.IFlickrOAuth.GetRequestTokenAsync(System.String,System.Threading.CancellationToken)">
@@ -8355,6 +8294,7 @@
             <summary>
             Get a list of current 'Pandas' supported by Flickr.
             </summary>
+            <param name="cancellationToken"></param>
             <returns>An array of panda names.</returns>
         </member>
         <member name="M:Flickr.Net.Core.IFlickrPanda.GetPhotosAsync(System.String,Flickr.Net.Core.Enums.PhotoSearchExtras,System.Int32,System.Int32,System.Threading.CancellationToken)">
@@ -8364,8 +8304,8 @@
             <param name="pandaName">The name of the panda to return photos for.</param>
             <param name="extras">The extras to return with the photos.</param>
             <param name="perPage">The number of photos to return per page.</param>
-            <param name="cancellationToken"></param>
             <param name="page">The age to return.</param>
+            <param name="cancellationToken"></param>
         </member>
         <member name="T:Flickr.Net.Core.IFlickrPeople">
             <summary>
@@ -8410,6 +8350,7 @@
             <summary>
             Returns the limits for a person. See <see cref="T:Flickr.Net.Core.Entities.PersonLimits"/> for more details.
             </summary>
+            <param name="cancellationToken"></param>
             <returns></returns>
         </member>
         <member name="M:Flickr.Net.Core.IFlickrPeople.GetPhotosAsync(System.String,Flickr.Net.Core.Enums.SafetyLevel,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime},Flickr.Net.Core.Enums.ContentTypeSearch,Flickr.Net.Core.Enums.PrivacyFilter,Flickr.Net.Core.Enums.PhotoSearchExtras,System.Int32,System.Int32,System.Threading.CancellationToken)">
@@ -8451,14 +8392,15 @@
             </summary>
             <param name="userId">The user ID to get photos of.</param>
             <param name="extras">A list of extras to return for each photo.</param>
+            <param name="page">The page of photos to return. Default is 1.</param>
             <param name="perPage">The number of photos to return per page.</param>
             <param name="cancellationToken"></param>
-            <param name="page">The page of photos to return. Default is 1.</param>
         </member>
         <member name="M:Flickr.Net.Core.IFlickrPeople.GetUploadStatusAsync(System.Threading.CancellationToken)">
             <summary>
             Gets the upload status of the authenticated user.
             </summary>
+            <param name="cancellationToken"></param>
         </member>
         <member name="M:Flickr.Net.Core.IFlickrPeople.GetPublicGroupsAsync(System.String,System.Threading.CancellationToken)">
             <summary>
@@ -8963,8 +8905,8 @@
             <param name="photoId">The numerical photoId of the photograph.</param>
             <param name="title">The new title of the photograph.</param>
             <param name="description">The new description of the photograph.</param>
-            <exception cref="T:Flickr.Net.Core.Exceptions.FlickrApiException">Thrown when the photo id cannot be found.</exception>
             <param name="cancellationToken"></param>
+            <exception cref="T:Flickr.Net.Core.Exceptions.FlickrApiException">Thrown when the photo id cannot be found.</exception>
             <return></return>
         </member>
         <member name="M:Flickr.Net.Core.IFlickrPhotos.SetPermsAsync(System.String,System.Boolean,System.Boolean,System.Boolean,System.Nullable{Flickr.Net.Core.Enums.PermissionComment},System.Nullable{Flickr.Net.Core.Enums.PermissionAddMeta},System.Threading.CancellationToken)">
@@ -9213,6 +9155,7 @@
             <summary>
             Gets a list of all current licenses.
             </summary>
+            <param name="cancellationToken"></param>
         </member>
         <member name="M:Flickr.Net.Core.IFlickrPhotosLicenses.SetLicenseAsync(System.String,Flickr.Net.Core.Enums.LicenseType,System.Threading.CancellationToken)">
             <summary>
@@ -9453,6 +9396,7 @@
             <summary>
             Gets a list of valid Place Type key/value pairs.
             </summary>
+            <param name="cancellationToken"></param>
             <remarks>
             All Flickr.Net methods use the <see cref="T:Flickr.Net.Core.Enums.PlaceType"/> enumeration so this method doesn't
             serve much purpose.
@@ -9603,6 +9547,7 @@
             <summary>
             Gets the currently authenticated users default content type.
             </summary>
+            <param name="cancellationToken"></param>
         </member>
         <member name="M:Flickr.Net.Core.IFlickrPrefs.GetGeoPermsAsync(System.Threading.CancellationToken)">
             <summary>
@@ -9610,21 +9555,25 @@
             and whether or not the user has chosen to use geo-related EXIF information to automatically
             geotag their photos.
             </summary>
+            <param name="cancellationToken"></param>
         </member>
         <member name="M:Flickr.Net.Core.IFlickrPrefs.GetHiddenAsync(System.Threading.CancellationToken)">
             <summary>
             Gets the currently authenticated users default hidden from search setting.
             </summary>
+            <param name="cancellationToken"></param>
         </member>
         <member name="M:Flickr.Net.Core.IFlickrPrefs.GetPrivacyAsync(System.Threading.CancellationToken)">
             <summary>
             Returns the default privacy level preference for the user.
             </summary>
+            <param name="cancellationToken"></param>
         </member>
         <member name="M:Flickr.Net.Core.IFlickrPrefs.GetSafetyLevelAsync(System.Threading.CancellationToken)">
             <summary>
             Gets the currently authenticated users default safety level.
             </summary>
+            <param name="cancellationToken"></param>
         </member>
         <member name="T:Flickr.Net.Core.IFlickrProfile">
             <summary>
@@ -9648,11 +9597,13 @@
             <summary>
             Get a list of subscriptions for the calling user.
             </summary>
+            <param name="cancellationToken"></param>
         </member>
         <member name="M:Flickr.Net.Core.IFlickrPush.GetTopicsAsync(System.Threading.CancellationToken)">
             <summary>
             Get a list of topics that are available for subscription.
             </summary>
+            <param name="cancellationToken"></param>
         </member>
         <member name="M:Flickr.Net.Core.IFlickrPush.SubscribeAsync(System.String,System.String,System.String,System.String,System.Nullable{System.Int32},System.Collections.Generic.IEnumerable{System.Int32},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Double},System.Nullable{System.Double},System.Nullable{System.Int32},Flickr.Net.Core.Enums.RadiusUnit,Flickr.Net.Core.Enums.GeoAccuracy,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
             <summary>
@@ -9712,6 +9663,7 @@
             <summary>
             Gets an array of supported method names for Flickr.
             </summary>
+            <param name="cancellationToken"></param>
             <remarks>Note: Not all methods might be supported by the FlickrNet Library.</remarks>
         </member>
         <member name="T:Flickr.Net.Core.IFlickrStats">
@@ -9771,6 +9723,7 @@
             <summary>
             Gets the collection of CSV files of archived stats from Flickr.
             </summary>
+            <param name="cancellationToken"></param>
             <remarks>Archived files only available till the 1st June 2010.</remarks>
         </member>
         <member name="M:Flickr.Net.Core.IFlickrStats.GetPhotoDomainsAsync(System.DateTime,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
@@ -10026,11 +9979,13 @@
             <summary>
             Test the logged in state of the current Filckr object.
             </summary>
+            <param name="cancellationToken"></param>
         </member>
         <member name="M:Flickr.Net.Core.IFlickrTest.NullAsync(System.Threading.CancellationToken)">
             <summary>
             Null test.
             </summary>
+            <param name="cancellationToken"></param>
         </member>
         <member name="M:Flickr.Net.Core.IFlickrTest.EchoAsync(System.Collections.Generic.Dictionary{System.String,System.String},System.Threading.CancellationToken)">
             <summary>
@@ -10303,7 +10258,7 @@
             Internal Cache class
             </summary>
         </member>
-        <member name="M:Flickr.Net.Core.Internals.Caching.Cache.#ctor(FlickrNet.Core.Settings.FlickrCachingSettings)">
+        <member name="M:Flickr.Net.Core.Internals.Caching.Cache.#ctor(Flickr.Net.Core.Settings.FlickrCachingSettings)">
             <summary>
             Initializes a new instance of the <see cref="T:Flickr.Net.Core.Internals.Caching.Cache"/> class.
             </summary>
@@ -10460,7 +10415,7 @@
         </member>
         <member name="T:Flickr.Net.Core.Internals.EchoResponseDictionary">
             <summary>
-            The response returned by the <see cref="!:Flickr.TestEcho"/> method.
+            The response returned by the <see cref="M:Flickr.Net.Core.IFlickrTest.EchoAsync(System.Collections.Generic.Dictionary{System.String,System.String},System.Threading.CancellationToken)"/> method.
             </summary>
         </member>
         <member name="T:Flickr.Net.Core.Internals.Extensions.CacheExtensions">
@@ -10476,7 +10431,7 @@
             <param name="url">The URL to remove from the cache.</param>
             <remarks>
             The URL can either be an image URL for a downloaded picture, or a request URL (see <see
-            cref="!:LastRequest"/> for getting the last URL).
+            cref="P:Flickr.Net.Core.Flickr.LastRequest"/> for getting the last URL).
             </remarks>
         </member>
         <member name="T:Flickr.Net.Core.Internals.FlickrResponder">
@@ -10649,11 +10604,11 @@
         </member>
         <member name="M:Flickr.Net.Core.Internals.UtilityMethods.PartialOptionsIntoArray(Flickr.Net.Core.SearchOptions.PartialSearchOptions,System.Collections.Generic.Dictionary{System.String,System.String})">
             <summary>
-            Adds the partial options to the passed in <see cref="!:Hashtable"/>.
+            Adds the partial options to the passed in <see cref="T:System.Collections.Hashtable"/>.
             </summary>
             <param name="options">The options to convert to an array.</param>
             <param name="parameters">
-            The <see cref="!:Hashtable"/> to add the option key value pairs to.
+            The <see cref="T:System.Collections.Hashtable"/> to add the option key value pairs to.
             </param>
         </member>
         <member name="M:Flickr.Net.Core.Internals.UtilityMethods.UrlFormat(Flickr.Net.Core.Entities.Photo,System.String,System.String)">
@@ -11206,6 +11161,70 @@
             cref="T:System.Collections.Generic.Dictionary`2"/> instanced passed in, ready for sending to Flickr.
             </summary>
             <param name="parameters">The <see cref="T:System.Collections.Generic.Dictionary`2"/> to add the options to.</param>
+        </member>
+        <member name="T:Flickr.Net.Core.Settings.FlickrCachingSettings">
+            <summary>
+            The flickr caching settings.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Settings.FlickrCachingSettings.CacheDisabled">
+            <summary>
+            Gets or sets whether the cache should be disabled. Use only in extreme cases where you are
+            sure you don't want any caching.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Settings.FlickrCachingSettings.InstanceCacheDisabled">
+            <summary>
+            Override if the cache is disabled for this particular instance of <see cref="T:Flickr.Net.Core.Flickr"/>.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Settings.FlickrCachingSettings.CacheTimeout">
+            <summary>
+            All GET calls to Flickr are cached by the Flickr.Net API. Set the <see cref="P:Flickr.Net.Core.Settings.FlickrCachingSettings.CacheTimeout"/>
+            to determine how long these calls should be cached (make this as long as possible!)
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Settings.FlickrCachingSettings.CacheLocation">
+            <summary>
+            Sets or gets the location to store the Cache files.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Settings.FlickrCachingSettings.CacheSizeLimit">
+            <summary>
+            <see cref="P:Flickr.Net.Core.Settings.FlickrCachingSettings.CacheSizeLimit"/> is the cache file size in bytes for downloaded pictures. The
+            default is 50MB (or 50 * 1024 * 1025 in bytes).
+            </summary>
+        </member>
+        <member name="T:Flickr.Net.Core.Settings.FlickrSettings">
+            <summary>
+            The flickr settings.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Settings.FlickrSettings.ApiKey">
+            <summary>
+            Get or set the API Key to be used by all calls. API key is mandatory for all calls to Flickr.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Settings.FlickrSettings.ApiSecret">
+            <summary>
+            API shared secret is required for all calls that require signing, which includes all methods
+            that require authentication, as well as the actual flickr.auth.* calls.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Settings.FlickrSettings.OAuthAccessToken">
+            <summary>
+            OAuth Access Token. Needed for authenticated access using OAuth to Flickr.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Settings.FlickrSettings.OAuthAccessTokenSecret">
+            <summary>
+            OAuth Access Token Secret. Needed for authenticated access using OAuth to Flickr.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Settings.FlickrSettings.HttpTimeout">
+            <summary>
+            Internal timeout for all web requests in milliseconds. Defaults to 30 seconds.
+            </summary>
         </member>
     </members>
 </doc>

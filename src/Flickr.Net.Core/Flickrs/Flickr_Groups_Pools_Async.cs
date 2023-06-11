@@ -143,8 +143,8 @@ public interface IFlickrGroupsPools
     /// The <see cref="PhotoSearchExtras"/> specifying which extras to return. All other overloads
     /// default to returning all extras.
     /// </param>
-    /// <param name="perPage">The number of photos per page.</param>
     /// <param name="page">The page to return.</param>
+    /// <param name="perPage">The number of photos per page.</param>
     /// <param name="cancellationToken"></param>
     Task<PhotoCollection> GetPhotosAsync(string groupId, string tags = null, string userId = null, PhotoSearchExtras extras = PhotoSearchExtras.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 

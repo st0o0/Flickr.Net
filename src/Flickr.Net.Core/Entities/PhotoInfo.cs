@@ -1,6 +1,4 @@
-﻿using System.Collections.ObjectModel;
-
-namespace Flickr.Net.Core.Entities;
+﻿namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// Detailed information returned by <see cref="IFlickrPhotos.GetInfoAsync(string, string,
