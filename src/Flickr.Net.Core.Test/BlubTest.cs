@@ -19,7 +19,7 @@ public class BlubTest
 
     private void TESTTEST()
     {
-        //var t = new Flickr(null, null);
+        var t = new Flickr(null, null);
         //t.
     }
 }

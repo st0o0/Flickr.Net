@@ -240,10 +240,7 @@ public partial class Flickr
     /// <summary>
     /// Returns the last URL requested. Includes API signing.
     /// </summary>
-    public string LastRequest
-    {
-        get { return _lastRequest; }
-    }
+    public string LastRequest => _lastRequest;
 
     internal void CheckApiKey()
     {

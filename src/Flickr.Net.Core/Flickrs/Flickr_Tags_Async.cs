@@ -1,6 +1,4 @@
-﻿using System.Collections.ObjectModel;
-
-namespace Flickr.Net.Core;
+﻿namespace Flickr.Net.Core;
 
 /// <summary>
 /// The flickr.
