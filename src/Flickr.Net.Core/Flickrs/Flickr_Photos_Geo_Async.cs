@@ -5,7 +5,7 @@
 /// </summary>
 public partial class Flickr : IFlickrPhotosGeo
 {
-    async Task IFlickrPhotosGeo.BatchCorrectLocationAsync(double latitude, double longitude, GeoAccuracy accuracy, string placeId, string woeId, CancellationToken cancellationToken)
+    async Task IFlickrPhotosGeo.BatchCorrectLocationAsync(double latitude, double longitude, GeoAccuracy accuracy, PlaceId? placeId, WoeId? woeId, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -17,14 +17,54 @@ public partial class Flickr : IFlickrPhotosGeo
             { "accuracy", accuracy.ToString("D") }
         };
 
-        if (!string.IsNullOrEmpty(placeId))
+        if (placeId.HasValue && !string.IsNullOrEmpty(placeId.Value))
         {
-            parameters.Add("place_id", placeId);
+            parameters.Add("place_id", placeId.Value);
         }
 
-        if (!string.IsNullOrEmpty(woeId))
+        if (woeId.HasValue && !string.IsNullOrEmpty(woeId.Value))
         {
-            parameters.Add("woe_id", woeId);
+            parameters.Add("woe_id", woeId.Value);
+        }
+
+        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+    }
+
+    async Task IFlickrPhotosGeo.BatchCorrectLocationAsync(double latitude, double longitude, GeoAccuracy accuracy, PlaceId? placeId, CancellationToken cancellationToken)
+    {
+        CheckRequiresAuthentication();
+
+        Dictionary<string, string> parameters = new()
+        {
+            { "method", "flickr.photos.geo.batchCorrectLocation" },
+            { "lat", latitude.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) },
+            { "lon", longitude.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) },
+            { "accuracy", accuracy.ToString("D") }
+        };
+
+        if (placeId.HasValue && !string.IsNullOrEmpty(placeId.Value))
+        {
+            parameters.Add("place_id", placeId.Value);
+        }
+
+        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+    }
+
+    async Task IFlickrPhotosGeo.BatchCorrectLocationAsync(double latitude, double longitude, GeoAccuracy accuracy, WoeId? woeId, CancellationToken cancellationToken)
+    {
+        CheckRequiresAuthentication();
+
+        Dictionary<string, string> parameters = new()
+        {
+            { "method", "flickr.photos.geo.batchCorrectLocation" },
+            { "lat", latitude.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) },
+            { "lon", longitude.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) },
+            { "accuracy", accuracy.ToString("D") }
+        };
+
+        if (woeId.HasValue && !string.IsNullOrEmpty(woeId.Value))
+        {
+            parameters.Add("woe_id", woeId.Value);
         }
 
         await GetResponseAsync<NoResponse>(parameters, cancellationToken);
@@ -200,7 +240,61 @@ public interface IFlickrPhotosGeo
     /// </param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task BatchCorrectLocationAsync(double latitude, double longitude, GeoAccuracy accuracy, string placeId = null, string woeId = null, CancellationToken cancellationToken = default);
+    Task BatchCorrectLocationAsync(double latitude, double longitude, GeoAccuracy accuracy, PlaceId? placeId = null, WoeId? woeId = null, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Correct the places hierarchy for all the photos for a user at a given latitude, longitude
+    /// and accuracy.
+    /// </summary>
+    /// <remarks>
+    /// Batch corrections are processed in a delayed queue so it may take a few minutes before the
+    /// changes are reflected in a user's photos.
+    /// </remarks>
+    /// <param name="latitude">
+    /// The latitude of the photos to be update whose valid range is -90 to 90. Anything more than 6
+    /// decimal places will be truncated.
+    /// </param>
+    /// <param name="longitude">
+    /// The longitude of the photos to be updated whose valid range is -180 to 180. Anything more
+    /// than 6 decimal places will be truncated.
+    /// </param>
+    /// <param name="accuracy">
+    /// Recorded accuracy level of the photos to be updated. World level is 1, Country is ~3, Region
+    /// ~6, City ~11, Street ~16. Current range is 1-16. Defaults to 16 if not specified.
+    /// </param>
+    /// <param name="placeId">
+    /// A Flickr Places ID. (While optional, you must pass either a valid Places ID or a WOE ID.)
+    /// </param>
+    /// <param name="cancellationToken"></param>
+    /// <return></return>
+    Task BatchCorrectLocationAsync(double latitude, double longitude, GeoAccuracy accuracy, PlaceId? placeId = null, CancellationToken cancellationToken = default);
+
+     /// <summary>
+    /// Correct the places hierarchy for all the photos for a user at a given latitude, longitude
+    /// and accuracy.
+    /// </summary>
+    /// <remarks>
+    /// Batch corrections are processed in a delayed queue so it may take a few minutes before the
+    /// changes are reflected in a user's photos.
+    /// </remarks>
+    /// <param name="latitude">
+    /// The latitude of the photos to be update whose valid range is -90 to 90. Anything more than 6
+    /// decimal places will be truncated.
+    /// </param>
+    /// <param name="longitude">
+    /// The longitude of the photos to be updated whose valid range is -180 to 180. Anything more
+    /// than 6 decimal places will be truncated.
+    /// </param>
+    /// <param name="accuracy">
+    /// Recorded accuracy level of the photos to be updated. World level is 1, Country is ~3, Region
+    /// ~6, City ~11, Street ~16. Current range is 1-16. Defaults to 16 if not specified.
+    /// </param>
+    /// <param name="woeId">
+    /// A Where On Earth (WOE) ID.
+    /// </param>
+    /// <param name="cancellationToken"></param>
+    /// <return></return>
+    Task BatchCorrectLocationAsync(double latitude, double longitude, GeoAccuracy accuracy, WoeId? woeId = null, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Correct the places hierarchy for a given photo.
