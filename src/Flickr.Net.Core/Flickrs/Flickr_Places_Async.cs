@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Core.Exceptions;
+﻿using Flickr.Net.Core.Entities;
+using Flickr.Net.Core.Exceptions;
 using Flickr.Net.Core.Internals.Extensions;
 
 namespace Flickr.Net.Core;
@@ -42,21 +43,36 @@ public partial class Flickr : IFlickrPlaces
         return result[0];
     }
 
-    async Task<PlaceCollection> IFlickrPlaces.GetChildrenWithPhotosPublicAsync(string placeId, string woeId, CancellationToken cancellationToken)
+    async Task<PlaceCollection> IFlickrPlaces.GetChildrenWithPhotosPublicAsync(PlaceId placeId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
             { "method", "flickr.places.getChildrenWithPhotosPublic" }
         };
 
-        if ((placeId == null || placeId.Length == 0) && (woeId == null || woeId.Length == 0))
+        if (placeId == null && string.IsNullOrEmpty(placeId))
         {
-            throw new FlickrException("Both placeId and woeId cannot be null or empty.");
+            throw new FlickrException("PlaceId cannot be null or empty.");
         }
 
         if (!string.IsNullOrEmpty(placeId))
         {
             parameters.Add("place_id", placeId);
+        }
+
+        return await GetResponseAsync<PlaceCollection>(parameters, cancellationToken);
+    }
+
+    async Task<PlaceCollection> IFlickrPlaces.GetChildrenWithPhotosPublicAsync(WoeId woeId, CancellationToken cancellationToken)
+    {
+        Dictionary<string, string> parameters = new()
+        {
+            { "method", "flickr.places.getChildrenWithPhotosPublic" }
+        };
+
+        if (woeId == null && string.IsNullOrEmpty(woeId))
+        {
+            throw new FlickrException("WoeId cannot be null or empty.");
         }
 
         if (!string.IsNullOrEmpty(woeId))
@@ -67,21 +83,36 @@ public partial class Flickr : IFlickrPlaces
         return await GetResponseAsync<PlaceCollection>(parameters, cancellationToken);
     }
 
-    async Task<PlaceInfo> IFlickrPlaces.GetInfoAsync(string placeId, string woeId, CancellationToken cancellationToken)
+    async Task<PlaceInfo> IFlickrPlaces.GetInfoAsync(PlaceId placeId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
             { "method", "flickr.places.getInfo" }
         };
 
-        if (string.IsNullOrEmpty(placeId) && string.IsNullOrEmpty(woeId))
+        if (string.IsNullOrEmpty(placeId))
         {
-            throw new FlickrException("Both placeId and woeId cannot be null or empty.");
+            throw new FlickrException("PlaceId cannot be null or empty.");
         }
 
         if (!string.IsNullOrEmpty(placeId))
         {
             parameters.Add("place_id", placeId);
+        }
+
+        return await GetResponseAsync<PlaceInfo>(parameters, cancellationToken);
+    }
+
+    async Task<PlaceInfo> IFlickrPlaces.GetInfoAsync(WoeId woeId, CancellationToken cancellationToken)
+    {
+        Dictionary<string, string> parameters = new()
+        {
+            { "method", "flickr.places.getInfo" }
+        };
+
+        if (string.IsNullOrEmpty(woeId))
+        {
+            throw new FlickrException("WoeId cannot be null or empty.");
         }
 
         if (!string.IsNullOrEmpty(woeId))
@@ -113,21 +144,36 @@ public partial class Flickr : IFlickrPlaces
         return await GetResponseAsync<PlaceTypeInfoCollection>(parameters, cancellationToken);
     }
 
-    async Task<ShapeDataCollection> IFlickrPlaces.GetShapeHistoryAsync(string placeId, string woeId, CancellationToken cancellationToken)
+    async Task<ShapeDataCollection> IFlickrPlaces.GetShapeHistoryAsync(PlaceId placeId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
             { "method", "flickr.places.getShapeHistory" }
         };
 
-        if (string.IsNullOrEmpty(placeId) && string.IsNullOrEmpty(woeId))
+        if (string.IsNullOrEmpty(placeId))
         {
-            throw new FlickrException("Both placeId and woeId cannot be null or empty.");
+            throw new FlickrException("PlaceId cannot be null or empty.");
         }
 
         if (!string.IsNullOrEmpty(placeId))
         {
             parameters.Add("place_id", placeId);
+        }
+
+        return await GetResponseAsync<ShapeDataCollection>(parameters, cancellationToken);
+    }
+
+    async Task<ShapeDataCollection> IFlickrPlaces.GetShapeHistoryAsync(WoeId woeId, CancellationToken cancellationToken)
+    {
+        Dictionary<string, string> parameters = new()
+        {
+            { "method", "flickr.places.getShapeHistory" }
+        };
+
+        if (string.IsNullOrEmpty(woeId))
+        {
+            throw new FlickrException("WoeId cannot be null or empty.");
         }
 
         if (!string.IsNullOrEmpty(woeId))
@@ -354,7 +400,7 @@ public partial class Flickr : IFlickrPlaces
         return await GetResponseAsync<PlaceCollection>(parameters, cancellationToken);
     }
 
-    async Task<TagCollection> IFlickrPlaces.TagsForPlaceAsync(string placeId, string woeId, DateTime? minUploadDate, DateTime? maxUploadDate,
+    async Task<TagCollection> IFlickrPlaces.TagsForPlaceAsync(PlaceId placeId, DateTime? minUploadDate, DateTime? maxUploadDate,
                                             DateTime? minTakenDate, DateTime? maxTakenDate,
                                             CancellationToken cancellationToken)
     {
@@ -363,19 +409,56 @@ public partial class Flickr : IFlickrPlaces
             { "method", "flickr.places.tagsForPlace" }
         };
 
-        if (string.IsNullOrEmpty(placeId) && string.IsNullOrEmpty(woeId))
+        if (string.IsNullOrEmpty(placeId))
         {
-            throw new FlickrException("Both placeId and woeId cannot be null or empty.");
-        }
-
-        if (!string.IsNullOrEmpty(woeId))
-        {
-            parameters.Add("woe_id", woeId);
+            throw new FlickrException("PlaceId cannot be null or empty.");
         }
 
         if (!string.IsNullOrEmpty(placeId))
         {
             parameters.Add("place_id", placeId);
+        }
+
+        if (minTakenDate.HasValue && minTakenDate != DateTime.MinValue)
+        {
+            parameters.Add("min_taken_date", UtilityMethods.DateToMySql(minTakenDate.Value));
+        }
+
+        if (maxTakenDate.HasValue && maxTakenDate != DateTime.MinValue)
+        {
+            parameters.Add("max_taken_date", UtilityMethods.DateToMySql(maxTakenDate.Value));
+        }
+
+        if (minUploadDate.HasValue && minUploadDate != DateTime.MinValue)
+        {
+            parameters.Add("min_upload_date", UtilityMethods.DateToUnixTimestamp(minUploadDate.Value));
+        }
+
+        if (maxUploadDate.HasValue && maxUploadDate != DateTime.MinValue)
+        {
+            parameters.Add("max_upload_date", UtilityMethods.DateToUnixTimestamp(maxUploadDate.Value));
+        }
+
+        return await GetResponseAsync<TagCollection>(parameters, cancellationToken);
+    }
+
+    async Task<TagCollection> IFlickrPlaces.TagsForPlaceAsync(WoeId woeId, DateTime? minUploadDate, DateTime? maxUploadDate,
+                                            DateTime? minTakenDate, DateTime? maxTakenDate,
+                                            CancellationToken cancellationToken)
+    {
+        Dictionary<string, string> parameters = new()
+        {
+            { "method", "flickr.places.tagsForPlace" }
+        };
+
+        if (string.IsNullOrEmpty(woeId))
+        {
+            throw new FlickrException("WoeId cannot be null or empty.");
+        }
+
+        if (!string.IsNullOrEmpty(woeId))
+        {
+            parameters.Add("woe_id", woeId);
         }
 
         if (minTakenDate.HasValue && minTakenDate != DateTime.MinValue)
@@ -429,26 +512,31 @@ public interface IFlickrPlaces
     /// Return a list of locations with public photos that are parented by a Where on Earth (WOE) or
     /// Places ID.
     /// </summary>
-    /// <param name="placeId">
-    /// A Flickr Places ID. (While optional, you must pass either a valid Places ID or a WOE ID.)
-    /// </param>
-    /// <param name="woeId">
-    /// A Where On Earth (WOE) ID. (While optional, you must pass either a valid Places ID or a WOE ID.)
-    /// </param>
+    /// <param name="placeId">A Flickr Places ID.</param>
     /// <param name="cancellationToken"></param>
-    Task<PlaceCollection> GetChildrenWithPhotosPublicAsync(string placeId, string woeId = null, CancellationToken cancellationToken = default);
+    Task<PlaceCollection> GetChildrenWithPhotosPublicAsync(PlaceId placeId, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Return a list of locations with public photos that are parented by a Where on Earth (WOE) or
+    /// Places ID.
+    /// </summary>
+    /// <param name="woeId">A Where On Earth (WOE) ID.</param>
+    /// <param name="cancellationToken"></param>
+    Task<PlaceCollection> GetChildrenWithPhotosPublicAsync(WoeId woeId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get informations about a place.
     /// </summary>
-    /// <param name="placeId">
-    /// A Flickr Places ID. (While optional, you must pass either a valid Places ID or a WOE ID.)
-    /// </param>
-    /// <param name="woeId">
-    /// A Where On Earth (WOE) ID. (While optional, you must pass either a valid Places ID or a WOE ID.)
-    /// </param>
+    /// <param name="placeId">A Flickr Places ID.</param>
     /// <param name="cancellationToken"></param>
-    Task<PlaceInfo> GetInfoAsync(string placeId, string woeId = null, CancellationToken cancellationToken = default);
+    Task<PlaceInfo> GetInfoAsync(PlaceId placeId, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Get informations about a place.
+    /// </summary>
+    /// <param name="woeId">A Where On Earth (WOE) ID.</param>
+    /// <param name="cancellationToken"></param>
+    Task<PlaceInfo> GetInfoAsync(WoeId woeId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Lookup information about a place, by its flickr.com/places URL.
@@ -473,14 +561,17 @@ public interface IFlickrPlaces
     /// Return an historical list of all the shape data generated for a Places or Where on Earth
     /// (WOE) ID.
     /// </summary>
-    /// <param name="placeId">
-    /// A Flickr Places ID. (While optional, you must pass either a valid Places ID or a WOE ID.)
-    /// </param>
-    /// <param name="woeId">
-    /// A Where On Earth (WOE) ID. (While optional, you must pass either a valid Places ID or a WOE ID.)
-    /// </param>
+    /// <param name="placeId">A Flickr Places ID.</param>
     /// <param name="cancellationToken"></param>
-    Task<ShapeDataCollection> GetShapeHistoryAsync(string placeId, string woeId = null, CancellationToken cancellationToken = default);
+    Task<ShapeDataCollection> GetShapeHistoryAsync(PlaceId placeId, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Return an historical list of all the shape data generated for a Places or Where on Earth
+    /// (WOE) ID.
+    /// </summary>
+    /// <param name="woeId">A Where On Earth (WOE) ID.</param>
+    /// <param name="cancellationToken"></param>
+    Task<ShapeDataCollection> GetShapeHistoryAsync(WoeId woeId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Return the top 100 most geotagged places for a day.
@@ -589,16 +680,9 @@ public interface IFlickrPlaces
         CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Return a list of the top 100 unique tags for a Flickr Places or Where on Earth (WOE) ID.
+    /// Return a list of the top 100 unique tags for a Flickr Places.
     /// </summary>
-    /// <param name="placeId">
-    /// A Flickr Places identifier to use to filter photo clusters. (While optional, you must pass
-    /// either a valid Places ID or a WOE ID.)
-    /// </param>
-    /// <param name="woeId">
-    /// A Where on Earth identifier to use to filter photo clusters. (While optional, you must pass
-    /// either a valid Places ID or a WOE ID.)
-    /// </param>
+    /// <param name="placeId">A Flickr Places identifier to use to filter photo clusters.</param>
     /// <param name="minUploadDate">
     /// Minimum upload date. Photos with an upload date greater than or equal to this value will be returned.
     /// </param>
@@ -612,7 +696,28 @@ public interface IFlickrPlaces
     /// Maximum taken date. Photos with an taken date less than or equal to this value will be returned.
     /// </param>
     /// <param name="cancellationToken"></param>
-    Task<TagCollection> TagsForPlaceAsync(string placeId, string woeId = null, DateTime? minUploadDate = null, DateTime? maxUploadDate = null,
+    Task<TagCollection> TagsForPlaceAsync(PlaceId placeId, DateTime? minUploadDate = null, DateTime? maxUploadDate = null,
+        DateTime? minTakenDate = null, DateTime? maxTakenDate = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Return a list of the top 100 unique tags for Earth (WOE) ID.
+    /// </summary>
+    /// <param name="woeId">A Where on Earth identifier to use to filter photo clusters.</param>
+    /// <param name="minUploadDate">
+    /// Minimum upload date. Photos with an upload date greater than or equal to this value will be returned.
+    /// </param>
+    /// <param name="maxUploadDate">
+    /// Maximum upload date. Photos with an upload date less than or equal to this value will be returned.
+    /// </param>
+    /// <param name="minTakenDate">
+    /// Minimum taken date. Photos with an taken date greater than or equal to this value will be returned.
+    /// </param>
+    /// <param name="maxTakenDate">
+    /// Maximum taken date. Photos with an taken date less than or equal to this value will be returned.
+    /// </param>
+    /// <param name="cancellationToken"></param>
+    Task<TagCollection> TagsForPlaceAsync(WoeId woeId, DateTime? minUploadDate = null, DateTime? maxUploadDate = null,
         DateTime? minTakenDate = null, DateTime? maxTakenDate = null,
         CancellationToken cancellationToken = default);
 }
