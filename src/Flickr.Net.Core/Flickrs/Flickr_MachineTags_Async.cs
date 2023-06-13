@@ -204,13 +204,6 @@ public interface IFlickrMachineTags
     /// Only return machine tags values that have been added since this timestamp.
     /// </param>
     /// <param name="cancellationToken"></param>
-    /// <param name="page">
-    /// The page of results to return. If this argument is omitted, it defaults to 1.
-    /// </param>
-    /// <param name="perPage">
-    /// Number of values to return per page. If this argument is omitted, it defaults to 100. The
-    /// maximum allowed value is 500.
-    /// </param>
     Task<ValueCollection> GetRecentValuesAsync(string namespaceName = null, string predicate = null, DateTime? addedSince = null, CancellationToken cancellationToken = default);
 
     /// <summary>

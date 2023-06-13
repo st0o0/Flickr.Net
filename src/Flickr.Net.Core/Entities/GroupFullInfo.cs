@@ -6,7 +6,7 @@ namespace Flickr.Net.Core.Entities;
 /// Provides details of a particular group.
 /// </summary>
 /// <remarks>
-/// Used by the Url methods and <see cref="Flickr.GroupsGetInfo"/> method. The reason for a <see
+/// Used by the Url methods and <see cref="IFlickrGroups.GetInfoAsync(string, CancellationToken)"/> method. The reason for a <see
 /// cref="Group"/> and <see cref="GroupFullInfo"/> are due to xml serialization incompatabilities.
 /// </remarks>
 public sealed class GroupFullInfo : IFlickrParsable

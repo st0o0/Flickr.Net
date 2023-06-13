@@ -42,6 +42,7 @@ public interface IFlickrReflection
     /// <summary>
     /// Gets an array of supported method names for Flickr.
     /// </summary>
+    /// <param name="cancellationToken"></param>
     /// <remarks>Note: Not all methods might be supported by the FlickrNet Library.</remarks>
     Task<MethodCollection> GetMethodsAsync(CancellationToken cancellationToken = default);
 }

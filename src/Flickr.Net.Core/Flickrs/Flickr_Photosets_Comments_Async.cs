@@ -5,7 +5,7 @@
 /// </summary>
 public partial class Flickr : IFlickrPhotosetsComments
 {
-    async Task<string> IFlickrPhotosetsComments.PhotosetsCommentsAddCommentAsync(string photosetId, string commentText, CancellationToken cancellationToken)
+    async Task<string> IFlickrPhotosetsComments.AddCommentAsync(string photosetId, string commentText, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -19,7 +19,7 @@ public partial class Flickr : IFlickrPhotosetsComments
         return result.GetAttributeValue("*", "id");
     }
 
-    async Task IFlickrPhotosetsComments.PhotosetsCommentsDeleteCommentAsync(string commentId, CancellationToken cancellationToken)
+    async Task IFlickrPhotosetsComments.DeleteCommentAsync(string commentId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -30,7 +30,7 @@ public partial class Flickr : IFlickrPhotosetsComments
         await GetResponseAsync<NoResponse>(parameters, cancellationToken);
     }
 
-    async Task IFlickrPhotosetsComments.PhotosetsCommentsEditCommentAsync(string commentId, string commentText, CancellationToken cancellationToken)
+    async Task IFlickrPhotosetsComments.EditCommentAsync(string commentId, string commentText, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -42,7 +42,7 @@ public partial class Flickr : IFlickrPhotosetsComments
         await GetResponseAsync<NoResponse>(parameters, cancellationToken);
     }
 
-    async Task<PhotosetCommentCollection> IFlickrPhotosetsComments.PhotosetsCommentsGetListAsync(string photosetId, CancellationToken cancellationToken)
+    async Task<PhotosetCommentCollection> IFlickrPhotosetsComments.GetListAsync(string photosetId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -65,14 +65,14 @@ public interface IFlickrPhotosetsComments
     /// <param name="photosetId">The ID of the photoset to add the comment to.</param>
     /// <param name="commentText">The text of the comment. Can contain some HTML.</param>
     /// <param name="cancellationToken"></param>
-    Task<string> PhotosetsCommentsAddCommentAsync(string photosetId, string commentText, CancellationToken cancellationToken = default);
+    Task<string> AddCommentAsync(string photosetId, string commentText, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Deletes a comment from a photoset.
     /// </summary>
     /// <param name="commentId">The ID of the comment to delete.</param>
     /// <param name="cancellationToken"></param>
-    Task PhotosetsCommentsDeleteCommentAsync(string commentId, CancellationToken cancellationToken = default);
+    Task DeleteCommentAsync(string commentId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Edits a comment.
@@ -80,12 +80,12 @@ public interface IFlickrPhotosetsComments
     /// <param name="commentId">The ID of the comment to edit.</param>
     /// <param name="commentText">The new text for the comment.</param>
     /// <param name="cancellationToken"></param>
-    Task PhotosetsCommentsEditCommentAsync(string commentId, string commentText, CancellationToken cancellationToken = default);
+    Task EditCommentAsync(string commentId, string commentText, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets a list of comments for a photoset.
     /// </summary>
     /// <param name="photosetId">The id of the photoset to return the comments for.</param>
     /// <param name="cancellationToken"></param>
-    Task<PhotosetCommentCollection> PhotosetsCommentsGetListAsync(string photosetId, CancellationToken cancellationToken = default);
+    Task<PhotosetCommentCollection> GetListAsync(string photosetId, CancellationToken cancellationToken = default);
 }

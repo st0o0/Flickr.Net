@@ -1,10 +1,8 @@
-﻿using System.Xml;
-
-namespace Flickr.Net.Core.Entities;
+﻿namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// A photo in the context of a favorite. Returned as part of a call to <see
-/// cref="Flickr.FavoritesGetContext(string, string)"/>.
+/// cref="IFlickrFavorites.GetContextAsync(string, string, CancellationToken)"/>.
 /// </summary>
 public sealed class FavoriteContextPhoto : Photo, IFlickrParsable
 {

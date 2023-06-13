@@ -3,7 +3,7 @@
 namespace Flickr.Net.Core.Entities;
 
 /// <summary>
-/// The limits for a person returned by <see cref="Flickr.PeopleGetLimits"/>.
+/// The limits for a person returned by <see cref="IFlickrPeople.GetLimitsAsync(CancellationToken)"/>.
 /// </summary>
 /// <remarks>For more details on limits see help here: https://www.flickr.com/help/limits/</remarks>
 public class PersonLimits : IFlickrParsable

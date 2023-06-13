@@ -1,4 +1,4 @@
-using System.Collections.ObjectModel;
+using Flickr.Net.Core.Internals.Extensions;
 
 namespace Flickr.Net.Core.SearchOptions;
 
@@ -83,7 +83,7 @@ public class PhotoSearchOptions
     public string Tags { get; set; }
 
     /// <summary>
-    /// Tag mode can either be 'all', or 'any'. Defaults to <see cref="FlickrNet.TagMode.AllTags"/>
+    /// Tag mode can either be 'all', or 'any'. Defaults to <see cref="TagMode.AllTags"/>
     /// </summary>
     public TagMode TagMode { get; set; }
 
@@ -279,7 +279,7 @@ public class PhotoSearchOptions
 
     internal string ExtrasString
     {
-        get { return UtilityMethods.ExtrasToString(Extras); }
+        get { return Extras.ToFlickrString(); }
     }
 
     internal string ColorCodeString
@@ -387,8 +387,8 @@ public class PhotoSearchOptions
     }
 
     /// <summary>
-    /// Takes the various properties of this instance and adds them to a 
-    /// <see cref="Dictionary{K,V}"/> instanced passed in, ready for sending to Flickr.
+    /// Takes the various properties of this instance and adds them to a <see
+    /// cref="Dictionary{K,V}"/> instanced passed in, ready for sending to Flickr.
     /// </summary>
     /// <param name="parameters">The <see cref="Dictionary{K,V}"/> to add the options to.</param>
     public void AddToDictionary(ref Dictionary<string, string> parameters)
@@ -415,7 +415,7 @@ public class PhotoSearchOptions
 
         if (TagMode != TagMode.None)
         {
-            parameters.Add("tag_mode", UtilityMethods.TagModeToString(TagMode));
+            parameters.Add("tag_mode", TagMode.ToFlickrString());
         }
 
         if (!string.IsNullOrEmpty(MachineTags))
@@ -425,7 +425,7 @@ public class PhotoSearchOptions
 
         if (MachineTagMode != MachineTagMode.None)
         {
-            parameters.Add("machine_tag_mode", UtilityMethods.MachineTagModeToString(MachineTagMode));
+            parameters.Add("machine_tag_mode", MachineTagMode.ToFlickrString());
         }
 
         if (MinUploadDate != DateTime.MinValue)

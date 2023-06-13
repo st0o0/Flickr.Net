@@ -1,10 +1,9 @@
 using Flickr.Net.Core.Exceptions;
 using Flickr.Net.Core.SearchOptions;
-using System.ComponentModel;
+using System.Collections;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Xml;
 
 namespace Flickr.Net.Core.Internals;
 
@@ -14,56 +13,6 @@ namespace Flickr.Net.Core.Internals;
 public static class UtilityMethods
 {
     private static readonly DateTime UnixStartDate = new(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-
-    /// <summary>
-    /// Converts <see cref="AuthLevel"/> to a string.
-    /// </summary>
-    /// <param name="level">The level to convert.</param>
-    /// <returns></returns>
-    public static string AuthLevelToString(AuthLevel level)
-    {
-        return level switch
-        {
-            AuthLevel.Delete => "delete",
-            AuthLevel.Read => "read",
-            AuthLevel.Write => "write",
-            AuthLevel.None => "none",
-            _ => string.Empty,
-        };
-    }
-
-    /// <summary>
-    /// Convert a <see cref="TagMode"/> to a string used when passing to Flickr.
-    /// </summary>
-    /// <param name="tagMode">The tag mode to convert.</param>
-    /// <returns>The string to pass to Flickr.</returns>
-    public static string TagModeToString(TagMode tagMode)
-    {
-        return tagMode switch
-        {
-            TagMode.None => string.Empty,
-            TagMode.AllTags => "all",
-            TagMode.AnyTag => "any",
-            TagMode.Boolean => "bool",
-            _ => string.Empty,
-        };
-    }
-
-    /// <summary>
-    /// Convert a <see cref="MachineTagMode"/> to a string used when passing to Flickr.
-    /// </summary>
-    /// <param name="machineTagMode">The machine tag mode to convert.</param>
-    /// <returns>The string to pass to Flickr.</returns>
-    public static string MachineTagModeToString(MachineTagMode machineTagMode)
-    {
-        return machineTagMode switch
-        {
-            MachineTagMode.None => string.Empty,
-            MachineTagMode.AllTags => "all",
-            MachineTagMode.AnyTag => "any",
-            _ => string.Empty,
-        };
-    }
 
     /// <summary>
     /// Encodes a URL quesrystring data component.
@@ -109,47 +58,14 @@ public static class UtilityMethods
     }
 
     /// <summary>
-    /// Converts a <see cref="long"/>, representing a unix timestamp number into a 
-    /// <see cref="DateTime"/> object.
+    /// Converts a <see cref="long"/>, representing a unix timestamp number into a <see
+    /// cref="DateTime"/> object.
     /// </summary>
     /// <param name="timestamp">The unix timestamp.</param>
     /// <returns>The <see cref="DateTime"/> object the time represents.</returns>
     public static DateTime UnixTimestampToDate(long timestamp)
     {
         return UnixStartDate.AddSeconds(timestamp);
-    }
-
-    /// <summary>
-    /// Utility method to convert the <see cref="PhotoSearchExtras"/> enum to a string.
-    /// </summary>
-    /// <example>
-    /// <code>
-    ///PhotoSearchExtras extras = PhotoSearchExtras.DateTaken &amp; PhotoSearchExtras.IconServer;
-    ///string val = Utils.ExtrasToString(extras);
-    ///Console.WriteLine(val);
-    /// </code>
-    /// outputs: "date_taken,icon_server";
-    /// </example>
-    /// <param name="extras"></param>
-    /// <returns></returns>
-    public static string ExtrasToString(PhotoSearchExtras extras)
-    {
-        List<string> extraList = new();
-        Type e = typeof(PhotoSearchExtras);
-        foreach (PhotoSearchExtras extra in GetFlags(extras))
-        {
-            System.Reflection.FieldInfo info = e.GetField(extra.ToString("G"));
-            DescriptionAttribute[] o = (DescriptionAttribute[])info.GetCustomAttributes(typeof(DescriptionAttribute), false);
-            if (o.Length == 0)
-            {
-                continue;
-            }
-
-            DescriptionAttribute att = o[0];
-            extraList.Add(att.Description);
-        }
-
-        return string.Join(",", extraList.ToArray());
     }
 
     /// <summary>
@@ -209,28 +125,7 @@ public static class UtilityMethods
         return string.Join(",", colorList.ToArray());
     }
 
-    private static IEnumerable<Enum> GetFlags(Enum input)
-    {
-        long i = Convert.ToInt64(input);
-        foreach (Enum value in GetValues(input))
-        {
-            if ((i & Convert.ToInt64(value)) != 0)
-            {
-                yield return value;
-            }
-        }
-    }
-
-    private static IEnumerable<Enum> GetValues(Enum enumeration)
-    {
-        List<Enum> enumerations = new();
-        foreach (System.Reflection.FieldInfo fieldInfo in enumeration.GetType().GetFields(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public))
-        {
-            enumerations.Add((Enum)fieldInfo.GetValue(enumeration));
-        }
-        return enumerations;
-    }
-
+    //todo: KEKW
     /// <summary>
     /// Converts a <see cref="PhotoSearchSortOrder"/> into a string for use by the Flickr API.
     /// </summary>
@@ -251,6 +146,7 @@ public static class UtilityMethods
         };
     }
 
+    //todo: KEKW
     /// <summary>
     /// Converts a <see cref="PopularitySort"/> enum to a string.
     /// </summary>
@@ -267,6 +163,7 @@ public static class UtilityMethods
         };
     }
 
+    //todo: KEKW
     /// <summary>
     /// Adds the partial options to the passed in <see cref="Hashtable"/>.
     /// </summary>
@@ -470,6 +367,7 @@ public static class UtilityMethods
         return string.Format(System.Globalization.CultureInfo.InvariantCulture, format, parameters);
     }
 
+    //todo: KEKW
     /// <summary>
     /// Parses the id to member type.
     /// </summary>
@@ -487,6 +385,7 @@ public static class UtilityMethods
         };
     }
 
+    //todo: KEKW
     internal static MemberTypes ParseRoleToMemberType(string memberRole)
     {
         return memberRole switch
@@ -498,6 +397,7 @@ public static class UtilityMethods
         };
     }
 
+    //todo: KEKW
     /// <summary>
     /// Members the type to string.
     /// </summary>
@@ -626,6 +526,7 @@ public static class UtilityMethods
         return date.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.DateTimeFormatInfo.InvariantInfo);
     }
 
+    //todo: KEKW
     /// <summary>
     /// Converts a <see cref="MediaType"/> enumeration into a string used by Flickr.
     /// </summary>
@@ -643,8 +544,8 @@ public static class UtilityMethods
     }
 
     /// <summary>
-    /// If an unknown element is found and the DLL is a debug DLL then a 
-    /// <see cref="ParsingException"/> is thrown.
+    /// If an unknown element is found and the DLL is a debug DLL then a <see
+    /// cref="ParsingException"/> is thrown.
     /// </summary>
     /// <param name="reader">The <see cref="XmlReader"/> containing the unknown xml node.</param>
     [System.Diagnostics.Conditional("DEBUG")]
@@ -773,6 +674,7 @@ public static class UtilityMethods
         return sb.ToString();
     }
 
+    //todo: KEKW
     /// <summary>
     /// Converts a collection of <see cref="Style"/> values to a string literal containing the
     /// lowercase string representations of each distinct style once, separated by commas.

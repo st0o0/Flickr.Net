@@ -1,6 +1,4 @@
-﻿using System.Xml;
-
-namespace Flickr.Net.Core.Entities;
+﻿namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// Contains details of a user
@@ -18,7 +16,8 @@ public sealed class FoundUser : IFlickrParsable
     public string UserName { get; set; }
 
     /// <summary>
-    /// The full name of the user. Only returned by <see cref="Flickr.AuthGetToken"/>.
+    /// The full name of the user. Only returned by <see
+    /// cref="IFlickrOAuth.GetAccessTokenAsync(OAuthRequestToken, string, CancellationToken)"/>.
     /// </summary>
     public string FullName { get; set; }
 
@@ -63,7 +62,7 @@ public sealed class FoundUser : IFlickrParsable
 }
 
 /// <summary>
-/// The upload status of the user, as returned by <see cref="Flickr.PeopleGetUploadStatus"/>.
+/// The upload status of the user, as returned by <see cref="IFlickrPeople.GetUploadStatusAsync(CancellationToken)"/>.
 /// </summary>
 public sealed class UserStatus : IFlickrParsable
 {

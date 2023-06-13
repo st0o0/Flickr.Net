@@ -1,7 +1,7 @@
 namespace Flickr.Net.Core.Entities.Collections;
 
 /// <summary>
-/// A collection of members returned by the <see cref="Flickr.GroupsMembersGetList(string)"/> method.
+/// A collection of members returned by the <see cref="IFlickrGroupsMembers.GetListAsync(string, MemberTypes, int, int, CancellationToken)"/> method.
 /// </summary>
 public sealed class MemberCollection : System.Collections.ObjectModel.Collection<Member>, IFlickrParsable
 {

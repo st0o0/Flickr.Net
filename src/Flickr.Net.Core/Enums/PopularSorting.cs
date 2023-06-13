@@ -5,9 +5,23 @@
 
 public enum PopularSorting
 {
+    /// <summary>
+    /// </summary>
     None,
+
+    /// <summary>
+    /// </summary>
     Faves,
+
+    /// <summary>
+    /// </summary>
     Views,
+
+    /// <summary>
+    /// </summary>
     Comments,
+
+    /// <summary>
+    /// </summary>
     Interesting
 }

@@ -5,7 +5,7 @@
 /// </summary>
 public partial class Flickr : IFlickrPush
 {
-    async Task<SubscriptionCollection> IFlickrPush.PushGetSubscriptionsAsync(CancellationToken cancellationToken)
+    async Task<SubscriptionCollection> IFlickrPush.GetSubscriptionsAsync(CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -14,7 +14,7 @@ public partial class Flickr : IFlickrPush
         return await GetResponseAsync<SubscriptionCollection>(parameters, cancellationToken);
     }
 
-    async Task<string[]> IFlickrPush.PushGetTopicsAsync(CancellationToken cancellationToken)
+    async Task<string[]> IFlickrPush.GetTopicsAsync(CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -25,7 +25,7 @@ public partial class Flickr : IFlickrPush
         return result.GetElementArray("topic", "name");
     }
 
-    async Task IFlickrPush.PushSubscribeAsync(string topic, string callback, string verify, string verifyToken,
+    async Task IFlickrPush.SubscribeAsync(string topic, string callback, string verify, string verifyToken,
                                   int? leaseSeconds, IEnumerable<int> woeIds, IEnumerable<string> placeIds, double? latitude,
                                   double? longitude, int? radius, RadiusUnit radiusUnits, GeoAccuracy accuracy,
                                   IEnumerable<string> nsids, IEnumerable<string> tags, CancellationToken cancellationToken)
@@ -119,7 +119,7 @@ public partial class Flickr : IFlickrPush
         await GetResponseAsync<NoResponse>(parameters, cancellationToken);
     }
 
-    async Task IFlickrPush.PushUnsubscribeAsync(string topic, string callback, string verify, string verifyToken, CancellationToken cancellationToken)
+    async Task IFlickrPush.UnsubscribeAsync(string topic, string callback, string verify, string verifyToken, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -163,12 +163,14 @@ public interface IFlickrPush
     /// <summary>
     /// Get a list of subscriptions for the calling user.
     /// </summary>
-    Task<SubscriptionCollection> PushGetSubscriptionsAsync(CancellationToken cancellationToken = default);
+    /// <param name="cancellationToken"></param>
+    Task<SubscriptionCollection> GetSubscriptionsAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get a list of topics that are available for subscription.
     /// </summary>
-    Task<string[]> PushGetTopicsAsync(CancellationToken cancellationToken = default);
+    /// <param name="cancellationToken"></param>
+    Task<string[]> GetTopicsAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Subscribe to a particular topic.
@@ -198,7 +200,7 @@ public interface IFlickrPush
     /// listed will be included in the subscription. Only valid if the topic is 'tags'
     /// </param>
     /// <param name="cancellationToken"></param>
-    Task PushSubscribeAsync(string topic, string callback, string verify, string verifyToken = null,
+    Task SubscribeAsync(string topic, string callback, string verify, string verifyToken = null,
                                    int? leaseSeconds = null, IEnumerable<int> woeIds = null, IEnumerable<string> placeIds = null, double? latitude = null,
                                    double? longitude = null, int? radius = null, RadiusUnit radiusUnits = RadiusUnit.None, GeoAccuracy accuracy = GeoAccuracy.None,
                                    IEnumerable<string> nsids = null, IEnumerable<string> tags = null, CancellationToken cancellationToken = default);
@@ -213,5 +215,5 @@ public interface IFlickrPush
     /// The verification token to include in the unsubscribe verification process.
     /// </param>
     /// <param name="cancellationToken"></param>
-    Task PushUnsubscribeAsync(string topic, string callback, string verify, string verifyToken = null, CancellationToken cancellationToken = default);
+    Task UnsubscribeAsync(string topic, string callback, string verify, string verifyToken = null, CancellationToken cancellationToken = default);
 }

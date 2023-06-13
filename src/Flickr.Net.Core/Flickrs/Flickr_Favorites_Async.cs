@@ -54,7 +54,7 @@ public partial class Flickr : IFlickrFavorites
 
         if (extras != PhotoSearchExtras.None)
         {
-            parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            parameters.Add("extras", extras.ToFlickrString());
         }
 
         if (perPage > 0)
@@ -123,9 +123,6 @@ public interface IFlickrFavorites
     /// </param>
     /// <param name="userId">The user id of the users whose favorites you wish to search.</param>
     /// <param name="cancellationToken"></param>
-    /// <param name="numPrevious">The number of previous favorites to list. Defaults to 1.</param>
-    /// <param name="numNext">The number of next favorites to list. Defaults to 1.</param>
-    /// <param name="extras">Any extras to return for each photo in the previous and next list.</param>
     /// <returns></returns>
     Task<FavoriteContext> GetContextAsync(string photoId, string userId, CancellationToken cancellationToken = default);
 
@@ -136,25 +133,22 @@ public interface IFlickrFavorites
     /// <param name="minFavoriteDate">Minimum date that a photo was favorited on.</param>
     /// <param name="maxFavoriteDate">Maximum date that a photo was favorited on.</param>
     /// <param name="extras">The extras to return for each photo.</param>
+    /// <param name="page">The page to download this time.</param>
     /// <param name="perPage">Number of photos to include per page.</param>
     /// <param name="cancellationToken"></param>
-    /// <param name="page">The page to download this time.</param>
     Task<PhotoCollection> GetListAsync(string userId = null, DateTime? minFavoriteDate = null, DateTime? maxFavoriteDate = null, PhotoSearchExtras extras = PhotoSearchExtras.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets the public favourites for a specified user.
     /// </summary>
     /// <remarks>
-    /// This function difers from <see cref="Flickr.FavoritesGetList(string)"/> in that the user id
-    /// is not optional.
+    /// This function differs from <see cref="IFlickrFavorites.GetListAsync(string, DateTime?,
+    /// DateTime?, PhotoSearchExtras, int, int, CancellationToken)"/> in that the user id is not optional.
     /// </remarks>
     /// <param name="userId">The is of the user whose favourites you wish to return.</param>
-    /// <param name="minFavoriteDate">Minimum date that a photo was favorited on.</param>
-    /// <param name="maxFavoriteDate">Maximum date that a photo was favorited on.</param>
-    /// <param name="extras">The extras to return for each photo.</param>
+    /// <param name="page">The specific page to return.</param>
     /// <param name="perPage">The number of photos to return per page.</param>
     /// <param name="cancellationToken"></param>
-    /// <param name="page">The specific page to return.</param>
     Task<PhotoCollection> GetPublicListAsync(string userId, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>

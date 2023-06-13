@@ -1,6 +1,4 @@
-﻿using System.Collections.ObjectModel;
-
-namespace Flickr.Net.Core;
+﻿namespace Flickr.Net.Core;
 
 /// <summary>
 /// The flickr.
@@ -18,7 +16,7 @@ public partial class Flickr : IFlickrTags
 
         if (extras != PhotoSearchExtras.None)
         {
-            parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            parameters.Add("extras", extras.ToFlickrString());
         }
 
         return await GetResponseAsync<PhotoCollection>(parameters, cancellationToken);

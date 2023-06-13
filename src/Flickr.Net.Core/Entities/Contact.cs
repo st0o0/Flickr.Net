@@ -16,17 +16,20 @@ public sealed class Contact : IFlickrParsable
     public string UserName { get; set; }
 
     /// <summary>
-    /// The users real name. Only returned for authenticated calls to <see cref="Flickr.ContactsGetList()"/>.
+    /// The users real name. Only returned for authenticated calls to <see
+    /// cref="IFlickrContacts.GetListAsync(ContactType, int, int, CancellationToken)"/>.
     /// </summary>
     public string RealName { get; set; }
 
     /// <summary>
-    /// The location of the contact. Only returned for authenticated calls to <see cref="Flickr.ContactsGetList()"/>.
+    /// The location of the contact. Only returned for authenticated calls to <see
+    /// cref="IFlickrContacts.GetListAsync(ContactType, int, int, CancellationToken)"/>.
     /// </summary>
     public string Location { get; set; }
 
     /// <summary>
-    /// The URL path alias for the contact. Only returned for authenticated calls to <see cref="Flickr.ContactsGetList()"/>.
+    /// The URL path alias for the contact. Only returned for authenticated calls to <see
+    /// cref="IFlickrContacts.GetListAsync(ContactType, int, int, CancellationToken)"/>.
     /// </summary>
     public string PathAlias { get; set; }
 
@@ -57,7 +60,8 @@ public sealed class Contact : IFlickrParsable
     }
 
     /// <summary>
-    /// The number of photos uploaded. Only returned by <see cref="Flickr.ContactsGetListRecentlyUploaded()"/>
+    /// The number of photos uploaded. Only returned by <see
+    /// cref="IFlickrContacts.GetListRecentlyUploadedAsync(ContactSearch, DateTime?, CancellationToken)"/>
     /// </summary>
     public int? PhotosUploaded { get; set; }
 

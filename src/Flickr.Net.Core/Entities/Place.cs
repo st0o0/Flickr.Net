@@ -1,5 +1,3 @@
-using System.Xml;
-
 namespace Flickr.Net.Core.Entities;
 
 /// <summary>
@@ -58,7 +56,7 @@ public sealed class Place : IFlickrParsable
     /// <summary>
     /// The number of photos the calling user has for this place.
     /// </summary>
-    /// <remarks>Only returned for <see cref="Flickr.PlacesPlacesForUser()"/>.</remarks>
+    /// <remarks>Only returned for <see cref="IFlickrPlaces.PlacesForUserAsync(PlaceType, string, string, int, DateTime?, DateTime?, DateTime?, DateTime?, CancellationToken)"/>.</remarks>
     public int? PhotoCount { get; set; }
 
     /// <summary>

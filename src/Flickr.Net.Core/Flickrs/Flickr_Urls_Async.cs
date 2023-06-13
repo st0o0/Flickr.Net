@@ -112,7 +112,7 @@ public interface IFlickrUrls
     /// The NSID of the user to fetch the url for. If omitted, the calling user is assumed.
     /// </param>
     /// <param name="cancellationToken"></param>
-    /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
+    /// <returns></returns>
     Task<string> GetUserProfileAsync(string userId = null, CancellationToken cancellationToken = default);
 
     /// <summary>

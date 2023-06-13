@@ -2,43 +2,6 @@
 
 namespace Flickr.Net.Core.Flickrs.Results;
 
-internal class FlickrResultArgs<T> : EventArgs where T : IFlickrParsable
-{
-    internal FlickrResultArgs(FlickrResult<T> result)
-    {
-        Error = result.Error;
-        HasError = result.HasError;
-        Result = result.Result;
-    }
-
-    private Exception error;
-    public bool HasError { get; set; }
-    public T Result { get; set; }
-
-    public Exception Error
-    {
-        get
-        {
-            return error;
-        }
-        set
-        {
-            error = value;
-            FlickrApiException flickrApiException = value as FlickrApiException;
-
-            if (flickrApiException != null)
-            {
-                ErrorCode = flickrApiException.Code;
-                ErrorMessage = flickrApiException.OriginalMessage;
-                HasError = true;
-            }
-        }
-    }
-
-    public int ErrorCode { get; set; }
-    public string ErrorMessage { get; set; }
-}
-
 /// <summary>
 /// Contains details of the result from Flickr, or the error if an error occurred.
 /// </summary>

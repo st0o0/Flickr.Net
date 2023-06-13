@@ -1,8 +1,8 @@
-namespace FlickrNet.Core.Configuration;
+namespace Flickr.Net.Core.Configuration;
+
 /// <summary>
 /// The flickr configuration.
 /// </summary>
-
 public class FlickrConfiguration
 {
     /// <summary>

@@ -1,5 +1,3 @@
-using System.Collections.ObjectModel;
-
 namespace Flickr.Net.Core.Entities;
 
 /// <summary>
@@ -15,8 +13,8 @@ public sealed class CollectionInfo : IFlickrParsable
     public string CollectionId { get; set; }
 
     /// <summary>
-    /// The number of child collections this collection contains. Call
-    /// <see cref="Flickr.CollectionsGetTree()"/> for children.
+    /// The number of child collections this collection contains. Call <see
+    /// cref="IFlickrCollections.GetTreeAsync(string, string, CancellationToken)"/> for children.
     /// </summary>
     public int ChildCount { get; set; }
 

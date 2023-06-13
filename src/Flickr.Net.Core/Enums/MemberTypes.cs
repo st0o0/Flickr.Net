@@ -1,7 +1,7 @@
 namespace Flickr.Net.Core.Enums;
 
 /// <summary>
-/// The type of a member. Passed as a parameter to <see cref="Flickr.GroupsMembersGetList(string)"/>
+/// The type of a member. Passed as a parameter to <see cref="IFlickrGroupsMembers.GetListAsync(string, MemberTypes, int, int, CancellationToken)"/>
 /// and returned for each <see cref="Member"/> as well.
 /// </summary>
 [Flags]

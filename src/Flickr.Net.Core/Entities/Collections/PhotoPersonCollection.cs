@@ -1,6 +1,4 @@
-﻿using System.Xml;
-
-namespace Flickr.Net.Core.Entities.Collections;
+﻿namespace Flickr.Net.Core.Entities.Collections;
 
 /// <summary>
 /// A list of <see cref="PhotoPerson"/> instances.

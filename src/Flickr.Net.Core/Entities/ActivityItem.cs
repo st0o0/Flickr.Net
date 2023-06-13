@@ -1,9 +1,8 @@
-using System.Xml;
-
 namespace Flickr.Net.Core.Entities;
 
 /// <summary>
-/// Activity class used for <see cref="Flickr.ActivityUserPhotos()"/> and <see cref="Flickr.ActivityUserComments"/>.
+/// Activity class used for <see cref="IFlickrActivity.UserPhotosAsync(int, TimeType, int, int,
+/// CancellationToken)"/> and <see cref="IFlickrActivity.UserCommentsAsync(int, int, CancellationToken)"/>.
 /// </summary>
 public sealed class ActivityItem : IFlickrParsable
 {
@@ -48,19 +47,23 @@ public sealed class ActivityItem : IFlickrParsable
     /// <summary>
     /// The number of new comments within the given time frame.
     /// </summary>
-    /// <remarks>Only applicable for <see cref="Flickr.ActivityUserPhotos()"/>.</remarks>
+    /// <remarks>
+    /// Only applicable for <see cref="IFlickrActivity.UserPhotosAsync(int, TimeType, int, int, CancellationToken)"/>.
+    /// </remarks>
     public int NewComments { get; set; }
 
     /// <summary>
     /// The number of old comments within the given time frame.
     /// </summary>
-    /// <remarks>Only applicable for <see cref="Flickr.ActivityUserPhotos()"/>.</remarks>
+    /// <remarks>
+    /// Only applicable for <see cref="IFlickrActivity.UserPhotosAsync(int, TimeType, int, int, CancellationToken)"/>.
+    /// </remarks>
     public int OldComments { get; set; }
 
     /// <summary>
     /// The number of comments on the item.
     /// </summary>
-    /// <remarks>Only applicable for <see cref="Flickr.ActivityUserComments"/>.</remarks>
+    /// <remarks>Only applicable for <see cref="IFlickrActivity.UserCommentsAsync(int, int, CancellationToken)"/>.</remarks>
     public int Comments { get; set; }
 
     /// <summary>
@@ -120,19 +123,28 @@ public sealed class ActivityItem : IFlickrParsable
     /// <summary>
     /// The number of new notes within the given time frame.
     /// </summary>
-    /// <remarks>Only applicable for photos and when calling <see cref="Flickr.ActivityUserPhotos()"/>.</remarks>
+    /// <remarks>
+    /// Only applicable for photos and when calling <see cref="IFlickrActivity.UserPhotosAsync(int,
+    /// TimeType, int, int, CancellationToken)"/>.
+    /// </remarks>
     public int? NewNotes { get; set; }
 
     /// <summary>
     /// The number of old notes within the given time frame.
     /// </summary>
-    /// <remarks>Only applicable for photos and when calling <see cref="Flickr.ActivityUserPhotos()"/>.</remarks>
+    /// <remarks>
+    /// Only applicable for photos and when calling <see cref="IFlickrActivity.UserPhotosAsync(int,
+    /// TimeType, int, int, CancellationToken)"/>.
+    /// </remarks>
     public int? OldNotes { get; set; }
 
     /// <summary>
     /// The number of comments on the photo.
     /// </summary>
-    /// <remarks>Only applicable for photos and when calling <see cref="Flickr.ActivityUserComments"/>.</remarks>
+    /// <remarks>
+    /// Only applicable for photos and when calling <see
+    /// cref="IFlickrActivity.UserCommentsAsync(int, int, CancellationToken)"/>.
+    /// </remarks>
     public int? Notes { get; set; }
 
     /// <summary>

@@ -1,10 +1,10 @@
+using Flickr.Net.Core.SearchOptions;
+
 namespace Flickr.Net.Core.Enums;
 
 /// <summary>
-/// The sort order for the 
-/// <see cref="Flickr.PhotosSearch(PhotoSearchOptions)"/>,
-/// <see cref="Flickr.PhotosGetWithGeoData()"/>,
-/// <see cref="Flickr.PhotosGetWithoutGeoData()"/> methods.
+/// The sort order for the <see cref="IFlickrPhotos.SearchAsync(PhotoSearchOptions, CancellationToken)"/>, <see
+/// cref="IFlickrPhotos.GetWithGeoDataAsync(PartialSearchOptions, CancellationToken)"/>, <see cref="IFlickrPhotos.GetWithoutGeoDataAsync(PartialSearchOptions, CancellationToken)"/> methods.
 /// </summary>
 [Serializable]
 public enum PhotoSearchSortOrder

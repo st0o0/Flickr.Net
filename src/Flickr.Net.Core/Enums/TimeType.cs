@@ -5,6 +5,11 @@
 
 public enum TimeType
 {
+    /// <summary>
+    /// </summary>
     Hours,
+
+    /// <summary>
+    /// </summary>
     Days
 }

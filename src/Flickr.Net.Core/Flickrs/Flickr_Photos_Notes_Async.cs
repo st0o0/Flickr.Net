@@ -5,7 +5,7 @@
 /// </summary>
 public partial class Flickr : IFlickrPhotosNotes
 {
-    async Task<string> IFlickrPhotosNotes.PhotosNotesAddAsync(string photoId, int noteX, int noteY, int noteWidth, int noteHeight, string noteText, CancellationToken cancellationToken)
+    async Task<string> IFlickrPhotosNotes.AddAsync(string photoId, int noteX, int noteY, int noteWidth, int noteHeight, string noteText, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -23,7 +23,7 @@ public partial class Flickr : IFlickrPhotosNotes
         return result.GetAttributeValue("*", "id");
     }
 
-    async Task IFlickrPhotosNotes.PhotosNotesDeleteAsync(string noteId, CancellationToken cancellationToken)
+    async Task IFlickrPhotosNotes.DeleteAsync(string noteId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -34,7 +34,7 @@ public partial class Flickr : IFlickrPhotosNotes
         await GetResponseAsync<NoResponse>(parameters, cancellationToken);
     }
 
-    async Task IFlickrPhotosNotes.PhotosNotesEditAsync(string noteId, int noteX, int noteY, int noteWidth, int noteHeight, string noteText, CancellationToken cancellationToken)
+    async Task IFlickrPhotosNotes.EditAsync(string noteId, int noteX, int noteY, int noteWidth, int noteHeight, string noteText, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -66,14 +66,14 @@ public interface IFlickrPhotosNotes
     /// <param name="noteHeight">The height of the note.</param>
     /// <param name="noteText">The text in the note.</param>
     /// <param name="cancellationToken"></param>
-    Task<string> PhotosNotesAddAsync(string photoId, int noteX, int noteY, int noteWidth, int noteHeight, string noteText, CancellationToken cancellationToken = default);
+    Task<string> AddAsync(string photoId, int noteX, int noteY, int noteWidth, int noteHeight, string noteText, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Delete an existing note.
     /// </summary>
     /// <param name="noteId">The ID of the note.</param>
     /// <param name="cancellationToken"></param>
-    Task PhotosNotesDeleteAsync(string noteId, CancellationToken cancellationToken = default);
+    Task DeleteAsync(string noteId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Edit and update a note.
@@ -85,5 +85,5 @@ public interface IFlickrPhotosNotes
     /// <param name="noteHeight">The height of the note.</param>
     /// <param name="noteText">The new text in the note.</param>
     /// <param name="cancellationToken"></param>
-    Task PhotosNotesEditAsync(string noteId, int noteX, int noteY, int noteWidth, int noteHeight, string noteText, CancellationToken cancellationToken = default);
+    Task EditAsync(string noteId, int noteX, int noteY, int noteWidth, int noteHeight, string noteText, CancellationToken cancellationToken = default);
 }

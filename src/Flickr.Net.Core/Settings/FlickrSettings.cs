@@ -1,6 +1,6 @@
-using FlickrNet.Core.Configuration;
+using Flickr.Net.Core.Configuration;
 
-namespace FlickrNet.Core.Settings;
+namespace Flickr.Net.Core.Settings;
 /// <summary>
 /// The flickr settings.
 /// </summary>

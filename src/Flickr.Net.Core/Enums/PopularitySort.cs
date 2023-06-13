@@ -1,7 +1,7 @@
 ﻿namespace Flickr.Net.Core.Enums;
 
 /// <summary>
-/// Sorting used for <see cref="Flickr.StatsGetPopularPhotos(DateTime, PopularitySort, int, int)"/>
+/// Sorting used for <see cref="IFlickrStats.GetPopularPhotosAsync(DateTime, PopularitySort, int, int, CancellationToken)"/>
 /// </summary>
 public enum PopularitySort
 {

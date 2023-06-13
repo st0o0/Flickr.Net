@@ -5,7 +5,7 @@
 /// </summary>
 public partial class Flickr : IFlickrPhotosGeo
 {
-    async Task IFlickrPhotosGeo.PhotosGeoBatchCorrectLocationAsync(double latitude, double longitude, GeoAccuracy accuracy, string placeId, string woeId, CancellationToken cancellationToken)
+    async Task IFlickrPhotosGeo.BatchCorrectLocationAsync(double latitude, double longitude, GeoAccuracy accuracy, string placeId, string woeId, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -30,7 +30,7 @@ public partial class Flickr : IFlickrPhotosGeo
         await GetResponseAsync<NoResponse>(parameters, cancellationToken);
     }
 
-    async Task IFlickrPhotosGeo.PhotosGeoCorrectLocationAsync(string photoId, string placeId, string woeId, CancellationToken cancellationToken)
+    async Task IFlickrPhotosGeo.CorrectLocationAsync(string photoId, string placeId, string woeId, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -53,7 +53,7 @@ public partial class Flickr : IFlickrPhotosGeo
         await GetResponseAsync<NoResponse>(parameters, cancellationToken);
     }
 
-    async Task<PlaceInfo> IFlickrPhotosGeo.PhotosGeoGetLocationAsync(string photoId, CancellationToken cancellationToken)
+    async Task<PlaceInfo> IFlickrPhotosGeo.GetLocationAsync(string photoId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -65,7 +65,7 @@ public partial class Flickr : IFlickrPhotosGeo
         return result.Location;
     }
 
-    async Task<GeoPermissions> IFlickrPhotosGeo.PhotosGeoGetPermsAsync(string photoId, CancellationToken cancellationToken)
+    async Task<GeoPermissions> IFlickrPhotosGeo.GetPermsAsync(string photoId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -76,7 +76,7 @@ public partial class Flickr : IFlickrPhotosGeo
         return await GetResponseAsync<GeoPermissions>(parameters, cancellationToken);
     }
 
-    async Task<PhotoCollection> IFlickrPhotosGeo.PhotosGeoPhotosForLocationAsync(double latitude, double longitude, GeoAccuracy accuracy, PhotoSearchExtras extras, int perPage, int page, CancellationToken cancellationToken)
+    async Task<PhotoCollection> IFlickrPhotosGeo.PhotosForLocationAsync(double latitude, double longitude, GeoAccuracy accuracy, PhotoSearchExtras extras, int perPage, int page, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -94,7 +94,7 @@ public partial class Flickr : IFlickrPhotosGeo
 
         if (extras != PhotoSearchExtras.None)
         {
-            parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            parameters.Add("extras", extras.ToFlickrString());
         }
 
         if (perPage > 0)
@@ -110,7 +110,7 @@ public partial class Flickr : IFlickrPhotosGeo
         return await GetResponseAsync<PhotoCollection>(parameters, cancellationToken);
     }
 
-    async Task IFlickrPhotosGeo.PhotosGeoRemoveLocationAsync(string photoId, CancellationToken cancellationToken)
+    async Task IFlickrPhotosGeo.RemoveLocationAsync(string photoId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -121,7 +121,7 @@ public partial class Flickr : IFlickrPhotosGeo
         await GetResponseAsync<NoResponse>(parameters, cancellationToken);
     }
 
-    async Task IFlickrPhotosGeo.PhotosGeoSetContextAsync(string photoId, GeoContext context, CancellationToken cancellationToken)
+    async Task IFlickrPhotosGeo.SetContextAsync(string photoId, GeoContext context, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -133,7 +133,7 @@ public partial class Flickr : IFlickrPhotosGeo
         await GetResponseAsync<NoResponse>(parameters, cancellationToken);
     }
 
-    async Task IFlickrPhotosGeo.PhotosGeoSetLocationAsync(string photoId, double latitude, double longitude, GeoAccuracy accuracy, CancellationToken cancellationToken)
+    async Task IFlickrPhotosGeo.SetLocationAsync(string photoId, double latitude, double longitude, GeoAccuracy accuracy, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -151,7 +151,7 @@ public partial class Flickr : IFlickrPhotosGeo
         await GetResponseAsync<NoResponse>(parameters, cancellationToken);
     }
 
-    async Task IFlickrPhotosGeo.PhotosGeoSetPermsAsync(string photoId, bool isPublic, bool isContact, bool isFamily, bool isFriend, CancellationToken cancellationToken)
+    async Task IFlickrPhotosGeo.SetPermsAsync(string photoId, bool isPublic, bool isContact, bool isFamily, bool isFriend, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -200,7 +200,7 @@ public interface IFlickrPhotosGeo
     /// </param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task PhotosGeoBatchCorrectLocationAsync(double latitude, double longitude, GeoAccuracy accuracy, string placeId = null, string woeId = null, CancellationToken cancellationToken = default);
+    Task BatchCorrectLocationAsync(double latitude, double longitude, GeoAccuracy accuracy, string placeId = null, string woeId = null, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Correct the places hierarchy for a given photo.
@@ -214,7 +214,7 @@ public interface IFlickrPhotosGeo
     /// </param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task PhotosGeoCorrectLocationAsync(string photoId, string placeId, string woeId, CancellationToken cancellationToken = default);
+    Task CorrectLocationAsync(string photoId, string placeId, string woeId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Returns the location data for a give photo.
@@ -222,7 +222,7 @@ public interface IFlickrPhotosGeo
     /// <param name="photoId">The ID of the photo to return the location information for.</param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<PlaceInfo> PhotosGeoGetLocationAsync(string photoId, CancellationToken cancellationToken = default);
+    Task<PlaceInfo> GetLocationAsync(string photoId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get permissions for a photo.
@@ -230,7 +230,7 @@ public interface IFlickrPhotosGeo
     /// <param name="photoId">The id of the photo to get permissions for.</param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<GeoPermissions> PhotosGeoGetPermsAsync(string photoId, CancellationToken cancellationToken = default);
+    Task<GeoPermissions> GetPermsAsync(string photoId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Return a list of photos for a user at a specific latitude, longitude and accuracy.
@@ -255,7 +255,7 @@ public interface IFlickrPhotosGeo
     /// </param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<PhotoCollection> PhotosGeoPhotosForLocationAsync(double latitude, double longitude, GeoAccuracy accuracy = GeoAccuracy.None, PhotoSearchExtras extras = PhotoSearchExtras.None, int perPage = 0, int page = 0, CancellationToken cancellationToken = default);
+    Task<PhotoCollection> PhotosForLocationAsync(double latitude, double longitude, GeoAccuracy accuracy = GeoAccuracy.None, PhotoSearchExtras extras = PhotoSearchExtras.None, int perPage = 0, int page = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Removes Location information.
@@ -263,7 +263,7 @@ public interface IFlickrPhotosGeo
     /// <param name="photoId">The photo ID of the photo to remove information from.</param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task PhotosGeoRemoveLocationAsync(string photoId, CancellationToken cancellationToken = default);
+    Task RemoveLocationAsync(string photoId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Indicate the state of a photo's geotagginess beyond latitude and longitude.
@@ -279,7 +279,7 @@ public interface IFlickrPhotosGeo
     /// </param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task PhotosGeoSetContextAsync(string photoId, GeoContext context, CancellationToken cancellationToken = default);
+    Task SetContextAsync(string photoId, GeoContext context, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Sets the geo location for a photo.
@@ -296,7 +296,7 @@ public interface IFlickrPhotosGeo
     /// <param name="accuracy">The accuracy of the photos geo location.</param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task PhotosGeoSetLocationAsync(string photoId, double latitude, double longitude, GeoAccuracy accuracy = GeoAccuracy.None, CancellationToken cancellationToken = default);
+    Task SetLocationAsync(string photoId, double latitude, double longitude, GeoAccuracy accuracy = GeoAccuracy.None, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Set the permission for who can see geotagged photos on Flickr.
@@ -308,5 +308,5 @@ public interface IFlickrPhotosGeo
     /// <param name="isFriend"></param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task PhotosGeoSetPermsAsync(string photoId, bool isPublic, bool isContact, bool isFamily, bool isFriend, CancellationToken cancellationToken = default);
+    Task SetPermsAsync(string photoId, bool isPublic, bool isContact, bool isFamily, bool isFriend, CancellationToken cancellationToken = default);
 }

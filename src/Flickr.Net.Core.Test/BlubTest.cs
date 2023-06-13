@@ -1,4 +1,4 @@
-﻿using FlickrNet.Core.Configuration;
+﻿using Flickr.Net.Core.Configuration;
 
 namespace Flickr.Net.Core.Test;
 /// <summary>
@@ -19,7 +19,7 @@ public class BlubTest
 
     private void TESTTEST()
     {
-        //var t = new Flickr(null, null);
+        var t = new Flickr(null, null);
         //t.
     }
 }

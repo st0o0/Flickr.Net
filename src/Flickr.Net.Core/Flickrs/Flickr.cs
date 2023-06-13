@@ -2,10 +2,9 @@ using Flickr.Net.Core.Exceptions;
 using Flickr.Net.Core.Exceptions.Handlers;
 using Flickr.Net.Core.Internals.Caching;
 using Flickr.Net.Core.Internals.HttpContents;
-using FlickrNet.Core.Configuration;
-using FlickrNet.Core.Settings;
+using Flickr.Net.Core.Configuration;
+using Flickr.Net.Core.Settings;
 using System.Text;
-using System.Xml;
 
 namespace Flickr.Net.Core;
 
@@ -60,14 +59,24 @@ public partial class Flickr
     {
     }
 
+    /// <summary>
+    /// </summary>
     protected static string UploadUrl => "https://up.flickr.com/services/upload/";
 
+    /// <summary>
+    /// </summary>
     protected static string ReplaceUrl => "https://up.flickr.com/services/replace/";
 
+    /// <summary>
+    /// </summary>
     protected static string AuthUrl => "https://www.flickr.com/services/auth/";
 
+    /// <summary>
+    /// </summary>
     protected static Uri BaseUri => new("https://api.flickr.com/services/rest/");
 
+    /// <summary>
+    /// </summary>
     protected Cache Cache => _cache;
 
     /// <summary>
@@ -231,10 +240,7 @@ public partial class Flickr
     /// <summary>
     /// Returns the last URL requested. Includes API signing.
     /// </summary>
-    public string LastRequest
-    {
-        get { return _lastRequest; }
-    }
+    public string LastRequest => _lastRequest;
 
     internal void CheckApiKey()
     {

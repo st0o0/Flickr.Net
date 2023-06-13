@@ -31,7 +31,7 @@ public partial class Flickr : IFlickrInterestingness
 
         if (extras != PhotoSearchExtras.None)
         {
-            parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            parameters.Add("extras", extras.ToFlickrString());
         }
 
         return await GetResponseAsync<PhotoCollection>(parameters, cancellationToken);
@@ -48,11 +48,11 @@ public interface IFlickrInterestingness
     /// </summary>
     /// <param name="date">The date to return the interestingness photos for.</param>
     /// <param name="extras">
-    /// The extra parameters to return along with the search results. See 
-    /// <see cref="PhotoSearchOptions"/> for more details.
+    /// The extra parameters to return along with the search results. See <see
+    /// cref="PhotoSearchOptions"/> for more details.
     /// </param>
+    /// <param name="page">The page of the results to return.</param>
     /// <param name="perPage">The number of results to return per page.</param>
     /// <param name="cancellationToken"></param>
-    /// <param name="page">The page of the results to return.</param>
     Task<PhotoCollection> GetListAsync(DateTime? date, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken);
 }

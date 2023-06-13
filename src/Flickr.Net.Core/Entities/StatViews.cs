@@ -4,7 +4,7 @@
 /// The number of views of each type that a users account has had for a given date (or overall if no
 /// date specified).
 /// </summary>
-/// <remarks>Used by <see cref="Flickr.StatsGetTotalViews(DateTime)"/>.</remarks>
+/// <remarks>Used by <see cref="IFlickrStats.GetTotalViewsAsync(DateTime, CancellationToken)"/>.</remarks>
 public sealed class StatViews : IFlickrParsable
 {
     /// <summary>
