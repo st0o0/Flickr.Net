@@ -565,6 +565,28 @@
             An array of the 12 photos used to create a collection's mosaic.
             </summary>
         </member>
+        <member name="T:Flickr.Net.Core.Entities.CollectionSet">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.CollectionSet.SetId">
+            <remarks/>
+            <summary>
+            Gets or sets the set id.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.CollectionSet.Title">
+            <remarks/>
+            <summary>
+            Gets or sets the title.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.CollectionSet.Description">
+            <remarks/>
+            <summary>
+            Gets or sets the description.
+            </summary>
+        </member>
         <member name="T:Flickr.Net.Core.Entities.Collections.ActivityItemCollection">
             <summary>
             A list of <see cref="T:Flickr.Net.Core.Entities.ActivityItem"/> items.
@@ -1605,28 +1627,6 @@
         <member name="P:Flickr.Net.Core.Entities.Collections.ValueCollection.Pages">
             <summary>
             The number of pages of namespaces that are available.
-            </summary>
-        </member>
-        <member name="T:Flickr.Net.Core.Entities.CollectionSet">
-            <summary>
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.CollectionSet.SetId">
-            <remarks/>
-            <summary>
-            Gets or sets the set id.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.CollectionSet.Title">
-            <remarks/>
-            <summary>
-            Gets or sets the title.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.CollectionSet.Description">
-            <remarks/>
-            <summary>
-            Gets or sets the description.
             </summary>
         </member>
         <member name="T:Flickr.Net.Core.Entities.Contact">
@@ -4425,9 +4425,33 @@
             </summary>
             <param name="reader"></param>
         </member>
+        <member name="T:Flickr.Net.Core.Entities.PlaceId">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Flickr.Net.Core.Entities.PlaceId.#ctor(System.String)">
+            <summary>
+            </summary>
+            <param name="placeId"></param>
+        </member>
+        <member name="M:Flickr.Net.Core.Entities.PlaceId.op_Implicit(Flickr.Net.Core.Entities.PlaceId)~System.String">
+            <summary>
+            </summary>
+            <param name="placeId"></param>
+        </member>
+        <member name="M:Flickr.Net.Core.Entities.PlaceId.op_Implicit(System.String)~Flickr.Net.Core.Entities.PlaceId">
+            <summary>
+            </summary>
+            <param name="placeId"></param>
+        </member>
+        <member name="M:Flickr.Net.Core.Entities.PlaceId.ToString">
+            <summary>
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Flickr.Net.Core.Entities.PlaceInfo">
             <summary>
-            Detailed information about a place. Returned by <see cref="M:Flickr.Net.Core.IFlickrPlaces.GetInfoAsync(System.String,System.String,System.Threading.CancellationToken)"/>.
+            Detailed information about a place. Returned by <see cref="!:IFlickrPlaces.GetInfoAsync(string, string, CancellationToken)"/>.
             </summary>
         </member>
         <member name="P:Flickr.Net.Core.Entities.PlaceInfo.PlaceId">
@@ -4696,7 +4720,7 @@
         </member>
         <member name="T:Flickr.Net.Core.Entities.ShapeData">
             <summary>
-            The shape data supplied by <see cref="M:Flickr.Net.Core.IFlickrPlaces.GetInfoAsync(System.String,System.String,System.Threading.CancellationToken)"/>.
+            The shape data supplied by <see cref="!:IFlickrPlaces.GetInfoAsync(string, string, CancellationToken)"/>.
             </summary>
             <remarks>
             See <a
@@ -5594,6 +5618,30 @@
             <summary>
             The height of the video.
             </summary>
+        </member>
+        <member name="T:Flickr.Net.Core.Entities.WoeId">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Flickr.Net.Core.Entities.WoeId.#ctor(System.String)">
+            <summary>
+            </summary>
+            <param name="woeId"></param>
+        </member>
+        <member name="M:Flickr.Net.Core.Entities.WoeId.op_Implicit(Flickr.Net.Core.Entities.WoeId)~System.String">
+            <summary>
+            </summary>
+            <param name="woeId"></param>
+        </member>
+        <member name="M:Flickr.Net.Core.Entities.WoeId.op_Implicit(System.String)~Flickr.Net.Core.Entities.WoeId">
+            <summary>
+            </summary>
+            <param name="woeId"></param>
+        </member>
+        <member name="M:Flickr.Net.Core.Entities.WoeId.ToString">
+            <summary>
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:Flickr.Net.Core.Enums.ActivityEventType">
             <summary>
@@ -8303,8 +8351,8 @@
             </summary>
             <param name="pandaName">The name of the panda to return photos for.</param>
             <param name="extras">The extras to return with the photos.</param>
-            <param name="perPage">The number of photos to return per page.</param>
             <param name="page">The age to return.</param>
+            <param name="perPage">The number of photos to return per page.</param>
             <param name="cancellationToken"></param>
         </member>
         <member name="T:Flickr.Net.Core.IFlickrPeople">
@@ -9008,7 +9056,7 @@
             The flickr photos geo.
             </summary>
         </member>
-        <member name="M:Flickr.Net.Core.IFlickrPhotosGeo.BatchCorrectLocationAsync(System.Double,System.Double,Flickr.Net.Core.Enums.GeoAccuracy,System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Flickr.Net.Core.IFlickrPhotosGeo.BatchCorrectLocationAsync(Flickr.Net.Core.Entities.PlaceId,System.Double,System.Double,Flickr.Net.Core.Enums.GeoAccuracy,System.Threading.CancellationToken)">
             <summary>
             Correct the places hierarchy for all the photos for a user at a given latitude, longitude
             and accuracy.
@@ -9017,6 +9065,7 @@
             Batch corrections are processed in a delayed queue so it may take a few minutes before the
             changes are reflected in a user's photos.
             </remarks>
+            <param name="placeId">A Flickr Places ID.</param>
             <param name="latitude">
             The latitude of the photos to be update whose valid range is -90 to 90. Anything more than 6
             decimal places will be truncated.
@@ -9029,26 +9078,49 @@
             Recorded accuracy level of the photos to be updated. World level is 1, Country is ~3, Region
             ~6, City ~11, Street ~16. Current range is 1-16. Defaults to 16 if not specified.
             </param>
-            <param name="placeId">
-            A Flickr Places ID. (While optional, you must pass either a valid Places ID or a WOE ID.)
+            <param name="cancellationToken"></param>
+            <return></return>
+        </member>
+        <member name="M:Flickr.Net.Core.IFlickrPhotosGeo.BatchCorrectLocationAsync(Flickr.Net.Core.Entities.WoeId,System.Double,System.Double,Flickr.Net.Core.Enums.GeoAccuracy,System.Threading.CancellationToken)">
+            <summary>
+            Correct the places hierarchy for all the photos for a user at a given latitude, longitude
+            and accuracy.
+            </summary>
+            <remarks>
+            Batch corrections are processed in a delayed queue so it may take a few minutes before the
+            changes are reflected in a user's photos.
+            </remarks>
+            <param name="woeId">A Where On Earth (WOE) ID.</param>
+            <param name="latitude">
+            The latitude of the photos to be update whose valid range is -90 to 90. Anything more than 6
+            decimal places will be truncated.
             </param>
-            <param name="woeId">
-            A Where On Earth (WOE) ID. (While optional, you must pass either a valid Places ID or a WOE ID.)
+            <param name="longitude">
+            The longitude of the photos to be updated whose valid range is -180 to 180. Anything more
+            than 6 decimal places will be truncated.
+            </param>
+            <param name="accuracy">
+            Recorded accuracy level of the photos to be updated. World level is 1, Country is ~3, Region
+            ~6, City ~11, Street ~16. Current range is 1-16. Defaults to 16 if not specified.
             </param>
             <param name="cancellationToken"></param>
             <return></return>
         </member>
-        <member name="M:Flickr.Net.Core.IFlickrPhotosGeo.CorrectLocationAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Flickr.Net.Core.IFlickrPhotosGeo.CorrectLocationAsync(System.String,Flickr.Net.Core.Entities.PlaceId,System.Threading.CancellationToken)">
             <summary>
             Correct the places hierarchy for a given photo.
             </summary>
             <param name="photoId">The ID of the photo whose WOE location is being corrected.</param>
-            <param name="placeId">
-            A Flickr Places ID. (While optional, you must pass either a valid Places ID or a WOE ID.)
-            </param>
-            <param name="woeId">
-            A Where On Earth (WOE) ID. (While optional, you must pass either a valid Places ID or a WOE ID.)
-            </param>
+            <param name="placeId">A Flickr Places ID.</param>
+            <param name="cancellationToken"></param>
+            <return></return>
+        </member>
+        <member name="M:Flickr.Net.Core.IFlickrPhotosGeo.CorrectLocationAsync(System.String,Flickr.Net.Core.Entities.WoeId,System.Threading.CancellationToken)">
+            <summary>
+            Correct the places hierarchy for a given photo.
+            </summary>
+            <param name="photoId">The ID of the photo whose WOE location is being corrected.</param>
+            <param name="woeId">A Where On Earth (WOE) ID.</param>
             <param name="cancellationToken"></param>
             <return></return>
         </member>
@@ -9358,29 +9430,34 @@
             <param name="cancellationToken"></param>
             <return></return>
         </member>
-        <member name="M:Flickr.Net.Core.IFlickrPlaces.GetChildrenWithPhotosPublicAsync(System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Flickr.Net.Core.IFlickrPlaces.GetChildrenWithPhotosPublicAsync(Flickr.Net.Core.Entities.PlaceId,System.Threading.CancellationToken)">
             <summary>
             Return a list of locations with public photos that are parented by a Where on Earth (WOE) or
             Places ID.
             </summary>
-            <param name="placeId">
-            A Flickr Places ID. (While optional, you must pass either a valid Places ID or a WOE ID.)
-            </param>
-            <param name="woeId">
-            A Where On Earth (WOE) ID. (While optional, you must pass either a valid Places ID or a WOE ID.)
-            </param>
+            <param name="placeId">A Flickr Places ID.</param>
             <param name="cancellationToken"></param>
         </member>
-        <member name="M:Flickr.Net.Core.IFlickrPlaces.GetInfoAsync(System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Flickr.Net.Core.IFlickrPlaces.GetChildrenWithPhotosPublicAsync(Flickr.Net.Core.Entities.WoeId,System.Threading.CancellationToken)">
+            <summary>
+            Return a list of locations with public photos that are parented by a Where on Earth (WOE) or
+            Places ID.
+            </summary>
+            <param name="woeId">A Where On Earth (WOE) ID.</param>
+            <param name="cancellationToken"></param>
+        </member>
+        <member name="M:Flickr.Net.Core.IFlickrPlaces.GetInfoAsync(Flickr.Net.Core.Entities.PlaceId,System.Threading.CancellationToken)">
             <summary>
             Get informations about a place.
             </summary>
-            <param name="placeId">
-            A Flickr Places ID. (While optional, you must pass either a valid Places ID or a WOE ID.)
-            </param>
-            <param name="woeId">
-            A Where On Earth (WOE) ID. (While optional, you must pass either a valid Places ID or a WOE ID.)
-            </param>
+            <param name="placeId">A Flickr Places ID.</param>
+            <param name="cancellationToken"></param>
+        </member>
+        <member name="M:Flickr.Net.Core.IFlickrPlaces.GetInfoAsync(Flickr.Net.Core.Entities.WoeId,System.Threading.CancellationToken)">
+            <summary>
+            Get informations about a place.
+            </summary>
+            <param name="woeId">A Where On Earth (WOE) ID.</param>
             <param name="cancellationToken"></param>
         </member>
         <member name="M:Flickr.Net.Core.IFlickrPlaces.GetInfoByUrlAsync(System.String,System.Threading.CancellationToken)">
@@ -9402,17 +9479,20 @@
             serve much purpose.
             </remarks>
         </member>
-        <member name="M:Flickr.Net.Core.IFlickrPlaces.GetShapeHistoryAsync(System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Flickr.Net.Core.IFlickrPlaces.GetShapeHistoryAsync(Flickr.Net.Core.Entities.PlaceId,System.Threading.CancellationToken)">
             <summary>
             Return an historical list of all the shape data generated for a Places or Where on Earth
             (WOE) ID.
             </summary>
-            <param name="placeId">
-            A Flickr Places ID. (While optional, you must pass either a valid Places ID or a WOE ID.)
-            </param>
-            <param name="woeId">
-            A Where On Earth (WOE) ID. (While optional, you must pass either a valid Places ID or a WOE ID.)
-            </param>
+            <param name="placeId">A Flickr Places ID.</param>
+            <param name="cancellationToken"></param>
+        </member>
+        <member name="M:Flickr.Net.Core.IFlickrPlaces.GetShapeHistoryAsync(Flickr.Net.Core.Entities.WoeId,System.Threading.CancellationToken)">
+            <summary>
+            Return an historical list of all the shape data generated for a Places or Where on Earth
+            (WOE) ID.
+            </summary>
+            <param name="woeId">A Where On Earth (WOE) ID.</param>
             <param name="cancellationToken"></param>
         </member>
         <member name="M:Flickr.Net.Core.IFlickrPlaces.GetTopPlacesListAsync(Flickr.Net.Core.Enums.PlaceType,System.Nullable{System.DateTime},System.String,System.String,System.Threading.CancellationToken)">
@@ -9512,18 +9592,30 @@
             </param>
             <param name="cancellationToken"></param>
         </member>
-        <member name="M:Flickr.Net.Core.IFlickrPlaces.TagsForPlaceAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Flickr.Net.Core.IFlickrPlaces.TagsForPlaceAsync(Flickr.Net.Core.Entities.PlaceId,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
-            Return a list of the top 100 unique tags for a Flickr Places or Where on Earth (WOE) ID.
+            Return a list of the top 100 unique tags for a Flickr Places.
             </summary>
-            <param name="placeId">
-            A Flickr Places identifier to use to filter photo clusters. (While optional, you must pass
-            either a valid Places ID or a WOE ID.)
+            <param name="placeId">A Flickr Places identifier to use to filter photo clusters.</param>
+            <param name="minUploadDate">
+            Minimum upload date. Photos with an upload date greater than or equal to this value will be returned.
             </param>
-            <param name="woeId">
-            A Where on Earth identifier to use to filter photo clusters. (While optional, you must pass
-            either a valid Places ID or a WOE ID.)
+            <param name="maxUploadDate">
+            Maximum upload date. Photos with an upload date less than or equal to this value will be returned.
             </param>
+            <param name="minTakenDate">
+            Minimum taken date. Photos with an taken date greater than or equal to this value will be returned.
+            </param>
+            <param name="maxTakenDate">
+            Maximum taken date. Photos with an taken date less than or equal to this value will be returned.
+            </param>
+            <param name="cancellationToken"></param>
+        </member>
+        <member name="M:Flickr.Net.Core.IFlickrPlaces.TagsForPlaceAsync(Flickr.Net.Core.Entities.WoeId,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Return a list of the top 100 unique tags for Earth (WOE) ID.
+            </summary>
+            <param name="woeId">A Where on Earth identifier to use to filter photo clusters.</param>
             <param name="minUploadDate">
             Minimum upload date. Photos with an upload date greater than or equal to this value will be returned.
             </param>
@@ -9605,7 +9697,7 @@
             </summary>
             <param name="cancellationToken"></param>
         </member>
-        <member name="M:Flickr.Net.Core.IFlickrPush.SubscribeAsync(System.String,System.String,System.String,System.String,System.Nullable{System.Int32},System.Collections.Generic.IEnumerable{System.Int32},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Double},System.Nullable{System.Double},System.Nullable{System.Int32},Flickr.Net.Core.Enums.RadiusUnit,Flickr.Net.Core.Enums.GeoAccuracy,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
+        <member name="M:Flickr.Net.Core.IFlickrPush.SubscribeAsync(System.String,System.String,System.String,System.String,System.Nullable{System.Int32},System.Collections.Generic.IEnumerable{Flickr.Net.Core.Entities.WoeId},System.Collections.Generic.IEnumerable{Flickr.Net.Core.Entities.PlaceId},System.Nullable{System.Double},System.Nullable{System.Double},System.Nullable{System.Int32},Flickr.Net.Core.Enums.RadiusUnit,Flickr.Net.Core.Enums.GeoAccuracy,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
             <summary>
             Subscribe to a particular topic.
             </summary>

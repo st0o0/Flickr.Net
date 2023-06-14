@@ -3,7 +3,8 @@
 namespace Flickr.Net.Core.Entities;
 
 /// <summary>
-/// The shape data supplied by <see cref="IFlickrPlaces.GetInfoAsync(string, string, CancellationToken)"/>.
+/// The shape data supplied by <see cref="IFlickrPlaces.GetInfoAsync(PlaceId, CancellationToken)"/>
+/// or <see cref="IFlickrPlaces.GetInfoAsync(WoeId, CancellationToken)"/>.
 /// </summary>
 /// <remarks>
 /// See <a

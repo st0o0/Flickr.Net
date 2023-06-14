@@ -5,7 +5,7 @@
 /// </summary>
 public partial class Flickr : IFlickrPhotosGeo
 {
-    async Task IFlickrPhotosGeo.BatchCorrectLocationAsync(double latitude, double longitude, GeoAccuracy accuracy, string placeId, string woeId, CancellationToken cancellationToken)
+    async Task IFlickrPhotosGeo.BatchCorrectLocationAsync(PlaceId placeId, double latitude, double longitude, GeoAccuracy accuracy, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -22,6 +22,21 @@ public partial class Flickr : IFlickrPhotosGeo
             parameters.Add("place_id", placeId);
         }
 
+        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+    }
+
+    async Task IFlickrPhotosGeo.BatchCorrectLocationAsync(WoeId woeId, double latitude, double longitude, GeoAccuracy accuracy, CancellationToken cancellationToken)
+    {
+        CheckRequiresAuthentication();
+
+        Dictionary<string, string> parameters = new()
+        {
+            { "method", "flickr.photos.geo.batchCorrectLocation" },
+            { "lat", latitude.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) },
+            { "lon", longitude.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) },
+            { "accuracy", accuracy.ToString("D") }
+        };
+
         if (!string.IsNullOrEmpty(woeId))
         {
             parameters.Add("woe_id", woeId);
@@ -30,7 +45,7 @@ public partial class Flickr : IFlickrPhotosGeo
         await GetResponseAsync<NoResponse>(parameters, cancellationToken);
     }
 
-    async Task IFlickrPhotosGeo.CorrectLocationAsync(string photoId, string placeId, string woeId, CancellationToken cancellationToken)
+    async Task IFlickrPhotosGeo.CorrectLocationAsync(string photoId, PlaceId placeId, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -44,6 +59,19 @@ public partial class Flickr : IFlickrPhotosGeo
         {
             parameters.Add("place_id", placeId);
         }
+
+        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+    }
+
+    async Task IFlickrPhotosGeo.CorrectLocationAsync(string photoId, WoeId woeId, CancellationToken cancellationToken)
+    {
+        CheckRequiresAuthentication();
+
+        Dictionary<string, string> parameters = new()
+        {
+            { "method", "flickr.photos.geo.correctLocation" },
+            { "photo_id", photoId }
+        };
 
         if (!string.IsNullOrEmpty(woeId))
         {
@@ -180,6 +208,7 @@ public interface IFlickrPhotosGeo
     /// Batch corrections are processed in a delayed queue so it may take a few minutes before the
     /// changes are reflected in a user's photos.
     /// </remarks>
+    /// <param name="placeId">A Flickr Places ID.</param>
     /// <param name="latitude">
     /// The latitude of the photos to be update whose valid range is -90 to 90. Anything more than 6
     /// decimal places will be truncated.
@@ -192,29 +221,52 @@ public interface IFlickrPhotosGeo
     /// Recorded accuracy level of the photos to be updated. World level is 1, Country is ~3, Region
     /// ~6, City ~11, Street ~16. Current range is 1-16. Defaults to 16 if not specified.
     /// </param>
-    /// <param name="placeId">
-    /// A Flickr Places ID. (While optional, you must pass either a valid Places ID or a WOE ID.)
+    /// <param name="cancellationToken"></param>
+    /// <return></return>
+    Task BatchCorrectLocationAsync(PlaceId placeId, double latitude, double longitude, GeoAccuracy accuracy, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Correct the places hierarchy for all the photos for a user at a given latitude, longitude
+    /// and accuracy.
+    /// </summary>
+    /// <remarks>
+    /// Batch corrections are processed in a delayed queue so it may take a few minutes before the
+    /// changes are reflected in a user's photos.
+    /// </remarks>
+    /// <param name="woeId">A Where On Earth (WOE) ID.</param>
+    /// <param name="latitude">
+    /// The latitude of the photos to be update whose valid range is -90 to 90. Anything more than 6
+    /// decimal places will be truncated.
     /// </param>
-    /// <param name="woeId">
-    /// A Where On Earth (WOE) ID. (While optional, you must pass either a valid Places ID or a WOE ID.)
+    /// <param name="longitude">
+    /// The longitude of the photos to be updated whose valid range is -180 to 180. Anything more
+    /// than 6 decimal places will be truncated.
+    /// </param>
+    /// <param name="accuracy">
+    /// Recorded accuracy level of the photos to be updated. World level is 1, Country is ~3, Region
+    /// ~6, City ~11, Street ~16. Current range is 1-16. Defaults to 16 if not specified.
     /// </param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task BatchCorrectLocationAsync(double latitude, double longitude, GeoAccuracy accuracy, string placeId = null, string woeId = null, CancellationToken cancellationToken = default);
+    Task BatchCorrectLocationAsync(WoeId woeId, double latitude, double longitude, GeoAccuracy accuracy, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Correct the places hierarchy for a given photo.
     /// </summary>
     /// <param name="photoId">The ID of the photo whose WOE location is being corrected.</param>
-    /// <param name="placeId">
-    /// A Flickr Places ID. (While optional, you must pass either a valid Places ID or a WOE ID.)
-    /// </param>
-    /// <param name="woeId">
-    /// A Where On Earth (WOE) ID. (While optional, you must pass either a valid Places ID or a WOE ID.)
-    /// </param>
+    /// <param name="placeId">A Flickr Places ID.</param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task CorrectLocationAsync(string photoId, string placeId, string woeId, CancellationToken cancellationToken = default);
+    Task CorrectLocationAsync(string photoId, PlaceId placeId, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Correct the places hierarchy for a given photo.
+    /// </summary>
+    /// <param name="photoId">The ID of the photo whose WOE location is being corrected.</param>
+    /// <param name="woeId">A Where On Earth (WOE) ID.</param>
+    /// <param name="cancellationToken"></param>
+    /// <return></return>
+    Task CorrectLocationAsync(string photoId, WoeId woeId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Returns the location data for a give photo.

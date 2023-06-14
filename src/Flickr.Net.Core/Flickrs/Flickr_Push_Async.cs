@@ -26,7 +26,7 @@ public partial class Flickr : IFlickrPush
     }
 
     async Task IFlickrPush.SubscribeAsync(string topic, string callback, string verify, string verifyToken,
-                                  int? leaseSeconds, IEnumerable<int> woeIds, IEnumerable<string> placeIds, double? latitude,
+                                  int? leaseSeconds, IEnumerable<WoeId> woeIds, IEnumerable<PlaceId> placeIds, double? latitude,
                                   double? longitude, int? radius, RadiusUnit radiusUnits, GeoAccuracy accuracy,
                                   IEnumerable<string> nsids, IEnumerable<string> tags, CancellationToken cancellationToken)
     {
@@ -73,7 +73,7 @@ public partial class Flickr : IFlickrPush
 
         if (woeIds != null && woeIds.Any())
         {
-            parameters.Add("woe_ids", string.Join(",", woeIds.Select(x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo)).ToArray()));
+            parameters.Add("woe_ids", string.Join(",", woeIds.ToArray()));
         }
 
         if (placeIds != null && placeIds.Any())
@@ -201,7 +201,7 @@ public interface IFlickrPush
     /// </param>
     /// <param name="cancellationToken"></param>
     Task SubscribeAsync(string topic, string callback, string verify, string verifyToken = null,
-                                   int? leaseSeconds = null, IEnumerable<int> woeIds = null, IEnumerable<string> placeIds = null, double? latitude = null,
+                                   int? leaseSeconds = null, IEnumerable<WoeId> woeIds = null, IEnumerable<PlaceId> placeIds = null, double? latitude = null,
                                    double? longitude = null, int? radius = null, RadiusUnit radiusUnits = RadiusUnit.None, GeoAccuracy accuracy = GeoAccuracy.None,
                                    IEnumerable<string> nsids = null, IEnumerable<string> tags = null, CancellationToken cancellationToken = default);
 
