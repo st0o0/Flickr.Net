@@ -26,6 +26,3 @@ public class Group
     [XmlAttribute("members", Form = XmlSchemaForm.Unqualified)]
     public int Members { get; set; }
 }
-
-
-

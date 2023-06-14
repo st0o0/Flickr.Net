@@ -25,4 +25,3 @@ public sealed class PhotoCountCollection : System.Collections.ObjectModel.Collec
         reader.Skip();
     }
 }
-

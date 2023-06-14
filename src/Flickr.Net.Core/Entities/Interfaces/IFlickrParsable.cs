@@ -1,6 +1,4 @@
-﻿using System.Xml;
-
-namespace Flickr.Net.Core.Entities.Interfaces;
+﻿namespace Flickr.Net.Core.Entities.Interfaces;
 
 /// <summary>
 /// An interface that the classes that are returned by the Flickr API use to enable them to self-deserialize.

@@ -26,7 +26,8 @@ public sealed class GalleryCollection : Collection<Gallery>, IFlickrParsable
     public int Total { get; set; }
 
     /// <summary>
-    /// The owner of these galleries if called from <see cref="IFlickrGalleries.GetListAsync(string, int, int, CancellationToken)"/>.
+    /// The owner of these galleries if called from <see cref="IFlickrGalleries.GetListAsync(string,
+    /// int, int, CancellationToken)"/>.
     /// </summary>
     public string UserId { get; set; }
 

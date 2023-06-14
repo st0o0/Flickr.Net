@@ -1,7 +1,8 @@
 ﻿namespace Flickr.Net.Core.Entities.Collections;
 
 /// <summary>
-/// The collection of location suggestions returned by <see cref="IFlickrPhotosSuggestions.GetListAsync(string, SuggestionStatus, CancellationToken)"/>.
+/// The collection of location suggestions returned by <see
+/// cref="IFlickrPhotosSuggestions.GetListAsync(string, SuggestionStatus, CancellationToken)"/>.
 /// </summary>
 public sealed class SuggestionCollection : Collection<Suggestion>, IFlickrParsable
 {

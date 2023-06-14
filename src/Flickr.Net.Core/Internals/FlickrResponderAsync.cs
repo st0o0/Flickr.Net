@@ -1,6 +1,6 @@
-﻿using Flickr.Net.Core.Exceptions;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http.Headers;
+using Flickr.Net.Core.Exceptions;
 
 namespace Flickr.Net.Core.Internals;
 /// <summary>

@@ -1,7 +1,8 @@
 ﻿namespace Flickr.Net.Core.Entities.Collections;
 
 /// <summary>
-/// A list of gallery photos as returned by <see cref="IFlickrGalleries.GetPhotosAsync(string, PhotoSearchExtras, CancellationToken)"/>
+/// A list of gallery photos as returned by <see cref="IFlickrGalleries.GetPhotosAsync(string,
+/// PhotoSearchExtras, CancellationToken)"/>
 /// </summary>
 public sealed class GalleryPhotoCollection : System.Collections.ObjectModel.Collection<GalleryPhoto>, IFlickrParsable
 {

@@ -1,11 +1,9 @@
 namespace Flickr.Net.Core.Internals.Extensions;
 
 /// <summary>
-/// 
 /// </summary>
 public static class AuthLevelExtensions
 {
-
     /// <summary>
     /// Converts <see cref="AuthLevel"/> to a string.
     /// </summary>

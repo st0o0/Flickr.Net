@@ -1,8 +1,10 @@
 namespace Flickr.Net.Core.Entities;
 
 /// <summary>
-/// The context of the current photo, as returned by <see cref="IFlickrPhotos.GetContextAsync(string, CancellationToken)"/>, <see
-/// cref="IFlickrPhotosets.GetContextAsync(string, string, CancellationToken)"/> and <see cref="IFlickrGroupsPools.GetContextAsync(string, string, CancellationToken)"/> methods.
+/// The context of the current photo, as returned by <see
+/// cref="IFlickrPhotos.GetContextAsync(string, CancellationToken)"/>, <see
+/// cref="IFlickrPhotosets.GetContextAsync(string, string, CancellationToken)"/> and <see
+/// cref="IFlickrGroupsPools.GetContextAsync(string, string, CancellationToken)"/> methods.
 /// </summary>
 public sealed class Context : IFlickrParsable
 {

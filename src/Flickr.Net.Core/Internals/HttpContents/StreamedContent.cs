@@ -1,5 +1,5 @@
-﻿using Flickr.Net.Core.Internals.Extensions;
-using System.Net;
+﻿using System.Net;
+using Flickr.Net.Core.Internals.Extensions;
 
 namespace Flickr.Net.Core.Internals.HttpContents;
 

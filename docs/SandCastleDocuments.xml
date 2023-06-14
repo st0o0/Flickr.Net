@@ -4451,7 +4451,7 @@
         </member>
         <member name="T:Flickr.Net.Core.Entities.PlaceInfo">
             <summary>
-            Detailed information about a place. Returned by <see cref="!:IFlickrPlaces.GetInfoAsync(string, string, CancellationToken)"/>.
+            Detailed information about a place. Returned by <see cref="M:Flickr.Net.Core.IFlickrPlaces.GetInfoAsync(Flickr.Net.Core.Entities.PlaceId,System.Threading.CancellationToken)"/> or <see cref="M:Flickr.Net.Core.IFlickrPlaces.GetInfoAsync(Flickr.Net.Core.Entities.WoeId,System.Threading.CancellationToken)"/>.
             </summary>
         </member>
         <member name="P:Flickr.Net.Core.Entities.PlaceInfo.PlaceId">
@@ -4720,7 +4720,8 @@
         </member>
         <member name="T:Flickr.Net.Core.Entities.ShapeData">
             <summary>
-            The shape data supplied by <see cref="!:IFlickrPlaces.GetInfoAsync(string, string, CancellationToken)"/>.
+            The shape data supplied by <see cref="M:Flickr.Net.Core.IFlickrPlaces.GetInfoAsync(Flickr.Net.Core.Entities.PlaceId,System.Threading.CancellationToken)"/>
+            or <see cref="M:Flickr.Net.Core.IFlickrPlaces.GetInfoAsync(Flickr.Net.Core.Entities.WoeId,System.Threading.CancellationToken)"/>.
             </summary>
             <remarks>
             See <a

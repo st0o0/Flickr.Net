@@ -17,6 +17,3 @@ public sealed class MethodCollection : System.Collections.ObjectModel.Collection
         reader.Skip();
     }
 }
-
-
-

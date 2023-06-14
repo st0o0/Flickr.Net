@@ -6,8 +6,8 @@ namespace Flickr.Net.Core.Entities;
 public sealed class License : IFlickrParsable
 {
     /// <summary>
-    /// The ID of the license. Used by <see cref="IFlickrPhotos.GetInfoAsync(string, string, CancellationToken)"/> and <see
-    /// cref="IFlickrPhotos.GetInfoAsync(string, string, CancellationToken)"/>.
+    /// The ID of the license. Used by <see cref="IFlickrPhotos.GetInfoAsync(string, string,
+    /// CancellationToken)"/> and <see cref="IFlickrPhotos.GetInfoAsync(string, string, CancellationToken)"/>.
     /// </summary>
     public LicenseType LicenseId { get; set; }
 

@@ -807,7 +807,8 @@ public interface IFlickrPhotos
     /// Remove an existing tag.
     /// </summary>
     /// <param name="tagId">
-    /// The id of the tag, as returned by <see cref="IFlickrPhotos.GetInfoAsync(string, string, CancellationToken)"/> or similar method.
+    /// The id of the tag, as returned by <see cref="IFlickrPhotos.GetInfoAsync(string, string,
+    /// CancellationToken)"/> or similar method.
     /// </param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
@@ -889,7 +890,8 @@ public interface IFlickrPhotos
     /// </summary>
     /// <remarks>
     /// This will remove all old tags and add these new ones specified. See <see
-    /// cref="IFlickrPhotos.AddTagAsync(string, string[], CancellationToken)"/> to just add new tags without deleting old ones.
+    /// cref="IFlickrPhotos.AddTagAsync(string, string[], CancellationToken)"/> to just add new tags
+    /// without deleting old ones.
     /// </remarks>
     /// <param name="photoId">The id of the photo to update.</param>
     /// <param name="tags">An array of tags.</param>

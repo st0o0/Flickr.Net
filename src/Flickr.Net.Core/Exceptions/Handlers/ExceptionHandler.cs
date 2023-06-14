@@ -1,6 +1,4 @@
-﻿using System.Xml;
-
-namespace Flickr.Net.Core.Exceptions.Handlers;
+﻿namespace Flickr.Net.Core.Exceptions.Handlers;
 
 /// <summary>
 /// A handler that is used to generate an exception from the response sent back by Flickr.

@@ -1,9 +1,9 @@
-using Flickr.Net.Core.Exceptions;
-using Flickr.Net.Core.SearchOptions;
 using System.Collections;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
+using Flickr.Net.Core.Exceptions;
+using Flickr.Net.Core.SearchOptions;
 
 namespace Flickr.Net.Core.Internals;
 

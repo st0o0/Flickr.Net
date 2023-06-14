@@ -1,5 +1,5 @@
-﻿using Flickr.Net.Core.Internals.Caching;
-using System.Diagnostics;
+﻿using System.Diagnostics;
+using Flickr.Net.Core.Internals.Caching;
 
 namespace Flickr.Net.Core;
 
