@@ -95,6 +95,13 @@ steps:
       publishVstsFeed: $(internalFeedName)
       allowPackageConflicts: true
 
+  - task: NuGetCommand@2
+    inputs:
+      command: 'push'
+      packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+      nuGetFeedType: 'external'
+      publishFeedCredentials: 'Nuget.org'
+
   - task: GitHubRelease@0
     inputs:
       action: create
@@ -109,3 +116,4 @@ steps:
       addChangeLog: true
       assets: $(Build.ArtifactStagingDirectory)/packages/*
     displayName: Create Github Release
+
