@@ -115,6 +115,7 @@ stages:
     jobs:
     - deployment: 'DeployToNuget'
       environment: 'NugetRelease'
+      displayName: Publish artifacts
       pool:
           vmImage: $(vmImage)
       strategy:
