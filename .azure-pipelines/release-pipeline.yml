@@ -113,50 +113,54 @@ stages:
     dependsOn: Build
     displayName: 📤 Publish artifacts
     jobs:
-      - job: PublishArtifacts
-        displayName: Publish artifacts
-        pool:
+    - deployment: 'DeployToNuget'
+      environment: 'NugetRelease'
+      displayName: Publish artifacts
+      pool:
           vmImage: $(vmImage)
-        steps:
-          - checkout: none
-          - download: current
-            artifact: packages
-          - task: UseDotNet@2
-            displayName: Install .NET sdk
-            inputs:
-              packageType: sdk
-              version: $(netSdkVersion)
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+            - checkout: none
+            - download: current
+              artifact: packages
+            - task: UseDotNet@2
+              displayName: Install .NET sdk
+              inputs:
+                packageType: sdk
+                version: $(netSdkVersion)
               
-          - task: NuGetAuthenticate@1
-            displayName: 'NuGet Authenticate'
+            - task: NuGetAuthenticate@1
+              displayName: 'NuGet Authenticate'
 
-          - task: NuGetCommand@2
-            displayName: Publish CI package to Azure artifacts
-            inputs:
-              command: 'push'
-              packagesToPush: $(Pipeline.Workspace)/packages/*.*upkg
-              nuGetFeedType: 'internal'
-              vstsFeed: $(internalFeedName)
-              publishVstsFeed: $(internalFeedName)
-              allowPackageConflicts: true
-          - task: NuGetCommand@2
-            inputs:
-              command: 'push'
-              packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
-              nuGetFeedType: 'external'
-              publishFeedCredentials: 'Nuget.org'
+            - task: NuGetCommand@2
+              displayName: Publish CI package to Azure artifacts
+              inputs:
+                command: 'push'
+                packagesToPush: $(Pipeline.Workspace)/packages/*.*upkg
+                nuGetFeedType: 'internal'
+                vstsFeed: $(internalFeedName)
+                publishVstsFeed: $(internalFeedName)
+                allowPackageConflicts: true
+            - task: NuGetCommand@2
+              inputs:
+                command: 'push'
+                packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+                nuGetFeedType: 'external'
+                publishFeedCredentials: 'Nuget.org'
           
-          - task: GitHubRelease@0
-            displayName: Create Github Release
-            inputs:
-              action: create
-              target: $(Build.SourceVersion)
-              tagSource: manual
-              tag: v$(GitVersion.NuGetVersion)
-              tagPattern: v$(GitVersion.NuGetVersion)
-              title: v$(GitVersion.NuGetVersion)
-              githubConnection: githubRelease
-              repositoryName: $(Build.Repository.Name)
-              isPreRelease: false
-              addChangeLog: true
-              assets: $(Build.ArtifactStagingDirectory)/packages/*
+            - task: GitHubRelease@0
+              displayName: Create Github Release
+              inputs:
+                action: create
+                target: $(Build.SourceVersion)
+                tagSource: manual
+                tag: v$(GitVersion.NuGetVersion)
+                tagPattern: v$(GitVersion.NuGetVersion)
+                title: v$(GitVersion.NuGetVersion)
+                githubConnection: githubRelease
+                repositoryName: $(Build.Repository.Name)
+                isPreRelease: false
+                addChangeLog: true
+                assets: $(Build.ArtifactStagingDirectory)/packages/*
