@@ -98,4 +98,3 @@ public sealed class GroupCategory : IFlickrParsable
         reader.Skip();
     }
 }
-

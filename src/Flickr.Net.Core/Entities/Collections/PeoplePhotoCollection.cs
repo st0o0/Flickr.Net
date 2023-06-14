@@ -1,17 +1,20 @@
 ﻿namespace Flickr.Net.Core.Entities.Collections;
 
 /// <summary>
-/// A collection of photos returned by the <see cref="IFlickrPanda.GetPhotosAsync(string, PhotoSearchExtras, int, int, CancellationToken)"/> methods.
+/// A collection of photos returned by the <see cref="IFlickrPanda.GetPhotosAsync(string,
+/// PhotoSearchExtras, int, int, CancellationToken)"/> methods.
 /// </summary>
 public sealed class PeoplePhotoCollection : System.Collections.ObjectModel.Collection<Photo>, IFlickrParsable
 {
     /// <summary>
-    /// Only populate for authenticated calls to <see cref="IFlickrPeople.GetPhotosOfAsync(string, PhotoSearchExtras, int, int, CancellationToken)"/>
+    /// Only populate for authenticated calls to <see cref="IFlickrPeople.GetPhotosOfAsync(string,
+    /// PhotoSearchExtras, int, int, CancellationToken)"/>
     /// </summary>
     public int Pages { get; set; }
 
     /// <summary>
-    /// Only populate for authenticated calls to <see cref="IFlickrPeople.GetPhotosOfAsync(string, PhotoSearchExtras, int, int, CancellationToken)"/>
+    /// Only populate for authenticated calls to <see cref="IFlickrPeople.GetPhotosOfAsync(string,
+    /// PhotoSearchExtras, int, int, CancellationToken)"/>
     /// </summary>
     public int Total { get; set; }
 

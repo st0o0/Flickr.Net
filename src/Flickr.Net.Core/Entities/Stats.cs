@@ -1,8 +1,10 @@
 ﻿namespace Flickr.Net.Core.Entities;
 
 /// <summary>
-/// The stats returned by <see cref="IFlickrStats.GetPhotoStatsAsync(DateTime, string, CancellationToken)"/>, <see
-/// cref="IFlickrStats.GetPhotostreamStatsAsync(DateTime, CancellationToken)"/>, <see cref="IFlickrStats.GetPhotosetStatsAsync(DateTime, string, CancellationToken)"/> and <see cref="IFlickrStats.GetCollectionStatsAsync(DateTime, string, CancellationToken)"/>
+/// The stats returned by <see cref="IFlickrStats.GetPhotoStatsAsync(DateTime, string,
+/// CancellationToken)"/>, <see cref="IFlickrStats.GetPhotostreamStatsAsync(DateTime,
+/// CancellationToken)"/>, <see cref="IFlickrStats.GetPhotosetStatsAsync(DateTime, string,
+/// CancellationToken)"/> and <see cref="IFlickrStats.GetCollectionStatsAsync(DateTime, string, CancellationToken)"/>
 /// </summary>
 public sealed class Stats : IFlickrParsable
 {

@@ -1,7 +1,8 @@
 ﻿namespace Flickr.Net.Core.Entities.Collections;
 
 /// <summary>
-/// A list of popular photos as returned by <see cref="IFlickrStats.GetPopularPhotosAsync(DateTime, PopularitySort, int, int, CancellationToken)"/>
+/// A list of popular photos as returned by <see cref="IFlickrStats.GetPopularPhotosAsync(DateTime,
+/// PopularitySort, int, int, CancellationToken)"/>
 /// </summary>
 public sealed class PopularPhotoCollection : System.Collections.ObjectModel.Collection<PopularPhoto>, IFlickrParsable
 {

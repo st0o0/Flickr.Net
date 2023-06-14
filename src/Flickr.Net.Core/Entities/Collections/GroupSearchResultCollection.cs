@@ -72,4 +72,3 @@ public sealed class GroupSearchResultCollection : System.Collections.ObjectModel
         reader.Skip();
     }
 }
-

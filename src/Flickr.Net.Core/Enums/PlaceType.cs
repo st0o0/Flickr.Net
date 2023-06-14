@@ -1,7 +1,8 @@
 ﻿namespace Flickr.Net.Core.Enums;
 
 /// <summary>
-/// Used by <see cref="IFlickrPlaces.PlacesForUserAsync(PlaceType, string, string, int, DateTime?, DateTime?, DateTime?, DateTime?, CancellationToken)"/>.
+/// Used by <see cref="IFlickrPlaces.PlacesForUserAsync(PlaceType, string, string, int, DateTime?,
+/// DateTime?, DateTime?, DateTime?, CancellationToken)"/>.
 /// </summary>
 public enum PlaceType
 {

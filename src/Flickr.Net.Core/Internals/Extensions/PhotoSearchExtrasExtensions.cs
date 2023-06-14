@@ -1,7 +1,6 @@
 using System.ComponentModel;
 
 /// <summary>
-/// 
 /// </summary>
 public static class PhotoSearchExtrasExtensions
 {
