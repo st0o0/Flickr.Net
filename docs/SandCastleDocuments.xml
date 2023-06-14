@@ -4432,14 +4432,22 @@
         <member name="M:Flickr.Net.Core.Entities.PlaceId.#ctor(System.String)">
             <summary>
             </summary>
+            <param name="placeId"></param>
         </member>
         <member name="M:Flickr.Net.Core.Entities.PlaceId.op_Implicit(Flickr.Net.Core.Entities.PlaceId)~System.String">
             <summary>
             </summary>
+            <param name="placeId"></param>
+        </member>
+        <member name="M:Flickr.Net.Core.Entities.PlaceId.op_Implicit(System.String)~Flickr.Net.Core.Entities.PlaceId">
+            <summary>
+            </summary>
+            <param name="placeId"></param>
         </member>
         <member name="M:Flickr.Net.Core.Entities.PlaceId.ToString">
             <summary>
             </summary>
+            <returns></returns>
         </member>
         <member name="T:Flickr.Net.Core.Entities.PlaceInfo">
             <summary>
@@ -5618,14 +5626,22 @@
         <member name="M:Flickr.Net.Core.Entities.WoeId.#ctor(System.String)">
             <summary>
             </summary>
+            <param name="woeId"></param>
         </member>
         <member name="M:Flickr.Net.Core.Entities.WoeId.op_Implicit(Flickr.Net.Core.Entities.WoeId)~System.String">
             <summary>
             </summary>
+            <param name="woeId"></param>
+        </member>
+        <member name="M:Flickr.Net.Core.Entities.WoeId.op_Implicit(System.String)~Flickr.Net.Core.Entities.WoeId">
+            <summary>
+            </summary>
+            <param name="woeId"></param>
         </member>
         <member name="M:Flickr.Net.Core.Entities.WoeId.ToString">
             <summary>
             </summary>
+            <returns></returns>
         </member>
         <member name="T:Flickr.Net.Core.Enums.ActivityEventType">
             <summary>
@@ -9578,7 +9594,7 @@
         </member>
         <member name="M:Flickr.Net.Core.IFlickrPlaces.TagsForPlaceAsync(Flickr.Net.Core.Entities.PlaceId,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
-            Return a list of the top 100 unique tags for a Flickr Places or Where on Earth (WOE) ID.
+            Return a list of the top 100 unique tags for a Flickr Places.
             </summary>
             <param name="placeId">A Flickr Places identifier to use to filter photo clusters.</param>
             <param name="minUploadDate">
@@ -9597,7 +9613,7 @@
         </member>
         <member name="M:Flickr.Net.Core.IFlickrPlaces.TagsForPlaceAsync(Flickr.Net.Core.Entities.WoeId,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
-            Return a list of the top 100 unique tags for a Flickr Places or Where on Earth (WOE) ID.
+            Return a list of the top 100 unique tags for Earth (WOE) ID.
             </summary>
             <param name="woeId">A Where on Earth identifier to use to filter photo clusters.</param>
             <param name="minUploadDate">
