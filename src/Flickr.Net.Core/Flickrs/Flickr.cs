@@ -4,7 +4,9 @@ using Flickr.Net.Core.Exceptions;
 using Flickr.Net.Core.Exceptions.Handlers;
 using Flickr.Net.Core.Internals.Caching;
 using Flickr.Net.Core.Internals.HttpContents;
+using Flickr.Net.Core.Configuration;
 using Flickr.Net.Core.Settings;
+using System.Text;
 
 namespace Flickr.Net.Core;
 
@@ -354,8 +356,8 @@ internal static class FlickrExtensions
     {
         try
         {
-            using MemoryStream ms = new(bytes);
-            using XmlReader reader = XmlReader.Create(ms, new XmlReaderSettings
+            using var ms = new MemoryStream(bytes);
+            using var reader = XmlReader.Create(ms, new XmlReaderSettings
             {
                 IgnoreWhitespace = true
             });

@@ -1,3 +1,5 @@
+using Flickr.Net.Core.Internals.Extensions;
+
 namespace Flickr.Net.Core.SearchOptions;
 
 /// <summary>
@@ -166,8 +168,5 @@ public class PartialSearchOptions
         get { return extras.ToFlickrString(); }
     }
 
-    internal string SortOrderString
-    {
-        get { return UtilityMethods.SortOrderToString(SortOrder); }
-    }
+    internal string SortOrderString => SortOrder.ToFlickrString();
 }

@@ -1,4 +1,6 @@
-﻿namespace Flickr.Net.Core;
+﻿using Flickr.Net.Core.Internals.Extensions;
+
+namespace Flickr.Net.Core;
 
 /// <summary>
 /// The flickr.
@@ -26,7 +28,7 @@ public partial class Flickr : IFlickrGroupsMembers
 
         if (memberTypes != MemberTypes.None)
         {
-            parameters.Add("membertypes", UtilityMethods.MemberTypeToString(memberTypes));
+            parameters.Add("membertypes", memberTypes.ToFlickrString());
         }
 
         parameters.Add("group_id", groupId);

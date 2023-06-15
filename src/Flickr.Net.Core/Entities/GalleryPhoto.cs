@@ -25,7 +25,7 @@ public class GalleryPhoto : Photo, IFlickrParsable
             Description = reader.ReadElementContentAsString();
         }
 
-        if (reader.NodeType == System.Xml.XmlNodeType.EndElement && reader.LocalName == "photo")
+        if (reader.NodeType == XmlNodeType.EndElement && reader.LocalName == "photo")
         {
             reader.Skip();
         }

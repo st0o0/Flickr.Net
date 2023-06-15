@@ -1,4 +1,6 @@
-﻿namespace Flickr.Net.Core;
+﻿using Flickr.Net.Core.Internals.Extensions;
+
+namespace Flickr.Net.Core;
 
 /// <summary>
 /// The flickr.
@@ -298,7 +300,7 @@ public partial class Flickr : IFlickrStats
 
         if (sort != PopularitySort.None)
         {
-            parameters.Add("sort", UtilityMethods.SortOrderToString(sort));
+            parameters.Add("sort", sort.ToFlickrString());
         }
 
         if (page > 0)

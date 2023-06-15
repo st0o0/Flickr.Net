@@ -17,29 +17,16 @@ public sealed class GroupThrottleInfo : IFlickrParsable
 
     private static GroupThrottleMode ParseMode(string mode)
     {
-        switch (mode)
+        return mode switch
         {
-            case "day":
-                return GroupThrottleMode.PerDay;
-
-            case "week":
-                return GroupThrottleMode.PerWeek;
-
-            case "month":
-                return GroupThrottleMode.PerMonth;
-
-            case "ever":
-                return GroupThrottleMode.Ever;
-
-            case "none":
-                return GroupThrottleMode.NoLimit;
-
-            case "disabled":
-                return GroupThrottleMode.Disabled;
-
-            default:
-                throw new ArgumentException(string.Format(System.Globalization.CultureInfo.InvariantCulture, "Unknown mode found {0}", mode), nameof(mode));
-        }
+            "day" => GroupThrottleMode.PerDay,
+            "week" => GroupThrottleMode.PerWeek,
+            "month" => GroupThrottleMode.PerMonth,
+            "ever" => GroupThrottleMode.Ever,
+            "none" => GroupThrottleMode.NoLimit,
+            "disabled" => GroupThrottleMode.Disabled,
+            _ => throw new ArgumentException(string.Format(System.Globalization.CultureInfo.InvariantCulture, "Unknown mode found {0}", mode), nameof(mode)),
+        };
     }
 
     /// <summary>

@@ -10,8 +10,8 @@ public sealed class GroupCategory : IFlickrParsable
     /// </summary>
     public GroupCategory()
     {
-        Subcategories = new System.Collections.ObjectModel.Collection<SubCategory>();
-        Groups = new System.Collections.ObjectModel.Collection<Group>();
+        Subcategories = new Collection<SubCategory>();
+        Groups = new Collection<Group>();
     }
 
     /// <summary>
@@ -40,7 +40,7 @@ public sealed class GroupCategory : IFlickrParsable
     /// <summary>
     /// An array of <see cref="SubCategory"/> items.
     /// </summary>
-    public System.Collections.ObjectModel.Collection<SubCategory> Subcategories { get; set; }
+    public Collection<SubCategory> Subcategories { get; set; }
 
     /// <summary>
     /// An array of <see cref="Group"/> items, listing the groups within this category.
@@ -98,3 +98,4 @@ public sealed class GroupCategory : IFlickrParsable
         reader.Skip();
     }
 }
+
