@@ -1216,6 +1216,11 @@
             The number of pages of namespaces that are available.
             </summary>
         </member>
+        <member name="T:Flickr.Net.Core.Entities.Collections.RawTagCollection">
+            <summary>
+            List containing <see cref="T:Flickr.Net.Core.Entities.RawTag"/> items.
+            </summary>
+        </member>
         <member name="T:Flickr.Net.Core.Entities.Collections.ShapeDataCollection">
             <summary>
             A collection of <see cref="T:Flickr.Net.Core.Entities.ShapeData"/> instances.
@@ -1902,6 +1907,27 @@
         <member name="P:Flickr.Net.Core.Entities.FavoriteContextPhoto.FavoriteUrl">
             <summary>
             The URL for the favorite, with the context of the user as well.
+            </summary>
+        </member>
+        <member name="T:Flickr.Net.Core.Entities.FoundUser">
+            <summary>
+            Contains details of a user
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.FoundUser.UserId">
+            <summary>
+            The ID of the found user.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.FoundUser.UserName">
+            <summary>
+            The username of the found user.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.FoundUser.FullName">
+            <summary>
+            The full name of the user. Only returned by <see
+            cref="M:Flickr.Net.Core.IFlickrOAuth.GetAccessTokenAsync(Flickr.Net.Core.Internals.OAuthRequestToken,System.String,System.Threading.CancellationToken)"/>.
             </summary>
         </member>
         <member name="T:Flickr.Net.Core.Entities.Gallery">
@@ -4272,6 +4298,11 @@
             The photo ID of the primary photo of the photoset.
             </summary>
         </member>
+        <member name="P:Flickr.Net.Core.Entities.Photoset.PrimaryPhoto">
+            <summary>
+            The full details of the primary photo, as well as any extras requested.
+            </summary>
+        </member>
         <member name="P:Flickr.Net.Core.Entities.Photoset.Secret">
             <summary>
             The secret for the primary photo for the photoset.
@@ -4355,11 +4386,6 @@
         <member name="P:Flickr.Net.Core.Entities.Photoset.PhotosetSmallUrl">
             <summary>
             The URL for the small copy of a photo.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.Photoset.PrimaryPhoto">
-            <summary>
-            The full details of the primary photo, as well as any extras requested.
             </summary>
         </member>
         <member name="T:Flickr.Net.Core.Entities.Place">
@@ -4572,6 +4598,62 @@
             The name of the blog service supported by Flickr.
             </summary>
         </member>
+        <member name="T:Flickr.Net.Core.Entities.PointD">
+            <summary>
+            A point structure for holding double-floating points precision data.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.PointD.X">
+            <summary>
+            The X position of the point.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.PointD.Y">
+            <summary>
+            The Y position of the point.
+            </summary>
+        </member>
+        <member name="M:Flickr.Net.Core.Entities.PointD.#ctor(System.Double,System.Double)">
+            <summary>
+            Default constructor.
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+        </member>
+        <member name="M:Flickr.Net.Core.Entities.PointD.op_Equality(Flickr.Net.Core.Entities.PointD,Flickr.Net.Core.Entities.PointD)">
+            <summary>
+            For predefined value types, the equality operator (==) returns true if the values of its
+            operands are equal, false otherwise.
+            </summary>
+            <param name="point1"></param>
+            <param name="point2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Flickr.Net.Core.Entities.PointD.op_Inequality(Flickr.Net.Core.Entities.PointD,Flickr.Net.Core.Entities.PointD)">
+            <summary>
+            For predefined value types, the equality operator (!=) returns false if the values of its
+            operands are equal, true otherwise.
+            </summary>
+            <param name="point1"></param>
+            <param name="point2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Flickr.Net.Core.Entities.PointD.Equals(System.Object)">
+            <summary>
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Flickr.Net.Core.Entities.PointD.GetHashCode">
+            <summary>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Flickr.Net.Core.Entities.PointD.ToString">
+            <summary>
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Flickr.Net.Core.Entities.PopularPhoto">
             <summary>
             Details about a popular photo, including the statistics for its views, comments and favourites
@@ -4718,6 +4800,26 @@
             PInterest url.
             </summary>
         </member>
+        <member name="T:Flickr.Net.Core.Entities.RawTag">
+            <summary>
+            Raw tags, as returned by the <see cref="M:Flickr.Net.Core.IFlickrTags.GetListUserRawAsync(System.String,System.Threading.CancellationToken)"/> method.
+            </summary>
+        </member>
+        <member name="M:Flickr.Net.Core.Entities.RawTag.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.RawTag.RawTags">
+            <summary>
+            An array of strings containing the raw tags returned by the method.
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Entities.RawTag.CleanTag">
+            <summary>
+            The clean tag.
+            </summary>
+        </member>
         <member name="T:Flickr.Net.Core.Entities.ShapeData">
             <summary>
             The shape data supplied by <see cref="M:Flickr.Net.Core.IFlickrPlaces.GetInfoAsync(Flickr.Net.Core.Entities.PlaceId,System.Threading.CancellationToken)"/>
@@ -4773,62 +4875,6 @@
             <summary>
             A list of urls for the shapefiles.
             </summary>
-        </member>
-        <member name="T:Flickr.Net.Core.Entities.PointD">
-            <summary>
-            A point structure for holding double-floating points precision data.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.PointD.X">
-            <summary>
-            The X position of the point.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.PointD.Y">
-            <summary>
-            The Y position of the point.
-            </summary>
-        </member>
-        <member name="M:Flickr.Net.Core.Entities.PointD.#ctor(System.Double,System.Double)">
-            <summary>
-            Default constructor.
-            </summary>
-            <param name="x"></param>
-            <param name="y"></param>
-        </member>
-        <member name="M:Flickr.Net.Core.Entities.PointD.op_Equality(Flickr.Net.Core.Entities.PointD,Flickr.Net.Core.Entities.PointD)">
-            <summary>
-            For predefined value types, the equality operator (==) returns true if the values of its
-            operands are equal, false otherwise.
-            </summary>
-            <param name="point1"></param>
-            <param name="point2"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Flickr.Net.Core.Entities.PointD.op_Inequality(Flickr.Net.Core.Entities.PointD,Flickr.Net.Core.Entities.PointD)">
-            <summary>
-            For predefined value types, the equality operator (!=) returns false if the values of its
-            operands are equal, true otherwise.
-            </summary>
-            <param name="point1"></param>
-            <param name="point2"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Flickr.Net.Core.Entities.PointD.Equals(System.Object)">
-            <summary>
-            </summary>
-            <param name="obj"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Flickr.Net.Core.Entities.PointD.GetHashCode">
-            <summary>
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Flickr.Net.Core.Entities.PointD.ToString">
-            <summary>
-            </summary>
-            <returns></returns>
         </member>
         <member name="T:Flickr.Net.Core.Entities.Size">
             <summary>
@@ -5093,31 +5139,6 @@
         <member name="P:Flickr.Net.Core.Entities.Tag.Count">
             <summary>
             The poularity of the tag. Will be 0 if not returned via <see cref="M:Flickr.Net.Core.IFlickrTags.GetListUserPopularAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)"/>
-            </summary>
-        </member>
-        <member name="T:Flickr.Net.Core.Entities.RawTagCollection">
-            <summary>
-            List containing <see cref="T:Flickr.Net.Core.Entities.RawTag"/> items.
-            </summary>
-        </member>
-        <member name="T:Flickr.Net.Core.Entities.RawTag">
-            <summary>
-            Raw tags, as returned by the <see cref="M:Flickr.Net.Core.IFlickrTags.GetListUserRawAsync(System.String,System.Threading.CancellationToken)"/> method.
-            </summary>
-        </member>
-        <member name="M:Flickr.Net.Core.Entities.RawTag.#ctor">
-            <summary>
-            Default constructor.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.RawTag.RawTags">
-            <summary>
-            An array of strings containing the raw tags returned by the method.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.RawTag.CleanTag">
-            <summary>
-            The clean tag.
             </summary>
         </member>
         <member name="T:Flickr.Net.Core.Entities.Ticket">
@@ -5392,25 +5413,26 @@
             <param name="attributeName">The attribute name to find on the matching element.</param>
             <returns>An array of string values.</returns>
         </member>
-        <member name="T:Flickr.Net.Core.Entities.FoundUser">
+        <member name="T:Flickr.Net.Core.Entities.UserGeoPermissions">
             <summary>
-            Contains details of a user
+            The default privacy level for geographic information attached to the user's photos and whether
+            or not the user has chosen to use geo-related EXIF information to automatically geotag their photos.
             </summary>
         </member>
-        <member name="P:Flickr.Net.Core.Entities.FoundUser.UserId">
+        <member name="P:Flickr.Net.Core.Entities.UserGeoPermissions.UserId">
             <summary>
-            The ID of the found user.
+            The ID of the user.
             </summary>
         </member>
-        <member name="P:Flickr.Net.Core.Entities.FoundUser.UserName">
+        <member name="P:Flickr.Net.Core.Entities.UserGeoPermissions.GeoPermissions">
             <summary>
-            The username of the found user.
+            The default privacy level for geographic information attached to the user's photos.
             </summary>
         </member>
-        <member name="P:Flickr.Net.Core.Entities.FoundUser.FullName">
+        <member name="P:Flickr.Net.Core.Entities.UserGeoPermissions.ImportGeoExif">
             <summary>
-            The full name of the user. Only returned by <see
-            cref="M:Flickr.Net.Core.IFlickrOAuth.GetAccessTokenAsync(Flickr.Net.Core.Internals.OAuthRequestToken,System.String,System.Threading.CancellationToken)"/>.
+            Whether or not the user has chosen to use geo-related EXIF information to automatically
+            geotag their photos.
             </summary>
         </member>
         <member name="T:Flickr.Net.Core.Entities.UserStatus">
@@ -5521,28 +5543,6 @@
         <member name="P:Flickr.Net.Core.Entities.UserStatus.PercentageUsed">
             <summary>
             <see cref="T:System.Double"/> representing the percentage bandwidth used so far. Will range from 0 to 1.
-            </summary>
-        </member>
-        <member name="T:Flickr.Net.Core.Entities.UserGeoPermissions">
-            <summary>
-            The default privacy level for geographic information attached to the user's photos and whether
-            or not the user has chosen to use geo-related EXIF information to automatically geotag their photos.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.UserGeoPermissions.UserId">
-            <summary>
-            The ID of the user.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.UserGeoPermissions.GeoPermissions">
-            <summary>
-            The default privacy level for geographic information attached to the user's photos.
-            </summary>
-        </member>
-        <member name="P:Flickr.Net.Core.Entities.UserGeoPermissions.ImportGeoExif">
-            <summary>
-            Whether or not the user has chosen to use geo-related EXIF information to automatically
-            geotag their photos.
             </summary>
         </member>
         <member name="T:Flickr.Net.Core.Entities.Value">
@@ -10208,6 +10208,26 @@
             If an error was returned by the Flickr API then this will contain the error message.
             </summary>
         </member>
+        <member name="T:Flickr.Net.Core.Flickrs.Results.FlickrJSONPropertyNameAttribute">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Flickr.Net.Core.Flickrs.Results.FlickrJSONPropertyNameAttribute.#ctor(System.String)">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Flickr.Net.Core.Flickrs.Results.FlickrJSONPropertyNameAttribute.Name">
+            <summary>
+            </summary>
+        </member>
+        <member name="T:Flickr.Net.Core.Flickrs.Results.GenericJsonPropertyNameContractResolver">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Flickr.Net.Core.Flickrs.Results.GenericJsonPropertyNameContractResolver.CreateProperty(System.Reflection.MemberInfo,Newtonsoft.Json.MemberSerialization)">
+            <summary>
+            </summary>
+        </member>
         <member name="T:Flickr.Net.Core.Internals.BoundaryBox">
             <summary>
             Summary description for BoundaryBox.
@@ -10539,6 +10559,20 @@
             cref="P:Flickr.Net.Core.Flickr.LastRequest"/> for getting the last URL).
             </remarks>
         </member>
+        <member name="T:Flickr.Net.Core.Internals.Extensions.CollectionStyleExtensions">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Flickr.Net.Core.Internals.Extensions.CollectionStyleExtensions.ToFlickrString(System.Collections.Generic.ICollection{Flickr.Net.Core.Enums.Style})">
+            <summary>
+            Converts a collection of <see cref="T:Flickr.Net.Core.Enums.Style"/> values to a string literal containing the
+            lowercase string representations of each distinct style once, separated by commas.
+            </summary>
+            <param name="styles">Set of styles.</param>
+            <returns>Concatenated styles.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="styles"/> is null.</exception>
+            <exception cref="T:System.OutOfMemoryException">Out of memory.</exception>
+        </member>
         <member name="T:Flickr.Net.Core.Internals.Extensions.MachineTagModeExtensions">
             <summary>
             
@@ -10550,6 +10584,46 @@
             </summary>
             <param name="machineTagMode">The machine tag mode to convert.</param>
             <returns>The string to pass to Flickr.</returns>
+        </member>
+        <member name="T:Flickr.Net.Core.Internals.Extensions.MediaTypeExtensions">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Flickr.Net.Core.Internals.Extensions.MediaTypeExtensions.ToFlickrString(Flickr.Net.Core.Enums.MediaType)">
+            <summary>
+            Converts a <see cref="T:Flickr.Net.Core.Enums.MediaType"/> enumeration into a string used by Flickr.
+            </summary>
+            <param name="mediaType">The <see cref="T:Flickr.Net.Core.Enums.MediaType"/> value to convert.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Flickr.Net.Core.Internals.Extensions.MemberTypeExtensions">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Flickr.Net.Core.Internals.Extensions.MemberTypeExtensions.ToFlickrString(Flickr.Net.Core.Enums.MemberTypes)">
+            <summary>
+            Members the type to string.
+            </summary>
+            <param name="memberTypes">The member types.</param>
+            <returns>A string.</returns>
+        </member>
+        <member name="T:Flickr.Net.Core.Internals.Extensions.SortOrderExtensions">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Flickr.Net.Core.Internals.Extensions.SortOrderExtensions.ToFlickrString(Flickr.Net.Core.Enums.PopularitySort)">
+            <summary>
+            Converts a <see cref="T:Flickr.Net.Core.Enums.PopularitySort"/> enum to a string.
+            </summary>
+            <param name="sortOrder">The value to convert.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Flickr.Net.Core.Internals.Extensions.SortOrderExtensions.ToFlickrString(Flickr.Net.Core.Enums.PhotoSearchSortOrder)">
+            <summary>
+            Converts a <see cref="T:Flickr.Net.Core.Enums.PhotoSearchSortOrder"/> into a string for use by the Flickr API.
+            </summary>
+            <param name="order">The sort order to convert.</param>
+            <returns>The string representative for the sort order.</returns>
         </member>
         <member name="T:Flickr.Net.Core.Internals.Extensions.TagModeExtensions">
             <summary>
@@ -10577,17 +10651,6 @@
             Parameters other than OAuth ones are ignored.
             </summary>
             <param name="parameters">OAuth and other parameters.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Flickr.Net.Core.Internals.FlickrResponder.OAuthCalculatePostData(System.Collections.Generic.Dictionary{System.String,System.String})">
-            <summary>
-            Calculates for form encoded POST data to be included in the body of an OAuth call.
-            </summary>
-            <remarks>
-            This will include all non-OAuth parameters. The OAuth parameter will be included in the
-            Authentication header.
-            </remarks>
-            <param name="parameters"></param>
             <returns></returns>
         </member>
         <member name="M:Flickr.Net.Core.Internals.FlickrResponder.GetDataResponseAsync(Flickr.Net.Core.Flickr,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Threading.CancellationToken)">
@@ -10681,20 +10744,6 @@
             <param name="codes">The codes.</param>
             <returns>A string.</returns>
         </member>
-        <member name="M:Flickr.Net.Core.Internals.UtilityMethods.SortOrderToString(Flickr.Net.Core.Enums.PhotoSearchSortOrder)">
-            <summary>
-            Converts a <see cref="T:Flickr.Net.Core.Enums.PhotoSearchSortOrder"/> into a string for use by the Flickr API.
-            </summary>
-            <param name="order">The sort order to convert.</param>
-            <returns>The string representative for the sort order.</returns>
-        </member>
-        <member name="M:Flickr.Net.Core.Internals.UtilityMethods.SortOrderToString(Flickr.Net.Core.Enums.PopularitySort)">
-            <summary>
-            Converts a <see cref="T:Flickr.Net.Core.Enums.PopularitySort"/> enum to a string.
-            </summary>
-            <param name="sortOrder">The value to convert.</param>
-            <returns></returns>
-        </member>
         <member name="M:Flickr.Net.Core.Internals.UtilityMethods.PartialOptionsIntoArray(Flickr.Net.Core.SearchOptions.PartialSearchOptions,System.Collections.Generic.Dictionary{System.String,System.String})">
             <summary>
             Adds the partial options to the passed in <see cref="T:System.Collections.Hashtable"/>.
@@ -10737,7 +10786,7 @@
             </summary>
             <param name="farm">The farm.</param>
             <param name="server">The server.</param>
-            <param name="photoid">The photoid.</param>
+            <param name="photoId">The photoid.</param>
             <param name="secret">The secret.</param>
             <param name="size">The size.</param>
             <param name="extension">The extension.</param>
@@ -10749,13 +10798,6 @@
             </summary>
             <param name="memberTypeId">The member type id.</param>
             <returns>A MemberTypes.</returns>
-        </member>
-        <member name="M:Flickr.Net.Core.Internals.UtilityMethods.MemberTypeToString(Flickr.Net.Core.Enums.MemberTypes)">
-            <summary>
-            Members the type to string.
-            </summary>
-            <param name="memberTypes">The member types.</param>
-            <returns>A string.</returns>
         </member>
         <member name="M:Flickr.Net.Core.Internals.UtilityMethods.MD5Hash(System.String)">
             <summary>
@@ -10784,13 +10826,6 @@
             </summary>
             <param name="date">The date.</param>
             <returns>A string.</returns>
-        </member>
-        <member name="M:Flickr.Net.Core.Internals.UtilityMethods.MediaTypeToString(Flickr.Net.Core.Enums.MediaType)">
-            <summary>
-            Converts a <see cref="T:Flickr.Net.Core.Enums.MediaType"/> enumeration into a string used by Flickr.
-            </summary>
-            <param name="mediaType">The <see cref="T:Flickr.Net.Core.Enums.MediaType"/> value to convert.</param>
-            <returns></returns>
         </member>
         <member name="M:Flickr.Net.Core.Internals.UtilityMethods.CheckParsingException(System.Xml.XmlReader)">
             <summary>
@@ -10836,16 +10871,6 @@
             </summary>
             <param name="collectionId">The collection id.</param>
             <returns>A string.</returns>
-        </member>
-        <member name="M:Flickr.Net.Core.Internals.UtilityMethods.StylesToString(System.Collections.Generic.ICollection{Flickr.Net.Core.Enums.Style})">
-            <summary>
-            Converts a collection of <see cref="T:Flickr.Net.Core.Enums.Style"/> values to a string literal containing the
-            lowercase string representations of each distinct style once, separated by commas.
-            </summary>
-            <param name="styles">Set of styles.</param>
-            <returns>Concatenated styles.</returns>
-            <exception cref="T:System.ArgumentNullException"><paramref name="styles"/> is null.</exception>
-            <exception cref="T:System.OutOfMemoryException">Out of memory.</exception>
         </member>
         <member name="T:Flickr.Net.Core.SearchOptions.PartialSearchOptions">
             <summary>

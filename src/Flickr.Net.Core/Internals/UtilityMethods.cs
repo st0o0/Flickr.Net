@@ -116,54 +116,16 @@ public static class UtilityMethods
             {
                 colorList.Add(c);
             }
-            if (codeMap.ContainsKey(c))
+
+            if (codeMap.TryGetValue(c, out string value))
             {
-                colorList.Add(codeMap[c]);
+                colorList.Add(value);
             }
         }
 
         return string.Join(",", colorList.ToArray());
     }
 
-    //todo: KEKW
-    /// <summary>
-    /// Converts a <see cref="PhotoSearchSortOrder"/> into a string for use by the Flickr API.
-    /// </summary>
-    /// <param name="order">The sort order to convert.</param>
-    /// <returns>The string representative for the sort order.</returns>
-    public static string SortOrderToString(PhotoSearchSortOrder order)
-    {
-        return order switch
-        {
-            PhotoSearchSortOrder.DatePostedAscending => "date-posted-asc",
-            PhotoSearchSortOrder.DatePostedDescending => "date-posted-desc",
-            PhotoSearchSortOrder.DateTakenAscending => "date-taken-asc",
-            PhotoSearchSortOrder.DateTakenDescending => "date-taken-desc",
-            PhotoSearchSortOrder.InterestingnessAscending => "interestingness-asc",
-            PhotoSearchSortOrder.InterestingnessDescending => "interestingness-desc",
-            PhotoSearchSortOrder.Relevance => "relevance",
-            _ => string.Empty,
-        };
-    }
-
-    //todo: KEKW
-    /// <summary>
-    /// Converts a <see cref="PopularitySort"/> enum to a string.
-    /// </summary>
-    /// <param name="sortOrder">The value to convert.</param>
-    /// <returns></returns>
-    public static string SortOrderToString(PopularitySort sortOrder)
-    {
-        return sortOrder switch
-        {
-            PopularitySort.Comments => "comments",
-            PopularitySort.Favorites => "favorites",
-            PopularitySort.Views => "views",
-            _ => string.Empty,
-        };
-    }
-
-    //todo: KEKW
     /// <summary>
     /// Adds the partial options to the passed in <see cref="Hashtable"/>.
     /// </summary>
@@ -342,12 +304,12 @@ public static class UtilityMethods
     /// </summary>
     /// <param name="farm">The farm.</param>
     /// <param name="server">The server.</param>
-    /// <param name="photoid">The photoid.</param>
+    /// <param name="photoId">The photoid.</param>
     /// <param name="secret">The secret.</param>
     /// <param name="size">The size.</param>
     /// <param name="extension">The extension.</param>
     /// <returns>A string.</returns>
-    public static string UrlFormat(string farm, string server, string photoid, string secret, string size, string extension)
+    public static string UrlFormat(string farm, string server, string photoId, string secret, string size, string extension)
     {
         string sizeAbbreviation = size switch
         {
@@ -359,7 +321,7 @@ public static class UtilityMethods
             "medium" => string.Empty,
             _ => size,
         };
-        return UrlFormat(PhotoUrlFormat, farm, server, photoid, secret, sizeAbbreviation, extension);
+        return UrlFormat(PhotoUrlFormat, farm, server, photoId, secret, sizeAbbreviation, extension);
     }
 
     private static string UrlFormat(string format, params object[] parameters)
@@ -367,7 +329,6 @@ public static class UtilityMethods
         return string.Format(System.Globalization.CultureInfo.InvariantCulture, format, parameters);
     }
 
-    //todo: KEKW
     /// <summary>
     /// Parses the id to member type.
     /// </summary>
@@ -385,7 +346,6 @@ public static class UtilityMethods
         };
     }
 
-    //todo: KEKW
     internal static MemberTypes ParseRoleToMemberType(string memberRole)
     {
         return memberRole switch
@@ -395,39 +355,6 @@ public static class UtilityMethods
             "member" => MemberTypes.Member,
             _ => MemberTypes.None,
         };
-    }
-
-    //todo: KEKW
-    /// <summary>
-    /// Members the type to string.
-    /// </summary>
-    /// <param name="memberTypes">The member types.</param>
-    /// <returns>A string.</returns>
-    public static string MemberTypeToString(MemberTypes memberTypes)
-    {
-        List<string> types = new();
-
-        if ((memberTypes & MemberTypes.Narwhal) == MemberTypes.Narwhal)
-        {
-            types.Add("1");
-        }
-
-        if ((memberTypes & MemberTypes.Member) == MemberTypes.Member)
-        {
-            types.Add("2");
-        }
-
-        if ((memberTypes & MemberTypes.Moderator) == MemberTypes.Moderator)
-        {
-            types.Add("3");
-        }
-
-        if ((memberTypes & MemberTypes.Admin) == MemberTypes.Admin)
-        {
-            types.Add("4");
-        }
-
-        return string.Join(",", types.ToArray());
     }
 
     /// <summary>
@@ -524,23 +451,6 @@ public static class UtilityMethods
     public static string DateToMySql(DateTime date)
     {
         return date.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.DateTimeFormatInfo.InvariantInfo);
-    }
-
-    //todo: KEKW
-    /// <summary>
-    /// Converts a <see cref="MediaType"/> enumeration into a string used by Flickr.
-    /// </summary>
-    /// <param name="mediaType">The <see cref="MediaType"/> value to convert.</param>
-    /// <returns></returns>
-    public static string MediaTypeToString(MediaType mediaType)
-    {
-        return mediaType switch
-        {
-            MediaType.All => "all",
-            MediaType.Photos => "photos",
-            MediaType.Videos => "videos",
-            _ => string.Empty,
-        };
     }
 
     /// <summary>
@@ -672,19 +582,5 @@ public static class UtilityMethods
         }
 
         return sb.ToString();
-    }
-
-    //todo: KEKW
-    /// <summary>
-    /// Converts a collection of <see cref="Style"/> values to a string literal containing the
-    /// lowercase string representations of each distinct style once, separated by commas.
-    /// </summary>
-    /// <param name="styles">Set of styles.</param>
-    /// <returns>Concatenated styles.</returns>
-    /// <exception cref="ArgumentNullException"><paramref name="styles"/> is null.</exception>
-    /// <exception cref="OutOfMemoryException">Out of memory.</exception>
-    public static string StylesToString(ICollection<Style> styles)
-    {
-        return string.Join(",", styles.Distinct().Select(s => s.ToString().ToLower()));
     }
 }

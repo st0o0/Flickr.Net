@@ -7,9 +7,9 @@
 [Serializable]
 public sealed class EchoResponseDictionary : Dictionary<string, string>, IFlickrParsable
 {
-    void IFlickrParsable.Load(System.Xml.XmlReader reader)
+    void IFlickrParsable.Load(XmlReader reader)
     {
-        while (reader.NodeType != System.Xml.XmlNodeType.None && reader.NodeType != System.Xml.XmlNodeType.EndElement)
+        while (reader.NodeType != XmlNodeType.None && reader.NodeType != XmlNodeType.EndElement)
         {
             Add(reader.Name, reader.ReadElementContentAsString());
         }

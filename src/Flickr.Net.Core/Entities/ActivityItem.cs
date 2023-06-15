@@ -11,7 +11,7 @@ public sealed class ActivityItem : IFlickrParsable
     /// </summary>
     public ActivityItem()
     {
-        Events = new System.Collections.ObjectModel.Collection<ActivityEvent>();
+        Events = new Collection<ActivityEvent>();
     }
 
     /// <summary>
@@ -161,7 +161,7 @@ public sealed class ActivityItem : IFlickrParsable
     /// <summary>
     /// The events that comprise this activity item.
     /// </summary>
-    public System.Collections.ObjectModel.Collection<ActivityEvent> Events { get; set; }
+    public Collection<ActivityEvent> Events { get; set; }
 
     /// <summary>
     /// The URL for the square thumbnail of a photo or the primary photo for a photoset or gallery.

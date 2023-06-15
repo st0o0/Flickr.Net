@@ -1,11 +1,12 @@
 ﻿using Flickr.Net.Core.Configuration;
-using Flickr.Net.Core.Entities;
+using Flickr.Net.Core.Flickrs.Results;
+using Newtonsoft.Json;
 
 namespace Flickr.Net.Core.Test;
-
 /// <summary>
 /// The blub test.
 /// </summary>
+
 public class BlubTest
 {
     /// <summary>
@@ -51,6 +52,7 @@ public class BlubTest
 
         Assert.Equal(id, placeId);
     }
+}
 
     /// <summary>
     /// Tests the.

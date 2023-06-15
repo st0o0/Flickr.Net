@@ -3,10 +3,10 @@ using System.Net.Http.Headers;
 using Flickr.Net.Core.Exceptions;
 
 namespace Flickr.Net.Core.Internals;
+
 /// <summary>
 /// The flickr responder.
 /// </summary>
-
 public static partial class FlickrResponder
 {
     /// <summary>
@@ -34,28 +34,15 @@ public static partial class FlickrResponder
 
     private static async Task<byte[]> GetDataResponseNormalAsync(Flickr flickr, string baseUrl, Dictionary<string, string> parameters, CancellationToken cancellationToken = default)
     {
-        string data = string.Empty;
-
-        foreach (KeyValuePair<string, string> k in parameters)
-        {
-            data += k.Key + "=" + UtilityMethods.EscapeDataString(k.Value) + "&";
-        }
-
-        return await DownloadDataAsync(baseUrl, data, PostContentType, null, cancellationToken);
+        return await DownloadDataAsync(baseUrl, new FormUrlEncodedContent(parameters), null, cancellationToken);
     }
 
     private static async Task<byte[]> GetDataResponseOAuthAsync(Flickr flickr, string baseUrl, Dictionary<string, string> parameters, CancellationToken cancellationToken = default)
     {
         // Remove api key if it exists.
-        if (parameters.ContainsKey("api_key"))
-        {
-            parameters.Remove("api_key");
-        }
+        parameters.Remove("api_key");
 
-        if (parameters.ContainsKey("api_sig"))
-        {
-            parameters.Remove("api_sig");
-        }
+        parameters.Remove("api_sig");
 
         // If OAuth Access Token is set then add token and generate signature.
         if (!string.IsNullOrEmpty(flickr.FlickrSettings.OAuthAccessToken) && !parameters.ContainsKey("oauth_token"))
@@ -69,13 +56,13 @@ public static partial class FlickrResponder
         }
 
         // Calculate post data, content header and auth header
-        string data = OAuthCalculatePostData(parameters);
+        var data = new FormUrlEncodedContent(parameters.Where((pair) => !pair.Key.StartsWith("oauth", StringComparison.Ordinal)));
         string authHeader = OAuthCalculateAuthHeader(parameters);
 
         // Download data.
         try
         {
-            return await DownloadDataAsync(baseUrl, data, PostContentType, authHeader, cancellationToken);
+            return await DownloadDataAsync(baseUrl, data, authHeader, cancellationToken);
         }
         catch (HttpRequestException ex)
         {
@@ -93,7 +80,7 @@ public static partial class FlickrResponder
         }
     }
 
-    private static async Task<byte[]> DownloadDataAsync(string baseUrl, string data, string contentType, string authHeader, CancellationToken cancellationToken = default)
+    private static async Task<byte[]> DownloadDataAsync(string baseUrl, FormUrlEncodedContent data, string authHeader, CancellationToken cancellationToken = default)
     {
         using HttpClient client = new();
         HttpRequestMessage message = new()
@@ -107,11 +94,8 @@ public static partial class FlickrResponder
         }
 
         message.Method = HttpMethod.Post;
-        message.Content = new StringContent(data);
-        if (!string.IsNullOrEmpty(contentType))
-        {
-            message.Content.Headers.ContentType = MediaTypeHeaderValue.Parse(contentType);
-        }
+        message.Content = data;
+
         HttpResponseMessage response = await client.SendAsync(message, cancellationToken);
         try
         {

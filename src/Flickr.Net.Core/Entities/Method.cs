@@ -56,12 +56,12 @@ public sealed class Method : IFlickrParsable
     /// <summary>
     /// The arguments of the method.
     /// </summary>
-    public System.Collections.ObjectModel.Collection<MethodArgument> Arguments { get; set; }
+    public Collection<MethodArgument> Arguments { get; set; }
 
     /// <summary>
     /// The possible errors that could be returned by the method.
     /// </summary>
-    public System.Collections.ObjectModel.Collection<MethodError> Errors { get; set; }
+    public Collection<MethodError> Errors { get; set; }
 
     void IFlickrParsable.Load(XmlReader reader)
     {

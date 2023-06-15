@@ -10,7 +10,7 @@ internal class SafeNativeMethods
     {
     }
 
-    internal static int GetErrorCode(System.IO.IOException ioe)
+    internal static int GetErrorCode(IOException ioe)
     {
         return System.Runtime.InteropServices.Marshal.GetHRForException(ioe) & 0xFFFF;
     }

@@ -140,10 +140,12 @@ public sealed class GroupFullInfo : IFlickrParsable
     /// <returns>The <see cref="Group"/> instance.</returns>
     public static implicit operator Group(GroupFullInfo groupInfo)
     {
-        Group g = new();
-        g.GroupId = groupInfo.GroupId;
-        g.GroupName = groupInfo.GroupName;
-        g.Members = groupInfo.Members;
+        Group g = new()
+        {
+            GroupId = groupInfo.GroupId,
+            GroupName = groupInfo.GroupName,
+            Members = groupInfo.Members
+        };
 
         return g;
     }

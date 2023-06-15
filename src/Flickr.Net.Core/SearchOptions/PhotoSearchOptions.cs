@@ -287,10 +287,7 @@ public class PhotoSearchOptions
         get { return UtilityMethods.ColorCodesToString(ColorCodes); }
     }
 
-    internal string SortOrderString
-    {
-        get { return UtilityMethods.SortOrderToString(SortOrder); }
-    }
+    internal string SortOrderString => SortOrder.ToFlickrString();
 
     /// <summary>
     /// Search for photos by the users 'username'
@@ -560,7 +557,7 @@ public class PhotoSearchOptions
 
         if (MediaType != MediaType.None)
         {
-            parameters.Add("media", UtilityMethods.MediaTypeToString(MediaType));
+            parameters.Add("media", MediaType.ToFlickrString());
         }
 
         if (GeoContext != GeoContext.NotDefined)
@@ -650,7 +647,7 @@ public class PhotoSearchOptions
 
         if (Styles != null && Styles.Count != 0)
         {
-            parameters.Add("styles", UtilityMethods.StylesToString(Styles));
+            parameters.Add("styles", Styles.ToFlickrString());
         }
     }
 }

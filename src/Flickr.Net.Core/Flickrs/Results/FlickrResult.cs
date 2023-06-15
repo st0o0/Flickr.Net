@@ -1,4 +1,5 @@
 ﻿using Flickr.Net.Core.Exceptions;
+using Flickr.Net.Core.Internals.Attributes;
 
 namespace Flickr.Net.Core.Flickrs.Results;
 
@@ -18,6 +19,7 @@ public class FlickrResult<T>
     /// <summary>
     /// If the call was successful then this contains the result.
     /// </summary>
+    [JsonPropertyGenericTypeName(0)]
     public T Result { get; set; }
 
     /// <summary>

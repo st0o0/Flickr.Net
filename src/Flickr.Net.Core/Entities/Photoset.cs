@@ -45,6 +45,11 @@ public sealed class Photoset : IFlickrParsable
     public string PrimaryPhotoId { get; set; }
 
     /// <summary>
+    /// The full details of the primary photo, as well as any extras requested.
+    /// </summary>
+    public Photo PrimaryPhoto { get; set; }
+
+    /// <summary>
     /// The secret for the primary photo for the photoset.
     /// </summary>
     public string Secret { get; set; }
@@ -272,9 +277,4 @@ public sealed class Photoset : IFlickrParsable
 
         reader.Read();
     }
-
-    /// <summary>
-    /// The full details of the primary photo, as well as any extras requested.
-    /// </summary>
-    public Photo PrimaryPhoto { get; set; }
 }
