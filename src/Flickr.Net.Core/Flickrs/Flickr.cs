@@ -4,9 +4,7 @@ using Flickr.Net.Core.Exceptions;
 using Flickr.Net.Core.Exceptions.Handlers;
 using Flickr.Net.Core.Internals.Caching;
 using Flickr.Net.Core.Internals.HttpContents;
-using Flickr.Net.Core.Configuration;
 using Flickr.Net.Core.Settings;
-using System.Text;
 
 namespace Flickr.Net.Core;
 
