@@ -5,7 +5,7 @@ namespace Flickr.Net.Core.Test;
 /// <summary>
 /// The blub test.
 /// </summary>
-public class BlubTest
+public class StringToIdTests
 {
     /// <summary>
     /// Tests the.
@@ -14,8 +14,7 @@ public class BlubTest
     public void WoeId_To_String()
     {
         var id = "Test";
-        var test = string.Join(",", new[] { new WoeId(id), new WoeId("KEKW") });
-        Assert.Contains(id, test);
+        Assert.Equal(id, new WoeId(id));
     }
 
     /// <summary>
@@ -25,8 +24,7 @@ public class BlubTest
     public void PlaceId_To_String()
     {
         var id = "Test";
-        var test = string.Join(",", new[] { new PlaceId(id), new PlaceId("KEKW") });
-        Assert.Contains(id, test);
+        Assert.Equal(id, new PlaceId(id));
     }
 
     /// <summary>
@@ -51,11 +49,5 @@ public class BlubTest
         WoeId woeId = id;
 
         Assert.Equal(id, woeId);
-    }
-
-    private void TESTTEST()
-    {
-        var t = new Flickr(null, null);
-        //t.
     }
 }

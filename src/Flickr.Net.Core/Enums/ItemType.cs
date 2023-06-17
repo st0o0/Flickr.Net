@@ -8,6 +8,7 @@ namespace Flickr.Net.Core.Enums;
 /// <summary>
 /// The type of the <see cref="Item"/>.
 /// </summary>
+[DataContract]
 [JsonConverter(typeof(StringEnumConverter))]
 public enum ItemType
 {

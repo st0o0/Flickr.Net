@@ -7,12 +7,8 @@ using Newtonsoft.Json;
 
 namespace Flickr.Net.Core.NewEntities;
 
-/// <summary>
-/// </summary>
 public class Activity
 {
-    /// <summary>
-    /// </summary>
     [JsonProperty("event")]
     public List<Event> Events { get; set; }
 }

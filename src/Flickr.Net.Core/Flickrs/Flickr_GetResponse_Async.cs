@@ -12,7 +12,11 @@ namespace Flickr.Net.Core;
 /// </summary>
 public partial class Flickr
 {
-    private async Task<T> GetResponseAsync<T>(Dictionary<string, string> parameters, CancellationToken cancellationToken = default) where T : new()
+    private Task GetResponseAsync(Dictionary<string, string> parameters, CancellationToken cancellationToken = default) => GetGenericResponseAsync<FlickrResult, string>(parameters, cancellationToken);
+
+    private Task<T> GetResponseAsync<T>(Dictionary<string, string> parameters, CancellationToken cancellationToken = default) => GetGenericResponseAsync<FlickrResult<T>, T>(parameters, cancellationToken);
+
+    private async Task<TResponse> GetGenericResponseAsync<T, TResponse>(Dictionary<string, string> parameters, CancellationToken cancellationToken = default) where T : FlickrResult
     {
         CheckApiKey();
 
@@ -64,17 +68,22 @@ public partial class Flickr
         {
             LastResponse = result;
 
-            var flickrResults = JsonConvert.DeserializeObject<FlickrResult<T>>(result, new JsonSerializerSettings
+            var flickrResults = JsonConvert.DeserializeObject<T>(result, new JsonSerializerSettings
             {
                 ContractResolver = new GenericJsonPropertyNameContractResolver()
             });
 
             if (flickrResults.HasError)
             {
-                throw ExceptionHandler.CreateResponseException<T>(flickrResults);
+                throw ExceptionHandler.CreateResponseException(flickrResults);
             }
 
-            return flickrResults.Result;
+            if (flickrResults is FlickrResult<TResponse> value)
+            {
+                return value.Content;
+            }
+
+            return default;
         }
         catch (Exception)
         {

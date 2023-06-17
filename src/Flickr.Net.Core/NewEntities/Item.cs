@@ -1,11 +1,10 @@
-﻿using Flickr.Net.Core.Internals.Attributes;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Flickr.Net.Core.NewEntities;
 
 /// <summary>
 /// </summary>
-[FlickrJsonPropertyName("items")]
 public class Item
 {
     /// <summary>
@@ -27,11 +26,6 @@ public class Item
     /// </summary>
     [JsonProperty("id")]
     public string Id { get; set; }
-
-    /// <summary>
-    /// </summary>
-    [JsonProperty("owner")]
-    public string Owner { get; set; }
 
     /// <summary>
     /// </summary>

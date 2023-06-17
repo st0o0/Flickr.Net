@@ -21,7 +21,7 @@ public sealed class OAuth
     /// The permissions the current token allows the application to perform.
     /// </summary>
     [JsonProperty("perms")]
-    public AuthLevel Permissions { get; set; }
+    public AuthLevel Perms { get; set; }
 
     /// <summary>
     /// The <see cref="User"/> object associated with the token. Readonly.

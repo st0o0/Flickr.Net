@@ -14,7 +14,7 @@ public static class ExceptionHandler
     /// <see cref="FlickrApiException"/>
     /// created from the information returned by Flickr.
     /// <returns></returns>
-    public static Exception CreateResponseException<T>(FlickrResult<T> result) => CreateException(result.ErrorCode, result.ErrorMessage);
+    public static Exception CreateResponseException(FlickrResult result) => CreateException(result.ErrorCode, result.ErrorMessage);
 
     private static FlickrApiException CreateException(int code, string message) => code switch
     {

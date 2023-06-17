@@ -7,20 +7,26 @@ namespace Flickr.Net.Core.Flickrs.Results;
 /// Contains details of the result from Flickr, or the error if an error occurred.
 /// </summary>
 /// <typeparam name="T">The type of the result returned from Flickr.</typeparam>
-public class FlickrResult<T>
+public class FlickrResult<T> : FlickrResult
 {
-    private Exception error;
+    /// <summary>
+    /// If the call was successful then this contains the result.
+    /// </summary>
+    [JsonPropertyGenericTypeName(0)]
+    public T Content { get; set; }
+}
+
+/// <summary>
+/// The flickr result.
+/// </summary>
+public class FlickrResult
+{
+    private Exception _exception;
 
     /// <summary>
     /// True if the result returned an error.
     /// </summary>
     public bool HasError { get; set; }
-
-    /// <summary>
-    /// If the call was successful then this contains the result.
-    /// </summary>
-    [JsonPropertyGenericTypeName(0)]
-    public T Result { get; set; }
 
     /// <summary>
     /// If the call was unsuccessful then this contains the exception.
@@ -29,11 +35,11 @@ public class FlickrResult<T>
     {
         get
         {
-            return error;
+            return _exception;
         }
         set
         {
-            error = value;
+            _exception = value;
             if (value == null)
             {
                 HasError = false;
