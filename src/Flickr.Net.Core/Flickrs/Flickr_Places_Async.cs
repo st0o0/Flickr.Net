@@ -38,7 +38,7 @@ public partial class Flickr : IFlickrPlaces
             parameters.Add("accuracy", ((int)accuracy).ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
 
-        PlaceCollection result = await GetResponseAsync<PlaceCollection>(parameters, cancellationToken);
+        var result = await GetResponseAsync<PlaceCollection>(parameters, cancellationToken);
         return result[0];
     }
 

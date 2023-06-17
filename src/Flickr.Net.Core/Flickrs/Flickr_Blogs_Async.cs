@@ -1,11 +1,14 @@
-﻿namespace Flickr.Net.Core;
+﻿using Flickr.Net.Core.NewEntities;
+using Flickr.Net.Core.NewEntities.Collections;
+
+namespace Flickr.Net.Core;
 
 /// <summary>
 /// The flickr.
 /// </summary>
 public partial class Flickr : IFlickrBlogs
 {
-    async Task<BlogCollection> IFlickrBlogs.GetListAsync(CancellationToken cancellationToken)
+    async Task<IEnumerable<Blog>> IFlickrBlogs.GetListAsync(CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -14,7 +17,8 @@ public partial class Flickr : IFlickrBlogs
             { "method", "flickr.blogs.getList" }
         };
 
-        return await GetResponseAsync<BlogCollection>(parameters, cancellationToken);
+        var resultObject = await GetResponseAsync<Blogs>(parameters, cancellationToken);
+        return resultObject.Blog;
     }
 
     async Task<BlogServiceCollection> IFlickrBlogs.GetServicesAsync(CancellationToken cancellationToken)
@@ -57,7 +61,7 @@ public interface IFlickrBlogs
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <remarks></remarks>
-    Task<BlogCollection> GetListAsync(CancellationToken cancellationToken = default);
+    Task<IEnumerable<Blog>> GetListAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Return a list of Flickr supported blogging services.

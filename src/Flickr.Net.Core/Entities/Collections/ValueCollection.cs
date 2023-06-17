@@ -96,14 +96,14 @@ public sealed class ValueCollection : Collection<Value>, IFlickrParsable
         {
             Value item = new();
             ((IFlickrParsable)item).Load(reader);
-            if (!string.IsNullOrEmpty(NamespaceName) && string.IsNullOrEmpty(item.NamespaceName))
+            if (!string.IsNullOrEmpty(NamespaceName) && string.IsNullOrEmpty(item.Namespace))
             {
-                item.NamespaceName = NamespaceName;
+                item.Namespace = NamespaceName;
             }
 
-            if (!string.IsNullOrEmpty(PredicateName) && string.IsNullOrEmpty(item.PredicateName))
+            if (!string.IsNullOrEmpty(PredicateName) && string.IsNullOrEmpty(item.Predicate))
             {
-                item.PredicateName = PredicateName;
+                item.Predicate = PredicateName;
             }
 
             Add(item);

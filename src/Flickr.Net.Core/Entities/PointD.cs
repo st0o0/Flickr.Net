@@ -66,7 +66,7 @@ public struct PointD
 
         if (obj is PointD)
         {
-            PointD p = (PointD)obj;
+            var p = (PointD)obj;
             return this == p;
         }
         return false;

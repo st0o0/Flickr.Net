@@ -3,7 +3,7 @@
 /// <summary>
 /// The type of the <see cref="ActivityEvent"/>.
 /// </summary>
-public enum ActivityEventType
+public enum EventType
 {
     /// <summary>
     /// The event type was not specified, or was a new unsupported type.

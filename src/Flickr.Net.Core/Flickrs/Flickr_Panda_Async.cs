@@ -13,7 +13,7 @@ public partial class Flickr : IFlickrPanda
             { "method", "flickr.panda.getList" }
         };
 
-        UnknownResponse result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
+        var result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
         return result.GetElementArray("panda");
     }
 

@@ -1,54 +1,48 @@
-namespace Flickr.Net.Core.Entities;
+//using Flickr.Net.Core.Internals.Attributes;
+//using Newtonsoft.Json;
 
-/// <summary>
-/// Successful authentication returns a <see cref="Auth"/> object.
-/// </summary>
-[Serializable]
-public sealed class Auth : IFlickrParsable
-{
-    /// <summary>
-    /// The authentication token returned by the <see
-    /// cref="IFlickrOAuth.GetAccessTokenAsync(OAuthRequestToken, string, CancellationToken)"/> or
-    /// <see cref="IFlickrOAuth.CheckTokenAsync(CancellationToken)"/> methods.
-    /// </summary>
-    public string Token { get; set; }
+//namespace Flickr.Net.Core.Entities;
 
-    /// <summary>
-    /// The permissions the current token allows the application to perform.
-    /// </summary>
-    public AuthLevel Permissions { get; set; }
+///// <summary>
+///// Successful authentication returns a <see cref="Auth"/> object.
+///// </summary>
+//[Serializable]
+//public sealed class Auth : IFlickrParsable
+//{
+//    /// <summary>
+//    /// The authentication token returned by the <see
+//    /// cref="IFlickrOAuth.GetAccessTokenAsync(OAuthRequestToken, string, CancellationToken)"/> or
+//    /// <see cref="IFlickrOAuth.CheckTokenAsync(CancellationToken)"/> methods.
+//    /// </summary>
+//    public string Token { get; set; }
 
-    /// <summary>
-    /// The <see cref="User"/> object associated with the token. Readonly.
-    /// </summary>
-    public FoundUser User { get; set; }
+// ///
+// <summary>
+// /// The permissions the current token allows the application to perform. ///
+// </summary>
+// public AuthLevel Permissions { get; set; }
 
-    void IFlickrParsable.Load(System.Xml.XmlReader reader)
-    {
-        reader.Read();
+// ///
+// <summary>
+// /// The <see cref="User"/> object associated with the token. Readonly. ///
+// </summary>
+// public FoundUser User { get; set; }
 
-        while (reader.LocalName != "auth" && reader.LocalName != "oauth")
-        {
-            switch (reader.LocalName)
-            {
-                case "token":
-                    Token = reader.ReadElementContentAsString();
-                    break;
+// void IFlickrParsable.Load(System.Xml.XmlReader reader) { reader.Read();
 
-                case "perms":
-                    Permissions = (AuthLevel)Enum.Parse(typeof(AuthLevel), reader.ReadElementContentAsString(), true);
-                    break;
+// while (reader.LocalName != "auth" && reader.LocalName != "oauth") { switch (reader.LocalName) {
+// case "token": Token = reader.ReadElementContentAsString(); break;
 
-                case "user":
-                    User = new FoundUser();
-                    ((IFlickrParsable)User).Load(reader);
-                    break;
+// case "perms": Permissions = (AuthLevel)Enum.Parse(typeof(AuthLevel),
+// reader.ReadElementContentAsString(), true); break;
 
-                default:
-                    UtilityMethods.CheckParsingException(reader);
-                    reader.Skip();
-                    break;
-            }
-        }
-    }
-}
+// case "user": User = new FoundUser(); ((IFlickrParsable)User).Load(reader); break;
+
+//                default:
+//                    UtilityMethods.CheckParsingException(reader);
+//                    reader.Skip();
+//                    break;
+//            }
+//        }
+//    }
+//}

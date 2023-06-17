@@ -18,9 +18,11 @@ public static partial class FlickrResponder
     /// <param name="parameters">A dictionary of parameters.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public static async Task<byte[]> GetDataResponseAsync(Flickr flickr, string baseUrl, Dictionary<string, string> parameters, CancellationToken cancellationToken = default)
+    public static async Task<string> GetDataResponseAsync(Flickr flickr, string baseUrl, Dictionary<string, string> parameters, CancellationToken cancellationToken = default)
     {
-        bool oAuth = parameters.ContainsKey("oauth_consumer_key");
+        var oAuth = parameters.ContainsKey("oauth_consumer_key");
+
+        parameters.TryAdd("format", "json");
 
         if (oAuth)
         {
@@ -32,12 +34,12 @@ public static partial class FlickrResponder
         }
     }
 
-    private static async Task<byte[]> GetDataResponseNormalAsync(Flickr flickr, string baseUrl, Dictionary<string, string> parameters, CancellationToken cancellationToken = default)
+    private static async Task<string> GetDataResponseNormalAsync(Flickr flickr, string baseUrl, Dictionary<string, string> parameters, CancellationToken cancellationToken = default)
     {
         return await DownloadDataAsync(baseUrl, new FormUrlEncodedContent(parameters), null, cancellationToken);
     }
 
-    private static async Task<byte[]> GetDataResponseOAuthAsync(Flickr flickr, string baseUrl, Dictionary<string, string> parameters, CancellationToken cancellationToken = default)
+    private static async Task<string> GetDataResponseOAuthAsync(Flickr flickr, string baseUrl, Dictionary<string, string> parameters, CancellationToken cancellationToken = default)
     {
         // Remove api key if it exists.
         parameters.Remove("api_key");
@@ -51,13 +53,13 @@ public static partial class FlickrResponder
         }
         if (!string.IsNullOrEmpty(flickr.FlickrSettings.OAuthAccessTokenSecret) && !parameters.ContainsKey("oauth_signature"))
         {
-            string sig = ((IFlickrOAuth)flickr).CalculateSignature("POST", baseUrl, parameters, flickr.FlickrSettings.OAuthAccessTokenSecret);
+            var sig = ((IFlickrOAuth)flickr).CalculateSignature("POST", baseUrl, parameters, flickr.FlickrSettings.OAuthAccessTokenSecret);
             parameters.Add("oauth_signature", sig);
         }
 
         // Calculate post data, content header and auth header
         var data = new FormUrlEncodedContent(parameters.Where((pair) => !pair.Key.StartsWith("oauth", StringComparison.Ordinal)));
-        string authHeader = OAuthCalculateAuthHeader(parameters);
+        var authHeader = OAuthCalculateAuthHeader(parameters);
 
         // Download data.
         try
@@ -80,7 +82,7 @@ public static partial class FlickrResponder
         }
     }
 
-    private static async Task<byte[]> DownloadDataAsync(string baseUrl, FormUrlEncodedContent data, string authHeader, CancellationToken cancellationToken = default)
+    private static async Task<string> DownloadDataAsync(string baseUrl, FormUrlEncodedContent data, string authHeader, CancellationToken cancellationToken = default)
     {
         using HttpClient client = new();
         HttpRequestMessage message = new()
@@ -96,16 +98,16 @@ public static partial class FlickrResponder
         message.Method = HttpMethod.Post;
         message.Content = data;
 
-        HttpResponseMessage response = await client.SendAsync(message, cancellationToken);
+        var response = await client.SendAsync(message, cancellationToken);
         try
         {
-            response.EnsureSuccessStatusCode();
+            response = response.EnsureSuccessStatusCode();
         }
         catch (Exception)
         {
             throw;
         }
 
-        return await response.Content.ReadAsByteArrayAsync(cancellationToken);
+        return await response.Content.ReadAsStringAsync(cancellationToken);
     }
 }

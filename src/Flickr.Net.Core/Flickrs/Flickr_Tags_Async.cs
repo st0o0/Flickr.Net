@@ -66,7 +66,7 @@ public partial class Flickr : IFlickrTags
             { "photo_id", photoId }
         };
 
-        PhotoInfo result = await GetResponseAsync<PhotoInfo>(parameters, cancellationToken);
+        var result = await GetResponseAsync<PhotoInfo>(parameters, cancellationToken);
         return result.Tags;
     }
 

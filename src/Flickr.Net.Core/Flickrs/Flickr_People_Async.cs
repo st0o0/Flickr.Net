@@ -1,4 +1,5 @@
 ﻿using Flickr.Net.Core.Exceptions;
+using Flickr.Net.Core.NewEntities;
 
 namespace Flickr.Net.Core;
 
@@ -7,7 +8,7 @@ namespace Flickr.Net.Core;
 /// </summary>
 public partial class Flickr : IFlickrPeople
 {
-    async Task<FoundUser> IFlickrPeople.FindByEmailAsync(string emailAddress, CancellationToken cancellationToken)
+    async Task<User> IFlickrPeople.FindByEmailAsync(string emailAddress, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -15,10 +16,10 @@ public partial class Flickr : IFlickrPeople
             { "find_email", emailAddress }
         };
 
-        return await GetResponseAsync<FoundUser>(parameters, cancellationToken);
+        return await GetResponseAsync<User>(parameters, cancellationToken);
     }
 
-    async Task<FoundUser> IFlickrPeople.FindByUserNameAsync(string userName, CancellationToken cancellationToken)
+    async Task<User> IFlickrPeople.FindByUserNameAsync(string userName, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -26,7 +27,7 @@ public partial class Flickr : IFlickrPeople
             { "username", userName }
         };
 
-        return await GetResponseAsync<FoundUser>(parameters, cancellationToken);
+        return await GetResponseAsync<User>(parameters, cancellationToken);
     }
 
     async Task<GroupInfoCollection> IFlickrPeople.GetGroupsAsync(string userId, CancellationToken cancellationToken)
@@ -189,17 +190,17 @@ public interface IFlickrPeople
     /// <exception cref="FlickrApiException">
     /// A FlickrApiException is raised if the email address is not found.
     /// </exception>
-    Task<FoundUser> FindByEmailAsync(string emailAddress, CancellationToken cancellationToken = default);
+    Task<User> FindByEmailAsync(string emailAddress, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Returns a <see cref="FoundUser"/> object matching the screen name.
+    /// Returns a <see cref="User"/> object matching the screen name.
     /// </summary>
     /// <param name="userName">The screen name or username of the user.</param>
     /// <param name="cancellationToken"></param>
     /// <exception cref="FlickrApiException">
     /// A FlickrApiException is raised if the email address is not found.
     /// </exception>
-    Task<FoundUser> FindByUserNameAsync(string userName, CancellationToken cancellationToken = default);
+    Task<User> FindByUserNameAsync(string userName, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets a list of groups the user is a member of.

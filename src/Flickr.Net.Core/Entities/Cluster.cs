@@ -34,7 +34,7 @@ public sealed class Cluster : IFlickrParsable
             else
             {
                 List<string> ids = new();
-                foreach (string s in Tags)
+                foreach (var s in Tags)
                 {
                     ids.Add(s);
                 }

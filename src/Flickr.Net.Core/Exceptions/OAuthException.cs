@@ -63,7 +63,7 @@ public class OAuthException : Exception
     /// <param name="innerException"></param>
     public OAuthException(Exception innerException) : base("OAuth Exception", innerException)
     {
-        HttpRequestException exception = innerException as HttpRequestException;
+        var exception = innerException as HttpRequestException;
         if (exception == null)
         {
             return;

@@ -20,17 +20,17 @@ public static class PhotoSearchExtrasExtensions
     public static string ToFlickrString(this PhotoSearchExtras extras)
     {
         List<string> extraList = new();
-        Type e = typeof(PhotoSearchExtras);
+        var e = typeof(PhotoSearchExtras);
         foreach (PhotoSearchExtras extra in GetFlags(extras))
         {
-            System.Reflection.FieldInfo info = e.GetField(extra.ToString("G"));
-            DescriptionAttribute[] o = (DescriptionAttribute[])info.GetCustomAttributes(typeof(DescriptionAttribute), false);
+            var info = e.GetField(extra.ToString("G"));
+            var o = (DescriptionAttribute[])info.GetCustomAttributes(typeof(DescriptionAttribute), false);
             if (o.Length == 0)
             {
                 continue;
             }
 
-            DescriptionAttribute att = o[0];
+            var att = o[0];
             extraList.Add(att.Description);
         }
 
@@ -39,8 +39,8 @@ public static class PhotoSearchExtrasExtensions
 
     private static IEnumerable<Enum> GetFlags(Enum input)
     {
-        long i = Convert.ToInt64(input);
-        foreach (Enum value in GetValues(input))
+        var i = Convert.ToInt64(input);
+        foreach (var value in GetValues(input))
         {
             if ((i & Convert.ToInt64(value)) != 0)
             {
@@ -52,7 +52,7 @@ public static class PhotoSearchExtrasExtensions
     private static IEnumerable<Enum> GetValues(Enum enumeration)
     {
         List<Enum> enumerations = new();
-        foreach (System.Reflection.FieldInfo fieldInfo in enumeration.GetType().GetFields(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public))
+        foreach (var fieldInfo in enumeration.GetType().GetFields(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public))
         {
             enumerations.Add((Enum)fieldInfo.GetValue(enumeration));
         }

@@ -31,7 +31,7 @@ public static class UtilityMethods
     /// <returns>A long for the number of seconds since 1st January 1970, as per unix specification.</returns>
     public static string DateToUnixTimestamp(DateTime date)
     {
-        TimeSpan ts = date - UnixStartDate;
+        var ts = date - UnixStartDate;
         return ts.TotalSeconds.ToString("0", System.Globalization.NumberFormatInfo.InvariantInfo);
     }
 
@@ -104,20 +104,20 @@ public static class UtilityMethods
             { "black", "e" },
         };
 
-        foreach (string code in codes)
+        foreach (var code in codes)
         {
             if (string.IsNullOrEmpty(code))
             {
                 continue;
             }
 
-            string c = code.ToLower();
+            var c = code.ToLower();
             if (c.Length == 1 && codeMap.ContainsValue(c))
             {
                 colorList.Add(c);
             }
 
-            if (codeMap.TryGetValue(c, out string value))
+            if (codeMap.TryGetValue(c, out var value))
             {
                 colorList.Add(value);
             }
@@ -195,22 +195,22 @@ public static class UtilityMethods
     internal static void WriteString(Stream s, string str)
     {
         WriteInt32(s, str.Length);
-        foreach (char c in str)
+        foreach (var c in str)
         {
             s.WriteByte((byte)(c & 0xFF));
             s.WriteByte((byte)(c >> 8 & 0xFF));
         }
     }
 
-    internal static void WriteByteArray(Stream stream, byte[] bytes)
+    internal static void WriteByteArray(Stream stream, string value)
     {
-        WriteString(stream, Encoding.UTF8.GetString(bytes));
+        WriteString(stream, value);
     }
 
     internal static int ReadInt32(Stream s)
     {
         int i = 0, b;
-        for (int j = 0; j < 4; j++)
+        for (var j = 0; j < 4; j++)
         {
             b = s.ReadByte();
             if (b == -1)
@@ -225,9 +225,9 @@ public static class UtilityMethods
 
     internal static string ReadString(Stream s)
     {
-        int len = ReadInt32(s);
-        char[] chars = new char[len];
-        for (int i = 0; i < len; i++)
+        var len = ReadInt32(s);
+        var chars = new char[len];
+        for (var i = 0; i < len; i++)
         {
             int hi, lo;
             lo = s.ReadByte();
@@ -240,11 +240,6 @@ public static class UtilityMethods
             chars[i] = (char)(lo | hi << 8);
         }
         return new string(chars);
-    }
-
-    internal static byte[] ReadByteArray(Stream s)
-    {
-        return Encoding.UTF8.GetBytes(ReadString(s));
     }
 
     private const string PhotoUrlFormat = "https://farm{0}.staticflickr.com/{1}/{2}_{3}{4}.{5}";
@@ -311,7 +306,7 @@ public static class UtilityMethods
     /// <returns>A string.</returns>
     public static string UrlFormat(string farm, string server, string photoId, string secret, string size, string extension)
     {
-        string sizeAbbreviation = size switch
+        var sizeAbbreviation = size switch
         {
             "square" => "_s",
             "thumbnail" => "_t",
@@ -366,9 +361,9 @@ public static class UtilityMethods
     {
         byte[] hashedBytes;
 
-        using (MD5 md5 = MD5.Create())
+        using (var md5 = MD5.Create())
         {
-            byte[] bytes = Encoding.UTF8.GetBytes(data);
+            var bytes = Encoding.UTF8.GetBytes(data);
             hashedBytes = md5.ComputeHash(bytes, 0, bytes.Length);
         }
         return BitConverter.ToString(hashedBytes).Replace("-", string.Empty).ToLower();
@@ -381,9 +376,9 @@ public static class UtilityMethods
     /// <returns>A DateTime.</returns>
     public static DateTime MySqlToDate(string p)
     {
-        string format1 = "yyyy-MM-dd";
-        string format2 = "yyyy-MM-dd hh:mm:ss";
-        System.Globalization.DateTimeFormatInfo iformat = System.Globalization.DateTimeFormatInfo.InvariantInfo;
+        var format1 = "yyyy-MM-dd";
+        var format2 = "yyyy-MM-dd hh:mm:ss";
+        var iformat = System.Globalization.DateTimeFormatInfo.InvariantInfo;
 
         try
         {
@@ -411,7 +406,7 @@ public static class UtilityMethods
     /// <returns>The parsed <see cref="DateTime"/>.</returns>
     public static DateTime ParseDateWithGranularity(string date)
     {
-        DateTime output = DateTime.MinValue;
+        var output = DateTime.MinValue;
 
         if (string.IsNullOrEmpty(date))
         {
@@ -429,7 +424,7 @@ public static class UtilityMethods
             return output;
         }
 
-        string format = "yyyy-MM-dd HH:mm:ss";
+        var format = "yyyy-MM-dd HH:mm:ss";
         try
         {
             output = DateTime.ParseExact(date, format, System.Globalization.DateTimeFormatInfo.InvariantInfo, System.Globalization.DateTimeStyles.None);
@@ -512,11 +507,11 @@ public static class UtilityMethods
             return dic;
         }
 
-        string[] parts = response.Split('&');
+        var parts = response.Split('&');
 
-        foreach (string part in parts)
+        foreach (var part in parts)
         {
-            string[] bits = part.Split(new[] { '=' }, 2, StringSplitOptions.RemoveEmptyEntries);
+            var bits = part.Split(new[] { '=' }, 2, StringSplitOptions.RemoveEmptyEntries);
             dic.Add(bits[0], bits.Length == 1 ? "" : Uri.UnescapeDataString(bits[1]));
         }
 
@@ -534,7 +529,7 @@ public static class UtilityMethods
     /// <returns>The escaped string.</returns>
     public static string EscapeOAuthString(string text)
     {
-        string value = text;
+        var value = text;
 
         value = EscapeDataString(value).Replace("+", "%20");
 
@@ -565,11 +560,11 @@ public static class UtilityMethods
 
     internal static string EscapeDataString(string value)
     {
-        int limit = 2000;
+        var limit = 2000;
         StringBuilder sb = new(value.Length + value.Length / 2);
-        int loops = value.Length / limit;
+        var loops = value.Length / limit;
 
-        for (int i = 0; i <= loops; i++)
+        for (var i = 0; i <= loops; i++)
         {
             if (i < loops)
             {

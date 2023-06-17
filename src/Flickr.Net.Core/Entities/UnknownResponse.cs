@@ -31,8 +31,8 @@ public sealed class UnknownResponse : IFlickrParsable
     /// <returns>The string value of the given attribute, if found.</returns>
     public string GetAttributeValue(string element, string attribute)
     {
-        XmlDocument doc = GetXmlDocument();
-        XmlNode node = doc.SelectSingleNode("//" + element + "/@" + attribute);
+        var doc = GetXmlDocument();
+        var node = doc.SelectSingleNode("//" + element + "/@" + attribute);
         if (node != null)
         {
             return node.Value;
@@ -50,8 +50,8 @@ public sealed class UnknownResponse : IFlickrParsable
     /// <returns>The string value of the given element, if found.</returns>
     public string GetElementValue(string element)
     {
-        XmlDocument doc = GetXmlDocument();
-        XmlNode node = doc.SelectSingleNode("//" + element + "[1]");
+        var doc = GetXmlDocument();
+        var node = doc.SelectSingleNode("//" + element + "[1]");
         if (node != null)
         {
             return node.InnerText;

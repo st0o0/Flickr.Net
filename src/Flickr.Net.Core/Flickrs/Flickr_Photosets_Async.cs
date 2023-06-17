@@ -132,8 +132,8 @@ public partial class Flickr : IFlickrPhotosets
             parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
 
-        PhotosetCollection result = await GetResponseAsync<PhotosetCollection>(parameters, cancellationToken);
-        foreach (Photoset photoset in result)
+        var result = await GetResponseAsync<PhotosetCollection>(parameters, cancellationToken);
+        foreach (var photoset in result)
         {
             photoset.OwnerId = userId;
         }

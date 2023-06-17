@@ -89,7 +89,7 @@ public partial class Flickr : IFlickrPhotosGeo
             { "photo_id", photoId }
         };
 
-        PhotoInfo result = await GetResponseAsync<PhotoInfo>(parameters, cancellationToken);
+        var result = await GetResponseAsync<PhotoInfo>(parameters, cancellationToken);
         return result.Location;
     }
 

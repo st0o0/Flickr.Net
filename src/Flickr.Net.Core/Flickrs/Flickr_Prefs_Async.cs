@@ -14,7 +14,7 @@ public partial class Flickr : IFlickrPrefs
             { "method", "flickr.prefs.getContentType" }
         };
 
-        UnknownResponse result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
+        var result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
         return (ContentType)int.Parse(result.GetAttributeValue("*", "content_type"), System.Globalization.NumberFormatInfo.InvariantInfo);
     }
 
@@ -39,7 +39,7 @@ public partial class Flickr : IFlickrPrefs
             { "method", "flickr.prefs.getHidden" }
         };
 
-        UnknownResponse result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
+        var result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
         return (HiddenFromSearch)int.Parse(result.GetAttributeValue("*", "hidden"), System.Globalization.NumberFormatInfo.InvariantInfo);
     }
 
@@ -52,7 +52,7 @@ public partial class Flickr : IFlickrPrefs
             { "method", "flickr.prefs.getPrivacy" }
         };
 
-        UnknownResponse result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
+        var result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
         return (PrivacyFilter)int.Parse(result.GetAttributeValue("*", "privacy"), System.Globalization.NumberFormatInfo.InvariantInfo);
     }
 
@@ -65,7 +65,7 @@ public partial class Flickr : IFlickrPrefs
             { "method", "flickr.prefs.getSafetyLevel" }
         };
 
-        UnknownResponse result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
+        var result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
         return (SafetyLevel)int.Parse(result.GetAttributeValue("*", "safety_level"), System.Globalization.NumberFormatInfo.InvariantInfo);
     }
 }

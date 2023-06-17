@@ -1,5 +1,4 @@
-﻿using Flickr.Net.Core.Configuration;
-using Flickr.Net.Core.Entities;
+﻿using Flickr.Net.Core.Entities;
 
 namespace Flickr.Net.Core.Test;
 
@@ -8,16 +7,6 @@ namespace Flickr.Net.Core.Test;
 /// </summary>
 public class BlubTest
 {
-    /// <summary>
-    /// Tests the.
-    /// </summary>
-    [Fact]
-    public void Test()
-    {
-        var t = new FlickrConfiguration();
-        Assert.NotNull(t);
-    }
-
     /// <summary>
     /// Tests the.
     /// </summary>

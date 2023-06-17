@@ -1,5 +1,9 @@
 ﻿using System.Diagnostics;
+using Flickr.Net.Core.Exceptions.Handlers;
+using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals.Caching;
+using Flickr.Net.Core.Internals.ContractResolver;
+using Newtonsoft.Json;
 
 namespace Flickr.Net.Core;
 
@@ -8,7 +12,7 @@ namespace Flickr.Net.Core;
 /// </summary>
 public partial class Flickr
 {
-    private async Task<T> GetResponseAsync<T>(Dictionary<string, string> parameters, CancellationToken cancellationToken = default) where T : IFlickrParsable, new()
+    private async Task<T> GetResponseAsync<T>(Dictionary<string, string> parameters, CancellationToken cancellationToken = default) where T : new()
     {
         CheckApiKey();
 
@@ -24,11 +28,11 @@ public partial class Flickr
             }
         }
 
-        string url = CalculateUri(parameters, !string.IsNullOrEmpty(FlickrSettings.ApiSecret));
+        var url = CalculateUri(parameters, !string.IsNullOrEmpty(FlickrSettings.ApiSecret));
 
         _lastRequest = url;
 
-        byte[] result;
+        string result;
 
         if (FlickrCachingSettings.InstanceCacheDisabled)
         {
@@ -36,9 +40,9 @@ public partial class Flickr
         }
         else
         {
-            string urlComplete = url;
+            var urlComplete = url;
 
-            ResponseCacheItem cached = (ResponseCacheItem)Cache.Responses.Get(urlComplete, Cache.CacheTimeout, true);
+            var cached = (ResponseCacheItem)Cache.Responses.Get(urlComplete, Cache.CacheTimeout, true);
             if (cached != null)
             {
                 Debug.WriteLine("Cache hit.");
@@ -56,19 +60,25 @@ public partial class Flickr
             }
         }
 
-        T resultItem = new();
-
         try
         {
             LastResponse = result;
 
-            resultItem.Load(result);
+            var flickrResults = JsonConvert.DeserializeObject<FlickrResult<T>>(result, new JsonSerializerSettings
+            {
+                ContractResolver = new GenericJsonPropertyNameContractResolver()
+            });
+
+            if (flickrResults.HasError)
+            {
+                throw ExceptionHandler.CreateResponseException<T>(flickrResults);
+            }
+
+            return flickrResults.Result;
         }
         catch (Exception)
         {
             throw;
         }
-
-        return resultItem;
     }
 }

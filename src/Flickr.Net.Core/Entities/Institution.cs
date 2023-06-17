@@ -69,8 +69,8 @@ public sealed class Institution : IFlickrParsable
                     reader.Read();
                     while (reader.LocalName == "url")
                     {
-                        string type = reader.GetAttribute("type");
-                        string url = reader.ReadElementContentAsString();
+                        var type = reader.GetAttribute("type");
+                        var url = reader.ReadElementContentAsString();
                         switch (type)
                         {
                             case "site":

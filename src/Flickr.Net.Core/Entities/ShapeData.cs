@@ -109,11 +109,11 @@ public sealed class ShapeData : IFlickrParsable
                     while (reader.LocalName == "polyline")
                     {
                         Collection<PointD> polyline = new();
-                        string polystring = reader.ReadElementContentAsString();
-                        string[] points = polystring.Split(' ');
-                        foreach (string point in points)
+                        var polystring = reader.ReadElementContentAsString();
+                        var points = polystring.Split(' ');
+                        foreach (var point in points)
                         {
-                            string[] xy = point.Split(',');
+                            var xy = point.Split(',');
                             if (xy.Length != 2)
                             {
                                 throw new ParsingException("Invalid polypoint found in polyline : '" + polystring +

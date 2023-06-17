@@ -1,4 +1,6 @@
-﻿namespace Flickr.Net.Core;
+﻿using Flickr.Net.Core.NewEntities;
+
+namespace Flickr.Net.Core;
 
 /// <summary>
 /// The flickr.
@@ -13,7 +15,7 @@ public partial class Flickr : IFlickrUrls
             { "group_id", groupId }
         };
 
-        UnknownResponse result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
+        var result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
         return result.GetAttributeValue("*", "url");
     }
 
@@ -29,7 +31,7 @@ public partial class Flickr : IFlickrUrls
             parameters.Add("user_id", userId);
         }
 
-        UnknownResponse result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
+        var result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
         return result.GetAttributeValue("*", "url");
     }
 
@@ -45,7 +47,7 @@ public partial class Flickr : IFlickrUrls
             parameters.Add("user_id", userId);
         }
 
-        UnknownResponse result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
+        var result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
         return result.GetAttributeValue("*", "url");
     }
 
@@ -68,11 +70,11 @@ public partial class Flickr : IFlickrUrls
             { "url", urlToFind }
         };
 
-        UnknownResponse result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
+        var result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
         return result.GetAttributeValue("*", "id");
     }
 
-    async Task<FoundUser> IFlickrUrls.LookupUserAsync(string urlToFind, CancellationToken cancellationToken)
+    async Task<User> IFlickrUrls.LookupUserAsync(string urlToFind, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -80,7 +82,7 @@ public partial class Flickr : IFlickrUrls
             { "url", urlToFind }
         };
 
-        return await GetResponseAsync<FoundUser>(parameters, cancellationToken);
+        return await GetResponseAsync<User>(parameters, cancellationToken);
     }
 }
 
@@ -134,5 +136,5 @@ public interface IFlickrUrls
     /// </summary>
     /// <param name="urlToFind">Thr url to the user's profile or photos page.</param>
     /// <param name="cancellationToken"></param>
-    Task<FoundUser> LookupUserAsync(string urlToFind, CancellationToken cancellationToken = default);
+    Task<User> LookupUserAsync(string urlToFind, CancellationToken cancellationToken = default);
 }

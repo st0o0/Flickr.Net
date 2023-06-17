@@ -1,4 +1,7 @@
-﻿namespace Flickr.Net.Core.Entities;
+﻿using Flickr.Net.Core.Internals.JsonConverters;
+using Newtonsoft.Json;
+
+namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// A machine tag value and its usage.
@@ -8,40 +11,45 @@ public sealed class Value : IFlickrParsable
     /// <summary>
     /// The usage of this machine tag value.
     /// </summary>
+    [JsonProperty("usage")]
     public int Usage { get; set; }
 
     /// <summary>
     /// The namespace for this value.
     /// </summary>
-    public string NamespaceName { get; set; }
+    [JsonProperty("namespace")]
+    public string Namespace { get; set; }
 
     /// <summary>
     /// The predicate name for this value.
     /// </summary>
-    public string PredicateName { get; set; }
+    [JsonProperty("predicate")]
+    public string Predicate { get; set; }
 
     /// <summary>
     /// The text of this value.
     /// </summary>
-    public string ValueText { get; set; }
+    [JsonProperty("_content")]
+    public string Content { get; set; }
 
     /// <summary>
     /// The date this machine tag was first used.
     /// </summary>
-    public DateTime? DateFirstAdded { get; set; }
+    [JsonProperty("first_added")]
+    [JsonConverter(typeof(FlickrTimestampToDateTimeConverter))]
+    public DateTime? FirstAdded { get; set; }
 
     /// <summary>
     /// The date this machine tag was last added.
     /// </summary>
-    public DateTime? DateLastUsed { get; set; }
+    [JsonProperty("last_added")]
+    [JsonConverter(typeof(FlickrTimestampToDateTimeConverter))]
+    public DateTime? LastUsed { get; set; }
 
     /// <summary>
     /// The full machine tag for this value.
     /// </summary>
-    public string MachineTag
-    {
-        get { return NamespaceName + ":" + PredicateName + "=" + ValueText; }
-    }
+    public string ToMachineTagString() => Namespace + ":" + Predicate + "=" + Content;
 
     void IFlickrParsable.Load(System.Xml.XmlReader reader)
     {
@@ -54,19 +62,19 @@ public sealed class Value : IFlickrParsable
                     break;
 
                 case "predicate":
-                    PredicateName = reader.Value;
+                    Predicate = reader.Value;
                     break;
 
                 case "namespace":
-                    NamespaceName = reader.Value;
+                    Namespace = reader.Value;
                     break;
 
                 case "first_added":
-                    DateFirstAdded = UtilityMethods.UnixTimestampToDate(reader.Value);
+                    FirstAdded = UtilityMethods.UnixTimestampToDate(reader.Value);
                     break;
 
                 case "last_added":
-                    DateLastUsed = UtilityMethods.UnixTimestampToDate(reader.Value);
+                    LastUsed = UtilityMethods.UnixTimestampToDate(reader.Value);
                     break;
             }
         }
@@ -75,7 +83,7 @@ public sealed class Value : IFlickrParsable
 
         if (reader.NodeType == System.Xml.XmlNodeType.Text)
         {
-            ValueText = reader.ReadContentAsString();
+            Content = reader.ReadContentAsString();
         }
 
         reader.Read();

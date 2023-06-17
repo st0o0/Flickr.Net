@@ -55,7 +55,7 @@ public partial class Flickr : IFlickrUpload
             parameters.Remove("api_key");
             OAuthGetBasicParameters(parameters);
             parameters.Add("oauth_token", FlickrSettings.OAuthAccessToken);
-            string sig = ((IFlickrOAuth)this).CalculateSignature("POST", uploadUri.AbsoluteUri, parameters, FlickrSettings.OAuthAccessTokenSecret);
+            var sig = ((IFlickrOAuth)this).CalculateSignature("POST", uploadUri.AbsoluteUri, parameters, FlickrSettings.OAuthAccessTokenSecret);
             parameters.Add("oauth_signature", sig);
         }
         else
@@ -81,7 +81,7 @@ public partial class Flickr : IFlickrUpload
             parameters.Remove("api_key");
             OAuthGetBasicParameters(parameters);
             parameters.Add("oauth_token", FlickrSettings.OAuthAccessToken);
-            string sig = ((IFlickrOAuth)this).CalculateSignature("POST", replaceUri.AbsoluteUri, parameters, FlickrSettings.OAuthAccessTokenSecret);
+            var sig = ((IFlickrOAuth)this).CalculateSignature("POST", replaceUri.AbsoluteUri, parameters, FlickrSettings.OAuthAccessTokenSecret);
             parameters.Add("oauth_signature", sig);
         }
         else
@@ -94,11 +94,11 @@ public partial class Flickr : IFlickrUpload
 
     private static async Task<string> UploadDataAsync(Stream imageStream, string fileName, IProgress<double> progress, Uri uploadUri, Dictionary<string, string> parameters, CancellationToken cancellationToken = default)
     {
-        string authHeader = FlickrResponder.OAuthCalculateAuthHeader(parameters);
+        var authHeader = FlickrResponder.OAuthCalculateAuthHeader(parameters);
 
-        string boundary = "FLICKR_MIME_" + DateTime.Now.ToString("yyyyMMddhhmmss", System.Globalization.DateTimeFormatInfo.InvariantInfo);
+        var boundary = "FLICKR_MIME_" + DateTime.Now.ToString("yyyyMMddhhmmss", System.Globalization.DateTimeFormatInfo.InvariantInfo);
 
-        MultipartFormDataContent content = CreateUploadData(imageStream, fileName, progress, parameters, boundary, cancellationToken);
+        var content = CreateUploadData(imageStream, fileName, progress, parameters, boundary, cancellationToken);
 
         HttpRequestMessage requestMessage = new()
         {
@@ -112,7 +112,7 @@ public partial class Flickr : IFlickrUpload
             requestMessage.Headers.Add("Authorization", authHeader);
         }
 
-        HttpResponseMessage responseMessage = await new HttpClient().SendAsync(requestMessage, cancellationToken);
+        var responseMessage = await new HttpClient().SendAsync(requestMessage, cancellationToken);
 
         responseMessage.EnsureSuccessStatusCode();
 

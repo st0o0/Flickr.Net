@@ -14,7 +14,7 @@ public partial class Flickr : IFlickrPhotosetsComments
             { "comment_text", commentText }
         };
 
-        UnknownResponse result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
+        var result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
 
         return result.GetAttributeValue("*", "id");
     }

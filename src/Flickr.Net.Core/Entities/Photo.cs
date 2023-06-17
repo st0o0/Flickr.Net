@@ -767,7 +767,7 @@ public class Photo : IFlickrParsable
                     break;
 
                 case "tags":
-                    foreach (string tag in reader.Value.Split(' '))
+                    foreach (var tag in reader.Value.Split(' '))
                     {
                         Tags.Add(tag);
                     }

@@ -21,7 +21,7 @@ public partial class Flickr : IFlickrPush
             { "method", "flickr.push.getTopics" }
         };
 
-        UnknownResponse result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
+        var result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
         return result.GetElementArray("topic", "name");
     }
 

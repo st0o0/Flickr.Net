@@ -1,12 +1,10 @@
-﻿using System.Text;
-
-namespace Flickr.Net.Core.Entities;
+﻿namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// The access authentication token return by Flickr after a successful authentication.
 /// </summary>
 [Serializable]
-public class OAuthAccessToken : IFlickrParsable
+public record OAuthAccessToken : IFlickrParsable
 {
     /// <summary>
     /// The access token string.
@@ -38,34 +36,34 @@ public class OAuthAccessToken : IFlickrParsable
     /// </summary>
     /// <param name="response">A URL parameter encoded string, e.g. "oauth_token=ABC&amp;oauth_token_secret=DEF&amp;user_id=1234567@N00".</param>
     /// <returns></returns>
-    internal static OAuthAccessToken ParseResponse(byte[] response)
+    internal static OAuthAccessToken ParseResponse(string response)
     {
-        Dictionary<string, string> parts = UtilityMethods.StringToDictionary(Encoding.UTF8.GetString(response));
+        var parts = UtilityMethods.StringToDictionary(response);
 
         OAuthAccessToken token = new();
-        if (parts.ContainsKey("oauth_token"))
+        if (parts.TryGetValue("oauth_token", out var oauth_token))
         {
-            token.Token = parts["oauth_token"];
+            token = token with { Token = oauth_token };
         }
 
-        if (parts.ContainsKey("oauth_token_secret"))
+        if (parts.TryGetValue("oauth_token_secret", out var oauth_token_secret))
         {
-            token.TokenSecret = parts["oauth_token_secret"];
+            token = token with { TokenSecret = oauth_token_secret };
         }
 
-        if (parts.ContainsKey("user_nsid"))
+        if (parts.TryGetValue("user_nsid", out var user_nsid))
         {
-            token.UserId = parts["user_nsid"];
+            token = token with { UserId = user_nsid };
         }
 
-        if (parts.ContainsKey("fullname"))
+        if (parts.TryGetValue("fullname", out var fullname))
         {
-            token.FullName = parts["fullname"];
+            token = token with { FullName = fullname };
         }
 
-        if (parts.ContainsKey("username"))
+        if (parts.TryGetValue("username", out var username))
         {
-            token.Username = parts["username"];
+            token = token with { Username = username };
         }
 
         return token;

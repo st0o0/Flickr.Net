@@ -373,7 +373,7 @@ public class PhotoSearchOptions
         AddToDictionary(ref parameters);
 
         List<string> parts = new();
-        foreach (KeyValuePair<string, string> pair in parameters)
+        foreach (var pair in parameters)
         {
             parts.Add(Uri.EscapeDataString(pair.Key) + "|" + Uri.EscapeDataString(pair.Value));
         }
@@ -448,7 +448,7 @@ public class PhotoSearchOptions
         if (Licenses.Count != 0)
         {
             List<string> licenseArray = new();
-            foreach (LicenseType license in Licenses)
+            foreach (var license in Licenses)
             {
                 licenseArray.Add(license.ToString("d"));
             }

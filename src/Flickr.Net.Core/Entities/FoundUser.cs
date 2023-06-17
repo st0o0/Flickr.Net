@@ -1,62 +1,48 @@
-﻿namespace Flickr.Net.Core.Entities;
+﻿//using Flickr.Net.Core.Internals.Attributes;
+//using Newtonsoft.Json;
 
-/// <summary>
-/// Contains details of a user
-/// </summary>
-public sealed class FoundUser : IFlickrParsable
-{
-    /// <summary>
-    /// The ID of the found user.
-    /// </summary>
-    public string UserId { get; set; }
+//namespace Flickr.Net.Core.Entities;
 
-    /// <summary>
-    /// The username of the found user.
-    /// </summary>
-    public string UserName { get; set; }
+///// <summary>
+///// Contains details of a user
+///// </summary>
+//[FlickrJsonPropertyName("user")]
+//public sealed class FoundUser : IFlickrParsable
+//{
+//    /// <summary>
+//    /// The ID of the found user.
+//    /// </summary>
+//    [JsonProperty("nsid")]
+//    public string UserId { get; set; }
 
-    /// <summary>
-    /// The full name of the user. Only returned by <see
-    /// cref="IFlickrOAuth.GetAccessTokenAsync(OAuthRequestToken, string, CancellationToken)"/>.
-    /// </summary>
-    public string FullName { get; set; }
+// ///
+// <summary>
+// /// The username of the found user. ///
+// </summary>
+// [JsonProperty("username")] public string UserName { get; set; }
 
-    void IFlickrParsable.Load(XmlReader reader)
-    {
-        if (reader.LocalName != "user")
-        {
-            UtilityMethods.CheckParsingException(reader);
-        }
+// /// <summary> /// The full name of the user. Only returned by <see ///
+// cref="IFlickrOAuth.GetAccessTokenAsync(OAuthRequestToken, string, CancellationToken)"/>. ///
+// </summary> [JsonProperty("fullname")] public string FullName { get; set; }
 
-        while (reader.MoveToNextAttribute())
-        {
-            switch (reader.LocalName)
-            {
-                case "nsid":
-                case "id":
-                    UserId = reader.Value;
-                    break;
+// void IFlickrParsable.Load(XmlReader reader) { if (reader.LocalName != "user") {
+// UtilityMethods.CheckParsingException(reader); }
 
-                case "username":
-                    UserName = reader.Value;
-                    break;
+// while (reader.MoveToNextAttribute()) { switch (reader.LocalName) { case "nsid": case "id": UserId
+// = reader.Value; break;
 
-                case "fullname":
-                    FullName = reader.Value;
-                    break;
+// case "username": UserName = reader.Value; break;
 
-                default:
-                    UtilityMethods.CheckParsingException(reader);
-                    break;
-            }
-        }
+// case "fullname": FullName = reader.Value; break;
 
-        reader.Read();
+// default: UtilityMethods.CheckParsingException(reader); break; } }
 
-        if (reader.NodeType != XmlNodeType.EndElement)
-        {
-            UserName = reader.ReadElementContentAsString();
-            reader.Skip();
-        }
-    }
-}
+// reader.Read();
+
+//        if (reader.NodeType != XmlNodeType.EndElement)
+//        {
+//            UserName = reader.ReadElementContentAsString();
+//            reader.Skip();
+//        }
+//    }
+//}
