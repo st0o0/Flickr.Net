@@ -4,9 +4,9 @@ using Flickr.Net.Core.NewEntities;
 using Flickr.Net.Core.NewEntities.Collections;
 using Newtonsoft.Json;
 
-namespace Flickr.Net.Core.Test;
+namespace Flickr.Net.Core.Test.Entities;
 
-public class CamerasTests
+public class CameraTests
 {
     [Fact]
     public void JsonStringToCameras()

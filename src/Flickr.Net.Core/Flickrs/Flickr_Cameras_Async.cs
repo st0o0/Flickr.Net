@@ -8,7 +8,7 @@ namespace Flickr.Net.Core;
 /// </summary>
 public partial class Flickr : IFlickrCameras
 {
-    async Task<List<Brand>> IFlickrCameras.GetBrandsAsync(CancellationToken cancellationToken)
+    async Task<Brands> IFlickrCameras.GetBrandsAsync(CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -18,7 +18,7 @@ public partial class Flickr : IFlickrCameras
         return await GetResponseAsync<Brands>(parameters, cancellationToken);
     }
 
-    async Task<List<Camera>> IFlickrCameras.GetBrandModelsAsync(string brandId, CancellationToken cancellationToken)
+    async Task<Cameras> IFlickrCameras.GetBrandModelsAsync(string brandId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -40,7 +40,7 @@ public interface IFlickrCameras
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<List<Brand>> GetBrandsAsync(CancellationToken cancellationToken = default);
+    Task<Brands> GetBrandsAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get a list of camera models for a particular brand id.
@@ -48,5 +48,5 @@ public interface IFlickrCameras
     /// <param name="brandId">The ID of the brand you want the models of.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<List<Camera>> GetBrandModelsAsync(string brandId, CancellationToken cancellationToken = default);
+    Task<Cameras> GetBrandModelsAsync(string brandId, CancellationToken cancellationToken = default);
 }

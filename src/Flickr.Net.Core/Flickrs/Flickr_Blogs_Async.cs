@@ -1,5 +1,4 @@
-﻿using Flickr.Net.Core.NewEntities;
-using Flickr.Net.Core.NewEntities.Collections;
+﻿using Flickr.Net.Core.NewEntities.Collections;
 
 namespace Flickr.Net.Core;
 
@@ -8,7 +7,7 @@ namespace Flickr.Net.Core;
 /// </summary>
 public partial class Flickr : IFlickrBlogs
 {
-    async Task<List<Blog>> IFlickrBlogs.GetListAsync(CancellationToken cancellationToken)
+    async Task<Blogs> IFlickrBlogs.GetListAsync(CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -20,7 +19,7 @@ public partial class Flickr : IFlickrBlogs
         return await GetResponseAsync<Blogs>(parameters, cancellationToken);
     }
 
-    async Task<List<Service>> IFlickrBlogs.GetServicesAsync(CancellationToken cancellationToken)
+    async Task<Services> IFlickrBlogs.GetServicesAsync(CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -60,13 +59,13 @@ public interface IFlickrBlogs
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <remarks></remarks>
-    Task<List<Blog>> GetListAsync(CancellationToken cancellationToken = default);
+    Task<Blogs> GetListAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Return a list of Flickr supported blogging services.
     /// </summary>
     /// <param name="cancellationToken"></param>
-    Task<List<Service>> GetServicesAsync(CancellationToken cancellationToken = default);
+    Task<Services> GetServicesAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Posts a photo already uploaded to a blog. Requires authentication.

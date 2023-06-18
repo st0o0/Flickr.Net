@@ -1,11 +1,13 @@
-﻿namespace Flickr.Net.Core;
+﻿using Flickr.Net.Core.NewEntities.Collections;
+
+namespace Flickr.Net.Core;
 
 /// <summary>
 /// The flickr.
 /// </summary>
 public partial class Flickr : IFlickrContacts
 {
-    async Task<ContactCollection> IFlickrContacts.GetListAsync(ContactType filter, int page, int perPage, CancellationToken cancellationToken)
+    async Task<Contacts> IFlickrContacts.GetListAsync(ContactType filter, int page, int perPage, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -29,10 +31,10 @@ public partial class Flickr : IFlickrContacts
             parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
 
-        return await GetResponseAsync<ContactCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<Contacts>(parameters, cancellationToken);
     }
 
-    async Task<ContactCollection> IFlickrContacts.GetListRecentlyUploadedAsync(ContactSearch filter, DateTime? dateLastUpdated, CancellationToken cancellationToken)
+    async Task<Contacts> IFlickrContacts.GetListRecentlyUploadedAsync(ContactSearch filter, DateTime? dateLastUpdated, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -52,10 +54,10 @@ public partial class Flickr : IFlickrContacts
             parameters.Add("filter", filterString);
         }
 
-        return await GetResponseAsync<ContactCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<Contacts>(parameters, cancellationToken);
     }
 
-    async Task<ContactCollection> IFlickrContacts.GetPublicListAsync(string userId, int page, int perPage, CancellationToken cancellationToken)
+    async Task<Contacts> IFlickrContacts.GetPublicListAsync(string userId, int page, int perPage, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -73,10 +75,10 @@ public partial class Flickr : IFlickrContacts
             parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
 
-        return await GetResponseAsync<ContactCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<Contacts>(parameters, cancellationToken);
     }
 
-    async Task<ContactCollection> IFlickrContacts.GetTaggingSuggestionsAsync(int page, int perPage, CancellationToken cancellationToken)
+    async Task<Contacts> IFlickrContacts.GetTaggingSuggestionsAsync(int page, int perPage, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -95,7 +97,7 @@ public partial class Flickr : IFlickrContacts
             parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
 
-        return await GetResponseAsync<ContactCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<Contacts>(parameters, cancellationToken);
     }
 }
 
@@ -120,7 +122,7 @@ public interface IFlickrContacts
     /// </param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<ContactCollection> GetListAsync(ContactType filter = ContactType.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<Contacts> GetListAsync(ContactType filter = ContactType.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Return a list of contacts for a user who have recently uploaded photos along with the total
@@ -140,7 +142,7 @@ public interface IFlickrContacts
     /// </param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<ContactCollection> GetListRecentlyUploadedAsync(ContactSearch filter = ContactSearch.AllContacts, DateTime? dateLastUpdated = null, CancellationToken cancellationToken = default);
+    Task<Contacts> GetListRecentlyUploadedAsync(ContactSearch filter = ContactSearch.AllContacts, DateTime? dateLastUpdated = null, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets a list of the given users contact, or those that are publically avaiable.
@@ -155,7 +157,7 @@ public interface IFlickrContacts
     /// </param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<ContactCollection> GetPublicListAsync(string userId, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<Contacts> GetPublicListAsync(string userId, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Returns a list of contacts who Flickr suggests you might want to tag.
@@ -168,5 +170,5 @@ public interface IFlickrContacts
     /// <param name="perPage">The number of contacts to return per page.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<ContactCollection> GetTaggingSuggestionsAsync(int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<Contacts> GetTaggingSuggestionsAsync(int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 }

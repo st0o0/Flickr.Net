@@ -8,7 +8,7 @@ namespace Flickr.Net.Core;
 /// </summary>
 public partial class Flickr : IFlickrActivity
 {
-    async Task<List<Item>> IFlickrActivity.UserCommentsAsync(int page, int perPage, CancellationToken cancellationToken)
+    async Task<Items> IFlickrActivity.UserCommentsAsync(int page, int perPage, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -30,7 +30,7 @@ public partial class Flickr : IFlickrActivity
         return await GetResponseAsync<Items>(parameters, cancellationToken);
     }
 
-    async Task<List<Item>> IFlickrActivity.UserPhotosAsync(int timePeriod, TimeType timeType, int page, int perPage, CancellationToken cancellationToken)
+    async Task<Items> IFlickrActivity.UserPhotosAsync(int timePeriod, TimeType timeType, int page, int perPage, CancellationToken cancellationToken)
     {
         if (timePeriod == 0)
         {
@@ -78,7 +78,7 @@ public interface IFlickrActivity
     /// <param name="page">The page of the activity to return.</param>
     /// <param name="perPage">The number of activities to return per page.</param>
     /// <param name="cancellationToken"></param>
-    Task<List<Item>> UserCommentsAsync(int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<Items> UserCommentsAsync(int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Returns a list of recent activity on photos belonging to the calling user.
@@ -89,5 +89,5 @@ public interface IFlickrActivity
     /// <param name="page">The page numver of the activity to return.</param>
     /// <param name="perPage">The number of activities to return per page.</param>
     /// <param name="cancellationToken"></param>
-    Task<List<Item>> UserPhotosAsync(int timePeriod, TimeType timeType = TimeType.Hours, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<Items> UserPhotosAsync(int timePeriod, TimeType timeType = TimeType.Hours, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 }

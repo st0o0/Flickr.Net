@@ -5,9 +5,9 @@ using Flickr.Net.Core.NewEntities.Collections;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Flickr.Net.Core.Test;
+namespace Flickr.Net.Core.Test.Entities;
 
-public class ItemsTests
+public class ItemTests
 {
     [Fact]
     public void JsonStringToItems()

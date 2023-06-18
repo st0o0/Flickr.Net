@@ -9,7 +9,7 @@ using Flickr.Net.Core.NewEntities.Collections;
 using Flickr.Net.Core.NewEntities;
 using Newtonsoft.Json;
 
-namespace Flickr.Net.Core.Test;
+namespace Flickr.Net.Core.Test.Entities;
 
 public class CollectionTests
 {
@@ -85,5 +85,74 @@ public class CollectionTests
         Assert.True(items.IconPhotos.Values[0].IsPublic);
         Assert.False(items.IconPhotos.Values[0].IsFamily);
         Assert.False(items.IconPhotos.Values[0].IsFriend);
+    }
+
+    [Fact]
+    public void JsonStringToCollections()
+    {
+        var json = /*lang=json,strict*/ """
+            {
+              "stat": "ok",
+              "collections": {
+                "collection": [
+                  {
+                    "id": "12-72157594586579649",
+                    "title": "All My Photos",
+                    "description": "a collection",
+                    "iconlarge": "https://combo.staticflickr.com/pw/images/collection_default_l.gif",
+                    "iconsmall": "https://combo.staticflickr.com/pw/images/collection_default_s.gif",
+                    "set": [
+                      {
+                        "id": "92157594171298291",
+                        "title": "kitesurfing",
+                        "description": "a set"
+                      },
+                      {
+                        "id": "72157594247596158",
+                        "title": "faves",
+                        "description": "some favorites."
+                      }
+                    ]
+                  },
+                  {
+                    "id": "12-72157594586579649",
+                    "title": "All My Photos",
+                    "description": "a collection",
+                    "iconlarge": "https://combo.staticflickr.com/pw/images/collection_default_l.gif",
+                    "iconsmall": "https://combo.staticflickr.com/pw/images/collection_default_s.gif",
+                    "set": [
+                      {
+                        "id": "92157594171298291",
+                        "title": "kitesurfing",
+                        "description": "a set"
+                      },
+                      {
+                        "id": "72157594247596158",
+                        "title": "faves",
+                        "description": "some favorites."
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+            """;
+
+        var result = JsonConvert.DeserializeObject<FlickrResult<Collections>>(json, new JsonSerializerSettings
+        {
+            ContractResolver = new GenericJsonPropertyNameContractResolver()
+        });
+
+        Assert.NotNull(result);
+        Assert.False(result.HasError);
+        var items = result.Content;
+        Assert.IsType<Collections>(items);
+        Assert.IsType<Collection>(items.Values[0]);
+        Assert.IsType<DateTime>(items.Values[0].DateCreate);
+        Assert.Equal(2, items.Values.Count);
+        Assert.IsType<Set>(items.Values[0].Sets[0]);
+        Assert.Equal(2, items.Values[0].Sets.Count);
+        Assert.IsType<Set>(items.Values[1].Sets[0]);
+        Assert.Equal(2, items.Values[1].Sets.Count);
     }
 }

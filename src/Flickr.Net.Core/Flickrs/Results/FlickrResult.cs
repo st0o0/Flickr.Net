@@ -1,5 +1,6 @@
 ﻿using Flickr.Net.Core.Exceptions;
 using Flickr.Net.Core.Internals.Attributes;
+using Newtonsoft.Json;
 
 namespace Flickr.Net.Core.Flickrs.Results;
 
@@ -63,4 +64,26 @@ public class FlickrResult
     /// If an error was returned by the Flickr API then this will contain the error message.
     /// </summary>
     public string ErrorMessage { get; set; }
+}
+
+/// <summary>
+/// </summary>
+/// <typeparam name="TNextPhoto"></typeparam>
+/// <typeparam name="TPrevPhoto"></typeparam>
+public class FlickrContextResult<TNextPhoto, TPrevPhoto> : FlickrResult
+{
+    /// <summary>
+    /// </summary>
+    [JsonProperty("count")]
+    public int Count { get; set; }
+
+    /// <summary>
+    /// </summary>
+    [JsonPropertyGenericTypeName(0)]
+    public TNextPhoto NextPhoto { get; set; }
+
+    /// <summary>
+    /// </summary>
+    [JsonPropertyGenericTypeName(1)]
+    public TPrevPhoto PrevPhoto { get; set; }
 }

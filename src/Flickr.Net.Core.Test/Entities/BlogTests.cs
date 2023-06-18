@@ -3,9 +3,9 @@ using Flickr.Net.Core.Internals.ContractResolver;
 using Flickr.Net.Core.NewEntities.Collections;
 using Newtonsoft.Json;
 
-namespace Flickr.Net.Core.Test;
+namespace Flickr.Net.Core.Test.Entities;
 
-public class BlogsTests
+public class BlogTests
 {
     [Fact]
     public void JsonStringToBlogs()

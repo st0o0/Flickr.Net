@@ -1,142 +1,103 @@
-namespace Flickr.Net.Core.Entities;
+//namespace Flickr.Net.Core.Entities;
 
-/// <summary>
-/// Summary description for CollectionInfo.
-/// </summary>
-public sealed class CollectionInfo : IFlickrParsable
-{
-    private readonly Collection<Photo> _iconPhotos = new();
+///// <summary>
+///// Summary description for CollectionInfo.
+///// </summary>
+//public sealed class CollectionInfo : IFlickrParsable
+//{
+//    private readonly Collection<Photo> _iconPhotos = new();
 
-    /// <summary>
-    /// The ID for the collection.
-    /// </summary>
-    public string CollectionId { get; set; }
+// ///
+// <summary>
+// /// The ID for the collection. ///
+// </summary>
+// public string CollectionId { get; set; }
 
-    /// <summary>
-    /// The number of child collections this collection contains. Call <see
-    /// cref="IFlickrCollections.GetTreeAsync(string, string, CancellationToken)"/> for children.
-    /// </summary>
-    public int ChildCount { get; set; }
+// /// <summary> /// The number of child collections this collection contains. Call <see ///
+// cref="IFlickrCollections.GetTreeAsync(string, string, CancellationToken)"/> for children. ///
+// </summary> public int ChildCount { get; set; }
 
-    /// <summary>
-    /// The date the collection was created.
-    /// </summary>
-    public DateTime DateCreated { get; set; }
+// ///
+// <summary>
+// /// The date the collection was created. ///
+// </summary>
+// public DateTime DateCreated { get; set; }
 
-    /// <summary>
-    /// The large mosaic icon for the collection.
-    /// </summary>
-    public string IconLarge { get; set; }
+// ///
+// <summary>
+// /// The large mosaic icon for the collection. ///
+// </summary>
+// public string IconLarge { get; set; }
 
-    /// <summary>
-    /// The small mosaix icon for the collection.
-    /// </summary>
-    public string IconSmall { get; set; }
+// ///
+// <summary>
+// /// The small mosaix icon for the collection. ///
+// </summary>
+// public string IconSmall { get; set; }
 
-    /// <summary>
-    /// The server for the icons.
-    /// </summary>
-    public string Server { get; set; }
+// ///
+// <summary>
+// /// The server for the icons. ///
+// </summary>
+// public string Server { get; set; }
 
-    /// <summary>
-    /// The secret for the icons.
-    /// </summary>
-    public string Secret { get; set; }
+// ///
+// <summary>
+// /// The secret for the icons. ///
+// </summary>
+// public string Secret { get; set; }
 
-    /// <summary>
-    /// The description for the collection.
-    /// </summary>
-    public string Description { get; set; }
+// ///
+// <summary>
+// /// The description for the collection. ///
+// </summary>
+// public string Description { get; set; }
 
-    /// <summary>
-    /// The title of the description.
-    /// </summary>
-    public string Title { get; set; }
+// ///
+// <summary>
+// /// The title of the description. ///
+// </summary>
+// public string Title { get; set; }
 
-    /// <summary>
-    /// An array of the 12 photos used to create a collection's mosaic.
-    /// </summary>
-    public Collection<Photo> IconPhotos
-    { get { return _iconPhotos; } }
+// /// <summary> /// An array of the 12 photos used to create a collection's mosaic. /// </summary>
+// public Collection<Photo> IconPhotos { get { return _iconPhotos; } }
 
-    void IFlickrParsable.Load(System.Xml.XmlReader reader)
-    {
-        if (reader.LocalName != "collection")
-        {
-            UtilityMethods.CheckParsingException(reader);
-        }
+// void IFlickrParsable.Load(System.Xml.XmlReader reader) { if (reader.LocalName != "collection") {
+// UtilityMethods.CheckParsingException(reader); }
 
-        while (reader.MoveToNextAttribute())
-        {
-            switch (reader.Name)
-            {
-                case "id":
-                    CollectionId = reader.Value;
-                    break;
+// while (reader.MoveToNextAttribute()) { switch (reader.Name) { case "id": CollectionId =
+// reader.Value; break;
 
-                case "child_count":
-                    ChildCount = int.Parse(reader.Value, System.Globalization.CultureInfo.InvariantCulture);
-                    break;
+// case "child_count": ChildCount = int.Parse(reader.Value,
+// System.Globalization.CultureInfo.InvariantCulture); break;
 
-                case "datecreate":
-                    DateCreated = UtilityMethods.UnixTimestampToDate(reader.Value);
-                    break;
+// case "datecreate": DateCreated = UtilityMethods.UnixTimestampToDate(reader.Value); break;
 
-                case "iconlarge":
-                    IconLarge = reader.Value;
-                    break;
+// case "iconlarge": IconLarge = reader.Value; break;
 
-                case "iconsmall":
-                    IconSmall = reader.Value;
-                    break;
+// case "iconsmall": IconSmall = reader.Value; break;
 
-                case "server":
-                    Server = reader.Value;
-                    break;
+// case "server": Server = reader.Value; break;
 
-                case "secret":
-                    Secret = reader.Value;
-                    break;
+// case "secret": Secret = reader.Value; break;
 
-                default:
-                    UtilityMethods.CheckParsingException(reader);
-                    break;
-            }
-        }
+// default: UtilityMethods.CheckParsingException(reader); break; } }
 
-        reader.Read();
+// reader.Read();
 
-        while (reader.LocalName != "collection")
-        {
-            switch (reader.Name)
-            {
-                case "title":
-                    Title = reader.ReadElementContentAsString();
-                    break;
+// while (reader.LocalName != "collection") { switch (reader.Name) { case "title": Title =
+// reader.ReadElementContentAsString(); break;
 
-                case "description":
-                    Description = reader.ReadElementContentAsString();
-                    break;
+// case "description": Description = reader.ReadElementContentAsString(); break;
 
-                case "iconphotos":
-                    reader.Read();
+// case "iconphotos": reader.Read();
 
-                    while (reader.LocalName == "photo")
-                    {
-                        Photo p = new();
-                        ((IFlickrParsable)p).Load(reader);
+// while (reader.LocalName == "photo") { Photo p = new(); ((IFlickrParsable)p).Load(reader);
 
-                        _iconPhotos.Add(p);
-                    }
-                    reader.Read();
-                    return;
+// _iconPhotos.Add(p); } reader.Read(); return;
 
-                default:
-                    UtilityMethods.CheckParsingException(reader);
-                    break;
-            }
-        }
+// default: UtilityMethods.CheckParsingException(reader); break; } }
 
-        reader.Skip();
-    }
-}
+//        reader.Skip();
+//    }
+//}
