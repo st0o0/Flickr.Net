@@ -124,7 +124,7 @@ public class ItemTests
         Assert.IsType<Items>(items);
         Assert.Equal(3, items.Values.Count);
         Assert.IsType<ItemType>(items.Values[0].Type);
-        Assert.IsType<DateTime>(items.Values[0].Activity.Events[0].DateAdded);
+        Assert.IsType<DateTime>(items.Values[0].Activity.Events[0].AddedDate);
         Assert.IsType<EventType>(items.Values[0].Activity.Events[0].Type);
     }
 }

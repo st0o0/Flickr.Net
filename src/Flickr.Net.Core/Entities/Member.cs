@@ -2,7 +2,7 @@ namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// Details for a Flickr member, as returned by the <see
-/// cref="IFlickrGroupsMembers.GetListAsync(string, MemberTypes, int, int, CancellationToken)"/> method.
+/// cref="IFlickrGroupsMembers.GetListAsync(string, MemberType, int, int, CancellationToken)"/> method.
 /// </summary>
 public sealed class Member : IFlickrParsable
 {
@@ -29,7 +29,7 @@ public sealed class Member : IFlickrParsable
     /// <summary>
     /// The type of the member (basic, moderator or administrator).
     /// </summary>
-    public MemberTypes MemberType { get; set; }
+    public MemberType MemberType { get; set; }
 
     /// <summary>
     /// The icon URL for the users buddy icon. Calculated from the <see cref="IconFarm"/> and <see cref="IconServer"/>.

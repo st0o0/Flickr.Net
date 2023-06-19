@@ -17,6 +17,15 @@ public class Contact
     [JsonProperty("realname")]
     public string RealName { get; set; }
 
+    [JsonProperty("location")]
+    public string Location { get; set; }
+
+    [JsonProperty("path_alias")]
+    public string PathAlias { get; set; }
+
+    [JsonProperty("photos_uploaded")]
+    public int UploadedPhotos { get; set; }
+
     [JsonProperty("friend")]
     [JsonConverter(typeof(BoolConverter))]
     public bool Friend { get; set; }
@@ -28,4 +37,8 @@ public class Contact
     [JsonProperty("ignored")]
     [JsonConverter(typeof(BoolConverter))]
     public bool Ignored { get; set; }
+
+    [JsonProperty("ispro")]
+    [JsonConverter(typeof(BoolConverter))]
+    public bool IsPro { get; set; }
 }

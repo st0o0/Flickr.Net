@@ -28,7 +28,7 @@ public class TopicReply : IFlickrParsable
     /// <summary>
     /// The role within the group of the reply author.
     /// </summary>
-    public MemberTypes AuthorRole { get; set; }
+    public MemberType AuthorRole { get; set; }
 
     /// <summary>
     /// The server for the reply author's buddy icon.

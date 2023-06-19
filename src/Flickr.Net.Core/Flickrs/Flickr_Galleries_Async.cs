@@ -1,4 +1,7 @@
-﻿namespace Flickr.Net.Core;
+﻿using Flickr.Net.Core.NewEntities;
+using Flickr.Net.Core.NewEntities.Collections;
+
+namespace Flickr.Net.Core;
 
 /// <summary>
 /// The flickr.
@@ -19,7 +22,7 @@ public partial class Flickr : IFlickrGalleries
             parameters.Add("comment", comment);
         }
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
     async Task IFlickrGalleries.CreateAsync(string title, string description, string primaryPhotoId, CancellationToken cancellationToken)
@@ -38,7 +41,7 @@ public partial class Flickr : IFlickrGalleries
             parameters.Add("primary_photo_id", primaryPhotoId);
         }
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
     async Task IFlickrGalleries.EditMetaAsync(string galleryId, string title, string description, CancellationToken cancellationToken)
@@ -57,7 +60,7 @@ public partial class Flickr : IFlickrGalleries
             parameters.Add("description", description);
         }
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
     async Task IFlickrGalleries.EditPhotoAsync(string galleryId, string photoId, string comment, CancellationToken cancellationToken)
@@ -72,7 +75,7 @@ public partial class Flickr : IFlickrGalleries
             { "comment", comment }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
     async Task IFlickrGalleries.EditPhotosAsync(string galleryId, string primaryPhotoId, IEnumerable<string> photoIds, CancellationToken cancellationToken)
@@ -87,7 +90,7 @@ public partial class Flickr : IFlickrGalleries
             { "photo_ids", string.Join(",", photoIds.ToArray())}
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
     async Task<Gallery> IFlickrGalleries.GetInfoAsync(string galleryId, CancellationToken cancellationToken)
@@ -101,7 +104,7 @@ public partial class Flickr : IFlickrGalleries
         return await GetResponseAsync<Gallery>(parameters, cancellationToken);
     }
 
-    async Task<GalleryCollection> IFlickrGalleries.GetListAsync(string userId, int page, int perPage, CancellationToken cancellationToken)
+    async Task<Galleries> IFlickrGalleries.GetListAsync(string userId, int page, int perPage, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -123,10 +126,10 @@ public partial class Flickr : IFlickrGalleries
             parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
 
-        return await GetResponseAsync<GalleryCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<Galleries>(parameters, cancellationToken);
     }
 
-    async Task<GalleryCollection> IFlickrGalleries.GetListForPhotoAsync(string photoId, int page, int perPage, CancellationToken cancellationToken)
+    async Task<Galleries> IFlickrGalleries.GetListForPhotoAsync(string photoId, int page, int perPage, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -144,10 +147,10 @@ public partial class Flickr : IFlickrGalleries
             parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
 
-        return await GetResponseAsync<GalleryCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<Galleries>(parameters, cancellationToken);
     }
 
-    async Task<GalleryPhotoCollection> IFlickrGalleries.GetPhotosAsync(string galleryId, PhotoSearchExtras extras, CancellationToken cancellationToken)
+    async Task<GalleryPhotos> IFlickrGalleries.GetPhotosAsync(string galleryId, PhotoSearchExtras extras, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -160,7 +163,7 @@ public partial class Flickr : IFlickrGalleries
             parameters.Add("extras", extras.ToFlickrString());
         }
 
-        return await GetResponseAsync<GalleryPhotoCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<GalleryPhotos>(parameters, cancellationToken);
     }
 
     async Task IFlickrGalleries.RemovePhoto(string galleryId, string photoId, string fullResponse, CancellationToken cancellationToken)
@@ -267,7 +270,7 @@ public interface IFlickrGalleries
     /// <param name="perPage"></param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<GalleryCollection> GetListAsync(string userId, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<Galleries> GetListAsync(string userId, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Return the list of galleries to which a photo has been added. Galleries are returned sorted
@@ -283,7 +286,7 @@ public interface IFlickrGalleries
     /// </param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<GalleryCollection> GetListForPhotoAsync(string photoId, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<Galleries> GetListForPhotoAsync(string photoId, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Return the list of photos for a gallery.
@@ -292,7 +295,7 @@ public interface IFlickrGalleries
     /// <param name="extras">A list of extra information to fetch for each returned record.</param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<GalleryPhotoCollection> GetPhotosAsync(string galleryId, PhotoSearchExtras extras = PhotoSearchExtras.None, CancellationToken cancellationToken = default);
+    Task<GalleryPhotos> GetPhotosAsync(string galleryId, PhotoSearchExtras extras = PhotoSearchExtras.None, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Remove a photo from a gallery (and optionally update the gallery description).

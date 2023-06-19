@@ -38,7 +38,7 @@ public class Topic : IFlickrParsable
     /// <summary>
     /// The role within the group of the author of the topic.
     /// </summary>
-    public MemberTypes AuthorRole { get; set; }
+    public MemberType AuthorRole { get; set; }
 
     /// <summary>
     /// The server for the author's buddy icon.

@@ -5,7 +5,7 @@ namespace Flickr.Net.Core.NewEntities;
 public class Details
 {
     [JsonProperty("megapixels")]
-    public string Megapixels { get; set; }
+    public string MegaPixels { get; set; }
 
     [JsonProperty("zoom")]
     public string Zoom { get; set; }

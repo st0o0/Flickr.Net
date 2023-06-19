@@ -20,13 +20,13 @@ public class Event
     /// <summary>
     /// </summary>
     [JsonProperty("username")]
-    public string Username { get; set; }
+    public string UserName { get; set; }
 
     /// <summary>
     /// </summary>
     [JsonProperty("dateadded")]
     [JsonConverter(typeof(FlickrTimestampToDateTimeConverter))]
-    public DateTime? DateAdded { get; set; }
+    public DateTime AddedDate { get; set; }
 
     /// <summary>
     /// </summary>

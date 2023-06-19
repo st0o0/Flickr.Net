@@ -79,7 +79,7 @@ public class CollectionTests
         Assert.False(result.HasError);
         var items = result.Content;
         Assert.IsType<Collection>(items);
-        Assert.IsType<DateTime>(items.DateCreate);
+        Assert.IsType<DateTime>(items.CreateDate);
         Assert.IsType<Photos>(items.IconPhotos);
         Assert.Equal(3, items.IconPhotos.Values.Count);
         Assert.True(items.IconPhotos.Values[0].IsPublic);
@@ -148,7 +148,7 @@ public class CollectionTests
         var items = result.Content;
         Assert.IsType<Collections>(items);
         Assert.IsType<Collection>(items.Values[0]);
-        Assert.IsType<DateTime>(items.Values[0].DateCreate);
+        Assert.IsType<DateTime>(items.Values[0].CreateDate);
         Assert.Equal(2, items.Values.Count);
         Assert.IsType<Set>(items.Values[0].Sets[0]);
         Assert.Equal(2, items.Values[0].Sets.Count);

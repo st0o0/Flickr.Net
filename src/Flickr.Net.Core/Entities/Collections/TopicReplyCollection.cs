@@ -61,7 +61,7 @@ public class TopicReplyCollection : System.Collections.ObjectModel.Collection<To
     /// <summary>
     /// The role within the group of the topic author.
     /// </summary>
-    public MemberTypes AuthorRole { get; set; }
+    public MemberType AuthorRole { get; set; }
 
     /// <summary>
     /// The server for the author's buddy icon.

@@ -22,7 +22,7 @@ public class Collection
 
     [JsonProperty("datecreate")]
     [JsonConverter(typeof(FlickrTimestampToDateTimeConverter))]
-    public DateTime DateCreate { get; set; }
+    public DateTime CreateDate { get; set; }
 
     [JsonProperty("iconlarge")]
     public string LargeIcon { get; set; }

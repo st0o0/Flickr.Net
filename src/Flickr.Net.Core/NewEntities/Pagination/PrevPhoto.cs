@@ -1,12 +1,12 @@
 ﻿using Flickr.Net.Core.Internals.Attributes;
 using Newtonsoft.Json;
 
-namespace Flickr.Net.Core.NewEntities.Paging;
+namespace Flickr.Net.Core.NewEntities.Pagination;
 
 /// <summary>
 /// </summary>
-[FlickrJsonPropertyName("nextphoto")]
-public class NextPhoto
+[FlickrJsonPropertyName("prevphoto")]
+public class PrevPhoto
 {
     [JsonProperty("id")]
     public string Id { get; set; }

@@ -10,5 +10,5 @@ namespace Flickr.Net.Core.NewEntities;
 public class Activity
 {
     [JsonProperty("event")]
-    public List<Event> Events { get; set; }
+    public List<Event> Events { get; set; } = new List<Event>();
 }

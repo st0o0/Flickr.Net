@@ -12,11 +12,24 @@ namespace Flickr.Net.Core;
 /// </summary>
 public partial class Flickr
 {
+    private Task<FlickrContextResult<TNextPhoto, TPrevPhoto>> GetContextResponseAsync<TNextPhoto, TPrevPhoto>(Dictionary<string, string> parameters, CancellationToken cancellationToken = default) => GetGenericResponseAsync<FlickrContextResult<TNextPhoto, TPrevPhoto>, TNextPhoto, TPrevPhoto>(parameters, cancellationToken);
+
     private Task GetResponseAsync(Dictionary<string, string> parameters, CancellationToken cancellationToken = default) => GetGenericResponseAsync<FlickrResult, string>(parameters, cancellationToken);
 
     private Task<T> GetResponseAsync<T>(Dictionary<string, string> parameters, CancellationToken cancellationToken = default) => GetGenericResponseAsync<FlickrResult<T>, T>(parameters, cancellationToken);
 
-    private async Task<TResponse> GetGenericResponseAsync<T, TResponse>(Dictionary<string, string> parameters, CancellationToken cancellationToken = default) where T : FlickrResult
+    private async Task<TResponse> GetGenericResponseAsync<T, TResponse>(Dictionary<string, string> parameters, CancellationToken cancellationToken = default)
+    {
+        var result = await GetGenericResponseAsync<FlickrResult<TResponse>, TResponse>(parameters, cancellationToken);
+        if (result is FlickrResult<TResponse> value)
+        {
+            return value.Content;
+        }
+
+        return default;
+    }
+
+    private async Task<T> GetGenericResponseAsync<T, TPrimaryResponse, TSecondResponse>(Dictionary<string, string> parameters, CancellationToken cancellationToken = default) where T : FlickrResult
     {
         CheckApiKey();
 
@@ -78,12 +91,7 @@ public partial class Flickr
                 throw ExceptionHandler.CreateResponseException(flickrResults);
             }
 
-            if (flickrResults is FlickrResult<TResponse> value)
-            {
-                return value.Content;
-            }
-
-            return default;
+            return flickrResults;
         }
         catch (Exception)
         {
