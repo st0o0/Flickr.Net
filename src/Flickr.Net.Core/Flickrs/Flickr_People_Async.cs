@@ -1,5 +1,6 @@
 ﻿using Flickr.Net.Core.Exceptions;
 using Flickr.Net.Core.NewEntities;
+using Flickr.Net.Core.NewEntities.Collections;
 
 namespace Flickr.Net.Core;
 
@@ -30,7 +31,7 @@ public partial class Flickr : IFlickrPeople
         return await GetResponseAsync<User>(parameters, cancellationToken);
     }
 
-    async Task<GroupInfoCollection> IFlickrPeople.GetGroupsAsync(string userId, CancellationToken cancellationToken)
+    async Task<Groups> IFlickrPeople.GetGroupsAsync(string userId, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -40,7 +41,7 @@ public partial class Flickr : IFlickrPeople
             { "user_id", userId }
         };
 
-        return await GetResponseAsync<GroupInfoCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<Groups>(parameters, cancellationToken);
     }
 
     async Task<Person> IFlickrPeople.GetInfoAsync(string userId, CancellationToken cancellationToken)
@@ -165,7 +166,7 @@ public partial class Flickr : IFlickrPeople
         return await GetResponseAsync<UserStatus>(parameters, cancellationToken);
     }
 
-    async Task<GroupInfoCollection> IFlickrPeople.GetPublicGroupsAsync(string userId, CancellationToken cancellationToken)
+    async Task<Groups> IFlickrPeople.GetPublicGroupsAsync(string userId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -173,7 +174,7 @@ public partial class Flickr : IFlickrPeople
             { "user_id", userId }
         };
 
-        return await GetResponseAsync<GroupInfoCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<Groups>(parameters, cancellationToken);
     }
 }
 
@@ -207,7 +208,7 @@ public interface IFlickrPeople
     /// </summary>
     /// <param name="userId">The user whose groups you wish to return.</param>
     /// <param name="cancellationToken"></param>
-    Task<GroupInfoCollection> GetGroupsAsync(string userId, CancellationToken cancellationToken = default);
+    Task<Groups> GetGroupsAsync(string userId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets the <see cref="Person"/> object for the given user id.
@@ -277,5 +278,5 @@ public interface IFlickrPeople
     /// </summary>
     /// <param name="userId">The user id to get groups for.</param>
     /// <param name="cancellationToken"></param>
-    Task<GroupInfoCollection> GetPublicGroupsAsync(string userId, CancellationToken cancellationToken = default);
+    Task<Groups> GetPublicGroupsAsync(string userId, CancellationToken cancellationToken = default);
 }

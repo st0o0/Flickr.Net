@@ -1,4 +1,5 @@
 ﻿using Flickr.Net.Core.Internals.Extensions;
+using Flickr.Net.Core.NewEntities.Collections;
 
 namespace Flickr.Net.Core;
 
@@ -7,7 +8,7 @@ namespace Flickr.Net.Core;
 /// </summary>
 public partial class Flickr : IFlickrGroupsMembers
 {
-    async Task<MemberCollection> IFlickrGroupsMembers.GetListAsync(string groupId, MemberType memberTypes, int page, int perPage, CancellationToken cancellationToken)
+    async Task<Members> IFlickrGroupsMembers.GetListAsync(string groupId, MemberType memberTypes, int page, int perPage, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -33,7 +34,7 @@ public partial class Flickr : IFlickrGroupsMembers
 
         parameters.Add("group_id", groupId);
 
-        return await GetResponseAsync<MemberCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<Members>(parameters, cancellationToken);
     }
 }
 
@@ -59,5 +60,5 @@ public interface IFlickrGroupsMembers
     /// The number of members to return per page (default is 100, max is 500).
     /// </param>
     /// <param name="cancellationToken"></param>
-    Task<MemberCollection> GetListAsync(string groupId, MemberType memberTypes = MemberType.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<Members> GetListAsync(string groupId, MemberType memberTypes = MemberType.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 }

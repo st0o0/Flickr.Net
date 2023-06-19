@@ -1,5 +1,7 @@
 ﻿using Flickr.Net.Core.Internals.Attributes;
+using Flickr.Net.Core.Internals.JsonConverters;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Flickr.Net.Core.NewEntities.Collections;
 
@@ -128,4 +130,78 @@ public class Replies : FlickrCollection<Reply>
 {
     [JsonProperty("topic")]
     public Topic Topic { get; set; }
+}
+
+/// <inheritdoc/>
+[FlickrJsonPropertyName("topics")]
+public class Topics : FlickrPaginationCollection<Topic>
+{
+    [JsonProperty("group_id")]
+    public string GroupId { get; set; }
+
+    [JsonProperty("iconserver")]
+    public string IconServer { get; set; }
+
+    [JsonProperty("iconfarm")]
+    public string IconFarm { get; set; }
+
+    [JsonProperty("name")]
+    public string Name { get; set; }
+
+    [JsonProperty("members")]
+    public int Members { get; set; }
+
+    [JsonProperty("privacy")]
+    public PoolPrivacy Privacy { get; set; }
+
+    [JsonProperty("lang")]
+    public string Lang { get; set; }
+
+    [JsonProperty("ispoolmoderated")]
+    [JsonConverter(typeof(BoolConverter))]
+    public bool IsPoolModerated { get; set; }
+
+    [JsonIgnore]
+    public string GroupIconUrl => UtilityMethods.BuddyIcon(IconServer, IconFarm, GroupId);
+}
+
+/// <inheritdoc/>
+[FlickrJsonPropertyName("groups")]
+public class Groups : FlickrPaginationCollection<Group>
+{ }
+
+/// <inheritdoc/>
+//[FlickrJsonPropertyName("groups")]
+//public class GroupSearchResults : FlickrPaginationCollection<GroupSearchResult>
+//{ }
+
+/// <inheritdoc/>
+[FlickrJsonPropertyName("members")]
+public class Members : FlickrPaginationCollection<Member>
+{ }
+
+/// <inheritdoc/>
+[FlickrJsonPropertyName("namespaces")]
+public class Namespaces : FlickrPaginationCollection<Namespace>
+{ }
+
+/// <inheritdoc/>
+[FlickrJsonPropertyName("pairs")]
+public class Pairs : FlickrPaginationCollection<Pair>
+{ }
+
+/// <inheritdoc/>
+[FlickrJsonPropertyName("predicates")]
+public class Predicates : FlickrPaginationCollection<Predicate>
+{ }
+
+/// <inheritdoc/>
+[FlickrJsonPropertyName("values")]
+public class Values : FlickrPaginationCollection<Value>
+{
+    [JsonProperty("namespace")]
+    public string Namespace { get; set; }
+
+    [JsonProperty("predicate")]
+    public string Predicate { get; set; }
 }

@@ -36,4 +36,8 @@ public class Photo
     [JsonProperty("isfamily")]
     [JsonConverter(typeof(BoolConverter))]
     public bool IsFamily { get; set; }
+
+    [JsonProperty("dateadded")]
+    [JsonConverter(typeof(FlickrTimestampToDateTimeConverter))]
+    public string AddedDate { get; set; }
 }
