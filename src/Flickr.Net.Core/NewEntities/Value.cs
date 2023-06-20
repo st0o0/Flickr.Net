@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Flickr.Net.Core.Internals.JsonConverters;
+﻿using Flickr.Net.Core.Internals.JsonConverters;
 using Newtonsoft.Json;
 
 namespace Flickr.Net.Core.NewEntities;
@@ -20,11 +15,11 @@ public class Value
     public string Predicate { get; set; }
 
     [JsonProperty("first_added")]
-    [JsonConverter(typeof(FlickrTimestampToDateTimeConverter))]
+    [JsonConverter(typeof(TimestampToDateTimeConverter))]
     public DateTime FirstAdded { get; set; }
 
     [JsonProperty("last_added")]
-    [JsonConverter(typeof(FlickrTimestampToDateTimeConverter))]
+    [JsonConverter(typeof(TimestampToDateTimeConverter))]
     public DateTime LastAdded { get; set; }
 
     [JsonProperty("_content")]

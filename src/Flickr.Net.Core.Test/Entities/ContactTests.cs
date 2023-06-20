@@ -1,6 +1,5 @@
 ﻿using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals.ContractResolver;
-using Flickr.Net.Core.NewEntities.Collections;
 using Flickr.Net.Core.NewEntities;
 using Newtonsoft.Json;
 

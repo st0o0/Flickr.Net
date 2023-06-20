@@ -1,5 +1,4 @@
-﻿using Flickr.Net.Core.NewEntities.Collections;
-using Flickr.Net.Core.SearchOptions;
+﻿using Flickr.Net.Core.SearchOptions;
 
 namespace Flickr.Net.Core;
 

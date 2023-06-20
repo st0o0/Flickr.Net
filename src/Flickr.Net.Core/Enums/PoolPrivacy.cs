@@ -1,5 +1,4 @@
 ﻿using System.Runtime.Serialization;
-using System.Xml.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 

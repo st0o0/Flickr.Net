@@ -1,5 +1,4 @@
 ﻿using Flickr.Net.Core.Internals.Extensions;
-using Flickr.Net.Core.NewEntities.Collections;
 
 namespace Flickr.Net.Core;
 

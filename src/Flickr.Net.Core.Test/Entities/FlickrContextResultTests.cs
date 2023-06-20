@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Flickr.Net.Core.Flickrs.Results;
+﻿using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals.ContractResolver;
-using Flickr.Net.Core.NewEntities.Collections;
 using Flickr.Net.Core.NewEntities.Pagination;
 using Newtonsoft.Json;
 

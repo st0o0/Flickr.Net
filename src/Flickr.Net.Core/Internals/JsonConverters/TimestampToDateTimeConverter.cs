@@ -1,11 +1,11 @@
-﻿using Newtonsoft.Json.Converters;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Flickr.Net.Core.Internals.JsonConverters;
 
 /// <summary>
 /// </summary>
-public class FlickrTimestampToDateTimeConverter : DateTimeConverterBase
+public class TimestampToDateTimeConverter : DateTimeConverterBase
 {
     private static readonly DateTime UnixStartDate = new(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 

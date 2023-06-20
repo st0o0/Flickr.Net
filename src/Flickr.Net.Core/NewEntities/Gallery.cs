@@ -15,11 +15,11 @@ public class Gallery
     public string Owner { get; set; }
 
     [JsonProperty("date_create")]
-    [JsonConverter(typeof(FlickrTimestampToDateTimeConverter))]
+    [JsonConverter(typeof(TimestampToDateTimeConverter))]
     public DateTime CreateDate { get; set; }
 
     [JsonProperty("date_update")]
-    [JsonConverter(typeof(FlickrTimestampToDateTimeConverter))]
+    [JsonConverter(typeof(TimestampToDateTimeConverter))]
     public DateTime UpdateDate { get; set; }
 
     [JsonProperty("primary_photo_id")]

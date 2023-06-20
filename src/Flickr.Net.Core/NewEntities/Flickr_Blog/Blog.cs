@@ -1,7 +1,7 @@
 ﻿using Flickr.Net.Core.Internals.JsonConverters;
 using Newtonsoft.Json;
 
-namespace Flickr.Net.Core.NewEntities;
+namespace Flickr.Net.Core.NewEntities.Flickr_Blog;
 
 /// <summary>
 /// Provides details of a specific blog, as configured by the user.

@@ -2,7 +2,7 @@
 
 /// <summary>
 /// </summary>
-[AttributeUsage(AttributeTargets.Class)]
+[AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
 internal class FlickrJsonPropertyNameAttribute : Attribute
 {
     /// <summary>

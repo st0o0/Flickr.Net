@@ -1,5 +1,4 @@
 ﻿using System.Runtime.Serialization;
-using Flickr.Net.Core.NewEntities;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 

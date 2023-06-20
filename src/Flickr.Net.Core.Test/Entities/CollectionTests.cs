@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals.ContractResolver;
-using Flickr.Net.Core.NewEntities.Collections;
 using Flickr.Net.Core.NewEntities;
 using Newtonsoft.Json;
+using Flickr.Net.Core.NewEntities.Flickr_Collections;
 
 namespace Flickr.Net.Core.Test.Entities;
 

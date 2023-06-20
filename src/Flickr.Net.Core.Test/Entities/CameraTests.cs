@@ -1,7 +1,7 @@
 ﻿using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals.ContractResolver;
 using Flickr.Net.Core.NewEntities;
-using Flickr.Net.Core.NewEntities.Collections;
+using Flickr.Net.Core.NewEntities.Flickr_Cameras;
 using Newtonsoft.Json;
 
 namespace Flickr.Net.Core.Test.Entities;

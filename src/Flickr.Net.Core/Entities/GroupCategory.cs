@@ -67,7 +67,6 @@
 // while (reader.LocalName == "subcat" || reader.LocalName == "group") { if (reader.LocalName ==
 // "subcat") { SubCategory c = new(); ((IFlickrParsable)c).Load(reader); Subcategories.Add(c); }
 // else { //Group s = new(); //((IFlickrParsable)s).Load(reader); //Groups.Add(s); } }
-
 //        // Skip to next element (if any)
 //        reader.Skip();
 //    }

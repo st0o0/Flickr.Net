@@ -1,4 +1,5 @@
 ﻿using Flickr.Net.Core.NewEntities;
+using Flickr.Net.Core.NewEntities.Flickr_OAuth;
 
 namespace Flickr.Net.Core;
 

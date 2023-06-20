@@ -1,6 +1,4 @@
-﻿using Flickr.Net.Core.Internals.Attributes;
-using Flickr.Net.Core.Internals.JsonConverters;
-using Flickr.Net.Core.NewEntities.Collections;
+﻿using Flickr.Net.Core.Internals.JsonConverters;
 using Newtonsoft.Json;
 
 namespace Flickr.Net.Core.NewEntities;
@@ -11,7 +9,7 @@ public class Institution
     public string Id { get; set; }
 
     [JsonProperty("date_launch")]
-    [JsonConverter(typeof(FlickrTimestampToDateTimeConverter))]
+    [JsonConverter(typeof(TimestampToDateTimeConverter))]
     public DateTime LaunchDate { get; set; }
 
     [JsonProperty("name")]

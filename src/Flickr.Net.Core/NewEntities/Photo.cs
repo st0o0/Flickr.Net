@@ -38,6 +38,6 @@ public class Photo
     public bool IsFamily { get; set; }
 
     [JsonProperty("dateadded")]
-    [JsonConverter(typeof(FlickrTimestampToDateTimeConverter))]
+    [JsonConverter(typeof(TimestampToDateTimeConverter))]
     public string AddedDate { get; set; }
 }

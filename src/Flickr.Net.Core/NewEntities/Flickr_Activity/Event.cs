@@ -1,7 +1,7 @@
 ﻿using Flickr.Net.Core.Internals.JsonConverters;
 using Newtonsoft.Json;
 
-namespace Flickr.Net.Core.NewEntities;
+namespace Flickr.Net.Core;
 
 /// <summary>
 /// </summary>
@@ -25,7 +25,7 @@ public class Event
     /// <summary>
     /// </summary>
     [JsonProperty("dateadded")]
-    [JsonConverter(typeof(FlickrTimestampToDateTimeConverter))]
+    [JsonConverter(typeof(TimestampToDateTimeConverter))]
     public DateTime AddedDate { get; set; }
 
     /// <summary>

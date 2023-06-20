@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Flickr.Net.Core.NewEntities.Flickr_Cameras;
+using Newtonsoft.Json;
 
 namespace Flickr.Net.Core.NewEntities;
 

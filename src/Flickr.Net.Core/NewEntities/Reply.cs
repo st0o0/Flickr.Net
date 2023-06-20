@@ -1,6 +1,5 @@
 ﻿using Flickr.Net.Core.Internals.JsonConverters;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace Flickr.Net.Core.NewEntities;
 
@@ -37,11 +36,11 @@ public class Reply
     public bool CanDelete { get; set; }
 
     [JsonProperty("datecreate")]
-    [JsonConverter(typeof(FlickrTimestampToDateTimeConverter))]
+    [JsonConverter(typeof(TimestampToDateTimeConverter))]
     public DateTime CreateDate { get; set; }
 
     [JsonProperty("lastedit")]
-    [JsonConverter(typeof(FlickrTimestampToDateTimeConverter))]
+    [JsonConverter(typeof(TimestampToDateTimeConverter))]
     public DateTime LastEdit { get; set; }
 
     [JsonProperty("message")]

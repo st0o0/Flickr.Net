@@ -61,11 +61,11 @@ public class Topic
     public bool IsLocked { get; set; }
 
     [JsonProperty("datecreate")]
-    [JsonConverter(typeof(FlickrTimestampToDateTimeConverter))]
+    [JsonConverter(typeof(TimestampToDateTimeConverter))]
     public DateTime CreateDate { get; set; }
 
     [JsonProperty("datelastpost")]
-    [JsonConverter(typeof(FlickrTimestampToDateTimeConverter))]
+    [JsonConverter(typeof(TimestampToDateTimeConverter))]
     public DateTime LastPostDate { get; set; }
 
     [JsonProperty("total")]

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Flickr.Net.Core.NewEntities;
+namespace Flickr.Net.Core.NewEntities.Flickr_Blog;
 
 /// <summary>
 /// </summary>

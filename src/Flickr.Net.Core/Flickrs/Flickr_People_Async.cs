@@ -1,6 +1,5 @@
 ﻿using Flickr.Net.Core.Exceptions;
-using Flickr.Net.Core.NewEntities;
-using Flickr.Net.Core.NewEntities.Collections;
+using Flickr.Net.Core.NewEntities.Flickr_OAuth;
 
 namespace Flickr.Net.Core;
 

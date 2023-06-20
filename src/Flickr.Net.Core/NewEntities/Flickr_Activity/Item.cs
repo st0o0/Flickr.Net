@@ -1,11 +1,11 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+﻿using Flickr.Net.Core.NewEntities.__Concept;
+using Newtonsoft.Json;
 
-namespace Flickr.Net.Core.NewEntities;
+namespace Flickr.Net.Core;
 
 /// <summary>
 /// </summary>
-public class Item
+public record Item : FlickrEntityBase<Id>
 {
     /// <summary>
     /// </summary>
@@ -21,11 +21,6 @@ public class Item
     /// </summary>
     [JsonProperty("type")]
     public ItemType Type { get; set; }
-
-    /// <summary>
-    /// </summary>
-    [JsonProperty("id")]
-    public string Id { get; set; }
 
     /// <summary>
     /// </summary>

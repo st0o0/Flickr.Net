@@ -1,7 +1,4 @@
-﻿using Flickr.Net.Core.NewEntities;
-using Flickr.Net.Core.NewEntities.Collections;
-
-namespace Flickr.Net.Core;
+﻿namespace Flickr.Net.Core;
 
 /// <summary>
 /// The flickr.

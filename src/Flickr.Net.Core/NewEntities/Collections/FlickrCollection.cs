@@ -1,9 +1,15 @@
 ﻿using Flickr.Net.Core.Internals.Attributes;
 using Flickr.Net.Core.Internals.JsonConverters;
+using Flickr.Net.Core.NewEntities;
+using Flickr.Net.Core.NewEntities.Flickr_Blog;
+using Flickr.Net.Core.NewEntities.Flickr_Collections;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using Member = Flickr.Net.Core.NewEntities.Member;
+using Photo = Flickr.Net.Core.NewEntities.Photo;
+using Predicate = Flickr.Net.Core.NewEntities.Predicate;
+using Value = Flickr.Net.Core.NewEntities.Value;
 
-namespace Flickr.Net.Core.NewEntities.Collections;
+namespace Flickr.Net.Core;
 
 /// <summary>
 /// </summary>
@@ -80,6 +86,12 @@ public class Brands : FlickrCollection<Brand>
 /// <inheritdoc/>
 [FlickrJsonPropertyName("photo")]
 public class Photos : FlickrCollection<Photo>
+{
+}
+
+/// <inheritdoc/>
+[FlickrJsonPropertyName("iconphotos")]
+public class IconPhotos : FlickrCollection<IconPhoto>
 {
 }
 
@@ -204,4 +216,27 @@ public class Values : FlickrPaginationCollection<Value>
 
     [JsonProperty("predicate")]
     public string Predicate { get; set; }
+}
+
+/// <inheritdoc/>
+[FlickrJsonPropertyName("pandas")]
+public class Pandas : FlickrCollection<Panda>
+{ }
+
+/// <inheritdoc/>
+[FlickrJsonPropertyName("photos")]
+public class PandaPhotos : FlickrCollection<PandaPhoto>
+{
+    [JsonProperty("interval")]
+    public int Interval { get; set; }
+
+    [JsonProperty("lastupdate")]
+    [JsonConverter(typeof(TimestampToDateTimeConverter))]
+    public DateTime LastUpdate { get; set; }
+
+    [JsonProperty("total")]
+    public int Total { get; set; }
+
+    [JsonProperty("panda")]
+    public string Panda { get; set; }
 }

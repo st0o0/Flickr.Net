@@ -1,7 +1,7 @@
 ﻿using Flickr.Net.Core.Internals.Attributes;
 using Newtonsoft.Json;
 
-namespace Flickr.Net.Core.NewEntities;
+namespace Flickr.Net.Core.NewEntities.Flickr_OAuth;
 
 /// <summary>
 /// Successful authentication returns a <see cref="OAuth"/> object.

@@ -36,14 +36,14 @@ public sealed class Value : IFlickrParsable
     /// The date this machine tag was first used.
     /// </summary>
     [JsonProperty("first_added")]
-    [JsonConverter(typeof(FlickrTimestampToDateTimeConverter))]
+    [JsonConverter(typeof(TimestampToDateTimeConverter))]
     public DateTime? FirstAdded { get; set; }
 
     /// <summary>
     /// The date this machine tag was last added.
     /// </summary>
     [JsonProperty("last_added")]
-    [JsonConverter(typeof(FlickrTimestampToDateTimeConverter))]
+    [JsonConverter(typeof(TimestampToDateTimeConverter))]
     public DateTime? LastUsed { get; set; }
 
     /// <summary>
