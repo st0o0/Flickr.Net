@@ -1,13 +1,10 @@
-﻿using Flickr.Net.Core.NewEntities.Flickr_Cameras;
+﻿using Flickr.Net.Core.Bases;
 using Newtonsoft.Json;
 
-namespace Flickr.Net.Core.NewEntities;
+namespace Flickr.Net.Core;
 
-public class Camera
+public record Camera : FlickrEntityBase<Id>
 {
-    [JsonProperty("id")]
-    public string Id { get; set; }
-
     [JsonProperty("name")]
     public string Name { get; set; }
 

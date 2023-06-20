@@ -1,16 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using Flickr.Net.Core.Bases;
+using Newtonsoft.Json;
 
-namespace Flickr.Net.Core.NewEntities.Flickr_Blog;
+namespace Flickr.Net.Core;
 
 /// <summary>
 /// </summary>
-public class Service
+public record Service : FlickrEntityBase<Id>
 {
-    /// <summary>
-    /// </summary>
-    [JsonProperty("id")]
-    public string Id { get; set; }
-
     /// <summary>
     /// </summary>
     [JsonProperty("_content")]

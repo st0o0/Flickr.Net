@@ -1,16 +1,14 @@
-﻿using Flickr.Net.Core.Internals.Attributes;
+﻿using Flickr.Net.Core.Bases;
+using Flickr.Net.Core.Internals.Attributes;
 using Newtonsoft.Json;
 
-namespace Flickr.Net.Core.NewEntities.Pagination;
+namespace Flickr.Net.Core;
 
 /// <summary>
 /// </summary>
 [FlickrJsonPropertyName("prevphoto")]
-public class PrevPhoto
+public record PrevPhoto : FlickrEntityBase<Id>
 {
-    [JsonProperty("id")]
-    public string Id { get; set; }
-
     [JsonProperty("secret")]
     public string Secret { get; set; }
 

@@ -1,7 +1,5 @@
 ﻿using Flickr.Net.Core.Flickrs.Results;
-using Flickr.Net.Core.Internals.ContractResolver;
-using Flickr.Net.Core.NewEntities;
-using Newtonsoft.Json;
+using Flickr.Net.Core.Internals;
 
 namespace Flickr.Net.Core.Test.Entities;
 
@@ -29,10 +27,7 @@ public class PandaTests
             }
             """;
 
-        var result = JsonConvert.DeserializeObject<FlickrResult<Pandas>>(json, new JsonSerializerSettings
-        {
-            ContractResolver = new GenericJsonPropertyNameContractResolver()
-        });
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Pandas>>(json);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
@@ -77,10 +72,7 @@ public class PandaTests
             }
             """;
 
-        var result = JsonConvert.DeserializeObject<FlickrResult<PandaPhotos>>(json, new JsonSerializerSettings
-        {
-            ContractResolver = new GenericJsonPropertyNameContractResolver()
-        });
+        var result = FlickrConvert.DeserializeObject<FlickrResult<PandaPhotos>>(json);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);

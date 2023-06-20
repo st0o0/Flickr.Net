@@ -1,5 +1,4 @@
 ﻿using Flickr.Net.Core.Exceptions;
-using Flickr.Net.Core.NewEntities.Flickr_OAuth;
 
 namespace Flickr.Net.Core;
 
@@ -54,7 +53,7 @@ public partial class Flickr : IFlickrPeople
         return await GetResponseAsync<Person>(parameters, cancellationToken);
     }
 
-    async Task<PersonLimits> IFlickrPeople.GetLimitsAsync(CancellationToken cancellationToken)
+    async Task<Limits> IFlickrPeople.GetLimitsAsync(CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -63,10 +62,10 @@ public partial class Flickr : IFlickrPeople
             { "method", "flickr.people.getLimits" }
         };
 
-        return await GetResponseAsync<PersonLimits>(parameters, cancellationToken);
+        return await GetResponseAsync<Limits>(parameters, cancellationToken);
     }
 
-    async Task<PhotoCollection> IFlickrPeople.GetPhotosAsync(string userId, SafetyLevel safeSearch, DateTime? minUploadDate, DateTime? maxUploadDate, DateTime? minTakenDate, DateTime? maxTakenDate, ContentTypeSearch contentType, PrivacyFilter privacyFilter, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken)
+    async Task<PagedPhotos> IFlickrPeople.GetPhotosAsync(string userId, SafetyLevel safeSearch, DateTime? minUploadDate, DateTime? maxUploadDate, DateTime? minTakenDate, DateTime? maxTakenDate, ContentTypeSearch contentType, PrivacyFilter privacyFilter, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -126,10 +125,10 @@ public partial class Flickr : IFlickrPeople
             parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
 
-        return await GetResponseAsync<PhotoCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }
 
-    async Task<PeoplePhotoCollection> IFlickrPeople.GetPhotosOfAsync(string userId, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken)
+    async Task<PagedPhotos> IFlickrPeople.GetPhotosOfAsync(string userId, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -152,17 +151,17 @@ public partial class Flickr : IFlickrPeople
             parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
 
-        return await GetResponseAsync<PeoplePhotoCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }
 
-    async Task<UserStatus> IFlickrPeople.GetUploadStatusAsync(CancellationToken cancellationToken)
+    async Task<UploadStatus> IFlickrPeople.GetUploadStatusAsync(CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
             { "method", "flickr.people.getUploadStatus" }
         };
 
-        return await GetResponseAsync<UserStatus>(parameters, cancellationToken);
+        return await GetResponseAsync<UploadStatus>(parameters, cancellationToken);
     }
 
     async Task<Groups> IFlickrPeople.GetPublicGroupsAsync(string userId, CancellationToken cancellationToken)
@@ -221,7 +220,7 @@ public interface IFlickrPeople
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<PersonLimits> GetLimitsAsync(CancellationToken cancellationToken = default);
+    Task<Limits> GetLimitsAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Return photos from the given user's photostream. Only photos visible to the calling user
@@ -254,7 +253,7 @@ public interface IFlickrPeople
     /// maximum allowed value is 500.
     /// </param>
     /// <param name="cancellationToken"></param>
-    Task<PhotoCollection> GetPhotosAsync(string userId, SafetyLevel safeSearch = SafetyLevel.None, DateTime? minUploadDate = null, DateTime? maxUploadDate = null, DateTime? minTakenDate = null, DateTime? maxTakenDate = null, ContentTypeSearch contentType = ContentTypeSearch.None, PrivacyFilter privacyFilter = PrivacyFilter.None, PhotoSearchExtras extras = PhotoSearchExtras.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<PagedPhotos> GetPhotosAsync(string userId, SafetyLevel safeSearch = SafetyLevel.None, DateTime? minUploadDate = null, DateTime? maxUploadDate = null, DateTime? minTakenDate = null, DateTime? maxTakenDate = null, ContentTypeSearch contentType = ContentTypeSearch.None, PrivacyFilter privacyFilter = PrivacyFilter.None, PhotoSearchExtras extras = PhotoSearchExtras.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets the photos containing the specified user.
@@ -264,13 +263,13 @@ public interface IFlickrPeople
     /// <param name="page">The page of photos to return. Default is 1.</param>
     /// <param name="perPage">The number of photos to return per page.</param>
     /// <param name="cancellationToken"></param>
-    Task<PeoplePhotoCollection> GetPhotosOfAsync(string userId, PhotoSearchExtras extras = PhotoSearchExtras.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<PagedPhotos> GetPhotosOfAsync(string userId, PhotoSearchExtras extras = PhotoSearchExtras.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets the upload status of the authenticated user.
     /// </summary>
     /// <param name="cancellationToken"></param>
-    Task<UserStatus> GetUploadStatusAsync(CancellationToken cancellationToken = default);
+    Task<UploadStatus> GetUploadStatusAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get a list of public groups for a user.

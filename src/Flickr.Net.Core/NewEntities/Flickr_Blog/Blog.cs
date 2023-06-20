@@ -1,20 +1,13 @@
-﻿using Flickr.Net.Core.Internals.JsonConverters;
+﻿using Flickr.Net.Core.Bases;
 using Newtonsoft.Json;
 
-namespace Flickr.Net.Core.NewEntities.Flickr_Blog;
+namespace Flickr.Net.Core;
 
 /// <summary>
 /// Provides details of a specific blog, as configured by the user.
 /// </summary>
-public class Blog
+public record Blog : FlickrEntityBase<Id>
 {
-    /// <summary>
-    /// The ID Flickr has assigned to the blog. Use this to post to the blog using <see
-    /// cref="IFlickrBlogs.PostPhotoAsync(string, string, string, string, string, CancellationToken)"/>.
-    /// </summary>
-    [JsonProperty("id")]
-    public string Id { get; set; }
-
     /// <summary>
     /// The name you have assigned to the blog in Flickr. ///
     /// </summary>
@@ -26,7 +19,6 @@ public class Blog
     /// in the password when posting.
     /// </summary>
     [JsonProperty("needspassword")]
-    [JsonConverter(typeof(BoolConverter))]
     public bool NeedPassword { get; set; }
 
     /// <summary>

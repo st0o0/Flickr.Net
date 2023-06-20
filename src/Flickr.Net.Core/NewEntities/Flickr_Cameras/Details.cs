@@ -1,8 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using Flickr.Net.Core.Bases;
+using Newtonsoft.Json;
 
-namespace Flickr.Net.Core.NewEntities.Flickr_Cameras;
+namespace Flickr.Net.Core;
 
-public class Details
+public record Details : FlickrEntityBase
 {
     [JsonProperty("megapixels")]
     public string MegaPixels { get; set; }

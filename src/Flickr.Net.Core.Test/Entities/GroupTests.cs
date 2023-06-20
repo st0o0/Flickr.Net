@@ -1,8 +1,6 @@
 ﻿using Flickr.Net.Core.Enums;
 using Flickr.Net.Core.Flickrs.Results;
-using Flickr.Net.Core.Internals.ContractResolver;
-using Flickr.Net.Core.NewEntities;
-using Newtonsoft.Json;
+using Flickr.Net.Core.Internals;
 
 namespace Flickr.Net.Core.Test.Entities;
 
@@ -44,10 +42,7 @@ public class GroupTests
             }
             """;
 
-        var result = JsonConvert.DeserializeObject<FlickrResult<GroupInfo>>(json, new JsonSerializerSettings
-        {
-            ContractResolver = new GenericJsonPropertyNameContractResolver(),
-        });
+        var result = FlickrConvert.DeserializeObject<FlickrResult<GroupInfo>>(json);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
@@ -111,10 +106,7 @@ public class GroupTests
             }
             """;
 
-        var result = JsonConvert.DeserializeObject<FlickrResult<Groups>>(json, new JsonSerializerSettings
-        {
-            ContractResolver = new GenericJsonPropertyNameContractResolver(),
-        });
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Groups>>(json);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
@@ -1245,10 +1237,7 @@ public class GroupTests
             }
             """;
 
-        var result = JsonConvert.DeserializeObject<FlickrResult<Groups>>(json, new JsonSerializerSettings
-        {
-            ContractResolver = new GenericJsonPropertyNameContractResolver()
-        });
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Groups>>(json);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);

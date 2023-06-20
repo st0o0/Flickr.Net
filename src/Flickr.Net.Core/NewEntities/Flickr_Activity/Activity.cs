@@ -1,8 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using Flickr.Net.Core.Bases;
+using Newtonsoft.Json;
 
 namespace Flickr.Net.Core;
 
-public class Activity
+public record Activity : FlickrEntityBase
 {
     [JsonProperty("event")]
     public List<Event> Events { get; set; } = new List<Event>();

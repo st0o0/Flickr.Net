@@ -1,5 +1,4 @@
 ﻿using Flickr.Net.Core.Flickrs.Results;
-using Flickr.Net.Core.NewEntities.Pagination;
 
 namespace Flickr.Net.Core;
 
@@ -54,7 +53,7 @@ public partial class Flickr : IFlickrGroupsPools
         return await GetResponseAsync<Groups>(parameters, cancellationToken);
     }
 
-    async Task<Photos> IFlickrGroupsPools.GetPhotosAsync(string groupId, string tags, string userId, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken)
+    async Task<PagedPhotos> IFlickrGroupsPools.GetPhotosAsync(string groupId, string tags, string userId, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -87,7 +86,7 @@ public partial class Flickr : IFlickrGroupsPools
             parameters.Add("extras", extras.ToFlickrString());
         }
 
-        return await GetResponseAsync<Photos>(parameters, cancellationToken);
+        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }
 
     async Task IFlickrGroupsPools.RemoveAsync(string photoId, string groupId, CancellationToken cancellationToken)
@@ -149,7 +148,7 @@ public interface IFlickrGroupsPools
     /// <param name="page">The page to return.</param>
     /// <param name="perPage">The number of photos per page.</param>
     /// <param name="cancellationToken"></param>
-    Task<Photos> GetPhotosAsync(string groupId, string tags = null, string userId = null, PhotoSearchExtras extras = PhotoSearchExtras.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<PagedPhotos> GetPhotosAsync(string groupId, string tags = null, string userId = null, PhotoSearchExtras extras = PhotoSearchExtras.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Remove a picture from a group.

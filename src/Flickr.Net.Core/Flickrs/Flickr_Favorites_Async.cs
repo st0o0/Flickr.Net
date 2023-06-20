@@ -1,5 +1,4 @@
 ﻿using Flickr.Net.Core.Flickrs.Results;
-using Flickr.Net.Core.NewEntities.Pagination;
 
 namespace Flickr.Net.Core;
 

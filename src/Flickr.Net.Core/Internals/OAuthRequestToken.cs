@@ -3,7 +3,7 @@
 /// <summary>
 /// Class containing details of the OAUth request token returned by Flickr.
 /// </summary>
-public class OAuthRequestToken
+public record OAuthRequestToken
 {
     /// <summary>
     /// The request token string.

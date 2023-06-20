@@ -1,7 +1,5 @@
 ﻿using Flickr.Net.Core.Flickrs.Results;
-using Flickr.Net.Core.Internals.ContractResolver;
-using Flickr.Net.Core.NewEntities;
-using Newtonsoft.Json;
+using Flickr.Net.Core.Internals;
 
 namespace Flickr.Net.Core.Test.Entities;
 
@@ -39,10 +37,7 @@ public class PredicateTests
             }
             """;
 
-        var result = JsonConvert.DeserializeObject<FlickrResult<Predicates>>(json, new JsonSerializerSettings
-        {
-            ContractResolver = new GenericJsonPropertyNameContractResolver()
-        });
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Predicates>>(json);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);

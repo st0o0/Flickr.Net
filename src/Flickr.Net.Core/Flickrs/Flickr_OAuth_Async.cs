@@ -1,7 +1,6 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 using Flickr.Net.Core.Internals.Extensions;
-using Flickr.Net.Core.NewEntities.Flickr_OAuth;
 
 namespace Flickr.Net.Core;
 
@@ -63,7 +62,6 @@ public partial class Flickr : IFlickrOAuth
 
     string IFlickrOAuth.CalculateSignature(string method, string url, Dictionary<string, string> parameters, string tokenSecret)
     {
-        var baseString = "";
         var key = FlickrSettings.ApiSecret + "&" + tokenSecret;
         var keyBytes = Encoding.UTF8.GetBytes(key);
 
@@ -84,7 +82,7 @@ public partial class Flickr : IFlickrOAuth
 
         sb.Remove(sb.Length - 1, 1);
 
-        baseString = method + "&" + UtilityMethods.EscapeOAuthString(url) + "&" + UtilityMethods.EscapeOAuthString(sb.ToString());
+        var baseString = method + "&" + UtilityMethods.EscapeOAuthString(url) + "&" + UtilityMethods.EscapeOAuthString(sb.ToString());
 
         HMACSHA1 sha1 = new(keyBytes);
 
@@ -120,7 +118,7 @@ public partial class Flickr : IFlickrOAuth
     /// <returns></returns>
     private Dictionary<string, string> OAuthGetBasicParameters()
     {
-        string oauthtimestamp = UtilityMethods.DateToUnixTimestamp(DateTime.UtcNow);
+        var oauthtimestamp = UtilityMethods.DateToUnixTimestamp(DateTime.UtcNow);
         var oauthnonce = Guid.NewGuid().ToString("N");
 
         Dictionary<string, string> parameters = new()

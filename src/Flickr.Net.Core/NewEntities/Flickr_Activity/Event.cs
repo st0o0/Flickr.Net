@@ -1,11 +1,11 @@
-﻿using Flickr.Net.Core.Internals.JsonConverters;
+﻿using Flickr.Net.Core.Bases;
 using Newtonsoft.Json;
 
 namespace Flickr.Net.Core;
 
 /// <summary>
 /// </summary>
-public class Event
+public record Event : FlickrEntityBase
 {
     /// <summary>
     /// </summary>
@@ -25,7 +25,6 @@ public class Event
     /// <summary>
     /// </summary>
     [JsonProperty("dateadded")]
-    [JsonConverter(typeof(TimestampToDateTimeConverter))]
     public DateTime AddedDate { get; set; }
 
     /// <summary>
@@ -76,6 +75,5 @@ public class Event
     /// <summary>
     /// </summary>
     [JsonProperty("is_muted")]
-    [JsonConverter(typeof(BoolConverter))]
     public bool IsMuted { get; set; }
 }

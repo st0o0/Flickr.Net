@@ -1,7 +1,6 @@
 ﻿using Flickr.Net.Core.Flickrs.Results;
+using Flickr.Net.Core.Internals;
 using Flickr.Net.Core.Internals.ContractResolver;
-using Flickr.Net.Core.NewEntities;
-using Flickr.Net.Core.NewEntities.Flickr_Collections;
 using Newtonsoft.Json;
 
 namespace Flickr.Net.Core.Test.Entities;
@@ -65,10 +64,7 @@ public class CollectionTests
             }
             """;
 
-        var result = JsonConvert.DeserializeObject<FlickrResult<Collection>>(json, new JsonSerializerSettings
-        {
-            ContractResolver = new GenericJsonPropertyNameContractResolver()
-        });
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Collection>>(json);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);

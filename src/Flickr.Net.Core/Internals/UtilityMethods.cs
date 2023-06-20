@@ -4,6 +4,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Flickr.Net.Core.Exceptions;
 using Flickr.Net.Core.SearchOptions;
+using Flickr.Net.Core.Entities;
 
 namespace Flickr.Net.Core.Internals;
 
@@ -251,7 +252,7 @@ public static class UtilityMethods
     /// <param name="size">The size.</param>
     /// <param name="extension">The extension.</param>
     /// <returns>A string.</returns>
-    public static string UrlFormat(Photo p, string size, string extension)
+    public static string UrlFormat(Entities.Photo p, string size, string extension)
     {
         if (size == "_o" || size == "original")
         {

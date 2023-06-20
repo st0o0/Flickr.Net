@@ -1,20 +1,12 @@
 ﻿using Flickr.Net.Core.Internals.Attributes;
-using Flickr.Net.Core.Internals.JsonConverters;
-using Flickr.Net.Core.NewEntities;
-using Flickr.Net.Core.NewEntities.Flickr_Blog;
-using Flickr.Net.Core.NewEntities.Flickr_Collections;
 using Newtonsoft.Json;
-using Member = Flickr.Net.Core.NewEntities.Member;
-using Photo = Flickr.Net.Core.NewEntities.Photo;
-using Predicate = Flickr.Net.Core.NewEntities.Predicate;
-using Value = Flickr.Net.Core.NewEntities.Value;
 
 namespace Flickr.Net.Core;
 
 /// <summary>
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public abstract class FlickrCollection<T>
+public abstract record FlickrCollection<T>
 {
     /// <summary>
     /// </summary>
@@ -30,7 +22,7 @@ public abstract class FlickrCollection<T>
 /// <summary>
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public abstract class FlickrPaginationCollection<T> : FlickrCollection<T>
+public abstract record FlickrPaginationCollection<T> : FlickrCollection<T>
 {
     /// <summary>
     /// </summary>
@@ -55,22 +47,22 @@ public abstract class FlickrPaginationCollection<T> : FlickrCollection<T>
 
 /// <inheritdoc/>
 [FlickrJsonPropertyName("blogs")]
-public class Blogs : FlickrCollection<Blog>
+public record Blogs : FlickrCollection<Blog>
 { }
 
 /// <inheritdoc/>
 [FlickrJsonPropertyName("items")]
-public class Items : FlickrCollection<Item>
+public record Items : FlickrCollection<Item>
 { }
 
 /// <inheritdoc/>
 [FlickrJsonPropertyName("services")]
-public class Services : FlickrCollection<Service>
+public record Services : FlickrCollection<Service>
 { }
 
 /// <inheritdoc/>
 [FlickrJsonPropertyName("cameras")]
-public class Cameras : FlickrCollection<Camera>
+public record Cameras : FlickrCollection<Camera>
 {
     /// <summary>
     /// </summary>
@@ -80,50 +72,50 @@ public class Cameras : FlickrCollection<Camera>
 
 /// <inheritdoc/>
 [FlickrJsonPropertyName("brands")]
-public class Brands : FlickrCollection<Brand>
+public record Brands : FlickrCollection<Brand>
 { }
 
 /// <inheritdoc/>
 [FlickrJsonPropertyName("photo")]
-public class Photos : FlickrCollection<Photo>
+public record Photos : FlickrCollection<Photo>
 {
 }
 
 /// <inheritdoc/>
 [FlickrJsonPropertyName("iconphotos")]
-public class IconPhotos : FlickrCollection<IconPhoto>
+public record IconPhotos : FlickrCollection<IconPhoto>
 {
 }
 
 /// <inheritdoc/>
 [FlickrJsonPropertyName("photo")]
-public class PagedPhotos : FlickrPaginationCollection<Photo>
+public record PagedPhotos : FlickrPaginationCollection<Photo>
 {
 }
 
 /// <inheritdoc/>
 [FlickrJsonPropertyName("collections")]
-public class Collections : FlickrCollection<Collection>
+public record Collections : FlickrCollection<Collection>
 { }
 
 /// <inheritdoc/>
 [FlickrJsonPropertyName("institutions")]
-public class Institutions : FlickrCollection<Institution>
+public record Institutions : FlickrCollection<Institution>
 { }
 
 /// <inheritdoc/>
 [FlickrJsonPropertyName("urls")]
-public class Urls : FlickrCollection<Url>
+public record Urls : FlickrCollection<Url>
 { }
 
 /// <inheritdoc/>
 [FlickrJsonPropertyName("contacts")]
-public class Contacts : FlickrPaginationCollection<Contact>
+public record Contacts : FlickrPaginationCollection<Contact>
 { }
 
 /// <inheritdoc/>
 [FlickrJsonPropertyName("galleries")]
-public class Galleries : FlickrPaginationCollection<Gallery>
+public record Galleries : FlickrPaginationCollection<Gallery>
 {
     /// <summary>
     /// </summary>
@@ -133,12 +125,12 @@ public class Galleries : FlickrPaginationCollection<Gallery>
 
 /// <inheritdoc/>
 [FlickrJsonPropertyName("photos")]
-public class GalleryPhotos : FlickrPaginationCollection<GalleryPhoto>
+public record GalleryPhotos : FlickrPaginationCollection<GalleryPhoto>
 { }
 
 /// <inheritdoc/>
 [FlickrJsonPropertyName("replies")]
-public class Replies : FlickrCollection<Reply>
+public record Replies : FlickrCollection<Reply>
 {
     [JsonProperty("topic")]
     public Topic Topic { get; set; }
@@ -146,7 +138,7 @@ public class Replies : FlickrCollection<Reply>
 
 /// <inheritdoc/>
 [FlickrJsonPropertyName("topics")]
-public class Topics : FlickrPaginationCollection<Topic>
+public record Topics : FlickrPaginationCollection<Topic>
 {
     [JsonProperty("group_id")]
     public string GroupId { get; set; }
@@ -170,7 +162,6 @@ public class Topics : FlickrPaginationCollection<Topic>
     public string Lang { get; set; }
 
     [JsonProperty("ispoolmoderated")]
-    [JsonConverter(typeof(BoolConverter))]
     public bool IsPoolModerated { get; set; }
 
     [JsonIgnore]
@@ -179,7 +170,7 @@ public class Topics : FlickrPaginationCollection<Topic>
 
 /// <inheritdoc/>
 [FlickrJsonPropertyName("groups")]
-public class Groups : FlickrPaginationCollection<Group>
+public record Groups : FlickrPaginationCollection<Group>
 { }
 
 /// <inheritdoc/>
@@ -189,27 +180,27 @@ public class Groups : FlickrPaginationCollection<Group>
 
 /// <inheritdoc/>
 [FlickrJsonPropertyName("members")]
-public class Members : FlickrPaginationCollection<Member>
+public record Members : FlickrPaginationCollection<Member>
 { }
 
 /// <inheritdoc/>
 [FlickrJsonPropertyName("namespaces")]
-public class Namespaces : FlickrPaginationCollection<Namespace>
+public record Namespaces : FlickrPaginationCollection<Namespace>
 { }
 
 /// <inheritdoc/>
 [FlickrJsonPropertyName("pairs")]
-public class Pairs : FlickrPaginationCollection<Pair>
+public record Pairs : FlickrPaginationCollection<Pair>
 { }
 
 /// <inheritdoc/>
 [FlickrJsonPropertyName("predicates")]
-public class Predicates : FlickrPaginationCollection<Predicate>
+public record Predicates : FlickrPaginationCollection<Predicate>
 { }
 
 /// <inheritdoc/>
 [FlickrJsonPropertyName("values")]
-public class Values : FlickrPaginationCollection<Value>
+public record Values : FlickrPaginationCollection<Value>
 {
     [JsonProperty("namespace")]
     public string Namespace { get; set; }
@@ -220,18 +211,17 @@ public class Values : FlickrPaginationCollection<Value>
 
 /// <inheritdoc/>
 [FlickrJsonPropertyName("pandas")]
-public class Pandas : FlickrCollection<Panda>
+public record Pandas : FlickrCollection<Panda>
 { }
 
 /// <inheritdoc/>
 [FlickrJsonPropertyName("photos")]
-public class PandaPhotos : FlickrCollection<PandaPhoto>
+public record PandaPhotos : FlickrCollection<PandaPhoto>
 {
     [JsonProperty("interval")]
     public int Interval { get; set; }
 
     [JsonProperty("lastupdate")]
-    [JsonConverter(typeof(TimestampToDateTimeConverter))]
     public DateTime LastUpdate { get; set; }
 
     [JsonProperty("total")]

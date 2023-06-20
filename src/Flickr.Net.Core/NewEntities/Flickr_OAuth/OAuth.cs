@@ -1,13 +1,14 @@
-﻿using Flickr.Net.Core.Internals.Attributes;
+﻿using Flickr.Net.Core.Bases;
+using Flickr.Net.Core.Internals.Attributes;
 using Newtonsoft.Json;
 
-namespace Flickr.Net.Core.NewEntities.Flickr_OAuth;
+namespace Flickr.Net.Core;
 
 /// <summary>
 /// Successful authentication returns a <see cref="OAuth"/> object.
 /// </summary>
 [FlickrJsonPropertyName("oauth")]
-public sealed class OAuth
+public sealed record OAuth : FlickrEntityBase
 {
     /// <summary>
     /// The authentication token returned by the <see

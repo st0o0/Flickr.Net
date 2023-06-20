@@ -10,52 +10,27 @@
 //    /// </summary>
 //    public int Count { get; set; }
 
-//    /// <summary>
-//    /// The list of previous photos for this favorite. Defaults to just a single photo.
-//    /// </summary>
-//    public Collection<FavoriteContextPhoto> PreviousPhotos { get; set; }
+// /// <summary> /// The list of previous photos for this favorite. Defaults to just a single photo.
+// /// </summary> public Collection<FavoriteContextPhoto> PreviousPhotos { get; set; }
 
-//    /// <summary>
-//    /// The list of next photos for this favorite. Defaults to just a single photo.
-//    /// </summary>
-//    public Collection<FavoriteContextPhoto> NextPhotos { get; set; }
+// /// <summary> /// The list of next photos for this favorite. Defaults to just a single photo. ///
+// </summary> public Collection<FavoriteContextPhoto> NextPhotos { get; set; }
 
-//    /// <summary>
-//    /// Default constructor for <see cref="FavoriteContext"/>
-//    /// </summary>
-//    public FavoriteContext()
-//    {
-//        PreviousPhotos = new Collection<FavoriteContextPhoto>();
-//        NextPhotos = new Collection<FavoriteContextPhoto>();
-//    }
+// /// <summary> /// Default constructor for <see cref="FavoriteContext"/> /// </summary> public
+// FavoriteContext() { PreviousPhotos = new Collection<FavoriteContextPhoto>(); NextPhotos = new
+// Collection<FavoriteContextPhoto>(); }
 
-//    void IFlickrParsable.Load(XmlReader reader)
-//    {
-//        if (reader.LocalName != "count" && !reader.ReadToFollowing("count"))
-//        {
-//            UtilityMethods.CheckParsingException(reader);
-//            return;
-//        }
+// void IFlickrParsable.Load(XmlReader reader) { if (reader.LocalName != "count" &&
+// !reader.ReadToFollowing("count")) { UtilityMethods.CheckParsingException(reader); return; }
 
-//        Count = reader.ReadElementContentAsInt();
+// Count = reader.ReadElementContentAsInt();
 
-//        if (reader.LocalName != "prevphotos")
-//        {
-//            reader.ReadToFollowing("prevphotos");
-//        }
+// if (reader.LocalName != "prevphotos") { reader.ReadToFollowing("prevphotos"); }
 
-//        reader.ReadToDescendant("photo");
-//        while (reader.LocalName == "photo")
-//        {
-//            FavoriteContextPhoto photo = new();
-//            ((IFlickrParsable)photo).Load(reader);
-//            PreviousPhotos.Add(photo);
-//        }
+// reader.ReadToDescendant("photo"); while (reader.LocalName == "photo") { FavoriteContextPhoto
+// photo = new(); ((IFlickrParsable)photo).Load(reader); PreviousPhotos.Add(photo); }
 
-//        if (reader.LocalName != "nextphotos")
-//        {
-//            reader.ReadToFollowing("nextphotos");
-//        }
+// if (reader.LocalName != "nextphotos") { reader.ReadToFollowing("nextphotos"); }
 
 //        reader.ReadToDescendant("photo");
 //        while (reader.LocalName == "photo")

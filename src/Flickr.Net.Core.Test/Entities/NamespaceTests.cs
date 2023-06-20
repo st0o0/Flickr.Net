@@ -1,7 +1,5 @@
 ﻿using Flickr.Net.Core.Flickrs.Results;
-using Flickr.Net.Core.Internals.ContractResolver;
-using Flickr.Net.Core.NewEntities;
-using Newtonsoft.Json;
+using Flickr.Net.Core.Internals;
 
 namespace Flickr.Net.Core.Test.Entities;
 
@@ -49,10 +47,7 @@ public class NamespaceTests
             }
             """;
 
-        var result = JsonConvert.DeserializeObject<FlickrResult<Namespaces>>(json, new JsonSerializerSettings
-        {
-            ContractResolver = new GenericJsonPropertyNameContractResolver()
-        });
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Namespaces>>(json);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);

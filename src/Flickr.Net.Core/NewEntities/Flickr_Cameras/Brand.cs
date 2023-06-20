@@ -1,12 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using Flickr.Net.Core.Bases;
+using Newtonsoft.Json;
 
 namespace Flickr.Net.Core;
 
-public class Brand
+public record Brand : FlickrEntityBase<Id>
 {
-    [JsonProperty("id")]
-    public string Id { get; set; }
-
     [JsonProperty("_content")]
     public string Content { get; set; }
 }

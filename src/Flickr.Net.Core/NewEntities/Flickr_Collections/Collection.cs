@@ -1,15 +1,12 @@
-﻿using Flickr.Net.Core.Internals.Attributes;
-using Flickr.Net.Core.Internals.JsonConverters;
+﻿using Flickr.Net.Core.Bases;
+using Flickr.Net.Core.Internals.Attributes;
 using Newtonsoft.Json;
 
-namespace Flickr.Net.Core.NewEntities.Flickr_Collections;
+namespace Flickr.Net.Core;
 
 [FlickrJsonPropertyName("collection")]
-public class Collection
+public record Collection : FlickrEntityBase<Id>
 {
-    [JsonProperty("id")]
-    public string Id { get; set; }
-
     [JsonProperty("title")]
     public string Title { get; set; }
 
@@ -20,7 +17,6 @@ public class Collection
     public int ChildCount { get; set; }
 
     [JsonProperty("datecreate")]
-    [JsonConverter(typeof(TimestampToDateTimeConverter))]
     public DateTime CreateDate { get; set; }
 
     [JsonProperty("iconlarge")]

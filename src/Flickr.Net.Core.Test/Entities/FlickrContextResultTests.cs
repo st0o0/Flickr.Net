@@ -1,7 +1,5 @@
 ﻿using Flickr.Net.Core.Flickrs.Results;
-using Flickr.Net.Core.Internals.ContractResolver;
-using Flickr.Net.Core.NewEntities.Pagination;
-using Newtonsoft.Json;
+using Flickr.Net.Core.Internals;
 
 namespace Flickr.Net.Core.Test.Entities;
 
@@ -29,17 +27,14 @@ public class FlickrContextResultTests
             }
             """;
 
-        var result = JsonConvert.DeserializeObject<FlickrContextResult<NextPhoto, PrevPhoto>>(json, new JsonSerializerSettings
-        {
-            ContractResolver = new GenericJsonPropertyNameContractResolver()
-        });
+        var result = FlickrConvert.DeserializeObject<FlickrContextResult<NextPhoto, PrevPhoto>>(json);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
         Assert.Equal(3, result.Count);
         Assert.IsType<NextPhoto>(result.NextPhoto);
-        Assert.NotEmpty(result.NextPhoto.Id);
+        Assert.False(string.IsNullOrEmpty(result.NextPhoto.Id));
         Assert.IsType<PrevPhoto>(result.PrevPhoto);
-        Assert.NotEmpty(result.PrevPhoto.Id);
+        Assert.False(string.IsNullOrEmpty(result.PrevPhoto.Id));
     }
 }

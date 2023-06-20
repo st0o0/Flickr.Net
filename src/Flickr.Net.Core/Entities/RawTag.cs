@@ -1,7 +1,8 @@
 ﻿namespace Flickr.Net.Core.Entities;
 
 /// <summary>
-/// Raw tags, as returned by the <see cref="IFlickrTags.GetListUserRawAsync(string, CancellationToken)"/> method.
+/// Raw tags, as returned by the <see cref="IFlickrTags.GetListUserRawAsync(string,
+/// CancellationToken)"/> method.
 /// </summary>
 public sealed class RawTag : IFlickrParsable
 {

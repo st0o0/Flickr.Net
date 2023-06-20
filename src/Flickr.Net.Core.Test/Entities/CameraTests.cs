@@ -1,7 +1,6 @@
 ﻿using Flickr.Net.Core.Flickrs.Results;
+using Flickr.Net.Core.Internals;
 using Flickr.Net.Core.Internals.ContractResolver;
-using Flickr.Net.Core.NewEntities;
-using Flickr.Net.Core.NewEntities.Flickr_Cameras;
 using Newtonsoft.Json;
 
 namespace Flickr.Net.Core.Test.Entities;
@@ -50,10 +49,7 @@ public class CameraTests
             }
             """;
 
-        var result = JsonConvert.DeserializeObject<FlickrResult<Cameras>>(json, new JsonSerializerSettings
-        {
-            ContractResolver = new GenericJsonPropertyNameContractResolver()
-        });
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Cameras>>(json);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);

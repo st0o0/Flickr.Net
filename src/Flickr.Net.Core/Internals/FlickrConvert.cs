@@ -11,7 +11,7 @@ public static class FlickrConvert
         var settings = new JsonSerializerSettings()
         {
             ContractResolver = new GenericJsonPropertyNameContractResolver(),
-            Converters = new List<JsonConverter>() { new BoolConverter(), new TimestampToDateTimeConverter() }
+            Converters = new List<JsonConverter>() { new BoolConverter(), new TimestampToDateTimeConverter() },
         };
 
         return JsonConvert.DeserializeObject<T>(json, settings);
