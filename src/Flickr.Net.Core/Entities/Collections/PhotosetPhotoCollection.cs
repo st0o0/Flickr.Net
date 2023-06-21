@@ -3,7 +3,7 @@
 /// <summary>
 /// A list of photos contained within a photoset.
 /// </summary>
-public sealed class PhotosetPhotoCollection : PagedPhotoCollection, IFlickrParsable
+public sealed record PhotosetPhotoCollection : PagedPhotos, IFlickrParsable
 {
     /// <summary>
     /// The id for the photoset.
@@ -95,7 +95,7 @@ public sealed class PhotosetPhotoCollection : PagedPhotoCollection, IFlickrParsa
                 photo.UserId = OwnerId;
             }
 
-            Add(photo);
+            //Add(photo);
         }
 
         reader.Skip();

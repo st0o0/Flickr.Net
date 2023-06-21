@@ -1,5 +1,6 @@
 ﻿using Flickr.Net.Core.Exceptions;
 using Flickr.Net.Core.Internals.Attributes;
+using Flickr.Net.Core.NewEntities.Flickr_Photos;
 using Newtonsoft.Json;
 
 namespace Flickr.Net.Core.Flickrs.Results;
@@ -8,7 +9,7 @@ namespace Flickr.Net.Core.Flickrs.Results;
 /// Contains details of the result from Flickr, or the error if an error occurred.
 /// </summary>
 /// <typeparam name="T">The type of the result returned from Flickr.</typeparam>
-public class FlickrResult<T> : FlickrResult
+public record FlickrResult<T> : FlickrResult
 {
     /// <summary>
     /// If the call was successful then this contains the result.
@@ -20,7 +21,7 @@ public class FlickrResult<T> : FlickrResult
 /// <summary>
 /// The flickr result.
 /// </summary>
-public class FlickrResult
+public record FlickrResult
 {
     private Exception _exception;
 
@@ -70,7 +71,7 @@ public class FlickrResult
 /// </summary>
 /// <typeparam name="TNextPhoto"></typeparam>
 /// <typeparam name="TPrevPhoto"></typeparam>
-public class FlickrContextResult<TNextPhoto, TPrevPhoto> : FlickrResult
+public record FlickrContextResult<TNextPhoto, TPrevPhoto> : FlickrResult
 {
     /// <summary>
     /// </summary>
@@ -86,4 +87,17 @@ public class FlickrContextResult<TNextPhoto, TPrevPhoto> : FlickrResult
     /// </summary>
     [JsonPropertyGenericTypeName(1)]
     public TPrevPhoto PrevPhoto { get; set; }
+}
+
+public record FlickrAllContextResult<TPrimary, TSecond> : FlickrResult
+{
+    /// <summary>
+    /// </summary>
+    [JsonPropertyGenericTypeName(0)]
+    public List<TPrimary> Primary { get; set; }
+
+    /// <summary>
+    /// </summary>
+    [JsonPropertyGenericTypeName(1)]
+    public List<TSecond> Second { get; set; }
 }

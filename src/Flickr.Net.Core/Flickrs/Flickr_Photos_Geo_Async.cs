@@ -104,7 +104,7 @@ public partial class Flickr : IFlickrPhotosGeo
         return await GetResponseAsync<GeoPermissions>(parameters, cancellationToken);
     }
 
-    async Task<PhotoCollection> IFlickrPhotosGeo.PhotosForLocationAsync(double latitude, double longitude, GeoAccuracy accuracy, PhotoSearchExtras extras, int perPage, int page, CancellationToken cancellationToken)
+    async Task<PagedPhotos> IFlickrPhotosGeo.PhotosForLocationAsync(double latitude, double longitude, GeoAccuracy accuracy, PhotoSearchExtras extras, int perPage, int page, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -135,7 +135,7 @@ public partial class Flickr : IFlickrPhotosGeo
             parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
 
-        return await GetResponseAsync<PhotoCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }
 
     async Task IFlickrPhotosGeo.RemoveLocationAsync(string photoId, CancellationToken cancellationToken)
@@ -307,7 +307,7 @@ public interface IFlickrPhotosGeo
     /// </param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<PhotoCollection> PhotosForLocationAsync(double latitude, double longitude, GeoAccuracy accuracy = GeoAccuracy.None, PhotoSearchExtras extras = PhotoSearchExtras.None, int perPage = 0, int page = 0, CancellationToken cancellationToken = default);
+    Task<PagedPhotos> PhotosForLocationAsync(double latitude, double longitude, GeoAccuracy accuracy = GeoAccuracy.None, PhotoSearchExtras extras = PhotoSearchExtras.None, int perPage = 0, int page = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Removes Location information.

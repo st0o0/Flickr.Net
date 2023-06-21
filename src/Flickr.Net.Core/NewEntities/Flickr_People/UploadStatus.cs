@@ -14,19 +14,19 @@ public record UploadStatus : FlickrEntityBase<Id>
     public string Username { get; set; }
 
     [JsonProperty("bandwidth")]
-    public Bandwidth Bandwidth { get; set; }
+    public BandwidthStatus Bandwidth { get; set; }
 
     [JsonProperty("filesize")]
-    public Filesize Filesize { get; set; }
+    public FileSizeStatus Filesize { get; set; }
 
     [JsonProperty("sets")]
-    public Sets Sets { get; set; }
+    public SetsStatus Sets { get; set; }
 
     [JsonProperty("videos")]
-    public Videos Videos { get; set; }
+    public VideoStatus Videos { get; set; }
 }
 
-public record Videos
+public record VideoStatus
 {
     [JsonProperty("uploaded")]
     public int Uploaded { get; set; }
@@ -35,7 +35,7 @@ public record Videos
     public string Remaining { get; set; }
 }
 
-public record Sets
+public record SetsStatus
 {
     [JsonProperty("created")]
     public int Created { get; set; }
@@ -44,7 +44,7 @@ public record Sets
     public string Remaining { get; set; }
 }
 
-public record Filesize
+public record FileSizeStatus
 {
     [JsonProperty("maxbytes")]
     public long MaxBytes { get; set; }
@@ -53,7 +53,7 @@ public record Filesize
     public long MaxKb { get; set; }
 }
 
-public record Bandwidth
+public record BandwidthStatus
 {
     [JsonProperty("maxbytes")]
     public long MaxBytes { get; set; }

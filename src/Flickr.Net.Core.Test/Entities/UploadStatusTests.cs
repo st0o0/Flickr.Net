@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using Flickr.Net.Core.Enums;
-using Flickr.Net.Core.Flickrs.Results;
+﻿using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals;
 
 namespace Flickr.Net.Core.Test.Entities;
@@ -53,9 +46,9 @@ public class UploadStatusTests
         var items = result.Content;
         Assert.IsType<UploadStatus>(items);
         Assert.True(items.IsPro);
-        Assert.IsType<Sets>(items.Sets);
-        Assert.IsType<Filesize>(items.Filesize);
-        Assert.IsType<Bandwidth>(items.Bandwidth);
-        Assert.IsType<Videos>(items.Videos);
+        Assert.IsType<SetsStatus>(items.Sets);
+        Assert.IsType<FileSizeStatus>(items.Filesize);
+        Assert.IsType<BandwidthStatus>(items.Bandwidth);
+        Assert.IsType<VideoStatus>(items.Videos);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Flickr.Net.Core.Internals.Attributes;
+using Flickr.Net.Core.NewEntities.Flickr_Photos;
 using Newtonsoft.Json;
 
 namespace Flickr.Net.Core;
@@ -230,3 +231,18 @@ public record PandaPhotos : FlickrCollection<PandaPhoto>
     [JsonProperty("panda")]
     public string Panda { get; set; }
 }
+
+/// <inheritdoc/>
+[FlickrJsonPropertyName("set")]
+public record Sets : FlickrCollection<Set>
+{ }
+
+/// <inheritdoc/>
+[FlickrJsonPropertyName("pool")]
+public record Pools : FlickrCollection<Pool>
+{ }
+
+/// <inheritdoc/>
+[FlickrJsonPropertyName("photocounts")]
+public record PhotoCounts : FlickrCollection<PhotoCount>
+{ }

@@ -52,7 +52,7 @@ public partial class Flickr : IFlickrPhotosComments
         return await GetResponseAsync<PhotoCommentCollection>(parameters, cancellationToken);
     }
 
-    async Task<PhotoCollection> IFlickrPhotosComments.GetRecentForContactsAsync(DateTime? dateLastComment, string[] contactsFilter, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken)
+    async Task<PagedPhotos> IFlickrPhotosComments.GetRecentForContactsAsync(DateTime? dateLastComment, string[] contactsFilter, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -86,7 +86,7 @@ public partial class Flickr : IFlickrPhotosComments
             parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
 
-        return await GetResponseAsync<PhotoCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }
 }
 
@@ -142,5 +142,5 @@ public interface IFlickrPhotosComments
     /// maximum allowed value is 500.
     /// </param>
     /// <param name="cancellationToken"></param>
-    Task<PhotoCollection> GetRecentForContactsAsync(DateTime? dateLastComment = null, string[] contactsFilter = null, PhotoSearchExtras extras = PhotoSearchExtras.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<PagedPhotos> GetRecentForContactsAsync(DateTime? dateLastComment = null, string[] contactsFilter = null, PhotoSearchExtras extras = PhotoSearchExtras.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 }
