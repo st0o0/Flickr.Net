@@ -40,7 +40,7 @@ public record Item : FlickrEntityBase<Id>
     /// <summary>
     /// </summary>
     [JsonProperty("farm")]
-    public string Farm { get; set; }
+    public int Farm { get; set; }
 
     /// <summary>
     /// </summary>

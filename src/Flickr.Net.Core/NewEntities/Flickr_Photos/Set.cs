@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Flickr.Net.Core.Bases;
+﻿using Flickr.Net.Core.Bases;
 using Flickr.Net.Core.Internals.Attributes;
 using Newtonsoft.Json;
 
-namespace Flickr.Net.Core.NewEntities.Flickr_Photos;
+namespace Flickr.Net.Core;
 
 [FlickrJsonPropertyName("set")]
 public record Set : FlickrEntityBase<Id>

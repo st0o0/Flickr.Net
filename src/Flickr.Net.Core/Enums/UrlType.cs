@@ -17,5 +17,8 @@ public enum UrlType
     License,
 
     [EnumMember(Value = "flickr")]
-    Flickr
+    Flickr,
+
+    [EnumMember(Value = "photopage")]
+    PhotoPage,
 }

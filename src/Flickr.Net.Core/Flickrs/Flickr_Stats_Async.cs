@@ -7,7 +7,8 @@ namespace Flickr.Net.Core;
 /// </summary>
 public partial class Flickr : IFlickrStats
 {
-    async Task<StatDomainCollection> IFlickrStats.GetCollectionDomainsAsync(DateTime date, string collectionId, int page, int perPage, CancellationToken cancellationToken)
+    // todo:StatDomainCollection
+    async Task<object> IFlickrStats.GetCollectionDomainsAsync(DateTime date, string collectionId, int page, int perPage, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -31,10 +32,11 @@ public partial class Flickr : IFlickrStats
             parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
 
-        return await GetResponseAsync<StatDomainCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<object>(parameters, cancellationToken);
     }
 
-    async Task<StatReferrerCollection> IFlickrStats.GetCollectionReferrersAsync(DateTime date, string domain, string collectionId, int page, int perPage, CancellationToken cancellationToken)
+    // todo:StatReferrerCollection
+    async Task<object> IFlickrStats.GetCollectionReferrersAsync(DateTime date, string domain, string collectionId, int page, int perPage, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -59,10 +61,11 @@ public partial class Flickr : IFlickrStats
             parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
 
-        return await GetResponseAsync<StatReferrerCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<object>(parameters, cancellationToken);
     }
 
-    async Task<Stats> IFlickrStats.GetCollectionStatsAsync(DateTime date, string collectionId, CancellationToken cancellationToken)
+    // todo:Stats
+    async Task<object> IFlickrStats.GetCollectionStatsAsync(DateTime date, string collectionId, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -73,10 +76,11 @@ public partial class Flickr : IFlickrStats
             { "collection_id", UtilityMethods.CleanCollectionId(collectionId) }
         };
 
-        return await GetResponseAsync<Stats>(parameters, cancellationToken);
+        return await GetResponseAsync<object>(parameters, cancellationToken);
     }
 
-    async Task<CsvFileCollection> IFlickrStats.GetCsvFilesAsync(CancellationToken cancellationToken)
+    // todo:CsvFileCollection
+    async Task<object> IFlickrStats.GetCsvFilesAsync(CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -85,10 +89,11 @@ public partial class Flickr : IFlickrStats
             { "method", "flickr.stats.getCSVFiles" }
         };
 
-        return await GetResponseAsync<CsvFileCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<object>(parameters, cancellationToken);
     }
 
-    async Task<StatDomainCollection> IFlickrStats.GetPhotoDomainsAsync(DateTime date, string photoId, int page, int perPage, CancellationToken cancellationToken)
+    // todo:StatDomainCollection
+    async Task<object> IFlickrStats.GetPhotoDomainsAsync(DateTime date, string photoId, int page, int perPage, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -112,10 +117,11 @@ public partial class Flickr : IFlickrStats
             parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
 
-        return await GetResponseAsync<StatDomainCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<object>(parameters, cancellationToken);
     }
 
-    async Task<StatReferrerCollection> IFlickrStats.GetPhotoReferrersAsync(DateTime date, string domain, string photoId, int page, int perPage, CancellationToken cancellationToken)
+    // todo:StatReferrerCollection
+    async Task<object> IFlickrStats.GetPhotoReferrersAsync(DateTime date, string domain, string photoId, int page, int perPage, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -140,10 +146,11 @@ public partial class Flickr : IFlickrStats
             parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
 
-        return await GetResponseAsync<StatReferrerCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<object>(parameters, cancellationToken);
     }
 
-    async Task<StatDomainCollection> IFlickrStats.GetPhotosetDomainsAsync(DateTime date, string photosetId, int page, int perPage, CancellationToken cancellationToken)
+    // todo:StatDomainCollection
+    async Task<object> IFlickrStats.GetPhotosetDomainsAsync(DateTime date, string photosetId, int page, int perPage, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -167,10 +174,11 @@ public partial class Flickr : IFlickrStats
             parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
 
-        return await GetResponseAsync<StatDomainCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<object>(parameters, cancellationToken);
     }
 
-    async Task<StatReferrerCollection> IFlickrStats.GetPhotosetReferrersAsync(DateTime date, string domain, string photosetId, int page, int perPage, CancellationToken cancellationToken)
+    // todo:StatReferrerCollection
+    async Task<object> IFlickrStats.GetPhotosetReferrersAsync(DateTime date, string domain, string photosetId, int page, int perPage, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -195,10 +203,11 @@ public partial class Flickr : IFlickrStats
             parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
 
-        return await GetResponseAsync<StatReferrerCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<object>(parameters, cancellationToken);
     }
 
-    async Task<Stats> IFlickrStats.GetPhotosetStatsAsync(DateTime date, string photosetId, CancellationToken cancellationToken)
+    // todo:Stats
+    async Task<object> IFlickrStats.GetPhotosetStatsAsync(DateTime date, string photosetId, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -209,10 +218,11 @@ public partial class Flickr : IFlickrStats
             { "photoset_id", photosetId }
         };
 
-        return await GetResponseAsync<Stats>(parameters, cancellationToken);
+        return await GetResponseAsync<object>(parameters, cancellationToken);
     }
 
-    async Task<Stats> IFlickrStats.GetPhotoStatsAsync(DateTime date, string photoId, CancellationToken cancellationToken)
+    // todo:Stats
+    async Task<object> IFlickrStats.GetPhotoStatsAsync(DateTime date, string photoId, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -223,10 +233,11 @@ public partial class Flickr : IFlickrStats
             { "photo_id", photoId }
         };
 
-        return await GetResponseAsync<Stats>(parameters, cancellationToken);
+        return await GetResponseAsync<object>(parameters, cancellationToken);
     }
 
-    async Task<StatDomainCollection> IFlickrStats.GetPhotostreamDomainsAsync(DateTime date, int page, int perPage, CancellationToken cancellationToken)
+    // todo:StatDomainCollection
+    async Task<object> IFlickrStats.GetPhotostreamDomainsAsync(DateTime date, int page, int perPage, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -246,10 +257,11 @@ public partial class Flickr : IFlickrStats
             parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
 
-        return await GetResponseAsync<StatDomainCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<object>(parameters, cancellationToken);
     }
 
-    async Task<StatReferrerCollection> IFlickrStats.GetPhotostreamReferrersAsync(DateTime date, string domain, int page, int perPage, CancellationToken cancellationToken)
+    // todo:StatReferrerCollection
+    async Task<object> IFlickrStats.GetPhotostreamReferrersAsync(DateTime date, string domain, int page, int perPage, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -269,10 +281,11 @@ public partial class Flickr : IFlickrStats
             parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
 
-        return await GetResponseAsync<StatReferrerCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<object>(parameters, cancellationToken);
     }
 
-    async Task<Stats> IFlickrStats.GetPhotostreamStatsAsync(DateTime date, CancellationToken cancellationToken)
+    // todo:Stats
+    async Task<object> IFlickrStats.GetPhotostreamStatsAsync(DateTime date, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -282,10 +295,11 @@ public partial class Flickr : IFlickrStats
             { "date", UtilityMethods.DateToUnixTimestamp(date) }
         };
 
-        return await GetResponseAsync<Stats>(parameters, cancellationToken);
+        return await GetResponseAsync<object>(parameters, cancellationToken);
     }
 
-    async Task<PopularPhotoCollection> IFlickrStats.GetPopularPhotosAsync(DateTime date, PopularitySort sort, int page, int perPage, CancellationToken cancellationToken)
+    // todo:PopularPhotoCollection
+    async Task<object> IFlickrStats.GetPopularPhotosAsync(DateTime date, PopularitySort sort, int page, int perPage, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -313,10 +327,11 @@ public partial class Flickr : IFlickrStats
             parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
 
-        return await GetResponseAsync<PopularPhotoCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<object>(parameters, cancellationToken);
     }
 
-    async Task<StatViews> IFlickrStats.GetTotalViewsAsync(DateTime date, CancellationToken cancellationToken)
+    // todo:StatViews
+    async Task<object> IFlickrStats.GetTotalViewsAsync(DateTime date, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -329,7 +344,7 @@ public partial class Flickr : IFlickrStats
             parameters.Add("date", UtilityMethods.DateToUnixTimestamp(date));
         }
 
-        return await GetResponseAsync<StatViews>(parameters, cancellationToken);
+        return await GetResponseAsync<object>(parameters, cancellationToken);
     }
 }
 
@@ -357,7 +372,7 @@ public interface IFlickrStats
     /// maximum allowed value is 100.
     /// </param>
     /// <param name="cancellationToken"></param>
-    Task<StatDomainCollection> GetCollectionDomainsAsync(DateTime date, string collectionId = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<object> GetCollectionDomainsAsync(DateTime date, string collectionId = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get a list of referrers from a given domain to a collection.
@@ -375,7 +390,7 @@ public interface IFlickrStats
     /// The number of referrers to return per page. The default is 25 and the maximum is 100.
     /// </param>
     /// <param name="cancellationToken"></param>
-    Task<StatReferrerCollection> GetCollectionReferrersAsync(DateTime date, string domain, string collectionId = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<object> GetCollectionReferrersAsync(DateTime date, string domain, string collectionId = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Returns the number of views on the given date for the given collection. Only <see
@@ -384,14 +399,14 @@ public interface IFlickrStats
     /// <param name="date">The date to return stats for.</param>
     /// <param name="collectionId">The collection to return stats for.</param>
     /// <param name="cancellationToken"></param>
-    Task<Stats> GetCollectionStatsAsync(DateTime date, string collectionId, CancellationToken cancellationToken = default);
+    Task<object> GetCollectionStatsAsync(DateTime date, string collectionId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets the collection of CSV files of archived stats from Flickr.
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <remarks>Archived files only available till the 1st June 2010.</remarks>
-    Task<CsvFileCollection> GetCsvFilesAsync(CancellationToken cancellationToken = default);
+    Task<object> GetCsvFilesAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get a list of referring domains for a photo.
@@ -411,7 +426,7 @@ public interface IFlickrStats
     /// maximum allowed value is 100.
     /// </param>
     /// <param name="cancellationToken"></param>
-    Task<StatDomainCollection> GetPhotoDomainsAsync(DateTime date, string photoId = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<object> GetPhotoDomainsAsync(DateTime date, string photoId = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get a list of referrers from a given domain to a photo.
@@ -429,7 +444,7 @@ public interface IFlickrStats
     /// The number of referrers to return per page. The default is 25 and the maximum is 100.
     /// </param>
     /// <param name="cancellationToken"></param>
-    Task<StatReferrerCollection> GetPhotoReferrersAsync(DateTime date, string domain, string photoId = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<object> GetPhotoReferrersAsync(DateTime date, string domain, string photoId = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get a list of referring domains for a photoset.
@@ -449,7 +464,7 @@ public interface IFlickrStats
     /// maximum allowed value is 100.
     /// </param>
     /// <param name="cancellationToken"></param>
-    Task<StatDomainCollection> GetPhotosetDomainsAsync(DateTime date, string photosetId = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<object> GetPhotosetDomainsAsync(DateTime date, string photosetId = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get a list of referrers from a given domain to a photoset.
@@ -467,7 +482,7 @@ public interface IFlickrStats
     /// The number of referrers to return per page. The default is 25 and the maximum is 100.
     /// </param>
     /// <param name="cancellationToken"></param>
-    Task<StatReferrerCollection> GetPhotosetReferrersAsync(DateTime date, string domain, string photosetId = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<object> GetPhotosetReferrersAsync(DateTime date, string domain, string photosetId = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Returns the number of views and comments on the given date for the given photoset. Only <see
@@ -476,7 +491,7 @@ public interface IFlickrStats
     /// <param name="date">The date to return stats for.</param>
     /// <param name="photosetId">The photoset to return stats for.</param>
     /// <param name="cancellationToken"></param>
-    Task<Stats> GetPhotosetStatsAsync(DateTime date, string photosetId, CancellationToken cancellationToken = default);
+    Task<object> GetPhotosetStatsAsync(DateTime date, string photosetId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Returns the number of views, comments and favorites on the given date for the given photo.
@@ -484,7 +499,7 @@ public interface IFlickrStats
     /// <param name="date">The date to return stats for.</param>
     /// <param name="photoId">The photo to return stats for.</param>
     /// <param name="cancellationToken"></param>
-    Task<Stats> GetPhotoStatsAsync(DateTime date, string photoId, CancellationToken cancellationToken = default);
+    Task<object> GetPhotoStatsAsync(DateTime date, string photoId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get a list of referring domains for a photostream.
@@ -501,7 +516,7 @@ public interface IFlickrStats
     /// maximum allowed value is 100.
     /// </param>
     /// <param name="cancellationToken"></param>
-    Task<StatDomainCollection> GetPhotostreamDomainsAsync(DateTime date, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<object> GetPhotostreamDomainsAsync(DateTime date, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get a list of referrers from a given domain to a photostream.
@@ -516,7 +531,7 @@ public interface IFlickrStats
     /// The number of referrers to return per page. The default is 25 and the maximum is 100.
     /// </param>
     /// <param name="cancellationToken"></param>
-    Task<StatReferrerCollection> GetPhotostreamReferrersAsync(DateTime date, string domain, int page, int perPage, CancellationToken cancellationToken = default);
+    Task<object> GetPhotostreamReferrersAsync(DateTime date, string domain, int page, int perPage, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Returns the number of views on the given date for the users photostream. Only <see
@@ -524,7 +539,7 @@ public interface IFlickrStats
     /// </summary>
     /// <param name="date">The date to return stats for.</param>
     /// <param name="cancellationToken"></param>
-    Task<Stats> GetPhotostreamStatsAsync(DateTime date, CancellationToken cancellationToken = default);
+    Task<object> GetPhotostreamStatsAsync(DateTime date, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// List the photos with the most views, comments or favorites.
@@ -546,12 +561,12 @@ public interface IFlickrStats
     /// maximum allowed value is 100.
     /// </param>
     /// <param name="cancellationToken"></param>
-    Task<PopularPhotoCollection> GetPopularPhotosAsync(DateTime date, PopularitySort sort, int page, int perPage, CancellationToken cancellationToken = default);
+    Task<object> GetPopularPhotosAsync(DateTime date, PopularitySort sort, int page, int perPage, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get the overall view counts for an account on a given date.
     /// </summary>
     /// <param name="date">The date to return the overall view count for.</param>
     /// <param name="cancellationToken"></param>
-    Task<StatViews> GetTotalViewsAsync(DateTime date, CancellationToken cancellationToken = default);
+    Task<object> GetTotalViewsAsync(DateTime date, CancellationToken cancellationToken = default);
 }

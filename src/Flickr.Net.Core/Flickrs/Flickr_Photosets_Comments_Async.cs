@@ -16,7 +16,8 @@ public partial class Flickr : IFlickrPhotosetsComments
 
         var result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
 
-        return result.GetAttributeValue("*", "id");
+        //return result.GetAttributeValue("*", "id");
+        return default;
     }
 
     async Task IFlickrPhotosetsComments.DeleteCommentAsync(string commentId, CancellationToken cancellationToken)
@@ -27,7 +28,7 @@ public partial class Flickr : IFlickrPhotosetsComments
             { "comment_id", commentId }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
     async Task IFlickrPhotosetsComments.EditCommentAsync(string commentId, string commentText, CancellationToken cancellationToken)
@@ -39,10 +40,11 @@ public partial class Flickr : IFlickrPhotosetsComments
             { "comment_text", commentText }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
-    async Task<PhotosetCommentCollection> IFlickrPhotosetsComments.GetListAsync(string photosetId, CancellationToken cancellationToken)
+    // todo: PhotosetCommentCollection
+    async Task<object> IFlickrPhotosetsComments.GetListAsync(string photosetId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -50,7 +52,7 @@ public partial class Flickr : IFlickrPhotosetsComments
             { "photoset_id", photosetId }
         };
 
-        return await GetResponseAsync<PhotosetCommentCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<object>(parameters, cancellationToken);
     }
 }
 
@@ -87,5 +89,5 @@ public interface IFlickrPhotosetsComments
     /// </summary>
     /// <param name="photosetId">The id of the photoset to return the comments for.</param>
     /// <param name="cancellationToken"></param>
-    Task<PhotosetCommentCollection> GetListAsync(string photosetId, CancellationToken cancellationToken = default);
+    Task<object> GetListAsync(string photosetId, CancellationToken cancellationToken = default);
 }

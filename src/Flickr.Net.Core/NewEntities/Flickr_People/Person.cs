@@ -42,10 +42,10 @@ public record Person : FlickrEntityBase<Id>
     public Description Description { get; set; }
 
     [JsonProperty("photosurl")]
-    public PhotosUrl Photosurl { get; set; }
+    public PhotosUrl PhotoUrl { get; set; }
 
     [JsonProperty("profileurl")]
-    public ProfileUrl Profileurl { get; set; }
+    public ProfileUrl ProfileUrl { get; set; }
 
     [JsonProperty("mobileurl")]
     public MobileUrl Mobileurl { get; set; }
@@ -183,14 +183,14 @@ public struct FirstDateTaken
     public static implicit operator FirstDateTaken(string username) => new() { Content = username };
 }
 
-public struct Location
+public struct LocationInfo
 {
     [JsonProperty("_content")]
     public string Content { get; set; }
 
-    public static implicit operator string(Location username) => username.Content;
+    public static implicit operator string(LocationInfo username) => username.Content;
 
-    public static implicit operator Location(string username) => new() { Content = username };
+    public static implicit operator LocationInfo(string username) => new() { Content = username };
 }
 
 public struct MboxSha1sum

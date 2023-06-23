@@ -5,7 +5,8 @@
 /// </summary>
 public partial class Flickr : IFlickrReflection
 {
-    async Task<Method> IFlickrReflection.GetMethodInfoAsync(string methodName, CancellationToken cancellationToken)
+    // todo: Method
+    async Task<object> IFlickrReflection.GetMethodInfoAsync(string methodName, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -13,17 +14,18 @@ public partial class Flickr : IFlickrReflection
             { "method_name", methodName }
         };
 
-        return await GetResponseAsync<Method>(parameters, cancellationToken);
+        return await GetResponseAsync<object>(parameters, cancellationToken);
     }
 
-    async Task<MethodCollection> IFlickrReflection.GetMethodsAsync(CancellationToken cancellationToken)
+    // todo: MethodCollection
+    async Task<object> IFlickrReflection.GetMethodsAsync(CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
             { "method", "flickr.reflection.getMethods" }
         };
 
-        return await GetResponseAsync<MethodCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<object>(parameters, cancellationToken);
     }
 }
 
@@ -37,12 +39,12 @@ public interface IFlickrReflection
     /// </summary>
     /// <param name="methodName">The name of the method to retrieve.</param>
     /// <param name="cancellationToken"></param>
-    Task<Method> GetMethodInfoAsync(string methodName, CancellationToken cancellationToken = default);
+    Task<object> GetMethodInfoAsync(string methodName, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets an array of supported method names for Flickr.
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <remarks>Note: Not all methods might be supported by the FlickrNet Library.</remarks>
-    Task<MethodCollection> GetMethodsAsync(CancellationToken cancellationToken = default);
+    Task<object> GetMethodsAsync(CancellationToken cancellationToken = default);
 }

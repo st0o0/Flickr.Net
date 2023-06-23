@@ -349,39 +349,6 @@ public partial class Flickr
 
 internal static class FlickrExtensions
 {
-    public static void Load(this IFlickrParsable item, byte[] bytes)
-    {
-        try
-        {
-            using var ms = new MemoryStream(bytes);
-            using var reader = XmlReader.Create(ms, new XmlReaderSettings
-            {
-                IgnoreWhitespace = true
-            });
-
-            if (!reader.ReadToDescendant("rsp"))
-            {
-                throw new Exception("Unable to find response element 'rsp' in Flickr response");
-            }
-            while (reader.MoveToNextAttribute())
-            {
-                if (reader.LocalName == "stat" && reader.Value == "fail")
-                {
-                    //throw ExceptionHandler.CreateResponseException(reader);
-                }
-            }
-
-            reader.MoveToElement();
-            reader.Read();
-
-            item.Load(reader);
-        }
-        catch (XmlException)
-        {
-            throw;
-        }
-    }
-
     /// <summary>
     /// Whether a given character is allowed by XML 1.0.
     /// </summary>

@@ -18,7 +18,7 @@ public partial class Flickr : IFlickrGroupsPools
             { "group_id", groupId }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
     async Task<FlickrContextResult<NextPhoto, PrevPhoto>> IFlickrGroupsPools.GetContextAsync(string photoId, string groupId, CancellationToken cancellationToken)
@@ -98,7 +98,7 @@ public partial class Flickr : IFlickrGroupsPools
             { "group_id", groupId }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 }
 

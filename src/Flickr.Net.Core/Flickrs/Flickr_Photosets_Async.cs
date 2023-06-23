@@ -18,10 +18,11 @@ public partial class Flickr : IFlickrPhotosets
             { "photo_id", photoId }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
-    async Task<Photoset> IFlickrPhotosets.CreateAsync(string title, string primaryPhotoId, string description, CancellationToken cancellationToken)
+    // todo:Photoset
+    async Task<object> IFlickrPhotosets.CreateAsync(string title, string primaryPhotoId, string description, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -37,7 +38,7 @@ public partial class Flickr : IFlickrPhotosets
             parameters.Add("description", description);
         }
 
-        return await GetResponseAsync<Photoset>(parameters, cancellationToken);
+        return await GetResponseAsync<object>(parameters, cancellationToken);
     }
 
     async Task IFlickrPhotosets.DeleteAsync(string photosetId, CancellationToken cancellationToken)
@@ -50,7 +51,7 @@ public partial class Flickr : IFlickrPhotosets
             { "photoset_id", photosetId }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
     async Task IFlickrPhotosets.EditMetaAsync(string photosetId, string title, string description, CancellationToken cancellationToken)
@@ -69,7 +70,7 @@ public partial class Flickr : IFlickrPhotosets
             parameters.Add("description", description);
         }
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
     async Task IFlickrPhotosets.EditPhotosAsync(string photosetId, string primaryPhotoId, string[] photoIds, CancellationToken cancellationToken)
@@ -84,10 +85,11 @@ public partial class Flickr : IFlickrPhotosets
             { "photo_ids", string.Join(",", photoIds) }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
-    async Task<Context> IFlickrPhotosets.GetContextAsync(string photoId, string photosetId, CancellationToken cancellationToken)
+    // todo:Context
+    async Task<object> IFlickrPhotosets.GetContextAsync(string photoId, string photosetId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -96,10 +98,11 @@ public partial class Flickr : IFlickrPhotosets
             { "photoset_id", photosetId }
         };
 
-        return await GetResponseAsync<Context>(parameters, cancellationToken);
+        return await GetResponseAsync<object>(parameters, cancellationToken);
     }
 
-    async Task<Photoset> IFlickrPhotosets.GetInfoAsync(string photosetId, CancellationToken cancellationToken)
+    // todo:Photoset
+    async Task<object> IFlickrPhotosets.GetInfoAsync(string photosetId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -107,10 +110,11 @@ public partial class Flickr : IFlickrPhotosets
             { "photoset_id", photosetId }
         };
 
-        return await GetResponseAsync<Photoset>(parameters, cancellationToken);
+        return await GetResponseAsync<object>(parameters, cancellationToken);
     }
 
-    async Task<PhotosetCollection> IFlickrPhotosets.GetListAsync(string userId, int page, int perPage, CancellationToken cancellationToken)
+    // todo:PhotosetCollection
+    async Task<object> IFlickrPhotosets.GetListAsync(string userId, int page, int perPage, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -132,15 +136,13 @@ public partial class Flickr : IFlickrPhotosets
             parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
 
-        var result = await GetResponseAsync<PhotosetCollection>(parameters, cancellationToken);
-        foreach (var photoset in result)
-        {
-            photoset.OwnerId = userId;
-        }
+        var result = await GetResponseAsync<object>(parameters, cancellationToken);
+
         return result;
     }
 
-    async Task<PhotosetPhotoCollection> IFlickrPhotosets.GetPhotosAsync(string photosetId, PhotoSearchExtras extras, PrivacyFilter privacyFilter, int page, int perPage, MediaType media, CancellationToken cancellationToken)
+    // todo:PhotosetPhotoCollection
+    async Task<object> IFlickrPhotosets.GetPhotosAsync(string photosetId, PhotoSearchExtras extras, PrivacyFilter privacyFilter, int page, int perPage, MediaType media, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -172,13 +174,13 @@ public partial class Flickr : IFlickrPhotosets
         {
             parameters.Add("media", media switch
             {
-                MediaType.Photos => "photos",
-                MediaType.Videos => "videos",
+                MediaType.Photos or MediaType.Photo => "photos",
+                MediaType.Videos or MediaType.Video => "videos",
                 _ or MediaType.All => "all",
             });
         }
 
-        return await GetResponseAsync<PhotosetPhotoCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<object>(parameters, cancellationToken);
     }
 
     async Task IFlickrPhotosets.OrderSetsAsync(IEnumerable<string> photosetIds, CancellationToken cancellationToken)
@@ -189,7 +191,7 @@ public partial class Flickr : IFlickrPhotosets
             { "photoset_ids", string.Join(",", photosetIds.ToArray()) }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
     async Task IFlickrPhotosets.RemovePhotoAsync(string photosetId, string photoId, CancellationToken cancellationToken)
@@ -201,7 +203,7 @@ public partial class Flickr : IFlickrPhotosets
             { "photo_id", photoId }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
     async Task IFlickrPhotosets.RemovePhotosAsync(string photosetId, IEnumerable<string> photoIds, CancellationToken cancellationToken)
@@ -213,7 +215,7 @@ public partial class Flickr : IFlickrPhotosets
             { "photo_ids", string.Join(",", photoIds.ToArray()) }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
     async Task IFlickrPhotosets.ReorderPhotosAsync(string photosetId, IEnumerable<string> photoIds, CancellationToken cancellationToken)
@@ -225,7 +227,7 @@ public partial class Flickr : IFlickrPhotosets
             { "photo_ids", string.Join(",", photoIds.ToArray()) }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
     async Task IFlickrPhotosets.SetPrimaryPhotoAsync(string photosetId, string photoId, CancellationToken cancellationToken)
@@ -237,7 +239,7 @@ public partial class Flickr : IFlickrPhotosets
             { "photo_id", photoId }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 }
 
@@ -271,7 +273,7 @@ public interface IFlickrPhotosets
     /// </param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<Photoset> CreateAsync(string title, string primaryPhotoId, string description = null, CancellationToken cancellationToken = default);
+    Task<object> CreateAsync(string title, string primaryPhotoId, string description = null, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Deletes the specified photoset.
@@ -311,7 +313,7 @@ public interface IFlickrPhotosets
     /// <param name="photosetId">The id of the set.</param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<Context> GetContextAsync(string photoId, string photosetId, CancellationToken cancellationToken = default);
+    Task<object> GetContextAsync(string photoId, string photosetId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets the information about a photoset.
@@ -319,7 +321,7 @@ public interface IFlickrPhotosets
     /// <param name="photosetId">The ID of the photoset to return information for.</param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<Photoset> GetInfoAsync(string photosetId, CancellationToken cancellationToken = default);
+    Task<object> GetInfoAsync(string photosetId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets a list of the specified users photosets.
@@ -329,7 +331,7 @@ public interface IFlickrPhotosets
     /// <param name="perPage">The number of photosets to return per page. Defaults to 500.</param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<PhotosetCollection> GetListAsync(string userId, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<object> GetListAsync(string userId, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets a collection of photos for a photoset.
@@ -342,7 +344,7 @@ public interface IFlickrPhotosets
     /// <param name="media">Filter on the type of media.</param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<PhotosetPhotoCollection> GetPhotosAsync(string photosetId, PhotoSearchExtras extras = PhotoSearchExtras.None, PrivacyFilter privacyFilter = PrivacyFilter.None, int page = 0, int perPage = 0, MediaType media = MediaType.None, CancellationToken cancellationToken = default);
+    Task<object> GetPhotosAsync(string photosetId, PhotoSearchExtras extras = PhotoSearchExtras.None, PrivacyFilter privacyFilter = PrivacyFilter.None, int page = 0, int perPage = 0, MediaType media = MediaType.None, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Changes the order of your photosets.

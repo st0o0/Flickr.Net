@@ -1,5 +1,5 @@
-﻿using Flickr.Net.Core.Internals.Attributes;
-using Flickr.Net.Core.NewEntities.Flickr_Photos;
+﻿using Flickr.Net.Core.Bases;
+using Flickr.Net.Core.Internals.Attributes;
 using Newtonsoft.Json;
 
 namespace Flickr.Net.Core;
@@ -7,7 +7,7 @@ namespace Flickr.Net.Core;
 /// <summary>
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public abstract record FlickrCollection<T>
+public abstract record FlickrCollection<T> : FlickrEntityBase where T : IFlickrEntity
 {
     /// <summary>
     /// </summary>
@@ -23,7 +23,7 @@ public abstract record FlickrCollection<T>
 /// <summary>
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public abstract record FlickrPaginationCollection<T> : FlickrCollection<T>
+public abstract record FlickrPaginationCollection<T> : FlickrCollection<T> where T : IFlickrEntity
 {
     /// <summary>
     /// </summary>
@@ -77,7 +77,7 @@ public record Brands : FlickrCollection<Brand>
 { }
 
 /// <inheritdoc/>
-[FlickrJsonPropertyName("photo")]
+[FlickrJsonPropertyName("photos")]
 public record Photos : FlickrCollection<Photo>
 {
 }
@@ -89,7 +89,7 @@ public record IconPhotos : FlickrCollection<IconPhoto>
 }
 
 /// <inheritdoc/>
-[FlickrJsonPropertyName("photo")]
+[FlickrJsonPropertyName("photos")]
 public record PagedPhotos : FlickrPaginationCollection<Photo>
 {
 }
@@ -234,7 +234,7 @@ public record PandaPhotos : FlickrCollection<PandaPhoto>
 
 /// <inheritdoc/>
 [FlickrJsonPropertyName("set")]
-public record Sets : FlickrCollection<Set>
+public record Sets : FlickrCollection<CollectionSet>
 { }
 
 /// <inheritdoc/>
@@ -245,4 +245,65 @@ public record Pools : FlickrCollection<Pool>
 /// <inheritdoc/>
 [FlickrJsonPropertyName("photocounts")]
 public record PhotoCounts : FlickrCollection<PhotoCount>
+{ }
+
+/// <inheritdoc/>
+[FlickrJsonPropertyName("photo")]
+public record PhotoPersons : FlickrPaginationCollection<PhotoPerson>
+{
+    [JsonProperty("id")]
+    public string Id { get; set; }
+
+    [JsonProperty("secret")]
+    public string Secret { get; set; }
+
+    [JsonProperty("server")]
+    public string Server { get; set; }
+
+    [JsonProperty("farm")]
+    public int Farm { get; set; }
+}
+
+/// <inheritdoc/>
+[FlickrJsonPropertyName("notes")]
+public record Notes : FlickrCollection<Note>
+{ }
+
+/// <inheritdoc/>
+[FlickrJsonPropertyName("tags")]
+public record Tags : FlickrCollection<Tag>
+{ }
+
+/// <inheritdoc/>
+[FlickrJsonPropertyName("sizes")]
+public record Sizes : FlickrCollection<Size>
+{
+    [JsonProperty("canblog")]
+    public bool CanBlog { get; set; }
+
+    [JsonProperty("canprint")]
+    public bool CanPrint { get; set; }
+
+    [JsonProperty("candownload")]
+    public bool CanDownload { get; set; }
+}
+
+/// <inheritdoc/>
+[FlickrJsonPropertyName("comments")]
+public abstract record Comments<T> : FlickrCollection<Comment> where T : IIdentifierType
+{
+    [JsonPropertyGenericTypeName(0)]
+    public T Id { get; set; }
+}
+
+/// <inheritdoc/>
+public record PhotosetComments : Comments<PhotosetId>
+{ }
+
+/// <inheritdoc/>
+public record PhotoComments : Comments<PhotoId>
+{ }
+
+/// <inheritdoc/>
+public record Licenses : FlickrCollection<License>
 { }

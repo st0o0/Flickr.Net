@@ -14,8 +14,8 @@ public partial class Flickr : IFlickrPhotosComments
             { "comment_text", commentText }
         };
 
-        var response = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
-        return response.GetAttributeValue("*", "id");
+        var response = await GetResponseAsync<CommentUnknownResponse>(parameters, cancellationToken);
+        return response.GetValueOrDefault("id");
     }
 
     async Task IFlickrPhotosComments.DeleteCommentAsync(string commentId, CancellationToken cancellationToken)
@@ -26,7 +26,7 @@ public partial class Flickr : IFlickrPhotosComments
             { "comment_id", commentId }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
     async Task IFlickrPhotosComments.EditCommentAsync(string commentId, string commentText, CancellationToken cancellationToken)
@@ -38,10 +38,10 @@ public partial class Flickr : IFlickrPhotosComments
             { "comment_text", commentText }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
-    async Task<PhotoCommentCollection> IFlickrPhotosComments.GetListAsync(string photoId, CancellationToken cancellationToken)
+    async Task<PhotoComments> IFlickrPhotosComments.GetListAsync(string photoId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -49,7 +49,7 @@ public partial class Flickr : IFlickrPhotosComments
             { "photo_id", photoId }
         };
 
-        return await GetResponseAsync<PhotoCommentCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<PhotoComments>(parameters, cancellationToken);
     }
 
     async Task<PagedPhotos> IFlickrPhotosComments.GetRecentForContactsAsync(DateTime? dateLastComment, string[] contactsFilter, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken)
@@ -123,7 +123,7 @@ public interface IFlickrPhotosComments
     /// </summary>
     /// <param name="photoId">The id of the photo to return the comments for.</param>
     /// <param name="cancellationToken"></param>
-    Task<PhotoCommentCollection> GetListAsync(string photoId, CancellationToken cancellationToken = default);
+    Task<PhotoComments> GetListAsync(string photoId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Return the list of photos belonging to your contacts that have been commented on recently.

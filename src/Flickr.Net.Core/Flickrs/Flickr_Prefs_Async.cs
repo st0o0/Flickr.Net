@@ -15,10 +15,11 @@ public partial class Flickr : IFlickrPrefs
         };
 
         var result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
-        return (ContentType)int.Parse(result.GetAttributeValue("*", "content_type"), System.Globalization.NumberFormatInfo.InvariantInfo);
+        //return (ContentType)int.Parse(result.GetAttributeValue("*", "content_type"), System.Globalization.NumberFormatInfo.InvariantInfo);
+        return default;
     }
 
-    async Task<UserGeoPermissions> IFlickrPrefs.GetGeoPermsAsync(CancellationToken cancellationToken)
+    async Task<object> IFlickrPrefs.GetGeoPermsAsync(CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -27,7 +28,7 @@ public partial class Flickr : IFlickrPrefs
             { "method", "flickr.prefs.getGeoPerms" }
         };
 
-        return await GetResponseAsync<UserGeoPermissions>(parameters, cancellationToken);
+        return await GetResponseAsync<object>(parameters, cancellationToken);
     }
 
     async Task<HiddenFromSearch> IFlickrPrefs.GetHiddenAsync(CancellationToken cancellationToken)
@@ -40,7 +41,8 @@ public partial class Flickr : IFlickrPrefs
         };
 
         var result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
-        return (HiddenFromSearch)int.Parse(result.GetAttributeValue("*", "hidden"), System.Globalization.NumberFormatInfo.InvariantInfo);
+        //return (HiddenFromSearch)int.Parse(result.GetAttributeValue("*", "hidden"), System.Globalization.NumberFormatInfo.InvariantInfo);
+        return default;
     }
 
     async Task<PrivacyFilter> IFlickrPrefs.GetPrivacyAsync(CancellationToken cancellationToken)
@@ -53,7 +55,8 @@ public partial class Flickr : IFlickrPrefs
         };
 
         var result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
-        return (PrivacyFilter)int.Parse(result.GetAttributeValue("*", "privacy"), System.Globalization.NumberFormatInfo.InvariantInfo);
+        //return (PrivacyFilter)int.Parse(result.GetAttributeValue("*", "privacy"), System.Globalization.NumberFormatInfo.InvariantInfo);
+        return default;
     }
 
     async Task<SafetyLevel> IFlickrPrefs.GetSafetyLevelAsync(CancellationToken cancellationToken)
@@ -66,7 +69,9 @@ public partial class Flickr : IFlickrPrefs
         };
 
         var result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
-        return (SafetyLevel)int.Parse(result.GetAttributeValue("*", "safety_level"), System.Globalization.NumberFormatInfo.InvariantInfo);
+        //return (SafetyLevel)int.Parse(result.GetAttributeValue("*", "safety_level"), System.Globalization.NumberFormatInfo.InvariantInfo);
+
+        return default;
     }
 }
 
@@ -87,7 +92,8 @@ public interface IFlickrPrefs
     /// geotag their photos.
     /// </summary>
     /// <param name="cancellationToken"></param>
-    Task<UserGeoPermissions> GetGeoPermsAsync(CancellationToken cancellationToken = default);
+    // todo: UserGeoPermissions
+    Task<object> GetGeoPermsAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets the currently authenticated users default hidden from search setting.

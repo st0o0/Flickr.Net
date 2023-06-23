@@ -1,8 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using Flickr.Net.Core.Bases;
+using Newtonsoft.Json;
 
 namespace Flickr.Net.Core;
 
-public class PhotoCount
+public record PhotoCount : FlickrEntityBase
 {
     [JsonProperty("count")]
     public int Count { get; set; }

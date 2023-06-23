@@ -9,9 +9,6 @@ public abstract record PhotoBase : FlickrEntityBase<Id>
 
     [JsonProperty("server")]
     public string Server { get; set; }
-
-    [JsonProperty("title")]
-    public string Title { get; set; }
 }
 
 public abstract record ExtendedPhotoBase : PhotoBase
@@ -21,4 +18,7 @@ public abstract record ExtendedPhotoBase : PhotoBase
 
     [JsonProperty("farm")]
     public string Farm { get; set; }
+
+    [JsonProperty("title")]
+    public string Title { get; set; }
 }

@@ -5,7 +5,7 @@
 /// </summary>
 public partial class Flickr : IFlickrPanda
 {
-    async Task<string[]> IFlickrPanda.GetListAsync(CancellationToken cancellationToken)
+    async Task<Pandas> IFlickrPanda.GetListAsync(CancellationToken cancellationToken)
 
     {
         Dictionary<string, string> parameters = new()
@@ -13,11 +13,10 @@ public partial class Flickr : IFlickrPanda
             { "method", "flickr.panda.getList" }
         };
 
-        var result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
-        return result.GetElementArray("panda");
+        return await GetResponseAsync<Pandas>(parameters, cancellationToken);
     }
 
-    async Task<PandaPhotoCollection> IFlickrPanda.GetPhotosAsync(string pandaName, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken)
+    async Task<PandaPhotos> IFlickrPanda.GetPhotosAsync(string pandaName, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -40,7 +39,7 @@ public partial class Flickr : IFlickrPanda
             parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
 
-        return await GetResponseAsync<PandaPhotoCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<PandaPhotos>(parameters, cancellationToken);
     }
 }
 
@@ -54,7 +53,7 @@ public interface IFlickrPanda
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns>An array of panda names.</returns>
-    Task<string[]> GetListAsync(CancellationToken cancellationToken = default);
+    Task<Pandas> GetListAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets a list of photos for the given panda.
@@ -64,5 +63,5 @@ public interface IFlickrPanda
     /// <param name="page">The age to return.</param>
     /// <param name="perPage">The number of photos to return per page.</param>
     /// <param name="cancellationToken"></param>
-    Task<PandaPhotoCollection> GetPhotosAsync(string pandaName, PhotoSearchExtras extras = PhotoSearchExtras.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<PandaPhotos> GetPhotosAsync(string pandaName, PhotoSearchExtras extras = PhotoSearchExtras.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 }

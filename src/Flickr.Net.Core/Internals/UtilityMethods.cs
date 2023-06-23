@@ -4,7 +4,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Flickr.Net.Core.Exceptions;
 using Flickr.Net.Core.SearchOptions;
-using Flickr.Net.Core.Entities;
 
 namespace Flickr.Net.Core.Internals;
 
@@ -252,15 +251,15 @@ public static class UtilityMethods
     /// <param name="size">The size.</param>
     /// <param name="extension">The extension.</param>
     /// <returns>A string.</returns>
-    public static string UrlFormat(Entities.Photo p, string size, string extension)
+    public static string UrlFormat(Photo p, string size, string extension)
     {
         if (size == "_o" || size == "original")
         {
-            return UrlFormat(p.Farm, p.Server, p.PhotoId, p.OriginalSecret, size, extension);
+            return UrlFormat(p.Farm, p.Server, p.Id, p.Secret, size, extension);
         }
         else
         {
-            return UrlFormat(p.Farm, p.Server, p.PhotoId, p.Secret, size, extension);
+            return UrlFormat(p.Farm, p.Server, p.Id, p.Secret, size, extension);
         }
     }
 
@@ -275,11 +274,11 @@ public static class UtilityMethods
     {
         if (size == "_o" || size == "original")
         {
-            return UrlFormat(p.Farm, p.Server, p.PhotoId, p.OriginalSecret, size, extension);
+            return UrlFormat(p.Farm, p.Server, p.Id, p.OriginalSecret, size, extension);
         }
         else
         {
-            return UrlFormat(p.Farm, p.Server, p.PhotoId, p.Secret, size, extension);
+            return UrlFormat(p.Farm, p.Server, p.Id, p.Secret, size, extension);
         }
     }
 
@@ -290,10 +289,10 @@ public static class UtilityMethods
     /// <param name="size">The size.</param>
     /// <param name="extension">The extension.</param>
     /// <returns>A string.</returns>
-    public static string UrlFormat(Photoset p, string size, string extension)
-    {
-        return UrlFormat(p.Farm, p.Server, p.PrimaryPhotoId, p.Secret, size, extension);
-    }
+    //public static string UrlFormat(Photoset p, string size, string extension)
+    //{
+    //    return UrlFormat(p.Farm, p.Server, p.PrimaryPhotoId, p.Secret, size, extension);
+    //}
 
     /// <summary>
     /// Urls the format.
@@ -305,7 +304,7 @@ public static class UtilityMethods
     /// <param name="size">The size.</param>
     /// <param name="extension">The extension.</param>
     /// <returns>A string.</returns>
-    public static string UrlFormat(string farm, string server, string photoId, string secret, string size, string extension)
+    public static string UrlFormat(int farm, string server, string photoId, string secret, string size, string extension)
     {
         var sizeAbbreviation = size switch
         {
@@ -447,28 +446,6 @@ public static class UtilityMethods
     public static string DateToMySql(DateTime date)
     {
         return date.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.DateTimeFormatInfo.InvariantInfo);
-    }
-
-    /// <summary>
-    /// If an unknown element is found and the DLL is a debug DLL then a <see
-    /// cref="ParsingException"/> is thrown.
-    /// </summary>
-    /// <param name="reader">The <see cref="XmlReader"/> containing the unknown xml node.</param>
-    [System.Diagnostics.Conditional("DEBUG")]
-    public static void CheckParsingException(XmlReader reader)
-    {
-        if (reader.NodeType == XmlNodeType.Attribute)
-        {
-            throw new ParsingException("Unknown attribute: " + reader.Name + "=" + reader.Value);
-        }
-        if (!string.IsNullOrEmpty(reader.Value))
-        {
-            throw new ParsingException("Unknown " + reader.NodeType.ToString() + ": " + reader.Name + "=" + reader.Value);
-        }
-        else
-        {
-            throw new ParsingException("Unknown element: " + reader.Name);
-        }
     }
 
     /// <summary>

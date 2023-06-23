@@ -25,3 +25,23 @@ public struct Id : IIdentifierType
 
     public static implicit operator Id(string value) => new() { _id = value };
 }
+
+[FlickrJsonPropertyName("photo_id")]
+public struct PhotoId : IIdentifierType
+{
+    private string _id;
+
+    public static implicit operator string(PhotoId value) => value._id;
+
+    public static implicit operator PhotoId(string value) => new() { _id = value };
+}
+
+[FlickrJsonPropertyName("photoset_id")]
+public struct PhotosetId : IIdentifierType
+{
+    private string _id;
+
+    public static implicit operator string(PhotosetId value) => value._id;
+
+    public static implicit operator PhotosetId(string value) => new() { _id = value };
+}

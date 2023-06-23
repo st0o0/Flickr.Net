@@ -20,7 +20,8 @@ public partial class Flickr : IFlickrPhotosNotes
 
         var result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
 
-        return result.GetAttributeValue("*", "id");
+        //return result.GetAttributeValue("*", "id");
+        return default;
     }
 
     async Task IFlickrPhotosNotes.DeleteAsync(string noteId, CancellationToken cancellationToken)
@@ -31,7 +32,7 @@ public partial class Flickr : IFlickrPhotosNotes
             { "note_id", noteId }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
     async Task IFlickrPhotosNotes.EditAsync(string noteId, int noteX, int noteY, int noteWidth, int noteHeight, string noteText, CancellationToken cancellationToken)
@@ -47,7 +48,7 @@ public partial class Flickr : IFlickrPhotosNotes
             { "note_text", noteText }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 }
 

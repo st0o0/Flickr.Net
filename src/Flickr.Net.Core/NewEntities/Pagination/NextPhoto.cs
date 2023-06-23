@@ -2,8 +2,7 @@
 using Flickr.Net.Core.Internals.Attributes;
 using Newtonsoft.Json;
 
-namespace Flickr.Net.Core
-;
+namespace Flickr.Net.Core;
 
 /// <summary>
 /// </summary>

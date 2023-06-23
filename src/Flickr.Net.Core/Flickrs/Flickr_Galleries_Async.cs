@@ -175,7 +175,7 @@ public partial class Flickr : IFlickrGalleries
             { "full_response", fullResponse ?? "" }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 }
 

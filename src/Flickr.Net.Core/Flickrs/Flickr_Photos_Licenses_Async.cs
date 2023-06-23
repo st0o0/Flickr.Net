@@ -5,14 +5,15 @@
 /// </summary>
 public partial class Flickr : IFlickrPhotosLicenses
 {
-    async Task<LicenseCollection> IFlickrPhotosLicenses.GetInfoAsync(CancellationToken cancellationToken)
+    // todo: LicenseCollection
+    async Task<object> IFlickrPhotosLicenses.GetInfoAsync(CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
             { "method", "flickr.photos.licenses.getInfo" },
         };
 
-        return await GetResponseAsync<LicenseCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<object>(parameters, cancellationToken);
     }
 
     async Task IFlickrPhotosLicenses.SetLicenseAsync(string photoId, LicenseType license, CancellationToken cancellationToken)
@@ -26,7 +27,7 @@ public partial class Flickr : IFlickrPhotosLicenses
             { "license_id", license.ToString("d") }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 }
 
@@ -39,7 +40,7 @@ public interface IFlickrPhotosLicenses
     /// Gets a list of all current licenses.
     /// </summary>
     /// <param name="cancellationToken"></param>
-    Task<LicenseCollection> GetInfoAsync(CancellationToken cancellationToken = default);
+    Task<object> GetInfoAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Sets the license for a photo.

@@ -24,7 +24,7 @@ public record Gallery : FlickrEntityBase<Id>
     public string PrimaryPhotoServer { get; set; }
 
     [JsonProperty("primary_photo_farm")]
-    public string PrimaryPhotoFarm { get; set; }
+    public int PrimaryPhotoFarm { get; set; }
 
     [JsonProperty("primary_photo_secret")]
     public string PrimaryPhotoSecret { get; set; }

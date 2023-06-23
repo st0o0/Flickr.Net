@@ -20,10 +20,11 @@ public partial class Flickr : IFlickrPhotosSuggestions
             { "suggestion_id", suggestionId }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
-    async Task<SuggestionCollection> IFlickrPhotosSuggestions.GetListAsync(string photoId, SuggestionStatus status, CancellationToken cancellationToken)
+    // todo: SuggestionCollection
+    async Task<object> IFlickrPhotosSuggestions.GetListAsync(string photoId, SuggestionStatus status, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -34,7 +35,7 @@ public partial class Flickr : IFlickrPhotosSuggestions
             { "status_id", status.ToString("d") }
         };
 
-        return await GetResponseAsync<SuggestionCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<object>(parameters, cancellationToken);
     }
 
     async Task IFlickrPhotosSuggestions.RejectSuggestionAsync(string suggestionId, CancellationToken cancellationToken)
@@ -52,7 +53,7 @@ public partial class Flickr : IFlickrPhotosSuggestions
             { "suggestion_id", suggestionId }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
     async Task IFlickrPhotosSuggestions.RemoveSuggestionAsync(string suggestionId, CancellationToken cancellationToken)
@@ -70,7 +71,7 @@ public partial class Flickr : IFlickrPhotosSuggestions
             { "suggestion_id", suggestionId }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
     async Task IFlickrPhotosSuggestions.SuggestLocationAsync(string photoId, double latitude, double longitude, GeoAccuracy accuracy, string woeId, string placeId, string note, CancellationToken cancellationToken)
@@ -105,7 +106,7 @@ public partial class Flickr : IFlickrPhotosSuggestions
             parameters.Add("note", note);
         }
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 }
 
@@ -128,7 +129,7 @@ public interface IFlickrPhotosSuggestions
     /// <param name="status">The type of status to filter by.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<SuggestionCollection> GetListAsync(string photoId, SuggestionStatus status, CancellationToken cancellationToken = default);
+    Task<object> GetListAsync(string photoId, SuggestionStatus status, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Rejects a suggestion made for a location on a photo. Currently doesn't appear to actually

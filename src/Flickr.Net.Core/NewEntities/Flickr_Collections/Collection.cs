@@ -35,5 +35,5 @@ public record Collection : FlickrEntityBase<Id>
     public Photos IconPhotos { get; set; }
 
     [JsonProperty("set")]
-    public List<Set> Sets { get; set; }
+    public List<CollectionSet> Sets { get; set; }
 }

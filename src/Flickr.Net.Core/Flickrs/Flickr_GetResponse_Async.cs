@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using Flickr.Net.Core.Bases;
 using Flickr.Net.Core.Exceptions.Handlers;
 using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals.Caching;
@@ -12,12 +13,14 @@ namespace Flickr.Net.Core;
 /// </summary>
 public partial class Flickr
 {
-    private Task<FlickrContextResult<TNextPhoto, TPrevPhoto>> GetContextResponseAsync<TNextPhoto, TPrevPhoto>(Dictionary<string, string> parameters, CancellationToken cancellationToken = default) => GetGenericResponseAsync<FlickrContextResult<TNextPhoto, TPrevPhoto>, TNextPhoto, TPrevPhoto>(parameters, cancellationToken);
+    private Task<FlickrContextResult<TNextPhoto, TPrevPhoto>> GetContextResponseAsync<TNextPhoto, TPrevPhoto>(Dictionary<string, string> parameters, CancellationToken cancellationToken = default) where TNextPhoto : IFlickrEntity where TPrevPhoto : IFlickrEntity => GetGenericResponseAsync<FlickrContextResult<TNextPhoto, TPrevPhoto>, TNextPhoto, TPrevPhoto>(parameters, cancellationToken);
 
-    private Task GetResponseAsync(Dictionary<string, string> parameters, CancellationToken cancellationToken = default) => GetGenericResponseAsync<FlickrResult, string>(parameters, cancellationToken);
+    private Task GetResponseAsync(Dictionary<string, string> parameters, CancellationToken cancellationToken = default) => GetGenericResponseAsync<FlickrResult, UnknownResponse>(parameters, cancellationToken);
 
+    //todo: where T : IFlickrEntity
     private Task<T> GetResponseAsync<T>(Dictionary<string, string> parameters, CancellationToken cancellationToken = default) => GetGenericResponseAsync<FlickrResult<T>, T>(parameters, cancellationToken);
 
+    //todo: where T : IFlickrEntity
     private async Task<TResponse> GetGenericResponseAsync<T, TResponse>(Dictionary<string, string> parameters, CancellationToken cancellationToken = default)
     {
         var result = await GetGenericResponseAsync<FlickrResult<TResponse>, TResponse>(parameters, cancellationToken);
@@ -29,7 +32,7 @@ public partial class Flickr
         return default;
     }
 
-    private async Task<T> GetGenericResponseAsync<T, TPrimaryResponse, TSecondResponse>(Dictionary<string, string> parameters, CancellationToken cancellationToken = default) where T : FlickrResult
+    private async Task<T> GetGenericResponseAsync<T, TPrimaryResponse, TSecondResponse>(Dictionary<string, string> parameters, CancellationToken cancellationToken = default) where TPrimaryResponse : IFlickrEntity where TSecondResponse : IFlickrEntity where T : FlickrResult
     {
         CheckApiKey();
 
@@ -37,9 +40,12 @@ public partial class Flickr
 
         // If OAuth Token exists or no authentication required then use new OAuth
         if (!string.IsNullOrEmpty(FlickrSettings.OAuthAccessToken))
+
         {
             OAuthGetBasicParameters(parameters);
+
             if (!string.IsNullOrEmpty(FlickrSettings.OAuthAccessToken))
+
             {
                 parameters["oauth_token"] = FlickrSettings.OAuthAccessToken;
             }

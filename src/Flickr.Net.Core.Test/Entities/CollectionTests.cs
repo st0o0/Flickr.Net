@@ -141,9 +141,9 @@ public class CollectionTests
         Assert.IsType<Collection>(items.Values[0]);
         Assert.IsType<DateTime>(items.Values[0].CreateDate);
         Assert.Equal(2, items.Values.Count);
-        Assert.IsType<Set>(items.Values[0].Sets[0]);
+        Assert.IsType<CollectionSet>(items.Values[0].Sets[0]);
         Assert.Equal(2, items.Values[0].Sets.Count);
-        Assert.IsType<Set>(items.Values[1].Sets[0]);
+        Assert.IsType<CollectionSet>(items.Values[1].Sets[0]);
         Assert.Equal(2, items.Values[1].Sets.Count);
     }
 }

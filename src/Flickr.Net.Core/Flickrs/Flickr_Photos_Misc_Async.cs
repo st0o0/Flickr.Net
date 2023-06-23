@@ -24,10 +24,11 @@ public partial class Flickr : IFlickrPhotosMisc
             { "degrees", degrees.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
-    async Task<TicketCollection> IFlickrPhotosMisc.CheckTicketsAsync(string[] tickets, CancellationToken cancellationToken)
+    // todo: TicketCollection
+    async Task<object> IFlickrPhotosMisc.CheckTicketsAsync(string[] tickets, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -35,7 +36,7 @@ public partial class Flickr : IFlickrPhotosMisc
             { "tickets", string.Join(",", tickets) }
         };
 
-        return await GetResponseAsync<TicketCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<object>(parameters, cancellationToken);
     }
 }
 
@@ -60,5 +61,6 @@ public interface IFlickrPhotosMisc
     /// </summary>
     /// <param name="tickets">A list of ticket ids</param>
     /// <param name="cancellationToken"></param>
-    Task<TicketCollection> CheckTicketsAsync(string[] tickets, CancellationToken cancellationToken = default);
+    // todo: TicketCollection
+    Task<object> CheckTicketsAsync(string[] tickets, CancellationToken cancellationToken = default);
 }

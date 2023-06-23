@@ -1,6 +1,5 @@
 ﻿using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals;
-using Flickr.Net.Core.NewEntities.Flickr_Photos;
 
 namespace Flickr.Net.Core.Test.Entities;
 

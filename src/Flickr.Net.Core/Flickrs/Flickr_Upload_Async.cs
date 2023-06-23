@@ -116,10 +116,9 @@ public partial class Flickr : IFlickrUpload
 
         responseMessage.EnsureSuccessStatusCode();
 
-        UnknownResponse t = new();
-        ((IFlickrParsable)t).Load(await responseMessage.Content.ReadAsByteArrayAsync(cancellationToken));
-        return t.GetElementValue("photoid");
-
+        // todo: Upload
+        var result = await responseMessage.Content.ReadAsByteArrayAsync(cancellationToken);
+        return "";
         //HttpWebRequest req = (HttpWebRequest)WebRequest.Create(uploadUri);
         //req.Method = "POST";
         //req.ContentType = "multipart/form-data; boundary=" + boundary;

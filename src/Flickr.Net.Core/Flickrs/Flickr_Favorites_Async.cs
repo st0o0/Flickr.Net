@@ -15,7 +15,7 @@ public partial class Flickr : IFlickrFavorites
             { "photo_id", photoId }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
     async Task<FlickrContextResult<NextPhoto, PrevPhoto>> IFlickrFavorites.GetContextAsync(string photoId, string userId, CancellationToken cancellationToken)
@@ -101,7 +101,7 @@ public partial class Flickr : IFlickrFavorites
             { "photo_id", photoId }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 }
 
