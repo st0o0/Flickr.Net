@@ -1,6 +1,4 @@
-﻿using System.Xml;
-
-namespace Flickr.Net.Core.Internals;
+﻿namespace Flickr.Net.Core.Internals;
 
 /// <summary>
 /// The response returned by the <see cref="IFlickrTest.EchoAsync(Dictionary{string, string},

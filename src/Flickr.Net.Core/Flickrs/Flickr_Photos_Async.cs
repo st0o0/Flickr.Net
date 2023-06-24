@@ -250,7 +250,6 @@ public partial class Flickr : IFlickrPhotos
         return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }
 
-    // todo: PhotoPermissions
     async Task<Perms> IFlickrPhotos.GetPermsAsync(string photoId, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();

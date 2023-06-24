@@ -1,7 +1,6 @@
 ﻿using Flickr.Net.Core.Internals.ContractResolver;
 using Flickr.Net.Core.Internals.JsonConverters;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Flickr.Net.Core.Internals;
 
