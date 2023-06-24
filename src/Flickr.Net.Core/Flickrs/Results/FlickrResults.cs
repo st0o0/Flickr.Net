@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices;
-using Flickr.Net.Core.Bases;
+﻿using Flickr.Net.Core.Bases;
 using Flickr.Net.Core.Exceptions;
 using Flickr.Net.Core.Internals.Attributes;
 using Newtonsoft.Json;
