@@ -32,7 +32,7 @@ public partial class Flickr : IFlickrPhotosSuggestions
         {
             { "method", "flickr.photos.suggestions.getList" },
             { "photo_id", photoId },
-            { "status_id", status.ToString("d") }
+            { "status_id", status.GetEnumMemberValue() }
         };
 
         return await GetResponseAsync<object>(parameters, cancellationToken);

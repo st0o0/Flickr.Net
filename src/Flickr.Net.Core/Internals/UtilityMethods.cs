@@ -149,12 +149,12 @@ public static class UtilityMethods
 
         if (options.MinTakenDate != DateTime.MinValue)
         {
-            parameters.Add("min_taken_date", DateToMySql(options.MinTakenDate));
+            parameters.Add("min_taken_date", options.MinTakenDate.ToMySql());
         }
 
         if (options.MaxTakenDate != DateTime.MinValue)
         {
-            parameters.Add("max_taken_date", DateToMySql(options.MaxTakenDate));
+            parameters.Add("max_taken_date", options.MaxTakenDate.ToMySql());
         }
 
         if (options.Extras != PhotoSearchExtras.None)
@@ -435,16 +435,6 @@ public static class UtilityMethods
 #endif
         }
         return output;
-    }
-
-    /// <summary>
-    /// Dates the to my sql.
-    /// </summary>
-    /// <param name="date">The date.</param>
-    /// <returns>A string.</returns>
-    public static string DateToMySql(DateTime date)
-    {
-        return date.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.DateTimeFormatInfo.InvariantInfo);
     }
 
     /// <summary>

@@ -24,23 +24,23 @@ public enum MemberType
     /// A basic member.
     /// </summary>
     [EnumMember(Value = "member")]
-    Member = 1,
+    Member = 1 << 0,
 
     /// <summary>
     /// A group moderator.
     /// </summary>
     [EnumMember(Value = "moderator")]
-    Moderator = 2,
+    Moderator = 1 << 1,
 
     /// <summary>
     /// A group adminstrator.
     /// </summary>
     [EnumMember(Value = "admin")]
-    Admin = 4,
+    Admin = 1 << 2,
 
     /// <summary>
     /// Some strange kind of super-admin. Unsupported by the API.
     /// </summary>
     [EnumMember(Value = "narwhal")]
-    Narwhal = 8,
+    Narwhal = 1 << 3,
 }

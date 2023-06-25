@@ -281,12 +281,12 @@ public partial class Flickr : IFlickrPlaces
 
         if (minTakenDate.HasValue && minTakenDate != DateTime.MinValue)
         {
-            parameters.Add("min_taken_date", UtilityMethods.DateToMySql(minTakenDate.Value));
+            parameters.Add("min_taken_date", minTakenDate.Value.ToMySql());
         }
 
         if (maxTakenDate.HasValue && maxTakenDate != DateTime.MinValue)
         {
-            parameters.Add("max_taken_date", UtilityMethods.DateToMySql(maxTakenDate.Value));
+            parameters.Add("max_taken_date", maxTakenDate.Value.ToMySql());
         }
 
         return await GetResponseAsync<object>(parameters, cancellationToken);
@@ -327,7 +327,7 @@ public partial class Flickr : IFlickrPlaces
 
         if (tagMode != TagMode.None)
         {
-            parameters.Add("tag_mode", tagMode.ToFlickrString());
+            parameters.Add("tag_mode", tagMode.GetEnumMemberValue());
         }
 
         if (machineTags != null && machineTags.Any())
@@ -337,27 +337,27 @@ public partial class Flickr : IFlickrPlaces
 
         if (machineTagMode != MachineTagMode.None)
         {
-            parameters.Add("machine_tag_mode", machineTagMode.ToFlickrString());
+            parameters.Add("machine_tag_mode", machineTagMode.GetEnumMemberValue());
         }
 
         if (minTakenDate.HasValue && minTakenDate != DateTime.MinValue)
         {
-            parameters.Add("min_taken_date", UtilityMethods.DateToMySql(minTakenDate.Value));
+            parameters.Add("min_taken_date", minTakenDate.Value.ToMySql());
         }
 
         if (maxTakenDate.HasValue && maxTakenDate != DateTime.MinValue)
         {
-            parameters.Add("max_taken_date", UtilityMethods.DateToMySql(maxTakenDate.Value));
+            parameters.Add("max_taken_date", maxTakenDate.Value.ToMySql());
         }
 
         if (minUploadDate.HasValue && minUploadDate != DateTime.MinValue)
         {
-            parameters.Add("min_upload_date", UtilityMethods.DateToUnixTimestamp(minUploadDate.Value));
+            parameters.Add("min_upload_date", minUploadDate.Value.ToUnixTimestamp());
         }
 
         if (maxUploadDate.HasValue && maxUploadDate != DateTime.MinValue)
         {
-            parameters.Add("max_upload_date", UtilityMethods.DateToUnixTimestamp(maxUploadDate.Value));
+            parameters.Add("max_upload_date", maxUploadDate.Value.ToUnixTimestamp());
         }
 
         return await GetResponseAsync<object>(parameters, cancellationToken);
@@ -393,12 +393,12 @@ public partial class Flickr : IFlickrPlaces
 
         if (minTakenDate.HasValue && minTakenDate != DateTime.MinValue)
         {
-            parameters.Add("min_taken_date", UtilityMethods.DateToMySql(minTakenDate.Value));
+            parameters.Add("min_taken_date", minTakenDate.Value.ToMySql());
         }
 
         if (maxTakenDate.HasValue && maxTakenDate != DateTime.MinValue)
         {
-            parameters.Add("max_taken_date", UtilityMethods.DateToMySql(maxTakenDate.Value));
+            parameters.Add("max_taken_date", maxTakenDate.Value.ToMySql());
         }
 
         if (minUploadDate.HasValue && minUploadDate != DateTime.MinValue)
@@ -436,12 +436,12 @@ public partial class Flickr : IFlickrPlaces
 
         if (minTakenDate.HasValue && minTakenDate != DateTime.MinValue)
         {
-            parameters.Add("min_taken_date", UtilityMethods.DateToMySql(minTakenDate.Value));
+            parameters.Add("min_taken_date", minTakenDate.Value.ToMySql());
         }
 
         if (maxTakenDate.HasValue && maxTakenDate != DateTime.MinValue)
         {
-            parameters.Add("max_taken_date", UtilityMethods.DateToMySql(maxTakenDate.Value));
+            parameters.Add("max_taken_date", maxTakenDate.Value.ToMySql());
         }
 
         if (minUploadDate.HasValue && minUploadDate != DateTime.MinValue)
@@ -479,12 +479,12 @@ public partial class Flickr : IFlickrPlaces
 
         if (minTakenDate.HasValue && minTakenDate != DateTime.MinValue)
         {
-            parameters.Add("min_taken_date", UtilityMethods.DateToMySql(minTakenDate.Value));
+            parameters.Add("min_taken_date", minTakenDate.Value.ToMySql());
         }
 
         if (maxTakenDate.HasValue && maxTakenDate != DateTime.MinValue)
         {
-            parameters.Add("max_taken_date", UtilityMethods.DateToMySql(maxTakenDate.Value));
+            parameters.Add("max_taken_date", maxTakenDate.Value.ToMySql());
         }
 
         if (minUploadDate.HasValue && minUploadDate != DateTime.MinValue)

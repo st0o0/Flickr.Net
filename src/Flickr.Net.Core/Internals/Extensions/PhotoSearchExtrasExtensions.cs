@@ -17,7 +17,7 @@ public static class PhotoSearchExtrasExtensions
     /// </example>
     /// <param name="extras"></param>
     /// <returns></returns>
-    public static string ToFlickrString(this PhotoSearchExtras extras)
+    public static string ToOldFlickrString(this PhotoSearchExtras extras)
     {
         List<string> extraList = new();
         var e = typeof(PhotoSearchExtras);
@@ -35,6 +35,18 @@ public static class PhotoSearchExtrasExtensions
         }
 
         return string.Join(",", extraList.ToArray());
+    }
+
+    public static string ToFlickrString(this PhotoSearchExtras extras){
+        var results = new List<string>();
+        var enumType = typeof(PhotoSearchExtras);
+        foreach(var extra in GetFlags(extras))
+        {
+            var enumString = extra.GetEnumMemberValue();
+            results.Add(enumString);
+        }
+
+        return string.Join(",", results);
     }
 
     private static IEnumerable<Enum> GetFlags(Enum input)

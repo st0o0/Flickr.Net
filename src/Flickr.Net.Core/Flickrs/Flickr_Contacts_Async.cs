@@ -43,7 +43,7 @@ public partial class Flickr : IFlickrContacts
 
         if (dateLastUpdated.HasValue && dateLastUpdated > DateTime.MinValue)
         {
-            parameters.Add("date_lastupload", UtilityMethods.DateToUnixTimestamp(dateLastUpdated.Value));
+            parameters.Add("date_lastupload", dateLastUpdated.Value.ToUnixTimestamp());
         }
 
         if (filter != ContactSearch.None)

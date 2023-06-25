@@ -6,13 +6,13 @@
 public partial class Flickr : IFlickrTags
 {
     // todo: Cluster
-    async Task<PagedPhotos> IFlickrTags.GetClusterPhotosAsync(object cluster, PhotoSearchExtras extras, CancellationToken cancellationToken)
+    async Task<PagedPhotos> IFlickrTags.GetClusterPhotosAsync(string clusterId, string sourceTag,  PhotoSearchExtras extras, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
             { "method", "flickr.tags.getClusterPhotos" },
-            //{ "tag", cluster.SourceTag },
-            //{ "cluster_id", cluster.ClusterId }
+            { "tag", sourceTag },
+            { "cluster_id", clusterId }
         };
 
         if (extras != PhotoSearchExtras.None)
@@ -163,10 +163,11 @@ public interface IFlickrTags
     /// <summary>
     /// Returns the first 24 photos for a given tag cluster.
     /// </summary>
-    /// <param name="cluster">The <see cref="Cluster"/> instance to return the photos for.</param>
+    /// <param name="clusterId">The instance to return the photos for.</param>
+    /// <param name="sourceTag"></param>
     /// <param name="extras">Extra information to return with each photo.</param>
     /// <param name="cancellationToken"></param>
-    Task<PagedPhotos> GetClusterPhotosAsync(object cluster, PhotoSearchExtras extras, CancellationToken cancellationToken = default);
+    Task<PagedPhotos> GetClusterPhotosAsync(string clusterId, string sourceTag, PhotoSearchExtras extras, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gives you a list of tag clusters for the given tag.

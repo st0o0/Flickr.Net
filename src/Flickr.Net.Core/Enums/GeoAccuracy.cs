@@ -1,7 +1,4 @@
-using System.Runtime.Serialization;
 using Flickr.Net.Core.SearchOptions;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace Flickr.Net.Core.Enums;
 

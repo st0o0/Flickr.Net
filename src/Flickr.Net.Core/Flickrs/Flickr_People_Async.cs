@@ -82,22 +82,22 @@ public partial class Flickr : IFlickrPeople
 
         if (minUploadDate.HasValue && minUploadDate > DateTime.MinValue)
         {
-            parameters.Add("min_upload_date", UtilityMethods.DateToUnixTimestamp(minUploadDate.Value));
+            parameters.Add("min_upload_date", minUploadDate.Value.ToUnixTimestamp());
         }
 
         if (maxUploadDate.HasValue && maxUploadDate > DateTime.MinValue)
         {
-            parameters.Add("max_upload_date", UtilityMethods.DateToUnixTimestamp(maxUploadDate.Value));
+            parameters.Add("max_upload_date", maxUploadDate.Value.ToUnixTimestamp());
         }
 
         if (minTakenDate.HasValue && minTakenDate > DateTime.MinValue)
         {
-            parameters.Add("min_taken_date", UtilityMethods.DateToMySql(minTakenDate.Value));
+            parameters.Add("min_taken_date", minTakenDate.Value.ToUnixTimestamp());
         }
 
         if (maxTakenDate.HasValue && maxTakenDate > DateTime.MinValue)
         {
-            parameters.Add("max_taken_date", UtilityMethods.DateToMySql(maxTakenDate.Value));
+            parameters.Add("max_taken_date", maxTakenDate.Value.ToUnixTimestamp());
         }
 
         if (contentType != ContentTypeSearch.None)

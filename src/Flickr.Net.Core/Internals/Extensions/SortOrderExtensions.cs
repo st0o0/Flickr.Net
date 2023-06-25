@@ -22,7 +22,8 @@ public static class SortOrderExtensions
     /// </summary>
     /// <param name="order">The sort order to convert.</param>
     /// <returns>The string representative for the sort order.</returns>
-    public static string ToFlickrString(this PhotoSearchSortOrder order) => order switch
+    [Obsolete]
+    public static string ToKEKWFlickrString(this PhotoSearchSortOrder order) => order switch
     {
         PhotoSearchSortOrder.DatePostedAscending => "date-posted-asc",
         PhotoSearchSortOrder.DatePostedDescending => "date-posted-desc",

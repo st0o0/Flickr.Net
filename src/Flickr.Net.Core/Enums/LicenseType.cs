@@ -1,8 +1,4 @@
-﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-
-namespace Flickr.Net.Core.Enums;
+﻿namespace Flickr.Net.Core.Enums;
 
 /// <summary>
 /// A enumeration containing the list of current license types.

@@ -1,8 +1,4 @@
-﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-
-namespace Flickr.Net.Core.Enums;
+﻿namespace Flickr.Net.Core.Enums;
 
 /// <summary>
 /// An enumeration defining who can add meta data (tags and notes).

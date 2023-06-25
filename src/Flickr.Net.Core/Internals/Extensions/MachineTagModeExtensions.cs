@@ -9,7 +9,8 @@ public static class MachineTagModeExtensions
     /// </summary>
     /// <param name="machineTagMode">The machine tag mode to convert.</param>
     /// <returns>The string to pass to Flickr.</returns>
-    public static string ToFlickrString(this MachineTagMode machineTagMode) => machineTagMode switch
+    [Obsolete]
+    public static string ToKEKWFlickrString(this MachineTagMode machineTagMode) => machineTagMode switch
     {
         MachineTagMode.None => string.Empty,
         MachineTagMode.AllTags => "all",

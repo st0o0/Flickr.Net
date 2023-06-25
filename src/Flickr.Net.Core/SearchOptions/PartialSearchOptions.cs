@@ -168,5 +168,5 @@ public class PartialSearchOptions
         get { return extras.ToFlickrString(); }
     }
 
-    internal string SortOrderString => SortOrder.ToFlickrString();
+    internal string SortOrderString => SortOrder.GetEnumMemberValue();
 }

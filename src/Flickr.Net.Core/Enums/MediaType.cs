@@ -34,9 +34,15 @@ public enum MediaType
     [EnumMember(Value = "videos")]
     Videos,
 
+    /// <summary>
+    /// Only photo will be returned.
+    /// </summary>
     [EnumMember(Value = "photo")]
     Photo,
 
+    /// <summary>
+    /// Only video will be returned.
+    /// </summary>
     [EnumMember(Value = "video")]
     Video,
 }

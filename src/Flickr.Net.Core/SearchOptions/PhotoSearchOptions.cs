@@ -277,17 +277,11 @@ public class PhotoSearchOptions
     /// </summary>
     public string JumpTo { get; set; }
 
-    internal string ExtrasString
-    {
-        get { return Extras.ToFlickrString(); }
-    }
+    internal string ExtrasString => Extras.ToFlickrString();
 
-    internal string ColorCodeString
-    {
-        get { return UtilityMethods.ColorCodesToString(ColorCodes); }
-    }
+    internal string ColorCodeString => UtilityMethods.ColorCodesToString(ColorCodes);
 
-    internal string SortOrderString => SortOrder.ToFlickrString();
+    internal string SortOrderString => SortOrder.GetEnumMemberValue();
 
     /// <summary>
     /// Search for photos by the users 'username'
@@ -412,7 +406,7 @@ public class PhotoSearchOptions
 
         if (TagMode != TagMode.None)
         {
-            parameters.Add("tag_mode", TagMode.ToFlickrString());
+            parameters.Add("tag_mode", TagMode.GetEnumMemberValue());
         }
 
         if (!string.IsNullOrEmpty(MachineTags))
@@ -422,37 +416,32 @@ public class PhotoSearchOptions
 
         if (MachineTagMode != MachineTagMode.None)
         {
-            parameters.Add("machine_tag_mode", MachineTagMode.ToFlickrString());
+            parameters.Add("machine_tag_mode", MachineTagMode.GetEnumMemberValue());
         }
 
         if (MinUploadDate != DateTime.MinValue)
         {
-            parameters.Add("min_upload_date", UtilityMethods.DateToUnixTimestamp(MinUploadDate).ToString());
+            parameters.Add("min_upload_date", MinUploadDate.ToUnixTimestamp());
         }
 
         if (MaxUploadDate != DateTime.MinValue)
         {
-            parameters.Add("max_upload_date", UtilityMethods.DateToUnixTimestamp(MaxUploadDate).ToString());
+            parameters.Add("max_upload_date", MaxUploadDate.ToUnixTimestamp());
         }
 
         if (MinTakenDate != DateTime.MinValue)
         {
-            parameters.Add("min_taken_date", UtilityMethods.DateToMySql(MinTakenDate));
+            parameters.Add("min_taken_date", MinTakenDate.ToMySql());
         }
 
         if (MaxTakenDate != DateTime.MinValue)
         {
-            parameters.Add("max_taken_date", UtilityMethods.DateToMySql(MaxTakenDate));
+            parameters.Add("max_taken_date", MaxTakenDate.ToMySql());
         }
 
         if (Licenses.Count != 0)
         {
-            List<string> licenseArray = new();
-            foreach (var license in Licenses)
-            {
-                licenseArray.Add(license.ToString("d"));
-            }
-            parameters.Add("license", string.Join(",", licenseArray.ToArray()));
+            parameters.Add("license", string.Join(",", Licenses.Distinct().Select(x => x.GetEnumMemberValue())));
         }
 
         if (PerPage != 0)
@@ -522,12 +511,12 @@ public class PhotoSearchOptions
 
         if (RadiusUnits != RadiusUnit.None)
         {
-            parameters.Add("radius_units", RadiusUnits == RadiusUnit.Miles ? "mi" : "km");
+            parameters.Add("radius_units", RadiusUnits .GetEnumMemberValue());
         }
 
         if (Contacts != ContactSearch.None)
         {
-            parameters.Add("contacts", Contacts == ContactSearch.AllContacts ? "all" : "ff");
+            parameters.Add("contacts", Contacts.GetEnumMemberValue());
         }
 
         if (WoeId != null)
@@ -557,12 +546,12 @@ public class PhotoSearchOptions
 
         if (MediaType != MediaType.None)
         {
-            parameters.Add("media", MediaType.ToFlickrString());
+            parameters.Add("media", MediaType.GetEnumMemberValue());
         }
 
         if (GeoContext != GeoContext.NotDefined)
         {
-            parameters.Add("geo_context", GeoContext.ToString("d"));
+            parameters.Add("geo_context", GeoContext.GetEnumMemberValue());
         }
 
         if (Faves)

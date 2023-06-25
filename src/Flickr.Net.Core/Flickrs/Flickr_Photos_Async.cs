@@ -280,15 +280,10 @@ public partial class Flickr : IFlickrPhotos
             parameters.Add("user_id", userId);
         }
 
-        var sortString = sort switch
+        if(sort != PopularSorting.None)
         {
-            PopularSorting.Views => "views",
-            PopularSorting.Comments => "comments",
-            PopularSorting.Faves => "faves",
-            _ or PopularSorting.Interesting => "interesting"
-        };
-
-        parameters.Add("sort", sortString);
+            parameters.Add("sort", sort.GetEnumMemberValue());
+        }
 
         if (extras != PhotoSearchExtras.None)
         {
