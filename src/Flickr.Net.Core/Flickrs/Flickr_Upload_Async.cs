@@ -1,4 +1,6 @@
-﻿namespace Flickr.Net.Core;
+﻿using Newtonsoft.Json.Linq;
+
+namespace Flickr.Net.Core;
 
 /// <summary>
 /// The flickr.
@@ -112,13 +114,13 @@ public partial class Flickr : IFlickrUpload
             requestMessage.Headers.Add("Authorization", authHeader);
         }
 
-        var responseMessage = await new HttpClient().SendAsync(requestMessage, cancellationToken);
+        var client = new HttpClient();
+
+        var responseMessage = await client.SendAsync(requestMessage, cancellationToken);
 
         responseMessage.EnsureSuccessStatusCode();
 
         // todo: Upload
-        var result = await responseMessage.Content.ReadAsStringAsync(cancellationToken);
-
         return "";
     }
 }

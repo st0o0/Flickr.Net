@@ -29,7 +29,3 @@ public class GroupUnknownResponse : UnknownResponse
 [FlickrJsonPropertyName("user")]
 public class UserUnknownResponse : UnknownResponse
 { }
-
-[FlickrJsonPropertyName("photoid")]
-public class UploadUnknownResponse : UnknownResponse
-{ }

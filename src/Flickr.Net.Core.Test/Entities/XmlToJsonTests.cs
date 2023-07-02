@@ -44,5 +44,7 @@ public class XmlToJsonTests
         Assert.NotNull(result);
         Assert.True(result.ContainsKey("@stat"));
         Assert.True(result.ContainsKey("photoid"));
+        Assert.True(result.TryGetValue("@stat", out var token));
+        Assert.True("ok" == token.Value<string>());
     }
 }

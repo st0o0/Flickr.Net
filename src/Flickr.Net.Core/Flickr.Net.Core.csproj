@@ -11,6 +11,10 @@
     <PackageReference Include="System.Xml.XmlSerializer" Version="4.3.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="NewEntities\Flickr_Uploads\" />
+  </ItemGroup>
+
     <PropertyGroup>
         <VSTestLogger>trx%3bLogFileName=$(MSBuildProjectName).trx</VSTestLogger>
         <VSTestResultsDirectory>$(MSBuildThisFileDirectory)/TestResults/$(TargetFramework)</VSTestResultsDirectory>
