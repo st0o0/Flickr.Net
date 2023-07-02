@@ -1,15 +1,13 @@
 ﻿using Flickr.Net.Core.Bases;
-using Newtonsoft.Json;
+using Flickr.Net.Core.Internals.Attributes;
 
 namespace Flickr.Net.Core;
 
-public record Geoperms : FlickrEntityBase
+[FlickrJsonPropertyName("photo")]
+public record ClusterPhoto : ExtendedPhotoBase
 {
     [JsonProperty("ispublic")]
     public bool IsPublic { get; set; }
-
-    [JsonProperty("iscontact")]
-    public bool IsContact { get; set; }
 
     [JsonProperty("isfriend")]
     public bool IsFriend { get; set; }

@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace Flickr.Net.Core.Internals.JsonConverters;
+﻿namespace Flickr.Net.Core.Internals.JsonConverters;
 
 /// <summary>
 /// </summary>

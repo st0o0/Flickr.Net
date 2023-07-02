@@ -1,8 +1,6 @@
-using System.Collections;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-using Flickr.Net.Core.SearchOptions;
 
 namespace Flickr.Net.Core.Internals;
 
@@ -65,122 +63,6 @@ public static class UtilityMethods
     public static DateTime UnixTimestampToDate(long timestamp)
     {
         return UnixStartDate.AddSeconds(timestamp);
-    }
-
-    /// <summary>
-    /// Colors the codes to string.
-    /// </summary>
-    /// <param name="codes">The codes.</param>
-    /// <returns>A string.</returns>
-    public static string ColorCodesToString(IEnumerable<string> codes)
-    {
-        List<string> colorList = new();
-        Dictionary<string, string> codeMap = new()
-        {
-            { "red", "0" },
-            { "darkorange", "1" },
-            { "dark orange", "1" },
-            { "orange", "2" },
-            { "palepink", "b" },
-            { "pale pink", "b" },
-            { "yellow", "3" },
-            { "lemonyellow", "4" },
-            { "lemon yellow", "4" },
-            { "school bus yellow", "3" },
-            { "schoolbusyellow", "3" },
-            { "green", "5" },
-            { "darklimegreen", "6" },
-            { "dark lime green", "6" },
-            { "limegreen", "6" },
-            { "lime green", "6" },
-            { "cyan", "7" },
-            { "blue", "8" },
-            { "violet", "9" },
-            { "purple", "9" },
-            { "pink", "a" },
-            { "white", "c" },
-            { "grey", "d" },
-            { "black", "e" },
-        };
-
-        foreach (var code in codes)
-        {
-            if (string.IsNullOrEmpty(code))
-            {
-                continue;
-            }
-
-            var c = code.ToLower();
-            if (c.Length == 1 && codeMap.ContainsValue(c))
-            {
-                colorList.Add(c);
-            }
-
-            if (codeMap.TryGetValue(c, out var value))
-            {
-                colorList.Add(value);
-            }
-        }
-
-        return string.Join(",", colorList.ToArray());
-    }
-
-    /// <summary>
-    /// Adds the partial options to the passed in <see cref="Hashtable"/>.
-    /// </summary>
-    /// <param name="options">The options to convert to an array.</param>
-    /// <param name="parameters">
-    /// The <see cref="Hashtable"/> to add the option key value pairs to.
-    /// </param>
-    public static void PartialOptionsIntoArray(PartialSearchOptions options, Dictionary<string, string> parameters)
-    {
-        ArgumentNullException.ThrowIfNull(options, nameof(options));
-        ArgumentNullException.ThrowIfNull(parameters, nameof(parameters));
-
-        if (options.MinUploadDate != DateTime.MinValue)
-        {
-            parameters.Add("min_uploaded_date", DateToUnixTimestamp(options.MinUploadDate).ToString());
-        }
-
-        if (options.MaxUploadDate != DateTime.MinValue)
-        {
-            parameters.Add("max_uploaded_date", DateToUnixTimestamp(options.MaxUploadDate).ToString());
-        }
-
-        if (options.MinTakenDate != DateTime.MinValue)
-        {
-            parameters.Add("min_taken_date", options.MinTakenDate.ToMySql());
-        }
-
-        if (options.MaxTakenDate != DateTime.MinValue)
-        {
-            parameters.Add("max_taken_date", options.MaxTakenDate.ToMySql());
-        }
-
-        if (options.Extras != PhotoSearchExtras.None)
-        {
-            parameters.Add("extras", options.ExtrasString);
-        }
-
-        if (options.SortOrder != PhotoSearchSortOrder.None)
-        {
-            parameters.Add("sort", options.SortOrderString);
-        }
-
-        if (options.PerPage > 0)
-        {
-            parameters.Add("per_page", options.PerPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
-
-        if (options.Page > 0)
-        {
-            parameters.Add("page", options.Page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
-
-        if (options.PrivacyFilter != PrivacyFilter.None)
-        {
-            parameters.Add("privacy_filter", options.PrivacyFilter.ToString("d"));
-        }
     }
 
     internal static void WriteInt32(Stream s, int i)

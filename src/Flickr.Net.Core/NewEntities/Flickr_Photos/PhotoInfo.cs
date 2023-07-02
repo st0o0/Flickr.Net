@@ -1,6 +1,5 @@
 ﻿using Flickr.Net.Core.Bases;
 using Flickr.Net.Core.Internals.Attributes;
-using Newtonsoft.Json;
 
 namespace Flickr.Net.Core;
 
@@ -68,13 +67,13 @@ public record PhotoInfo : PhotoBase
     public People People { get; set; }
 
     [JsonProperty("tags")]
-    public Tags Tags { get; set; }
+    public PhotoInfoTags Tags { get; set; }
 
     [JsonProperty("location")]
     public Location Location { get; set; }
 
     [JsonProperty("geoperms")]
-    public Geoperms Geoperms { get; set; }
+    public GeoPermissions Geoperms { get; set; }
 
     [JsonProperty("urls")]
     public Urls Urls { get; set; }

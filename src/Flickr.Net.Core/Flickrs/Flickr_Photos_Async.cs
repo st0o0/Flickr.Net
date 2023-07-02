@@ -1,6 +1,6 @@
 ﻿using Flickr.Net.Core.Exceptions;
 using Flickr.Net.Core.Flickrs.Results;
-using Flickr.Net.Core.SearchOptions;
+using Flickr.Net.Core.Internals.Extensions;
 
 namespace Flickr.Net.Core;
 
@@ -200,8 +200,7 @@ public partial class Flickr : IFlickrPhotos
         return await GetResponseAsync<PhotoExif>(parameters, cancellationToken);
     }
 
-    // todo: PhotoFavoriteCollection
-    async Task<object> IFlickrPhotos.GetFavoritesAsync(string photoId, int perPage, int page, CancellationToken cancellationToken)
+    async Task<PhotoPersons> IFlickrPhotos.GetFavoritesAsync(string photoId, int perPage, int page, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -219,7 +218,7 @@ public partial class Flickr : IFlickrPhotos
             parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
 
-        return await GetResponseAsync<object>(parameters, cancellationToken);
+        return await GetResponseAsync<PhotoPersons>(parameters, cancellationToken);
     }
 
     async Task<PhotoInfo> IFlickrPhotos.GetInfoAsync(string photoId, string secret, CancellationToken cancellationToken)
@@ -245,8 +244,7 @@ public partial class Flickr : IFlickrPhotos
             { "method", "flickr.photos.getNotInSet" }
         };
 
-        UtilityMethods.PartialOptionsIntoArray(options, parameters);
-
+        options.AddToDictionary(parameters);
         return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }
 
@@ -280,7 +278,7 @@ public partial class Flickr : IFlickrPhotos
             parameters.Add("user_id", userId);
         }
 
-        if(sort != PopularSorting.None)
+        if (sort != PopularSorting.None)
         {
             parameters.Add("sort", sort.GetEnumMemberValue());
         }
@@ -328,8 +326,7 @@ public partial class Flickr : IFlickrPhotos
         return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }
 
-    // todo: SizeCollection
-    async Task<object> IFlickrPhotos.GetSizesAsync(string photoId, CancellationToken cancellationToken)
+    async Task<Sizes> IFlickrPhotos.GetSizesAsync(string photoId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -337,7 +334,7 @@ public partial class Flickr : IFlickrPhotos
             { "photo_id", photoId }
         };
 
-        return await GetResponseAsync<object>(parameters, cancellationToken);
+        return await GetResponseAsync<Sizes>(parameters, cancellationToken);
     }
 
     async Task<PagedPhotos> IFlickrPhotos.GetUntaggedAsync(PartialSearchOptions options, CancellationToken cancellationToken)
@@ -347,7 +344,7 @@ public partial class Flickr : IFlickrPhotos
             { "method", "flickr.photos.getUntagged" }
         };
 
-        UtilityMethods.PartialOptionsIntoArray(options, parameters);
+        options.AddToDictionary(parameters);
         return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }
 
@@ -357,7 +354,7 @@ public partial class Flickr : IFlickrPhotos
         {
             { "method", "flickr.photos.getWithoutGeoData" }
         };
-        UtilityMethods.PartialOptionsIntoArray(options, parameters);
+        options.AddToDictionary(parameters);
 
         return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }
@@ -369,7 +366,7 @@ public partial class Flickr : IFlickrPhotos
             { "method", "flickr.photos.getWithGeoData" }
         };
 
-        UtilityMethods.PartialOptionsIntoArray(options, parameters);
+        options.AddToDictionary(parameters);
 
         return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }
@@ -420,7 +417,7 @@ public partial class Flickr : IFlickrPhotos
             { "method", "flickr.photos.search" }
         };
 
-        options.AddToDictionary(ref parameters);
+        options.AddToDictionary(parameters);
 
         return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }
@@ -652,7 +649,6 @@ public interface IFlickrPhotos
     /// <param name="photoId">The ID of the photo to return the context for.</param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-
     Task<FlickrContextResult<NextPhoto, PrevPhoto>> GetContextAsync(string photoId, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -687,7 +683,7 @@ public interface IFlickrPhotos
     /// <param name="page">The page to return. Default is 1.</param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<object> GetFavoritesAsync(string photoId, int perPage = 0, int page = 0, CancellationToken cancellationToken = default);
+    Task<PhotoPersons> GetFavoritesAsync(string photoId, int perPage = 0, int page = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get information about a photo. The calling user must have permission to view the photo.
@@ -752,7 +748,7 @@ public interface IFlickrPhotos
     /// <param name="photoId">The id of the photo to fetch size information for.</param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<object> GetSizesAsync(string photoId, CancellationToken cancellationToken = default);
+    Task<Sizes> GetSizesAsync(string photoId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Returns a list of your photos with no tags.

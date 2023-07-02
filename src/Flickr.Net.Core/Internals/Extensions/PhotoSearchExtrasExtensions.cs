@@ -1,9 +1,25 @@
-using System.ComponentModel;
+namespace Flickr.Net.Core.Internals.Extensions;
 
 /// <summary>
 /// </summary>
 public static class PhotoSearchExtrasExtensions
 {
+    //public static string ToOldFlickrString(this PhotoSearchExtras extras)
+    //{
+    //    List<string> extraList = new();
+    //    var e = typeof(PhotoSearchExtras);
+    //    foreach (PhotoSearchExtras extra in GetFlags(extras))
+    //    {
+    //        var info = e.GetField(extra.ToString("G"));
+    //        var o = (DescriptionAttribute[])info.GetCustomAttributes(typeof(DescriptionAttribute), false);
+    //        if (o.Length == 0)
+    //        {
+    //            continue;
+    //        }
+    // var att = o[0]; extraList.Add(att.Description); }
+    //    return string.Join(",", extraList.ToArray());
+    //}
+
     /// <summary>
     /// Utility method to convert the <see cref="PhotoSearchExtras"/> enum to a string.
     /// </summary>
@@ -17,36 +33,16 @@ public static class PhotoSearchExtrasExtensions
     /// </example>
     /// <param name="extras"></param>
     /// <returns></returns>
-    public static string ToOldFlickrString(this PhotoSearchExtras extras)
+    public static string ToFlickrString(this PhotoSearchExtras extras)
     {
-        List<string> extraList = new();
-        var e = typeof(PhotoSearchExtras);
-        foreach (PhotoSearchExtras extra in GetFlags(extras))
-        {
-            var info = e.GetField(extra.ToString("G"));
-            var o = (DescriptionAttribute[])info.GetCustomAttributes(typeof(DescriptionAttribute), false);
-            if (o.Length == 0)
-            {
-                continue;
-            }
-
-            var att = o[0];
-            extraList.Add(att.Description);
-        }
-
-        return string.Join(",", extraList.ToArray());
-    }
-
-    public static string ToFlickrString(this PhotoSearchExtras extras){
         var results = new List<string>();
-        var enumType = typeof(PhotoSearchExtras);
-        foreach(var extra in GetFlags(extras))
+        foreach (var extra in GetFlags(extras))
         {
             var enumString = extra.GetEnumMemberValue();
             results.Add(enumString);
         }
 
-        return string.Join(",", results);
+        return string.Join(",", results.Where(s => !string.IsNullOrWhiteSpace(s)).Distinct().ToList());
     }
 
     private static IEnumerable<Enum> GetFlags(Enum input)
@@ -64,10 +60,17 @@ public static class PhotoSearchExtrasExtensions
     private static IEnumerable<Enum> GetValues(Enum enumeration)
     {
         List<Enum> enumerations = new();
-        foreach (var fieldInfo in enumeration.GetType().GetFields(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public))
+        var enumType = enumeration.GetType();
+
+        foreach (var e in Enum.GetValues(enumType))
         {
-            enumerations.Add((Enum)fieldInfo.GetValue(enumeration));
+            var flag = (Enum)e;
+            if (enumeration.HasFlag(flag))
+            {
+                enumerations.Add(flag);
+            }
         }
+
         return enumerations;
     }
 }

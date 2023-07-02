@@ -3,8 +3,6 @@ using Flickr.Net.Core.Bases;
 using Flickr.Net.Core.Exceptions.Handlers;
 using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals.Caching;
-using Flickr.Net.Core.Internals.ContractResolver;
-using Newtonsoft.Json;
 
 namespace Flickr.Net.Core;
 
@@ -13,26 +11,23 @@ namespace Flickr.Net.Core;
 /// </summary>
 public partial class Flickr
 {
-    private Task<FlickrContextResult<TNextPhoto, TPrevPhoto>> GetContextResponseAsync<TNextPhoto, TPrevPhoto>(Dictionary<string, string> parameters, CancellationToken cancellationToken = default) where TNextPhoto : IFlickrEntity where TPrevPhoto : IFlickrEntity => GetGenericResponseAsync<FlickrContextResult<TNextPhoto, TPrevPhoto>, TNextPhoto, TPrevPhoto>(parameters, cancellationToken);
+    private Task<FlickrContextResult<TNextPhoto, TPrevPhoto>> GetContextResponseAsync<TNextPhoto, TPrevPhoto>(Dictionary<string, string> parameters, CancellationToken cancellationToken = default) where TNextPhoto : IFlickrEntity where TPrevPhoto : IFlickrEntity => GetGenericResponseAsync<FlickrContextResult<TNextPhoto, TPrevPhoto>>(parameters, cancellationToken);
 
     private Task GetResponseAsync(Dictionary<string, string> parameters, CancellationToken cancellationToken = default) => GetGenericResponseAsync<FlickrResult, UnknownResponse>(parameters, cancellationToken);
 
     //todo: where T : IFlickrEntity
     private Task<T> GetResponseAsync<T>(Dictionary<string, string> parameters, CancellationToken cancellationToken = default) => GetGenericResponseAsync<FlickrResult<T>, T>(parameters, cancellationToken);
 
-    //todo: where T : IFlickrEntity
-    private async Task<TResponse> GetGenericResponseAsync<T, TResponse>(Dictionary<string, string> parameters, CancellationToken cancellationToken = default)
+    //todo: where TResponse : IFlickrEntity
+    private async Task<TResponse> GetGenericResponseAsync<T, TResponse>(Dictionary<string, string> parameters, CancellationToken cancellationToken = default) where T : FlickrResult
     {
-        var result = await GetGenericResponseAsync<FlickrResult<TResponse>, TResponse>(parameters, cancellationToken);
-        if (result is FlickrResult<TResponse> value)
-        {
-            return value.Content;
-        }
-
+        var result = await GetGenericResponseAsync<T>(parameters, cancellationToken);
+        // Todo: FICK ALLES DER TYP DEN ICH IN DEN METHODS REIN SCHREIBE MUSS ZURÜCKKOMMEN DU
+        // KLEINER ******
         return default;
     }
 
-    private async Task<T> GetGenericResponseAsync<T, TPrimaryResponse, TSecondResponse>(Dictionary<string, string> parameters, CancellationToken cancellationToken = default) where TPrimaryResponse : IFlickrEntity where TSecondResponse : IFlickrEntity where T : FlickrResult
+    private async Task<T> GetGenericResponseAsync<T>(Dictionary<string, string> parameters, CancellationToken cancellationToken = default) where T : FlickrResult
     {
         CheckApiKey();
 
@@ -87,10 +82,7 @@ public partial class Flickr
         {
             LastResponse = result;
 
-            var flickrResults = JsonConvert.DeserializeObject<T>(result, new JsonSerializerSettings
-            {
-                ContractResolver = new GenericJsonPropertyNameContractResolver()
-            });
+            var flickrResults = FlickrConvert.DeserializeObject<T>(result);
 
             if (flickrResults.HasError)
             {

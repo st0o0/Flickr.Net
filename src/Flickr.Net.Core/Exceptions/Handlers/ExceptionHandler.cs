@@ -23,7 +23,7 @@ public static class ExceptionHandler
         98 => new LoginFailedInvalidTokenException(message),
         99 => new UserNotLoggedInInsufficientPermissionsException(message),
         100 => new InvalidApiKeyException(message),
-        105 => new ServiceUnavailableException(message),
+        105 or 0 => new ServiceUnavailableException(message),
         111 => new FormatNotFoundException(message),
         112 => new MethodNotFoundException(message),
         116 => new BadUrlFoundException(message),

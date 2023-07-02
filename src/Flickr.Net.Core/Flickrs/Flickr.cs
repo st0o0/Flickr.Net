@@ -159,11 +159,6 @@ public partial class Flickr
     public IFlickrPhotosets Photosets => this;
 
     /// <summary>
-    /// property for all place functions
-    /// </summary>
-    public IFlickrPlaces Places => this;
-
-    /// <summary>
     /// property for all pref functions
     /// </summary>
     public IFlickrPrefs Prefs => this;

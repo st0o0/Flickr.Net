@@ -1,7 +1,5 @@
 ﻿using Flickr.Net.Core.Bases;
 using Flickr.Net.Core.Internals.Attributes;
-using Flickr.Net.Core.Internals.JsonConverters;
-using Newtonsoft.Json;
 
 namespace Flickr.Net.Core;
 
@@ -42,7 +40,6 @@ public record Topic : FlickrEntityBase
     public string AuthorIconFarm { get; set; }
 
     [JsonProperty("can_edit")]
-    [JsonConverter(typeof(BoolConverter))]
     public bool CanEdit { get; set; }
 
     [JsonProperty("can_delete")]

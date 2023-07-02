@@ -85,8 +85,7 @@ public partial class Flickr : IFlickrPhotosPeople
         await GetResponseAsync(parameters, cancellationToken);
     }
 
-    // todo: PhotoPersonCollection
-    async Task<object> IFlickrPhotosPeople.GetListAsync(string photoId, CancellationToken cancellationToken)
+    async Task<PeoplePersons> IFlickrPhotosPeople.GetListAsync(string photoId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -94,7 +93,7 @@ public partial class Flickr : IFlickrPhotosPeople
             { "photo_id", photoId }
         };
 
-        return await GetResponseAsync<object>(parameters, cancellationToken);
+        return await GetResponseAsync<PeoplePersons>(parameters, cancellationToken);
     }
 }
 
@@ -154,5 +153,5 @@ public interface IFlickrPhotosPeople
     /// <param name="photoId">The id of the photo to get a list of people for.</param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<object> GetListAsync(string photoId, CancellationToken cancellationToken = default);
+    Task<PeoplePersons> GetListAsync(string photoId, CancellationToken cancellationToken = default);
 }

@@ -87,4 +87,49 @@ public class TopicTests
         Assert.False(items.Values[1].CanDelete);
         Assert.False(items.Values[1].CanEdit);
     }
+
+    [Fact]
+    public void JsonStringToTopicNames()
+    {
+        var json = /*lang=json,strict*/ """
+            {
+              "topics": {
+                "topic": [
+                  {
+                    "name": "contacts_photos",
+                    "display_name": "photos from your contacts"
+                  },
+                  {
+                    "name": "contacts_faves",
+                    "display_name": "favorites from your contacts"
+                  },
+                  {
+                    "name": "photos_of_contacts",
+                    "display_name": "photos of your contacts"
+                  },
+                  { "name": "photos_of_me", "display_name": "photos of you" },
+                  { "name": "my_photos", "display_name": "your photos" },
+                  { "name": "my_faves", "display_name": "your favorites" },
+                  { "name": "geo", "display_name": "photos from an area (geo)" },
+                  { "name": "commons", "display_name": "photos from the Flickr Commons" },
+                  { "name": "tags", "display_name": "photos with a tag (or tags)" },
+                  { "name": "airports", "display_name": "photos from airports" },
+                  {
+                    "name": "geotagged",
+                    "display_name": "publicly viewable geo-tagged photos"
+                  }
+                ]
+              },
+              "stat": "ok"
+            }
+            """;
+        var result = FlickrConvert.DeserializeObject<FlickrResult<TopicNames>>(json);
+
+        Assert.NotNull(result);
+        Assert.False(result.HasError);
+        var items = result.Content;
+        Assert.IsType<TopicNames>(items);
+        Assert.Equal(11, items.Values.Count);
+        Assert.Equal("contacts_photos", items.Values[0].Name);
+    }
 }

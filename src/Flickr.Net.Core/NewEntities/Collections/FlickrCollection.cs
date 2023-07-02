@@ -1,6 +1,5 @@
 ﻿using Flickr.Net.Core.Bases;
 using Flickr.Net.Core.Internals.Attributes;
-using Newtonsoft.Json;
 
 namespace Flickr.Net.Core;
 
@@ -118,10 +117,26 @@ public record Contacts : FlickrPaginationCollection<Contact>
 [FlickrJsonPropertyName("galleries")]
 public record Galleries : FlickrPaginationCollection<Gallery>
 {
+}
+
+/// <inheritdoc/>
+[FlickrJsonPropertyName("galleries")]
+public record UserGalleries : Galleries
+{
     /// <summary>
     /// </summary>
     [JsonProperty("user_id")]
     public string UserId { get; set; }
+}
+
+/// <inheritdoc/>
+[FlickrJsonPropertyName("galleries")]
+public record PhotoGalleries : Galleries
+{
+    /// <summary>
+    /// </summary>
+    [JsonProperty("photo_id")]
+    public string PhotoId { get; set; }
 }
 
 /// <inheritdoc/>
@@ -271,7 +286,7 @@ public record Notes : FlickrCollection<Note>
 
 /// <inheritdoc/>
 [FlickrJsonPropertyName("tags")]
-public record Tags : FlickrCollection<Tag>
+public record PhotoInfoTags : FlickrCollection<PhotoTag>
 { }
 
 /// <inheritdoc/>
@@ -307,3 +322,126 @@ public record PhotoComments : Comments<PhotoId>
 /// <inheritdoc/>
 public record Licenses : FlickrCollection<License>
 { }
+
+/// <inheritdoc/>
+public record Subscriptions : FlickrCollection<Subscription>
+{ }
+
+/// <inheritdoc/>
+[FlickrJsonPropertyName("topics")]
+public record TopicNames : FlickrCollection<TopicName>
+{ }
+
+/// <inheritdoc/>
+[FlickrJsonPropertyName("uploader")]
+public record Tickets : FlickrCollection<Ticket>
+{ }
+
+/// <inheritdoc/>
+[FlickrJsonPropertyName("people")]
+public record PeoplePersons : FlickrCollection<PeoplePerson>
+{
+    [JsonProperty("total")]
+    public int Total { get; set; }
+
+    [JsonProperty("photo_width")]
+    public int PhotoWidth { get; set; }
+
+    [JsonProperty("photo_height")]
+    public int PhotoHeight { get; set; }
+}
+
+/// <inheritdoc/>
+[FlickrJsonPropertyName("photosets")]
+public record Photosets : FlickrPaginationCollection<Photoset>
+{
+    [JsonProperty("cancreate")]
+    public bool CanCreate { get; set; }
+}
+
+/// <inheritdoc/>
+[FlickrJsonPropertyName("photoset")]
+public record PhotosetPhotos : FlickrPaginationCollection<PhotosetPhoto>
+{
+    [JsonProperty("id")]
+    public string Id { get; set; }
+
+    [JsonProperty("primary")]
+    public string Primary { get; set; }
+
+    [JsonProperty("owner")]
+    public string Owner { get; set; }
+
+    [JsonProperty("ownername")]
+    public string Ownername { get; set; }
+
+    [JsonProperty("title")]
+    public string Title { get; set; }
+}
+
+/// <inheritdoc/>
+[FlickrJsonPropertyName("cover_photos")]
+public record CoverPhotos : FlickrCollection<CoverPhoto>
+{ }
+
+/// <inheritdoc/>
+[FlickrJsonPropertyName("methods")]
+public record Methods : FlickrCollection<Method>
+{ }
+
+/// <inheritdoc/>
+[FlickrJsonPropertyName("domains")]
+public record Domains : FlickrPaginationCollection<Domain>
+{ }
+
+/// <inheritdoc/>
+[FlickrJsonPropertyName("domain")]
+public record Referrers : FlickrPaginationCollection<Referrer>
+{
+    [JsonProperty("name")]
+    public string Name { get; set; }
+}
+
+/// <inheritdoc/>
+[FlickrJsonPropertyName("stats")]
+public record CSVFiles : FlickrCollection<CSVFile>
+{ }
+
+/// <inheritdoc/>
+[FlickrJsonPropertyName("clusters")]
+public record Clusters : FlickrCollection<Cluster>
+{
+    [JsonProperty("source")]
+    public string Source { get; set; }
+
+    [JsonProperty("total")]
+    public int Total { get; set; }
+}
+
+/// <inheritdoc/>
+[FlickrJsonPropertyName("photos")]
+public record ClusterPhotos : FlickrCollection<ClusterPhoto>
+{ }
+
+/// <inheritdoc/>
+[FlickrJsonPropertyName("hottags")]
+public record Hottags : FlickrCollection<Hottag>
+{ }
+
+/// <inheritdoc/>
+[FlickrJsonPropertyName("photos")]
+public record StatsPhotos : FlickrPaginationCollection<StatsPhoto>
+{ }
+
+/// <inheritdoc/>
+[FlickrJsonPropertyName("tags")]
+public record UserTags : FlickrCollection<UserTag>
+{ }
+
+/// <inheritdoc/>
+[FlickrJsonPropertyName("tags")]
+public record Tags : FlickrCollection<Tag>
+{
+    [JsonProperty("source")]
+    public string Source { get; set; }
+}

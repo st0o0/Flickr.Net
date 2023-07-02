@@ -1,5 +1,4 @@
 ﻿using Flickr.Net.Core.Bases;
-using Newtonsoft.Json;
 
 namespace Flickr.Net.Core;
 

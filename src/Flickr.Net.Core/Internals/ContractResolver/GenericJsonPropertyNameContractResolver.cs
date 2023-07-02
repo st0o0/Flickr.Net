@@ -1,6 +1,5 @@
 ﻿using System.Reflection;
 using Flickr.Net.Core.Internals.Attributes;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
 namespace Flickr.Net.Core.Internals.ContractResolver;

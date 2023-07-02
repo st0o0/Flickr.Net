@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace Flickr.Net.Core.Bases;
+﻿namespace Flickr.Net.Core.Bases;
 
 public record GroupBase : FlickrEntityBase<NsId>
 {

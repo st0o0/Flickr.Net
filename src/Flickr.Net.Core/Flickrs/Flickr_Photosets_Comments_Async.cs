@@ -14,10 +14,8 @@ public partial class Flickr : IFlickrPhotosetsComments
             { "comment_text", commentText }
         };
 
-        var result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
-
-        //return result.GetAttributeValue("*", "id");
-        return default;
+        var result = await GetResponseAsync<CommentUnknownResponse>(parameters, cancellationToken);
+        return result.GetValueOrDefault("id");
     }
 
     async Task IFlickrPhotosetsComments.DeleteCommentAsync(string commentId, CancellationToken cancellationToken)
@@ -43,8 +41,7 @@ public partial class Flickr : IFlickrPhotosetsComments
         await GetResponseAsync(parameters, cancellationToken);
     }
 
-    // todo: PhotosetCommentCollection
-    async Task<object> IFlickrPhotosetsComments.GetListAsync(string photosetId, CancellationToken cancellationToken)
+    async Task<PhotosetComments> IFlickrPhotosetsComments.GetListAsync(string photosetId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -52,7 +49,7 @@ public partial class Flickr : IFlickrPhotosetsComments
             { "photoset_id", photosetId }
         };
 
-        return await GetResponseAsync<object>(parameters, cancellationToken);
+        return await GetResponseAsync<PhotosetComments>(parameters, cancellationToken);
     }
 }
 
@@ -89,5 +86,5 @@ public interface IFlickrPhotosetsComments
     /// </summary>
     /// <param name="photosetId">The id of the photoset to return the comments for.</param>
     /// <param name="cancellationToken"></param>
-    Task<object> GetListAsync(string photosetId, CancellationToken cancellationToken = default);
+    Task<PhotosetComments> GetListAsync(string photosetId, CancellationToken cancellationToken = default);
 }

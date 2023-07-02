@@ -13,10 +13,8 @@ public partial class Flickr : IFlickrUrls
             { "group_id", groupId }
         };
 
-        var result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
-        //return result.GetAttributeValue("*", "url");
-
-        return default;
+        var result = await GetResponseAsync<GroupUnknownResponse>(parameters, cancellationToken);
+        return result.GetValueOrDefault("url", string.Empty);
     }
 
     async Task<string> IFlickrUrls.GetUserPhotosAsync(string userId, CancellationToken cancellationToken)
@@ -32,8 +30,7 @@ public partial class Flickr : IFlickrUrls
         }
 
         var result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
-        //return result.GetAttributeValue("*", "url");
-        return default;
+        return result.GetValueOrDefault("url", string.Empty);
     }
 
     async Task<string> IFlickrUrls.GetUserProfileAsync(string userId, CancellationToken cancellationToken)
@@ -49,8 +46,7 @@ public partial class Flickr : IFlickrUrls
         }
 
         var result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
-        //return result.GetAttributeValue("*", "url");
-        return default;
+        return result.GetValueOrDefault("url", string.Empty);
     }
 
     async Task<Gallery> IFlickrUrls.LookupGalleryAsync(string url, CancellationToken cancellationToken)
@@ -72,12 +68,11 @@ public partial class Flickr : IFlickrUrls
             { "url", urlToFind }
         };
 
-        var result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
-        //return result.GetAttributeValue("*", "id");
-        return default;
+        var result = await GetResponseAsync<GroupUnknownResponse>(parameters, cancellationToken);
+        return result.GetValueOrDefault("id", string.Empty);
     }
 
-    async Task<User> IFlickrUrls.LookupUserAsync(string urlToFind, CancellationToken cancellationToken)
+    async Task<string> IFlickrUrls.LookupUserAsync(string urlToFind, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -85,7 +80,8 @@ public partial class Flickr : IFlickrUrls
             { "url", urlToFind }
         };
 
-        return await GetResponseAsync<User>(parameters, cancellationToken);
+        var result = await GetResponseAsync<UserUnknownResponse>(parameters, cancellationToken);
+        return result.GetValueOrDefault("id", string.Empty);
     }
 }
 
@@ -139,5 +135,5 @@ public interface IFlickrUrls
     /// </summary>
     /// <param name="urlToFind">Thr url to the user's profile or photos page.</param>
     /// <param name="cancellationToken"></param>
-    Task<User> LookupUserAsync(string urlToFind, CancellationToken cancellationToken = default);
+    Task<string> LookupUserAsync(string urlToFind, CancellationToken cancellationToken = default);
 }

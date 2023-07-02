@@ -1,4 +1,7 @@
-﻿namespace Flickr.Net.Core;
+﻿using Flickr.Net.Core.Internals.Extensions;
+using Flickr.Net.Core.NewEntities.Flickr_Photos;
+
+namespace Flickr.Net.Core;
 
 /// <summary>
 /// The flickr.
@@ -81,8 +84,7 @@ public partial class Flickr : IFlickrPhotosGeo
         await GetResponseAsync(parameters, cancellationToken);
     }
 
-    //todo: placeinfo
-    async Task<object> IFlickrPhotosGeo.GetLocationAsync(string photoId, CancellationToken cancellationToken)
+    async Task<PhotoLocation> IFlickrPhotosGeo.GetLocationAsync(string photoId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -90,12 +92,10 @@ public partial class Flickr : IFlickrPhotosGeo
             { "photo_id", photoId }
         };
 
-        var result = await GetResponseAsync<object>(parameters, cancellationToken);
-        return default;
+        return await GetResponseAsync<PhotoLocation>(parameters, cancellationToken);
     }
 
-    //todo: GeoPermissions
-    async Task<object> IFlickrPhotosGeo.GetPermsAsync(string photoId, CancellationToken cancellationToken)
+    async Task<GeoPermissions> IFlickrPhotosGeo.GetPermsAsync(string photoId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -103,7 +103,7 @@ public partial class Flickr : IFlickrPhotosGeo
             { "photo_id", photoId }
         };
 
-        return await GetResponseAsync<object>(parameters, cancellationToken);
+        return await GetResponseAsync<GeoPermissions>(parameters, cancellationToken);
     }
 
     async Task<PagedPhotos> IFlickrPhotosGeo.PhotosForLocationAsync(double latitude, double longitude, GeoAccuracy accuracy, PhotoSearchExtras extras, int perPage, int page, CancellationToken cancellationToken)
@@ -276,8 +276,7 @@ public interface IFlickrPhotosGeo
     /// <param name="photoId">The ID of the photo to return the location information for.</param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    //todo: PlaceInfo
-    Task<object> GetLocationAsync(string photoId, CancellationToken cancellationToken = default);
+    Task<PhotoLocation> GetLocationAsync(string photoId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get permissions for a photo.
@@ -285,8 +284,7 @@ public interface IFlickrPhotosGeo
     /// <param name="photoId">The id of the photo to get permissions for.</param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    // todo: GeoPermissions
-    Task<object> GetPermsAsync(string photoId, CancellationToken cancellationToken = default);
+    Task<GeoPermissions> GetPermsAsync(string photoId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Return a list of photos for a user at a specific latitude, longitude and accuracy.

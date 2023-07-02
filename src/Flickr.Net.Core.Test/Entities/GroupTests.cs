@@ -1243,11 +1243,12 @@ public class GroupTests
         Assert.False(result.HasError);
         var items = result.Content;
         Assert.IsType<Groups>(items);
-        foreach (var item in items.Values)
+
+        Parallel.ForEach(items.Values, item =>
         {
             Assert.IsType<Group>(item);
             Assert.NotNull(item);
             Assert.IsType<PoolPrivacy>(item.Privacy);
-        }
+        });
     }
 }

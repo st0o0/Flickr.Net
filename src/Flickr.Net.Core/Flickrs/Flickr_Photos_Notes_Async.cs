@@ -18,10 +18,9 @@ public partial class Flickr : IFlickrPhotosNotes
             { "note_text", noteText }
         };
 
-        var result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
+        var result = await GetResponseAsync<NoteUnknownResponse>(parameters, cancellationToken);
 
-        //return result.GetAttributeValue("*", "id");
-        return default;
+        return result.GetValueOrDefault("id");
     }
 
     async Task IFlickrPhotosNotes.DeleteAsync(string noteId, CancellationToken cancellationToken)

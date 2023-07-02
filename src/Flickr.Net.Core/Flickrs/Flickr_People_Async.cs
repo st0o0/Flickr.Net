@@ -1,4 +1,5 @@
 ﻿using Flickr.Net.Core.Exceptions;
+using Flickr.Net.Core.Internals.Extensions;
 
 namespace Flickr.Net.Core;
 

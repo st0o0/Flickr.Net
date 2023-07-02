@@ -11,20 +11,36 @@ public class FlickrContextResultTests
     {
         var json = /*lang=json,strict*/ """
             {
-              "stat": "ok",
-              "count": "3",
-              "prevphoto": {
-                "id": "2980",
-                "secret": "973da1e709",
-                "title": "boo!",
-                "url": "/photos/bees/2980/"
-              },
-              "nextphoto": {
-                "id": "2985",
-                "secret": "059b664012",
-                "title": "Amsterdam Amstel",
-                "url": "/photos/bees/2985/"
-              }
+                "count": {
+                    "_content": "3"
+                },
+                "prevphoto": {
+                    "id": "53012263866",
+                    "owner": "153496924@N03",
+                    "secret": "41275e5926",
+                    "server": "65535",
+                    "farm": 66,
+                    "title": "Da juckt es",
+                    "url": "\/photos\/kaauenwasser\/53012263866\/in\/faves-192376927@N06\/",
+                    "thumb": "https:\/\/live.staticflickr.com\/65535\/53012263866_41275e5926_s.jpg",
+                    "license": "0",
+                    "media": "photo",
+                    "is_faved": 1
+                },
+                "nextphoto": {
+                    "id": "52997757984",
+                    "owner": "153496924@N03",
+                    "secret": "44bb74027e",
+                    "server": "65535",
+                    "farm": 66,
+                    "title": "Nur das Entlein",
+                    "url": "\/photos\/kaauenwasser\/52997757984\/in\/faves-192376927@N06\/",
+                    "thumb": "https:\/\/live.staticflickr.com\/65535\/52997757984_44bb74027e_s.jpg",
+                    "license": "0",
+                    "media": "photo",
+                    "is_faved": 1
+                },
+                "stat": "ok"
             }
             """;
 
@@ -32,11 +48,13 @@ public class FlickrContextResultTests
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
-        Assert.Equal(3, result.Count);
+        Assert.Equal(3, (int)result.Count);
         Assert.IsType<NextPhoto>(result.NextPhoto);
         Assert.False(string.IsNullOrEmpty(result.NextPhoto.Id));
         Assert.IsType<PrevPhoto>(result.PrevPhoto);
         Assert.False(string.IsNullOrEmpty(result.PrevPhoto.Id));
+        Assert.True(result.PrevPhoto.IsFaved);
+        Assert.True(result.NextPhoto.IsFaved);
     }
 
     [Fact]

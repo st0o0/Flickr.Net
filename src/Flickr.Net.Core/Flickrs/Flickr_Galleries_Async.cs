@@ -1,4 +1,6 @@
-﻿namespace Flickr.Net.Core;
+﻿using Flickr.Net.Core.Internals.Extensions;
+
+namespace Flickr.Net.Core;
 
 /// <summary>
 /// The flickr.
@@ -90,7 +92,7 @@ public partial class Flickr : IFlickrGalleries
         await GetResponseAsync(parameters, cancellationToken);
     }
 
-    async Task<Gallery> IFlickrGalleries.GetInfoAsync(string galleryId, CancellationToken cancellationToken)
+    async Task<GalleryInfo> IFlickrGalleries.GetInfoAsync(string galleryId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -98,7 +100,7 @@ public partial class Flickr : IFlickrGalleries
             { "gallery_id", galleryId }
         };
 
-        return await GetResponseAsync<Gallery>(parameters, cancellationToken);
+        return await GetResponseAsync<GalleryInfo>(parameters, cancellationToken);
     }
 
     async Task<Galleries> IFlickrGalleries.GetListAsync(string userId, int page, int perPage, CancellationToken cancellationToken)
@@ -123,7 +125,7 @@ public partial class Flickr : IFlickrGalleries
             parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
 
-        return await GetResponseAsync<Galleries>(parameters, cancellationToken);
+        return await GetResponseAsync<UserGalleries>(parameters, cancellationToken);
     }
 
     async Task<Galleries> IFlickrGalleries.GetListForPhotoAsync(string photoId, int page, int perPage, CancellationToken cancellationToken)
@@ -144,7 +146,7 @@ public partial class Flickr : IFlickrGalleries
             parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
 
-        return await GetResponseAsync<Galleries>(parameters, cancellationToken);
+        return await GetResponseAsync<PhotoGalleries>(parameters, cancellationToken);
     }
 
     async Task<GalleryPhotos> IFlickrGalleries.GetPhotosAsync(string galleryId, PhotoSearchExtras extras, CancellationToken cancellationToken)
@@ -257,7 +259,7 @@ public interface IFlickrGalleries
     /// <param name="galleryId">The gallery ID you are requesting information for.</param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<Gallery> GetInfoAsync(string galleryId, CancellationToken cancellationToken = default);
+    Task<GalleryInfo> GetInfoAsync(string galleryId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets a list of galleries for the specified user.
@@ -266,7 +268,7 @@ public interface IFlickrGalleries
     /// <param name="page"></param>
     /// <param name="perPage"></param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <return><see cref="UserGalleries"/></return>
     Task<Galleries> GetListAsync(string userId, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -282,7 +284,7 @@ public interface IFlickrGalleries
     /// maximum allowed value is 500.
     /// </param>
     /// <param name="cancellationToken"></param>
-    /// <return></return>
+    /// <return><see cref="PhotoGalleries"/></return>
     Task<Galleries> GetListForPhotoAsync(string photoId, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>

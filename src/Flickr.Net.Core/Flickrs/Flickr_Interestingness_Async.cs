@@ -1,4 +1,4 @@
-﻿using Flickr.Net.Core.SearchOptions;
+﻿using Flickr.Net.Core.Internals.Extensions;
 
 namespace Flickr.Net.Core;
 

@@ -6,25 +6,26 @@
 public partial class Flickr : IFlickrPush
 {
     // todo: SubscriptionCollection
-    async Task<object> IFlickrPush.GetSubscriptionsAsync(CancellationToken cancellationToken)
+    async Task<Subscriptions> IFlickrPush.GetSubscriptionsAsync(CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
-        Dictionary<string, string> parameters = new() { { "method", "flickr.push.getSubscriptions" } };
+        Dictionary<string, string> parameters = new()
+        {
+            { "method", "flickr.push.getSubscriptions" }
+        };
 
-        return await GetResponseAsync<object>(parameters, cancellationToken);
+        return await GetResponseAsync<Subscriptions>(parameters, cancellationToken);
     }
 
-    async Task<string[]> IFlickrPush.GetTopicsAsync(CancellationToken cancellationToken)
+    async Task<TopicNames> IFlickrPush.GetTopicsAsync(CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
             { "method", "flickr.push.getTopics" }
         };
 
-        var result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
-        //return result.GetElementArray("topic", "name");
-        return default;
+        return await GetResponseAsync<TopicNames>(parameters, cancellationToken);
     }
 
     async Task IFlickrPush.SubscribeAsync(string topic, string callback, string verify, string verifyToken,
@@ -166,13 +167,13 @@ public interface IFlickrPush
     /// Get a list of subscriptions for the calling user.
     /// </summary>
     /// <param name="cancellationToken"></param>
-    Task<object> GetSubscriptionsAsync(CancellationToken cancellationToken = default);
+    Task<Subscriptions> GetSubscriptionsAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get a list of topics that are available for subscription.
     /// </summary>
     /// <param name="cancellationToken"></param>
-    Task<string[]> GetTopicsAsync(CancellationToken cancellationToken = default);
+    Task<TopicNames> GetTopicsAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Subscribe to a particular topic.

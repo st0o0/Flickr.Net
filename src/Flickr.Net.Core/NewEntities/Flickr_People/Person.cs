@@ -1,5 +1,4 @@
 ﻿using Flickr.Net.Core.Bases;
-using Newtonsoft.Json;
 
 namespace Flickr.Net.Core;
 
@@ -90,7 +89,7 @@ public struct PhotoInfos
     public Count Count { get; set; }
 
     [JsonProperty("views")]
-    public Views Views { get; set; }
+    public PhotoInfoViews Views { get; set; }
 }
 
 public struct Username
@@ -103,14 +102,14 @@ public struct Username
     public static implicit operator Username(string username) => new() { Content = username };
 }
 
-public struct Views
+public struct PhotoInfoViews
 {
     [JsonProperty("_content")]
     public string Content { get; set; }
 
-    public static implicit operator string(Views username) => username.Content;
+    public static implicit operator string(PhotoInfoViews username) => username.Content;
 
-    public static implicit operator Views(string username) => new() { Content = username };
+    public static implicit operator PhotoInfoViews(string username) => new() { Content = username };
 }
 
 public struct Realname

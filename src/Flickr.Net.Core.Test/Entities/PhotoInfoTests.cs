@@ -269,7 +269,7 @@ public class PhotoInfoTests
         Assert.False(result.HasError);
         var items = result.Content;
         Assert.IsType<PhotoInfo>(items);
-        Assert.IsType<Tags>(items.Tags);
+        Assert.IsType<PhotoInfoTags>(items.Tags);
         Assert.NotEmpty(items.Tags.Values);
         Assert.IsType<Urls>(items.Urls);
         Assert.NotEmpty(items.Urls.Values);

@@ -117,45 +117,9 @@ public partial class Flickr : IFlickrUpload
         responseMessage.EnsureSuccessStatusCode();
 
         // todo: Upload
-        var result = await responseMessage.Content.ReadAsByteArrayAsync(cancellationToken);
+        var result = await responseMessage.Content.ReadAsStringAsync(cancellationToken);
+
         return "";
-        //HttpWebRequest req = (HttpWebRequest)WebRequest.Create(uploadUri);
-        //req.Method = "POST";
-        //req.ContentType = "multipart/form-data; boundary=" + boundary;
-        //req.SendChunked = true;
-        //req.AllowWriteStreamBuffering = false;
-
-        //if (!string.IsNullOrEmpty(authHeader))
-        //{
-        //    req.Headers["Authorization"] = authHeader;
-        //}
-
-        //req.BeginGetRequestStream(
-        //    r =>
-        //    {
-        //        using (Stream reqStream = req.EndGetRequestStream(r))
-        //        {
-        //            int bufferSize = 32 * 1024;
-        //            if (dataBuffer.Length / 100 > bufferSize)
-        //            {
-        //                bufferSize = bufferSize * 2;
-        //            }
-
-        // dataBuffer.UploadProgress += (o, e) => { if (OnUploadProgress != null) {
-        // OnUploadProgress(this, e); } }; dataBuffer.CopyTo(reqStream, bufferSize);
-        // reqStream.Close(); }
-
-        // req.BeginGetResponse( r2 => { FlickrResult<string> result = new FlickrResult<string>();
-
-        // try { WebResponse res = req.EndGetResponse(r2); StreamReader sr =
-        // new(res.GetResponseStream()); string responseXml = sr.ReadToEnd(); sr.Close();
-
-        // UnknownResponse t = new(); ((IFlickrParsable)t).Load(responseXml); result.Result =
-        // t.GetElementValue("photoid"); result.HasError = false; } catch (Exception ex) { if (ex is
-        // WebException) { OAuthException oauthEx = new(ex); result.Error =
-        // string.IsNullOrEmpty(oauthEx.Message) ? ex : oauthEx; } else { result.Error = ex; } }
-
-        // callback(result); }, this); }, this);
     }
 }
 

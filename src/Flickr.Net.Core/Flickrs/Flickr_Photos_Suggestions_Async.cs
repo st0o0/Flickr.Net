@@ -23,8 +23,7 @@ public partial class Flickr : IFlickrPhotosSuggestions
         await GetResponseAsync(parameters, cancellationToken);
     }
 
-    // todo: SuggestionCollection
-    async Task<object> IFlickrPhotosSuggestions.GetListAsync(string photoId, SuggestionStatus status, CancellationToken cancellationToken)
+    async Task<UnknownResponse> IFlickrPhotosSuggestions.GetListAsync(string photoId, SuggestionStatus status, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -35,7 +34,7 @@ public partial class Flickr : IFlickrPhotosSuggestions
             { "status_id", status.GetEnumMemberValue() }
         };
 
-        return await GetResponseAsync<object>(parameters, cancellationToken);
+        return await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
     }
 
     async Task IFlickrPhotosSuggestions.RejectSuggestionAsync(string suggestionId, CancellationToken cancellationToken)
@@ -129,7 +128,7 @@ public interface IFlickrPhotosSuggestions
     /// <param name="status">The type of status to filter by.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<object> GetListAsync(string photoId, SuggestionStatus status, CancellationToken cancellationToken = default);
+    Task<UnknownResponse> GetListAsync(string photoId, SuggestionStatus status, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Rejects a suggestion made for a location on a photo. Currently doesn't appear to actually

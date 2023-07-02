@@ -5,8 +5,7 @@
 /// </summary>
 public partial class Flickr : IFlickrReflection
 {
-    // todo: Method
-    async Task<object> IFlickrReflection.GetMethodInfoAsync(string methodName, CancellationToken cancellationToken)
+    async Task<Method> IFlickrReflection.GetMethodInfoAsync(string methodName, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -14,18 +13,17 @@ public partial class Flickr : IFlickrReflection
             { "method_name", methodName }
         };
 
-        return await GetResponseAsync<object>(parameters, cancellationToken);
+        return await GetResponseAsync<Method>(parameters, cancellationToken);
     }
 
-    // todo: MethodCollection
-    async Task<object> IFlickrReflection.GetMethodsAsync(CancellationToken cancellationToken)
+    async Task<Methods> IFlickrReflection.GetMethodsAsync(CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
             { "method", "flickr.reflection.getMethods" }
         };
 
-        return await GetResponseAsync<object>(parameters, cancellationToken);
+        return await GetResponseAsync<Methods>(parameters, cancellationToken);
     }
 }
 
@@ -39,12 +37,12 @@ public interface IFlickrReflection
     /// </summary>
     /// <param name="methodName">The name of the method to retrieve.</param>
     /// <param name="cancellationToken"></param>
-    Task<object> GetMethodInfoAsync(string methodName, CancellationToken cancellationToken = default);
+    Task<Method> GetMethodInfoAsync(string methodName, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets an array of supported method names for Flickr.
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <remarks>Note: Not all methods might be supported by the FlickrNet Library.</remarks>
-    Task<object> GetMethodsAsync(CancellationToken cancellationToken = default);
+    Task<Methods> GetMethodsAsync(CancellationToken cancellationToken = default);
 }

@@ -6,14 +6,30 @@ namespace Flickr.Net.Core;
 public class UnknownResponse : Dictionary<string, string>, IFlickrEntity
 { }
 
-[FlickrJsonPropertyName("group")]
-public class GroupUnknownResponse : UnknownResponse
-{ }
-
 [FlickrJsonPropertyName("comment")]
 public class CommentUnknownResponse : UnknownResponse
 { }
 
-[FlickrJsonPropertyName("panda")]
-public class PandaUnknownResponse : UnknownResponse
+[FlickrJsonPropertyName("note")]
+public class NoteUnknownResponse : UnknownResponse
+{ }
+
+[FlickrJsonPropertyName("photoset")]
+public class PhotosetUnknownResponse : UnknownResponse
+{ }
+
+[FlickrJsonPropertyName("person")]
+public class PersonUnknownResponse : UnknownResponse
+{ }
+
+[FlickrJsonPropertyName("group")]
+public class GroupUnknownResponse : UnknownResponse
+{ }
+
+[FlickrJsonPropertyName("user")]
+public class UserUnknownResponse : UnknownResponse
+{ }
+
+[FlickrJsonPropertyName("photoid")]
+public class UploadUnknownResponse : UnknownResponse
 { }

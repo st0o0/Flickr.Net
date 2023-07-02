@@ -1,7 +1,5 @@
 ﻿using Flickr.Net.Core.Bases;
-using Flickr.Net.Core.Exceptions;
 using Flickr.Net.Core.Internals.Attributes;
-using Newtonsoft.Json;
 
 namespace Flickr.Net.Core.Flickrs.Results;
 
@@ -20,65 +18,29 @@ public record FlickrResult<T> : FlickrResult
 }
 
 /// <summary>
-/// Contains details of the result from Flickr, or the error if an error occurred.
-/// </summary>
-/// <typeparam name="T">The type of the result returned from Flickr.</typeparam>
-public record FlickrUnknownResult<T> : FlickrResult where T : UnknownResponse
-{
-    /// <summary>
-    /// If the call was successful then this contains the result.
-    /// </summary>
-    [JsonPropertyGenericTypeName(0)]
-    public T Content { get; set; }
-}
-
-/// <summary>
 /// The flickr result.
 /// </summary>
 public record FlickrResult
 {
-    private Exception _exception;
-
     /// <summary>
     /// True if the result returned an error.
     /// </summary>
-    public bool HasError { get; set; }
+    public bool HasError => State != "ok" || ErrorCode > 0;
 
-    /// <summary>
-    /// If the call was unsuccessful then this contains the exception.
-    /// </summary>
-    public Exception Error
-    {
-        get
-        {
-            return _exception;
-        }
-        set
-        {
-            _exception = value;
-            if (value == null)
-            {
-                HasError = false;
-                return;
-            }
-            HasError = true;
-            if (value is FlickrApiException flickrApiException)
-            {
-                ErrorCode = flickrApiException.Code;
-                ErrorMessage = flickrApiException.OriginalMessage;
-            }
-        }
-    }
+    [JsonProperty("stat")]
+    public string State { get; set; } = string.Empty;
 
     /// <summary>
     /// If an error was returned by the Flickr API then this will contain the error code.
     /// </summary>
-    public int ErrorCode { get; set; }
+    [JsonProperty("code")]
+    public int ErrorCode { get; set; } = int.MinValue;
 
     /// <summary>
     /// If an error was returned by the Flickr API then this will contain the error message.
     /// </summary>
-    public string ErrorMessage { get; set; }
+    [JsonProperty("message")]
+    public string ErrorMessage { get; set; } = string.Empty;
 }
 
 /// <summary>
@@ -90,7 +52,7 @@ public record FlickrContextResult<TNextPhoto, TPrevPhoto> : FlickrResult where T
     /// <summary>
     /// </summary>
     [JsonProperty("count")]
-    public int Count { get; set; }
+    public Count Count { get; set; }
 
     /// <summary>
     /// </summary>
@@ -114,4 +76,39 @@ public record FlickrAllContextResult<TPrimary, TSecond> : FlickrResult where TPr
     /// </summary>
     [JsonPropertyGenericTypeName(1)]
     public List<TSecond> Second { get; set; }
+}
+
+/// <summary>
+/// Contains details of the result from Flickr, or the error if an error occurred.
+/// </summary>
+/// <typeparam name="T">The type of the result returned from Flickr.</typeparam>
+public record FlickrUnknownResult<T> : FlickrResult where T : UnknownResponse
+{
+    /// <summary>
+    /// If the call was successful then this contains the result.
+    /// </summary>
+    [JsonPropertyGenericTypeName(0)]
+    public T Content { get; set; }
+}
+
+/// <summary>
+/// </summary>
+/// <typeparam name="T"></typeparam>
+public record FlickrStatsResult<T> : FlickrResult<T>
+{
+    [JsonProperty("period")]
+    public string Period { get; set; }
+
+    [JsonProperty("count")]
+    public int Count { get; set; }
+}
+
+public struct Count
+{
+    [JsonProperty("_content")]
+    public int Content { get; set; }
+
+    public static implicit operator int(Count count) => count.Content;
+
+    public static implicit operator Count(int count) => new() { Content = count };
 }
