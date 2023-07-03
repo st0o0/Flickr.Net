@@ -13,17 +13,22 @@ public partial class Flickr
 {
     private Task<FlickrContextResult<TNextPhoto, TPrevPhoto>> GetContextResponseAsync<TNextPhoto, TPrevPhoto>(Dictionary<string, string> parameters, CancellationToken cancellationToken = default) where TNextPhoto : IFlickrEntity where TPrevPhoto : IFlickrEntity => GetGenericResponseAsync<FlickrContextResult<TNextPhoto, TPrevPhoto>>(parameters, cancellationToken);
 
-    private Task GetResponseAsync(Dictionary<string, string> parameters, CancellationToken cancellationToken = default) => GetGenericResponseAsync<FlickrResult, UnknownResponse>(parameters, cancellationToken);
+    private Task GetResponseAsync(Dictionary<string, string> parameters, CancellationToken cancellationToken = default) => GetGenericResponseAsync<FlickrExtendedDataResult>(parameters, cancellationToken);
 
-    //todo: where T : IFlickrEntity
-    private Task<T> GetResponseAsync<T>(Dictionary<string, string> parameters, CancellationToken cancellationToken = default) => GetGenericResponseAsync<FlickrResult<T>, T>(parameters, cancellationToken);
+    private Task<T> GetResponseAsync<T>(Dictionary<string, string> parameters, CancellationToken cancellationToken = default) where T : IFlickrEntity => GetGenericResponseAsync<FlickrResult<T>, T>(parameters, cancellationToken);
 
     //todo: where TResponse : IFlickrEntity
-    private async Task<TResponse> GetGenericResponseAsync<T, TResponse>(Dictionary<string, string> parameters, CancellationToken cancellationToken = default) where T : FlickrResult
+    private async Task<TResponse> GetGenericResponseAsync<T, TResponse>(Dictionary<string, string> parameters, CancellationToken cancellationToken = default) where T : FlickrResult<TResponse> where TResponse : IFlickrEntity
     {
         var result = await GetGenericResponseAsync<T>(parameters, cancellationToken);
         // Todo: FICK ALLES DER TYP DEN ICH IN DEN METHODS REIN SCHREIBE MUSS ZURÜCKKOMMEN DU
         // KLEINER ******
+
+        if (result.Content is TResponse value)
+        {
+            return value;
+        }
+
         return default;
     }
 

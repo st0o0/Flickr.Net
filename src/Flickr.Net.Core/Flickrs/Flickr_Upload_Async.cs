@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Flickr.Net.Core.Exceptions.Handlers;
+using Flickr.Net.Core.Flickrs.Results;
+using Newtonsoft.Json.Linq;
 
 namespace Flickr.Net.Core;
 
@@ -65,7 +67,9 @@ public partial class Flickr : IFlickrUpload
             parameters.Add("auth_token", _settings.ApiKey ?? string.Empty);
         }
 
-        return await UploadDataAsync(stream, fileName, progress, uploadUri, parameters, cancellationToken);
+        var result = await UploadDataAsync(stream, fileName, progress, uploadUri, parameters, cancellationToken);
+
+        return result.Value<string>();
     }
 
     async Task<string> IFlickrUpload.ReplacePictureAsync(Stream stream, string fileName, string photoId, IProgress<double> progress, CancellationToken cancellationToken)
@@ -91,10 +95,12 @@ public partial class Flickr : IFlickrUpload
             parameters.Add("auth_token", _settings.ApiKey ?? string.Empty);
         }
 
-        return await UploadDataAsync(stream, fileName, progress, replaceUri, parameters, cancellationToken);
+        var result = await UploadDataAsync(stream, fileName, progress, replaceUri, parameters, cancellationToken);
+
+        return result.Value<string>("#text");
     }
 
-    private static async Task<string> UploadDataAsync(Stream imageStream, string fileName, IProgress<double> progress, Uri uploadUri, Dictionary<string, string> parameters, CancellationToken cancellationToken = default)
+    private static async Task<JToken> UploadDataAsync(Stream imageStream, string fileName, IProgress<double> progress, Uri uploadUri, Dictionary<string, string> parameters, CancellationToken cancellationToken = default)
     {
         var authHeader = FlickrResponder.OAuthCalculateAuthHeader(parameters);
 
@@ -120,8 +126,22 @@ public partial class Flickr : IFlickrUpload
 
         responseMessage.EnsureSuccessStatusCode();
 
-        // todo: Upload
-        return "";
+        var xml = await responseMessage.Content.ReadAsStringAsync(cancellationToken);
+        var json = FlickrConvert.XmlToJson(xml);
+
+        var flickrResults = FlickrConvert.DeserializeObject<FlickrExtendedDataResult>(json);
+
+        if (flickrResults.HasError)
+        {
+            throw ExceptionHandler.CreateResponseException(flickrResults);
+        }
+
+        if (flickrResults.Content.TryGetValue("photoid", out var value))
+        {
+            return value;
+        }
+
+        throw new InvalidOperationException(nameof(flickrResults.Content));
     }
 }
 

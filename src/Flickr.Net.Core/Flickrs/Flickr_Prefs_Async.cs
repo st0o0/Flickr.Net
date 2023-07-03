@@ -18,8 +18,7 @@ public partial class Flickr : IFlickrPrefs
         return (ContentType)int.Parse(result.GetValueOrDefault("content_type", "0"), System.Globalization.NumberFormatInfo.InvariantInfo);
     }
 
-    // todo: UserGeoPermissions
-    async Task<object> IFlickrPrefs.GetGeoPermsAsync(CancellationToken cancellationToken)
+    async Task<GeoPerms> IFlickrPrefs.GetGeoPermsAsync(CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -28,7 +27,7 @@ public partial class Flickr : IFlickrPrefs
             { "method", "flickr.prefs.getGeoPerms" }
         };
 
-        return await GetResponseAsync<object>(parameters, cancellationToken);
+        return await GetResponseAsync<GeoPerms>(parameters, cancellationToken);
     }
 
     async Task<HiddenFromSearch> IFlickrPrefs.GetHiddenAsync(CancellationToken cancellationToken)
@@ -88,7 +87,7 @@ public interface IFlickrPrefs
     /// geotag their photos.
     /// </summary>
     /// <param name="cancellationToken"></param>
-    Task<object> GetGeoPermsAsync(CancellationToken cancellationToken = default);
+    Task<GeoPerms> GetGeoPermsAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets the currently authenticated users default hidden from search setting.

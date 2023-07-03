@@ -5,7 +5,6 @@
 /// </summary>
 public partial class Flickr : IFlickrPush
 {
-    // todo: SubscriptionCollection
     async Task<Subscriptions> IFlickrPush.GetSubscriptionsAsync(CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();

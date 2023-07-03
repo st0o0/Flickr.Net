@@ -6,7 +6,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Flickr.Net.Core.Test.Entities;
 
-public class XmlToJsonTests
+public class FlickrExtendedDataResultTests
 {
     [Fact]
     public void ReplaceReponse()
@@ -19,13 +19,12 @@ public class XmlToJsonTests
 
         var doc = XDocument.Parse(xml);
         var json = JsonConvert.SerializeXNode(doc, Formatting.None, omitRootObject: true);
-        var result = FlickrConvert.DeserializeObject<Dictionary<string, JToken>>(json);
+        var result = FlickrConvert.DeserializeObject<FlickrExtendedDataResult>(json);
 
         Assert.NotNull(result);
-        Assert.True(result.ContainsKey("@stat"));
-        Assert.True(result.ContainsKey("photoid"));
-        var t = result.GetValueOrDefault("photoid");
-        Assert.Equal(1234, t.Value<int>("#text"));
+        Assert.False(result.HasError);
+        Assert.True(result.Content.TryGetValue("photoid", out var value));
+        Assert.Equal("1234", value.Value<string>("#text"));
     }
 
     [Fact]
@@ -39,12 +38,11 @@ public class XmlToJsonTests
 
         var doc = XDocument.Parse(xml);
         var json = JsonConvert.SerializeXNode(doc, Formatting.None, omitRootObject: true);
-        var result = FlickrConvert.DeserializeObject<Dictionary<string, JToken>>(json);
+        var result = FlickrConvert.DeserializeObject<FlickrExtendedDataResult>(json);
 
         Assert.NotNull(result);
-        Assert.True(result.ContainsKey("@stat"));
-        Assert.True(result.ContainsKey("photoid"));
-        Assert.True(result.TryGetValue("@stat", out var token));
-        Assert.True("ok" == token.Value<string>());
+        Assert.False(result.HasError);
+        Assert.True(result.Content.TryGetValue("photoid", out var value));
+        Assert.Equal("1234", value.Value<string>());
     }
 }

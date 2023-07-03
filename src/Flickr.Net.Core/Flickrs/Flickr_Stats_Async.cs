@@ -316,7 +316,6 @@ public partial class Flickr : IFlickrStats
         return await GetResponseAsync<StatsPhotos>(parameters, cancellationToken);
     }
 
-    // todo:StatViews
     async Task<Views> IFlickrStats.GetTotalViewsAsync(DateTime date, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();

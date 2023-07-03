@@ -1,5 +1,6 @@
 ﻿using Flickr.Net.Core.Bases;
 using Flickr.Net.Core.Internals.Attributes;
+using Newtonsoft.Json.Linq;
 
 namespace Flickr.Net.Core.Flickrs.Results;
 
@@ -8,7 +9,7 @@ namespace Flickr.Net.Core.Flickrs.Results;
 /// Contains details of the result from Flickr, or the error if an error occurred.
 /// </summary>
 /// <typeparam name="T">The type of the result returned from Flickr.</typeparam>
-public record FlickrResult<T> : FlickrResult
+public record FlickrResult<T> : FlickrResult where T : IFlickrEntity
 {
     /// <summary>
     /// If the call was successful then this contains the result.
@@ -20,7 +21,7 @@ public record FlickrResult<T> : FlickrResult
 /// <summary>
 /// The flickr result.
 /// </summary>
-public record FlickrResult
+public record FlickrResult : IFlickrEntity
 {
     /// <summary>
     /// True if the result returned an error.
@@ -28,7 +29,7 @@ public record FlickrResult
     public bool HasError => State != "ok" || ErrorCode > 0;
 
     [JsonProperty("stat")]
-    public string State { get; set; } = string.Empty;
+    public virtual string State { get; set; } = string.Empty;
 
     /// <summary>
     /// If an error was returned by the Flickr API then this will contain the error code.
@@ -65,6 +66,10 @@ public record FlickrContextResult<TNextPhoto, TPrevPhoto> : FlickrResult where T
     public TPrevPhoto PrevPhoto { get; set; }
 }
 
+/// <summary>
+/// </summary>
+/// <typeparam name="TPrimary"></typeparam>
+/// <typeparam name="TSecond"></typeparam>
 public record FlickrAllContextResult<TPrimary, TSecond> : FlickrResult where TPrimary : IFlickrEntity where TSecond : IFlickrEntity
 {
     /// <summary>
@@ -94,13 +99,24 @@ public record FlickrUnknownResult<T> : FlickrResult where T : UnknownResponse
 /// <summary>
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public record FlickrStatsResult<T> : FlickrResult<T>
+public record FlickrStatsResult<T> : FlickrResult<T> where T : IFlickrEntity
 {
     [JsonProperty("period")]
     public string Period { get; set; }
 
     [JsonProperty("count")]
     public int Count { get; set; }
+}
+
+/// <summary>
+/// </summary>
+public record FlickrExtendedDataResult : FlickrResult
+{
+    [JsonProperty("@stat")]
+    public override string State { get; set; } = string.Empty;
+
+    [JsonExtensionData]
+    public IDictionary<string, JToken> Content { get; set; }
 }
 
 public struct Count
