@@ -3,7 +3,6 @@
 /// <summary>
 /// An enumeration defining who can add meta data (tags and notes).
 /// </summary>
-[JsonConverter(typeof(StringEnumConverter))]
 public enum PermissionAddMeta
 {
     /// <summary>

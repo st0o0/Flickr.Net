@@ -4,7 +4,6 @@
 /// The status of a location suggestion.
 /// </summary>
 /// <remarks></remarks>
-[JsonConverter(typeof(StringEnumConverter))]
 public enum SuggestionStatus
 {
     /// <summary>

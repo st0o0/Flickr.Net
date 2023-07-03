@@ -8,8 +8,6 @@
 /// </remarks>
 public class PhotosetNotFoundException : FlickrApiException
 {
-    internal PhotosetNotFoundException(int code, string message)
-        : base(code, message)
-    {
-    }
+    internal PhotosetNotFoundException(int code, string message) : base(code, message)
+    { }
 }

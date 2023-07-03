@@ -3,7 +3,6 @@
 /// <summary>
 /// The units of a radius search
 /// </summary>
-[JsonConverter(typeof(StringEnumConverter))]
 public enum RadiusUnit
 {
     /// <summary>

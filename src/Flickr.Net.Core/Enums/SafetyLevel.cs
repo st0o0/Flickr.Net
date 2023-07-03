@@ -3,7 +3,6 @@
 /// <summary>
 /// Safety level of the photographic image.
 /// </summary>
-[JsonConverter(typeof(StringEnumConverter))]
 public enum SafetyLevel
 {
     /// <summary>

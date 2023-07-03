@@ -3,7 +3,6 @@
 /// <summary>
 /// The contact type.
 /// </summary>
-[JsonConverter(typeof(StringEnumConverter))]
 public enum ContactType
 {
     /// <summary>

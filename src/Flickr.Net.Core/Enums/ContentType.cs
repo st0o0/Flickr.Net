@@ -3,7 +3,6 @@
 /// <summary>
 /// What type of content is the upload representing.
 /// </summary>
-[JsonConverter(typeof(StringEnumConverter))]
 public enum ContentType
 {
     /// <summary>

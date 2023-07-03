@@ -3,7 +3,6 @@
 /// <summary>
 /// The various pricay settings for a group.
 /// </summary>
-[JsonConverter(typeof(StringEnumConverter))]
 public enum PoolPrivacy
 {
     /// <summary>

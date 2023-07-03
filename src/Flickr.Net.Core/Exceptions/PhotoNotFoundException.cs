@@ -8,8 +8,6 @@
 /// </remarks>
 public class PhotoNotFoundException : FlickrApiException
 {
-    internal PhotoNotFoundException(int code, string message)
-        : base(code, message)
-    {
-    }
+    internal PhotoNotFoundException(int code, string message) : base(code, message)
+    { }
 }

@@ -3,7 +3,6 @@
 /// <summary>
 /// The popular sorting.
 /// </summary>
-[JsonConverter(typeof(StringEnumConverter))]
 public enum PopularSorting
 {
     /// <summary>

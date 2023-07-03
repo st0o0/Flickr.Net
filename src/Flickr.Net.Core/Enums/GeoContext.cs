@@ -4,7 +4,6 @@
 /// The context to set a geotagged photo as. Used by <see
 /// cref="IFlickrPhotosGeo.SetContextAsync(string, GeoContext, CancellationToken)"/>.
 /// </summary>
-[JsonConverter(typeof(StringEnumConverter))]
 public enum GeoContext
 {
     /// <summary>

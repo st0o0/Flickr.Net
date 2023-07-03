@@ -5,8 +5,6 @@ namespace Flickr.Net.Core.Enums;
 /// cref="IFlickrGroupsMembers.GetListAsync(string, MemberType, int, int, CancellationToken)"/> and
 /// returned for each <see cref="Member"/> as well.
 /// </summary>
-
-[JsonConverter(typeof(StringEnumConverter))]
 [Flags]
 public enum MemberType
 {

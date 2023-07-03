@@ -36,7 +36,7 @@ public static class ExceptionHandler
         "Photo not found" or "Photo not found." => new PhotoNotFoundException(code, message),
         "Photoset not found" or "Photoset not found." => new PhotosetNotFoundException(code, message),
         "Permission Denied" => new PermissionDeniedException(code, message),
-        "User not found" or "User not found." => new PhotoNotFoundException(code, message),
+        "User not found" or "User not found." => new UserNotFoundException(code, message),
         _ or "" => new FlickrApiException(code, message)
     };
 }

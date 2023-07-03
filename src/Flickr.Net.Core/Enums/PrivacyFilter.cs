@@ -3,7 +3,6 @@
 /// <summary>
 /// When searching for photos you can filter on the privacy of the photos.
 /// </summary>
-[JsonConverter(typeof(StringEnumConverter))]
 public enum PrivacyFilter
 {
     /// <summary>

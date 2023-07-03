@@ -3,7 +3,6 @@
 /// <summary>
 /// An enumeration of photo styles.
 /// </summary>
-[JsonConverter(typeof(StringEnumConverter))]
 public enum Style
 {
     /// <summary>

@@ -3,7 +3,6 @@
 /// <summary>
 /// An enumeration defining who can add comments.
 /// </summary>
-[JsonConverter(typeof(StringEnumConverter))]
 public enum PermissionComment
 {
     /// <summary>

@@ -9,8 +9,6 @@
 /// </remarks>
 public class UserNotLoggedInInsufficientPermissionsException : FlickrApiException
 {
-    internal UserNotLoggedInInsufficientPermissionsException(string message)
-        : base(99, message)
-    {
-    }
+    internal UserNotLoggedInInsufficientPermissionsException(string message) : base(99, message)
+    { }
 }

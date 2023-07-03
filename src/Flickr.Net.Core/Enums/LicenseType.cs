@@ -3,7 +3,6 @@
 /// <summary>
 /// A enumeration containing the list of current license types.
 /// </summary>
-[JsonConverter(typeof(StringEnumConverter))]
 public enum LicenseType
 {
     /// <summary>

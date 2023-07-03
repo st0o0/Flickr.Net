@@ -3,7 +3,6 @@
 /// <summary>
 /// The access authentication token return by Flickr after a successful authentication.
 /// </summary>
-[Serializable]
 public record OAuthAccessToken
 {
     /// <summary>

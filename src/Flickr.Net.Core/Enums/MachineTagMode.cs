@@ -3,7 +3,6 @@
 /// <summary>
 /// Used to specify where all tags must be matched or any tag to be matched.
 /// </summary>
-[JsonConverter(typeof(StringEnumConverter))]
 public enum MachineTagMode
 {
     /// <summary>

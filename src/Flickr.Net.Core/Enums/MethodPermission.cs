@@ -3,7 +3,6 @@ namespace Flickr.Net.Core.Enums;
 /// <summary>
 /// An enumeration listing the permission levels required for calling the Flickr API methods.
 /// </summary>
-[JsonConverter(typeof(StringEnumConverter))]
 public enum MethodPermission
 {
     /// <summary>

@@ -3,7 +3,6 @@
 /// <summary>
 /// An enumeration of different media types tto search for.
 /// </summary>
-[JsonConverter(typeof(StringEnumConverter))]
 public enum MediaType
 {
     /// <summary>

@@ -4,7 +4,6 @@
 /// DateGranularity, used for setting taken date in <see cref="IFlickrPhotos.SetDatesAsync(string,
 /// DateTime?, DateTime?, DateGranularity, CancellationToken)"/>.
 /// </summary>
-[JsonConverter(typeof(StringEnumConverter))]
 public enum DateGranularity
 {
     /// <summary>

@@ -3,7 +3,6 @@
 /// <summary>
 /// Allows you to perform a search on a users contacts.
 /// </summary>
-[JsonConverter(typeof(StringEnumConverter))]
 public enum ContactSearch
 {
     /// <summary>

@@ -4,7 +4,6 @@
 /// Sorting used for <see cref="IFlickrStats.GetPopularPhotosAsync(DateTime, PopularitySort, int,
 /// int, CancellationToken)"/>
 /// </summary>
-[JsonConverter(typeof(StringEnumConverter))]
 public enum PopularitySort
 {
     /// <summary>

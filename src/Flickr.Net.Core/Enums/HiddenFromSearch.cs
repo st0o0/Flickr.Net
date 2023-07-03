@@ -3,7 +3,6 @@
 /// <summary>
 /// Determines weither the photo is visible in public searches. The default is 1, Visible.
 /// </summary>
-[JsonConverter(typeof(StringEnumConverter))]
 public enum HiddenFromSearch
 {
     /// <summary>

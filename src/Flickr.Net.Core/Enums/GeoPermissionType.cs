@@ -3,7 +3,6 @@
 /// <summary>
 /// The default privacy level for geographic information attached to the user's photos.
 /// </summary>
-[JsonConverter(typeof(StringEnumConverter))]
 public enum GeoPermissionType
 {
     /// <summary>

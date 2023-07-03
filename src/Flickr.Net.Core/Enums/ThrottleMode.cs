@@ -3,7 +3,6 @@
 /// <summary>
 /// The posting limit most for a group.
 /// </summary>
-[JsonConverter(typeof(StringEnumConverter))]
 public enum ThrottleMode
 {
     /// <summary>

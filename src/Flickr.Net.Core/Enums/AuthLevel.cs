@@ -3,7 +3,6 @@
 /// <summary>
 /// Used to specify the authentication levels needed for the Auth methods.
 /// </summary>
-[JsonConverter(typeof(StringEnumConverter))]
 public enum AuthLevel
 {
     /// <summary>

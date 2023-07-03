@@ -3,7 +3,6 @@
 /// <summary>
 /// The time type.
 /// </summary>
-[JsonConverter(typeof(StringEnumConverter))]
 public enum TimeType
 {
     /// <summary>

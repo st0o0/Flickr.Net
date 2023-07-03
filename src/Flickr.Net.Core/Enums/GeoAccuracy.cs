@@ -1,10 +1,9 @@
 namespace Flickr.Net.Core.Enums;
 
 /// <summary>
-/// Geo-taggin accuracy. Used in <see cref="PhotoSearchOptions.Accuracy"/> and <see cref="BoundaryBox.Accuracy"/>.
+/// Geo-taggin accuracy. Used in <see cref="BoundaryBox.Accuracy"/>.
 /// </summary>
 /// <remarks>Level descriptions are only approximate.</remarks>
-[JsonConverter(typeof(StringEnumConverter))]
 public enum GeoAccuracy
 {
     /// <summary>

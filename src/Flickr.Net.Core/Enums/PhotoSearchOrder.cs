@@ -6,7 +6,6 @@ namespace Flickr.Net.Core.Enums;
 /// CancellationToken)"/>, <see cref="IFlickrPhotos.GetWithoutGeoDataAsync(PartialSearchOptions,
 /// CancellationToken)"/> methods.
 /// </summary>
-[JsonConverter(typeof(StringEnumConverter))]
 public enum PhotoSearchSortOrder
 {
     /// <summary>

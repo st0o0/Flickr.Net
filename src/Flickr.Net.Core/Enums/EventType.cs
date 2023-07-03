@@ -3,7 +3,6 @@
 /// <summary>
 /// The type of the <see cref="Event"/>.
 /// </summary>
-[JsonConverter(typeof(StringEnumConverter))]
 public enum EventType
 {
     /// <summary>
