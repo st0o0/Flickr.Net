@@ -54,14 +54,14 @@ public class MethodTests
         Assert.NotEmpty(items.Arguments);
         Assert.NotEmpty(items.Errors);
 
-        Parallel.ForEach(items.Arguments, argument =>
+        Assert.All(items.Arguments, argument =>
         {
             Assert.IsType<string>(argument.Name);
             Assert.IsType<bool>(argument.Optional);
             Assert.IsType<string>(argument.Content);
         });
 
-        Parallel.ForEach(items.Errors, error =>
+        Assert.All(items.Errors, error =>
         {
             Assert.IsType<int>(error.Code);
             Assert.IsType<string>(error.Message);
@@ -759,7 +759,7 @@ public class MethodTests
         Assert.IsType<Methods>(items);
         Assert.NotEmpty(items.Values);
 
-        Parallel.ForEach(items.Values, value =>
+        Assert.All(items.Values, value =>
         {
             Assert.IsType<Method>(value);
             Assert.Contains("flickr.", value);

@@ -38,7 +38,7 @@ public static class MemberTypeExtensions
 
     public static bool Has(this MemberType type, in MemberType value)
     {
-        return value < type;
+        return value <= type;
     }
 
     public static bool Is(this MemberType type, MemberType value)

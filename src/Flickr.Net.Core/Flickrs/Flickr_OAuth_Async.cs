@@ -93,7 +93,7 @@ public partial class Flickr : IFlickrOAuth
 
     string IFlickrOAuth.CalculateAuthorizationUrl(string requestToken, AuthLevel perms, bool mobile)
     {
-        var permsString = (perms == AuthLevel.None) ? "" : "&perms=" + perms.ToFlickrString();
+        var permsString = (perms == AuthLevel.None) ? "" : "&perms=" + perms.GetEnumMemberValue();
 
         return "https://" + (mobile ? "m" : "www") + ".flickr.com/services/oauth/authorize?oauth_token=" + requestToken + permsString;
     }

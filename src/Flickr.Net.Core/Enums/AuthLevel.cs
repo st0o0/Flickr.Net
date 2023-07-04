@@ -8,7 +8,7 @@ public enum AuthLevel
     /// <summary>
     /// No access required - do not use this value!
     /// </summary>
-    [EnumMember(Value = "none")]
+    [EnumMember(Value = "")]
     None,
 
     /// <summary>

@@ -10,6 +10,7 @@ public class MemberTypeTests
     {
         var result = MemberType.Admin | MemberType.None;
         Assert.True(result.Is(MemberType.Admin));
+        Assert.True(result.Has(MemberType.Admin));
         Assert.True(result.Has(MemberType.Member));
     }
 
@@ -18,6 +19,7 @@ public class MemberTypeTests
     {
         const MemberType result = MemberType.Admin | MemberType.None;
         Assert.True(result.Is(MemberType.Admin));
+        Assert.True(result.Has(MemberType.Admin));
         Assert.True(result.Has(MemberType.Moderator));
     }
 
@@ -26,6 +28,7 @@ public class MemberTypeTests
     {
         var result = MemberType.Moderator | MemberType.None;
         Assert.True(result.Is(MemberType.Moderator));
+        Assert.True(result.Has(MemberType.Moderator));
         Assert.True(result.Has(MemberType.Member));
     }
 }

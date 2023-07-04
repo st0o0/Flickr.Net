@@ -70,6 +70,7 @@ public class CollectionTests
         Assert.IsType<Collection>(items);
         Assert.IsType<DateTime>(items.CreateDate);
         Assert.IsType<Photos>(items.IconPhotos);
+        Assert.NotEmpty(items.IconPhotos.Values);
         Assert.Equal(3, items.IconPhotos.Values.Count);
         Assert.True(items.IconPhotos.Values[0].IsPublic);
         Assert.False(items.IconPhotos.Values[0].IsFamily);
@@ -133,6 +134,7 @@ public class CollectionTests
         Assert.False(result.HasError);
         var items = result.Content;
         Assert.IsType<Collections>(items);
+        Assert.NotEmpty(items.Values);
         Assert.IsType<Collection>(items.Values[0]);
         Assert.IsType<DateTime>(items.Values[0].CreateDate);
         Assert.Equal(2, items.Values.Count);

@@ -11,17 +11,12 @@ internal static class DateTimeExtensions
     /// </summary>
     /// <param name="date">The date to convert.</param>
     /// <returns>A long for the number of seconds since 1st January 1970, as per unix specification.</returns>
-    public static string ToUnixTimestamp(this DateTime date)
-    {
-        var ts = date - _unixStartDate;
-        return ts.TotalSeconds.ToString("0", System.Globalization.NumberFormatInfo.InvariantInfo);
-    }
+    public static string ToUnixTimestamp(this DateTime date) => (date - _unixStartDate).TotalSeconds.ToString("0", System.Globalization.NumberFormatInfo.InvariantInfo);
 
     /// <summary>
     /// Dates the to my sql.
     /// </summary>
     /// <param name="date">The date.</param>
     /// <returns>A string.</returns>
-    public static string ToMySql(this DateTime date) =>
-        date.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.DateTimeFormatInfo.InvariantInfo);
+    public static string ToMySql(this DateTime date) => date.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.DateTimeFormatInfo.InvariantInfo);
 }

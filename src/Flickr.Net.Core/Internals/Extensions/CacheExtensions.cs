@@ -1,10 +1,10 @@
 ﻿using Flickr.Net.Core.Internals.Caching;
 
 namespace Flickr.Net.Core.Internals.Extensions;
+
 /// <summary>
 /// The cache extensions.
 /// </summary>
-
 public static class CacheExtensions
 {
     /// <summary>

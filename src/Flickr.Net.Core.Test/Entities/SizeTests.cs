@@ -138,7 +138,7 @@ public class SizeTests
         Assert.NotEmpty(items.Values);
         Assert.Equal(13, items.Values.Count);
 
-        Parallel.ForEach(items.Values, item =>
+        Assert.All(items.Values, item =>
         {
             Assert.Equal(MediaType.Photo, item.Media);
         });

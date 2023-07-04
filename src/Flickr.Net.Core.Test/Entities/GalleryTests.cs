@@ -721,7 +721,7 @@ public class GalleryTests
         Assert.Equal(5, items.CommentsCount);
         Assert.NotEmpty(items.CoverPhotos.Values);
 
-        Parallel.ForEach(items.CoverPhotos.Values, item =>
+        Assert.All(items.CoverPhotos.Values, item =>
         {
             Assert.Equal(150, item.Width);
             Assert.Equal(150, item.Height);

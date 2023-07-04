@@ -439,7 +439,7 @@ public class ClusterTests
         Assert.NotEmpty(items.Values);
         Assert.Equal(18, items.Values.Count);
 
-        Parallel.ForEach(items.Values, item =>
+        Assert.All(items.Values, item =>
         {
             Assert.True(item.IsPublic);
             Assert.False(item.IsFriend);
@@ -2571,10 +2571,10 @@ public class ClusterTests
         Assert.IsType<Hottags>(items);
         Assert.NotEmpty(items.Values);
 
-        Parallel.ForEach(items.Values, item =>
+        Assert.All(items.Values, item =>
         {
             Assert.NotEmpty(item.ThmData.Photos.Values);
-            Parallel.ForEach(item.ThmData.Photos.Values, value =>
+            Assert.All(item.ThmData.Photos.Values, value =>
             {
                 Assert.True(value.IsPublic);
                 Assert.False(value.IsFriend);

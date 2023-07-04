@@ -1244,7 +1244,7 @@ public class GroupTests
         var items = result.Content;
         Assert.IsType<Groups>(items);
 
-        Parallel.ForEach(items.Values, item =>
+        Assert.All(items.Values, item =>
         {
             Assert.IsType<Group>(item);
             Assert.NotNull(item);

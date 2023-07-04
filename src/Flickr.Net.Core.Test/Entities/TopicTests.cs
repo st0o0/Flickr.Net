@@ -123,6 +123,7 @@ public class TopicTests
               "stat": "ok"
             }
             """;
+
         var result = FlickrConvert.DeserializeObject<FlickrResult<TopicNames>>(json);
 
         Assert.NotNull(result);

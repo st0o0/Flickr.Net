@@ -41,6 +41,6 @@ public class PeoplePersonTests
         Assert.IsType<PeoplePersons>(items);
         Assert.NotEmpty(items.Values);
         Assert.IsType<PeoplePerson>(items.Values[0]);
-        Assert.Equal(1, items.Values.Count);
+        Assert.Single(items.Values);
     }
 }
