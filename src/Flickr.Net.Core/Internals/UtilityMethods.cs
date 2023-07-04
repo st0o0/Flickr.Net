@@ -166,18 +166,6 @@ public static class UtilityMethods
     /// <summary>
     /// Urls the format.
     /// </summary>
-    /// <param name="p">The p.</param>
-    /// <param name="size">The size.</param>
-    /// <param name="extension">The extension.</param>
-    /// <returns>A string.</returns>
-    //public static string UrlFormat(Photoset p, string size, string extension)
-    //{
-    //    return UrlFormat(p.Farm, p.Server, p.PrimaryPhotoId, p.Secret, size, extension);
-    //}
-
-    /// <summary>
-    /// Urls the format.
-    /// </summary>
     /// <param name="farm">The farm.</param>
     /// <param name="server">The server.</param>
     /// <param name="photoId">The photoid.</param>

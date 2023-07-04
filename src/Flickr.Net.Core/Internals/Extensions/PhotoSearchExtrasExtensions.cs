@@ -4,22 +4,6 @@ namespace Flickr.Net.Core.Internals.Extensions;
 /// </summary>
 public static class PhotoSearchExtrasExtensions
 {
-    //public static string ToOldFlickrString(this PhotoSearchExtras extras)
-    //{
-    //    List<string> extraList = new();
-    //    var e = typeof(PhotoSearchExtras);
-    //    foreach (PhotoSearchExtras extra in GetFlags(extras))
-    //    {
-    //        var info = e.GetField(extra.ToString("G"));
-    //        var o = (DescriptionAttribute[])info.GetCustomAttributes(typeof(DescriptionAttribute), false);
-    //        if (o.Length == 0)
-    //        {
-    //            continue;
-    //        }
-    // var att = o[0]; extraList.Add(att.Description); }
-    //    return string.Join(",", extraList.ToArray());
-    //}
-
     /// <summary>
     /// Utility method to convert the <see cref="PhotoSearchExtras"/> enum to a string.
     /// </summary>

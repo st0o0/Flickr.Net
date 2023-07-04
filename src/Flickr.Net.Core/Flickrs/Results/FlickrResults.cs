@@ -4,7 +4,6 @@ using Newtonsoft.Json.Linq;
 
 namespace Flickr.Net.Core.Flickrs.Results;
 
-//todo: where T : IFlickrEntity
 /// <summary>
 /// Contains details of the result from Flickr, or the error if an error occurred.
 /// </summary>
