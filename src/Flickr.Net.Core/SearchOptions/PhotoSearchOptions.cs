@@ -1,11 +1,11 @@
 using Flickr.Net.Core.Internals.Extensions;
 
-namespace Flickr.Net.Core.SearchOptions;
+namespace Flickr.Net.Core;
 
 /// <summary>
 /// Summary description for PhotoSearchOptions.
 /// </summary>
-public class PhotoSearchOptions
+public record PhotoSearchOptions
 {
     /// <summary>
     /// Creates a new instance of the search options.
@@ -65,27 +65,27 @@ public class PhotoSearchOptions
     /// <summary>
     /// The user Id of the user to search on. Defaults to null for no specific user.
     /// </summary>
-    public string UserId { get; set; }
+    public string UserId { get; init; }
 
     /// <summary>
     /// The geocontext for the resulting photos.
     /// </summary>
-    public GeoContext GeoContext { get; set; }
+    public GeoContext GeoContext { get; init; }
 
     /// <summary>
     /// The group id of the group to search within.
     /// </summary>
-    public string GroupId { get; set; }
+    public string GroupId { get; init; }
 
     /// <summary>
     /// A comma delimited list of tags
     /// </summary>
-    public string Tags { get; set; }
+    public string Tags { get; init; }
 
     /// <summary>
     /// Tag mode can either be 'all', or 'any'. Defaults to <see cref="TagMode.AllTags"/>
     /// </summary>
-    public TagMode TagMode { get; set; }
+    public TagMode TagMode { get; init; }
 
     /// <summary>
     /// Search for the given machine tags.
@@ -94,255 +94,224 @@ public class PhotoSearchOptions
     /// See https://www.flickr.com/services/api/flickr.photos.search.html for details on how to
     /// search for machine tags.
     /// </remarks>
-    public string MachineTags { get; set; }
+    public string MachineTags { get; init; }
 
     /// <summary>
     /// The machine tag mode.
     /// </summary>
     /// <remarks>Allowed values are any and all. It defaults to any if none specified.</remarks>
-    public MachineTagMode MachineTagMode { get; set; }
+    public MachineTagMode MachineTagMode { get; init; }
 
     /// <summary>
     /// Search for the given text in photo titles and descriptions.
     /// </summary>
-    public string Text { get; set; }
+    public string Text { get; init; }
 
     /// <summary>
     /// Minimum date uploaded. Defaults to <see cref="DateTime.MinValue"/> which signifies that the
     /// value is not to be used.
     /// </summary>
-    public DateTime MinUploadDate { get; set; }
+    public DateTime MinUploadDate { get; init; }
 
     /// <summary>
     /// Maximum date uploaded. Defaults to <see cref="DateTime.MinValue"/> which signifies that the
     /// value is not to be used.
     /// </summary>
-    public DateTime MaxUploadDate { get; set; }
+    public DateTime MaxUploadDate { get; init; }
 
     /// <summary>
     /// Minimum date taken. Defaults to <see cref="DateTime.MinValue"/> which signifies that the
     /// value is not to be used.
     /// </summary>
-    public DateTime MinTakenDate { get; set; }
+    public DateTime MinTakenDate { get; init; }
 
     /// <summary>
     /// Maximum date taken. Defaults to <see cref="DateTime.MinValue"/> which signifies that the
     /// value is not to be used.
     /// </summary>
-    public DateTime MaxTakenDate { get; set; }
+    public DateTime MaxTakenDate { get; init; }
 
     /// <summary>
     /// Filter by media type.
     /// </summary>
-    public MediaType MediaType { get; set; }
-
-    private Collection<LicenseType> licenses = new();
+    public MediaType MediaType { get; init; }
 
     /// <summary>
     /// The licenses you wish to search for.
     /// </summary>
-    public Collection<LicenseType> Licenses
-    {
-        get { return licenses; }
-    }
+    public Collection<LicenseType> Licenses { get; init; } = new();
 
     /// <summary>
     /// Optional extras to return, defaults to all. See <see cref="PhotoSearchExtras"/> for more details.
     /// </summary>
-    public PhotoSearchExtras Extras { get; set; }
+    public PhotoSearchExtras Extras { get; init; }
 
     /// <summary>
     /// Number of photos to return per page. Defaults to 100.
     /// </summary>
-    public int PerPage { get; set; }
+    public int PerPage { get; init; }
 
     /// <summary>
     /// The page to return. Defaults to page 1.
     /// </summary>
-    public int Page { get; set; }
+    public int Page { get; init; }
 
     /// <summary>
     /// The sort order of the returned list. Default is <see cref="PhotoSearchSortOrder.None"/>.
     /// </summary>
-    public PhotoSearchSortOrder SortOrder { get; set; }
+    public PhotoSearchSortOrder SortOrder { get; init; }
 
     /// <summary>
     /// The privacy fitler to filter the search on.
     /// </summary>
-    public PrivacyFilter PrivacyFilter { get; set; }
+    public PrivacyFilter PrivacyFilter { get; init; }
 
     /// <summary>
     /// The boundary box for which to search for geo location photos.
     /// </summary>
-    public BoundaryBox BoundaryBox { get; set; }
-
-    /// <summary>
-    /// The accuracy of the search for geo location photos.
-    /// </summary>
-    /// <remarks>Can also be set as a property of the <see cref="BoundaryBox"/> property.</remarks>
-    public GeoAccuracy Accuracy
-    {
-        get { return BoundaryBox == null ? GeoAccuracy.None : BoundaryBox.Accuracy; }
-        set
-        {
-            if (BoundaryBox == null) { BoundaryBox = new BoundaryBox(); }
-            BoundaryBox.Accuracy = value;
-        }
-    }
+    public BoundaryBox BoundaryBox { get; init; }
 
     /// <summary>
     /// Which type of safe search to perform.
     /// </summary>
     /// <remarks>An unauthenticated search will only ever return safe photos.</remarks>
-    public SafetyLevel SafeSearch { get; set; }
+    public SafetyLevel SafeSearch { get; init; }
 
     /// <summary>
     /// Filter your search on a particular type of content (photo, screenshot or other).
     /// </summary>
-    public ContentTypeSearch ContentType { get; set; }
+    public ContentTypeSearch ContentType { get; init; }
 
     /// <summary>
     /// Specify the units to use for a Geo location based search. Default is Kilometers.
     /// </summary>
-    public RadiusUnit RadiusUnits { get; set; }
+    public RadiusUnit RadiusUnits { get; init; }
 
     /// <summary>
     /// Specify the radius of a particular geo-location search. Maximum of 20 miles, 32 kilometers.
     /// </summary>
-    public float? Radius { get; set; }
+    public float? Radius { get; init; }
 
     /// <summary>
     /// Specify the longitude center of a geo-location search.
     /// </summary>
-    public double? Longitude { get; set; }
+    public double? Longitude { get; init; }
 
     /// <summary>
     /// Specify the latitude center of a geo-location search.
     /// </summary>
-    public double? Latitude { get; set; }
+    public double? Latitude { get; init; }
 
     /// <summary>
     /// Filter the search results on those that have Geolocation information.
     /// </summary>
-    public bool? HasGeo { get; set; }
+    public bool? HasGeo { get; init; }
 
     /// <summary>
     /// Fitler the search results on a particular users contacts. You must set UserId for this
     /// option to be honoured.
     /// </summary>
-    public ContactSearch Contacts { get; set; }
+    public ContactSearch Contacts { get; init; }
 
     /// <summary>
     /// The WOE id to return photos for. This is a spatial reference.
     /// </summary>
-    public string WoeId { get; set; }
+    public string WoeId { get; init; }
 
     /// <summary>
     /// The Flickr Place to return photos for.
     /// </summary>
-    public string PlaceId { get; set; }
+    public string PlaceId { get; init; }
 
     /// <summary>
     /// True if the photo is taken from the Flickr Commons project.
     /// </summary>
-    public bool IsCommons { get; set; }
+    public bool IsCommons { get; init; }
 
     /// <summary>
     /// Is the image in a gallery.
     /// </summary>
-    public bool InGallery { get; set; }
+    public bool InGallery { get; init; }
 
     /// <summary>
     /// Is the photo a part of the getty images collection on Flickr.
     /// </summary>
-    public bool IsGetty { get; set; }
+    public bool IsGetty { get; init; }
 
     /// <summary>
     /// If true then limit the search to within the current person's favourites.
     /// </summary>
-    public bool Faves { get; set; }
+    public bool Faves { get; init; }
 
     /// <summary>
     /// If set then will return photos tagged as containing the given person.
     /// </summary>
-    public string PersonId { get; set; }
+    public string PersonId { get; init; }
 
     /// <summary>
     /// Search for photos taken with a particular camera.
     /// </summary>
-    public string Camera { get; set; }
+    public string Camera { get; init; }
 
     /// <summary>
     /// I've no idea what this does. The Flickr API comment is simply: Jump, jump!
     /// </summary>
-    public string JumpTo { get; set; }
-
-    internal string ExtrasString
-    {
-        get { return Extras.ToFlickrString(); }
-    }
-
-    internal string ColorCodeString
-    {
-        get { return UtilityMethods.ColorCodesToString(ColorCodes); }
-    }
-
-    internal string SortOrderString => SortOrder.ToFlickrString();
+    public string JumpTo { get; init; }
 
     /// <summary>
     /// Search for photos by the users 'username'
     /// </summary>
-    public string Username { get; set; }
+    public string Username { get; init; }
 
     /// <summary>
     /// The minimum exposure to return photos for.
     /// </summary>
-    public double? ExifMinExposure { get; set; }
+    public double? ExifMinExposure { get; init; }
 
     /// <summary>
     /// The maximum exposure to return photos for.
     /// </summary>
-    public double? ExifMaxExposure { get; set; }
+    public double? ExifMaxExposure { get; init; }
 
     /// <summary>
     /// The minimum aperture to return photos for.
     /// </summary>
-    public double? ExifMinAperture { get; set; }
+    public double? ExifMinAperture { get; init; }
 
     /// <summary>
     /// The maximum aperture to return photos for.
     /// </summary>
-    public double? ExifMaxAperture { get; set; }
+    public double? ExifMaxAperture { get; init; }
 
     /// <summary>
     /// The minimum focal length to return photos for.
     /// </summary>
-    public int? ExifMinFocalLength { get; set; }
+    public int? ExifMinFocalLength { get; init; }
 
     /// <summary>
     /// The maximum focal length to return photos for.
     /// </summary>
-    public int? ExifMaxFocalLength { get; set; }
+    public int? ExifMaxFocalLength { get; init; }
 
     /// <summary>
     /// Exclude a specific user ID from the search results.
     /// </summary>
-    public string ExcludeUserID { get; set; }
+    public string ExcludeUserID { get; init; }
 
     /// <summary>
     /// The ID of the Foursquare Venue to return photos for.
     /// </summary>
-    public string FoursquareVenueID { get; set; }
+    public string FoursquareVenueID { get; init; }
 
     /// <summary>
     /// The WOE ID of the Foursquare Venue to return photos for.
     /// </summary>
-    public string FoursquareWoeID { get; set; }
+    public string FoursquareWoeID { get; init; }
 
     /// <summary>
     /// The path alias for a group to search.
     /// </summary>
-    public string GroupPathAlias { get; set; }
+    public string GroupPathAlias { get; init; }
 
     /// <summary>
     /// A list of the new color codes.
@@ -351,12 +320,12 @@ public class PhotoSearchOptions
     /// Acceptable values are "0"-"9" and "a"-"e". Or you can use a color name such as "yellow",
     /// "blue", "green" etc.
     /// </remarks>
-    public ICollection<string> ColorCodes { get; set; }
+    public ICollection<string> ColorCodes { get; init; }
 
     /// <summary>
     /// A collection of styles the search results will be filtered against.
     /// </summary>
-    public ICollection<Style> Styles { get; set; }
+    public ICollection<Style> Styles { get; init; }
 
     /// <summary>
     /// Calculates the Uri for a Flash slideshow for the given search options.
@@ -370,10 +339,10 @@ public class PhotoSearchOptions
 
         Dictionary<string, string> parameters = new();
 
-        AddToDictionary(ref parameters);
+        AddToDictionary(parameters);
 
         List<string> parts = new();
-        foreach (KeyValuePair<string, string> pair in parameters)
+        foreach (var pair in parameters)
         {
             parts.Add(Uri.EscapeDataString(pair.Key) + "|" + Uri.EscapeDataString(pair.Value));
         }
@@ -388,7 +357,7 @@ public class PhotoSearchOptions
     /// cref="Dictionary{K,V}"/> instanced passed in, ready for sending to Flickr.
     /// </summary>
     /// <param name="parameters">The <see cref="Dictionary{K,V}"/> to add the options to.</param>
-    public void AddToDictionary(ref Dictionary<string, string> parameters)
+    public void AddToDictionary(IDictionary<string, string> parameters)
     {
         if (!string.IsNullOrEmpty(UserId))
         {
@@ -412,7 +381,7 @@ public class PhotoSearchOptions
 
         if (TagMode != TagMode.None)
         {
-            parameters.Add("tag_mode", TagMode.ToFlickrString());
+            parameters.Add("tag_mode", TagMode.GetEnumMemberValue());
         }
 
         if (!string.IsNullOrEmpty(MachineTags))
@@ -422,37 +391,32 @@ public class PhotoSearchOptions
 
         if (MachineTagMode != MachineTagMode.None)
         {
-            parameters.Add("machine_tag_mode", MachineTagMode.ToFlickrString());
+            parameters.Add("machine_tag_mode", MachineTagMode.GetEnumMemberValue());
         }
 
         if (MinUploadDate != DateTime.MinValue)
         {
-            parameters.Add("min_upload_date", UtilityMethods.DateToUnixTimestamp(MinUploadDate).ToString());
+            parameters.Add("min_upload_date", MinUploadDate.ToUnixTimestamp());
         }
 
         if (MaxUploadDate != DateTime.MinValue)
         {
-            parameters.Add("max_upload_date", UtilityMethods.DateToUnixTimestamp(MaxUploadDate).ToString());
+            parameters.Add("max_upload_date", MaxUploadDate.ToUnixTimestamp());
         }
 
         if (MinTakenDate != DateTime.MinValue)
         {
-            parameters.Add("min_taken_date", UtilityMethods.DateToMySql(MinTakenDate));
+            parameters.Add("min_taken_date", MinTakenDate.ToMySql());
         }
 
         if (MaxTakenDate != DateTime.MinValue)
         {
-            parameters.Add("max_taken_date", UtilityMethods.DateToMySql(MaxTakenDate));
+            parameters.Add("max_taken_date", MaxTakenDate.ToMySql());
         }
 
         if (Licenses.Count != 0)
         {
-            List<string> licenseArray = new();
-            foreach (LicenseType license in Licenses)
-            {
-                licenseArray.Add(license.ToString("d"));
-            }
-            parameters.Add("license", string.Join(",", licenseArray.ToArray()));
+            parameters.Add("license", string.Join(",", Licenses.Distinct().Select(x => x.GetEnumMemberValue())));
         }
 
         if (PerPage != 0)
@@ -467,12 +431,12 @@ public class PhotoSearchOptions
 
         if (Extras != PhotoSearchExtras.None)
         {
-            parameters.Add("extras", ExtrasString);
+            parameters.Add("extras", Extras.ToFlickrString());
         }
 
         if (SortOrder != PhotoSearchSortOrder.None)
         {
-            parameters.Add("sort", SortOrderString);
+            parameters.Add("sort", SortOrder.ToFlickrString());
         }
 
         if (PrivacyFilter != PrivacyFilter.None)
@@ -485,9 +449,9 @@ public class PhotoSearchOptions
             parameters.Add("bbox", BoundaryBox.ToString());
         }
 
-        if (Accuracy != GeoAccuracy.None)
+        if (BoundaryBox != null && BoundaryBox.IsSet && BoundaryBox.Accuracy != GeoAccuracy.None)
         {
-            parameters.Add("accuracy", Accuracy.ToString("d"));
+            parameters.Add("accuracy", BoundaryBox.Accuracy.ToString("d"));
         }
 
         if (SafeSearch != SafetyLevel.None)
@@ -522,12 +486,12 @@ public class PhotoSearchOptions
 
         if (RadiusUnits != RadiusUnit.None)
         {
-            parameters.Add("radius_units", RadiusUnits == RadiusUnit.Miles ? "mi" : "km");
+            parameters.Add("radius_units", RadiusUnits.GetEnumMemberValue());
         }
 
         if (Contacts != ContactSearch.None)
         {
-            parameters.Add("contacts", Contacts == ContactSearch.AllContacts ? "all" : "ff");
+            parameters.Add("contacts", Contacts.GetEnumMemberValue());
         }
 
         if (WoeId != null)
@@ -557,12 +521,12 @@ public class PhotoSearchOptions
 
         if (MediaType != MediaType.None)
         {
-            parameters.Add("media", MediaType.ToFlickrString());
+            parameters.Add("media", MediaType.GetEnumMemberValue());
         }
 
         if (GeoContext != GeoContext.NotDefined)
         {
-            parameters.Add("geo_context", GeoContext.ToString("d"));
+            parameters.Add("geo_context", GeoContext.GetEnumMemberValue());
         }
 
         if (Faves)
@@ -642,7 +606,7 @@ public class PhotoSearchOptions
 
         if (ColorCodes != null && ColorCodes.Count != 0)
         {
-            parameters.Add("color_codes", ColorCodeString);
+            parameters.Add("color_codes", ColorCodes.ToFlickrString());
         }
 
         if (Styles != null && Styles.Count != 0)

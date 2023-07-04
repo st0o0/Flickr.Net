@@ -9,8 +9,6 @@
 /// </remarks>
 public sealed class MethodNotFoundException : FlickrApiException
 {
-    internal MethodNotFoundException(string message)
-        : base(111, message)
-    {
-    }
+    internal MethodNotFoundException(string message) : base(111, message)
+    { }
 }

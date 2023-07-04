@@ -1,43 +1,49 @@
-﻿namespace Flickr.Net.Core.Enums;
+﻿// namespace Flickr.Net.Core.Enums;
 
-/// <summary>
-/// Used by <see cref="IFlickrPlaces.PlacesForUserAsync(PlaceType, string, string, int, DateTime?,
-/// DateTime?, DateTime?, DateTime?, CancellationToken)"/>.
-/// </summary>
-public enum PlaceType
-{
-    /// <summary>
-    /// No place type selected. Not used by the Flickr API.
-    /// </summary>
-    None = 0,
+// /// <summary>
+// /// Used by <see cref="IFlickrPlaces."
+// /// </summary>
+// public enum PlaceType
+// {
+//     /// <summary>
+//     /// No place type selected. Not used by the Flickr API.
+//     /// </summary>
+//     [EnumMember(Value = "0")]
+//     None = 0,
 
-    /// <summary>
-    /// Locality.
-    /// </summary>
-    Locality = 7,
+//     /// <summary>
+//     /// Locality.
+//     /// </summary>
+//     [EnumMember(Value = "7")]
+//     Locality = 7,
 
-    /// <summary>
-    /// County.
-    /// </summary>
-    County = 9,
+//     /// <summary>
+//     /// County.
+//     /// </summary>
+//     [EnumMember(Value = "9")]
+//     County = 9,
 
-    /// <summary>
-    /// Region.
-    /// </summary>
-    Region = 8,
+//     /// <summary>
+//     /// Region.
+//     /// </summary>
+//     [EnumMember(Value = "8")]
+//     Region = 8,
 
-    /// <summary>
-    /// Country.
-    /// </summary>
-    Country = 12,
+//     /// <summary>
+//     /// Country.
+//     /// </summary>
+//     [EnumMember(Value = "12")]
+//     Country = 12,
 
-    /// <summary>
-    /// Neighbourhood.
-    /// </summary>
-    Neighbourhood = 22,
+//     /// <summary>
+//     /// Neighbourhood.
+//     /// </summary>
+//     [EnumMember(Value = "22")]
+//     Neighbourhood = 22,
 
-    /// <summary>
-    /// Continent.
-    /// </summary>
-    Continent = 29
-}
+//     /// <summary>
+//     /// Continent.
+//     /// </summary>
+//     [EnumMember(Value = "29")]
+//     Continent = 29
+// }

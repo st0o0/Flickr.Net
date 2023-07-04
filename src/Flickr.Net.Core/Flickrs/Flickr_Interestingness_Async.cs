@@ -1,4 +1,4 @@
-﻿using Flickr.Net.Core.SearchOptions;
+﻿using Flickr.Net.Core.Internals.Extensions;
 
 namespace Flickr.Net.Core;
 
@@ -7,7 +7,7 @@ namespace Flickr.Net.Core;
 /// </summary>
 public partial class Flickr : IFlickrInterestingness
 {
-    async Task<PhotoCollection> IFlickrInterestingness.GetListAsync(DateTime? date, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken)
+    async Task<PagedPhotos> IFlickrInterestingness.GetListAsync(DateTime? date, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -34,7 +34,7 @@ public partial class Flickr : IFlickrInterestingness
             parameters.Add("extras", extras.ToFlickrString());
         }
 
-        return await GetResponseAsync<PhotoCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }
 }
 
@@ -54,5 +54,5 @@ public interface IFlickrInterestingness
     /// <param name="page">The page of the results to return.</param>
     /// <param name="perPage">The number of results to return per page.</param>
     /// <param name="cancellationToken"></param>
-    Task<PhotoCollection> GetListAsync(DateTime? date, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken);
+    Task<PagedPhotos> GetListAsync(DateTime? date, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken);
 }

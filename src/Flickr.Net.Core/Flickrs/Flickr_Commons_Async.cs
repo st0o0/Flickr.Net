@@ -5,14 +5,14 @@
 /// </summary>
 public partial class Flickr : IFlickrCommons
 {
-    async Task<InstitutionCollection> IFlickrCommons.GetInstitutionsAsync(CancellationToken cancellationToken)
+    async Task<Institutions> IFlickrCommons.GetInstitutionsAsync(CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
             { "method", "flickr.commons.getInstitutions" }
         };
 
-        return await GetResponseAsync<InstitutionCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<Institutions>(parameters, cancellationToken);
     }
 }
 
@@ -25,5 +25,5 @@ public interface IFlickrCommons
     /// Gets a collection of Flickr Commons institutions.
     /// </summary>
     /// <param name="cancellationToken"></param>
-    Task<InstitutionCollection> GetInstitutionsAsync(CancellationToken cancellationToken = default);
+    Task<Institutions> GetInstitutionsAsync(CancellationToken cancellationToken = default);
 }

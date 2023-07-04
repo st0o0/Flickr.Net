@@ -5,7 +5,7 @@
 /// </summary>
 public partial class Flickr : IFlickrCollections
 {
-    async Task<CollectionInfo> IFlickrCollections.GetInfoAsync(string collectionId, CancellationToken cancellationToken)
+    async Task<Collection> IFlickrCollections.GetInfoAsync(string collectionId, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -15,10 +15,10 @@ public partial class Flickr : IFlickrCollections
             { "collection_id", collectionId }
         };
 
-        return await GetResponseAsync<CollectionInfo>(parameters, cancellationToken);
+        return await GetResponseAsync<Collection>(parameters, cancellationToken);
     }
 
-    async Task<CollectionCollection> IFlickrCollections.GetTreeAsync(string collectionId, string userId, CancellationToken cancellationToken)
+    async Task<Collections> IFlickrCollections.GetTreeAsync(string collectionId, string userId, CancellationToken cancellationToken)
     {
         if (string.IsNullOrEmpty(userId))
         {
@@ -40,7 +40,7 @@ public partial class Flickr : IFlickrCollections
             parameters.Add("user_id", userId);
         }
 
-        return await GetResponseAsync<CollectionCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<Collections>(parameters, cancellationToken);
     }
 }
 
@@ -54,7 +54,7 @@ public interface IFlickrCollections
     /// </summary>
     /// <param name="collectionId">The ID for the collection to return.</param>
     /// <param name="cancellationToken"></param>
-    Task<CollectionInfo> GetInfoAsync(string collectionId, CancellationToken cancellationToken = default);
+    Task<Collection> GetInfoAsync(string collectionId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets a tree of collection.
@@ -66,5 +66,5 @@ public interface IFlickrCollections
     /// The ID of the user to fetch the tree for, or null if using the authenticated user.
     /// </param>
     /// <param name="cancellationToken"></param>
-    Task<CollectionCollection> GetTreeAsync(string collectionId = null, string userId = null, CancellationToken cancellationToken = default);
+    Task<Collections> GetTreeAsync(string collectionId = null, string userId = null, CancellationToken cancellationToken = default);
 }

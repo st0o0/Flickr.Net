@@ -6,8 +6,6 @@
 /// <remarks>The FlickrNet library only uses one format, so you should not experience this error.</remarks>
 public sealed class FormatNotFoundException : FlickrApiException
 {
-    internal FormatNotFoundException(string message)
-        : base(111, message)
-    {
-    }
+    internal FormatNotFoundException(string message) : base(111, message)
+    { }
 }

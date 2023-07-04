@@ -1,11 +1,9 @@
-﻿using System.Text;
-
-namespace Flickr.Net.Core.Internals;
+﻿namespace Flickr.Net.Core.Internals;
 
 /// <summary>
 /// Class containing details of the OAUth request token returned by Flickr.
 /// </summary>
-public class OAuthRequestToken
+public record OAuthRequestToken
 {
     /// <summary>
     /// The request token string.
@@ -22,14 +20,14 @@ public class OAuthRequestToken
     /// </summary>
     /// <param name="response">A URL parameter encoded string, e.g. "oauth_token=ABC&amp;oauth_token_secret=DEF".</param>
     /// <returns></returns>
-    public static OAuthRequestToken ParseResponse(byte[] response)
+    public static OAuthRequestToken ParseResponse(string response)
     {
-        Dictionary<string, string> parameters = UtilityMethods.StringToDictionary(Encoding.UTF8.GetString(response));
-        OAuthRequestToken token = new()
+        var parameters = UtilityMethods.StringToDictionary(response);
+
+        return new()
         {
             Token = parameters["oauth_token"],
             TokenSecret = parameters["oauth_token_secret"]
         };
-        return token;
     }
 }

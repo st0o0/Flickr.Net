@@ -1,4 +1,6 @@
-﻿namespace Flickr.Net.Core;
+﻿using Flickr.Net.Core.Internals.Extensions;
+
+namespace Flickr.Net.Core;
 
 /// <summary>
 /// The flickr.
@@ -14,8 +16,8 @@ public partial class Flickr : IFlickrPhotosComments
             { "comment_text", commentText }
         };
 
-        UnknownResponse response = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
-        return response.GetAttributeValue("*", "id");
+        var response = await GetResponseAsync<CommentUnknownResponse>(parameters, cancellationToken);
+        return response.GetValueOrDefault("id");
     }
 
     async Task IFlickrPhotosComments.DeleteCommentAsync(string commentId, CancellationToken cancellationToken)
@@ -26,7 +28,7 @@ public partial class Flickr : IFlickrPhotosComments
             { "comment_id", commentId }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
     async Task IFlickrPhotosComments.EditCommentAsync(string commentId, string commentText, CancellationToken cancellationToken)
@@ -38,10 +40,10 @@ public partial class Flickr : IFlickrPhotosComments
             { "comment_text", commentText }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
-    async Task<PhotoCommentCollection> IFlickrPhotosComments.GetListAsync(string photoId, CancellationToken cancellationToken)
+    async Task<PhotoComments> IFlickrPhotosComments.GetListAsync(string photoId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -49,10 +51,10 @@ public partial class Flickr : IFlickrPhotosComments
             { "photo_id", photoId }
         };
 
-        return await GetResponseAsync<PhotoCommentCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<PhotoComments>(parameters, cancellationToken);
     }
 
-    async Task<PhotoCollection> IFlickrPhotosComments.GetRecentForContactsAsync(DateTime? dateLastComment, string[] contactsFilter, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken)
+    async Task<PagedPhotos> IFlickrPhotosComments.GetRecentForContactsAsync(DateTime? dateLastComment, string[] contactsFilter, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -86,7 +88,7 @@ public partial class Flickr : IFlickrPhotosComments
             parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
 
-        return await GetResponseAsync<PhotoCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }
 }
 
@@ -123,7 +125,7 @@ public interface IFlickrPhotosComments
     /// </summary>
     /// <param name="photoId">The id of the photo to return the comments for.</param>
     /// <param name="cancellationToken"></param>
-    Task<PhotoCommentCollection> GetListAsync(string photoId, CancellationToken cancellationToken = default);
+    Task<PhotoComments> GetListAsync(string photoId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Return the list of photos belonging to your contacts that have been commented on recently.
@@ -142,5 +144,5 @@ public interface IFlickrPhotosComments
     /// maximum allowed value is 500.
     /// </param>
     /// <param name="cancellationToken"></param>
-    Task<PhotoCollection> GetRecentForContactsAsync(DateTime? dateLastComment = null, string[] contactsFilter = null, PhotoSearchExtras extras = PhotoSearchExtras.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<PagedPhotos> GetRecentForContactsAsync(DateTime? dateLastComment = null, string[] contactsFilter = null, PhotoSearchExtras extras = PhotoSearchExtras.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 }

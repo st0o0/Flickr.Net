@@ -5,7 +5,7 @@
 /// </summary>
 public partial class Flickr : IFlickrActivity
 {
-    async Task<ActivityItemCollection> IFlickrActivity.UserCommentsAsync(int page, int perPage, CancellationToken cancellationToken)
+    async Task<Items> IFlickrActivity.UserCommentsAsync(int page, int perPage, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -24,10 +24,10 @@ public partial class Flickr : IFlickrActivity
             parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
 
-        return await GetResponseAsync<ActivityItemCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<Items>(parameters, cancellationToken);
     }
 
-    async Task<ActivityItemCollection> IFlickrActivity.UserPhotosAsync(int timePeriod, TimeType timeType, int page, int perPage, CancellationToken cancellationToken)
+    async Task<Items> IFlickrActivity.UserPhotosAsync(int timePeriod, TimeType timeType, int page, int perPage, CancellationToken cancellationToken)
     {
         if (timePeriod == 0)
         {
@@ -35,7 +35,7 @@ public partial class Flickr : IFlickrActivity
         }
 
         ArgumentNullException.ThrowIfNull(timeType, nameof(timeType));
-        var timeframe = timePeriod + timeType == TimeType.Days ? "d" : "h";
+        var timeframe = timePeriod + timeType.GetEnumMemberValue();
 
         CheckRequiresAuthentication();
 
@@ -59,7 +59,7 @@ public partial class Flickr : IFlickrActivity
             parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
 
-        return await GetResponseAsync<ActivityItemCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<Items>(parameters, cancellationToken);
     }
 }
 
@@ -75,7 +75,7 @@ public interface IFlickrActivity
     /// <param name="page">The page of the activity to return.</param>
     /// <param name="perPage">The number of activities to return per page.</param>
     /// <param name="cancellationToken"></param>
-    Task<ActivityItemCollection> UserCommentsAsync(int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<Items> UserCommentsAsync(int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Returns a list of recent activity on photos belonging to the calling user.
@@ -86,5 +86,5 @@ public interface IFlickrActivity
     /// <param name="page">The page numver of the activity to return.</param>
     /// <param name="perPage">The number of activities to return per page.</param>
     /// <param name="cancellationToken"></param>
-    Task<ActivityItemCollection> UserPhotosAsync(int timePeriod, TimeType timeType = TimeType.Hours, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<Items> UserPhotosAsync(int timePeriod, TimeType timeType = TimeType.Hours, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 }

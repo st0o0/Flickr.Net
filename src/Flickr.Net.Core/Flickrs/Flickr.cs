@@ -1,7 +1,6 @@
 using System.Text;
 using Flickr.Net.Core.Configuration;
 using Flickr.Net.Core.Exceptions;
-using Flickr.Net.Core.Exceptions.Handlers;
 using Flickr.Net.Core.Internals.Caching;
 using Flickr.Net.Core.Internals.HttpContents;
 using Flickr.Net.Core.Settings;
@@ -160,11 +159,6 @@ public partial class Flickr
     public IFlickrPhotosets Photosets => this;
 
     /// <summary>
-    /// property for all place functions
-    /// </summary>
-    public IFlickrPlaces Places => this;
-
-    /// <summary>
     /// property for all pref functions
     /// </summary>
     public IFlickrPrefs Prefs => this;
@@ -235,7 +229,7 @@ public partial class Flickr
     /// Returns the raw XML returned from the last response. Only set it the response was not
     /// returned from cache.
     /// </summary>
-    public byte[] LastResponse { get; private set; }
+    public string LastResponse { get; private set; }
 
     /// <summary>
     /// Returns the last URL requested. Includes API signing.
@@ -287,13 +281,13 @@ public partial class Flickr
     {
         if (includeSignature)
         {
-            string signature = CalculateAuthSignature(parameters);
+            var signature = CalculateAuthSignature(parameters);
             parameters.Add("api_sig", signature);
         }
 
         var url = new StringBuilder();
         url.Append('?');
-        foreach (KeyValuePair<string, string> pair in parameters)
+        foreach (var pair in parameters)
         {
             var escapedValue = UtilityMethods.EscapeDataString(pair.Value ?? "");
             url.AppendFormat(System.Globalization.CultureInfo.InvariantCulture, "{0}={1}&", pair.Key, escapedValue);
@@ -324,7 +318,7 @@ public partial class Flickr
             { new StreamedContent(imageStream, progress, cancellationToken), "photo", Path.GetFileName(fileName) }
         };
 
-        foreach (KeyValuePair<string, string> i in parameters)
+        foreach (var i in parameters)
         {
             if (i.Key.StartsWith("oauth", StringComparison.Ordinal))
             {
@@ -350,39 +344,6 @@ public partial class Flickr
 
 internal static class FlickrExtensions
 {
-    public static void Load(this IFlickrParsable item, byte[] bytes)
-    {
-        try
-        {
-            using var ms = new MemoryStream(bytes);
-            using var reader = XmlReader.Create(ms, new XmlReaderSettings
-            {
-                IgnoreWhitespace = true
-            });
-
-            if (!reader.ReadToDescendant("rsp"))
-            {
-                throw new Exception("Unable to find response element 'rsp' in Flickr response");
-            }
-            while (reader.MoveToNextAttribute())
-            {
-                if (reader.LocalName == "stat" && reader.Value == "fail")
-                {
-                    throw ExceptionHandler.CreateResponseException(reader);
-                }
-            }
-
-            reader.MoveToElement();
-            reader.Read();
-
-            item.Load(reader);
-        }
-        catch (XmlException)
-        {
-            throw;
-        }
-    }
-
     /// <summary>
     /// Whether a given character is allowed by XML 1.0.
     /// </summary>

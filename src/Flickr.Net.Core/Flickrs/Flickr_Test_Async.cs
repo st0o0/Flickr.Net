@@ -5,14 +5,14 @@
 /// </summary>
 public partial class Flickr : IFlickrTest
 {
-    async Task<FoundUser> IFlickrTest.LoginAsync(CancellationToken cancellationToken)
+    async Task<User> IFlickrTest.LoginAsync(CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
             { "method", "flickr.test.login" }
         };
 
-        return await GetResponseAsync<FoundUser>(parameters, cancellationToken);
+        return await GetResponseAsync<User>(parameters, cancellationToken);
     }
 
     async Task IFlickrTest.NullAsync(CancellationToken cancellationToken)
@@ -22,7 +22,7 @@ public partial class Flickr : IFlickrTest
             { "method", "flickr.test.null" }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
     async Task<EchoResponseDictionary> IFlickrTest.EchoAsync(Dictionary<string, string> parameters, CancellationToken cancellationToken)
@@ -41,7 +41,7 @@ public interface IFlickrTest
     /// Test the logged in state of the current Filckr object.
     /// </summary>
     /// <param name="cancellationToken"></param>
-    Task<FoundUser> LoginAsync(CancellationToken cancellationToken = default);
+    Task<User> LoginAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Null test.

@@ -8,8 +8,6 @@
 /// </remarks>
 public class UserNotFoundException : FlickrApiException
 {
-    internal UserNotFoundException(int code, string message)
-        : base(code, message)
-    {
-    }
+    internal UserNotFoundException(int code, string message) : base(code, message)
+    { }
 }

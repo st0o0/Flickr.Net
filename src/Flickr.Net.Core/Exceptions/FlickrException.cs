@@ -9,16 +9,14 @@ public class FlickrException : Exception
     /// Initializes a new instance of the <see cref="FlickrException"/> class.
     /// </summary>
     public FlickrException()
-    {
-    }
+    { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="FlickrException"/> class with a specified error message.
     /// </summary>
     /// <param name="message"></param>
     public FlickrException(string message) : base(message)
-    {
-    }
+    { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="FlickrException"/> class with a specified error
@@ -27,6 +25,5 @@ public class FlickrException : Exception
     /// <param name="message"></param>
     /// <param name="innerException"></param>
     public FlickrException(string message, Exception innerException) : base(message, innerException)
-    {
-    }
+    { }
 }

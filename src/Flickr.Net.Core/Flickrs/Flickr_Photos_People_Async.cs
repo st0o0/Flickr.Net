@@ -36,7 +36,7 @@ public partial class Flickr : IFlickrPhotosPeople
             parameters.Add("person_h", personHeight.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
     async Task IFlickrPhotosPeople.DeleteAsync(string photoId, string userId, CancellationToken cancellationToken)
@@ -50,7 +50,7 @@ public partial class Flickr : IFlickrPhotosPeople
             { "user_id", userId }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
     async Task IFlickrPhotosPeople.DeleteCoordsAsync(string photoId, string userId, CancellationToken cancellationToken)
@@ -64,7 +64,7 @@ public partial class Flickr : IFlickrPhotosPeople
             { "user_id", userId }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
     async Task IFlickrPhotosPeople.EditCoordsAsync(string photoId, string userId, int personX, int personY, int personWidth, int personHeight, CancellationToken cancellationToken)
@@ -82,10 +82,10 @@ public partial class Flickr : IFlickrPhotosPeople
             { "person_h", personHeight.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
-    async Task<PhotoPersonCollection> IFlickrPhotosPeople.GetListAsync(string photoId, CancellationToken cancellationToken)
+    async Task<PeoplePersons> IFlickrPhotosPeople.GetListAsync(string photoId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -93,7 +93,7 @@ public partial class Flickr : IFlickrPhotosPeople
             { "photo_id", photoId }
         };
 
-        return await GetResponseAsync<PhotoPersonCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<PeoplePersons>(parameters, cancellationToken);
     }
 }
 
@@ -153,5 +153,5 @@ public interface IFlickrPhotosPeople
     /// <param name="photoId">The id of the photo to get a list of people for.</param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<PhotoPersonCollection> GetListAsync(string photoId, CancellationToken cancellationToken = default);
+    Task<PeoplePersons> GetListAsync(string photoId, CancellationToken cancellationToken = default);
 }

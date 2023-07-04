@@ -29,7 +29,7 @@ internal static class StreamExtensions
             throw new ArgumentOutOfRangeException(nameof(bufferSize));
         }
 
-        byte[] buffer = new byte[bufferSize];
+        var buffer = new byte[bufferSize];
         double totalBytesRead = 0;
         int bytesRead;
         while ((bytesRead = source.Read(buffer, 0, buffer.Length)) != 0)

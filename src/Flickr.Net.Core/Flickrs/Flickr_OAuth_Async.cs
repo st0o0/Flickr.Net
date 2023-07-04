@@ -9,7 +9,7 @@ namespace Flickr.Net.Core;
 /// </summary>
 public partial class Flickr : IFlickrOAuth
 {
-    async Task<Auth> IFlickrOAuth.CheckTokenAsync(CancellationToken cancellationToken)
+    async Task<OAuth> IFlickrOAuth.CheckTokenAsync(CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -18,62 +18,61 @@ public partial class Flickr : IFlickrOAuth
             { "method", "flickr.auth.oauth.checkToken" }
         };
 
-        return await GetResponseAsync<Auth>(parameters, cancellationToken);
+        return await GetResponseAsync<OAuth>(parameters, cancellationToken);
     }
 
     async Task<OAuthRequestToken> IFlickrOAuth.GetRequestTokenAsync(string callbackUrl, CancellationToken cancellationToken)
     {
         CheckApiKey();
 
-        string url = "https://www.flickr.com/services/oauth/request_token";
+        var url = "https://www.flickr.com/services/oauth/request_token";
 
-        Dictionary<string, string> parameters = OAuthGetBasicParameters();
+        var parameters = OAuthGetBasicParameters();
 
         parameters.Add("oauth_callback", callbackUrl);
 
-        string sig = ((IFlickrOAuth)this).CalculateSignature("POST", url, parameters, null);
+        var sig = ((IFlickrOAuth)this).CalculateSignature("POST", url, parameters, null);
 
         parameters.Add("oauth_signature", sig);
 
-        byte[] result = await FlickrResponder.GetDataResponseAsync(this, url, parameters, cancellationToken);
+        var result = await FlickrResponder.GetDataResponseAsync(this, url, parameters, cancellationToken);
 
         return OAuthRequestToken.ParseResponse(result);
     }
 
-    async Task<OAuthRequestToken> IFlickrOAuth.GetAccessTokenAsync(OAuthRequestToken requestToken, string verifier, CancellationToken cancellationToken)
+    async Task<OAuthAccessToken> IFlickrOAuth.GetAccessTokenAsync(OAuthRequestToken requestToken, string verifier, CancellationToken cancellationToken)
     {
         CheckApiKey();
 
-        string url = "https://www.flickr.com/services/oauth/access_token";
+        var url = "https://www.flickr.com/services/oauth/access_token";
 
-        Dictionary<string, string> parameters = OAuthGetBasicParameters();
+        var parameters = OAuthGetBasicParameters();
 
         parameters.Add("oauth_verifier", verifier);
         parameters.Add("oauth_token", requestToken.TokenSecret);
 
-        string sig = ((IFlickrOAuth)this).CalculateSignature("POST", url, parameters, requestToken.TokenSecret);
+        var sig = ((IFlickrOAuth)this).CalculateSignature("POST", url, parameters, requestToken.TokenSecret);
 
         parameters.Add("oauth_signature", sig);
 
-        byte[] result = await FlickrResponder.GetDataResponseAsync(this, url, parameters, cancellationToken);
+        var result = await FlickrResponder.GetDataResponseAsync(this, url, parameters, cancellationToken);
 
-        return OAuthRequestToken.ParseResponse(result);
+        return OAuthAccessToken.ParseResponse(result);
     }
 
     string IFlickrOAuth.CalculateSignature(string method, string url, Dictionary<string, string> parameters, string tokenSecret)
     {
-        string baseString = "";
-        string key = FlickrSettings.ApiSecret + "&" + tokenSecret;
-        byte[] keyBytes = Encoding.UTF8.GetBytes(key);
+        var key = FlickrSettings.ApiSecret + "&" + tokenSecret;
+        var keyBytes = Encoding.UTF8.GetBytes(key);
 
         SortedList<string, string> sorted = new();
-        foreach (KeyValuePair<string, string> pair in parameters)
+        foreach (var pair in parameters)
         {
             sorted.Add(pair.Key, pair.Value);
         }
 
         StringBuilder sb = new();
-        foreach (KeyValuePair<string, string> pair in sorted)
+        foreach (var pair in sorted)
         {
             sb.Append(pair.Key);
             sb.Append('=');
@@ -83,18 +82,18 @@ public partial class Flickr : IFlickrOAuth
 
         sb.Remove(sb.Length - 1, 1);
 
-        baseString = method + "&" + UtilityMethods.EscapeOAuthString(url) + "&" + UtilityMethods.EscapeOAuthString(sb.ToString());
+        var baseString = method + "&" + UtilityMethods.EscapeOAuthString(url) + "&" + UtilityMethods.EscapeOAuthString(sb.ToString());
 
         HMACSHA1 sha1 = new(keyBytes);
 
-        byte[] hashBytes = sha1.ComputeHash(Encoding.UTF8.GetBytes(baseString));
+        var hashBytes = sha1.ComputeHash(Encoding.UTF8.GetBytes(baseString));
 
         return Convert.ToBase64String(hashBytes);
     }
 
     string IFlickrOAuth.CalculateAuthorizationUrl(string requestToken, AuthLevel perms, bool mobile)
     {
-        string permsString = (perms == AuthLevel.None) ? "" : "&perms=" + perms.ToFlickrString();
+        var permsString = (perms == AuthLevel.None) ? "" : "&perms=" + perms.GetEnumMemberValue();
 
         return "https://" + (mobile ? "m" : "www") + ".flickr.com/services/oauth/authorize?oauth_token=" + requestToken + permsString;
     }
@@ -106,8 +105,8 @@ public partial class Flickr : IFlickrOAuth
     /// <param name="parameters">Dictionary to be populated with the OAuth parameters.</param>
     private void OAuthGetBasicParameters(Dictionary<string, string> parameters)
     {
-        Dictionary<string, string> oAuthParameters = OAuthGetBasicParameters();
-        foreach (KeyValuePair<string, string> k in oAuthParameters)
+        var oAuthParameters = OAuthGetBasicParameters();
+        foreach (var k in oAuthParameters)
         {
             parameters.Add(k.Key, k.Value);
         }
@@ -119,8 +118,8 @@ public partial class Flickr : IFlickrOAuth
     /// <returns></returns>
     private Dictionary<string, string> OAuthGetBasicParameters()
     {
-        string oauthtimestamp = UtilityMethods.DateToUnixTimestamp(DateTime.UtcNow);
-        string oauthnonce = Guid.NewGuid().ToString("N");
+        var oauthtimestamp = UtilityMethods.DateToUnixTimestamp(DateTime.UtcNow);
+        var oauthnonce = Guid.NewGuid().ToString("N");
 
         Dictionary<string, string> parameters = new()
         {
@@ -144,7 +143,7 @@ public interface IFlickrOAuth
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<Auth> CheckTokenAsync(CancellationToken cancellationToken = default);
+    Task<OAuth> CheckTokenAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get an <see cref="OAuthRequestToken"/> for the given callback URL.
@@ -160,7 +159,7 @@ public interface IFlickrOAuth
     /// <param name="requestToken"></param>
     /// <param name="verifier"></param>
     /// <param name="cancellationToken"></param>
-    Task<OAuthRequestToken> GetAccessTokenAsync(OAuthRequestToken requestToken, string verifier, CancellationToken cancellationToken = default);
+    Task<OAuthAccessToken> GetAccessTokenAsync(OAuthRequestToken requestToken, string verifier, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Calculates the signature for an OAuth call.

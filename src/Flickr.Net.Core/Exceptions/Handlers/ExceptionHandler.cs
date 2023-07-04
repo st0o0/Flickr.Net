@@ -1,4 +1,6 @@
-﻿namespace Flickr.Net.Core.Exceptions.Handlers;
+﻿using Flickr.Net.Core.Flickrs.Results;
+
+namespace Flickr.Net.Core.Exceptions.Handlers;
 
 /// <summary>
 /// A handler that is used to generate an exception from the response sent back by Flickr.
@@ -8,111 +10,33 @@ public static class ExceptionHandler
     /// <summary>
     /// Creates a <see cref="FlickrApiException"/> from the response sent back from Flickr.
     /// </summary>
-    /// <param name="reader">The <see cref="XmlReader"/> containing the response from Flickr.</param>
-    /// <returns>
-    /// The <see cref="FlickrApiException"/> created from the information returned by Flickr.
-    /// </returns>
-    public static Exception CreateResponseException(XmlReader reader)
+    /// The
+    /// <see cref="FlickrApiException"/>
+    /// created from the information returned by Flickr.
+    /// <returns></returns>
+    public static Exception CreateResponseException(FlickrResult result) => CreateException(result.ErrorCode, result.ErrorMessage);
+
+    private static FlickrApiException CreateException(int code, string message) => code switch
     {
-        if (reader == null)
-        {
-            throw new ArgumentNullException(nameof(reader));
-        }
+        96 => new InvalidSignatureException(message),
+        97 => new MissingSignatureException(message),
+        98 => new LoginFailedInvalidTokenException(message),
+        99 => new UserNotLoggedInInsufficientPermissionsException(message),
+        100 => new InvalidApiKeyException(message),
+        105 or 0 => new ServiceUnavailableException(message),
+        111 => new FormatNotFoundException(message),
+        112 => new MethodNotFoundException(message),
+        116 => new BadUrlFoundException(message),
+        114 or 115 => new FlickrApiException(code, message),
+        _ => CreateExceptionFromMessage(code, message),
+    };
 
-        reader.MoveToElement();
-
-        if (!reader.ReadToDescendant("err"))
-        {
-            throw new XmlException("No error element found in XML");
-        }
-
-        int code = 0;
-        string msg = null;
-
-        while (reader.MoveToNextAttribute())
-        {
-            if (reader.LocalName == "code")
-            {
-                try
-                {
-                    code = int.Parse(reader.Value, System.Globalization.NumberStyles.Any, System.Globalization.NumberFormatInfo.InvariantInfo);
-                }
-                catch (FormatException)
-                {
-                    throw new FlickrException("Invalid value found in code attribute. Value '" + code + "' is not an integer");
-                }
-                continue;
-            }
-            if (reader.LocalName == "msg")
-            {
-                msg = reader.Value;
-                continue;
-            }
-        }
-
-        return CreateException(code, msg);
-    }
-
-    private static FlickrApiException CreateException(int code, string message)
+    private static FlickrApiException CreateExceptionFromMessage(int code, string message) => message switch
     {
-        switch (code)
-        {
-            case 96:
-                return new InvalidSignatureException(message);
-
-            case 97:
-                return new MissingSignatureException(message);
-
-            case 98:
-                return new LoginFailedInvalidTokenException(message);
-
-            case 99:
-                return new UserNotLoggedInInsufficientPermissionsException(message);
-
-            case 100:
-                return new InvalidApiKeyException(message);
-
-            case 105:
-                return new ServiceUnavailableException(message);
-
-            case 111:
-                return new FormatNotFoundException(message);
-
-            case 112:
-                return new MethodNotFoundException(message);
-
-            case 116:
-                return new BadUrlFoundException(message);
-
-            case 114: // Soap Error
-            case 115: // XML-RPC error
-                return new FlickrApiException(code, message);
-
-            default:
-                return CreateExceptionFromMessage(code, message);
-        }
-    }
-
-    private static FlickrApiException CreateExceptionFromMessage(int code, string message)
-    {
-        switch (message)
-        {
-            case "Photo not found":
-            case "Photo not found.":
-                return new PhotoNotFoundException(code, message);
-
-            case "Photoset not found":
-            case "Photoset not found.":
-                return new PhotosetNotFoundException(code, message);
-
-            case "Permission Denied":
-                return new PermissionDeniedException(code, message);
-
-            case "User not found":
-            case "User not found.":
-                return new UserNotFoundException(code, message);
-        }
-
-        return new FlickrApiException(code, message);
-    }
+        "Photo not found" or "Photo not found." => new PhotoNotFoundException(code, message),
+        "Photoset not found" or "Photoset not found." => new PhotosetNotFoundException(code, message),
+        "Permission Denied" => new PermissionDeniedException(code, message),
+        "User not found" or "User not found." => new UserNotFoundException(code, message),
+        _ or "" => new FlickrApiException(code, message)
+    };
 }

@@ -3,7 +3,6 @@ namespace Flickr.Net.Core.Exceptions;
 /// <summary>
 /// Exception thrown when the Flickr API returned a specifi error code.
 /// </summary>
-[Serializable]
 public class FlickrApiException : FlickrException
 {
     /// <summary>
@@ -24,20 +23,16 @@ public class FlickrApiException : FlickrException
     /// <summary>
     /// Initializes a new instance of the <see cref="FlickrApiException"/> class.
     /// </summary>
-    public FlickrApiException()
-        : base()
-    {
-    }
+    public FlickrApiException() : base()
+    { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="FlickrApiException"/> class with a specified
     /// error message.
     /// </summary>
     /// <param name="message"></param>
-    public FlickrApiException(string message)
-        : base(message)
-    {
-    }
+    public FlickrApiException(string message) : base(message)
+    { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="FlickrApiException"/> class with a specified
@@ -45,10 +40,8 @@ public class FlickrApiException : FlickrException
     /// </summary>
     /// <param name="message"></param>
     /// <param name="innerException"></param>
-    public FlickrApiException(string message, Exception innerException)
-        : base(message, innerException)
-    {
-    }
+    public FlickrApiException(string message, Exception innerException) : base(message, innerException)
+    { }
 
     /// <summary>
     /// Get the code of the Flickr error.
@@ -63,11 +56,5 @@ public class FlickrApiException : FlickrException
     /// <summary>
     /// Overrides the message to return custom error message.
     /// </summary>
-    public override string Message
-    {
-        get
-        {
-            return OriginalMessage + " (" + Code + ")";
-        }
-    }
+    public override string Message => OriginalMessage + " (" + Code + ")";
 }
