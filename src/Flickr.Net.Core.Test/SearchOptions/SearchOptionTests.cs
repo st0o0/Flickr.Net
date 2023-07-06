@@ -1,5 +1,6 @@
 ﻿using Flickr.Net.Core.Enums;
 using Flickr.Net.Core.Internals;
+using Flickr.Net.Core.Internals.Extensions;
 
 namespace Flickr.Net.Core.Test.SearchOptions;
 
@@ -23,8 +24,7 @@ public class SearchOptionTests
             SortOrder = PhotoSearchSortOrder.Relevance
         };
 
-        var result = new Dictionary<string, string>();
-        options.AddToDictionary(result);
+        var result = options.ToDictionary();
 
         Assert.NotEmpty(result["min_uploaded_date"]);
         Assert.Equal(dateTimeNow.ToUnixTimestamp(), result["min_uploaded_date"]);
@@ -59,8 +59,7 @@ public class SearchOptionTests
             SortOrder = PhotoSearchSortOrder.Relevance
         };
 
-        var result = new Dictionary<string, string>();
-        options.AddToDictionary(result);
+        var result = options.ToDictionary();
 
         Assert.NotEmpty(result["min_upload_date"]);
         Assert.Equal(dateTimeNow.ToUnixTimestamp(), result["min_upload_date"]);

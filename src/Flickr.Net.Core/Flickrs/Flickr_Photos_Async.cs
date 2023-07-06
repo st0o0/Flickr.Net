@@ -244,8 +244,9 @@ public partial class Flickr : IFlickrPhotos
             { "method", "flickr.photos.getNotInSet" }
         };
 
-        options.AddToDictionary(parameters);
-        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
+        var result = parameters.Concat(options.ToDictionary()).ToDictionary(e => e.Key, e => e.Value);
+
+        return await GetResponseAsync<PagedPhotos>(result, cancellationToken);
     }
 
     async Task<Perms> IFlickrPhotos.GetPermsAsync(string photoId, CancellationToken cancellationToken)
@@ -273,30 +274,15 @@ public partial class Flickr : IFlickrPhotos
             { "method", "flickr.photos.getPopular" }
         };
 
-        if (userId != null)
-        {
-            parameters.Add("user_id", userId);
-        }
+       parameters.AppendIf("user_id", userId, x => !string.IsNullOrEmpty(x), x => x);
 
-        if (sort != PopularSorting.None)
-        {
-            parameters.Add("sort", sort.GetEnumMemberValue());
-        }
+       parameters.AppendIf("sort", sort, x => x != PopularSorting.None, x => x.GetEnumMemberValue());
 
-        if (extras != PhotoSearchExtras.None)
-        {
-            parameters.Add("extras", extras.ToFlickrString());
-        }
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("extras", extras, x => x != PhotoSearchExtras.None, x => x.ToFlickrString());
 
         return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }
@@ -308,20 +294,11 @@ public partial class Flickr : IFlickrPhotos
             { "method", "flickr.photos.getRecent" },
         };
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (extras != PhotoSearchExtras.None)
-        {
-            parameters.Add("extras", extras.ToFlickrString());
-        }
+        parameters.AppendIf("extras", extras, x => x != PhotoSearchExtras.None, x => x.ToFlickrString());
 
         return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }
@@ -344,8 +321,9 @@ public partial class Flickr : IFlickrPhotos
             { "method", "flickr.photos.getUntagged" }
         };
 
-        options.AddToDictionary(parameters);
-        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
+        var result = parameters.Concat(options.ToDictionary()).ToDictionary(e => e.Key, e => e.Value);
+
+        return await GetResponseAsync<PagedPhotos>(result, cancellationToken);
     }
 
     async Task<PagedPhotos> IFlickrPhotos.GetWithoutGeoDataAsync(PartialSearchOptions options, CancellationToken cancellationToken)
@@ -354,9 +332,10 @@ public partial class Flickr : IFlickrPhotos
         {
             { "method", "flickr.photos.getWithoutGeoData" }
         };
-        options.AddToDictionary(parameters);
 
-        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
+        var result = parameters.Concat(options.ToDictionary()).ToDictionary(e => e.Key, e => e.Value);
+
+        return await GetResponseAsync<PagedPhotos>(result, cancellationToken);
     }
 
     async Task<PagedPhotos> IFlickrPhotos.GetWithGeoDataAsync(PartialSearchOptions options, CancellationToken cancellationToken)
@@ -366,9 +345,9 @@ public partial class Flickr : IFlickrPhotos
             { "method", "flickr.photos.getWithGeoData" }
         };
 
-        options.AddToDictionary(parameters);
+        var result = parameters.Concat(options.ToDictionary()).ToDictionary(e => e.Key, e => e.Value);
 
-        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
+        return await GetResponseAsync<PagedPhotos>(result, cancellationToken);
     }
 
     async Task<PagedPhotos> IFlickrPhotos.RecentlyUpdatedAsync(DateTime minDate, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken)
@@ -381,20 +360,11 @@ public partial class Flickr : IFlickrPhotos
             { "min_date", UtilityMethods.DateToUnixTimestamp(minDate) }
         };
 
-        if (extras != PhotoSearchExtras.None)
-        {
-            parameters.Add("extras", extras.ToFlickrString());
-        }
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("extras", extras, x => x != PhotoSearchExtras.None, x => x.ToFlickrString());
 
         return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }
@@ -417,9 +387,9 @@ public partial class Flickr : IFlickrPhotos
             { "method", "flickr.photos.search" }
         };
 
-        options.AddToDictionary(parameters);
+        var result = parameters.Concat(options.ToDictionary()).ToDictionary(e => e.Key, e => e.Value);
 
-        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
+        return await GetResponseAsync<PagedPhotos>(result, cancellationToken);
     }
 
     async Task IFlickrPhotos.SetContentTypeAsync(string photoId, ContentType contentType, CancellationToken cancellationToken)
@@ -444,16 +414,11 @@ public partial class Flickr : IFlickrPhotos
             { "photo_id", photoId }
         };
 
-        if (datePosted.HasValue && datePosted != DateTime.MinValue)
-        {
-            parameters.Add("date_posted", UtilityMethods.DateToUnixTimestamp(datePosted.Value).ToString());
-        }
+        parameters.AppendIf("date_posted", datePosted, x => x.HasValue && x != DateTime.MinValue, x => x.Value.ToUnixTimestamp());
 
-        if (dateTaken.HasValue && dateTaken != DateTime.MinValue)
-        {
-            parameters.Add("date_taken", dateTaken.Value.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.DateTimeFormatInfo.InvariantInfo));
-            parameters.Add("date_taken_granularity", granularity.ToString("d"));
-        }
+        parameters.AppendIf("date_taken", dateTaken, x => x.HasValue && x != DateTime.MinValue, x => x.Value.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.DateTimeFormatInfo.InvariantInfo));
+
+        parameters.AppendIf("date_taken_granularity", granularity, _ => dateTaken.HasValue && dateTaken != DateTime.MinValue, x => x.ToString("d"));
 
         await GetResponseAsync(parameters, cancellationToken);
     }
@@ -466,15 +431,9 @@ public partial class Flickr : IFlickrPhotos
             { "photo_id", photoId },
         };
 
-        if (!string.IsNullOrEmpty(title))
-        {
-            parameters.Add("title", title);
-        }
+        parameters.AppendIf("title", title, x => !string.IsNullOrEmpty(x), x => x);
 
-        if (!string.IsNullOrEmpty(description))
-        {
-            parameters.Add("description", description);
-        }
+        parameters.AppendIf("description", description, x => !string.IsNullOrEmpty(x), x => x);
 
         await GetResponseAsync(parameters, cancellationToken);
     }
@@ -490,15 +449,9 @@ public partial class Flickr : IFlickrPhotos
             { "is_family", (isFamily ? "1" : "0") }
         };
 
-        if (permComment.HasValue)
-        {
-            parameters.Add("perm_comment", permComment.Value.ToString("d"));
-        }
+        parameters.AppendIf("perm_comment", permComment, x => x.HasValue, x => x.Value.ToString("d"));
 
-        if (permAddMeta.HasValue)
-        {
-            parameters.Add("perm_addmeta", permAddMeta.Value.ToString("d"));
-        }
+        parameters.AppendIf("perm_addmeta", permAddMeta, x => x.HasValue, x => x.Value.ToString("d"));
 
         await GetResponseAsync(parameters, cancellationToken);
     }

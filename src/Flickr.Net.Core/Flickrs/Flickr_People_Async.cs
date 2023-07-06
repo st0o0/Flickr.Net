@@ -76,55 +76,25 @@ public partial class Flickr : IFlickrPeople
             { "user_id", userId ?? "me" }
         };
 
-        if (safeSearch != SafetyLevel.None)
-        {
-            parameters.Add("safe_search", safeSearch.ToString("d"));
-        }
+        parameters.AppendIf("safe_search", safeSearch, x => x != SafetyLevel.None, x => x.ToString("d"));
 
-        if (minUploadDate.HasValue && minUploadDate > DateTime.MinValue)
-        {
-            parameters.Add("min_upload_date", minUploadDate.Value.ToUnixTimestamp());
-        }
+        parameters.AppendIf("min_upload_date", minUploadDate, x => x.HasValue, x => x.Value.ToUnixTimestamp());
 
-        if (maxUploadDate.HasValue && maxUploadDate > DateTime.MinValue)
-        {
-            parameters.Add("max_upload_date", maxUploadDate.Value.ToUnixTimestamp());
-        }
+        parameters.AppendIf("max_upload_date", maxUploadDate, x => x.HasValue, x => x.Value.ToUnixTimestamp());
 
-        if (minTakenDate.HasValue && minTakenDate > DateTime.MinValue)
-        {
-            parameters.Add("min_taken_date", minTakenDate.Value.ToUnixTimestamp());
-        }
+        parameters.AppendIf("min_taken_date", minTakenDate, x => x.HasValue, x => x.Value.ToMySql());
 
-        if (maxTakenDate.HasValue && maxTakenDate > DateTime.MinValue)
-        {
-            parameters.Add("max_taken_date", maxTakenDate.Value.ToUnixTimestamp());
-        }
+        parameters.AppendIf("max_taken_date", maxTakenDate, x => x.HasValue, x => x.Value.ToMySql());
 
-        if (contentType != ContentTypeSearch.None)
-        {
-            parameters.Add("content_type", contentType.ToString("d"));
-        }
+        parameters.AppendIf("content_type", contentType, x => x != ContentTypeSearch.None, x => x.ToString("d"));
 
-        if (privacyFilter != PrivacyFilter.None)
-        {
-            parameters.Add("privacy_filter", privacyFilter.ToString("d"));
-        }
+        parameters.AppendIf("privacy_filter", privacyFilter, x => x != PrivacyFilter.None, x => x.ToString("d"));
 
-        if (extras != PhotoSearchExtras.None)
-        {
-            parameters.Add("extras", extras.ToFlickrString());
-        }
+        parameters.AppendIf("extras", extras, x => x != PhotoSearchExtras.None, x => x.ToFlickrString());
 
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }
@@ -137,20 +107,11 @@ public partial class Flickr : IFlickrPeople
             { "user_id", userId ?? "me" }
         };
 
-        if (extras != PhotoSearchExtras.None)
-        {
-            parameters.Add("extras", extras.ToFlickrString());
-        }
+        parameters.AppendIf("extras", extras, x => x != PhotoSearchExtras.None, x => x.ToFlickrString());
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }

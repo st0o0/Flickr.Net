@@ -332,9 +332,8 @@ public record PhotoSearchOptions
         sb.Append("https://www.flickr.com/show.gne");
         sb.Append("?api_method=flickr.photos.search&method_params=");
 
-        Dictionary<string, string> parameters = new();
 
-        AddToDictionary(parameters);
+        var parameters = this.ToDictionary();
 
         List<string> parts = new();
         foreach (var pair in parameters)
@@ -345,115 +344,5 @@ public record PhotoSearchOptions
         sb.Append(string.Join(";", parts.ToArray()));
 
         return sb.ToString();
-    }
-
-    /// <summary>
-    /// Takes the various properties of this instance and adds them to a <see
-    /// cref="Dictionary{K,V}"/> instanced passed in, ready for sending to Flickr.
-    /// </summary>
-    /// <param name="parameters">The <see cref="Dictionary{K,V}"/> to add the options to.</param>
-    public void AddToDictionary(IDictionary<string, string> parameters)
-    {
-        parameters.AppendIf("user_id", UserId, x => !string.IsNullOrEmpty(x), x => x);
-
-        parameters.AppendIf("group_id", GroupId, x => !string.IsNullOrEmpty(x), x => x);
-
-        parameters.AppendIf("text", Text, x => !string.IsNullOrEmpty(x), x => x);
-
-        parameters.AppendIf("tags", Tags, x => !string.IsNullOrEmpty(x), x => x);
-
-        parameters.AppendIf("tag_mode", TagMode, x => x != TagMode.None, x => x.GetEnumMemberValue());
-
-        parameters.AppendIf("machine_tags", MachineTags, x => !string.IsNullOrEmpty(x), x => x);
-
-        parameters.AppendIf("machine_tag_mode", MachineTagMode, x => x != MachineTagMode.None, x => x.GetEnumMemberValue());
-
-        parameters.AppendIf("min_upload_date", MinUploadDate, x => x != DateTime.MinValue, x => x.ToUnixTimestamp());
-
-        parameters.AppendIf("max_upload_date", MaxUploadDate, x => x != DateTime.MinValue, x => x.ToUnixTimestamp());
-
-        parameters.AppendIf("min_taken_date", MinTakenDate, x => x != DateTime.MinValue, x => x.ToMySql());
-
-        parameters.AppendIf("max_taken_date", MaxTakenDate, x => x != DateTime.MinValue, x => x.ToMySql());
-
-        parameters.AppendIf("license", Licenses, x => x.Count != 0, x => string.Join(",", x.Distinct().Select(item => item.GetEnumMemberValue())));
-
-        parameters.AppendIf("per_page", PerPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-
-        parameters.AppendIf("page", Page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-
-        parameters.AppendIf("extras", Extras, x => x != PhotoSearchExtras.None, x => x.ToFlickrString());
-
-        parameters.AppendIf("sort", SortOrder, x => x != PhotoSearchSortOrder.None, x => x.ToFlickrString());
-
-        parameters.AppendIf("privacy_filter", PrivacyFilter, x => x != PrivacyFilter.None, x => x.ToString("d"));
-
-        parameters.AppendIf("bbox", BoundaryBox, x => x != null && x.IsSet, x => x.ToString());
-
-        parameters.AppendIf("accuracy", BoundaryBox, x => x != null && x.IsSet && x.Accuracy != GeoAccuracy.None, x => x.Accuracy.ToString("d"));
-
-        parameters.AppendIf("safe_search", SafeSearch, x => x != SafetyLevel.None, x => x.ToString("d"));
-
-        parameters.AppendIf("content_type", ContentType, x => x != ContentTypeSearch.None, x => x.ToString("d"));
-
-        parameters.AppendIf("has_geo", HasGeo, x => x != null, x => x.Value ? "1" : "0");
-
-        parameters.AppendIf("lat", Latitude, x => x != null, x => x.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-
-        parameters.AppendIf("lon", Longitude, x => x != null, x => x.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-
-        parameters.AppendIf("radius", Radius, x => x != null, x => x.Value.ToString("0.00000", System.Globalization.NumberFormatInfo.InvariantInfo));
-
-        parameters.AppendIf("radius_units", RadiusUnits, x => x != RadiusUnit.None, x => x.GetEnumMemberValue());
-
-        parameters.AppendIf("contacts", Contacts, x => x != ContactSearch.None, x => x.GetEnumMemberValue());
-
-        parameters.AppendIf("woe_id", WoeId, x => x != null, x => x);
-
-        parameters.AppendIf("place_id", PlaceId, x => x != null, x => x);
-
-        parameters.AppendIf("is_commons", IsCommons, x => x, x => "1");
-
-        parameters.AppendIf("in_gallery", InGallery, x => x, x => "1");
-
-        parameters.AppendIf("is_getty", IsGetty, x => x, x => "1");
-
-        parameters.AppendIf("media", MediaType, x => x != MediaType.None, x => x.GetEnumMemberValue());
-
-        parameters.AppendIf("geo_context", GeoContext, x => x != GeoContext.NotDefined, x => x.GetEnumMemberValue());
-
-        parameters.AppendIf("faves", Faves, x => x , x => "1");
-        
-        parameters.AppendIf("person_id", PersonId, x => !string.IsNullOrEmpty(x), x => x);
-
-        parameters.AppendIf("camera", Camera, x => !string.IsNullOrEmpty(x), x => x);
-
-        parameters.AppendIf("jump_to", JumpTo, x => !string.IsNullOrEmpty(x), x => x);
-
-        parameters.AppendIf("username", Username, x => !string.IsNullOrEmpty(x), x => x);
-
-        parameters.AppendIf("exif_min_exposure", ExifMinExposure, x => x != null, x => x.Value.ToString("0.00000", System.Globalization.NumberFormatInfo.InvariantInfo));
-
-        parameters.AppendIf("exif_max_exposure", ExifMaxExposure, x => x != null, x => x.Value.ToString("0.00000", System.Globalization.NumberFormatInfo.InvariantInfo));
-
-        parameters.AppendIf("exif_min_aperture", ExifMinAperture, x => x != null, x => x.Value.ToString("0.00000", System.Globalization.NumberFormatInfo.InvariantInfo));
-        
-        parameters.AppendIf("exif_max_aperture", ExifMaxAperture, x => x != null, x => x.Value.ToString("0.00000", System.Globalization.NumberFormatInfo.InvariantInfo));
-        
-        parameters.AppendIf("exif_min_focallen", ExifMinFocalLength, x => x != null, x => x.Value.ToString("0", System.Globalization.NumberFormatInfo.InvariantInfo));
-        
-        parameters.AppendIf("exif_max_focallen", ExifMaxFocalLength, x => x != null, x => x.Value.ToString("0", System.Globalization.NumberFormatInfo.InvariantInfo));
-        
-        parameters.AppendIf("exclude_user_id", ExcludeUserID, x => !string.IsNullOrEmpty(x), x => x);
-
-        parameters.AppendIf("foursquare_venueid", FoursquareVenueID, x => !string.IsNullOrEmpty(x), x => x);
-
-        parameters.AppendIf("foursquare_woeid", FoursquareWoeID, x => !string.IsNullOrEmpty(x), x => x);
-
-        parameters.AppendIf("group_path_alias", GroupPathAlias, x => !string.IsNullOrEmpty(x), x => x);
-
-        parameters.AppendIf("color_codes", ColorCodes, x => x!= null && x.Count != 0, x => x.ToFlickrString());
-
-        parameters.AppendIf("styles", Styles, x => x!= null && x.Count != 0, x => x.ToFlickrString());
     }
 }
