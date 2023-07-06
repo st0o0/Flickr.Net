@@ -1,4 +1,6 @@
-﻿namespace Flickr.Net.Core;
+﻿using Flickr.Net.Core.Internals.Extensions;
+
+namespace Flickr.Net.Core;
 
 /// <summary>
 /// The flickr.
@@ -14,20 +16,11 @@ public partial class Flickr : IFlickrContacts
             { "method", "flickr.contacts.getList" }
         };
 
-        if (filter != ContactType.None)
-        {
-            parameters.Add("filter", filter.ToString().ToLower());
-        }
+        parameters.AppendIf("filter", filter, x => x != ContactType.None, x => x.ToString().ToLower());
 
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<Contacts>(parameters, cancellationToken);
     }
@@ -41,10 +34,7 @@ public partial class Flickr : IFlickrContacts
             { "method", "flickr.contacts.getListRecentlyUploaded" }
         };
 
-        if (dateLastUpdated.HasValue && dateLastUpdated > DateTime.MinValue)
-        {
-            parameters.Add("date_lastupload", dateLastUpdated.Value.ToUnixTimestamp());
-        }
+        parameters.AppendIf("date_lastupload", dateLastUpdated, x => x.HasValue && x > DateTime.MinValue, x => x.Value.ToUnixTimestamp());
 
         if (filter != ContactSearch.None)
         {
@@ -63,15 +53,9 @@ public partial class Flickr : IFlickrContacts
             { "user_id", userId }
         };
 
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<Contacts>(parameters, cancellationToken);
     }
@@ -85,15 +69,9 @@ public partial class Flickr : IFlickrContacts
             { "method", "flickr.contacts.getTaggingSuggestions" }
         };
 
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<Contacts>(parameters, cancellationToken);
     }

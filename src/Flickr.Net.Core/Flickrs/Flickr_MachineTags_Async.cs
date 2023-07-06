@@ -1,4 +1,6 @@
-﻿namespace Flickr.Net.Core;
+﻿using Flickr.Net.Core.Internals.Extensions;
+
+namespace Flickr.Net.Core;
 
 /// <summary>
 /// The flickr.
@@ -12,20 +14,11 @@ public partial class Flickr : IFlickrMachineTags
             { "method", "flickr.machinetags.getNamespaces" }
         };
 
-        if (!string.IsNullOrEmpty(predicate))
-        {
-            parameters.Add("predicate", predicate);
-        }
+        parameters.AppendIf("predicate", predicate, x => !string.IsNullOrEmpty(x), x => x);
 
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<Namespaces>(parameters, cancellationToken);
     }
@@ -37,25 +30,13 @@ public partial class Flickr : IFlickrMachineTags
             { "method", "flickr.machinetags.getPairs" }
         };
 
-        if (!string.IsNullOrEmpty(namespaceName))
-        {
-            parameters.Add("namespace", namespaceName);
-        }
+        parameters.AppendIf("namespace", namespaceName, x => !string.IsNullOrEmpty(x), x => x);
 
-        if (!string.IsNullOrEmpty(predicate))
-        {
-            parameters.Add("predicate", predicate);
-        }
+        parameters.AppendIf("predicate", predicate, x => !string.IsNullOrEmpty(x), x => x);
 
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<Pairs>(parameters, cancellationToken);
     }
@@ -67,20 +48,11 @@ public partial class Flickr : IFlickrMachineTags
             { "method", "flickr.machinetags.getPredicates" }
         };
 
-        if (!string.IsNullOrEmpty(namespaceName))
-        {
-            parameters.Add("namespace", namespaceName);
-        }
+        parameters.AppendIf("namespace", namespaceName, x => !string.IsNullOrEmpty(x), x => x);
 
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<Predicates>(parameters, cancellationToken);
     }
@@ -97,20 +69,11 @@ public partial class Flickr : IFlickrMachineTags
             { "method", "flickr.machinetags.getRecentValues" }
         };
 
-        if (!string.IsNullOrEmpty(namespaceName))
-        {
-            parameters.Add("namespace", namespaceName);
-        }
+        parameters.AppendIf("namespace", namespaceName, x => !string.IsNullOrEmpty(x), x => x);
 
-        if (!string.IsNullOrEmpty(predicate))
-        {
-            parameters.Add("predicate", predicate);
-        }
+        parameters.AppendIf("predicate", predicate, x => !string.IsNullOrEmpty(x), x => x);
 
-        if (addedSince.HasValue && addedSince > DateTime.MinValue)
-        {
-            parameters.Add("added_since", UtilityMethods.DateToUnixTimestamp(addedSince.Value));
-        }
+        parameters.AppendIf("added_since", addedSince, x => x.HasValue && x > DateTime.MinValue, x => x.Value.ToUnixTimestamp());
 
         return await GetResponseAsync<Values>(parameters, cancellationToken);
     }
@@ -124,15 +87,9 @@ public partial class Flickr : IFlickrMachineTags
             { "predicate", predicate }
         };
 
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<Values>(parameters, cancellationToken);
     }

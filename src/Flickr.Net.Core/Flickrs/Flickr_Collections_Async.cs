@@ -1,4 +1,6 @@
-﻿namespace Flickr.Net.Core;
+﻿using Flickr.Net.Core.Internals.Extensions;
+
+namespace Flickr.Net.Core;
 
 /// <summary>
 /// The flickr.
@@ -30,15 +32,9 @@ public partial class Flickr : IFlickrCollections
             { "method", "flickr.collections.getTree" }
         };
 
-        if (collectionId != null)
-        {
-            parameters.Add("collection_id", collectionId);
-        }
+        parameters.AppendIf("collection_id", collectionId, x => x != null, x => x);
 
-        if (userId != null)
-        {
-            parameters.Add("user_id", userId);
-        }
+        parameters.AppendIf("user_id", userId, x => x != null, x => x);
 
         return await GetResponseAsync<Collections>(parameters, cancellationToken);
     }

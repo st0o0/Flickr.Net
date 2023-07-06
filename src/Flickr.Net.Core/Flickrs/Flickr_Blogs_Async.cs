@@ -1,4 +1,6 @@
-﻿namespace Flickr.Net.Core;
+﻿using Flickr.Net.Core.Internals.Extensions;
+
+namespace Flickr.Net.Core;
 
 /// <summary>
 /// The flickr.
@@ -38,10 +40,7 @@ public partial class Flickr : IFlickrBlogs
             { "description", description }
         };
 
-        if (blogPassword != null)
-        {
-            parameters.Add("blog_password", blogPassword);
-        }
+        parameters.AppendIf("blog_password", blogPassword, x => x != null, x => x);
 
         await GetResponseAsync(parameters, cancellationToken);
     }

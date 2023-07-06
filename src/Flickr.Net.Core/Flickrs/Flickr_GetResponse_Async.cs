@@ -3,6 +3,7 @@ using Flickr.Net.Core.Bases;
 using Flickr.Net.Core.Exceptions.Handlers;
 using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals.Caching;
+using Flickr.Net.Core.Internals.Extensions;
 
 namespace Flickr.Net.Core;
 
@@ -41,11 +42,7 @@ public partial class Flickr
         {
             OAuthGetBasicParameters(parameters);
 
-            if (!string.IsNullOrEmpty(FlickrSettings.OAuthAccessToken))
-
-            {
-                parameters["oauth_token"] = FlickrSettings.OAuthAccessToken;
-            }
+            parameters.AppendIf("oauth_token", FlickrSettings.OAuthAccessToken, x => !string.IsNullOrEmpty(x), x => x);
         }
 
         var url = CalculateUri(parameters, !string.IsNullOrEmpty(FlickrSettings.ApiSecret));

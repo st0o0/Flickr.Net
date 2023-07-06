@@ -41,15 +41,9 @@ public partial class Flickr : IFlickrGroupsPools
             { "method", "flickr.groups.pools.getGroups" }
         };
 
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<Groups>(parameters, cancellationToken);
     }
@@ -62,30 +56,15 @@ public partial class Flickr : IFlickrGroupsPools
             { "group_id", groupId }
         };
 
-        if (tags != null && tags.Length > 0)
-        {
-            parameters.Add("tags", tags);
-        }
+        parameters.AppendIf("tags", tags, x => x != null && x.Length > 0, x => x);
 
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (userId != null && userId.Length > 0)
-        {
-            parameters.Add("user_id", userId);
-        }
+        parameters.AppendIf("user_id", userId, x => x != null && x.Length > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (extras != PhotoSearchExtras.None)
-        {
-            parameters.Add("extras", extras.ToFlickrString());
-        }
+        parameters.AppendIf("extras", extras, x => x != PhotoSearchExtras.None, x => x.ToFlickrString());
 
         return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }

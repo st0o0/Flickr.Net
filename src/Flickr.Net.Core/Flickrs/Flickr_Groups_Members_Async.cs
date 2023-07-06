@@ -14,24 +14,14 @@ public partial class Flickr : IFlickrGroupsMembers
         Dictionary<string, string> parameters = new()
         {
             { "method", "flickr.groups.members.getList" },
+            {"group_id", groupId }
         };
 
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (memberTypes != MemberType.None)
-        {
-            parameters.Add("membertypes", memberTypes.ToFlickrString());
-        }
-
-        parameters.Add("group_id", groupId);
+        parameters.AppendIf("membertypes", memberTypes, x => x != MemberType.None, x => x.ToFlickrString());
 
         return await GetResponseAsync<Members>(parameters, cancellationToken);
     }

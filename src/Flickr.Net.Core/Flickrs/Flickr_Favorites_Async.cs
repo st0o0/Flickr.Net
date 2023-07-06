@@ -40,35 +40,17 @@ public partial class Flickr : IFlickrFavorites
             { "method", "flickr.favorites.getList" }
         };
 
-        if (userId != null)
-        {
-            parameters.Add("user_id", userId);
-        }
+        parameters.AppendIf("user_id", userId, x => x != null, x => x);
 
-        if (minFavoriteDate.HasValue && minFavoriteDate > DateTime.MinValue)
-        {
-            parameters.Add("min_fav_date", UtilityMethods.DateToUnixTimestamp(minFavoriteDate.Value));
-        }
+        parameters.AppendIf("min_fav_date", maxFavoriteDate, x => x.HasValue && x > DateTime.MinValue, x => x.Value.ToUnixTimestamp());
 
-        if (maxFavoriteDate.HasValue && maxFavoriteDate > DateTime.MinValue)
-        {
-            parameters.Add("max_fav_date", UtilityMethods.DateToUnixTimestamp(maxFavoriteDate.Value));
-        }
+        parameters.AppendIf("max_fav_date", maxFavoriteDate, x => x.HasValue && x > DateTime.MinValue, x => x.Value.ToUnixTimestamp());
 
-        if (extras != PhotoSearchExtras.None)
-        {
-            parameters.Add("extras", extras.ToFlickrString());
-        }
+        parameters.AppendIf("extras", extras, x => x != PhotoSearchExtras.None, x => x.ToFlickrString());
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }
@@ -81,15 +63,9 @@ public partial class Flickr : IFlickrFavorites
             { "user_id", userId }
         };
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }

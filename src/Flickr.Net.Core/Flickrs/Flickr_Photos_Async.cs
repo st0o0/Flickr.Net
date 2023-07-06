@@ -162,10 +162,7 @@ public partial class Flickr : IFlickrPhotos
         {
             Array.Sort(dates);
 
-            dateString = string.Join(",", new List<DateTime>(dates).ConvertAll<string>(new Converter<DateTime, string>(delegate (DateTime d)
-            {
-                return UtilityMethods.DateToUnixTimestamp(d).ToString();
-            })).ToArray());
+            dateString = string.Join(",", dates.Select(x => x.ToUnixTimestamp()));
 
             parameters.Add("dates", dateString);
         }
@@ -173,10 +170,8 @@ public partial class Flickr : IFlickrPhotos
         if (takenDates != null && takenDates.Length > 0)
         {
             Array.Sort(takenDates);
-            takenDateString = string.Join(",", new List<DateTime>(takenDates).ConvertAll<string>(new Converter<DateTime, string>(delegate (DateTime d)
-            {
-                return UtilityMethods.DateToUnixTimestamp(d).ToString();
-            })).ToArray());
+
+            takenDateString = string.Join(",", takenDates.Select(x => x.ToUnixTimestamp()));
 
             parameters.Add("taken_dates", takenDateString);
         }
@@ -274,9 +269,9 @@ public partial class Flickr : IFlickrPhotos
             { "method", "flickr.photos.getPopular" }
         };
 
-       parameters.AppendIf("user_id", userId, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("user_id", userId, x => !string.IsNullOrEmpty(x), x => x);
 
-       parameters.AppendIf("sort", sort, x => x != PopularSorting.None, x => x.GetEnumMemberValue());
+        parameters.AppendIf("sort", sort, x => x != PopularSorting.None, x => x.GetEnumMemberValue());
 
         parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
@@ -466,10 +461,7 @@ public partial class Flickr : IFlickrPhotos
             { "photo_id", photoId }
         };
 
-        if (safetyLevel != SafetyLevel.None)
-        {
-            parameters.Add("safety_level", safetyLevel.ToString("D"));
-        }
+        parameters.AppendIf("safety_level", safetyLevel, x => x != SafetyLevel.None, x => x.ToString("D"));
 
         parameters.Add("hidden", hidden switch
         {
