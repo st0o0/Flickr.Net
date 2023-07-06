@@ -21,18 +21,15 @@ public record PhotoSearchOptions
     /// </summary>
     /// <param name="userId">The ID of the User to search for.</param>
     public PhotoSearchOptions(string userId) : this(userId, null, TagMode.AllTags, null)
-    {
-    }
+    { }
 
     /// <summary>
     /// Create an instance of the <see cref="PhotoSearchOptions"/> for a given user ID and tag list.
     /// </summary>
     /// <param name="userId">The ID of the User to search for.</param>
     /// <param name="tags">The tags (comma delimited) to search for. Will match all tags.</param>
-    public PhotoSearchOptions(string userId, string tags)
-        : this(userId, tags, TagMode.AllTags, null)
-    {
-    }
+    public PhotoSearchOptions(string userId, string tags) : this(userId, tags, TagMode.AllTags, null)
+    { }
 
     /// <summary>
     /// Create an instance of the <see cref="PhotoSearchOptions"/> for a given user ID and tag list,
@@ -41,10 +38,8 @@ public record PhotoSearchOptions
     /// <param name="userId">The ID of the User to search for.</param>
     /// <param name="tags">The tags (comma delimited) to search for.</param>
     /// <param name="tagMode">The <see cref="TagMode"/> to use to search.</param>
-    public PhotoSearchOptions(string userId, string tags, TagMode tagMode)
-        : this(userId, tags, tagMode, null)
-    {
-    }
+    public PhotoSearchOptions(string userId, string tags, TagMode tagMode) : this(userId, tags, tagMode, null)
+    { }
 
     /// <summary>
     /// Create an instance of the <see cref="PhotoSearchOptions"/> for a given user ID and tag list,
@@ -216,12 +211,12 @@ public record PhotoSearchOptions
     /// <summary>
     /// The WOE id to return photos for. This is a spatial reference.
     /// </summary>
-    public string WoeId { get; init; }
+    public WoeId WoeId { get; init; }
 
     /// <summary>
     /// The Flickr Place to return photos for.
     /// </summary>
-    public string PlaceId { get; init; }
+    public PlaceId PlaceId { get; init; }
 
     /// <summary>
     /// True if the photo is taken from the Flickr Commons project.
@@ -359,259 +354,106 @@ public record PhotoSearchOptions
     /// <param name="parameters">The <see cref="Dictionary{K,V}"/> to add the options to.</param>
     public void AddToDictionary(IDictionary<string, string> parameters)
     {
-        if (!string.IsNullOrEmpty(UserId))
-        {
-            parameters.Add("user_id", UserId);
-        }
+        parameters.AppendIf("user_id", UserId, x => !string.IsNullOrEmpty(x), x => x);
 
-        if (!string.IsNullOrEmpty(GroupId))
-        {
-            parameters.Add("group_id", GroupId);
-        }
+        parameters.AppendIf("group_id", GroupId, x => !string.IsNullOrEmpty(x), x => x);
 
-        if (!string.IsNullOrEmpty(Text))
-        {
-            parameters.Add("text", Text);
-        }
+        parameters.AppendIf("text", Text, x => !string.IsNullOrEmpty(x), x => x);
 
-        if (!string.IsNullOrEmpty(Tags))
-        {
-            parameters.Add("tags", Tags);
-        }
+        parameters.AppendIf("tags", Tags, x => !string.IsNullOrEmpty(x), x => x);
 
-        if (TagMode != TagMode.None)
-        {
-            parameters.Add("tag_mode", TagMode.GetEnumMemberValue());
-        }
+        parameters.AppendIf("tag_mode", TagMode, x => x != TagMode.None, x => x.GetEnumMemberValue());
 
-        if (!string.IsNullOrEmpty(MachineTags))
-        {
-            parameters.Add("machine_tags", MachineTags);
-        }
+        parameters.AppendIf("machine_tags", MachineTags, x => !string.IsNullOrEmpty(x), x => x);
 
-        if (MachineTagMode != MachineTagMode.None)
-        {
-            parameters.Add("machine_tag_mode", MachineTagMode.GetEnumMemberValue());
-        }
+        parameters.AppendIf("machine_tag_mode", MachineTagMode, x => x != MachineTagMode.None, x => x.GetEnumMemberValue());
 
-        if (MinUploadDate != DateTime.MinValue)
-        {
-            parameters.Add("min_upload_date", MinUploadDate.ToUnixTimestamp());
-        }
+        parameters.AppendIf("min_upload_date", MinUploadDate, x => x != DateTime.MinValue, x => x.ToUnixTimestamp());
 
-        if (MaxUploadDate != DateTime.MinValue)
-        {
-            parameters.Add("max_upload_date", MaxUploadDate.ToUnixTimestamp());
-        }
+        parameters.AppendIf("max_upload_date", MaxUploadDate, x => x != DateTime.MinValue, x => x.ToUnixTimestamp());
 
-        if (MinTakenDate != DateTime.MinValue)
-        {
-            parameters.Add("min_taken_date", MinTakenDate.ToMySql());
-        }
+        parameters.AppendIf("min_taken_date", MinTakenDate, x => x != DateTime.MinValue, x => x.ToMySql());
 
-        if (MaxTakenDate != DateTime.MinValue)
-        {
-            parameters.Add("max_taken_date", MaxTakenDate.ToMySql());
-        }
+        parameters.AppendIf("max_taken_date", MaxTakenDate, x => x != DateTime.MinValue, x => x.ToMySql());
 
-        if (Licenses.Count != 0)
-        {
-            parameters.Add("license", string.Join(",", Licenses.Distinct().Select(x => x.GetEnumMemberValue())));
-        }
+        parameters.AppendIf("license", Licenses, x => x.Count != 0, x => string.Join(",", x.Distinct().Select(item => item.GetEnumMemberValue())));
 
-        if (PerPage != 0)
-        {
-            parameters.Add("per_page", PerPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("per_page", PerPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (Page != 0)
-        {
-            parameters.Add("page", Page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("page", Page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (Extras != PhotoSearchExtras.None)
-        {
-            parameters.Add("extras", Extras.ToFlickrString());
-        }
+        parameters.AppendIf("extras", Extras, x => x != PhotoSearchExtras.None, x => x.ToFlickrString());
 
-        if (SortOrder != PhotoSearchSortOrder.None)
-        {
-            parameters.Add("sort", SortOrder.ToFlickrString());
-        }
+        parameters.AppendIf("sort", SortOrder, x => x != PhotoSearchSortOrder.None, x => x.ToFlickrString());
 
-        if (PrivacyFilter != PrivacyFilter.None)
-        {
-            parameters.Add("privacy_filter", PrivacyFilter.ToString("d"));
-        }
+        parameters.AppendIf("privacy_filter", PrivacyFilter, x => x != PrivacyFilter.None, x => x.ToString("d"));
 
-        if (BoundaryBox != null && BoundaryBox.IsSet)
-        {
-            parameters.Add("bbox", BoundaryBox.ToString());
-        }
+        parameters.AppendIf("bbox", BoundaryBox, x => x != null && x.IsSet, x => x.ToString());
 
-        if (BoundaryBox != null && BoundaryBox.IsSet && BoundaryBox.Accuracy != GeoAccuracy.None)
-        {
-            parameters.Add("accuracy", BoundaryBox.Accuracy.ToString("d"));
-        }
+        parameters.AppendIf("accuracy", BoundaryBox, x => x != null && x.IsSet && x.Accuracy != GeoAccuracy.None, x => x.Accuracy.ToString("d"));
 
-        if (SafeSearch != SafetyLevel.None)
-        {
-            parameters.Add("safe_search", SafeSearch.ToString("d"));
-        }
+        parameters.AppendIf("safe_search", SafeSearch, x => x != SafetyLevel.None, x => x.ToString("d"));
 
-        if (ContentType != ContentTypeSearch.None)
-        {
-            parameters.Add("content_type", ContentType.ToString("d"));
-        }
+        parameters.AppendIf("content_type", ContentType, x => x != ContentTypeSearch.None, x => x.ToString("d"));
 
-        if (HasGeo != null)
-        {
-            parameters.Add("has_geo", HasGeo.Value ? "1" : "0");
-        }
+        parameters.AppendIf("has_geo", HasGeo, x => x != null, x => x.Value ? "1" : "0");
 
-        if (Latitude != null)
-        {
-            parameters.Add("lat", Latitude.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("lat", Latitude, x => x != null, x => x.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (Longitude != null)
-        {
-            parameters.Add("lon", Longitude.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("lon", Longitude, x => x != null, x => x.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (Radius != null)
-        {
-            parameters.Add("radius", Radius.Value.ToString("0.00000", System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("radius", Radius, x => x != null, x => x.Value.ToString("0.00000", System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (RadiusUnits != RadiusUnit.None)
-        {
-            parameters.Add("radius_units", RadiusUnits.GetEnumMemberValue());
-        }
+        parameters.AppendIf("radius_units", RadiusUnits, x => x != RadiusUnit.None, x => x.GetEnumMemberValue());
 
-        if (Contacts != ContactSearch.None)
-        {
-            parameters.Add("contacts", Contacts.GetEnumMemberValue());
-        }
+        parameters.AppendIf("contacts", Contacts, x => x != ContactSearch.None, x => x.GetEnumMemberValue());
 
-        if (WoeId != null)
-        {
-            parameters.Add("woe_id", WoeId);
-        }
+        parameters.AppendIf("woe_id", WoeId, x => x != null, x => x);
 
-        if (PlaceId != null)
-        {
-            parameters.Add("place_id", PlaceId);
-        }
+        parameters.AppendIf("place_id", PlaceId, x => x != null, x => x);
 
-        if (IsCommons)
-        {
-            parameters.Add("is_commons", "1");
-        }
+        parameters.AppendIf("is_commons", IsCommons, x => x, x => "1");
 
-        if (InGallery)
-        {
-            parameters.Add("in_gallery", "1");
-        }
+        parameters.AppendIf("in_gallery", InGallery, x => x, x => "1");
 
-        if (IsGetty)
-        {
-            parameters.Add("is_getty", "1");
-        }
+        parameters.AppendIf("is_getty", IsGetty, x => x, x => "1");
 
-        if (MediaType != MediaType.None)
-        {
-            parameters.Add("media", MediaType.GetEnumMemberValue());
-        }
+        parameters.AppendIf("media", MediaType, x => x != MediaType.None, x => x.GetEnumMemberValue());
 
-        if (GeoContext != GeoContext.NotDefined)
-        {
-            parameters.Add("geo_context", GeoContext.GetEnumMemberValue());
-        }
+        parameters.AppendIf("geo_context", GeoContext, x => x != GeoContext.NotDefined, x => x.GetEnumMemberValue());
 
-        if (Faves)
-        {
-            parameters.Add("faves", "1");
-        }
+        parameters.AppendIf("faves", Faves, x => x , x => "1");
+        
+        parameters.AppendIf("person_id", PersonId, x => !string.IsNullOrEmpty(x), x => x);
 
-        if (PersonId != null)
-        {
-            parameters.Add("person_id", PersonId);
-        }
+        parameters.AppendIf("camera", Camera, x => !string.IsNullOrEmpty(x), x => x);
 
-        if (Camera != null)
-        {
-            parameters.Add("camera", Camera);
-        }
+        parameters.AppendIf("jump_to", JumpTo, x => !string.IsNullOrEmpty(x), x => x);
 
-        if (JumpTo != null)
-        {
-            parameters.Add("jump_to", JumpTo);
-        }
+        parameters.AppendIf("username", Username, x => !string.IsNullOrEmpty(x), x => x);
 
-        if (!string.IsNullOrEmpty(Username))
-        {
-            parameters.Add("username", Username);
-        }
+        parameters.AppendIf("exif_min_exposure", ExifMinExposure, x => x != null, x => x.Value.ToString("0.00000", System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (ExifMinExposure != null)
-        {
-            parameters.Add("exif_min_exposure", ExifMinExposure.Value.ToString("0.00000", System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("exif_max_exposure", ExifMaxExposure, x => x != null, x => x.Value.ToString("0.00000", System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (ExifMaxExposure != null)
-        {
-            parameters.Add("exif_max_exposure", ExifMaxExposure.Value.ToString("0.00000", System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("exif_min_aperture", ExifMinAperture, x => x != null, x => x.Value.ToString("0.00000", System.Globalization.NumberFormatInfo.InvariantInfo));
+        
+        parameters.AppendIf("exif_max_aperture", ExifMaxAperture, x => x != null, x => x.Value.ToString("0.00000", System.Globalization.NumberFormatInfo.InvariantInfo));
+        
+        parameters.AppendIf("exif_min_focallen", ExifMinFocalLength, x => x != null, x => x.Value.ToString("0", System.Globalization.NumberFormatInfo.InvariantInfo));
+        
+        parameters.AppendIf("exif_max_focallen", ExifMaxFocalLength, x => x != null, x => x.Value.ToString("0", System.Globalization.NumberFormatInfo.InvariantInfo));
+        
+        parameters.AppendIf("exclude_user_id", ExcludeUserID, x => !string.IsNullOrEmpty(x), x => x);
 
-        if (ExifMinAperture != null)
-        {
-            parameters.Add("exif_min_aperture", ExifMinAperture.Value.ToString("0.00000", System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("foursquare_venueid", FoursquareVenueID, x => !string.IsNullOrEmpty(x), x => x);
 
-        if (ExifMaxAperture != null)
-        {
-            parameters.Add("exif_max_aperture", ExifMaxAperture.Value.ToString("0.00000", System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("foursquare_woeid", FoursquareWoeID, x => !string.IsNullOrEmpty(x), x => x);
 
-        if (ExifMinFocalLength != null)
-        {
-            parameters.Add("exif_min_focallen", ExifMinFocalLength.Value.ToString("0", System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("group_path_alias", GroupPathAlias, x => !string.IsNullOrEmpty(x), x => x);
 
-        if (ExifMaxFocalLength != null)
-        {
-            parameters.Add("exif_max_focallen", ExifMaxFocalLength.Value.ToString("0", System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("color_codes", ColorCodes, x => x!= null && x.Count != 0, x => x.ToFlickrString());
 
-        if (ExcludeUserID != null)
-        {
-            parameters.Add("exclude_user_id", ExcludeUserID);
-        }
-
-        if (FoursquareVenueID != null)
-        {
-            parameters.Add("foursquare_venueid", FoursquareVenueID);
-        }
-
-        if (FoursquareWoeID != null)
-        {
-            parameters.Add("foursquare_woeid", FoursquareWoeID);
-        }
-
-        if (GroupPathAlias != null)
-        {
-            parameters.Add("group_path_alias", GroupPathAlias);
-        }
-
-        if (ColorCodes != null && ColorCodes.Count != 0)
-        {
-            parameters.Add("color_codes", ColorCodes.ToFlickrString());
-        }
-
-        if (Styles != null && Styles.Count != 0)
-        {
-            parameters.Add("styles", Styles.ToFlickrString());
-        }
+        parameters.AppendIf("styles", Styles, x => x!= null && x.Count != 0, x => x.ToFlickrString());
     }
 }

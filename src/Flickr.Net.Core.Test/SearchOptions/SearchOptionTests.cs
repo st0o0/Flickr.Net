@@ -20,7 +20,7 @@ public class SearchOptionTests
             Page = 2,
             PerPage = 3,
             PrivacyFilter = PrivacyFilter.PublicPhotos,
-            SortOrder = PhotoSearchSortOrder.Relevance,
+            SortOrder = PhotoSearchSortOrder.Relevance
         };
 
         var result = new Dictionary<string, string>();
@@ -56,7 +56,7 @@ public class SearchOptionTests
             Page = 2,
             PerPage = 3,
             PrivacyFilter = PrivacyFilter.PublicPhotos,
-            SortOrder = PhotoSearchSortOrder.Relevance,
+            SortOrder = PhotoSearchSortOrder.Relevance
         };
 
         var result = new Dictionary<string, string>();

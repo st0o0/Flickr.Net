@@ -62,8 +62,7 @@ public record PartialSearchOptions
     /// Default constructor.
     /// </summary>
     public PartialSearchOptions()
-    {
-    }
+    { }
 
     /// <summary>
     /// Constructor taking a default <see cref="PhotoSearchExtras"/> parameter.
