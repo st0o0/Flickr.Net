@@ -28,6 +28,7 @@ public partial class Flickr : IFlickrTest
     async Task<EchoResponseDictionary> IFlickrTest.EchoAsync(Dictionary<string, string> parameters, CancellationToken cancellationToken)
     {
         parameters.Add("method", "flickr.test.echo");
+
         return await GetResponseAsync<EchoResponseDictionary>(parameters, cancellationToken);
     }
 }

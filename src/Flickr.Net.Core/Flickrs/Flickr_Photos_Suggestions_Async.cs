@@ -1,4 +1,6 @@
-﻿namespace Flickr.Net.Core;
+﻿using Flickr.Net.Core.Internals.Extensions;
+
+namespace Flickr.Net.Core;
 
 /// <summary>
 /// The flickr.
@@ -73,7 +75,7 @@ public partial class Flickr : IFlickrPhotosSuggestions
         await GetResponseAsync(parameters, cancellationToken);
     }
 
-    async Task IFlickrPhotosSuggestions.SuggestLocationAsync(string photoId, double latitude, double longitude, GeoAccuracy accuracy, string woeId, string placeId, string note, CancellationToken cancellationToken)
+    async Task IFlickrPhotosSuggestions.SuggestLocationAsync(string photoId, double latitude, double longitude, GeoAccuracy accuracy, WoeId? woeId, PlaceId? placeId, string note, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -87,9 +89,9 @@ public partial class Flickr : IFlickrPhotosSuggestions
 
         parameters.AppendIf("accuracy", accuracy, x => x != GeoAccuracy.None, x => x.ToString("D"));
 
-        parameters.AppendIf("place_id", perPage, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("woe_id", woeId, x => !string.IsNullOrEmpty(x), x => x);
 
-        parameters.AppendIf("woe_id", page, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("place_id", placeId, x => !string.IsNullOrEmpty(x), x => x);
 
         parameters.AppendIf("note", note, x => !string.IsNullOrEmpty(x), x => x);
 
@@ -145,5 +147,5 @@ public interface IFlickrPhotosSuggestions
     /// <param name="placeId">The Flickr place id of the location to suggest.</param>
     /// <param name="note">A note to add to the suggestion.</param>
     /// <param name="cancellationToken"></param>
-    Task SuggestLocationAsync(string photoId, double latitude, double longitude, GeoAccuracy accuracy = GeoAccuracy.None, string woeId = null, string placeId = null, string note = null, CancellationToken cancellationToken = default);
+    Task SuggestLocationAsync(string photoId, double latitude, double longitude, GeoAccuracy accuracy = GeoAccuracy.None, WoeId? woeId = null, PlaceId? placeId = null, string note = null, CancellationToken cancellationToken = default);
 }

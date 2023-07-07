@@ -74,7 +74,6 @@ public partial class Flickr : IFlickrPhotosComments
 
         parameters.AppendIf("extras", extras, x => x != PhotoSearchExtras.None, x => x.ToFlickrString());
 
-
         return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }
 }

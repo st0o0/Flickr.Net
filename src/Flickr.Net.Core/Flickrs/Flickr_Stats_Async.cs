@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Core.Internals.Extensions;
+﻿using Flickr.Net.Core.Bases;
+using Flickr.Net.Core.Internals.Extensions;
 
 namespace Flickr.Net.Core;
 
@@ -16,20 +17,12 @@ public partial class Flickr : IFlickrStats
             { "method", "flickr.stats.getCollectionDomains" },
             { "date", UtilityMethods.DateToUnixTimestamp(date) }
         };
-        if (!string.IsNullOrEmpty(collectionId))
-        {
-            parameters.Add("collection_id", collectionId);
-        }
 
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("colletion_id", collectionId, x => !string.IsNullOrEmpty(x), x => x);
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<Domains>(parameters, cancellationToken);
     }
@@ -44,20 +37,12 @@ public partial class Flickr : IFlickrStats
             { "date", UtilityMethods.DateToUnixTimestamp(date) },
             { "domain", domain }
         };
-        if (!string.IsNullOrEmpty(collectionId))
-        {
-            parameters.Add("collection_id", collectionId);
-        }
 
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("colletion_id", collectionId, x => !string.IsNullOrEmpty(x), x => x);
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<Referrers>(parameters, cancellationToken);
     }
@@ -97,20 +82,12 @@ public partial class Flickr : IFlickrStats
             { "method", "flickr.stats.getPhotoDomains" },
             { "date", UtilityMethods.DateToUnixTimestamp(date) }
         };
-        if (!string.IsNullOrEmpty(photoId))
-        {
-            parameters.Add("photo_id", photoId);
-        }
 
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("photo_id", photoId, x => !string.IsNullOrEmpty(x), x => x);
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<Domains>(parameters, cancellationToken);
     }
@@ -125,20 +102,12 @@ public partial class Flickr : IFlickrStats
             { "date", UtilityMethods.DateToUnixTimestamp(date) },
             { "domain", domain }
         };
-        if (!string.IsNullOrEmpty(photoId))
-        {
-            parameters.Add("photo_id", photoId);
-        }
 
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("photo_id", photoId, x => !string.IsNullOrEmpty(x), x => x);
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<Referrers>(parameters, cancellationToken);
     }
@@ -152,20 +121,12 @@ public partial class Flickr : IFlickrStats
             { "method", "flickr.stats.getPhotosetDomains" },
             { "date", UtilityMethods.DateToUnixTimestamp(date) }
         };
-        if (!string.IsNullOrEmpty(photosetId))
-        {
-            parameters.Add("photoset_id", photosetId);
-        }
 
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("photoset_id", photosetId, x => !string.IsNullOrEmpty(x), x => x);
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<Domains>(parameters, cancellationToken);
     }
@@ -180,20 +141,12 @@ public partial class Flickr : IFlickrStats
             { "date", UtilityMethods.DateToUnixTimestamp(date) },
             { "domain", domain }
         };
-        if (!string.IsNullOrEmpty(photosetId))
-        {
-            parameters.Add("photoset_id", photosetId);
-        }
 
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("photoset_id", photosetId, x => !string.IsNullOrEmpty(x), x => x);
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<Referrers>(parameters, cancellationToken);
     }
@@ -236,15 +189,9 @@ public partial class Flickr : IFlickrStats
             { "date", UtilityMethods.DateToUnixTimestamp(date) }
         };
 
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<Domains>(parameters, cancellationToken);
     }
@@ -259,15 +206,10 @@ public partial class Flickr : IFlickrStats
             { "date", UtilityMethods.DateToUnixTimestamp(date) },
             { "domain", domain }
         };
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<Referrers>(parameters, cancellationToken);
     }
@@ -293,25 +235,14 @@ public partial class Flickr : IFlickrStats
         {
             { "method", "flickr.stats.getPopularPhotos" }
         };
-        if (date != DateTime.MinValue)
-        {
-            parameters.Add("date", UtilityMethods.DateToUnixTimestamp(date));
-        }
 
-        if (sort != PopularitySort.None)
-        {
-            parameters.Add("sort", sort.ToFlickrString());
-        }
+        parameters.AppendIf("date", date, x => x != DateTime.MinValue, x => x.ToUnixTimestamp());
 
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("sort", sort, x => x != PopularitySort.None, x => x.GetEnumMemberValue());
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<StatsPhotos>(parameters, cancellationToken);
     }
@@ -324,10 +255,8 @@ public partial class Flickr : IFlickrStats
         {
             { "method", "flickr.stats.getTotalViews" }
         };
-        if (date != DateTime.MinValue)
-        {
-            parameters.Add("date", UtilityMethods.DateToUnixTimestamp(date));
-        }
+
+        parameters.AppendIf("date", date, x => x != DateTime.MinValue, x => x.ToUnixTimestamp());
 
         return await GetResponseAsync<Views>(parameters, cancellationToken);
     }

@@ -71,30 +71,15 @@ public partial class Flickr : IFlickrPhotos
             { "method", "flickr.photos.getContactsPhotos" }
         };
 
-        if (count > 0 && !singlePhoto)
-        {
-            parameters.Add("count", count.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("count", count, x => x > 0 && !singlePhoto, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (justFriends)
-        {
-            parameters.Add("just_friends", "1");
-        }
+        parameters.AppendIf("just_friends", justFriends, x => x, _ => "1");
 
-        if (singlePhoto)
-        {
-            parameters.Add("single_photo", "1");
-        }
+        parameters.AppendIf("single_photo", singlePhoto, x => x, _ => "1");
 
-        if (includeSelf)
-        {
-            parameters.Add("include_self", "1");
-        }
+        parameters.AppendIf("include_self", includeSelf, x => x, _ => "1");
 
-        if (extras != PhotoSearchExtras.None)
-        {
-            parameters.Add("extras", extras.ToFlickrString());
-        }
+        parameters.AppendIf("extras", extras, x => x != PhotoSearchExtras.None, x => x.ToFlickrString());
 
         return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }
@@ -161,10 +146,7 @@ public partial class Flickr : IFlickrPhotos
             { "photo_id", photoId }
         };
 
-        if (secret != null)
-        {
-            parameters.Add("secret", secret);
-        }
+        parameters.AppendIf("secret", secret, x => x != null, x => secret);
 
         return await GetResponseAsync<PhotoExif>(parameters, cancellationToken);
     }
@@ -192,10 +174,7 @@ public partial class Flickr : IFlickrPhotos
             { "photo_id", photoId }
         };
 
-        if (secret != null)
-        {
-            parameters.Add("secret", secret);
-        }
+        parameters.AppendIf("secret", secret, x => x != null, x => secret);
 
         return await GetResponseAsync<PhotoInfo>(parameters, cancellationToken);
     }

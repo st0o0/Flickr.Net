@@ -36,11 +36,7 @@ public partial class Flickr : IFlickrContacts
 
         parameters.AppendIf("date_lastupload", dateLastUpdated, x => x.HasValue && x > DateTime.MinValue, x => x.Value.ToUnixTimestamp());
 
-        if (filter != ContactSearch.None)
-        {
-            var filterString = filter == ContactSearch.AllContacts ? "all" : "ff";
-            parameters.Add("filter", filterString);
-        }
+        parameters.AppendIf("filter", filter, x => x != ContactSearch.None, x => x == ContactSearch.AllContacts ? "all" : "ff");
 
         return await GetResponseAsync<Contacts>(parameters, cancellationToken);
     }

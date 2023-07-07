@@ -35,7 +35,7 @@ public partial class Flickr : IFlickrPhotosets
             { "title", title }
         };
 
-        parameters.AppendIf("description", accuracy, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("description", description, x => !string.IsNullOrEmpty(x), x => x);
 
         var result = await GetResponseAsync<PhotosetUnknownResponse>(parameters, cancellationToken);
 
@@ -66,7 +66,7 @@ public partial class Flickr : IFlickrPhotosets
             { "title", title }
         };
 
-        parameters.AppendIf("description", accuracy, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("description", description, x => !string.IsNullOrEmpty(x), x => x);
 
         await GetResponseAsync(parameters, cancellationToken);
     }

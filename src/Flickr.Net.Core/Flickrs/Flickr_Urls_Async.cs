@@ -1,4 +1,6 @@
-﻿namespace Flickr.Net.Core;
+﻿using Flickr.Net.Core.Internals.Extensions;
+
+namespace Flickr.Net.Core;
 
 /// <summary>
 /// The flickr.
@@ -40,12 +42,10 @@ public partial class Flickr : IFlickrUrls
             { "method", "flickr.urls.getUserProfile" }
         };
 
-        if (userId != null && userId.Length > 0)
-        {
-            parameters.Add("user_id", userId);
-        }
+        parameters.AppendIf("user_id", userId, x => x != null, x => x);
 
         var result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
+
         return result.GetValueOrDefault("url", string.Empty);
     }
 
@@ -69,6 +69,7 @@ public partial class Flickr : IFlickrUrls
         };
 
         var result = await GetResponseAsync<GroupUnknownResponse>(parameters, cancellationToken);
+
         return result.GetValueOrDefault("id", string.Empty);
     }
 
@@ -81,6 +82,7 @@ public partial class Flickr : IFlickrUrls
         };
 
         var result = await GetResponseAsync<UserUnknownResponse>(parameters, cancellationToken);
+
         return result.GetValueOrDefault("id", string.Empty);
     }
 }

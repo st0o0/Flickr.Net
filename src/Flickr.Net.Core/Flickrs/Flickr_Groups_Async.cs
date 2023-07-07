@@ -34,15 +34,12 @@ public partial class Flickr : IFlickrGroups
             { "group_id", groupId }
         };
 
-        if (acceptsRules)
-        {
-            parameters.Add("accepts_rules", "1");
-        }
+        parameters.AppendIf("accept_rules", acceptsRules, x => x, _ => "1");
 
         await GetResponseAsync(parameters, cancellationToken);
     }
 
-    async Task IFlickrGroups.JoinRequestAsync(string groupId, string message, bool acceptRules, CancellationToken cancellationToken)
+    async Task IFlickrGroups.JoinRequestAsync(string groupId, string message, bool acceptsRules, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -53,10 +50,7 @@ public partial class Flickr : IFlickrGroups
             { "message", message }
         };
 
-        if (acceptRules)
-        {
-            parameters.Add("accept_rules", "1");
-        }
+        parameters.AppendIf("accept_rules", acceptsRules, x => x, _ => "1");
 
         await GetResponseAsync(parameters, cancellationToken);
     }
@@ -71,10 +65,7 @@ public partial class Flickr : IFlickrGroups
             { "group_id", groupId }
         };
 
-        if (deletePhotos)
-        {
-            parameters.Add("delete_photos", "1");
-        }
+        parameters.AppendIf("delete_photos", deletePhotos, x => x, _ => "1");
 
         await GetResponseAsync(parameters, cancellationToken);
     }

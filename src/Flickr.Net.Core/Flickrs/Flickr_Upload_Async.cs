@@ -1,5 +1,6 @@
 ﻿using Flickr.Net.Core.Exceptions.Handlers;
 using Flickr.Net.Core.Flickrs.Results;
+using Flickr.Net.Core.Internals.Extensions;
 using Newtonsoft.Json.Linq;
 
 namespace Flickr.Net.Core;
@@ -20,39 +21,23 @@ public partial class Flickr : IFlickrUpload
 
         Dictionary<string, string> parameters = new();
 
-        if (title != null && title.Length > 0)
-        {
-            parameters.Add("title", title);
-        }
+        parameters.AppendIf("title", title, x => x != null && x.Length > 0, x => x);
 
-        if (description != null && description.Length > 0)
-        {
-            parameters.Add("description", description);
-        }
+        parameters.AppendIf("description", description, x => x != null && x.Length > 0, x => x);
 
-        if (tags != null && tags.Length > 0)
-        {
-            parameters.Add("tags", tags);
-        }
+        parameters.AppendIf("tags", tags, x => x != null && x.Length > 0, x => x);
 
         parameters.Add("is_public", isPublic ? "1" : "0");
+
         parameters.Add("is_friend", isFriend ? "1" : "0");
+
         parameters.Add("is_family", isFamily ? "1" : "0");
 
-        if (safetyLevel != SafetyLevel.None)
-        {
-            parameters.Add("safety_level", safetyLevel.ToString("D"));
-        }
+        parameters.AppendIf("safety_level", safetyLevel, x => x != SafetyLevel.None, x => x.ToString("D"));
 
-        if (contentType != ContentType.None)
-        {
-            parameters.Add("content_type", contentType.ToString("D"));
-        }
+        parameters.AppendIf("content_type", contentType, x => x != ContentType.None, x => x.ToString("D"));
 
-        if (hiddenFromSearch != HiddenFromSearch.None)
-        {
-            parameters.Add("hidden", hiddenFromSearch.ToString("D"));
-        }
+        parameters.AppendIf("hidden", hiddenFromSearch, x => x != HiddenFromSearch.None, x => x.ToString("D"));
 
         if (!string.IsNullOrEmpty(FlickrSettings.OAuthAccessToken))
         {

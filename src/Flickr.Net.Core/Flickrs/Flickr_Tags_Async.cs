@@ -17,10 +17,7 @@ public partial class Flickr : IFlickrTags
             { "cluster_id", clusterId }
         };
 
-        if (extras != PhotoSearchExtras.None)
-        {
-            parameters.Add("extras", extras.ToFlickrString());
-        }
+        parameters.AppendIf("extras", extras, x => x != PhotoSearchExtras.None, x => x.ToFlickrString());
 
         return await GetResponseAsync<ClusterPhotos>(parameters, cancellationToken);
     }
