@@ -107,30 +107,15 @@ public partial class Flickr : IFlickrPhotos
             { "user_id", userId }
         };
 
-        if (count > 0)
-        {
-            parameters.Add("count", count.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("count", count, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (justFriends)
-        {
-            parameters.Add("just_friends", "1");
-        }
+        parameters.AppendIf("just_friends", justFriends, x => x, x => "1");
 
-        if (singlePhoto)
-        {
-            parameters.Add("single_photo", "1");
-        }
+        parameters.AppendIf("single_photo", singlePhoto, x => x, x => "1");
 
-        if (includeSelf)
-        {
-            parameters.Add("include_self", "1");
-        }
+        parameters.AppendIf("include_self", includeSelf, x => x, x => "1");
 
-        if (extras != PhotoSearchExtras.None)
-        {
-            parameters.Add("extras", extras.ToFlickrString());
-        }
+        parameters.AppendIf("extras", extras, x => x != PhotoSearchExtras.None, x => x.ToFlickrString());
 
         return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }
@@ -150,31 +135,20 @@ public partial class Flickr : IFlickrPhotos
     {
         CheckRequiresAuthentication();
 
-        string dateString = null;
-        string takenDateString = null;
-
         Dictionary<string, string> parameters = new()
         {
             { "method", "flickr.photos.getCounts" }
         };
 
-        if (dates != null && dates.Length > 0)
+        parameters.AppendIf("dates", dates, x => x != null && x.Length > 0, x =>
         {
-            Array.Sort(dates);
+            return string.Join(",", x.Select(Item => Item.ToUnixTimestamp()));
+        });
 
-            dateString = string.Join(",", dates.Select(x => x.ToUnixTimestamp()));
-
-            parameters.Add("dates", dateString);
-        }
-
-        if (takenDates != null && takenDates.Length > 0)
+        parameters.AppendIf("taken_dates", takenDates, x => x != null && x.Length > 0, x =>
         {
-            Array.Sort(takenDates);
-
-            takenDateString = string.Join(",", takenDates.Select(x => x.ToUnixTimestamp()));
-
-            parameters.Add("taken_dates", takenDateString);
-        }
+            return string.Join(",", x.Select(Item => Item.ToUnixTimestamp()));
+        });
 
         return await GetResponseAsync<PhotoCounts>(parameters, cancellationToken);
     }
@@ -203,15 +177,9 @@ public partial class Flickr : IFlickrPhotos
             { "photo_id", photoId }
         };
 
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<PhotoPersons>(parameters, cancellationToken);
     }

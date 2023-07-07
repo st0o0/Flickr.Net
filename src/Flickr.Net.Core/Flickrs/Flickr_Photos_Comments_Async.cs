@@ -17,6 +17,7 @@ public partial class Flickr : IFlickrPhotosComments
         };
 
         var response = await GetResponseAsync<CommentUnknownResponse>(parameters, cancellationToken);
+
         return response.GetValueOrDefault("id");
     }
 
@@ -63,30 +64,16 @@ public partial class Flickr : IFlickrPhotosComments
             { "method", "flickr.photos.comments.getRecentForContacts" }
         };
 
-        if (dateLastComment.HasValue && dateLastComment != DateTime.MinValue)
-        {
-            parameters.Add("date_lastcomment", UtilityMethods.DateToUnixTimestamp(dateLastComment.Value));
-        }
+        parameters.AppendIf("date_lastcomment", dateLastComment, x => x.HasValue && x != DateTime.MinValue, x => x.Value.ToUnixTimestamp());
 
-        if (contactsFilter != null && contactsFilter.Length > 0)
-        {
-            parameters.Add("contacts_filter", string.Join(",", contactsFilter));
-        }
+        parameters.AppendIf("contacts_filter", contactsFilter, x => x != null && x.Length > 0, x => string.Join(",", x));
 
-        if (extras != PhotoSearchExtras.None)
-        {
-            parameters.Add("extras", extras.ToFlickrString());
-        }
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("extras", extras, x => x != PhotoSearchExtras.None, x => x.ToFlickrString());
+
 
         return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }
