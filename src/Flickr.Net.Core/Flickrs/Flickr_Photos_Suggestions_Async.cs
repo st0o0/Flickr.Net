@@ -85,25 +85,13 @@ public partial class Flickr : IFlickrPhotosSuggestions
             { "lon", longitude.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) }
         };
 
-        if (accuracy != GeoAccuracy.None)
-        {
-            parameters.Add("accuracy", accuracy.ToString("D"));
-        }
+        parameters.AppendIf("accuracy", accuracy, x => x != GeoAccuracy.None, x => x.ToString("D"));
 
-        if (!string.IsNullOrEmpty(placeId))
-        {
-            parameters.Add("place_id", placeId);
-        }
+        parameters.AppendIf("place_id", perPage, x => !string.IsNullOrEmpty(x), x => x);
 
-        if (!string.IsNullOrEmpty(woeId))
-        {
-            parameters.Add("woe_id", woeId);
-        }
+        parameters.AppendIf("woe_id", page, x => !string.IsNullOrEmpty(x), x => x);
 
-        if (!string.IsNullOrEmpty(note))
-        {
-            parameters.Add("note", note);
-        }
+        parameters.AppendIf("note", note, x => !string.IsNullOrEmpty(x), x => x);
 
         await GetResponseAsync(parameters, cancellationToken);
     }

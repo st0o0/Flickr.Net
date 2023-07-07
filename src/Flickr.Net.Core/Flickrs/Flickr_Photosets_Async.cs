@@ -35,12 +35,10 @@ public partial class Flickr : IFlickrPhotosets
             { "title", title }
         };
 
-        if (!string.IsNullOrEmpty(description))
-        {
-            parameters.Add("description", description);
-        }
+        parameters.AppendIf("description", accuracy, x => !string.IsNullOrEmpty(x), x => x);
 
         var result = await GetResponseAsync<PhotosetUnknownResponse>(parameters, cancellationToken);
+
         return result.GetValueOrDefault("id");
     }
 
@@ -68,10 +66,7 @@ public partial class Flickr : IFlickrPhotosets
             { "title", title }
         };
 
-        if (!string.IsNullOrEmpty(description))
-        {
-            parameters.Add("description", description);
-        }
+        parameters.AppendIf("description", accuracy, x => !string.IsNullOrEmpty(x), x => x);
 
         await GetResponseAsync(parameters, cancellationToken);
     }
@@ -121,20 +116,11 @@ public partial class Flickr : IFlickrPhotosets
             { "method", "flickr.photosets.getList" }
         };
 
-        if (userId != null)
-        {
-            parameters.Add("user_id", userId);
-        }
+        parameters.AppendIf("user_id", userId, x => x != null, x => x);
 
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<Photosets>(parameters, cancellationToken);
     }
@@ -147,25 +133,13 @@ public partial class Flickr : IFlickrPhotosets
             { "photoset_id", photosetId }
         };
 
-        if (extras != PhotoSearchExtras.None)
-        {
-            parameters.Add("extras", extras.ToFlickrString());
-        }
+        parameters.AppendIf("extras", extras, x => x != PhotoSearchExtras.None, x => x.ToFlickrString());
 
-        if (privacyFilter != PrivacyFilter.None)
-        {
-            parameters.Add("privacy_filter", privacyFilter.ToString("d"));
-        }
+        parameters.AppendIf("privacy_filter", privacyFilter, x => x != PrivacyFilter.None, x => x.ToString("d"));
 
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
         if (media != MediaType.None)
         {

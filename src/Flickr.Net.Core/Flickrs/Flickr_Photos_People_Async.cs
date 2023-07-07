@@ -16,25 +16,13 @@ public partial class Flickr : IFlickrPhotosPeople
             { "user_id", userId }
         };
 
-        if (personX != null)
-        {
-            parameters.Add("person_x", personX.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("person_x", personX, x => x.HasValue, x => x.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (personY != null)
-        {
-            parameters.Add("person_y", personY.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("person_y", personY, x => x.HasValue, x => x.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (personWidth != null)
-        {
-            parameters.Add("person_w", personWidth.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("person_w", personWidth, x => x.HasValue, x => x.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (personHeight != null)
-        {
-            parameters.Add("person_h", personHeight.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("person_h", personHeight, x => x.HasValue, x => x.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
         await GetResponseAsync(parameters, cancellationToken);
     }
