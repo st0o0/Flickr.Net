@@ -4,17 +4,8 @@ using Flickr.Net.Core.Internals.Attributes;
 namespace Flickr.Net.Core;
 
 [FlickrJsonPropertyName("photo")]
-public record GalleryPhoto : ExtendedPhotoBase
+public record GalleryPhoto : UltraDeluxePhotoBase
 {
-    [JsonProperty("ispublic")]
-    public bool IsPublic { get; set; }
-
-    [JsonProperty("isfriend")]
-    public bool IsFriend { get; set; }
-
-    [JsonProperty("isfamily")]
-    public bool IsFamily { get; set; }
-
     [JsonProperty("is_primary")]
     public bool IsPrimary { get; set; }
 

@@ -9,7 +9,7 @@ public abstract record PhotoBase : FlickrEntityBase<Id>
     public string Server { get; set; }
 }
 
-public abstract record ExtendedPhotoBase : PhotoBase
+public abstract record DeluxePhotoBase : PhotoBase
 {
     [JsonProperty("owner")]
     public string Owner { get; set; }
@@ -19,4 +19,16 @@ public abstract record ExtendedPhotoBase : PhotoBase
 
     [JsonProperty("title")]
     public string Title { get; set; }
+}
+
+public abstract record UltraDeluxePhotoBase : DeluxePhotoBase
+{
+    [JsonProperty("ispublic")]
+    public bool IsPublic { get; set; }
+
+    [JsonProperty("isfriend")]
+    public bool IsFriend { get; set; }
+
+    [JsonProperty("isfamily")]
+    public bool IsFamily { get; set; }
 }

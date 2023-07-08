@@ -4,7 +4,7 @@ using Flickr.Net.Core.Internals.Attributes;
 namespace Flickr.Net.Core;
 
 [FlickrJsonPropertyName("photo")]
-public record PandaPhoto : ExtendedPhotoBase
+public record PandaPhoto : DeluxePhotoBase
 {
     [JsonProperty("ownername")]
     public string OwnerName { get; set; }
