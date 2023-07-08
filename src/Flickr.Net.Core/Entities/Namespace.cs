@@ -1,48 +1,15 @@
-﻿namespace Flickr.Net.Core.Entities;
+﻿using Flickr.Net.Core.Bases;
 
-/// <summary>
-/// A machine tag namespace. "namespace:predicate=value".
-/// </summary>
-public sealed class Namespace : IFlickrParsable
+namespace Flickr.Net.Core;
+
+public record Namespace : FlickrEntityBase
 {
-    /// <summary>
-    /// The name of the namespace.
-    /// </summary>
-    public string NamespaceName { get; set; }
+    [JsonProperty("usage")]
+    public string Usage { get; set; }
 
-    /// <summary>
-    /// The usage of the namespace.
-    /// </summary>
-    public int Usage { get; set; }
+    [JsonProperty("predicates")]
+    public string Predicates { get; set; }
 
-    /// <summary>
-    /// The number of unique predicates within this namespace.
-    /// </summary>
-    public int Predicates { get; set; }
-
-    void IFlickrParsable.Load(System.Xml.XmlReader reader)
-    {
-        while (reader.MoveToNextAttribute())
-        {
-            switch (reader.LocalName)
-            {
-                case "usage":
-                    Usage = reader.ReadContentAsInt();
-                    break;
-
-                case "predicates":
-                    Predicates = reader.ReadContentAsInt();
-                    break;
-            }
-        }
-
-        reader.Read();
-
-        if (reader.NodeType == System.Xml.XmlNodeType.Text)
-        {
-            NamespaceName = reader.ReadContentAsString();
-        }
-
-        reader.Read();
-    }
+    [JsonProperty("_content")]
+    public string Content { get; set; }
 }

@@ -16,14 +16,14 @@ public partial class Flickr : IFlickrReflection
         return await GetResponseAsync<Method>(parameters, cancellationToken);
     }
 
-    async Task<MethodCollection> IFlickrReflection.GetMethodsAsync(CancellationToken cancellationToken)
+    async Task<Methods> IFlickrReflection.GetMethodsAsync(CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
             { "method", "flickr.reflection.getMethods" }
         };
 
-        return await GetResponseAsync<MethodCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<Methods>(parameters, cancellationToken);
     }
 }
 
@@ -44,5 +44,5 @@ public interface IFlickrReflection
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <remarks>Note: Not all methods might be supported by the FlickrNet Library.</remarks>
-    Task<MethodCollection> GetMethodsAsync(CancellationToken cancellationToken = default);
+    Task<Methods> GetMethodsAsync(CancellationToken cancellationToken = default);
 }

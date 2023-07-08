@@ -1,4 +1,6 @@
-﻿namespace Flickr.Net.Core;
+﻿using Flickr.Net.Core.Internals.Extensions;
+
+namespace Flickr.Net.Core;
 
 /// <summary>
 /// The flickr.
@@ -20,10 +22,10 @@ public partial class Flickr : IFlickrPhotosSuggestions
             { "suggestion_id", suggestionId }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
-    async Task<SuggestionCollection> IFlickrPhotosSuggestions.GetListAsync(string photoId, SuggestionStatus status, CancellationToken cancellationToken)
+    async Task<UnknownResponse> IFlickrPhotosSuggestions.GetListAsync(string photoId, SuggestionStatus status, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -31,10 +33,10 @@ public partial class Flickr : IFlickrPhotosSuggestions
         {
             { "method", "flickr.photos.suggestions.getList" },
             { "photo_id", photoId },
-            { "status_id", status.ToString("d") }
+            { "status_id", status.GetEnumMemberValue() }
         };
 
-        return await GetResponseAsync<SuggestionCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
     }
 
     async Task IFlickrPhotosSuggestions.RejectSuggestionAsync(string suggestionId, CancellationToken cancellationToken)
@@ -52,7 +54,7 @@ public partial class Flickr : IFlickrPhotosSuggestions
             { "suggestion_id", suggestionId }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
     async Task IFlickrPhotosSuggestions.RemoveSuggestionAsync(string suggestionId, CancellationToken cancellationToken)
@@ -70,10 +72,10 @@ public partial class Flickr : IFlickrPhotosSuggestions
             { "suggestion_id", suggestionId }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
-    async Task IFlickrPhotosSuggestions.SuggestLocationAsync(string photoId, double latitude, double longitude, GeoAccuracy accuracy, string woeId, string placeId, string note, CancellationToken cancellationToken)
+    async Task IFlickrPhotosSuggestions.SuggestLocationAsync(string photoId, double latitude, double longitude, GeoAccuracy accuracy, WoeId? woeId, PlaceId? placeId, string note, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -85,27 +87,15 @@ public partial class Flickr : IFlickrPhotosSuggestions
             { "lon", longitude.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) }
         };
 
-        if (accuracy != GeoAccuracy.None)
-        {
-            parameters.Add("accuracy", accuracy.ToString("D"));
-        }
+        parameters.AppendIf("accuracy", accuracy, x => x != GeoAccuracy.None, x => x.ToString("D"));
 
-        if (!string.IsNullOrEmpty(placeId))
-        {
-            parameters.Add("place_id", placeId);
-        }
+        parameters.AppendIf("woe_id", woeId, x => !string.IsNullOrEmpty(x), x => x);
 
-        if (!string.IsNullOrEmpty(woeId))
-        {
-            parameters.Add("woe_id", woeId);
-        }
+        parameters.AppendIf("place_id", placeId, x => !string.IsNullOrEmpty(x), x => x);
 
-        if (!string.IsNullOrEmpty(note))
-        {
-            parameters.Add("note", note);
-        }
+        parameters.AppendIf("note", note, x => !string.IsNullOrEmpty(x), x => x);
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 }
 
@@ -128,7 +118,7 @@ public interface IFlickrPhotosSuggestions
     /// <param name="status">The type of status to filter by.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<SuggestionCollection> GetListAsync(string photoId, SuggestionStatus status, CancellationToken cancellationToken = default);
+    Task<UnknownResponse> GetListAsync(string photoId, SuggestionStatus status, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Rejects a suggestion made for a location on a photo. Currently doesn't appear to actually
@@ -157,5 +147,5 @@ public interface IFlickrPhotosSuggestions
     /// <param name="placeId">The Flickr place id of the location to suggest.</param>
     /// <param name="note">A note to add to the suggestion.</param>
     /// <param name="cancellationToken"></param>
-    Task SuggestLocationAsync(string photoId, double latitude, double longitude, GeoAccuracy accuracy = GeoAccuracy.None, string woeId = null, string placeId = null, string note = null, CancellationToken cancellationToken = default);
+    Task SuggestLocationAsync(string photoId, double latitude, double longitude, GeoAccuracy accuracy = GeoAccuracy.None, WoeId? woeId = null, PlaceId? placeId = null, string note = null, CancellationToken cancellationToken = default);
 }

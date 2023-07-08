@@ -1,11 +1,13 @@
-﻿namespace Flickr.Net.Core;
+﻿using Flickr.Net.Core.Internals.Extensions;
+
+namespace Flickr.Net.Core;
 
 /// <summary>
 /// The flickr.
 /// </summary>
 public partial class Flickr : IFlickrBlogs
 {
-    async Task<BlogCollection> IFlickrBlogs.GetListAsync(CancellationToken cancellationToken)
+    async Task<Blogs> IFlickrBlogs.GetListAsync(CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -14,20 +16,20 @@ public partial class Flickr : IFlickrBlogs
             { "method", "flickr.blogs.getList" }
         };
 
-        return await GetResponseAsync<BlogCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<Blogs>(parameters, cancellationToken);
     }
 
-    async Task<BlogServiceCollection> IFlickrBlogs.GetServicesAsync(CancellationToken cancellationToken)
+    async Task<Services> IFlickrBlogs.GetServicesAsync(CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
             { "method", "flickr.blogs.getServices" }
         };
 
-        return await GetResponseAsync<BlogServiceCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<Services>(parameters, cancellationToken);
     }
 
-    async Task<NoResponse> IFlickrBlogs.PostPhotoAsync(string blogId, string photoId, string title, string description, string blogPassword, CancellationToken cancellationToken)
+    async Task IFlickrBlogs.PostPhotoAsync(string blogId, string photoId, string title, string description, string blogPassword, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -38,12 +40,9 @@ public partial class Flickr : IFlickrBlogs
             { "description", description }
         };
 
-        if (blogPassword != null)
-        {
-            parameters.Add("blog_password", blogPassword);
-        }
+        parameters.AppendIf("blog_password", blogPassword, x => x != null, x => x);
 
-        return await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 }
 
@@ -57,13 +56,13 @@ public interface IFlickrBlogs
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <remarks></remarks>
-    Task<BlogCollection> GetListAsync(CancellationToken cancellationToken = default);
+    Task<Blogs> GetListAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Return a list of Flickr supported blogging services.
     /// </summary>
     /// <param name="cancellationToken"></param>
-    Task<BlogServiceCollection> GetServicesAsync(CancellationToken cancellationToken = default);
+    Task<Services> GetServicesAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Posts a photo already uploaded to a blog. Requires authentication.
@@ -74,5 +73,5 @@ public interface IFlickrBlogs
     /// <param name="description">The body of the blog post.</param>
     /// <param name="blogPassword">The password of the blog if it is not already stored in flickr.</param>
     /// <param name="cancellationToken"></param>
-    Task<NoResponse> PostPhotoAsync(string blogId, string photoId, string title, string description, string blogPassword = null, CancellationToken cancellationToken = default);
+    Task PostPhotoAsync(string blogId, string photoId, string title, string description, string blogPassword = null, CancellationToken cancellationToken = default);
 }

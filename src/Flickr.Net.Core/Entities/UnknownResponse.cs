@@ -1,100 +1,31 @@
-﻿namespace Flickr.Net.Core.Entities;
+﻿using Flickr.Net.Core.Bases;
+using Flickr.Net.Core.Internals.Attributes;
 
-/// <summary>
-/// Contains the raw response from Flickr when an unknown method has been called. Used by <see
-/// cref="IFlickrTest.EchoAsync(Dictionary{string, string}, CancellationToken)"/>.
-/// </summary>
-public sealed class UnknownResponse : IFlickrParsable
-{
-    /// <summary>
-    /// The response from Flickr.
-    /// </summary>
-    public string ResponseXml { get; set; }
+namespace Flickr.Net.Core;
 
-    /// <summary>
-    /// Gets a <see cref="XmlDocument"/> containing the response XML.
-    /// </summary>
-    /// <returns></returns>
-    public XmlDocument GetXmlDocument()
-    {
-        var document = new XmlDocument();
-        document.LoadXml(ResponseXml);
+public class UnknownResponse : Dictionary<string, string>, IFlickrEntity
+{ }
 
-        return document;
-    }
+[FlickrJsonPropertyName("comment")]
+public class CommentUnknownResponse : UnknownResponse
+{ }
 
-    /// <summary>
-    /// Gets an attribute value from the given response.
-    /// </summary>
-    /// <param name="element">The element name to find.</param>
-    /// <param name="attribute">The attribute of the element to return.</param>
-    /// <returns>The string value of the given attribute, if found.</returns>
-    public string GetAttributeValue(string element, string attribute)
-    {
-        XmlDocument doc = GetXmlDocument();
-        XmlNode node = doc.SelectSingleNode("//" + element + "/@" + attribute);
-        if (node != null)
-        {
-            return node.Value;
-        }
-        else
-        {
-            return null;
-        }
-    }
+[FlickrJsonPropertyName("note")]
+public class NoteUnknownResponse : UnknownResponse
+{ }
 
-    /// <summary>
-    /// Gets an text value of an element from the given response.
-    /// </summary>
-    /// <param name="element">The element name to find.</param>
-    /// <returns>The string value of the given element, if found.</returns>
-    public string GetElementValue(string element)
-    {
-        XmlDocument doc = GetXmlDocument();
-        XmlNode node = doc.SelectSingleNode("//" + element + "[1]");
-        if (node != null)
-        {
-            return node.InnerText;
-        }
-        else
-        {
-            return null;
-        }
-    }
+[FlickrJsonPropertyName("photoset")]
+public class PhotosetUnknownResponse : UnknownResponse
+{ }
 
-    void IFlickrParsable.Load(XmlReader reader)
-    {
-        ResponseXml = reader.ReadOuterXml();
-    }
+[FlickrJsonPropertyName("person")]
+public class PersonUnknownResponse : UnknownResponse
+{ }
 
-    /// <summary>
-    /// Gets an array of text values of an element from the given response.
-    /// </summary>
-    /// <param name="elementName">The element name to find.</param>
-    /// <returns>An array of string values.</returns>
-    public string[] GetElementArray(string elementName)
-    {
-        List<string> array = new();
-        foreach (XmlNode n in GetXmlDocument().SelectNodes("//" + elementName))
-        {
-            array.Add(n.InnerText);
-        }
-        return array.ToArray();
-    }
+[FlickrJsonPropertyName("group")]
+public class GroupUnknownResponse : UnknownResponse
+{ }
 
-    /// <summary>
-    /// Gets an array of text values of an element's attribute from the given response.
-    /// </summary>
-    /// <param name="elementName">The element name to find.</param>
-    /// <param name="attributeName">The attribute name to find on the matching element.</param>
-    /// <returns>An array of string values.</returns>
-    public string[] GetElementArray(string elementName, string attributeName)
-    {
-        List<string> array = new();
-        foreach (XmlNode n in GetXmlDocument().SelectNodes("//" + elementName + "/@" + attributeName))
-        {
-            array.Add(n.InnerText);
-        }
-        return array.ToArray();
-    }
-}
+[FlickrJsonPropertyName("user")]
+public class UserUnknownResponse : UnknownResponse
+{ }

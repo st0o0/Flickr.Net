@@ -1,57 +1,17 @@
-﻿namespace Flickr.Net.Core.Entities;
+﻿using Flickr.Net.Core.Bases;
+using Flickr.Net.Core.Internals.Attributes;
 
-/// <summary>
-/// The stats returned by <see cref="IFlickrStats.GetPhotoStatsAsync(DateTime, string,
-/// CancellationToken)"/>, <see cref="IFlickrStats.GetPhotostreamStatsAsync(DateTime,
-/// CancellationToken)"/>, <see cref="IFlickrStats.GetPhotosetStatsAsync(DateTime, string,
-/// CancellationToken)"/> and <see cref="IFlickrStats.GetCollectionStatsAsync(DateTime, string, CancellationToken)"/>
-/// </summary>
-public sealed class Stats : IFlickrParsable
+namespace Flickr.Net.Core;
+
+[FlickrJsonPropertyName("stats")]
+public record Stats : FlickrEntityBase
 {
-    /// <summary>
-    /// The number of views the object in question has had (either Photostream, Collection, Photo or Photoset).
-    /// </summary>
+    [JsonProperty("views")]
     public int Views { get; set; }
 
-    /// <summary>
-    /// The number of comments the object in question has had (either Photo or Photoset).
-    /// </summary>
+    [JsonProperty("comments")]
     public int Comments { get; set; }
 
-    /// <summary>
-    /// The number of favorites the object in question has had (Photo only).
-    /// </summary>
+    [JsonProperty("favorites")]
     public int Favorites { get; set; }
-
-    void IFlickrParsable.Load(System.Xml.XmlReader reader)
-    {
-        if (reader.LocalName != "stats")
-        {
-            UtilityMethods.CheckParsingException(reader);
-        }
-
-        while (reader.MoveToNextAttribute())
-        {
-            switch (reader.LocalName)
-            {
-                case "views":
-                    Views = string.IsNullOrEmpty(reader.Value) ? 0 : int.Parse(reader.Value, System.Globalization.NumberFormatInfo.InvariantInfo);
-                    break;
-
-                case "comments":
-                    Comments = string.IsNullOrEmpty(reader.Value) ? 0 : int.Parse(reader.Value, System.Globalization.NumberFormatInfo.InvariantInfo);
-                    break;
-
-                case "favorites":
-                    Favorites = string.IsNullOrEmpty(reader.Value) ? 0 : int.Parse(reader.Value, System.Globalization.NumberFormatInfo.InvariantInfo);
-                    break;
-
-                default:
-                    UtilityMethods.CheckParsingException(reader);
-                    break;
-            }
-        }
-
-        reader.Skip();
-    }
 }

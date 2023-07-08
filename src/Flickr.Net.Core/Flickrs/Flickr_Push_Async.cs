@@ -1,28 +1,32 @@
-﻿namespace Flickr.Net.Core;
+﻿using Flickr.Net.Core.Internals.Extensions;
+
+namespace Flickr.Net.Core;
 
 /// <summary>
 /// The flickr.
 /// </summary>
 public partial class Flickr : IFlickrPush
 {
-    async Task<SubscriptionCollection> IFlickrPush.GetSubscriptionsAsync(CancellationToken cancellationToken)
+    async Task<Subscriptions> IFlickrPush.GetSubscriptionsAsync(CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
-        Dictionary<string, string> parameters = new() { { "method", "flickr.push.getSubscriptions" } };
+        Dictionary<string, string> parameters = new()
+        {
+            { "method", "flickr.push.getSubscriptions" }
+        };
 
-        return await GetResponseAsync<SubscriptionCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<Subscriptions>(parameters, cancellationToken);
     }
 
-    async Task<string[]> IFlickrPush.GetTopicsAsync(CancellationToken cancellationToken)
+    async Task<TopicNames> IFlickrPush.GetTopicsAsync(CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
             { "method", "flickr.push.getTopics" }
         };
 
-        UnknownResponse result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
-        return result.GetElementArray("topic", "name");
+        return await GetResponseAsync<TopicNames>(parameters, cancellationToken);
     }
 
     async Task IFlickrPush.SubscribeAsync(string topic, string callback, string verify, string verifyToken,
@@ -60,63 +64,29 @@ public partial class Flickr : IFlickrPush
             { "verify", verify }
         };
 
-        if (!string.IsNullOrEmpty(verifyToken))
-        {
-            parameters.Add("verify_token", verifyToken);
-        }
+        parameters.AppendIf("verify_token", verifyToken, x => !string.IsNullOrEmpty(x), x => x);
 
-        if (leaseSeconds.HasValue && leaseSeconds > 0)
-        {
-            parameters.Add("lease_seconds",
-                           leaseSeconds.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("lease_seconds", leaseSeconds, x => x != null && leaseSeconds > 0, x => x.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (woeIds != null && woeIds.Any())
-        {
-            parameters.Add("woe_ids", string.Join(",", woeIds.ToArray()));
-        }
+        parameters.AppendIf("woe_ids", woeIds, x => x != null && x.Any(), x => string.Join(",", x));
 
-        if (placeIds != null && placeIds.Any())
-        {
-            parameters.Add("place_ids", string.Join(",", placeIds));
-        }
+        parameters.AppendIf("place_ids", placeIds, x => x != null && x.Any(), x => string.Join(",", x));
 
-        if (latitude.HasValue && latitude > 0 && topic == "geo")
-        {
-            parameters.Add("lat", latitude.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("lat", latitude, x => x.HasValue && x > 0 && topic == "geo", x => x.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (longitude.HasValue && longitude > 0 && topic == "geo")
-        {
-            parameters.Add("lon", longitude.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("lon", longitude, x => x.HasValue && x > 0 && topic == "geo", x => x.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (radius.HasValue && radius > 0 && topic == "geo")
-        {
-            parameters.Add("radius", radius.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("radius", radius, x => x.HasValue && x > 0 && topic == "geo", x => x.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (radiusUnits != RadiusUnit.None && topic == "geo")
-        {
-            parameters.Add("radius_units", radiusUnits.ToString("d"));
-        }
+        parameters.AppendIf("radius_units", radiusUnits, x => x != RadiusUnit.None, x => radiusUnits.ToString("d"));
 
-        if (accuracy != GeoAccuracy.None)
-        {
-            parameters.Add("accuracy", ((int)accuracy).ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("accuracy", accuracy, x => x != GeoAccuracy.None, x => ((int)x).ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (nsids != null && nsids.Any() && topic == "commons")
-        {
-            parameters.Add("nsids", string.Join(",", nsids.ToArray()));
-        }
+        parameters.AppendIf("nsids", nsids, x => x != null && x.Any() && topic == "commons", x => string.Join(",", x.ToArray()));
 
-        if (tags != null && tags.Any() && topic == "tags")
-        {
-            parameters.Add("tags", string.Join(",", tags.ToArray()));
-        }
+        parameters.AppendIf("tags", tags, x => x != null && x.Any() && topic == "tags", x => string.Join(",", x.ToArray()));
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
     async Task IFlickrPush.UnsubscribeAsync(string topic, string callback, string verify, string verifyToken, CancellationToken cancellationToken)
@@ -146,12 +116,9 @@ public partial class Flickr : IFlickrPush
             { "verify", verify }
         };
 
-        if (!string.IsNullOrEmpty(verifyToken))
-        {
-            parameters.Add("verif_token", verifyToken);
-        }
+        parameters.AppendIf("verify_token", verifyToken, x => !string.IsNullOrEmpty(x), x => x);
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 }
 
@@ -164,13 +131,13 @@ public interface IFlickrPush
     /// Get a list of subscriptions for the calling user.
     /// </summary>
     /// <param name="cancellationToken"></param>
-    Task<SubscriptionCollection> GetSubscriptionsAsync(CancellationToken cancellationToken = default);
+    Task<Subscriptions> GetSubscriptionsAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get a list of topics that are available for subscription.
     /// </summary>
     /// <param name="cancellationToken"></param>
-    Task<string[]> GetTopicsAsync(CancellationToken cancellationToken = default);
+    Task<TopicNames> GetTopicsAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Subscribe to a particular topic.

@@ -1,9 +1,6 @@
-using System.Collections;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-using Flickr.Net.Core.Exceptions;
-using Flickr.Net.Core.SearchOptions;
 
 namespace Flickr.Net.Core.Internals;
 
@@ -31,7 +28,7 @@ public static class UtilityMethods
     /// <returns>A long for the number of seconds since 1st January 1970, as per unix specification.</returns>
     public static string DateToUnixTimestamp(DateTime date)
     {
-        TimeSpan ts = date - UnixStartDate;
+        var ts = date - UnixStartDate;
         return ts.TotalSeconds.ToString("0", System.Globalization.NumberFormatInfo.InvariantInfo);
     }
 
@@ -68,160 +65,6 @@ public static class UtilityMethods
         return UnixStartDate.AddSeconds(timestamp);
     }
 
-    /// <summary>
-    /// Colors the codes to string.
-    /// </summary>
-    /// <param name="codes">The codes.</param>
-    /// <returns>A string.</returns>
-    public static string ColorCodesToString(IEnumerable<string> codes)
-    {
-        List<string> colorList = new();
-        Dictionary<string, string> codeMap = new()
-        {
-            { "red", "0" },
-            { "darkorange", "1" },
-            { "dark orange", "1" },
-            { "orange", "2" },
-            { "palepink", "b" },
-            { "pale pink", "b" },
-            { "yellow", "3" },
-            { "lemonyellow", "4" },
-            { "lemon yellow", "4" },
-            { "school bus yellow", "3" },
-            { "schoolbusyellow", "3" },
-            { "green", "5" },
-            { "darklimegreen", "6" },
-            { "dark lime green", "6" },
-            { "limegreen", "6" },
-            { "lime green", "6" },
-            { "cyan", "7" },
-            { "blue", "8" },
-            { "violet", "9" },
-            { "purple", "9" },
-            { "pink", "a" },
-            { "white", "c" },
-            { "grey", "d" },
-            { "black", "e" },
-        };
-
-        foreach (string code in codes)
-        {
-            if (string.IsNullOrEmpty(code))
-            {
-                continue;
-            }
-
-            string c = code.ToLower();
-            if (c.Length == 1 && codeMap.ContainsValue(c))
-            {
-                colorList.Add(c);
-            }
-            if (codeMap.ContainsKey(c))
-            {
-                colorList.Add(codeMap[c]);
-            }
-        }
-
-        return string.Join(",", colorList.ToArray());
-    }
-
-    //todo: KEKW
-    /// <summary>
-    /// Converts a <see cref="PhotoSearchSortOrder"/> into a string for use by the Flickr API.
-    /// </summary>
-    /// <param name="order">The sort order to convert.</param>
-    /// <returns>The string representative for the sort order.</returns>
-    public static string SortOrderToString(PhotoSearchSortOrder order)
-    {
-        return order switch
-        {
-            PhotoSearchSortOrder.DatePostedAscending => "date-posted-asc",
-            PhotoSearchSortOrder.DatePostedDescending => "date-posted-desc",
-            PhotoSearchSortOrder.DateTakenAscending => "date-taken-asc",
-            PhotoSearchSortOrder.DateTakenDescending => "date-taken-desc",
-            PhotoSearchSortOrder.InterestingnessAscending => "interestingness-asc",
-            PhotoSearchSortOrder.InterestingnessDescending => "interestingness-desc",
-            PhotoSearchSortOrder.Relevance => "relevance",
-            _ => string.Empty,
-        };
-    }
-
-    //todo: KEKW
-    /// <summary>
-    /// Converts a <see cref="PopularitySort"/> enum to a string.
-    /// </summary>
-    /// <param name="sortOrder">The value to convert.</param>
-    /// <returns></returns>
-    public static string SortOrderToString(PopularitySort sortOrder)
-    {
-        return sortOrder switch
-        {
-            PopularitySort.Comments => "comments",
-            PopularitySort.Favorites => "favorites",
-            PopularitySort.Views => "views",
-            _ => string.Empty,
-        };
-    }
-
-    //todo: KEKW
-    /// <summary>
-    /// Adds the partial options to the passed in <see cref="Hashtable"/>.
-    /// </summary>
-    /// <param name="options">The options to convert to an array.</param>
-    /// <param name="parameters">
-    /// The <see cref="Hashtable"/> to add the option key value pairs to.
-    /// </param>
-    public static void PartialOptionsIntoArray(PartialSearchOptions options, Dictionary<string, string> parameters)
-    {
-        ArgumentNullException.ThrowIfNull(options, nameof(options));
-        ArgumentNullException.ThrowIfNull(parameters, nameof(parameters));
-
-        if (options.MinUploadDate != DateTime.MinValue)
-        {
-            parameters.Add("min_uploaded_date", DateToUnixTimestamp(options.MinUploadDate).ToString());
-        }
-
-        if (options.MaxUploadDate != DateTime.MinValue)
-        {
-            parameters.Add("max_uploaded_date", DateToUnixTimestamp(options.MaxUploadDate).ToString());
-        }
-
-        if (options.MinTakenDate != DateTime.MinValue)
-        {
-            parameters.Add("min_taken_date", DateToMySql(options.MinTakenDate));
-        }
-
-        if (options.MaxTakenDate != DateTime.MinValue)
-        {
-            parameters.Add("max_taken_date", DateToMySql(options.MaxTakenDate));
-        }
-
-        if (options.Extras != PhotoSearchExtras.None)
-        {
-            parameters.Add("extras", options.ExtrasString);
-        }
-
-        if (options.SortOrder != PhotoSearchSortOrder.None)
-        {
-            parameters.Add("sort", options.SortOrderString);
-        }
-
-        if (options.PerPage > 0)
-        {
-            parameters.Add("per_page", options.PerPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
-
-        if (options.Page > 0)
-        {
-            parameters.Add("page", options.Page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
-
-        if (options.PrivacyFilter != PrivacyFilter.None)
-        {
-            parameters.Add("privacy_filter", options.PrivacyFilter.ToString("d"));
-        }
-    }
-
     internal static void WriteInt32(Stream s, int i)
     {
         s.WriteByte((byte)(i & 0xFF));
@@ -233,22 +76,22 @@ public static class UtilityMethods
     internal static void WriteString(Stream s, string str)
     {
         WriteInt32(s, str.Length);
-        foreach (char c in str)
+        foreach (var c in str)
         {
             s.WriteByte((byte)(c & 0xFF));
             s.WriteByte((byte)(c >> 8 & 0xFF));
         }
     }
 
-    internal static void WriteByteArray(Stream stream, byte[] bytes)
+    internal static void WriteByteArray(Stream stream, string value)
     {
-        WriteString(stream, Encoding.UTF8.GetString(bytes));
+        WriteString(stream, value);
     }
 
     internal static int ReadInt32(Stream s)
     {
         int i = 0, b;
-        for (int j = 0; j < 4; j++)
+        for (var j = 0; j < 4; j++)
         {
             b = s.ReadByte();
             if (b == -1)
@@ -263,9 +106,9 @@ public static class UtilityMethods
 
     internal static string ReadString(Stream s)
     {
-        int len = ReadInt32(s);
-        char[] chars = new char[len];
-        for (int i = 0; i < len; i++)
+        var len = ReadInt32(s);
+        var chars = new char[len];
+        for (var i = 0; i < len; i++)
         {
             int hi, lo;
             lo = s.ReadByte();
@@ -278,11 +121,6 @@ public static class UtilityMethods
             chars[i] = (char)(lo | hi << 8);
         }
         return new string(chars);
-    }
-
-    internal static byte[] ReadByteArray(Stream s)
-    {
-        return Encoding.UTF8.GetBytes(ReadString(s));
     }
 
     private const string PhotoUrlFormat = "https://farm{0}.staticflickr.com/{1}/{2}_{3}{4}.{5}";
@@ -298,11 +136,11 @@ public static class UtilityMethods
     {
         if (size == "_o" || size == "original")
         {
-            return UrlFormat(p.Farm, p.Server, p.PhotoId, p.OriginalSecret, size, extension);
+            return UrlFormat(p.Farm, p.Server, p.Id, p.Secret, size, extension);
         }
         else
         {
-            return UrlFormat(p.Farm, p.Server, p.PhotoId, p.Secret, size, extension);
+            return UrlFormat(p.Farm, p.Server, p.Id, p.Secret, size, extension);
         }
     }
 
@@ -317,24 +155,12 @@ public static class UtilityMethods
     {
         if (size == "_o" || size == "original")
         {
-            return UrlFormat(p.Farm, p.Server, p.PhotoId, p.OriginalSecret, size, extension);
+            return UrlFormat(p.Farm, p.Server, p.Id, p.OriginalSecret, size, extension);
         }
         else
         {
-            return UrlFormat(p.Farm, p.Server, p.PhotoId, p.Secret, size, extension);
+            return UrlFormat(p.Farm, p.Server, p.Id, p.Secret, size, extension);
         }
-    }
-
-    /// <summary>
-    /// Urls the format.
-    /// </summary>
-    /// <param name="p">The p.</param>
-    /// <param name="size">The size.</param>
-    /// <param name="extension">The extension.</param>
-    /// <returns>A string.</returns>
-    public static string UrlFormat(Photoset p, string size, string extension)
-    {
-        return UrlFormat(p.Farm, p.Server, p.PrimaryPhotoId, p.Secret, size, extension);
     }
 
     /// <summary>
@@ -342,14 +168,14 @@ public static class UtilityMethods
     /// </summary>
     /// <param name="farm">The farm.</param>
     /// <param name="server">The server.</param>
-    /// <param name="photoid">The photoid.</param>
+    /// <param name="photoId">The photoid.</param>
     /// <param name="secret">The secret.</param>
     /// <param name="size">The size.</param>
     /// <param name="extension">The extension.</param>
     /// <returns>A string.</returns>
-    public static string UrlFormat(string farm, string server, string photoid, string secret, string size, string extension)
+    public static string UrlFormat(int farm, string server, string photoId, string secret, string size, string extension)
     {
-        string sizeAbbreviation = size switch
+        var sizeAbbreviation = size switch
         {
             "square" => "_s",
             "thumbnail" => "_t",
@@ -359,7 +185,7 @@ public static class UtilityMethods
             "medium" => string.Empty,
             _ => size,
         };
-        return UrlFormat(PhotoUrlFormat, farm, server, photoid, secret, sizeAbbreviation, extension);
+        return UrlFormat(PhotoUrlFormat, farm, server, photoId, secret, sizeAbbreviation, extension);
     }
 
     private static string UrlFormat(string format, params object[] parameters)
@@ -367,67 +193,32 @@ public static class UtilityMethods
         return string.Format(System.Globalization.CultureInfo.InvariantCulture, format, parameters);
     }
 
-    //todo: KEKW
     /// <summary>
     /// Parses the id to member type.
     /// </summary>
     /// <param name="memberTypeId">The member type id.</param>
     /// <returns>A MemberTypes.</returns>
-    public static MemberTypes ParseIdToMemberType(string memberTypeId)
+    public static MemberType ParseIdToMemberType(string memberTypeId)
     {
         return memberTypeId switch
         {
-            "1" => MemberTypes.Narwhal,
-            "2" => MemberTypes.Member,
-            "3" => MemberTypes.Moderator,
-            "4" => MemberTypes.Admin,
-            _ => MemberTypes.None,
+            "1" => MemberType.Narwhal,
+            "2" => MemberType.Member,
+            "3" => MemberType.Moderator,
+            "4" => MemberType.Admin,
+            _ => MemberType.None,
         };
     }
 
-    //todo: KEKW
-    internal static MemberTypes ParseRoleToMemberType(string memberRole)
+    internal static MemberType ParseRoleToMemberType(string memberRole)
     {
         return memberRole switch
         {
-            "admin" => MemberTypes.Admin,
-            "moderator" => MemberTypes.Moderator,
-            "member" => MemberTypes.Member,
-            _ => MemberTypes.None,
+            "admin" => MemberType.Admin,
+            "moderator" => MemberType.Moderator,
+            "member" => MemberType.Member,
+            _ => MemberType.None,
         };
-    }
-
-    //todo: KEKW
-    /// <summary>
-    /// Members the type to string.
-    /// </summary>
-    /// <param name="memberTypes">The member types.</param>
-    /// <returns>A string.</returns>
-    public static string MemberTypeToString(MemberTypes memberTypes)
-    {
-        List<string> types = new();
-
-        if ((memberTypes & MemberTypes.Narwhal) == MemberTypes.Narwhal)
-        {
-            types.Add("1");
-        }
-
-        if ((memberTypes & MemberTypes.Member) == MemberTypes.Member)
-        {
-            types.Add("2");
-        }
-
-        if ((memberTypes & MemberTypes.Moderator) == MemberTypes.Moderator)
-        {
-            types.Add("3");
-        }
-
-        if ((memberTypes & MemberTypes.Admin) == MemberTypes.Admin)
-        {
-            types.Add("4");
-        }
-
-        return string.Join(",", types.ToArray());
     }
 
     /// <summary>
@@ -439,9 +230,9 @@ public static class UtilityMethods
     {
         byte[] hashedBytes;
 
-        using (MD5 md5 = MD5.Create())
+        using (var md5 = MD5.Create())
         {
-            byte[] bytes = Encoding.UTF8.GetBytes(data);
+            var bytes = Encoding.UTF8.GetBytes(data);
             hashedBytes = md5.ComputeHash(bytes, 0, bytes.Length);
         }
         return BitConverter.ToString(hashedBytes).Replace("-", string.Empty).ToLower();
@@ -454,9 +245,9 @@ public static class UtilityMethods
     /// <returns>A DateTime.</returns>
     public static DateTime MySqlToDate(string p)
     {
-        string format1 = "yyyy-MM-dd";
-        string format2 = "yyyy-MM-dd hh:mm:ss";
-        System.Globalization.DateTimeFormatInfo iformat = System.Globalization.DateTimeFormatInfo.InvariantInfo;
+        var format1 = "yyyy-MM-dd";
+        var format2 = "yyyy-MM-dd hh:mm:ss";
+        var iformat = System.Globalization.DateTimeFormatInfo.InvariantInfo;
 
         try
         {
@@ -484,7 +275,7 @@ public static class UtilityMethods
     /// <returns>The parsed <see cref="DateTime"/>.</returns>
     public static DateTime ParseDateWithGranularity(string date)
     {
-        DateTime output = DateTime.MinValue;
+        var output = DateTime.MinValue;
 
         if (string.IsNullOrEmpty(date))
         {
@@ -502,7 +293,7 @@ public static class UtilityMethods
             return output;
         }
 
-        string format = "yyyy-MM-dd HH:mm:ss";
+        var format = "yyyy-MM-dd HH:mm:ss";
         try
         {
             output = DateTime.ParseExact(date, format, System.Globalization.DateTimeFormatInfo.InvariantInfo, System.Globalization.DateTimeStyles.None);
@@ -514,55 +305,6 @@ public static class UtilityMethods
 #endif
         }
         return output;
-    }
-
-    /// <summary>
-    /// Dates the to my sql.
-    /// </summary>
-    /// <param name="date">The date.</param>
-    /// <returns>A string.</returns>
-    public static string DateToMySql(DateTime date)
-    {
-        return date.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.DateTimeFormatInfo.InvariantInfo);
-    }
-
-    //todo: KEKW
-    /// <summary>
-    /// Converts a <see cref="MediaType"/> enumeration into a string used by Flickr.
-    /// </summary>
-    /// <param name="mediaType">The <see cref="MediaType"/> value to convert.</param>
-    /// <returns></returns>
-    public static string MediaTypeToString(MediaType mediaType)
-    {
-        return mediaType switch
-        {
-            MediaType.All => "all",
-            MediaType.Photos => "photos",
-            MediaType.Videos => "videos",
-            _ => string.Empty,
-        };
-    }
-
-    /// <summary>
-    /// If an unknown element is found and the DLL is a debug DLL then a <see
-    /// cref="ParsingException"/> is thrown.
-    /// </summary>
-    /// <param name="reader">The <see cref="XmlReader"/> containing the unknown xml node.</param>
-    [System.Diagnostics.Conditional("DEBUG")]
-    public static void CheckParsingException(XmlReader reader)
-    {
-        if (reader.NodeType == XmlNodeType.Attribute)
-        {
-            throw new ParsingException("Unknown attribute: " + reader.Name + "=" + reader.Value);
-        }
-        if (!string.IsNullOrEmpty(reader.Value))
-        {
-            throw new ParsingException("Unknown " + reader.NodeType.ToString() + ": " + reader.Name + "=" + reader.Value);
-        }
-        else
-        {
-            throw new ParsingException("Unknown element: " + reader.Name);
-        }
     }
 
     /// <summary>
@@ -602,11 +344,11 @@ public static class UtilityMethods
             return dic;
         }
 
-        string[] parts = response.Split('&');
+        var parts = response.Split('&');
 
-        foreach (string part in parts)
+        foreach (var part in parts)
         {
-            string[] bits = part.Split(new[] { '=' }, 2, StringSplitOptions.RemoveEmptyEntries);
+            var bits = part.Split(new[] { '=' }, 2, StringSplitOptions.RemoveEmptyEntries);
             dic.Add(bits[0], bits.Length == 1 ? "" : Uri.UnescapeDataString(bits[1]));
         }
 
@@ -624,7 +366,7 @@ public static class UtilityMethods
     /// <returns>The escaped string.</returns>
     public static string EscapeOAuthString(string text)
     {
-        string value = text;
+        var value = text;
 
         value = EscapeDataString(value).Replace("+", "%20");
 
@@ -655,11 +397,11 @@ public static class UtilityMethods
 
     internal static string EscapeDataString(string value)
     {
-        int limit = 2000;
+        var limit = 2000;
         StringBuilder sb = new(value.Length + value.Length / 2);
-        int loops = value.Length / limit;
+        var loops = value.Length / limit;
 
-        for (int i = 0; i <= loops; i++)
+        for (var i = 0; i <= loops; i++)
         {
             if (i < loops)
             {
@@ -672,19 +414,5 @@ public static class UtilityMethods
         }
 
         return sb.ToString();
-    }
-
-    //todo: KEKW
-    /// <summary>
-    /// Converts a collection of <see cref="Style"/> values to a string literal containing the
-    /// lowercase string representations of each distinct style once, separated by commas.
-    /// </summary>
-    /// <param name="styles">Set of styles.</param>
-    /// <returns>Concatenated styles.</returns>
-    /// <exception cref="ArgumentNullException"><paramref name="styles"/> is null.</exception>
-    /// <exception cref="OutOfMemoryException">Out of memory.</exception>
-    public static string StylesToString(ICollection<Style> styles)
-    {
-        return string.Join(",", styles.Distinct().Select(s => s.ToString().ToLower()));
     }
 }

@@ -6,8 +6,6 @@
 /// <remarks>The requested service is temporarily unavailable.</remarks>
 public class ServiceUnavailableException : FlickrApiException
 {
-    internal ServiceUnavailableException(string message)
-        : base(105, message)
-    {
-    }
+    internal ServiceUnavailableException(string message) : base(105, message)
+    { }
 }

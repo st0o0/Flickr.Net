@@ -1,91 +1,63 @@
-﻿namespace Flickr.Net.Core;
+﻿using Flickr.Net.Core.Internals.Extensions;
+
+namespace Flickr.Net.Core;
 
 /// <summary>
 /// The flickr.
 /// </summary>
 public partial class Flickr : IFlickrMachineTags
 {
-    async Task<NamespaceCollection> IFlickrMachineTags.GetNamespacesAsync(string predicate, int page, int perPage, CancellationToken cancellationToken)
+    async Task<Namespaces> IFlickrMachineTags.GetNamespacesAsync(string predicate, int page, int perPage, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
             { "method", "flickr.machinetags.getNamespaces" }
         };
 
-        if (!string.IsNullOrEmpty(predicate))
-        {
-            parameters.Add("predicate", predicate);
-        }
+        parameters.AppendIf("predicate", predicate, x => !string.IsNullOrEmpty(x), x => x);
 
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<NamespaceCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<Namespaces>(parameters, cancellationToken);
     }
 
-    async Task<PairCollection> IFlickrMachineTags.GetPairsAsync(string namespaceName, string predicate, int page, int perPage, CancellationToken cancellationToken)
+    async Task<Pairs> IFlickrMachineTags.GetPairsAsync(string namespaceName, string predicate, int page, int perPage, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
             { "method", "flickr.machinetags.getPairs" }
         };
 
-        if (!string.IsNullOrEmpty(namespaceName))
-        {
-            parameters.Add("namespace", namespaceName);
-        }
+        parameters.AppendIf("namespace", namespaceName, x => !string.IsNullOrEmpty(x), x => x);
 
-        if (!string.IsNullOrEmpty(predicate))
-        {
-            parameters.Add("predicate", predicate);
-        }
+        parameters.AppendIf("predicate", predicate, x => !string.IsNullOrEmpty(x), x => x);
 
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<PairCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<Pairs>(parameters, cancellationToken);
     }
 
-    async Task<PredicateCollection> IFlickrMachineTags.GetPredicatesAsync(string namespaceName, int page, int perPage, CancellationToken cancellationToken)
+    async Task<Predicates> IFlickrMachineTags.GetPredicatesAsync(string namespaceName, int page, int perPage, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
             { "method", "flickr.machinetags.getPredicates" }
         };
 
-        if (!string.IsNullOrEmpty(namespaceName))
-        {
-            parameters.Add("namespace", namespaceName);
-        }
+        parameters.AppendIf("namespace", namespaceName, x => !string.IsNullOrEmpty(x), x => x);
 
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<PredicateCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<Predicates>(parameters, cancellationToken);
     }
 
-    async Task<ValueCollection> IFlickrMachineTags.GetRecentValuesAsync(string namespaceName, string predicate, DateTime? addedSince, CancellationToken cancellationToken)
+    async Task<Values> IFlickrMachineTags.GetRecentValuesAsync(string namespaceName, string predicate, DateTime? addedSince, CancellationToken cancellationToken)
     {
         if (string.IsNullOrEmpty(namespaceName) && string.IsNullOrEmpty(predicate) && addedSince == DateTime.MinValue)
         {
@@ -97,25 +69,16 @@ public partial class Flickr : IFlickrMachineTags
             { "method", "flickr.machinetags.getRecentValues" }
         };
 
-        if (!string.IsNullOrEmpty(namespaceName))
-        {
-            parameters.Add("namespace", namespaceName);
-        }
+        parameters.AppendIf("namespace", namespaceName, x => !string.IsNullOrEmpty(x), x => x);
 
-        if (!string.IsNullOrEmpty(predicate))
-        {
-            parameters.Add("predicate", predicate);
-        }
+        parameters.AppendIf("predicate", predicate, x => !string.IsNullOrEmpty(x), x => x);
 
-        if (addedSince.HasValue && addedSince > DateTime.MinValue)
-        {
-            parameters.Add("added_since", UtilityMethods.DateToUnixTimestamp(addedSince.Value));
-        }
+        parameters.AppendIf("added_since", addedSince, x => x.HasValue && x > DateTime.MinValue, x => x.Value.ToUnixTimestamp());
 
-        return await GetResponseAsync<ValueCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<Values>(parameters, cancellationToken);
     }
 
-    async Task<ValueCollection> IFlickrMachineTags.GetValuesAsync(string namespaceName, string predicate, int page, int perPage, CancellationToken cancellationToken)
+    async Task<Values> IFlickrMachineTags.GetValuesAsync(string namespaceName, string predicate, int page, int perPage, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -124,17 +87,11 @@ public partial class Flickr : IFlickrMachineTags
             { "predicate", predicate }
         };
 
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<ValueCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<Values>(parameters, cancellationToken);
     }
 }
 
@@ -157,7 +114,7 @@ public interface IFlickrMachineTags
     /// maximum allowed value is 500.
     /// </param>
     /// <param name="cancellationToken"></param>
-    Task<NamespaceCollection> GetNamespacesAsync(string predicate = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<Namespaces> GetNamespacesAsync(string predicate = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Return a list of unique namespace and predicate pairs, optionally limited by predicate or
@@ -177,7 +134,7 @@ public interface IFlickrMachineTags
     /// maximum allowed value is 500.
     /// </param>
     /// <param name="cancellationToken"></param>
-    Task<PairCollection> GetPairsAsync(string namespaceName = null, string predicate = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<Pairs> GetPairsAsync(string namespaceName = null, string predicate = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Return a list of unique predicates, optionally limited by a given namespace, in alphabetical order.
@@ -193,7 +150,7 @@ public interface IFlickrMachineTags
     /// The maximum allowed value is 500.
     /// </param>
     /// <param name="cancellationToken"></param>
-    Task<PredicateCollection> GetPredicatesAsync(string namespaceName = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<Predicates> GetPredicatesAsync(string namespaceName = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Fetch recently used (or created) machine tags values.
@@ -204,7 +161,7 @@ public interface IFlickrMachineTags
     /// Only return machine tags values that have been added since this timestamp.
     /// </param>
     /// <param name="cancellationToken"></param>
-    Task<ValueCollection> GetRecentValuesAsync(string namespaceName = null, string predicate = null, DateTime? addedSince = null, CancellationToken cancellationToken = default);
+    Task<Values> GetRecentValuesAsync(string namespaceName = null, string predicate = null, DateTime? addedSince = null, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Return a list of unique values for a namespace and predicate.
@@ -219,5 +176,5 @@ public interface IFlickrMachineTags
     /// maximum allowed value is 500.
     /// </param>
     /// <param name="cancellationToken"></param>
-    Task<ValueCollection> GetValuesAsync(string namespaceName, string predicate, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<Values> GetValuesAsync(string namespaceName, string predicate, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 }

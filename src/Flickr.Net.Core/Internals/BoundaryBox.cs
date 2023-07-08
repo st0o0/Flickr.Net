@@ -50,7 +50,7 @@ public class BoundaryBox
             throw new ArgumentNullException(nameof(points));
         }
 
-        string[] splits = points.Split(',');
+        var splits = points.Split(',');
 
         if (splits.Length != 4)
         {
@@ -270,12 +270,12 @@ public class BoundaryBox
 
     private double DiagonalDistance()
     {
-        double latRad1 = MinimumLatitude / 180.0 * Math.PI;
-        double latRad2 = MaximumLatitude / 180.0 * Math.PI;
-        double lonRad1 = MinimumLongitude / 180.0 * Math.PI;
-        double lonRad2 = MaximumLongitude / 180.0 * Math.PI;
+        var latRad1 = MinimumLatitude / 180.0 * Math.PI;
+        var latRad2 = MaximumLatitude / 180.0 * Math.PI;
+        var lonRad1 = MinimumLongitude / 180.0 * Math.PI;
+        var lonRad2 = MaximumLongitude / 180.0 * Math.PI;
 
-        double e = Math.Acos(Math.Sin(latRad1) * Math.Sin(latRad2) + Math.Cos(latRad1) * Math.Cos(latRad2) * Math.Cos(lonRad2 - lonRad1));
+        var e = Math.Acos(Math.Sin(latRad1) * Math.Sin(latRad2) + Math.Cos(latRad1) * Math.Cos(latRad2) * Math.Cos(lonRad2 - lonRad1));
         return e;
     }
 }

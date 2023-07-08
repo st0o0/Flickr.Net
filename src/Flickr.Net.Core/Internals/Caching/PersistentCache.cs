@@ -51,7 +51,7 @@ public sealed class PersistentCache : IDisposable
         using (lockFile.Acquire())
         {
             Refresh();
-            InternalGetAll(valueType, out string[] keys, out Array values);
+            InternalGetAll(valueType, out var keys, out var values);
             return (ICacheItem[])values;
         }
     }
@@ -149,21 +149,21 @@ public sealed class PersistentCache : IDisposable
         {
             Refresh();
 
-            InternalGetAll(typeof(ICacheItem), out string[] keys, out Array values);
+            InternalGetAll(typeof(ICacheItem), out var keys, out var values);
             long totalSize = 0;
             foreach (ICacheItem cacheItem in values)
             {
                 totalSize += cacheItem.FileSize;
             }
 
-            for (int i = 0; i < keys.Length; i++)
+            for (var i = 0; i < keys.Length; i++)
             {
                 if (totalSize <= size)
                 {
                     break;
                 }
 
-                ICacheItem cacheItem = (ICacheItem)values.GetValue(i);
+                var cacheItem = (ICacheItem)values.GetValue(i);
                 totalSize -= cacheItem.FileSize;
                 flushed.Add(RemoveKey(keys[i]));
             }
@@ -171,7 +171,7 @@ public sealed class PersistentCache : IDisposable
             Persist();
         }
 
-        foreach (ICacheItem flushedItem in flushed)
+        foreach (var flushedItem in flushed)
         {
             Debug.Assert(flushedItem != null, "Flushed item was null--programmer error");
             if (flushedItem != null)
@@ -206,7 +206,7 @@ public sealed class PersistentCache : IDisposable
 
         keys = new List<string>(dataTable.Keys).ToArray();
         values = Array.CreateInstance(valueType, keys.Length);
-        for (int i = 0; i < keys.Length; i++)
+        for (var i = 0; i < keys.Length; i++)
         {
             values.SetValue(dataTable[keys[i]], i);
         }
@@ -259,7 +259,7 @@ public sealed class PersistentCache : IDisposable
             return null;
         }
 
-        ICacheItem cacheItem = dataTable[key];
+        var cacheItem = dataTable[key];
         dataTable.Remove(key);
         dirty = true;
         return cacheItem;
@@ -269,7 +269,7 @@ public sealed class PersistentCache : IDisposable
     {
         Debug.Assert(!dirty, "Refreshing even though cache is dirty");
 
-        DateTime newTimestamp = DateTime.MinValue;
+        var newTimestamp = DateTime.MinValue;
         long newLength = -1;
 
         dataFile.Refresh();
@@ -290,7 +290,7 @@ public sealed class PersistentCache : IDisposable
             else
             {
                 Debug.WriteLine("Loading cache from disk");
-                using FileStream inStream = dataFile.Open(FileMode.Open, FileAccess.Read, FileShare.Read);
+                using var inStream = dataFile.Open(FileMode.Open, FileAccess.Read, FileShare.Read);
                 dataTable = Load(inStream);
             }
         }
@@ -308,7 +308,7 @@ public sealed class PersistentCache : IDisposable
         }
 
         Debug.WriteLine("Saving cache to disk");
-        using (FileStream outStream = dataFile.Open(FileMode.OpenOrCreate, FileAccess.Write, FileShare.None))
+        using (var outStream = dataFile.Open(FileMode.OpenOrCreate, FileAccess.Write, FileShare.None))
         {
             Store(outStream, dataTable);
         }
@@ -323,13 +323,13 @@ public sealed class PersistentCache : IDisposable
     private Dictionary<string, ICacheItem> Load(Stream s)
     {
         Dictionary<string, ICacheItem> table = new();
-        int itemCount = UtilityMethods.ReadInt32(s);
-        for (int i = 0; i < itemCount; i++)
+        var itemCount = UtilityMethods.ReadInt32(s);
+        for (var i = 0; i < itemCount; i++)
         {
             try
             {
-                string key = UtilityMethods.ReadString(s);
-                ICacheItem val = persister.Read(s);
+                var key = UtilityMethods.ReadString(s);
+                var val = persister.Read(s);
                 if (val == null) // corrupt cache file
                 {
                     return table;
@@ -348,7 +348,7 @@ public sealed class PersistentCache : IDisposable
     private void Store(Stream s, Dictionary<string, ICacheItem> table)
     {
         UtilityMethods.WriteInt32(s, table.Count);
-        foreach (KeyValuePair<string, ICacheItem> entry in table)
+        foreach (var entry in table)
         {
             UtilityMethods.WriteString(s, entry.Key);
             persister.Write(s, entry.Value);

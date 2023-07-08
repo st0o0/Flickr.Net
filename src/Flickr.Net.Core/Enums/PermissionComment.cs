@@ -1,34 +1,31 @@
-﻿using System.Xml.Serialization;
-
-namespace Flickr.Net.Core.Enums;
+﻿namespace Flickr.Net.Core.Enums;
 
 /// <summary>
 /// An enumeration defining who can add comments.
 /// </summary>
-[Serializable]
 public enum PermissionComment
 {
     /// <summary>
     /// Nobody.
     /// </summary>
-    [XmlEnum("0")]
+    [EnumMember(Value = "0")]
     Nobody = 0,
 
     /// <summary>
     /// Friends and family only.
     /// </summary>
-    [XmlEnum("1")]
+    [EnumMember(Value = "1")]
     FriendsAndFamily = 1,
 
     /// <summary>
     /// Contacts only.
     /// </summary>
-    [XmlEnum("2")]
+    [EnumMember(Value = "2")]
     ContactsOnly = 2,
 
     /// <summary>
     /// All Flickr users.
     /// </summary>
-    [XmlEnum("3")]
+    [EnumMember(Value = "3")]
     Everybody = 3
 }

@@ -1,146 +1,125 @@
-﻿namespace Flickr.Net.Core.Entities;
+﻿using Flickr.Net.Core.Bases;
+using Flickr.Net.Core.Internals.Attributes;
 
-/// <summary>
-/// The <see cref="PhotoPerson"/> class contains details returned by the <see
-/// cref="IFlickrPhotosPeople.GetListAsync(string, CancellationToken)"/> method.
-/// </summary>
-public sealed class PhotoPerson : IFlickrParsable
+namespace Flickr.Net.Core;
+
+[FlickrJsonPropertyName("person")]
+public record PhotoPerson : FlickrEntityBase<NsId>
 {
-    /// <summary>
-    /// The user id of the user.
-    /// </summary>
-    /// <remarks/>
-    public string UserId { get; set; }
+    [JsonProperty("username")]
+    public string Username { get; set; }
 
-    /// <summary>
-    /// The server that will serve up the users Buddy Icon.
-    /// </summary>
+    [JsonProperty("favedate")]
+    public DateTime FaveDate { get; set; }
+
+    [JsonProperty("ispro")]
+    public bool IsPro { get; set; }
+
+    [JsonProperty("is_deleted")]
+    public bool IsDeleted { get; set; }
+
+    [JsonProperty("iconserver")]
     public string IconServer { get; set; }
 
-    /// <summary>
-    /// The server farm that will serve up the users Buddy Icon.
-    /// </summary>
-    public string IconFarm { get; set; }
+    [JsonProperty("iconfarm")]
+    public int Iconfarm { get; set; }
 
-    /// <summary>
-    /// The users username, also known as their screenname.
-    /// </summary>
-    public string UserName { get; set; }
-
-    /// <summary>
-    /// The users real name, as entered in their profile.
-    /// </summary>
-    public string RealName { get; set; }
-
-    /// <summary>
-    /// The user ID of the person who added this person, to this photo.
-    /// </summary>
-    public string AddedByUserId { get; set; }
-
-    /// <summary>
-    /// The left most position of the persons bounding box, if any.
-    /// </summary>
-    public int? PositionX { get; set; }
-
-    /// <summary>
-    /// The top most position of the persons bounding box, if any.
-    /// </summary>
-    public int? PositionY { get; set; }
-
-    /// <summary>
-    /// The width of the persons bounding box, if any.
-    /// </summary>
-    public int? PositionWidth { get; set; }
-
-    /// <summary>
-    /// The height of the persons bounding box, if any.
-    /// </summary>
-    public int? PositionHeight { get; set; }
-
-    /// <summary>
-    /// The path alias for the users photostream, if they have set it.
-    /// </summary>
+    [JsonProperty("path_alias")]
     public string PathAlias { get; set; }
 
-    /// <summary>
-    /// The URL for the users Flickr home page.
-    /// </summary>
-    public string PhotostreamUrl
-    {
-        get
-        {
-            return "https://www.flickr.com/photos/" + (string.IsNullOrEmpty(PathAlias) ? UserId : PathAlias);
-        }
-    }
+    [JsonProperty("has_stats")]
+    public bool HasStats { get; set; }
 
-    /// <summary>
-    /// Returns the <see cref="Uri"/> for the users Buddy Icon.
-    /// </summary>
-    public string BuddyIconUrl
-    {
-        get
-        {
-            return UtilityMethods.BuddyIcon(IconServer, IconFarm, UserId);
-        }
-    }
+    [JsonProperty("pro_badge")]
+    public string ProBadge { get; set; }
 
-    void IFlickrParsable.Load(System.Xml.XmlReader reader)
-    {
-        while (reader.MoveToNextAttribute())
-        {
-            switch (reader.LocalName)
-            {
-                case "id":
-                case "nsid":
-                    UserId = reader.Value;
-                    break;
+    [JsonProperty("expire")]
+    public string Expire { get; set; }
 
-                case "iconserver":
-                    IconServer = reader.Value;
-                    break;
+    [JsonProperty("gender")]
+    public string Gender { get; set; }
 
-                case "iconfarm":
-                    IconFarm = reader.Value;
-                    break;
+    [JsonProperty("ignored")]
+    public bool Ignored { get; set; }
 
-                case "username":
-                    UserName = reader.Value;
-                    break;
+    [JsonProperty("contact")]
+    public bool Contact { get; set; }
 
-                case "realname":
-                    RealName = reader.Value;
-                    break;
+    [JsonProperty("friend")]
+    public bool Friend { get; set; }
 
-                case "added_by":
-                    AddedByUserId = reader.Value;
-                    break;
+    [JsonProperty("family")]
+    public bool Family { get; set; }
 
-                case "path_alias":
-                    PathAlias = reader.Value;
-                    break;
+    [JsonProperty("revcontact")]
+    public bool Revcontact { get; set; }
 
-                case "x":
-                    PositionX = reader.ReadContentAsInt();
-                    break;
+    [JsonProperty("revfriend")]
+    public bool Revfriend { get; set; }
 
-                case "y":
-                    PositionY = reader.ReadContentAsInt();
-                    break;
+    [JsonProperty("revfamily")]
+    public bool Revfamily { get; set; }
 
-                case "w":
-                    PositionWidth = reader.ReadContentAsInt();
-                    break;
+    [JsonProperty("realname")]
+    public string Realname { get; set; }
 
-                case "h":
-                    PositionHeight = reader.ReadContentAsInt();
-                    break;
+    [JsonProperty("location")]
+    public string Location { get; set; }
 
-                default:
-                    UtilityMethods.CheckParsingException(reader);
-                    break;
-            }
-        }
+    [JsonProperty("timezone")]
+    public TimeZone Timezone { get; set; }
 
-        reader.Read();
-    }
+    [JsonProperty("description")]
+    public string Description { get; set; }
+
+    [JsonProperty("photosurl")]
+    public string PhotosUrl { get; set; }
+
+    [JsonProperty("profileurl")]
+    public string ProfileUrl { get; set; }
+
+    [JsonProperty("mobileurl")]
+    public string MobileUrl { get; set; }
+
+    [JsonProperty("photos")]
+    public PhotoDateInfos PhotoDateInfos { get; set; }
+
+    [JsonProperty("has_adfree")]
+    public bool HasAdfree { get; set; }
+
+    [JsonProperty("has_free_standard_shipping")]
+    public bool HasFreeStandardShipping { get; set; }
+
+    [JsonProperty("has_free_educational_resources")]
+    public bool HasFreeEducationalResources { get; set; }
+
+    [JsonProperty("mbox_sha1sum")]
+    public string MboxSha1sum { get; set; }
+}
+
+public struct TimeZone
+{
+    [JsonProperty("label")]
+    public string Label { get; set; }
+
+    [JsonProperty("offset")]
+    public string Offset { get; set; }
+
+    [JsonProperty("timezone_id")]
+    public string TimezoneId { get; set; }
+
+    [JsonProperty("timezone")]
+    public int Timezone { get; set; }
+}
+
+public struct PhotoDateInfos
+{
+    [JsonProperty("firstdatetaken")]
+    public DateTime FirstDateTaken { get; set; }
+
+    [JsonProperty("firstdate")]
+    public DateTime FirstDate { get; set; }
+
+    [JsonProperty("count")]
+    public int Count { get; set; }
 }

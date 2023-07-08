@@ -6,10 +6,10 @@ internal class ResponseCacheItemPersister : CacheItemPersister
 {
     public override ICacheItem Read(Stream inputStream)
     {
-        string s = UtilityMethods.ReadString(inputStream);
-        byte[] response = UtilityMethods.ReadByteArray(inputStream);
+        var s = UtilityMethods.ReadString(inputStream);
+        var response = UtilityMethods.ReadString(inputStream);
 
-        string[] chunks = s.Split('\n');
+        var chunks = s.Split('\n');
 
         // Corrupted cache record, so throw IOException which is then handled and returns partial cache.
         if (chunks.Length != 2)
@@ -17,7 +17,7 @@ internal class ResponseCacheItemPersister : CacheItemPersister
             throw new IOException("Unexpected number of chunks found");
         }
 
-        string url = chunks[0];
+        var url = chunks[0];
         DateTime creationTime = new(long.Parse(chunks[1], System.Globalization.NumberStyles.Any, System.Globalization.NumberFormatInfo.InvariantInfo));
         ResponseCacheItem item = new(new Uri(url), response, creationTime);
         return item;
@@ -25,7 +25,7 @@ internal class ResponseCacheItemPersister : CacheItemPersister
 
     public override void Write(Stream outputStream, ICacheItem cacheItem)
     {
-        ResponseCacheItem item = (ResponseCacheItem)cacheItem;
+        var item = (ResponseCacheItem)cacheItem;
         StringBuilder result = new();
         result.Append(item.Url.AbsoluteUri + "\n");
         result.Append(item.CreationTime.Ticks.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));

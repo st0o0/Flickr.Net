@@ -1,4 +1,6 @@
-﻿namespace Flickr.Net.Core;
+﻿using Flickr.Net.Core.Internals.Extensions;
+
+namespace Flickr.Net.Core;
 
 /// <summary>
 /// The flickr.
@@ -32,10 +34,10 @@ public partial class Flickr : IFlickrGroupsDiscussTopics
             { "message", message }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
-    async Task<TopicCollection> IFlickrGroupsDiscussTopics.TopicsGetListAsync(string groupId, int page, int perPage, CancellationToken cancellationToken)
+    async Task<Topics> IFlickrGroupsDiscussTopics.TopicsGetListAsync(string groupId, int page, int perPage, CancellationToken cancellationToken)
     {
         if (string.IsNullOrEmpty(groupId))
         {
@@ -48,17 +50,11 @@ public partial class Flickr : IFlickrGroupsDiscussTopics
             { "group_id", groupId }
         };
 
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<TopicCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<Topics>(parameters, cancellationToken);
     }
 
     async Task<Topic> IFlickrGroupsDiscussTopics.TopicsGetInfoAsync(string topicId, CancellationToken cancellationToken)
@@ -101,7 +97,7 @@ public interface IFlickrGroupsDiscussTopics
     /// <param name="perPage">The number of topics per page to return.</param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<TopicCollection> TopicsGetListAsync(string groupId, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<Topics> TopicsGetListAsync(string groupId, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets information on a particular topic with a group.

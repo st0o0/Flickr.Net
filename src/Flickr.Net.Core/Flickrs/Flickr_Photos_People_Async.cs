@@ -1,4 +1,6 @@
-﻿namespace Flickr.Net.Core;
+﻿using Flickr.Net.Core.Internals.Extensions;
+
+namespace Flickr.Net.Core;
 
 /// <summary>
 /// The flickr.
@@ -16,27 +18,15 @@ public partial class Flickr : IFlickrPhotosPeople
             { "user_id", userId }
         };
 
-        if (personX != null)
-        {
-            parameters.Add("person_x", personX.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("person_x", personX, x => x.HasValue, x => x.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (personY != null)
-        {
-            parameters.Add("person_y", personY.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("person_y", personY, x => x.HasValue, x => x.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (personWidth != null)
-        {
-            parameters.Add("person_w", personWidth.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("person_w", personWidth, x => x.HasValue, x => x.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (personHeight != null)
-        {
-            parameters.Add("person_h", personHeight.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("person_h", personHeight, x => x.HasValue, x => x.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
     async Task IFlickrPhotosPeople.DeleteAsync(string photoId, string userId, CancellationToken cancellationToken)
@@ -50,7 +40,7 @@ public partial class Flickr : IFlickrPhotosPeople
             { "user_id", userId }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
     async Task IFlickrPhotosPeople.DeleteCoordsAsync(string photoId, string userId, CancellationToken cancellationToken)
@@ -64,7 +54,7 @@ public partial class Flickr : IFlickrPhotosPeople
             { "user_id", userId }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
     async Task IFlickrPhotosPeople.EditCoordsAsync(string photoId, string userId, int personX, int personY, int personWidth, int personHeight, CancellationToken cancellationToken)
@@ -82,10 +72,10 @@ public partial class Flickr : IFlickrPhotosPeople
             { "person_h", personHeight.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
-    async Task<PhotoPersonCollection> IFlickrPhotosPeople.GetListAsync(string photoId, CancellationToken cancellationToken)
+    async Task<PeoplePersons> IFlickrPhotosPeople.GetListAsync(string photoId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -93,7 +83,7 @@ public partial class Flickr : IFlickrPhotosPeople
             { "photo_id", photoId }
         };
 
-        return await GetResponseAsync<PhotoPersonCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<PeoplePersons>(parameters, cancellationToken);
     }
 }
 
@@ -153,5 +143,5 @@ public interface IFlickrPhotosPeople
     /// <param name="photoId">The id of the photo to get a list of people for.</param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<PhotoPersonCollection> GetListAsync(string photoId, CancellationToken cancellationToken = default);
+    Task<PeoplePersons> GetListAsync(string photoId, CancellationToken cancellationToken = default);
 }

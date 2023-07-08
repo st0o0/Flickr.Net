@@ -1,37 +1,29 @@
-﻿namespace Flickr.Net.Core;
+﻿using Flickr.Net.Core.Internals.Extensions;
+
+namespace Flickr.Net.Core;
 
 /// <summary>
 /// The flickr.
 /// </summary>
 public partial class Flickr : IFlickrGroupsMembers
 {
-    async Task<MemberCollection> IFlickrGroupsMembers.GetListAsync(string groupId, MemberTypes memberTypes, int page, int perPage, CancellationToken cancellationToken)
+    async Task<Members> IFlickrGroupsMembers.GetListAsync(string groupId, MemberType memberTypes, int page, int perPage, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
         Dictionary<string, string> parameters = new()
         {
             { "method", "flickr.groups.members.getList" },
+            {"group_id", groupId }
         };
 
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (memberTypes != MemberTypes.None)
-        {
-            parameters.Add("membertypes", UtilityMethods.MemberTypeToString(memberTypes));
-        }
+        parameters.AppendIf("membertypes", memberTypes, x => x != MemberType.None, x => x.ToFlickrString());
 
-        parameters.Add("group_id", groupId);
-
-        return await GetResponseAsync<MemberCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<Members>(parameters, cancellationToken);
     }
 }
 
@@ -57,5 +49,5 @@ public interface IFlickrGroupsMembers
     /// The number of members to return per page (default is 100, max is 500).
     /// </param>
     /// <param name="cancellationToken"></param>
-    Task<MemberCollection> GetListAsync(string groupId, MemberTypes memberTypes = MemberTypes.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<Members> GetListAsync(string groupId, MemberType memberTypes = MemberType.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 }

@@ -1,28 +1,39 @@
-using System.Xml.Schema;
-using System.Xml.Serialization;
+﻿using Flickr.Net.Core.Bases;
 
-namespace Flickr.Net.Core.Entities;
+namespace Flickr.Net.Core;
 
-/// <summary>
-/// Provides details of a particular group.
-/// </summary>
-public class Group
+public record Group : GroupBase
 {
-    /// <summary>
-    /// The id of the group.
-    /// </summary>
-    [XmlAttribute("nsid", Form = XmlSchemaForm.Unqualified)]
-    public string GroupId { get; set; }
+    [JsonProperty("admin")]
+    public bool Admin { get; set; }
 
-    /// <summary>
-    /// The name of the group
-    /// </summary>
-    [XmlAttribute("name", Form = XmlSchemaForm.Unqualified)]
-    public string GroupName { get; set; }
+    [JsonProperty("photos")]
+    public int Photos { get; set; }
 
-    /// <summary>
-    /// The number of memebers of the group.
-    /// </summary>
-    [XmlAttribute("members", Form = XmlSchemaForm.Unqualified)]
+    [JsonProperty("privacy")]
+    public PoolPrivacy Privacy { get; set; }
+
+    [JsonProperty("iconserver")]
+    public string IconServer { get; set; }
+
+    [JsonProperty("iconfarm")]
+    public string IconFarm { get; set; }
+
+    [JsonProperty("members")]
     public int Members { get; set; }
+
+    [JsonProperty("pool_count")]
+    public int PoolCount { get; set; }
+
+    [JsonProperty("topic_count")]
+    public int TopicCount { get; set; }
+
+    [JsonProperty("invitation_only")]
+    public bool InvitationOnly { get; set; }
+
+    /// <summary>
+    /// The url for the group's icon.
+    /// </summary>
+    [JsonIgnore]
+    public string GroupIconUrl => UtilityMethods.BuddyIcon(IconServer, IconFarm, Id);
 }

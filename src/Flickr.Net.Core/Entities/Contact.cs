@@ -1,153 +1,36 @@
-﻿namespace Flickr.Net.Core.Entities;
+﻿using Flickr.Net.Core.Bases;
 
-/// <summary>
-/// Contains details of a contact for a particular user.
-/// </summary>
-public sealed class Contact : IFlickrParsable
+namespace Flickr.Net.Core;
+
+public record Contact : FlickrEntityBase<NsId>
 {
-    /// <summary>
-    /// The user id of the contact.
-    /// </summary>
-    public string UserId { get; set; }
-
-    /// <summary>
-    /// The username (or screen name) of the contact.
-    /// </summary>
+    [JsonProperty("username")]
     public string UserName { get; set; }
 
-    /// <summary>
-    /// The users real name. Only returned for authenticated calls to <see
-    /// cref="IFlickrContacts.GetListAsync(ContactType, int, int, CancellationToken)"/>.
-    /// </summary>
-    public string RealName { get; set; }
-
-    /// <summary>
-    /// The location of the contact. Only returned for authenticated calls to <see
-    /// cref="IFlickrContacts.GetListAsync(ContactType, int, int, CancellationToken)"/>.
-    /// </summary>
-    public string Location { get; set; }
-
-    /// <summary>
-    /// The URL path alias for the contact. Only returned for authenticated calls to <see
-    /// cref="IFlickrContacts.GetListAsync(ContactType, int, int, CancellationToken)"/>.
-    /// </summary>
-    public string PathAlias { get; set; }
-
-    /// <summary>
-    /// The icon server for this contacts buddy icon.
-    /// </summary>
+    [JsonProperty("iconserver")]
     public string IconServer { get; set; }
 
-    /// <summary>
-    /// The icon farm for this contacts buddy icon.
-    /// </summary>
-    public string IconFarm { get; set; }
+    [JsonProperty("realname")]
+    public string RealName { get; set; }
 
-    /// <summary>
-    /// Is the contact a Pro user.
-    /// </summary>
-    public bool? IsPro { get; set; }
+    [JsonProperty("location")]
+    public string Location { get; set; }
 
-    /// <summary>
-    /// The buddy icon for this contact.
-    /// </summary>
-    public string BuddyIconUrl
-    {
-        get
-        {
-            return UtilityMethods.BuddyIcon(IconServer, IconFarm, UserId);
-        }
-    }
+    [JsonProperty("path_alias")]
+    public string PathAlias { get; set; }
 
-    /// <summary>
-    /// The number of photos uploaded. Only returned by <see
-    /// cref="IFlickrContacts.GetListRecentlyUploadedAsync(ContactSearch, DateTime?, CancellationToken)"/>
-    /// </summary>
-    public int? PhotosUploaded { get; set; }
+    [JsonProperty("photos_uploaded")]
+    public int UploadedPhotos { get; set; }
 
-    /// <summary>
-    /// Is this contact marked as a friend contact?
-    /// </summary>
-    public bool? IsFriend { get; set; }
+    [JsonProperty("friend")]
+    public bool Friend { get; set; }
 
-    /// <summary>
-    /// Is this user marked a family contact?
-    /// </summary>
-    public bool? IsFamily { get; set; }
+    [JsonProperty("family")]
+    public bool Family { get; set; }
 
-    /// <summary>
-    /// Unsure how to even set this!
-    /// </summary>
-    public bool? IsIgnored { get; set; }
+    [JsonProperty("ignored")]
+    public bool Ignored { get; set; }
 
-    void IFlickrParsable.Load(System.Xml.XmlReader reader)
-    {
-        if (reader.LocalName != "contact")
-        {
-            UtilityMethods.CheckParsingException(reader);
-        }
-
-        while (reader.MoveToNextAttribute())
-        {
-            switch (reader.LocalName)
-            {
-                case "nsid":
-                    UserId = reader.Value;
-                    break;
-
-                case "username":
-                    UserName = reader.Value;
-                    break;
-
-                case "iconserver":
-                    IconServer = reader.Value;
-                    break;
-
-                case "iconfarm":
-                    IconFarm = reader.Value;
-                    break;
-
-                case "ignored":
-                    IsIgnored = reader.Value == "0";
-                    break;
-
-                case "realname":
-                    RealName = reader.Value;
-                    break;
-
-                case "location":
-                    Location = reader.Value;
-                    break;
-
-                case "friend":
-                    IsFriend = reader.Value == "1";
-                    break;
-
-                case "family":
-                    IsFamily = reader.Value == "1";
-                    break;
-
-                case "path_alias":
-                    PathAlias = reader.Value;
-                    break;
-
-                case "photos_uploaded":
-                    PhotosUploaded = int.Parse(reader.Value, System.Globalization.NumberFormatInfo.InvariantInfo);
-                    break;
-
-                case "rev_ignored":
-                    break;
-
-                case "ispro":
-                    IsPro = reader.Value == "1";
-                    break;
-
-                default:
-                    UtilityMethods.CheckParsingException(reader);
-                    break;
-            }
-        }
-
-        reader.Skip();
-    }
+    [JsonProperty("ispro")]
+    public bool IsPro { get; set; }
 }

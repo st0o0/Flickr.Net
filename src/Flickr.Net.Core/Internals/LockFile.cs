@@ -26,7 +26,7 @@ internal class LockFile : IDisposable
 
     public IDisposable Acquire()
     {
-        string dir = Path.GetDirectoryName(filepath);
+        var dir = Path.GetDirectoryName(filepath);
 
         lock (this)
         {
@@ -50,7 +50,7 @@ internal class LockFile : IDisposable
                 }
                 catch (IOException ioe)
                 {
-                    int errorCode = SafeNativeMethods.GetErrorCode(ioe);
+                    var errorCode = SafeNativeMethods.GetErrorCode(ioe);
                     switch (errorCode)
                     {
                         case 32:

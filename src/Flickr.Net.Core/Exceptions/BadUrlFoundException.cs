@@ -5,8 +5,6 @@
 /// </summary>
 public sealed class BadUrlFoundException : FlickrApiException
 {
-    internal BadUrlFoundException(string message)
-        : base(111, message)
-    {
-    }
+    internal BadUrlFoundException(string message) : base(111, message)
+    { }
 }

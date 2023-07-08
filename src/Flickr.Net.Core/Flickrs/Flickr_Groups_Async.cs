@@ -1,4 +1,6 @@
-﻿namespace Flickr.Net.Core;
+﻿using Flickr.Net.Core.Internals.Extensions;
+
+namespace Flickr.Net.Core;
 
 /// <summary>
 /// The flickr.
@@ -11,7 +13,7 @@ public partial class Flickr : IFlickrGroups
 
     IFlickrGroupsPools IFlickrGroups.Pools => this;
 
-    async Task<GroupFullInfo> IFlickrGroups.GetInfoAsync(string groupId, CancellationToken cancellationToken)
+    async Task<GroupInfo> IFlickrGroups.GetInfoAsync(string groupId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -19,7 +21,7 @@ public partial class Flickr : IFlickrGroups
             { "group_id", groupId }
         };
 
-        return await GetResponseAsync<GroupFullInfo>(parameters, cancellationToken);
+        return await GetResponseAsync<GroupInfo>(parameters, cancellationToken);
     }
 
     async Task IFlickrGroups.JoinAsync(string groupId, bool acceptsRules, CancellationToken cancellationToken)
@@ -32,15 +34,12 @@ public partial class Flickr : IFlickrGroups
             { "group_id", groupId }
         };
 
-        if (acceptsRules)
-        {
-            parameters.Add("accepts_rules", "1");
-        }
+        parameters.AppendIf("accept_rules", acceptsRules, x => x, _ => "1");
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
-    async Task IFlickrGroups.JoinRequestAsync(string groupId, string message, bool acceptRules, CancellationToken cancellationToken)
+    async Task IFlickrGroups.JoinRequestAsync(string groupId, string message, bool acceptsRules, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -51,12 +50,9 @@ public partial class Flickr : IFlickrGroups
             { "message", message }
         };
 
-        if (acceptRules)
-        {
-            parameters.Add("accept_rules", "1");
-        }
+        parameters.AppendIf("accept_rules", acceptsRules, x => x, _ => "1");
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
     async Task IFlickrGroups.LeaveAsync(string groupId, bool deletePhotos, CancellationToken cancellationToken)
@@ -69,15 +65,12 @@ public partial class Flickr : IFlickrGroups
             { "group_id", groupId }
         };
 
-        if (deletePhotos)
-        {
-            parameters.Add("delete_photos", "1");
-        }
+        parameters.AppendIf("delete_photos", deletePhotos, x => x, _ => "1");
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
-    async Task<GroupSearchResultCollection> IFlickrGroups.SearchAsync(string text, int page, int perPage, CancellationToken cancellationToken)
+    async Task<Groups> IFlickrGroups.SearchAsync(string text, int page, int perPage, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -85,17 +78,11 @@ public partial class Flickr : IFlickrGroups
             { "text", text }
         };
 
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<GroupSearchResultCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<Groups>(parameters, cancellationToken);
     }
 }
 
@@ -121,7 +108,7 @@ public interface IFlickrGroups
     /// </summary>
     /// <param name="groupId">The id of the group to return.</param>
     /// <param name="cancellationToken"></param>
-    Task<GroupFullInfo> GetInfoAsync(string groupId, CancellationToken cancellationToken = default);
+    Task<GroupInfo> GetInfoAsync(string groupId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Specify a group for the authenticated user to join.
@@ -157,5 +144,5 @@ public interface IFlickrGroups
     /// <param name="page">The page of the results to return.</param>
     /// <param name="perPage">The number of groups to list per page.</param>
     /// <param name="cancellationToken"></param>
-    Task<GroupSearchResultCollection> SearchAsync(string text, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<Groups> SearchAsync(string text, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 }

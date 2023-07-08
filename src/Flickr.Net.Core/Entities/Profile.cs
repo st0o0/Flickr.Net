@@ -1,174 +1,56 @@
-﻿namespace Flickr.Net.Core.Entities;
+﻿using Flickr.Net.Core.Bases;
 
-/// <summary>
-/// A user's profile
-/// </summary>
-public class Profile : IFlickrParsable
+namespace Flickr.Net.Core;
+public record Profile : FlickrEntityBase<Id>
 {
-    /// <summary>
-    /// The ID of the user.
-    /// </summary>
-    public string UserId { get; private set; }
+    [JsonProperty("nsid")]
+    public string Nsid { get; set; }
 
-    /// <summary>
-    /// Date the user joined Flickr.
-    /// </summary>
-    public DateTime? JoinDate { get; private set; }
+    [JsonProperty("join_date")]
+    public DateTime JoinDate { get; set; }
 
-    /// <summary>
-    /// Occupation of user, if set.
-    /// </summary>
-    public string Occupation { get; private set; }
+    [JsonProperty("occupation")]
+    public string Occupation { get; set; }
 
-    /// <summary>
-    /// Hometown of user, if set and visible.
-    /// </summary>
-    public string HomeTown { get; private set; }
+    [JsonProperty("hometown")]
+    public string Hometown { get; set; }
 
-    /// <summary>
-    /// The photoset id of the showcase set for this user.
-    /// </summary>
-    public string ShowcaseSet { get; private set; }
+    [JsonProperty("showcase_set")]
+    public string ShowcaseSet { get; set; }
 
-    /// <summary>
-    /// The title of the showcase set for this user.
-    /// </summary>
-    public string ShowcaseSetTitle { get; private set; }
+    [JsonProperty("showcase_set_title")]
+    public string ShowcaseSetTitle { get; set; }
 
-    /// <summary>
-    /// The first name of this user.
-    /// </summary>
-    public string FirstName { get; private set; }
+    [JsonProperty("first_name")]
+    public string FirstName { get; set; }
 
-    /// <summary>
-    /// The last name of this user.
-    /// </summary>
-    public string LastName { get; private set; }
+    [JsonProperty("last_name")]
+    public string LastName { get; set; }
 
-    /// <summary>
-    /// The verbose text of this users profile description.
-    /// </summary>
-    public string ProfileDescription { get; private set; }
+    [JsonProperty("email")]
+    public string Email { get; set; }
 
-    /// <summary>
-    /// The web site for this user, if set.
-    /// </summary>
-    public string WebSite { get; private set; }
+    [JsonProperty("profile_description")]
+    public string ProfileDescription { get; set; }
 
-    /// <summary>
-    /// The city where the user lives, if set.
-    /// </summary>
-    public string City { get; private set; }
+    [JsonProperty("city")]
+    public string City { get; set; }
 
-    /// <summary>
-    /// The country where the user lives, if set.
-    /// </summary>
-    public string Country { get; private set; }
+    [JsonProperty("country")]
+    public string Country { get; set; }
 
-    /// <summary>
-    /// Facebook username/url.
-    /// </summary>
-    public string Facebook { get; private set; }
+    [JsonProperty("facebook")]
+    public string Facebook { get; set; }
 
-    /// <summary>
-    /// Tumblr url.
-    /// </summary>
-    public string Tumblr { get; private set; }
+    [JsonProperty("twitter")]
+    public string Twitter { get; set; }
 
-    /// <summary>
-    /// Twitter url.
-    /// </summary>
-    public string Twitter { get; private set; }
+    [JsonProperty("tumblr")]
+    public string Tumblr { get; set; }
 
-    /// <summary>
-    /// Instagram url.
-    /// </summary>
-    public string Instagram { get; private set; }
+    [JsonProperty("instagram")]
+    public string Instagram { get; set; }
 
-    /// <summary>
-    /// PInterest url.
-    /// </summary>
-    public string Pinterest { get; private set; }
-
-    void IFlickrParsable.Load(XmlReader reader)
-    {
-        while (reader.MoveToNextAttribute())
-        {
-            switch (reader.LocalName)
-            {
-                case "id":
-                case "nsid":
-                    UserId = reader.Value;
-                    break;
-
-                case "join_date":
-                    JoinDate = UtilityMethods.UnixTimestampToDate(reader.Value);
-                    break;
-
-                case "occupation":
-                    Occupation = reader.Value;
-                    break;
-
-                case "hometown":
-                    HomeTown = reader.Value;
-                    break;
-
-                case "showcase_set":
-                    ShowcaseSet = reader.Value;
-                    break;
-
-                case "showcase_set_title":
-                    ShowcaseSetTitle = reader.Value;
-                    break;
-
-                case "first_name":
-                    FirstName = reader.Value;
-                    break;
-
-                case "last_name":
-                    LastName = reader.Value;
-                    break;
-
-                case "profile_description":
-                    ProfileDescription = reader.Value;
-                    break;
-
-                case "website":
-                    WebSite = reader.Value;
-                    break;
-
-                case "city":
-                    City = reader.Value;
-                    break;
-
-                case "country":
-                    Country = reader.Value;
-                    break;
-
-                case "facebook":
-                    Facebook = reader.Value;
-                    break;
-
-                case "twitter":
-                    Twitter = reader.Value;
-                    break;
-
-                case "tumblr":
-                    Tumblr = reader.Value;
-                    break;
-
-                case "instagram":
-                    Instagram = reader.Value;
-                    break;
-
-                case "pinterest":
-                    Pinterest = reader.Value;
-                    break;
-
-                default:
-                    UtilityMethods.CheckParsingException(reader);
-                    break;
-            }
-        }
-    }
+    [JsonProperty("pinterest")]
+    public string Pinterest { get; set; }
 }

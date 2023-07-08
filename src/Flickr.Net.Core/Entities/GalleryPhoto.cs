@@ -1,33 +1,17 @@
-﻿namespace Flickr.Net.Core.Entities;
+﻿using Flickr.Net.Core.Bases;
+using Flickr.Net.Core.Internals.Attributes;
 
-/// <summary>
-/// An instance of a photo returned by <see cref="IFlickrGalleries.GetPhotosAsync(string,
-/// PhotoSearchExtras, CancellationToken)"/>.
-/// </summary>
-public class GalleryPhoto : Photo, IFlickrParsable
+namespace Flickr.Net.Core;
+
+[FlickrJsonPropertyName("photo")]
+public record GalleryPhoto : UltraDeluxePhotoBase
 {
-    /// <summary>
-    /// The comment added to this photo in the gallery, if any.
-    /// </summary>
-    public string Comment { get; set; }
+    [JsonProperty("is_primary")]
+    public bool IsPrimary { get; set; }
 
-    void IFlickrParsable.Load(System.Xml.XmlReader reader)
-    {
-        Load(reader, false);
+    [JsonProperty("has_comment")]
+    public bool HasComments { get; set; }
 
-        if (reader.LocalName == "comment")
-        {
-            Comment = reader.ReadElementContentAsString();
-        }
-
-        if (reader.LocalName == "description")
-        {
-            Description = reader.ReadElementContentAsString();
-        }
-
-        if (reader.NodeType == System.Xml.XmlNodeType.EndElement && reader.LocalName == "photo")
-        {
-            reader.Skip();
-        }
-    }
+    [JsonProperty("comment")]
+    public List<string> Comments { get; set; } = new List<string>();
 }

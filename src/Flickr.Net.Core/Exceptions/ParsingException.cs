@@ -10,20 +10,16 @@ public class ParsingException : FlickrException
     /// <summary>
     /// Initializes a new instance of the <see cref="ParsingException"/> class.
     /// </summary>
-    public ParsingException()
-        : base()
-    {
-    }
+    public ParsingException() : base()
+    { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ParsingException"/> class with a specified
     /// error message.
     /// </summary>
     /// <param name="message"></param>
-    public ParsingException(string message)
-        : base(message)
-    {
-    }
+    public ParsingException(string message) : base(message)
+    { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ParsingException"/> class with a specified
@@ -31,8 +27,6 @@ public class ParsingException : FlickrException
     /// </summary>
     /// <param name="message"></param>
     /// <param name="innerException"></param>
-    public ParsingException(string message, Exception innerException)
-        : base(message, innerException)
-    {
-    }
+    public ParsingException(string message, Exception innerException) : base(message, innerException)
+    { }
 }

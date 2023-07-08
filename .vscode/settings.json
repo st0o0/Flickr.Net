@@ -1,5 +1,6 @@
 {
     "yaml.schemas": {
         "https://json.schemastore.org/github-workflow.json": "file:///g%3A/GIT/Flickr.Net/.git/workflows/docfx-build-publish.yml"
-    }
+    },
+    "dotnet.defaultSolution": "src/Flickr.Net.sln"
 }

@@ -1,4 +1,6 @@
-﻿namespace Flickr.Net.Core;
+﻿using Flickr.Net.Core.Internals.Extensions;
+
+namespace Flickr.Net.Core;
 
 /// <summary>
 /// The flickr.
@@ -26,7 +28,7 @@ public partial class Flickr : IFlickrGroupsDiscussReplies
             { "message", message }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
     async Task IFlickrGroupsDiscussReplies.DeleteAsync(string topicId, string replyId, CancellationToken cancellationToken)
@@ -50,7 +52,7 @@ public partial class Flickr : IFlickrGroupsDiscussReplies
             { "reply_id", replyId }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
     async Task IFlickrGroupsDiscussReplies.EditAsync(string topicId, string replyId, string message, CancellationToken cancellationToken)
@@ -80,10 +82,10 @@ public partial class Flickr : IFlickrGroupsDiscussReplies
             { "message", message }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
-    async Task<TopicReply> IFlickrGroupsDiscussReplies.GetInfoAsync(string topicId, string replyId, CancellationToken cancellationToken)
+    async Task<Reply> IFlickrGroupsDiscussReplies.GetInfoAsync(string topicId, string replyId, CancellationToken cancellationToken)
     {
         if (string.IsNullOrEmpty(topicId))
         {
@@ -102,10 +104,10 @@ public partial class Flickr : IFlickrGroupsDiscussReplies
             { "reply_id", replyId }
         };
 
-        return await GetResponseAsync<TopicReply>(parameters, cancellationToken);
+        return await GetResponseAsync<Reply>(parameters, cancellationToken);
     }
 
-    async Task<TopicReplyCollection> IFlickrGroupsDiscussReplies.GetListAsync(string topicId, int perPage, int page, CancellationToken cancellationToken)
+    async Task<Replies> IFlickrGroupsDiscussReplies.GetListAsync(string topicId, int perPage, int page, CancellationToken cancellationToken)
     {
         if (string.IsNullOrEmpty(topicId))
         {
@@ -118,17 +120,11 @@ public partial class Flickr : IFlickrGroupsDiscussReplies
             { "topic_id", topicId }
         };
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<TopicReplyCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<Replies>(parameters, cancellationToken);
     }
 }
 
@@ -172,7 +168,7 @@ public interface IFlickrGroupsDiscussReplies
     /// <param name="replyId">The id of the reply you want the details of.</param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<TopicReply> GetInfoAsync(string topicId, string replyId, CancellationToken cancellationToken = default);
+    Task<Reply> GetInfoAsync(string topicId, string replyId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets a list of replies for a particular topic.
@@ -182,5 +178,5 @@ public interface IFlickrGroupsDiscussReplies
     /// <param name="perPage">The number of replies per page you wish to get.</param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<TopicReplyCollection> GetListAsync(string topicId, int perPage, int page = 0, CancellationToken cancellationToken = default);
+    Task<Replies> GetListAsync(string topicId, int perPage, int page = 0, CancellationToken cancellationToken = default);
 }

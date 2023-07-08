@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Xml.XmlSerializer" Version="4.3.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
     <PropertyGroup>
@@ -27,6 +27,7 @@
         <Company />
         <GenerateDocumentationFile>True</GenerateDocumentationFile>
         <DocumentationFile>$(ProjectDir)..\..\docs\SandCastleDocuments.xml</DocumentationFile>
+        <AssemblyName>Flickr.Net.Core</AssemblyName>
     </PropertyGroup>
 
 </Project>

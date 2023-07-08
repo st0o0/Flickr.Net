@@ -1,4 +1,7 @@
-﻿namespace Flickr.Net.Core;
+﻿using Flickr.Net.Core.Flickrs.Results;
+using Flickr.Net.Core.Internals.Extensions;
+
+namespace Flickr.Net.Core;
 
 /// <summary>
 /// The flickr.
@@ -13,10 +16,10 @@ public partial class Flickr : IFlickrFavorites
             { "photo_id", photoId }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
-    async Task<FavoriteContext> IFlickrFavorites.GetContextAsync(string photoId, string userId, CancellationToken cancellationToken)
+    async Task<FlickrContextResult<NextPhoto, PrevPhoto>> IFlickrFavorites.GetContextAsync(string photoId, string userId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -25,10 +28,10 @@ public partial class Flickr : IFlickrFavorites
             { "photo_id", photoId },
         };
 
-        return await GetResponseAsync<FavoriteContext>(parameters, cancellationToken);
+        return await GetContextResponseAsync<NextPhoto, PrevPhoto>(parameters, cancellationToken);
     }
 
-    async Task<PhotoCollection> IFlickrFavorites.GetListAsync(string userId, DateTime? minFavoriteDate, DateTime? maxFavoriteDate, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken)
+    async Task<PagedPhotos> IFlickrFavorites.GetListAsync(string userId, DateTime? minFavoriteDate, DateTime? maxFavoriteDate, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -37,40 +40,22 @@ public partial class Flickr : IFlickrFavorites
             { "method", "flickr.favorites.getList" }
         };
 
-        if (userId != null)
-        {
-            parameters.Add("user_id", userId);
-        }
+        parameters.AppendIf("user_id", userId, x => x != null, x => x);
 
-        if (minFavoriteDate.HasValue && minFavoriteDate > DateTime.MinValue)
-        {
-            parameters.Add("min_fav_date", UtilityMethods.DateToUnixTimestamp(minFavoriteDate.Value));
-        }
+        parameters.AppendIf("min_fav_date", maxFavoriteDate, x => x.HasValue && x > DateTime.MinValue, x => x.Value.ToUnixTimestamp());
 
-        if (maxFavoriteDate.HasValue && maxFavoriteDate > DateTime.MinValue)
-        {
-            parameters.Add("max_fav_date", UtilityMethods.DateToUnixTimestamp(maxFavoriteDate.Value));
-        }
+        parameters.AppendIf("max_fav_date", maxFavoriteDate, x => x.HasValue && x > DateTime.MinValue, x => x.Value.ToUnixTimestamp());
 
-        if (extras != PhotoSearchExtras.None)
-        {
-            parameters.Add("extras", extras.ToFlickrString());
-        }
+        parameters.AppendIf("extras", extras, x => x != PhotoSearchExtras.None, x => x.ToFlickrString());
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<PhotoCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }
 
-    async Task<PhotoCollection> IFlickrFavorites.GetPublicListAsync(string userId, int page, int perPage, CancellationToken cancellationToken)
+    async Task<PagedPhotos> IFlickrFavorites.GetPublicListAsync(string userId, int page, int perPage, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -78,17 +63,11 @@ public partial class Flickr : IFlickrFavorites
             { "user_id", userId }
         };
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<PhotoCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }
 
     async Task IFlickrFavorites.RemoveAsync(string photoId, CancellationToken cancellationToken)
@@ -99,7 +78,7 @@ public partial class Flickr : IFlickrFavorites
             { "photo_id", photoId }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 }
 
@@ -124,7 +103,7 @@ public interface IFlickrFavorites
     /// <param name="userId">The user id of the users whose favorites you wish to search.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<FavoriteContext> GetContextAsync(string photoId, string userId, CancellationToken cancellationToken = default);
+    Task<FlickrContextResult<NextPhoto, PrevPhoto>> GetContextAsync(string photoId, string userId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get a list of favourites for the specified user.
@@ -136,7 +115,7 @@ public interface IFlickrFavorites
     /// <param name="page">The page to download this time.</param>
     /// <param name="perPage">Number of photos to include per page.</param>
     /// <param name="cancellationToken"></param>
-    Task<PhotoCollection> GetListAsync(string userId = null, DateTime? minFavoriteDate = null, DateTime? maxFavoriteDate = null, PhotoSearchExtras extras = PhotoSearchExtras.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<PagedPhotos> GetListAsync(string userId = null, DateTime? minFavoriteDate = null, DateTime? maxFavoriteDate = null, PhotoSearchExtras extras = PhotoSearchExtras.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets the public favourites for a specified user.
@@ -149,7 +128,7 @@ public interface IFlickrFavorites
     /// <param name="page">The specific page to return.</param>
     /// <param name="perPage">The number of photos to return per page.</param>
     /// <param name="cancellationToken"></param>
-    Task<PhotoCollection> GetPublicListAsync(string userId, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<PagedPhotos> GetPublicListAsync(string userId, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Removes a photograph from the logged in users favourites. Requires authentication.

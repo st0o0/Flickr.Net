@@ -1,297 +1,213 @@
-namespace Flickr.Net.Core.Entities;
+﻿using Flickr.Net.Core.Bases;
 
-/// <summary>
-/// The <see cref="Person"/> class contains details returned by the <see
-/// cref="IFlickrPeople.GetInfoAsync(string, CancellationToken)"/> method.
-/// </summary>
-public sealed class Person : IFlickrParsable
+namespace Flickr.Net.Core;
+
+public record Person : FlickrEntityBase<Id>
 {
-    /// <summary>
-    /// The user id of the user.
-    /// </summary>
-    /// <remarks/>
-    public string UserId { get; set; }
+    [JsonProperty("nsid")]
+    public string Nsid { get; set; }
 
-    /// <summary>
-    /// Does the user posses a pro account. 0 = free acouunt, 1 = pro account holder.
-    /// </summary>
+    [JsonProperty("ispro")]
     public bool IsPro { get; set; }
 
-    /// <summary>
-    /// The server that will serve up the users Buddy Icon.
-    /// </summary>
+    [JsonProperty("is_deleted")]
+    public bool IsDeleted { get; set; }
+
+    [JsonProperty("iconserver")]
     public string IconServer { get; set; }
 
-    /// <summary>
-    /// The server farm that will serve up the users Buddy Icon.
-    /// </summary>
-    public string IconFarm { get; set; }
+    [JsonProperty("iconfarm")]
+    public int IconFarm { get; set; }
 
-    /// <summary>
-    /// The gender of the user on Flickr. May be null, or X for unspecified.
-    /// </summary>
-    public string Gender { get; set; }
+    [JsonProperty("path_alias")]
+    public object PathAlias { get; set; }
 
-    /// <summary>
-    /// Is the person ignored by the calling user. Will be null if not an authenticated call.
-    /// </summary>
-    public bool? IsIgnored { get; set; }
+    [JsonProperty("has_stats")]
+    public bool HasStats { get; set; }
 
-    /// <summary>
-    /// Is the person a contact of the calling user. Will be null if not an authenticated call.
-    /// </summary>
-    public bool? IsContact { get; set; }
+    [JsonProperty("username")]
+    public Username Username { get; set; }
 
-    /// <summary>
-    /// Is the person a friend of the calling user. Will be null if not an authenticated call.
-    /// </summary>
-    public bool? IsFriend { get; set; }
+    [JsonProperty("realname")]
+    public Realname Realname { get; set; }
 
-    /// <summary>
-    /// Is the person family of the calling user. Will be null if not an authenticated call.
-    /// </summary>
-    public bool? IsFamily { get; set; }
+    [JsonProperty("mbox_sha1sum")]
+    public MboxSha1sum MboxSha1sum { get; set; }
 
-    /// <summary>
-    /// Has the person marked the calling user as a contact. Will be null if not an authenticated call.
-    /// </summary>
-    public bool? IsReverseContact { get; set; }
+    [JsonProperty("location")]
+    public Location Location { get; set; }
 
-    /// <summary>
-    /// Has the person marked the calling user as a friend. Will be null if not an authenticated call.
-    /// </summary>
-    public bool? IsReverseFriend { get; set; }
+    [JsonProperty("description")]
+    public Description Description { get; set; }
 
-    /// <summary>
-    /// Has the person marked the calling user as family. Will be null if not an authenticated call.
-    /// </summary>
-    public bool? IsReverseFamily { get; set; }
+    [JsonProperty("photosurl")]
+    public PhotosUrl PhotoUrl { get; set; }
 
-    /// <summary>
-    /// Not sure?
-    /// </summary>
-    public bool? CanBuyPro { get; set; }
+    [JsonProperty("profileurl")]
+    public ProfileUrl ProfileUrl { get; set; }
 
-    /// <summary>
-    /// Not sure?
-    /// </summary>
-    public bool? HasStats { get; set; }
+    [JsonProperty("mobileurl")]
+    public MobileUrl Mobileurl { get; set; }
 
-    /// <summary>
-    /// The users username, also known as their screenname.
-    /// </summary>
-    public string UserName { get; set; }
+    [JsonProperty("photos")]
+    public PhotoInfos PhotoInfos { get; set; }
 
-    /// <summary>
-    /// The users real name, as entered in their profile.
-    /// </summary>
-    public string RealName { get; set; }
+    [JsonProperty("upload_count")]
+    public int UploadCount { get; set; }
 
-    /// <summary>
-    /// The SHA1 hash of the users email address - used for FOAF networking.
-    /// </summary>
-    public string MailboxSha1Hash { get; set; }
+    [JsonProperty("upload_limit")]
+    public int UploadLimit { get; set; }
 
-    /// <summary>
-    /// Consists of your current location followed by country.
-    /// </summary>
-    /// <example>e.g. Newcastle, UK.</example>
-    public string Location { get; set; }
+    [JsonProperty("upload_limit_status")]
+    public string UploadLimitStatus { get; set; }
 
-    /// <summary>
-    /// Sub element containing a summary of the users photo information.
-    /// </summary>
-    /// <remarks/>
-    public PersonPhotosSummary PhotosSummary { get; set; }
+    [JsonProperty("is_cognito_user")]
+    public bool IsCognitoUser { get; set; }
 
-    /// <summary>
-    /// The users URL alias, if any.
-    /// </summary>
-    public string PathAlias { get; set; }
+    [JsonProperty("all_rights_reserved_photos_count")]
+    public int AllRightsReservedPhotosCount { get; set; }
 
-    /// <summary>
-    /// The users photo location on Flickr https://www.flickr.com/photos/username/
-    /// </summary>
-    public string PhotosUrl { get; set; }
+    [JsonProperty("has_adfree")]
+    public bool HasAdfree { get; set; }
 
-    /// <summary>
-    /// The users profile location on Flickr https://www.flickr.com/people/username/
-    /// </summary>
-    public string ProfileUrl { get; set; }
+    [JsonProperty("has_free_standard_shipping")]
+    public bool HasFreeStandardShipping { get; set; }
 
-    /// <summary>
-    /// The users profile location on Flickr https://m.flickr.com/photostream.gne?id=ID
-    /// </summary>
-    public string MobileUrl { get; set; }
+    [JsonProperty("has_free_educational_resources")]
+    public bool HasFreeEducationalResources { get; set; }
+}
 
-    /// <summary>
-    /// Returns the <see cref="Uri"/> for the users Buddy Icon.
-    /// </summary>
-    public string BuddyIconUrl
-    {
-        get
-        {
-            return UtilityMethods.BuddyIcon(IconServer, IconFarm, UserId);
-        }
-    }
+public struct PhotoInfos
+{
+    [JsonProperty("firstdatetaken")]
+    public FirstDateTaken Firstdatetaken { get; set; }
 
-    /// <summary>
-    /// Description of the timezone of this user.
-    /// </summary>
-    public string TimeZoneLabel { get; set; }
+    [JsonProperty("firstdate")]
+    public FirstDate Firstdate { get; set; }
 
-    /// <summary>
-    /// Offset for the timezome for this user, e.g. "+01:00".
-    /// </summary>
-    public string TimeZoneOffset { get; set; }
+    [JsonProperty("count")]
+    public Count Count { get; set; }
 
-    /// <summary>
-    /// The description of the user, as taken from the users profil page.
-    /// </summary>
-    /// <remarks>Will likely contain HTML.</remarks>
-    public string Description { get; set; }
+    [JsonProperty("views")]
+    public PhotoInfoViews Views { get; set; }
+}
 
-    void IFlickrParsable.Load(System.Xml.XmlReader reader)
-    {
-        LoadAttributes(reader);
+public struct Username
+{
+    [JsonProperty("_content")]
+    public string Content { get; set; }
 
-        LoadElements(reader);
-    }
+    public static implicit operator string(Username username) => username.Content;
 
-    private void LoadElements(System.Xml.XmlReader reader)
-    {
-        while (reader.LocalName != "person")
-        {
-            switch (reader.LocalName)
-            {
-                case "username":
-                    UserName = reader.ReadElementContentAsString();
-                    break;
+    public static implicit operator Username(string username) => new() { Content = username };
+}
 
-                case "location":
-                    Location = reader.ReadElementContentAsString();
-                    break;
+public struct PhotoInfoViews
+{
+    [JsonProperty("_content")]
+    public string Content { get; set; }
 
-                case "realname":
-                    RealName = reader.ReadElementContentAsString();
-                    break;
+    public static implicit operator string(PhotoInfoViews username) => username.Content;
 
-                case "photosurl":
-                    PhotosUrl = reader.ReadElementContentAsString();
-                    break;
+    public static implicit operator PhotoInfoViews(string username) => new() { Content = username };
+}
 
-                case "profileurl":
-                    ProfileUrl = reader.ReadElementContentAsString();
-                    break;
+public struct Realname
+{
+    [JsonProperty("_content")]
+    public string Content { get; set; }
 
-                case "mobileurl":
-                    MobileUrl = reader.ReadElementContentAsString();
-                    break;
+    public static implicit operator string(Realname username) => username.Content;
 
-                case "photos":
-                    PhotosSummary = new PersonPhotosSummary();
-                    ((IFlickrParsable)PhotosSummary).Load(reader);
-                    break;
+    public static implicit operator Realname(string username) => new() { Content = username };
+}
 
-                case "mbox_sha1sum":
-                    MailboxSha1Hash = reader.ReadElementContentAsString();
-                    break;
+public struct PhotosUrl
+{
+    [JsonProperty("_content")]
+    public string Content { get; set; }
 
-                case "timezone":
-                    TimeZoneLabel = reader.GetAttribute("label");
-                    TimeZoneOffset = reader.GetAttribute("offset");
-                    reader.Read();
-                    break;
+    public static implicit operator string(PhotosUrl username) => username.Content;
 
-                case "description":
-                    Description = reader.ReadElementContentAsString();
-                    break;
+    public static implicit operator PhotosUrl(string username) => new() { Content = username };
+}
 
-                default:
-                    UtilityMethods.CheckParsingException(reader);
-                    reader.Skip();
-                    break;
-            }
-        }
-    }
+public struct ProfileUrl
+{
+    [JsonProperty("_content")]
+    public string Content { get; set; }
 
-    private void LoadAttributes(System.Xml.XmlReader reader)
-    {
-        while (reader.MoveToNextAttribute())
-        {
-            switch (reader.LocalName)
-            {
-                case "id":
-                case "nsid":
-                    UserId = reader.Value;
-                    break;
+    public static implicit operator string(ProfileUrl username) => username.Content;
 
-                case "ispro":
-                    IsPro = reader.Value == "1";
-                    break;
+    public static implicit operator ProfileUrl(string username) => new() { Content = username };
+}
 
-                case "iconserver":
-                    IconServer = reader.Value;
-                    break;
+public struct Count
+{
+    [JsonProperty("_content")]
+    public int Content { get; set; }
 
-                case "iconfarm":
-                    IconFarm = reader.Value;
-                    break;
+    public static implicit operator int(Count username) => username.Content;
 
-                case "path_alias":
-                    PathAlias = reader.Value;
-                    break;
+    public static implicit operator Count(int username) => new() { Content = username };
+}
 
-                case "gender":
-                    Gender = reader.Value;
-                    break;
+public struct Description
+{
+    [JsonProperty("_content")]
+    public string Content { get; set; }
 
-                case "ignored":
-                    IsIgnored = reader.Value == "1";
-                    break;
+    public static implicit operator string(Description username) => username.Content;
 
-                case "contact":
-                    IsContact = reader.Value == "1";
-                    break;
+    public static implicit operator Description(string username) => new() { Content = username };
+}
 
-                case "friend":
-                    IsFriend = reader.Value == "1";
-                    break;
+public struct FirstDate
+{
+    [JsonProperty("_content")]
+    public string Content { get; set; }
 
-                case "family":
-                    IsFamily = reader.Value == "1";
-                    break;
+    public static implicit operator string(FirstDate username) => username.Content;
 
-                case "revcontact":
-                    IsReverseContact = reader.Value == "1";
-                    break;
+    public static implicit operator FirstDate(string username) => new() { Content = username };
+}
 
-                case "revfriend":
-                    IsReverseFriend = reader.Value == "1";
-                    break;
+public struct FirstDateTaken
+{
+    [JsonProperty("_content")]
+    public string Content { get; set; }
 
-                case "revfamily":
-                    IsReverseFamily = reader.Value == "1";
-                    break;
+    public static implicit operator string(FirstDateTaken username) => username.Content;
 
-                case "can_buy_pro":
-                    CanBuyPro = reader.Value == "1";
-                    break;
+    public static implicit operator FirstDateTaken(string username) => new() { Content = username };
+}
 
-                case "has_stats":
-                    HasStats = reader.Value == "1";
-                    break;
+public struct LocationInfo
+{
+    [JsonProperty("_content")]
+    public string Content { get; set; }
 
-                case "expire":
-                    // TODO: Not sure what the 'expire' attribute signifies. Is it a Bool?
-                    break;
+    public static implicit operator string(LocationInfo username) => username.Content;
 
-                default:
-                    UtilityMethods.CheckParsingException(reader);
-                    break;
-            }
-        }
+    public static implicit operator LocationInfo(string username) => new() { Content = username };
+}
 
-        reader.Read();
-    }
+public struct MboxSha1sum
+{
+    [JsonProperty("_content")]
+    public string Content { get; set; }
+
+    public static implicit operator string(MboxSha1sum username) => username.Content;
+
+    public static implicit operator MboxSha1sum(string username) => new() { Content = username };
+}
+
+public struct MobileUrl
+{
+    [JsonProperty("_content")]
+    public string Content { get; set; }
+
+    public static implicit operator string(MobileUrl username) => username.Content;
+
+    public static implicit operator MobileUrl(string username) => new() { Content = username };
 }

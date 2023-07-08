@@ -3,7 +3,6 @@
 /// <summary>
 /// The values for a content type search.
 /// </summary>
-[Serializable]
 public enum ContentTypeSearch
 {
     /// <summary>

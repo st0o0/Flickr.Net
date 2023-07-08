@@ -7,10 +7,7 @@ public partial class Flickr : IFlickrPhotosMisc
 {
     async Task IFlickrPhotosMisc.RotateAsync(string photoId, int degrees, CancellationToken cancellationToken)
     {
-        if (photoId == null)
-        {
-            throw new ArgumentNullException(nameof(photoId));
-        }
+        ArgumentNullException.ThrowIfNullOrEmpty(photoId, nameof(photoId));
 
         if (degrees != 90 && degrees != 180 && degrees != 270)
         {
@@ -24,18 +21,18 @@ public partial class Flickr : IFlickrPhotosMisc
             { "degrees", degrees.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
-    async Task<TicketCollection> IFlickrPhotosMisc.CheckTicketsAsync(string[] tickets, CancellationToken cancellationToken)
+    async Task<Tickets> IFlickrPhotosMisc.CheckTicketsAsync(IEnumerable<string> tickets, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
             { "method", "flickr.photos.upload.checkTickets" },
-            { "tickets", string.Join(",", tickets) }
+            { "tickets", string.Join(",", tickets.ToArray()) }
         };
 
-        return await GetResponseAsync<TicketCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<Tickets>(parameters, cancellationToken);
     }
 }
 
@@ -60,5 +57,5 @@ public interface IFlickrPhotosMisc
     /// </summary>
     /// <param name="tickets">A list of ticket ids</param>
     /// <param name="cancellationToken"></param>
-    Task<TicketCollection> CheckTicketsAsync(string[] tickets, CancellationToken cancellationToken = default);
+    Task<Tickets> CheckTicketsAsync(IEnumerable<string> tickets, CancellationToken cancellationToken = default);
 }

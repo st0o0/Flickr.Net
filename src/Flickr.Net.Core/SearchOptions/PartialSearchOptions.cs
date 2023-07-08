@@ -1,119 +1,64 @@
-namespace Flickr.Net.Core.SearchOptions;
+namespace Flickr.Net.Core;
 
 /// <summary>
 /// Summary description for PartialSearchOptions.
 /// </summary>
-public class PartialSearchOptions
+public record PartialSearchOptions
 {
-    private DateTime minUploadDate = DateTime.MinValue;
-    private DateTime maxUploadDate = DateTime.MinValue;
-    private DateTime minTakenDate = DateTime.MinValue;
-    private DateTime maxTakenDate = DateTime.MinValue;
-    private PhotoSearchExtras extras = PhotoSearchExtras.None;
-    private PhotoSearchSortOrder sort = PhotoSearchSortOrder.None;
-    private int perPage;
-    private int page;
-    private PrivacyFilter privacyFilter = PrivacyFilter.None;
-
     /// <summary>
     /// Minimum date uploaded. Defaults to <see cref="DateTime.MinValue"/> which signifies that the
     /// value is not to be used.
     /// </summary>
-    public DateTime MinUploadDate
-    {
-        get { return minUploadDate; }
-        set { minUploadDate = value; }
-    }
+    public DateTime MinUploadDate { get; init; } = DateTime.MinValue;
 
     /// <summary>
     /// Maximum date uploaded. Defaults to <see cref="DateTime.MinValue"/> which signifies that the
     /// value is not to be used.
     /// </summary>
-    public DateTime MaxUploadDate
-    {
-        get { return maxUploadDate; }
-        set { maxUploadDate = value; }
-    }
+    public DateTime MaxUploadDate { get; init; } = DateTime.MinValue;
 
     /// <summary>
     /// Minimum date taken. Defaults to <see cref="DateTime.MinValue"/> which signifies that the
     /// value is not to be used.
     /// </summary>
-    public DateTime MinTakenDate
-    {
-        get { return minTakenDate; }
-        set { minTakenDate = value; }
-    }
+    public DateTime MinTakenDate { get; init; } = DateTime.MinValue;
 
     /// <summary>
     /// Maximum date taken. Defaults to <see cref="DateTime.MinValue"/> which signifies that the
     /// value is not to be used.
     /// </summary>
-    public DateTime MaxTakenDate
-    {
-        get { return maxTakenDate; }
-        set { maxTakenDate = value; }
-    }
+    public DateTime MaxTakenDate { get; init; } = DateTime.MinValue;
 
     /// <summary>
     /// Optional extras to return, defaults to all. See <see cref="PhotoSearchExtras"/> for more details.
     /// </summary>
-    public PhotoSearchExtras Extras
-    {
-        get { return extras; }
-        set { extras = value; }
-    }
+    public PhotoSearchExtras Extras { get; init; } = PhotoSearchExtras.None;
 
     /// <summary>
     /// Number of photos to return per page. Defaults to 100.
     /// </summary>
-    public int PerPage
-    {
-        get { return perPage; }
-        set { perPage = value; }
-    }
+    public int PerPage { get; init; }
 
     /// <summary>
     /// The page to return. Defaults to page 1.
     /// </summary>
-    public int Page
-    {
-        get { return page; }
-        set
-        {
-            if (value < 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(value), "Must be greater than 0");
-            }
-
-            page = value;
-        }
-    }
+    public int Page { get; init; }
 
     /// <summary>
     /// The sort order of the returned list. Default is <see cref="PhotoSearchSortOrder.None"/>.
     /// </summary>
-    public PhotoSearchSortOrder SortOrder
-    {
-        get { return sort; }
-        set { sort = value; }
-    }
+    public PhotoSearchSortOrder SortOrder { get; init; } = PhotoSearchSortOrder.None;
 
     /// <summary>
     /// The privacy fitler to filter the search on.
     /// </summary>
-    public PrivacyFilter PrivacyFilter
-    {
-        get { return privacyFilter; }
-        set { privacyFilter = value; }
-    }
+    public PrivacyFilter PrivacyFilter { get; init; } = PrivacyFilter.None;
 
     /// <summary>
     /// Default constructor.
     /// </summary>
     public PartialSearchOptions()
-    {
-    }
+    { }
 
     /// <summary>
     /// Constructor taking a default <see cref="PhotoSearchExtras"/> parameter.
@@ -159,15 +104,5 @@ public class PartialSearchOptions
         Page = options.Page;
         PerPage = options.PerPage;
         PrivacyFilter = options.PrivacyFilter;
-    }
-
-    internal string ExtrasString
-    {
-        get { return extras.ToFlickrString(); }
-    }
-
-    internal string SortOrderString
-    {
-        get { return UtilityMethods.SortOrderToString(SortOrder); }
     }
 }

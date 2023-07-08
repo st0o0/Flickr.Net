@@ -1,5 +1,6 @@
 ﻿using Flickr.Net.Core.Exceptions;
-using Flickr.Net.Core.SearchOptions;
+using Flickr.Net.Core.Flickrs.Results;
+using Flickr.Net.Core.Internals.Extensions;
 
 namespace Flickr.Net.Core;
 
@@ -31,7 +32,7 @@ public partial class Flickr : IFlickrPhotos
             { "tags", string.Join(",", tags) }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
     async Task IFlickrPhotos.DeleteAsync(string photoId, CancellationToken cancellationToken)
@@ -42,10 +43,10 @@ public partial class Flickr : IFlickrPhotos
             { "photo_id", photoId }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
-    async Task<AllContexts> IFlickrPhotos.GetAllContextsAsync(string photoId, CancellationToken cancellationToken)
+    async Task<FlickrAllContextResult<CollectionSet, Pool>> IFlickrPhotos.GetAllContextsAsync(string photoId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -53,10 +54,10 @@ public partial class Flickr : IFlickrPhotos
             { "photo_id", photoId }
         };
 
-        return await GetResponseAsync<AllContexts>(parameters, cancellationToken);
+        return await GetResponseAsync<FlickrAllContextResult<CollectionSet, Pool>>(parameters, cancellationToken);
     }
 
-    async Task<PhotoCollection> IFlickrPhotos.GetContactsPhotosAsync(int count, bool justFriends, bool singlePhoto, bool includeSelf, PhotoSearchExtras extras, CancellationToken cancellationToken)
+    async Task<PagedPhotos> IFlickrPhotos.GetContactsPhotosAsync(int count, bool justFriends, bool singlePhoto, bool includeSelf, PhotoSearchExtras extras, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -70,35 +71,20 @@ public partial class Flickr : IFlickrPhotos
             { "method", "flickr.photos.getContactsPhotos" }
         };
 
-        if (count > 0 && !singlePhoto)
-        {
-            parameters.Add("count", count.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("count", count, x => x > 0 && !singlePhoto, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (justFriends)
-        {
-            parameters.Add("just_friends", "1");
-        }
+        parameters.AppendIf("just_friends", justFriends, x => x, _ => "1");
 
-        if (singlePhoto)
-        {
-            parameters.Add("single_photo", "1");
-        }
+        parameters.AppendIf("single_photo", singlePhoto, x => x, _ => "1");
 
-        if (includeSelf)
-        {
-            parameters.Add("include_self", "1");
-        }
+        parameters.AppendIf("include_self", includeSelf, x => x, _ => "1");
 
-        if (extras != PhotoSearchExtras.None)
-        {
-            parameters.Add("extras", extras.ToFlickrString());
-        }
+        parameters.AppendIf("extras", extras, x => x != PhotoSearchExtras.None, x => x.ToFlickrString());
 
-        return await GetResponseAsync<PhotoCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }
 
-    async Task<PhotoCollection> IFlickrPhotos.GetContactsPublicPhotosAsync(string userId, int count, bool justFriends, bool singlePhoto, bool includeSelf, PhotoSearchExtras extras, CancellationToken cancellationToken)
+    async Task<PagedPhotos> IFlickrPhotos.GetContactsPublicPhotosAsync(string userId, int count, bool justFriends, bool singlePhoto, bool includeSelf, PhotoSearchExtras extras, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -106,35 +92,20 @@ public partial class Flickr : IFlickrPhotos
             { "user_id", userId }
         };
 
-        if (count > 0)
-        {
-            parameters.Add("count", count.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("count", count, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (justFriends)
-        {
-            parameters.Add("just_friends", "1");
-        }
+        parameters.AppendIf("just_friends", justFriends, x => x, x => "1");
 
-        if (singlePhoto)
-        {
-            parameters.Add("single_photo", "1");
-        }
+        parameters.AppendIf("single_photo", singlePhoto, x => x, x => "1");
 
-        if (includeSelf)
-        {
-            parameters.Add("include_self", "1");
-        }
+        parameters.AppendIf("include_self", includeSelf, x => x, x => "1");
 
-        if (extras != PhotoSearchExtras.None)
-        {
-            parameters.Add("extras", extras.ToFlickrString());
-        }
+        parameters.AppendIf("extras", extras, x => x != PhotoSearchExtras.None, x => x.ToFlickrString());
 
-        return await GetResponseAsync<PhotoCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }
 
-    async Task<Context> IFlickrPhotos.GetContextAsync(string photoId, CancellationToken cancellationToken)
+    async Task<FlickrContextResult<NextPhoto, PrevPhoto>> IFlickrPhotos.GetContextAsync(string photoId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -142,48 +113,26 @@ public partial class Flickr : IFlickrPhotos
             { "photo_id", photoId }
         };
 
-        return await GetResponseAsync<Context>(parameters, cancellationToken);
+        return await GetResponseAsync<FlickrContextResult<NextPhoto, PrevPhoto>>(parameters, cancellationToken);
     }
 
-    async Task<PhotoCountCollection> IFlickrPhotos.GetCountsAsync(DateTime[] dates, DateTime[] takenDates, CancellationToken cancellationToken)
+    async Task<PhotoCounts> IFlickrPhotos.GetCountsAsync(DateTime[] dates, DateTime[] takenDates, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
-
-        string dateString = null;
-        string takenDateString = null;
 
         Dictionary<string, string> parameters = new()
         {
             { "method", "flickr.photos.getCounts" }
         };
 
-        if (dates != null && dates.Length > 0)
-        {
-            Array.Sort(dates);
+        parameters.AppendIf("dates", dates, x => x != null && x.Length > 0, x => string.Join(",", x.Select(Item => Item.ToUnixTimestamp())));
 
-            dateString = string.Join(",", new List<DateTime>(dates).ConvertAll<string>(new Converter<DateTime, string>(delegate (DateTime d)
-            {
-                return UtilityMethods.DateToUnixTimestamp(d).ToString();
-            })).ToArray());
+        parameters.AppendIf("taken_dates", takenDates, x => x != null && x.Length > 0, x => string.Join(",", x.Select(Item => Item.ToUnixTimestamp())));
 
-            parameters.Add("dates", dateString);
-        }
-
-        if (takenDates != null && takenDates.Length > 0)
-        {
-            Array.Sort(takenDates);
-            takenDateString = string.Join(",", new List<DateTime>(takenDates).ConvertAll<string>(new Converter<DateTime, string>(delegate (DateTime d)
-            {
-                return UtilityMethods.DateToUnixTimestamp(d).ToString();
-            })).ToArray());
-
-            parameters.Add("taken_dates", takenDateString);
-        }
-
-        return await GetResponseAsync<PhotoCountCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<PhotoCounts>(parameters, cancellationToken);
     }
 
-    async Task<ExifTagCollection> IFlickrPhotos.GetExifAsync(string photoId, string secret, CancellationToken cancellationToken)
+    async Task<PhotoExif> IFlickrPhotos.GetExifAsync(string photoId, string secret, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -191,15 +140,12 @@ public partial class Flickr : IFlickrPhotos
             { "photo_id", photoId }
         };
 
-        if (secret != null)
-        {
-            parameters.Add("secret", secret);
-        }
+        parameters.AppendIf("secret", secret, x => x != null, x => secret);
 
-        return await GetResponseAsync<ExifTagCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<PhotoExif>(parameters, cancellationToken);
     }
 
-    async Task<PhotoFavoriteCollection> IFlickrPhotos.GetFavoritesAsync(string photoId, int perPage, int page, CancellationToken cancellationToken)
+    async Task<PhotoPersons> IFlickrPhotos.GetFavoritesAsync(string photoId, int perPage, int page, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -207,17 +153,11 @@ public partial class Flickr : IFlickrPhotos
             { "photo_id", photoId }
         };
 
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<PhotoFavoriteCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<PhotoPersons>(parameters, cancellationToken);
     }
 
     async Task<PhotoInfo> IFlickrPhotos.GetInfoAsync(string photoId, string secret, CancellationToken cancellationToken)
@@ -228,27 +168,24 @@ public partial class Flickr : IFlickrPhotos
             { "photo_id", photoId }
         };
 
-        if (secret != null)
-        {
-            parameters.Add("secret", secret);
-        }
+        parameters.AppendIf("secret", secret, x => x != null, x => secret);
 
         return await GetResponseAsync<PhotoInfo>(parameters, cancellationToken);
     }
 
-    async Task<PhotoCollection> IFlickrPhotos.GetNotInSetAsync(PartialSearchOptions options, CancellationToken cancellationToken)
+    async Task<PagedPhotos> IFlickrPhotos.GetNotInSetAsync(PartialSearchOptions options, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
             { "method", "flickr.photos.getNotInSet" }
         };
 
-        UtilityMethods.PartialOptionsIntoArray(options, parameters);
+        parameters = parameters.Concat(options.ToDictionary()).ToDictionary(e => e.Key, e => e.Value);
 
-        return await GetResponseAsync<PhotoCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }
 
-    async Task<PhotoPermissions> IFlickrPhotos.GetPermsAsync(string photoId, CancellationToken cancellationToken)
+    async Task<Perms> IFlickrPhotos.GetPermsAsync(string photoId, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -258,10 +195,10 @@ public partial class Flickr : IFlickrPhotos
             { "photo_id", photoId }
         };
 
-        return await GetResponseAsync<PhotoPermissions>(parameters, cancellationToken);
+        return await GetResponseAsync<Perms>(parameters, cancellationToken);
     }
 
-    async Task<PhotoCollection> IFlickrPhotos.GetPopularAsync(string userId, PhotoSearchExtras extras, PopularSorting sort, int perPage, int page, CancellationToken cancellationToken)
+    async Task<PagedPhotos> IFlickrPhotos.GetPopularAsync(string userId, PhotoSearchExtras extras, PopularSorting sort, int perPage, int page, CancellationToken cancellationToken)
     {
         if (userId == null)
         {
@@ -273,65 +210,36 @@ public partial class Flickr : IFlickrPhotos
             { "method", "flickr.photos.getPopular" }
         };
 
-        if (userId != null)
-        {
-            parameters.Add("user_id", userId);
-        }
+        parameters.AppendIf("user_id", userId, x => !string.IsNullOrEmpty(x), x => x);
 
-        var sortString = sort switch
-        {
-            PopularSorting.Views => "views",
-            PopularSorting.Comments => "comments",
-            PopularSorting.Faves => "faves",
-            _ or PopularSorting.Interesting => "interesting"
-        };
+        parameters.AppendIf("sort", sort, x => x != PopularSorting.None, x => x.GetEnumMemberValue());
 
-        parameters.Add("sort", sortString);
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (extras != PhotoSearchExtras.None)
-        {
-            parameters.Add("extras", extras.ToFlickrString());
-        }
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("extras", extras, x => x != PhotoSearchExtras.None, x => x.ToFlickrString());
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
-
-        return await GetResponseAsync<PhotoCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }
 
-    async Task<PhotoCollection> IFlickrPhotos.GetRecentAsync(int page, int perPage, PhotoSearchExtras extras, CancellationToken cancellationToken)
+    async Task<PagedPhotos> IFlickrPhotos.GetRecentAsync(int page, int perPage, PhotoSearchExtras extras, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
             { "method", "flickr.photos.getRecent" },
         };
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (extras != PhotoSearchExtras.None)
-        {
-            parameters.Add("extras", extras.ToFlickrString());
-        }
+        parameters.AppendIf("extras", extras, x => x != PhotoSearchExtras.None, x => x.ToFlickrString());
 
-        return await GetResponseAsync<PhotoCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }
 
-    async Task<SizeCollection> IFlickrPhotos.GetSizesAsync(string photoId, CancellationToken cancellationToken)
+    async Task<Sizes> IFlickrPhotos.GetSizesAsync(string photoId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -339,44 +247,46 @@ public partial class Flickr : IFlickrPhotos
             { "photo_id", photoId }
         };
 
-        return await GetResponseAsync<SizeCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<Sizes>(parameters, cancellationToken);
     }
 
-    async Task<PhotoCollection> IFlickrPhotos.GetUntaggedAsync(PartialSearchOptions options, CancellationToken cancellationToken)
+    async Task<PagedPhotos> IFlickrPhotos.GetUntaggedAsync(PartialSearchOptions options, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
             { "method", "flickr.photos.getUntagged" }
         };
 
-        UtilityMethods.PartialOptionsIntoArray(options, parameters);
-        return await GetResponseAsync<PhotoCollection>(parameters, cancellationToken);
+        parameters = parameters.Concat(options.ToDictionary()).ToDictionary(e => e.Key, e => e.Value);
+
+        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }
 
-    async Task<PhotoCollection> IFlickrPhotos.GetWithoutGeoDataAsync(PartialSearchOptions options, CancellationToken cancellationToken)
+    async Task<PagedPhotos> IFlickrPhotos.GetWithoutGeoDataAsync(PartialSearchOptions options, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
             { "method", "flickr.photos.getWithoutGeoData" }
         };
-        UtilityMethods.PartialOptionsIntoArray(options, parameters);
 
-        return await GetResponseAsync<PhotoCollection>(parameters, cancellationToken);
+        parameters = parameters.Concat(options.ToDictionary()).ToDictionary(e => e.Key, e => e.Value);
+
+        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }
 
-    async Task<PhotoCollection> IFlickrPhotos.GetWithGeoDataAsync(PartialSearchOptions options, CancellationToken cancellationToken)
+    async Task<PagedPhotos> IFlickrPhotos.GetWithGeoDataAsync(PartialSearchOptions options, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
             { "method", "flickr.photos.getWithGeoData" }
         };
 
-        UtilityMethods.PartialOptionsIntoArray(options, parameters);
+        parameters = parameters.Concat(options.ToDictionary()).ToDictionary(e => e.Key, e => e.Value);
 
-        return await GetResponseAsync<PhotoCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }
 
-    async Task<PhotoCollection> IFlickrPhotos.RecentlyUpdatedAsync(DateTime minDate, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken)
+    async Task<PagedPhotos> IFlickrPhotos.RecentlyUpdatedAsync(DateTime minDate, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -386,22 +296,13 @@ public partial class Flickr : IFlickrPhotos
             { "min_date", UtilityMethods.DateToUnixTimestamp(minDate) }
         };
 
-        if (extras != PhotoSearchExtras.None)
-        {
-            parameters.Add("extras", extras.ToFlickrString());
-        }
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (perPage > 0)
-        {
-            parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (page > 0)
-        {
-            parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("extras", extras, x => x != PhotoSearchExtras.None, x => x.ToFlickrString());
 
-        return await GetResponseAsync<PhotoCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }
 
     async Task IFlickrPhotos.RemoveTagAsync(string tagId, CancellationToken cancellationToken)
@@ -412,19 +313,19 @@ public partial class Flickr : IFlickrPhotos
             { "tag_id", tagId }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
-    async Task<PhotoCollection> IFlickrPhotos.SearchAsync(PhotoSearchOptions options, CancellationToken cancellationToken)
+    async Task<PagedPhotos> IFlickrPhotos.SearchAsync(PhotoSearchOptions options, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
             { "method", "flickr.photos.search" }
         };
 
-        options.AddToDictionary(ref parameters);
+        parameters = parameters.Concat(options.ToDictionary()).ToDictionary(e => e.Key, e => e.Value);
 
-        return await GetResponseAsync<PhotoCollection>(parameters, cancellationToken);
+        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }
 
     async Task IFlickrPhotos.SetContentTypeAsync(string photoId, ContentType contentType, CancellationToken cancellationToken)
@@ -438,7 +339,7 @@ public partial class Flickr : IFlickrPhotos
             { "content_type", contentType.ToString("D") }
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
     async Task IFlickrPhotos.SetDatesAsync(string photoId, DateTime? datePosted, DateTime? dateTaken, DateGranularity granularity, CancellationToken cancellationToken)
@@ -449,18 +350,13 @@ public partial class Flickr : IFlickrPhotos
             { "photo_id", photoId }
         };
 
-        if (datePosted.HasValue && datePosted != DateTime.MinValue)
-        {
-            parameters.Add("date_posted", UtilityMethods.DateToUnixTimestamp(datePosted.Value).ToString());
-        }
+        parameters.AppendIf("date_posted", datePosted, x => x.HasValue && x != DateTime.MinValue, x => x.Value.ToUnixTimestamp());
 
-        if (dateTaken.HasValue && dateTaken != DateTime.MinValue)
-        {
-            parameters.Add("date_taken", dateTaken.Value.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.DateTimeFormatInfo.InvariantInfo));
-            parameters.Add("date_taken_granularity", granularity.ToString("d"));
-        }
+        parameters.AppendIf("date_taken", dateTaken, x => x.HasValue && x != DateTime.MinValue, x => x.Value.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.DateTimeFormatInfo.InvariantInfo));
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        parameters.AppendIf("date_taken_granularity", granularity, _ => dateTaken.HasValue && dateTaken != DateTime.MinValue, x => x.ToString("d"));
+
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
     async Task IFlickrPhotos.SetMetaAsync(string photoId, string title, string description, CancellationToken cancellationToken)
@@ -471,17 +367,11 @@ public partial class Flickr : IFlickrPhotos
             { "photo_id", photoId },
         };
 
-        if (!string.IsNullOrEmpty(title))
-        {
-            parameters.Add("title", title);
-        }
+        parameters.AppendIf("title", title, x => !string.IsNullOrEmpty(x), x => x);
 
-        if (!string.IsNullOrEmpty(description))
-        {
-            parameters.Add("description", description);
-        }
+        parameters.AppendIf("description", description, x => !string.IsNullOrEmpty(x), x => x);
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
     async Task IFlickrPhotos.SetPermsAsync(string photoId, bool isPublic, bool isFriend, bool isFamily, PermissionComment? permComment, PermissionAddMeta? permAddMeta, CancellationToken cancellationToken)
@@ -495,17 +385,11 @@ public partial class Flickr : IFlickrPhotos
             { "is_family", (isFamily ? "1" : "0") }
         };
 
-        if (permComment.HasValue)
-        {
-            parameters.Add("perm_comment", permComment.Value.ToString("d"));
-        }
+        parameters.AppendIf("perm_comment", permComment, x => x.HasValue, x => x.Value.ToString("d"));
 
-        if (permAddMeta.HasValue)
-        {
-            parameters.Add("perm_addmeta", permAddMeta.Value.ToString("d"));
-        }
+        parameters.AppendIf("perm_addmeta", permAddMeta, x => x.HasValue, x => x.Value.ToString("d"));
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
     async Task IFlickrPhotos.SetSafetyLevelAsync(string photoId, SafetyLevel safetyLevel, HiddenFromSearch hidden, CancellationToken cancellationToken)
@@ -518,19 +402,11 @@ public partial class Flickr : IFlickrPhotos
             { "photo_id", photoId }
         };
 
-        if (safetyLevel != SafetyLevel.None)
-        {
-            parameters.Add("safety_level", safetyLevel.ToString("D"));
-        }
+        parameters.AppendIf("safety_level", safetyLevel, x => x != SafetyLevel.None, x => x.ToString("D"));
 
-        parameters.Add("hidden", hidden switch
-        {
-            HiddenFromSearch.Hidden => "1",
-            HiddenFromSearch.Visible => "0",
-            _ or HiddenFromSearch.None => "0"
-        });
+        parameters.AppendIf("hidden", hidden, x => x == HiddenFromSearch.Hidden, _ => "1", "0");
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 
     async Task IFlickrPhotos.SetTagsAsync(string photoId, string[] tags, CancellationToken cancellationToken)
@@ -542,7 +418,7 @@ public partial class Flickr : IFlickrPhotos
             { "tags", string.Join(",", tags)}
         };
 
-        await GetResponseAsync<NoResponse>(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken);
     }
 }
 
@@ -611,7 +487,7 @@ public interface IFlickrPhotos
     /// <param name="photoId">The photo id of the photo to get the contexts for.</param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<AllContexts> GetAllContextsAsync(string photoId, CancellationToken cancellationToken = default);
+    Task<FlickrAllContextResult<CollectionSet, Pool>> GetAllContextsAsync(string photoId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets your contacts most recent photos.
@@ -631,7 +507,7 @@ public interface IFlickrPhotos
     /// </exception>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<PhotoCollection> GetContactsPhotosAsync(int count = 0, bool justFriends = false, bool singlePhoto = false, bool includeSelf = false, PhotoSearchExtras extras = PhotoSearchExtras.None, CancellationToken cancellationToken = default);
+    Task<PagedPhotos> GetContactsPhotosAsync(int count = 0, bool justFriends = false, bool singlePhoto = false, bool includeSelf = false, PhotoSearchExtras extras = PhotoSearchExtras.None, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets the public photos for given users ID's contacts.
@@ -646,7 +522,7 @@ public interface IFlickrPhotos
     /// <param name="extras">A list of extra details to return for each photo.</param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<PhotoCollection> GetContactsPublicPhotosAsync(string userId, int count = 0, bool justFriends = false, bool singlePhoto = false, bool includeSelf = false, PhotoSearchExtras extras = PhotoSearchExtras.None, CancellationToken cancellationToken = default);
+    Task<PagedPhotos> GetContactsPublicPhotosAsync(string userId, int count = 0, bool justFriends = false, bool singlePhoto = false, bool includeSelf = false, PhotoSearchExtras extras = PhotoSearchExtras.None, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets the context of the photo in the users photostream.
@@ -654,7 +530,7 @@ public interface IFlickrPhotos
     /// <param name="photoId">The ID of the photo to return the context for.</param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<Context> GetContextAsync(string photoId, CancellationToken cancellationToken = default);
+    Task<FlickrContextResult<NextPhoto, PrevPhoto>> GetContextAsync(string photoId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Returns count of photos between each pair of dates in the list.
@@ -667,7 +543,7 @@ public interface IFlickrPhotos
     /// <param name="takenDates">Comma-delimited list of dates in unix timestamp format. Optional.</param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<PhotoCountCollection> GetCountsAsync(DateTime[] dates = null, DateTime[] takenDates = null, CancellationToken cancellationToken = default);
+    Task<PhotoCounts> GetCountsAsync(DateTime[] dates = null, DateTime[] takenDates = null, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets the EXIF data for a given Photo ID.
@@ -678,7 +554,7 @@ public interface IFlickrPhotos
     /// </param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<ExifTagCollection> GetExifAsync(string photoId, string secret = null, CancellationToken cancellationToken = default);
+    Task<PhotoExif> GetExifAsync(string photoId, string secret = null, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get the list of favourites for a photo.
@@ -688,7 +564,7 @@ public interface IFlickrPhotos
     /// <param name="page">The page to return. Default is 1.</param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<PhotoFavoriteCollection> GetFavoritesAsync(string photoId, int perPage = 0, int page = 0, CancellationToken cancellationToken = default);
+    Task<PhotoPersons> GetFavoritesAsync(string photoId, int perPage = 0, int page = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get information about a photo. The calling user must have permission to view the photo.
@@ -708,7 +584,7 @@ public interface IFlickrPhotos
     /// <param name="options">A selection of options to filter/sort by.</param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<PhotoCollection> GetNotInSetAsync(PartialSearchOptions options, CancellationToken cancellationToken = default);
+    Task<PagedPhotos> GetNotInSetAsync(PartialSearchOptions options, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get permissions for a photo.
@@ -716,7 +592,7 @@ public interface IFlickrPhotos
     /// <param name="photoId">The id of the photo to get permissions for.</param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<PhotoPermissions> GetPermsAsync(string photoId, CancellationToken cancellationToken = default);
+    Task<Perms> GetPermsAsync(string photoId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get a users popular photos
@@ -728,7 +604,7 @@ public interface IFlickrPhotos
     /// <param name="page"></param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<PhotoCollection> GetPopularAsync(string userId, PhotoSearchExtras extras = PhotoSearchExtras.None, PopularSorting sort = PopularSorting.None, int perPage = 0, int page = 0, CancellationToken cancellationToken = default);
+    Task<PagedPhotos> GetPopularAsync(string userId, PhotoSearchExtras extras = PhotoSearchExtras.None, PopularSorting sort = PopularSorting.None, int perPage = 0, int page = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Returns a list of the latest public photos uploaded to flickr.
@@ -745,7 +621,7 @@ public interface IFlickrPhotos
     /// </param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<PhotoCollection> GetRecentAsync(int page = 0, int perPage = 0, PhotoSearchExtras extras = PhotoSearchExtras.None, CancellationToken cancellationToken = default);
+    Task<PagedPhotos> GetRecentAsync(int page = 0, int perPage = 0, PhotoSearchExtras extras = PhotoSearchExtras.None, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Returns the available sizes for a photo. The calling user must have permission to view the photo.
@@ -753,7 +629,7 @@ public interface IFlickrPhotos
     /// <param name="photoId">The id of the photo to fetch size information for.</param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<SizeCollection> GetSizesAsync(string photoId, CancellationToken cancellationToken = default);
+    Task<Sizes> GetSizesAsync(string photoId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Returns a list of your photos with no tags.
@@ -763,7 +639,7 @@ public interface IFlickrPhotos
     /// </param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<PhotoCollection> GetUntaggedAsync(PartialSearchOptions options, CancellationToken cancellationToken = default);
+    Task<PagedPhotos> GetUntaggedAsync(PartialSearchOptions options, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets a list of photos that do not contain geo location information.
@@ -771,7 +647,7 @@ public interface IFlickrPhotos
     /// <param name="options">A limited set of options are supported.</param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<PhotoCollection> GetWithoutGeoDataAsync(PartialSearchOptions options, CancellationToken cancellationToken = default);
+    Task<PagedPhotos> GetWithoutGeoDataAsync(PartialSearchOptions options, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets a list of photos that contain geo location information.
@@ -783,7 +659,7 @@ public interface IFlickrPhotos
     /// <param name="options">The options to filter/sort the results by.</param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<PhotoCollection> GetWithGeoDataAsync(PartialSearchOptions options, CancellationToken cancellationToken = default);
+    Task<PagedPhotos> GetWithGeoDataAsync(PartialSearchOptions options, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Return a list of your photos that have been recently created or which have been recently
@@ -801,7 +677,7 @@ public interface IFlickrPhotos
     /// </param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<PhotoCollection> RecentlyUpdatedAsync(DateTime minDate, PhotoSearchExtras extras = PhotoSearchExtras.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<PagedPhotos> RecentlyUpdatedAsync(DateTime minDate, PhotoSearchExtras extras = PhotoSearchExtras.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Remove an existing tag.
@@ -820,7 +696,7 @@ public interface IFlickrPhotos
     /// <param name="options">The parameters to search for.</param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<PhotoCollection> SearchAsync(PhotoSearchOptions options, CancellationToken cancellationToken = default);
+    Task<PagedPhotos> SearchAsync(PhotoSearchOptions options, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Sets the content type for a photo.

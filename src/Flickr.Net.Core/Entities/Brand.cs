@@ -1,45 +1,9 @@
-﻿namespace Flickr.Net.Core.Entities;
+﻿using Flickr.Net.Core.Bases;
 
-/// <summary>
-/// A particular camera brand.
-/// </summary>
-public class Brand : IFlickrParsable
+namespace Flickr.Net.Core;
+
+public record Brand : FlickrEntityBase<Id>
 {
-    /// <summary>
-    /// The name of the camera brand. e.g. "Canon".
-    /// </summary>
-    public string BrandName { get; set; }
-
-    /// <summary>
-    /// The ID of the camera brand. e.g. "canon".
-    /// </summary>
-    public string BrandId { get; set; }
-
-    void IFlickrParsable.Load(XmlReader reader)
-    {
-        if (reader.LocalName != "brand")
-        {
-            UtilityMethods.CheckParsingException(reader);
-        }
-
-        while (reader.MoveToNextAttribute())
-        {
-            switch (reader.LocalName)
-            {
-                case "id":
-                    BrandId = reader.Value;
-                    break;
-
-                case "name":
-                    BrandName = reader.Value;
-                    break;
-
-                default:
-                    UtilityMethods.CheckParsingException(reader);
-                    break;
-            }
-        }
-
-        reader.Skip();
-    }
+    [JsonProperty("_content")]
+    public string Content { get; set; }
 }

@@ -6,8 +6,6 @@
 /// <remarks>The passed signature was invalid.</remarks>
 public class InvalidSignatureException : FlickrApiException
 {
-    internal InvalidSignatureException(string message)
-        : base(96, message)
-    {
-    }
+    internal InvalidSignatureException(string message) : base(96, message)
+    { }
 }
