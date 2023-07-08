@@ -1,5 +1,4 @@
-﻿using System.Reflection.Metadata;
-using Flickr.Net.Core.Exceptions;
+﻿using Flickr.Net.Core.Exceptions;
 using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals.Extensions;
 
