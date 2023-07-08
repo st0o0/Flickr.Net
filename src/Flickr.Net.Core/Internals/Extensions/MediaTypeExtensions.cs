@@ -11,9 +11,8 @@ public static class MediaTypeExtensions
     /// <returns></returns>
     public static string ToFlickrString(this MediaType mediaType) => mediaType switch
     {
-        MediaType.All => "all",
-        MediaType.Photos => "photos",
-        MediaType.Videos => "videos",
-        _ => string.Empty,
+        MediaType.Photos or MediaType.Photo => "photos",
+        MediaType.Videos or MediaType.Video => "videos",
+        _ or MediaType.All => "all",
     };
 }

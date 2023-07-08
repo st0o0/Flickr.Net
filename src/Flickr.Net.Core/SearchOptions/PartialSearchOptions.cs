@@ -1,6 +1,3 @@
-using System.Collections;
-using Flickr.Net.Core.Internals.Extensions;
-
 namespace Flickr.Net.Core;
 
 /// <summary>

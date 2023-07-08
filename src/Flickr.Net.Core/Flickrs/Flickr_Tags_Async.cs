@@ -45,15 +45,9 @@ public partial class Flickr : IFlickrTags
             { "method", "flickr.tags.getHotList" }
         };
 
-        if (!string.IsNullOrEmpty(period))
-        {
-            parameters.Add("period", period);
-        }
+        parameters.AppendIf("period", period, x => !string.IsNullOrEmpty(x), x => x);
 
-        if (count.HasValue && count > 0)
-        {
-            parameters.Add("count", count.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("count", count, x => x.HasValue && x > 0, x => x.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
         return await GetGenericResponseAsync<FlickrStatsResult<Hottags>>(parameters, cancellationToken);
     }
@@ -76,10 +70,7 @@ public partial class Flickr : IFlickrTags
             { "method", "flickr.tags.getListUser" }
         };
 
-        if (userId != null && userId.Length > 0)
-        {
-            parameters.Add("user_id", userId);
-        }
+        parameters.AppendIf("user_id", userId, x => x != null && x.Length > 0, x => x);
 
         return await GetResponseAsync<Tags>(parameters, cancellationToken);
     }
@@ -91,15 +82,9 @@ public partial class Flickr : IFlickrTags
             { "method", "flickr.tags.getListUserPopular" }
         };
 
-        if (userId != null)
-        {
-            parameters.Add("user_id", userId);
-        }
+        parameters.AppendIf("user_id", userId, x => x != null && x.Length > 0, x => x);
 
-        if (count.HasValue && count > 0)
-        {
-            parameters.Add("count", count.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
+        parameters.AppendIf("count", count, x => x.HasValue && x > 0, x => x.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<UserTags>(parameters, cancellationToken);
     }

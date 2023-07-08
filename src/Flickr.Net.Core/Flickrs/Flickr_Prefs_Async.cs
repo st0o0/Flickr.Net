@@ -15,7 +15,7 @@ public partial class Flickr : IFlickrPrefs
         };
 
         var result = await GetResponseAsync<PersonUnknownResponse>(parameters, cancellationToken);
-        
+
         return (ContentType)int.Parse(result.GetValueOrDefault("content_type", "0"), System.Globalization.NumberFormatInfo.InvariantInfo);
     }
 
@@ -41,7 +41,7 @@ public partial class Flickr : IFlickrPrefs
         };
 
         var result = await GetResponseAsync<PersonUnknownResponse>(parameters, cancellationToken);
-        
+
         return (HiddenFromSearch)int.Parse(result.GetValueOrDefault("hidden", "0"), System.Globalization.NumberFormatInfo.InvariantInfo);
     }
 
@@ -55,7 +55,7 @@ public partial class Flickr : IFlickrPrefs
         };
 
         var result = await GetResponseAsync<PersonUnknownResponse>(parameters, cancellationToken);
-        
+
         return (PrivacyFilter)int.Parse(result.GetValueOrDefault("privacy", "0"), System.Globalization.NumberFormatInfo.InvariantInfo);
     }
 
@@ -69,7 +69,7 @@ public partial class Flickr : IFlickrPrefs
         };
 
         var result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
-        
+
         return (SafetyLevel)int.Parse(result.GetValueOrDefault("safety_level", "0"), System.Globalization.NumberFormatInfo.InvariantInfo);
     }
 }

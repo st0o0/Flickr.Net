@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Core.Exceptions;
+﻿using System.Reflection.Metadata;
+using Flickr.Net.Core.Exceptions;
 using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals.Extensions;
 
@@ -125,15 +126,9 @@ public partial class Flickr : IFlickrPhotos
             { "method", "flickr.photos.getCounts" }
         };
 
-        parameters.AppendIf("dates", dates, x => x != null && x.Length > 0, x =>
-        {
-            return string.Join(",", x.Select(Item => Item.ToUnixTimestamp()));
-        });
+        parameters.AppendIf("dates", dates, x => x != null && x.Length > 0, x => string.Join(",", x.Select(Item => Item.ToUnixTimestamp())));
 
-        parameters.AppendIf("taken_dates", takenDates, x => x != null && x.Length > 0, x =>
-        {
-            return string.Join(",", x.Select(Item => Item.ToUnixTimestamp()));
-        });
+        parameters.AppendIf("taken_dates", takenDates, x => x != null && x.Length > 0, x => string.Join(",", x.Select(Item => Item.ToUnixTimestamp())));
 
         return await GetResponseAsync<PhotoCounts>(parameters, cancellationToken);
     }
@@ -186,9 +181,9 @@ public partial class Flickr : IFlickrPhotos
             { "method", "flickr.photos.getNotInSet" }
         };
 
-        var result = parameters.Concat(options.ToDictionary()).ToDictionary(e => e.Key, e => e.Value);
+        parameters = parameters.Concat(options.ToDictionary()).ToDictionary(e => e.Key, e => e.Value);
 
-        return await GetResponseAsync<PagedPhotos>(result, cancellationToken);
+        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }
 
     async Task<Perms> IFlickrPhotos.GetPermsAsync(string photoId, CancellationToken cancellationToken)
@@ -263,9 +258,9 @@ public partial class Flickr : IFlickrPhotos
             { "method", "flickr.photos.getUntagged" }
         };
 
-        var result = parameters.Concat(options.ToDictionary()).ToDictionary(e => e.Key, e => e.Value);
+        parameters = parameters.Concat(options.ToDictionary()).ToDictionary(e => e.Key, e => e.Value);
 
-        return await GetResponseAsync<PagedPhotos>(result, cancellationToken);
+        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }
 
     async Task<PagedPhotos> IFlickrPhotos.GetWithoutGeoDataAsync(PartialSearchOptions options, CancellationToken cancellationToken)
@@ -275,9 +270,9 @@ public partial class Flickr : IFlickrPhotos
             { "method", "flickr.photos.getWithoutGeoData" }
         };
 
-        var result = parameters.Concat(options.ToDictionary()).ToDictionary(e => e.Key, e => e.Value);
+        parameters = parameters.Concat(options.ToDictionary()).ToDictionary(e => e.Key, e => e.Value);
 
-        return await GetResponseAsync<PagedPhotos>(result, cancellationToken);
+        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }
 
     async Task<PagedPhotos> IFlickrPhotos.GetWithGeoDataAsync(PartialSearchOptions options, CancellationToken cancellationToken)
@@ -287,9 +282,9 @@ public partial class Flickr : IFlickrPhotos
             { "method", "flickr.photos.getWithGeoData" }
         };
 
-        var result = parameters.Concat(options.ToDictionary()).ToDictionary(e => e.Key, e => e.Value);
+        parameters = parameters.Concat(options.ToDictionary()).ToDictionary(e => e.Key, e => e.Value);
 
-        return await GetResponseAsync<PagedPhotos>(result, cancellationToken);
+        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }
 
     async Task<PagedPhotos> IFlickrPhotos.RecentlyUpdatedAsync(DateTime minDate, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken)
@@ -329,9 +324,9 @@ public partial class Flickr : IFlickrPhotos
             { "method", "flickr.photos.search" }
         };
 
-        var result = parameters.Concat(options.ToDictionary()).ToDictionary(e => e.Key, e => e.Value);
+        parameters = parameters.Concat(options.ToDictionary()).ToDictionary(e => e.Key, e => e.Value);
 
-        return await GetResponseAsync<PagedPhotos>(result, cancellationToken);
+        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }
 
     async Task IFlickrPhotos.SetContentTypeAsync(string photoId, ContentType contentType, CancellationToken cancellationToken)
@@ -410,12 +405,7 @@ public partial class Flickr : IFlickrPhotos
 
         parameters.AppendIf("safety_level", safetyLevel, x => x != SafetyLevel.None, x => x.ToString("D"));
 
-        parameters.Add("hidden", hidden switch
-        {
-            HiddenFromSearch.Hidden => "1",
-            HiddenFromSearch.Visible => "0",
-            _ or HiddenFromSearch.None => "0"
-        });
+        parameters.AppendIf("hidden", hidden, x => x == HiddenFromSearch.Hidden, _ => "1", "0");
 
         await GetResponseAsync(parameters, cancellationToken);
     }

@@ -1,6 +1,5 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
-using Flickr.Net.Core.Internals.Extensions;
 
 namespace Flickr.Net.Core;
 

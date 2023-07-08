@@ -1,5 +1,4 @@
-﻿using Flickr.Net.Core.Bases;
-using Flickr.Net.Core.Internals.Extensions;
+﻿using Flickr.Net.Core.Internals.Extensions;
 
 namespace Flickr.Net.Core;
 

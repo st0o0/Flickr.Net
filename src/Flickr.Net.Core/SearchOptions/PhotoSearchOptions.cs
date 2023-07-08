@@ -332,7 +332,6 @@ public record PhotoSearchOptions
         sb.Append("https://www.flickr.com/show.gne");
         sb.Append("?api_method=flickr.photos.search&method_params=");
 
-
         var parameters = this.ToDictionary();
 
         List<string> parts = new();

@@ -141,15 +141,7 @@ public partial class Flickr : IFlickrPhotosets
 
         parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (media != MediaType.None)
-        {
-            parameters.Add("media", media switch
-            {
-                MediaType.Photos or MediaType.Photo => "photos",
-                MediaType.Videos or MediaType.Video => "videos",
-                _ or MediaType.All => "all",
-            });
-        }
+        parameters.AppendIf("media", media, x => x != MediaType.None, x => media.ToFlickrString());
 
         return await GetResponseAsync<PhotosetPhotos>(parameters, cancellationToken);
     }

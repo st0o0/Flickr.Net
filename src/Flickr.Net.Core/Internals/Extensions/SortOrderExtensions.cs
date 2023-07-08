@@ -4,28 +4,6 @@
 /// </summary>
 public static class SortOrderExtensions
 {
-    [Obsolete("KEKW")]
-    public static string ToKEKWFlickrString(this PopularitySort sortOrder) => sortOrder switch
-    {
-        PopularitySort.Comments => "comments",
-        PopularitySort.Favorites => "favorites",
-        PopularitySort.Views => "views",
-        _ => string.Empty,
-    };
-
-    [Obsolete("KEKW")]
-    public static string ToKEKWFlickrString(this PhotoSearchSortOrder order) => order switch
-    {
-        PhotoSearchSortOrder.DatePostedAscending => "date-posted-asc",
-        PhotoSearchSortOrder.DatePostedDescending => "date-posted-desc",
-        PhotoSearchSortOrder.DateTakenAscending => "date-taken-asc",
-        PhotoSearchSortOrder.DateTakenDescending => "date-taken-desc",
-        PhotoSearchSortOrder.InterestingnessAscending => "interestingness-asc",
-        PhotoSearchSortOrder.InterestingnessDescending => "interestingness-desc",
-        PhotoSearchSortOrder.Relevance => "relevance",
-        _ => string.Empty,
-    };
-
     /// <summary>
     /// Converts a <see cref="PopularitySort"/> enum to a string.
     /// </summary>

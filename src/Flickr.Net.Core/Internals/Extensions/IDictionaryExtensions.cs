@@ -5,6 +5,33 @@
 public static class IDictionaryExtensions
 {
     /// <summary>
+    /// Appends the if.
+    /// </summary>
+    /// <param name="pairs">The pairs.</param>
+    /// <param name="key">The key.</param>
+    /// <param name="value">The value.</param>
+    /// <param name="predicate">The predicate.</param>
+    /// <param name="func">The func.</param>
+    /// <param name="defaultValue">The default value.</param>
+    public static void AppendIf<TKey, TTargetValue, TSourceValue>(
+        this IDictionary<TKey, TTargetValue> pairs,
+        TKey key,
+        TSourceValue value,
+        Predicate<TSourceValue> predicate,
+        Func<TSourceValue, TTargetValue> func,
+        TTargetValue defaultValue)
+    {
+        if (predicate(value))
+        {
+            pairs.Add(key, func(value));
+        }
+        else
+        {
+            pairs.Add(key, defaultValue);
+        }
+    }
+
+    /// <summary>
     /// </summary>
     /// <typeparam name="TKey"></typeparam>
     /// <typeparam name="TTargetValue"></typeparam>
