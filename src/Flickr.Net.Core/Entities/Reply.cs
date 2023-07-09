@@ -2,7 +2,7 @@
 
 namespace Flickr.Net.Core;
 
-public record Reply : FlickrEntityBase<Id>
+public record Reply : FlickrEntityBase<Id>, IBuddyIcon
 {
     [JsonProperty("author")]
     public string Author { get; set; }
@@ -17,10 +17,10 @@ public record Reply : FlickrEntityBase<Id>
     public MemberType Role { get; set; }
 
     [JsonProperty("iconserver")]
-    public string Iconserver { get; set; }
+    public string IconServer { get; set; }
 
     [JsonProperty("iconfarm")]
-    public string Iconfarm { get; set; }
+    public int IconFarm { get; set; }
 
     [JsonProperty("can_edit")]
     public bool CanEdit { get; set; }

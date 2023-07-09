@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Core.Flickrs.Results;
+﻿using Flickr.Net.Core.Extensions;
+using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals;
 
 namespace Flickr.Net.Core.Test.Entities;
@@ -107,5 +108,6 @@ public class CommentTests
         Assert.IsType<Comment>(items.Values[0]);
         Assert.False(string.IsNullOrEmpty(items.Values[0].Id));
         Assert.IsType<DateTime>(items.Values[0].CreateDate);
+        Assert.NotEmpty(items.Values[0].ToBuddyIconUrl());
     }
 }

@@ -7,7 +7,7 @@ public static class ICollectionColorCodeExtensions
     /// </summary>
     /// <param name="codes">The codes.</param>
     /// <returns>A string.</returns>
-    public static string ToFlickrString(this ICollection<string> codes)
+    internal static string ToFlickrString(this ICollection<string> codes)
     {
         Dictionary<string, string> codeMap = new()
         {

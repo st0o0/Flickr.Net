@@ -4,7 +4,7 @@ using Flickr.Net.Core.Internals.Attributes;
 namespace Flickr.Net.Core;
 
 [FlickrJsonPropertyName("photo")]
-public record PhotoInfo : PhotoBase
+public record PhotoInfo : PhotoBase, IBuddyIcon, IWebUrl, ISquareUrl, ILargeSquareUrl, IThumbnailUrl, ISmallUrl, ISmall320Url, ISmall400Url, IMediumUrl, IMedium640Url, IMedium800Url, ILargeUrl, ILarge1600Url, ILarge2048Url, IOriginalUrl
 {
     [JsonProperty("farm")]
     public int Farm { get; set; }

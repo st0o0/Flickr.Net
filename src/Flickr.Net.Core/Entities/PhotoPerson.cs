@@ -4,7 +4,7 @@ using Flickr.Net.Core.Internals.Attributes;
 namespace Flickr.Net.Core;
 
 [FlickrJsonPropertyName("person")]
-public record PhotoPerson : FlickrEntityBase<NsId>
+public record PhotoPerson : FlickrEntityBase<NsId>, IBuddyIcon
 {
     [JsonProperty("username")]
     public string Username { get; set; }
@@ -22,7 +22,7 @@ public record PhotoPerson : FlickrEntityBase<NsId>
     public string IconServer { get; set; }
 
     [JsonProperty("iconfarm")]
-    public int Iconfarm { get; set; }
+    public int IconFarm { get; set; }
 
     [JsonProperty("path_alias")]
     public string PathAlias { get; set; }

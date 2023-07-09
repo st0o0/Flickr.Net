@@ -12,5 +12,5 @@ public static class CollectionStyleExtensions
     /// <returns>Concatenated styles.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="styles"/> is null.</exception>
     /// <exception cref="OutOfMemoryException">Out of memory.</exception>
-    public static string ToFlickrString(this ICollection<Style> styles) => string.Join(",", styles.Distinct().Select(s => s.GetEnumMemberValue()));
+    internal static string ToFlickrString(this ICollection<Style> styles) => string.Join(",", styles.Distinct().Select(s => s.GetEnumMemberValue()));
 }

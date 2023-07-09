@@ -2,13 +2,16 @@
 
 namespace Flickr.Net.Core;
 
-public record Contact : FlickrEntityBase<NsId>
+public record Contact : FlickrEntityBase<NsId>, IBuddyIcon
 {
     [JsonProperty("username")]
     public string UserName { get; set; }
 
     [JsonProperty("iconserver")]
     public string IconServer { get; set; }
+
+    [JsonProperty("iconfarm")]
+    public int IconFarm { get; set; }
 
     [JsonProperty("realname")]
     public string RealName { get; set; }

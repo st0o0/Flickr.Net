@@ -4,13 +4,13 @@ using Flickr.Net.Core.Internals.Attributes;
 namespace Flickr.Net.Core;
 
 [FlickrJsonPropertyName("group")]
-public record GroupInfo : FlickrEntityBase<Id>
+public record GroupInfo : FlickrEntityBase<Id>, IBuddyIcon
 {
     [JsonProperty("iconserver")]
     public string IconServer { get; set; }
 
     [JsonProperty("iconfarm")]
-    public string IconFarm { get; set; }
+    public int IconFarm { get; set; }
 
     [JsonProperty("lang")]
     public string Lang { get; set; }

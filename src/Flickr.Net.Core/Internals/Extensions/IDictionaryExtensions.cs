@@ -13,7 +13,7 @@ public static class IDictionaryExtensions
     /// <param name="predicate">The predicate.</param>
     /// <param name="func">The func.</param>
     /// <param name="defaultValue">The default value.</param>
-    public static void AppendIf<TKey, TTargetValue, TSourceValue>(
+    internal static void AppendIf<TKey, TTargetValue, TSourceValue>(
         this IDictionary<TKey, TTargetValue> pairs,
         TKey key,
         TSourceValue value,
@@ -41,7 +41,7 @@ public static class IDictionaryExtensions
     /// <param name="value"></param>
     /// <param name="predicate"></param>
     /// <param name="func"></param>
-    public static void AppendIf<TKey, TTargetValue, TSourceValue>(this IDictionary<TKey, TTargetValue> pairs, TKey key, TSourceValue value, Predicate<TSourceValue> predicate, Func<TSourceValue, TTargetValue> func)
+    internal static void AppendIf<TKey, TTargetValue, TSourceValue>(this IDictionary<TKey, TTargetValue> pairs, TKey key, TSourceValue value, Predicate<TSourceValue> predicate, Func<TSourceValue, TTargetValue> func)
     {
         if (predicate(value))
         {
@@ -57,7 +57,7 @@ public static class IDictionaryExtensions
     /// <param name="key"></param>
     /// <param name="value"></param>
     /// <param name="predicate"></param>
-    public static void AppendIf<TKey, TSourceValue>(this IDictionary<TKey, TSourceValue> pairs, TKey key, TSourceValue value, Predicate<TSourceValue> predicate)
+    internal static void AppendIf<TKey, TSourceValue>(this IDictionary<TKey, TSourceValue> pairs, TKey key, TSourceValue value, Predicate<TSourceValue> predicate)
     {
         pairs.AppendIf(key, value, predicate, x => x);
     }

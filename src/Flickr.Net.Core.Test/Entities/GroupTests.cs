@@ -1,4 +1,5 @@
 ﻿using Flickr.Net.Core.Enums;
+using Flickr.Net.Core.Extensions;
 using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals;
 
@@ -62,6 +63,7 @@ public class GroupTests
         Assert.False(items.Restrictions.ModerateOk);
         Assert.False(items.Restrictions.RestrictedOk);
         Assert.False(items.Restrictions.HasGeo);
+        Assert.NotEmpty(items.ToBuddyIconUrl());
     }
 
     [Fact]
@@ -117,6 +119,7 @@ public class GroupTests
         Assert.False(items.Values[1].EighteenPlus);
         Assert.False(items.Values[2].EighteenPlus);
         Assert.False(items.Values[3].EighteenPlus);
+        Assert.NotEmpty(items.Values[0].ToBuddyIconUrl());
     }
 
     [Fact]

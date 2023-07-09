@@ -17,7 +17,7 @@ public static class PhotoSearchExtrasExtensions
     /// </example>
     /// <param name="extras"></param>
     /// <returns></returns>
-    public static string ToFlickrString(this PhotoSearchExtras extras)
+    internal static string ToFlickrString(this PhotoSearchExtras extras)
     {
         var results = new List<string>();
         foreach (var extra in GetFlags(extras))

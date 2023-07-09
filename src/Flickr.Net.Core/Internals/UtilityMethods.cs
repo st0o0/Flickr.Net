@@ -132,9 +132,9 @@ public static class UtilityMethods
     /// <param name="size">The size.</param>
     /// <param name="extension">The extension.</param>
     /// <returns>A string.</returns>
-    public static string UrlFormat(Photo p, string size, string extension)
+    public static string UrlFormat(Photo p, SizeType size, string extension)
     {
-        if (size == "_o" || size == "original")
+        if (size == SizeType.Original)
         {
             return UrlFormat(p.Farm, p.Server, p.Id, p.Secret, size, extension);
         }
@@ -151,9 +151,9 @@ public static class UtilityMethods
     /// <param name="size">The size.</param>
     /// <param name="extension">The extension.</param>
     /// <returns>A string.</returns>
-    public static string UrlFormat(PhotoInfo p, string size, string extension)
+    public static string UrlFormat(PhotoInfo p, SizeType size, string extension)
     {
-        if (size == "_o" || size == "original")
+        if (size == SizeType.Original)
         {
             return UrlFormat(p.Farm, p.Server, p.Id, p.OriginalSecret, size, extension);
         }
@@ -161,6 +161,11 @@ public static class UtilityMethods
         {
             return UrlFormat(p.Farm, p.Server, p.Id, p.Secret, size, extension);
         }
+    }
+
+    public static string UrlFormat(Photoset p, SizeType size, string extension)
+    {
+        return UrlFormat(p.Farm, p.Server, p.Primary, p.Secret, size, extension);
     }
 
     /// <summary>
@@ -173,18 +178,10 @@ public static class UtilityMethods
     /// <param name="size">The size.</param>
     /// <param name="extension">The extension.</param>
     /// <returns>A string.</returns>
-    public static string UrlFormat(int farm, string server, string photoId, string secret, string size, string extension)
+    public static string UrlFormat(int farm, string server, string photoId, string secret, SizeType size, string extension)
     {
-        var sizeAbbreviation = size switch
-        {
-            "square" => "_s",
-            "thumbnail" => "_t",
-            "small" => "_m",
-            "large" => "_b",
-            "original" => "_o",
-            "medium" => string.Empty,
-            _ => size,
-        };
+        var sizeAbbreviation = size.GetEnumMemberValue();
+
         return UrlFormat(PhotoUrlFormat, farm, server, photoId, secret, sizeAbbreviation, extension);
     }
 

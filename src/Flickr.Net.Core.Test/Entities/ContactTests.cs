@@ -10,42 +10,55 @@ public class ContactTests
     {
         var json = /*lang=json,strict*/ """
             {
-              "stat": "ok",
-              "contacts": {
-                "page": "1",
-                "pages": "1",
-                "perpage": "1000",
-                "total": "3",
-                "contact": [
-                  {
-                    "nsid": "12037949629@N01",
-                    "username": "Eric",
-                    "iconserver": "1",
-                    "realname": "Eric Costello",
-                    "friend": "1",
-                    "family": "0",
-                    "ignored": "1"
-                  },
-                  {
-                    "nsid": "12037949631@N01",
-                    "username": "neb",
-                    "iconserver": "1",
-                    "realname": "Ben Cerveny",
-                    "friend": "0",
-                    "family": "0",
-                    "ignored": "0"
-                  },
-                  {
-                    "nsid": "41578656547@N01",
-                    "username": "cal_abc",
-                    "iconserver": "1",
-                    "realname": "Cal Henderson",
-                    "friend": "1",
-                    "family": "1",
-                    "ignored": "0"
-                  }
-                ]
-              }
+                "contacts": {
+                    "page": 1,
+                    "pages": 1,
+                    "per_page": 1000,
+                    "perpage": 1000,
+                    "total": 3,
+                    "contact": [
+                        {
+                            "nsid": "66956608@N06",
+                            "username": "Flickr",
+                            "iconserver": "3741",
+                            "iconfarm": 4,
+                            "ignored": 0,
+                            "rev_ignored": 0,
+                            "realname": "Flickr",
+                            "friend": 0,
+                            "family": 0,
+                            "path_alias": "flickr",
+                            "location": ""
+                        },
+                        {
+                            "nsid": "153496924@N03",
+                            "username": "KaAuenwasser",
+                            "iconserver": "7921",
+                            "iconfarm": 8,
+                            "ignored": 0,
+                            "rev_ignored": 0,
+                            "realname": "Stephan Gehrlein",
+                            "friend": 0,
+                            "family": 0,
+                            "path_alias": "kaauenwasser",
+                            "location": "Karlsruhe, Deutschland"
+                        },
+                        {
+                            "nsid": "148774494@N04",
+                            "username": "reipa59",
+                            "iconserver": "4163",
+                            "iconfarm": 5,
+                            "ignored": 0,
+                            "rev_ignored": 0,
+                            "realname": "",
+                            "friend": 0,
+                            "family": 0,
+                            "path_alias": "reinerpaul",
+                            "location": ""
+                        }
+                    ]
+                },
+                "stat": "ok"
             }
             """;
 
@@ -56,9 +69,9 @@ public class ContactTests
         var items = result.Content;
         Assert.IsType<Contacts>(items);
         Assert.IsType<Contact>(items.Values[0]);
-        Assert.True(items.Values[0].Friend);
+        Assert.False(items.Values[0].Friend);
         Assert.False(items.Values[0].Family);
-        Assert.True(items.Values[0].Ignored);
+        Assert.False(items.Values[0].Ignored);
         Assert.Equal(items.Total, items.Values.Count);
     }
 }

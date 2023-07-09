@@ -4,7 +4,7 @@ using Flickr.Net.Core.Internals.Attributes;
 namespace Flickr.Net.Core;
 
 [FlickrJsonPropertyName("topic")]
-public record Topic : FlickrEntityBase
+public record Topic : FlickrEntityBase, IBuddyIcon
 {
     [JsonProperty("topic_id")]
     public string TopicId { get; set; }

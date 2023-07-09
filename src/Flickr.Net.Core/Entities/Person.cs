@@ -2,7 +2,7 @@
 
 namespace Flickr.Net.Core;
 
-public record Person : FlickrEntityBase<Id>
+public record Person : FlickrEntityBase<Id>, IBuddyIcon
 {
     [JsonProperty("nsid")]
     public string Nsid { get; set; }
