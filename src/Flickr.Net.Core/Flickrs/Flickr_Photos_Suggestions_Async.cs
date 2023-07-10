@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Core.Internals.Extensions;
+﻿using System.Text.RegularExpressions;
+using Flickr.Net.Core.Internals.Extensions;
 
 namespace Flickr.Net.Core;
 
@@ -61,10 +62,7 @@ public partial class Flickr : IFlickrPhotosSuggestions
     {
         CheckRequiresAuthentication();
 
-        if (string.IsNullOrEmpty(suggestionId))
-        {
-            throw new ArgumentNullException(nameof(suggestionId));
-        }
+        ArgumentException.ThrowIfNullOrEmpty(suggestionId);
 
         Dictionary<string, string> parameters = new()
         {

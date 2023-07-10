@@ -16,6 +16,7 @@ public partial class Flickr : IFlickrUrls
         };
 
         var result = await GetResponseAsync<GroupUnknownResponse>(parameters, cancellationToken);
+
         return result.GetValueOrDefault("url", string.Empty);
     }
 
@@ -32,6 +33,7 @@ public partial class Flickr : IFlickrUrls
         }
 
         var result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
+
         return result.GetValueOrDefault("url", string.Empty);
     }
 

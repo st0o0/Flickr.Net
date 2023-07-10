@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Core.Internals.Extensions;
+﻿using System.Text.RegularExpressions;
+using Flickr.Net.Core.Internals.Extensions;
 
 namespace Flickr.Net.Core;
 
@@ -11,20 +12,11 @@ public partial class Flickr : IFlickrGroupsDiscussTopics
     {
         CheckRequiresAuthentication();
 
-        if (string.IsNullOrEmpty(groupId))
-        {
-            throw new ArgumentNullException(nameof(groupId));
-        }
+        ArgumentException.ThrowIfNullOrEmpty(groupId);
 
-        if (string.IsNullOrEmpty(subject))
-        {
-            throw new ArgumentNullException(nameof(subject));
-        }
+        ArgumentException.ThrowIfNullOrEmpty(subject);
 
-        if (string.IsNullOrEmpty(message))
-        {
-            throw new ArgumentNullException(nameof(message));
-        }
+        ArgumentException.ThrowIfNullOrEmpty(message);
 
         Dictionary<string, string> parameters = new()
         {
@@ -39,10 +31,7 @@ public partial class Flickr : IFlickrGroupsDiscussTopics
 
     async Task<Topics> IFlickrGroupsDiscussTopics.TopicsGetListAsync(string groupId, int page, int perPage, CancellationToken cancellationToken)
     {
-        if (string.IsNullOrEmpty(groupId))
-        {
-            throw new ArgumentNullException(nameof(groupId));
-        }
+        ArgumentException.ThrowIfNullOrEmpty(groupId);
 
         Dictionary<string, string> parameters = new()
         {
@@ -59,10 +48,7 @@ public partial class Flickr : IFlickrGroupsDiscussTopics
 
     async Task<Topic> IFlickrGroupsDiscussTopics.TopicsGetInfoAsync(string topicId, CancellationToken cancellationToken)
     {
-        if (string.IsNullOrEmpty(topicId))
-        {
-            throw new ArgumentNullException(nameof(topicId));
-        }
+        ArgumentException.ThrowIfNullOrEmpty(topicId);
 
         Dictionary<string, string> parameters = new()
         {

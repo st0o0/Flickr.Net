@@ -31,6 +31,7 @@ public partial class Flickr : IFlickrActivity
         }
 
         ArgumentNullException.ThrowIfNull(timeType, nameof(timeType));
+
         var timeframe = timePeriod + timeType.GetEnumMemberValue();
 
         CheckRequiresAuthentication();
