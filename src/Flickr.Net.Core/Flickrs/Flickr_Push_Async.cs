@@ -1,5 +1,4 @@
-﻿using System.Text.RegularExpressions;
-using Flickr.Net.Core.Internals.Extensions;
+﻿using Flickr.Net.Core.Internals.Extensions;
 
 namespace Flickr.Net.Core;
 
