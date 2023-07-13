@@ -1,4 +1,5 @@
 ﻿using Flickr.Net.Core.Enums;
+using Flickr.Net.Core.Extensions;
 using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals;
 
@@ -120,5 +121,8 @@ public class ItemTests
         Assert.IsType<ItemType>(items.Values[0].Type);
         Assert.IsType<DateTime>(items.Values[0].Activity.Events[0].AddedDate);
         Assert.IsType<EventType>(items.Values[0].Activity.Events[0].Type);
+        Assert.NotEmpty(items.Values[0].ToBuddyIconUrl());
+        Assert.NotEmpty(items.Values[0].ToSquareUrl());
+        Assert.NotEmpty(items.Values[0].ToSmallUrl());
     }
 }

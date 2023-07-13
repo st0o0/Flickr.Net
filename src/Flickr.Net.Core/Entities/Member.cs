@@ -2,7 +2,7 @@
 
 namespace Flickr.Net.Core;
 
-public record Member : FlickrEntityBase<NsId>
+public record Member : FlickrEntityBase<NsId>, IBuddyIcon
 {
     [JsonProperty("username")]
     public string UserName { get; set; }
@@ -15,9 +15,4 @@ public record Member : FlickrEntityBase<NsId>
 
     [JsonProperty("membertype")]
     public MemberType Type { get; set; }
-
-    /// <summary>
-    /// The icon URL for the users buddy icon. Calculated from the <see cref="IconFarm"/> and <see cref="IconServer"/>.
-    /// </summary>
-    public string IconUrl => UtilityMethods.BuddyIcon(IconServer, IconFarm, Id);
 }

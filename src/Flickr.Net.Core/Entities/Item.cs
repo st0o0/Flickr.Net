@@ -4,7 +4,7 @@ namespace Flickr.Net.Core;
 
 /// <summary>
 /// </summary>
-public record Item : FlickrEntityBase<Id>
+public record Item : FlickrEntityBase<Id>, ISmallUrl, ISquareUrl, IBuddyIcon
 {
     /// <summary>
     /// </summary>
@@ -98,11 +98,6 @@ public record Item : FlickrEntityBase<Id>
 
     /// <summary>
     /// </summary>
-    [JsonIgnore]
-    public string OwnerBuddyIcon => UtilityMethods.BuddyIcon(OwnerServer, OwnerFarm, OwnerId);
-
-    /// <summary>
-    /// </summary>
     [JsonProperty("notesnew")]
     public string NewNotes { get; set; }
 
@@ -125,24 +120,4 @@ public record Item : FlickrEntityBase<Id>
     /// </summary>
     [JsonProperty("media")]
     public MediaType Media { get; set; }
-
-    /// <summary>
-    /// </summary>
-    [JsonIgnore]
-    public string SquareThumbnailUrl => Type switch
-    {
-        ItemType.Photo => UtilityMethods.UrlFormat(Farm, Server, Id, Secret, "_s", "jpg"),
-        ItemType.Photoset or ItemType.Gallery => UtilityMethods.UrlFormat(Farm, Server, Primary, Secret, "_s", "jpg"),
-        _ => null
-    };
-
-    /// <summary>
-    /// </summary>
-    [JsonIgnore]
-    public string SmallUrl => Type switch
-    {
-        ItemType.Photo => UtilityMethods.UrlFormat(Farm, Server, Id, Secret, "_m", "jpg"),
-        ItemType.Photoset or ItemType.Gallery => UtilityMethods.UrlFormat(Farm, Server, Primary, Secret, "_m", "jpg"),
-        _ => null
-    };
 }

@@ -2,7 +2,7 @@
 
 namespace Flickr.Net.Core;
 
-public record Group : GroupBase
+public record Group : GroupBase, IBuddyIcon
 {
     [JsonProperty("admin")]
     public bool Admin { get; set; }
@@ -17,7 +17,7 @@ public record Group : GroupBase
     public string IconServer { get; set; }
 
     [JsonProperty("iconfarm")]
-    public string IconFarm { get; set; }
+    public int IconFarm { get; set; }
 
     [JsonProperty("members")]
     public int Members { get; set; }
@@ -30,10 +30,4 @@ public record Group : GroupBase
 
     [JsonProperty("invitation_only")]
     public bool InvitationOnly { get; set; }
-
-    /// <summary>
-    /// The url for the group's icon.
-    /// </summary>
-    [JsonIgnore]
-    public string GroupIconUrl => UtilityMethods.BuddyIcon(IconServer, IconFarm, Id);
 }

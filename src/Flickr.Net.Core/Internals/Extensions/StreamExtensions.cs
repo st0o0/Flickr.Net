@@ -2,7 +2,7 @@
 
 internal static class StreamExtensions
 {
-    public static async Task CopyToAsync(this Stream source, Stream destination, IProgress<double> progress, int bufferSize = 81920, CancellationToken cancellationToken = default)
+    internal static async Task CopyToAsync(this Stream source, Stream destination, IProgress<double> progress, int bufferSize = 81920, CancellationToken cancellationToken = default)
     {
         if (source == null)
         {

@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Core.Flickrs.Results;
+﻿using Flickr.Net.Core.Extensions;
+using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals;
 
 namespace Flickr.Net.Core.Test.Entities;
@@ -521,6 +522,11 @@ public class GalleryTests
         Assert.Equal(items.Values.Count, items.Total);
         Assert.IsType<DateTime>(items.Values[0].UpdateDate);
         Assert.IsType<DateTime>(items.Values[0].CreateDate);
+        Assert.NotEmpty(items.Values[0].ToBuddyIconUrl());
+        Assert.NotEmpty(items.Values[0].ToSquareUrl());
+        Assert.NotEmpty(items.Values[0].ToSmallUrl());
+        Assert.NotEmpty(items.Values[0].ToMediumUrl());
+        Assert.NotEmpty(items.Values[0].ToThumbnailUrl());
     }
 
     [Fact]

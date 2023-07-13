@@ -4,7 +4,7 @@ using Flickr.Net.Core.Internals.Attributes;
 namespace Flickr.Net.Core;
 
 [FlickrJsonPropertyName("gallery")]
-public record Gallery : FlickrEntityBase<Id>
+public record Gallery : FlickrEntityBase<Id>, IBuddyIcon, IThumbnailUrl, ISquareUrl, ISmallUrl, IMediumUrl
 {
     [JsonProperty("gallery_id")]
     public string GalleryId { get; set; }
@@ -19,10 +19,10 @@ public record Gallery : FlickrEntityBase<Id>
     public string Username { get; set; }
 
     [JsonProperty("iconserver")]
-    public string Iconserver { get; set; }
+    public string IconServer { get; set; }
 
     [JsonProperty("iconfarm")]
-    public int Iconfarm { get; set; }
+    public int IconFarm { get; set; }
 
     [JsonProperty("primary_photo_id")]
     public string PrimaryPhotoId { get; set; }
@@ -65,25 +65,4 @@ public record Gallery : FlickrEntityBase<Id>
 
     [JsonProperty("primary_photo_secret")]
     public string PrimaryPhotoSecret { get; set; }
-
-    /// <summary>
-    /// The URL of the thumbnail for the primary image for this gallery.
-    /// </summary>
-    public string PrimaryPhotoThumbnailUrl => UtilityMethods.UrlFormat(PrimaryPhotoFarm, PrimaryPhotoServer, PrimaryPhotoId, PrimaryPhotoSecret, "thumbnail", "jpg");
-
-    /// <summary>
-    /// The URL of the small image for the primary image for this gallery.
-    /// </summary>
-    public string PrimaryPhotoSmallUrl => UtilityMethods.UrlFormat(PrimaryPhotoFarm, PrimaryPhotoServer, PrimaryPhotoId, PrimaryPhotoSecret, "small", "jpg");
-
-    /// <summary>
-    /// The URL of the squrea thumbnail for the primary image for this gallery.
-    /// </summary>
-    public string PrimaryPhotoSquareThumbnailUrl => UtilityMethods.UrlFormat(PrimaryPhotoFarm, PrimaryPhotoServer, PrimaryPhotoId, PrimaryPhotoSecret, "square", "jpg");
-
-    /// <summary>
-    /// The URL of the medium image for the primary image for this gallery. For large sizes call
-    /// <see cref="IFlickrPhotos.GetSizesAsync(string, CancellationToken)"/>
-    /// </summary>
-    public string PrimaryPhotoMediumUrl => UtilityMethods.UrlFormat(PrimaryPhotoFarm, PrimaryPhotoServer, PrimaryPhotoId, PrimaryPhotoSecret, "medium", "jpg");
 }

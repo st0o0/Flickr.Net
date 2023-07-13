@@ -2,7 +2,7 @@
 
 namespace Flickr.Net.Core;
 
-public record Photoset : FlickrEntityBase<Id>
+public record Photoset : FlickrEntityBase<Id>, IThumbnailUrl, ISquareUrl, ISmallUrl
 {
     [JsonProperty("owner")]
     public string Owner { get; set; }

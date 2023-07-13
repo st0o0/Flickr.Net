@@ -9,7 +9,7 @@ public static class MemberTypeExtensions
     /// </summary>
     /// <param name="memberTypes">The member types.</param>
     /// <returns>A string.</returns>
-    public static string ToFlickrString(this MemberType memberTypes)
+    internal static string ToFlickrString(this MemberType memberTypes)
     {
         List<string> types = new();
 

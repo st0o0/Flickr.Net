@@ -4,7 +4,7 @@ using Flickr.Net.Core.Internals.Attributes;
 namespace Flickr.Net.Core;
 
 [FlickrJsonPropertyName("comment")]
-public record Comment : FlickrEntityBase<Id>
+public record Comment : FlickrEntityBase<Id>, IBuddyIcon
 {
     [JsonProperty("author")]
     public string Author { get; set; }

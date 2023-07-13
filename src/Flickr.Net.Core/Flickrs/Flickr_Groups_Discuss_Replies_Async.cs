@@ -11,15 +11,9 @@ public partial class Flickr : IFlickrGroupsDiscussReplies
     {
         CheckRequiresAuthentication();
 
-        if (string.IsNullOrEmpty(topicId))
-        {
-            throw new ArgumentNullException(nameof(topicId));
-        }
+        ArgumentException.ThrowIfNullOrEmpty(topicId);
 
-        if (string.IsNullOrEmpty(message))
-        {
-            throw new ArgumentNullException(nameof(message));
-        }
+        ArgumentException.ThrowIfNullOrEmpty(message);
 
         Dictionary<string, string> parameters = new()
         {
@@ -35,15 +29,9 @@ public partial class Flickr : IFlickrGroupsDiscussReplies
     {
         CheckRequiresAuthentication();
 
-        if (string.IsNullOrEmpty(topicId))
-        {
-            throw new ArgumentNullException(nameof(topicId));
-        }
+        ArgumentException.ThrowIfNullOrEmpty(topicId);
 
-        if (string.IsNullOrEmpty(replyId))
-        {
-            throw new ArgumentNullException(nameof(replyId));
-        }
+        ArgumentException.ThrowIfNullOrEmpty(replyId);
 
         Dictionary<string, string> parameters = new()
         {
@@ -59,20 +47,11 @@ public partial class Flickr : IFlickrGroupsDiscussReplies
     {
         CheckRequiresAuthentication();
 
-        if (string.IsNullOrEmpty(topicId))
-        {
-            throw new ArgumentNullException(nameof(topicId));
-        }
+        ArgumentException.ThrowIfNullOrEmpty(topicId);
 
-        if (string.IsNullOrEmpty(replyId))
-        {
-            throw new ArgumentNullException(nameof(replyId));
-        }
+        ArgumentException.ThrowIfNullOrEmpty(replyId);
 
-        if (string.IsNullOrEmpty(message))
-        {
-            throw new ArgumentNullException(nameof(message));
-        }
+        ArgumentException.ThrowIfNullOrEmpty(message);
 
         Dictionary<string, string> parameters = new()
         {
@@ -87,15 +66,8 @@ public partial class Flickr : IFlickrGroupsDiscussReplies
 
     async Task<Reply> IFlickrGroupsDiscussReplies.GetInfoAsync(string topicId, string replyId, CancellationToken cancellationToken)
     {
-        if (string.IsNullOrEmpty(topicId))
-        {
-            throw new ArgumentNullException(nameof(topicId));
-        }
-
-        if (string.IsNullOrEmpty(replyId))
-        {
-            throw new ArgumentNullException(nameof(replyId));
-        }
+        ArgumentException.ThrowIfNullOrEmpty(topicId);
+        ArgumentException.ThrowIfNullOrEmpty(replyId);
 
         Dictionary<string, string> parameters = new()
         {
@@ -109,10 +81,7 @@ public partial class Flickr : IFlickrGroupsDiscussReplies
 
     async Task<Replies> IFlickrGroupsDiscussReplies.GetListAsync(string topicId, int perPage, int page, CancellationToken cancellationToken)
     {
-        if (string.IsNullOrEmpty(topicId))
-        {
-            throw new ArgumentNullException(nameof(topicId));
-        }
+        ArgumentException.ThrowIfNullOrEmpty(topicId);
 
         Dictionary<string, string> parameters = new()
         {

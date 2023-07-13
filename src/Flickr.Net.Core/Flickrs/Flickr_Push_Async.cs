@@ -36,20 +36,11 @@ public partial class Flickr : IFlickrPush
     {
         CheckRequiresAuthentication();
 
-        if (string.IsNullOrEmpty(topic))
-        {
-            throw new ArgumentNullException(nameof(topic));
-        }
+        ArgumentException.ThrowIfNullOrEmpty(topic);
 
-        if (string.IsNullOrEmpty(callback))
-        {
-            throw new ArgumentNullException(nameof(callback));
-        }
+        ArgumentException.ThrowIfNullOrEmpty(callback);
 
-        if (string.IsNullOrEmpty(verify))
-        {
-            throw new ArgumentNullException(nameof(verify));
-        }
+        ArgumentException.ThrowIfNullOrEmpty(verify);
 
         if (topic == "tags" && (tags == null || tags.Any()))
         {
@@ -93,20 +84,11 @@ public partial class Flickr : IFlickrPush
     {
         CheckRequiresAuthentication();
 
-        if (string.IsNullOrEmpty(topic))
-        {
-            throw new ArgumentNullException(nameof(topic));
-        }
+        ArgumentException.ThrowIfNullOrEmpty(topic);
 
-        if (string.IsNullOrEmpty(callback))
-        {
-            throw new ArgumentNullException(nameof(callback));
-        }
+        ArgumentException.ThrowIfNullOrEmpty(callback);
 
-        if (string.IsNullOrEmpty(verify))
-        {
-            throw new ArgumentNullException(nameof(verify));
-        }
+        ArgumentException.ThrowIfNullOrEmpty(verify);
 
         Dictionary<string, string> parameters = new()
         {
