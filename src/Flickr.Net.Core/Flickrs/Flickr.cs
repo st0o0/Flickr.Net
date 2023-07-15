@@ -225,17 +225,6 @@ public partial class Flickr
         }
     }
 
-    /// <summary>
-    /// Returns the raw XML returned from the last response. Only set it the response was not
-    /// returned from cache.
-    /// </summary>
-    public string LastResponse { get; private set; }
-
-    /// <summary>
-    /// Returns the last URL requested. Includes API signing.
-    /// </summary>
-    public string LastRequest => _lastRequest;
-
     internal void CheckApiKey()
     {
         if (string.IsNullOrEmpty(_settings.ApiKey))

@@ -13,7 +13,7 @@ public sealed class ResponseCacheItem : ICacheItem
     /// <summary>
     /// Gets or sets the XML response.
     /// </summary>
-    public string Response { get; set; }
+    public byte[] Response { get; set; }
 
     /// <summary>
     /// Gets or sets the time the cache item was created.
@@ -34,7 +34,7 @@ public sealed class ResponseCacheItem : ICacheItem
     /// <param name="url"></param>
     /// <param name="response"></param>
     /// <param name="creationTime"></param>
-    public ResponseCacheItem(Uri url, string response, DateTime creationTime)
+    public ResponseCacheItem(Uri url, byte[] response, DateTime creationTime)
     {
         Url = url;
         Response = response;

@@ -1,5 +1,7 @@
-﻿using Flickr.Net.Core.Flickrs.Results;
+﻿using System.Text;
+using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals;
+using Newtonsoft.Json;
 
 namespace Flickr.Net.Core.Test.Entities;
 
@@ -50,7 +52,11 @@ public class PhotosetPhotoTests
             }
             """;
 
-        var result = FlickrConvert.DeserializeObject<FlickrResult<PhotosetPhotos>>(json);
+        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
+        using var sr = new StreamReader(ms);
+        using var reader = new JsonTextReader(sr);
+
+        var result = FlickrConvert.DeserializeObject<FlickrResult<PhotosetPhotos>>(reader);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);

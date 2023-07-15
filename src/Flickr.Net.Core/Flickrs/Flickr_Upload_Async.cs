@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Core.Exceptions.Handlers;
+﻿using System.Text;
+using Flickr.Net.Core.Exceptions.Handlers;
 using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals.Extensions;
 using Newtonsoft.Json.Linq;
@@ -114,12 +115,13 @@ public partial class Flickr : IFlickrUpload
         var xml = await responseMessage.Content.ReadAsStringAsync(cancellationToken);
         var json = FlickrConvert.XmlToJson(xml);
 
-        var flickrResults = FlickrConvert.DeserializeObject<FlickrExtendedDataResult>(json);
+        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
+        using var sr = new StreamReader(ms);
+        using var reader = new JsonTextReader(sr);
 
-        if (flickrResults.HasError)
-        {
-            throw ExceptionHandler.CreateResponseException(flickrResults);
-        }
+        var flickrResults = FlickrConvert.DeserializeObject<FlickrExtendedDataResult>(reader);
+
+        flickrResults = flickrResults.EnsureSuccessStatusCode();
 
         if (flickrResults.Content.TryGetValue("photoid", out var value))
         {

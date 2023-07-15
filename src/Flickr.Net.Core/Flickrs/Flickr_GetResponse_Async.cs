@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Collections;
+using System.Diagnostics;
 using Flickr.Net.Core.Bases;
 using Flickr.Net.Core.Exceptions.Handlers;
 using Flickr.Net.Core.Flickrs.Results;
@@ -49,11 +50,11 @@ public partial class Flickr
 
         _lastRequest = url;
 
-        string result;
+        Stream resultStream;
 
         if (FlickrCachingSettings.InstanceCacheDisabled)
         {
-            result = await FlickrResponder.GetDataResponseAsync(this, BaseUri.AbsoluteUri, parameters, cancellationToken);
+            resultStream = await FlickrResponder.GetDataResponseAsync(this, BaseUri.AbsoluteUri, parameters, cancellationToken);
         }
         else
         {
@@ -63,32 +64,33 @@ public partial class Flickr
             if (cached != null)
             {
                 Debug.WriteLine("Cache hit.");
-                result = cached.Response;
+                resultStream = new MemoryStream(cached.Response);
             }
             else
             {
                 Debug.WriteLine("Cache miss.");
-                result = await FlickrResponder.GetDataResponseAsync(this, BaseUri.AbsoluteUri, parameters, cancellationToken);
+                resultStream = await FlickrResponder.GetDataResponseAsync(this, BaseUri.AbsoluteUri, parameters, cancellationToken);
 
-                ResponseCacheItem resCache = new(new Uri(urlComplete), result, DateTime.UtcNow);
+                using var ms = new MemoryStream();
+                resultStream.CopyTo(ms);
+                var byteArray = ms.ToArray();
 
-                Cache.Responses.Shrink(Math.Max(0, Cache.CacheSizeLimit - result.Length));
+                ResponseCacheItem resCache = new(new Uri(urlComplete), byteArray, DateTime.UtcNow);
+
+                Cache.Responses.Shrink(Math.Max(0, Cache.CacheSizeLimit - byteArray.Length));
                 Cache.Responses[urlComplete] = resCache;
             }
         }
 
         try
         {
-            LastResponse = result;
+            using var sr = new StreamReader(resultStream);
+            using var reader = new JsonTextReader(sr);
+            var flickrResults = FlickrConvert.DeserializeObject<T>(reader);
+            resultStream.Dispose();
+            resultStream.Close();
 
-            var flickrResults = FlickrConvert.DeserializeObject<T>(result);
-
-            if (flickrResults.HasError)
-            {
-                throw ExceptionHandler.CreateResponseException(flickrResults);
-            }
-
-            return flickrResults;
+            return flickrResults.EnsureSuccessStatusCode();
         }
         catch (Exception)
         {

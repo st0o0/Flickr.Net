@@ -8,6 +8,8 @@ namespace Flickr.Net.Core.Internals.ContractResolver;
 /// </summary>
 internal class GenericJsonPropertyNameContractResolver : DefaultContractResolver
 {
+    public static GenericJsonPropertyNameContractResolver Instance { get; } = new();
+
     /// <summary>
     /// </summary>
     protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
