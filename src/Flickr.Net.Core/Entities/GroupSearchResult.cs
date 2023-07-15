@@ -5,5 +5,4 @@ namespace Flickr.Net.Core;
 
 [FlickrJsonPropertyName("group")]
 public record GroupSearchResult : GroupBase
-{
-}
+{ }
