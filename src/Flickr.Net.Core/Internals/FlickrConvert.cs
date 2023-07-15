@@ -6,15 +6,9 @@ namespace Flickr.Net.Core.Internals;
 
 public static class FlickrConvert
 {
-    public static T DeserializeObject<T>(string json)
+    public static T DeserializeObject<T>(JsonTextReader jsonTextReader)
     {
-        var settings = new JsonSerializerSettings()
-        {
-            ContractResolver = new GenericJsonPropertyNameContractResolver(),
-            Converters = new List<JsonConverter>() { new BoolConverter(), new TimestampToDateTimeConverter() },
-        };
-
-        return JsonConvert.DeserializeObject<T>(json, settings);
+        return Instance.Deserialize<T>(jsonTextReader);
     }
 
     public static string XmlToJson(string xml)
@@ -22,4 +16,14 @@ public static class FlickrConvert
         var doc = XDocument.Parse(xml);
         return JsonConvert.SerializeXNode(doc, Formatting.None, omitRootObject: true);
     }
+
+    private static JsonSerializer Instance { get; } = new JsonSerializer()
+    {
+        ContractResolver = GenericJsonPropertyNameContractResolver.Instance,
+        Converters =
+            {
+                BoolConverter.Instance,
+                TimestampToDateTimeConverter.Instance
+            },
+    };
 }

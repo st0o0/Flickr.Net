@@ -1,6 +1,8 @@
-﻿using Flickr.Net.Core.Enums;
+﻿using System.Text;
+using Flickr.Net.Core.Enums;
 using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals;
+using Newtonsoft.Json;
 
 namespace Flickr.Net.Core.Test.Entities;
 
@@ -18,7 +20,11 @@ public class UnknownResponseTests
             }
             """;
 
-        var result = FlickrConvert.DeserializeObject<FlickrUnknownResult<CommentUnknownResponse>>(json);
+        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
+        using var sr = new StreamReader(ms);
+        using var reader = new JsonTextReader(sr);
+
+        var result = FlickrConvert.DeserializeObject<FlickrUnknownResult<CommentUnknownResponse>>(reader);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
@@ -39,7 +45,11 @@ public class UnknownResponseTests
             }
             """;
 
-        var result = FlickrConvert.DeserializeObject<FlickrUnknownResult<NoteUnknownResponse>>(json);
+        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
+        using var sr = new StreamReader(ms);
+        using var reader = new JsonTextReader(sr);
+
+        var result = FlickrConvert.DeserializeObject<FlickrUnknownResult<NoteUnknownResponse>>(reader);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
@@ -62,7 +72,11 @@ public class UnknownResponseTests
             }
             """;
 
-        var result = FlickrConvert.DeserializeObject<FlickrUnknownResult<PhotosetUnknownResponse>>(json);
+        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
+        using var sr = new StreamReader(ms);
+        using var reader = new JsonTextReader(sr);
+
+        var result = FlickrConvert.DeserializeObject<FlickrUnknownResult<PhotosetUnknownResponse>>(reader);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
@@ -86,7 +100,11 @@ public class UnknownResponseTests
             }
             """;
 
-        var result = FlickrConvert.DeserializeObject<FlickrUnknownResult<PersonUnknownResponse>>(json);
+        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
+        using var sr = new StreamReader(ms);
+        using var reader = new JsonTextReader(sr);
+
+        var result = FlickrConvert.DeserializeObject<FlickrUnknownResult<PersonUnknownResponse>>(reader);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
@@ -110,7 +128,11 @@ public class UnknownResponseTests
             }
             """;
 
-        var result = FlickrConvert.DeserializeObject<FlickrUnknownResult<GroupUnknownResponse>>(json);
+        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
+        using var sr = new StreamReader(ms);
+        using var reader = new JsonTextReader(sr);
+
+        var result = FlickrConvert.DeserializeObject<FlickrUnknownResult<GroupUnknownResponse>>(reader);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
@@ -133,7 +155,11 @@ public class UnknownResponseTests
             }
             """;
 
-        var result = FlickrConvert.DeserializeObject<FlickrUnknownResult<UserUnknownResponse>>(json);
+        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
+        using var sr = new StreamReader(ms);
+        using var reader = new JsonTextReader(sr);
+
+        var result = FlickrConvert.DeserializeObject<FlickrUnknownResult<UserUnknownResponse>>(reader);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);

@@ -1,9 +1,13 @@
-﻿namespace Flickr.Net.Core.Internals.JsonConverters;
+﻿using Flickr.Net.Core.Internals.ContractResolver;
+
+namespace Flickr.Net.Core.Internals.JsonConverters;
 
 /// <summary>
 /// </summary>
 public class BoolConverter : JsonConverter
 {
+    public static BoolConverter Instance { get; } = new();
+
     /// <summary>
     /// </summary>
     public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

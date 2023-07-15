@@ -83,9 +83,9 @@ public static class UtilityMethods
         }
     }
 
-    internal static void WriteByteArray(Stream stream, string value)
+    internal static void WriteByteArray(Stream stream, byte[] value)
     {
-        WriteString(stream, value);
+        WriteString(stream, Encoding.UTF8.GetString(value));
     }
 
     internal static int ReadInt32(Stream s)
@@ -121,6 +121,13 @@ public static class UtilityMethods
             chars[i] = (char)(lo | hi << 8);
         }
         return new string(chars);
+    }
+
+    internal static byte[] ReadByteArray(Stream s)
+    {
+        using var ms = new MemoryStream();
+        s.CopyTo(ms);
+        return ms.ToArray();
     }
 
     private const string PhotoUrlFormat = "https://farm{0}.staticflickr.com/{1}/{2}_{3}{4}.{5}";

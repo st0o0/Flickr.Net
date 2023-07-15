@@ -7,7 +7,7 @@ internal class ResponseCacheItemPersister : CacheItemPersister
     public override ICacheItem Read(Stream inputStream)
     {
         var s = UtilityMethods.ReadString(inputStream);
-        var response = UtilityMethods.ReadString(inputStream);
+        var response = UtilityMethods.ReadByteArray(inputStream);
 
         var chunks = s.Split('\n');
 

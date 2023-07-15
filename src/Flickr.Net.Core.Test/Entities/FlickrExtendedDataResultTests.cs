@@ -1,4 +1,5 @@
-﻿using System.Xml.Linq;
+﻿using System.Text;
+using System.Xml.Linq;
 using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals;
 using Newtonsoft.Json;
@@ -19,7 +20,11 @@ public class FlickrExtendedDataResultTests
 
         var doc = XDocument.Parse(xml);
         var json = JsonConvert.SerializeXNode(doc, Formatting.None, omitRootObject: true);
-        var result = FlickrConvert.DeserializeObject<FlickrExtendedDataResult>(json);
+        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
+        using var sr = new StreamReader(ms);
+        using var reader = new JsonTextReader(sr);
+
+        var result = FlickrConvert.DeserializeObject<FlickrExtendedDataResult>(reader);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
@@ -38,7 +43,11 @@ public class FlickrExtendedDataResultTests
 
         var doc = XDocument.Parse(xml);
         var json = JsonConvert.SerializeXNode(doc, Formatting.None, omitRootObject: true);
-        var result = FlickrConvert.DeserializeObject<FlickrExtendedDataResult>(json);
+        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
+        using var sr = new StreamReader(ms);
+        using var reader = new JsonTextReader(sr);
+
+        var result = FlickrConvert.DeserializeObject<FlickrExtendedDataResult>(reader);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
