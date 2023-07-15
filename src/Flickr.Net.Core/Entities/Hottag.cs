@@ -9,7 +9,7 @@ public record Hottag : TagBase
     public ThmData ThmData { get; set; }
 }
 
-public class ThmData
+public record ThmData
 {
     [JsonProperty("photos")]
     public ClusterPhotos Photos { get; set; }
