@@ -1,1 +1,11 @@
-{"image":"mcr.microsoft.com/devcontainers/universal:2"}
+{
+    "name": "Flickr.Net",
+    "service": "devhost",
+    "workspaceFolder": "/workspace",
+    "extensions": [
+      "ms-dotnettools.csdevkit",
+      "editorconfig.editorconfig",
+      "formulahendry.dotnet-test-explorer"
+    ],
+    "remoteUser": "vscode"
+  }
