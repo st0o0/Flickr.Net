@@ -1,5 +1,4 @@
 ﻿using System.Text;
-using Flickr.Net.Core.Exceptions.Handlers;
 using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals.Extensions;
 using Newtonsoft.Json.Linq;
