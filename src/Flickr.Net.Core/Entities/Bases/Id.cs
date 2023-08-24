@@ -1,4 +1,5 @@
 ﻿using Flickr.Net.Core.Internals.Attributes;
+using Flickr.Net.Core.Internals.JsonConverters.IdentifierConverters;
 
 namespace Flickr.Net.Core.Bases;
 
@@ -7,6 +8,7 @@ public interface IIdentifierType
 }
 
 [FlickrJsonPropertyName("nsid")]
+[System.Text.Json.Serialization.JsonConverter(typeof(NsIdConverter))]
 public struct NsId : IIdentifierType
 {
     private string _id;
@@ -17,6 +19,7 @@ public struct NsId : IIdentifierType
 }
 
 [FlickrJsonPropertyName("id")]
+[System.Text.Json.Serialization.JsonConverter(typeof(IdConverter))]
 public struct Id : IIdentifierType
 {
     private string _id;
@@ -27,6 +30,7 @@ public struct Id : IIdentifierType
 }
 
 [FlickrJsonPropertyName("photo_id")]
+[System.Text.Json.Serialization.JsonConverter(typeof(PhotoIdConverter))]
 public struct PhotoId : IIdentifierType
 {
     private string _id;
@@ -37,6 +41,7 @@ public struct PhotoId : IIdentifierType
 }
 
 [FlickrJsonPropertyName("photoset_id")]
+[System.Text.Json.Serialization.JsonConverter(typeof(PhotosetIdConverter))]
 public struct PhotosetId : IIdentifierType
 {
     private string _id;
