@@ -73,10 +73,8 @@ public class PersonTests
             """;
 
         using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-        using var sr = new StreamReader(ms);
-        using var reader = new JsonTextReader(sr);
 
-        var item = FlickrConvert.DeserializeObject<FlickrResult<Person>>(reader);
+        var item = FlickrConvert.DeserializeObject<FlickrResult<Person>>(ms);
 
         Assert.NotNull(item);
         Assert.False(item.HasError);

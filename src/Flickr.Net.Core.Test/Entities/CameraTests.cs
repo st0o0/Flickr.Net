@@ -50,10 +50,8 @@ public class CameraTests
             """;
 
         using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-        using var sr = new StreamReader(ms);
-        using var reader = new JsonTextReader(sr);
 
-        var result = FlickrConvert.DeserializeObject<FlickrResult<Cameras>>(reader);
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Cameras>>(ms);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
@@ -93,10 +91,8 @@ public class CameraTests
             """;
 
         using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-        using var sr = new StreamReader(ms);
-        using var reader = new JsonTextReader(sr);
 
-        var result = FlickrConvert.DeserializeObject<FlickrResult<Brands>>(reader);
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Brands>>(ms);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);

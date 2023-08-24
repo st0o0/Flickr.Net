@@ -129,10 +129,8 @@ public class SizeTests
             """;
 
         using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-        using var sr = new StreamReader(ms);
-        using var reader = new JsonTextReader(sr);
 
-        var result = FlickrConvert.DeserializeObject<FlickrResult<Sizes>>(reader);
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Sizes>>(ms);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);

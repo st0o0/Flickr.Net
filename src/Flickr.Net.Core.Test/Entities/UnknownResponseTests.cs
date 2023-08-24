@@ -21,10 +21,8 @@ public class UnknownResponseTests
             """;
 
         using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-        using var sr = new StreamReader(ms);
-        using var reader = new JsonTextReader(sr);
 
-        var result = FlickrConvert.DeserializeObject<FlickrUnknownResult<CommentUnknownResponse>>(reader);
+        var result = FlickrConvert.DeserializeObject<FlickrUnknownResult<CommentUnknownResponse>>(ms);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
@@ -46,10 +44,8 @@ public class UnknownResponseTests
             """;
 
         using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-        using var sr = new StreamReader(ms);
-        using var reader = new JsonTextReader(sr);
 
-        var result = FlickrConvert.DeserializeObject<FlickrUnknownResult<NoteUnknownResponse>>(reader);
+        var result = FlickrConvert.DeserializeObject<FlickrUnknownResult<NoteUnknownResponse>>(ms);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
@@ -73,10 +69,8 @@ public class UnknownResponseTests
             """;
 
         using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-        using var sr = new StreamReader(ms);
-        using var reader = new JsonTextReader(sr);
 
-        var result = FlickrConvert.DeserializeObject<FlickrUnknownResult<PhotosetUnknownResponse>>(reader);
+        var result = FlickrConvert.DeserializeObject<FlickrUnknownResult<PhotosetUnknownResponse>>(ms);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
@@ -101,10 +95,8 @@ public class UnknownResponseTests
             """;
 
         using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-        using var sr = new StreamReader(ms);
-        using var reader = new JsonTextReader(sr);
 
-        var result = FlickrConvert.DeserializeObject<FlickrUnknownResult<PersonUnknownResponse>>(reader);
+        var result = FlickrConvert.DeserializeObject<FlickrUnknownResult<PersonUnknownResponse>>(ms);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
@@ -129,10 +121,8 @@ public class UnknownResponseTests
             """;
 
         using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-        using var sr = new StreamReader(ms);
-        using var reader = new JsonTextReader(sr);
 
-        var result = FlickrConvert.DeserializeObject<FlickrUnknownResult<GroupUnknownResponse>>(reader);
+        var result = FlickrConvert.DeserializeObject<FlickrUnknownResult<GroupUnknownResponse>>(ms);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
@@ -156,10 +146,8 @@ public class UnknownResponseTests
             """;
 
         using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-        using var sr = new StreamReader(ms);
-        using var reader = new JsonTextReader(sr);
 
-        var result = FlickrConvert.DeserializeObject<FlickrUnknownResult<UserUnknownResponse>>(reader);
+        var result = FlickrConvert.DeserializeObject<FlickrUnknownResult<UserUnknownResponse>>(ms);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
