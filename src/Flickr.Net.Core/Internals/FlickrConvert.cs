@@ -26,6 +26,11 @@ public static class FlickrConvert
         {
             var options = new JsonSerializerOptions()
             {
+                Converters =
+                {
+                    BoolConverter.Instance,
+                    TimestampToDateTimeConverter.Instance
+                },
                 TypeInfoResolver = new DefaultJsonTypeInfoResolver().WithAddedModifier(static typeInfo =>
                 {
                     foreach (JsonPropertyInfo property in typeInfo.Properties)
@@ -68,8 +73,6 @@ public static class FlickrConvert
                 })
             };
 
-            options.Converters.Add(BoolConverter.Instance);
-            options.Converters.Add(TimestampToDateTimeConverter.Instance);
             return options;
         }
     }
