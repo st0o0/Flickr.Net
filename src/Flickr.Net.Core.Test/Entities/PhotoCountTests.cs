@@ -56,10 +56,8 @@ public class PhotoCountTests
             """;
 
         using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-        using var sr = new StreamReader(ms);
-        using var reader = new JsonTextReader(sr);
 
-        var result = FlickrConvert.DeserializeObject<FlickrResult<PhotoCounts>>(reader);
+        var result = FlickrConvert.DeserializeObject<FlickrResult<PhotoCounts>>(ms);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);

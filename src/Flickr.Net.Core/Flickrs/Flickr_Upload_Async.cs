@@ -115,10 +115,8 @@ public partial class Flickr : IFlickrUpload
         var json = FlickrConvert.XmlToJson(xml);
 
         using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-        using var sr = new StreamReader(ms);
-        using var reader = new JsonTextReader(sr);
 
-        var flickrResults = FlickrConvert.DeserializeObject<FlickrExtendedDataResult>(reader);
+        var flickrResults = FlickrConvert.DeserializeObject<FlickrExtendedDataResult>(ms);
 
         flickrResults = flickrResults.EnsureSuccessStatusCode();
 

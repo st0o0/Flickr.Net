@@ -82,9 +82,7 @@ public partial class Flickr
 
         try
         {
-            using var sr = new StreamReader(resultStream);
-            using var reader = new JsonTextReader(sr);
-            var flickrResults = FlickrConvert.DeserializeObject<T>(reader);
+            var flickrResults = FlickrConvert.DeserializeObject<T>(resultStream);
             resultStream.Dispose();
             resultStream.Close();
 
