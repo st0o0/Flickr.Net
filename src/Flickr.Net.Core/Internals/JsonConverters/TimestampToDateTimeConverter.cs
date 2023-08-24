@@ -2,34 +2,31 @@
 
 /// <summary>
 /// </summary>
-public class TimestampToDateTimeConverter : DateTimeConverterBase
+public class TimestampToDateTimeConverter : System.Text.Json.Serialization.JsonConverter<DateTime>
 {
     public static TimestampToDateTimeConverter Instance { get; } = new();
 
     private static readonly DateTime UnixStartDate = new(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
-    /// <summary>
-    /// </summary>
-    public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+    private static DateTime UnixTimestampToDate(long timestamp)
     {
-        var content = "";
-        if (value is DateTime dateTime)
-            content = UtilityMethods.DateToUnixTimestamp(dateTime);
-        writer.WriteRawValue(content);
+        return UnixStartDate.AddSeconds(timestamp);
     }
+
 
     /// <summary>
     /// </summary>
-    public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+    public override DateTime Read(ref System.Text.Json.Utf8JsonReader reader, Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
     {
-        if (reader.Value == null)
+        var value = reader.GetString();
+        if (value == null)
         {
             return DateTime.MinValue;
         }
 
         try
         {
-            return UnixTimestampToDate(long.Parse(reader.Value.ToString(), System.Globalization.NumberStyles.Any, System.Globalization.NumberFormatInfo.InvariantInfo));
+            return UnixTimestampToDate(long.Parse(value, System.Globalization.NumberStyles.Any, System.Globalization.NumberFormatInfo.InvariantInfo));
         }
         catch (FormatException)
         {
@@ -37,8 +34,11 @@ public class TimestampToDateTimeConverter : DateTimeConverterBase
         }
     }
 
-    private static DateTime UnixTimestampToDate(long timestamp)
+    /// <summary>
+    /// </summary>
+    public override void Write(System.Text.Json.Utf8JsonWriter writer, DateTime value, System.Text.Json.JsonSerializerOptions options)
     {
-        return UnixStartDate.AddSeconds(timestamp);
+        var content = UtilityMethods.DateToUnixTimestamp(value);
+        writer.WriteRawValue(content);
     }
 }
