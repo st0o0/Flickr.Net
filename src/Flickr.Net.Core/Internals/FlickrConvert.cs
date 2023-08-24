@@ -39,7 +39,8 @@ public static class FlickrConvert
                                 throw new InvalidOperationException($"Property can't have more than one {typeof(JsonPropertyGenericTypeNameAttribute)}");
                             }
                             JsonPropertyGenericTypeNameAttribute attr = jsonAttributes[0];
-                            Type type = typeInfo.Type; //TODO: does this get the correct type?
+                            //TODO: this does get the correct value; please find something better
+                            Type type = property.GetType().GetProperties(BindingFlags.NonPublic | BindingFlags.Instance).Single(pi => pi.Name.Equals("DeclaringType")).GetValue(property, null) as Type;
                             if (!type.IsGenericType)
                             {
                                 throw new InvalidOperationException($"{type} is not a generic type");
