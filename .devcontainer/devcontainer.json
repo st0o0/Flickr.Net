@@ -7,5 +7,6 @@
       "editorconfig.editorconfig",
       "formulahendry.dotnet-test-explorer"
     ],
+    "postCreateCommand": "zsh ./.devcontainer/postCreateCommand.sh",
     "remoteUser": "vscode"
   }
