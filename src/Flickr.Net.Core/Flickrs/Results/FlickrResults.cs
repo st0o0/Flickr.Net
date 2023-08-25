@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Text.Json;
+using System.Text.Json.Serialization;
 using Flickr.Net.Core.Bases;
 using Flickr.Net.Core.Internals.Attributes;
 using Newtonsoft.Json.Linq;
@@ -116,8 +117,7 @@ public record FlickrExtendedDataResult : FlickrResult
     public override string State { get; set; } = string.Empty;
 
     [System.Text.Json.Serialization.JsonExtensionData]
-    //TODO: replace JToken
-    public IDictionary<string, JToken> Content { get; set; }
+    public IDictionary<string, JsonElement> Content { get; set; }
 }
 
 public struct Count
