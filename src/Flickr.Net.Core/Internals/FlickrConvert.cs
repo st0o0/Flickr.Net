@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Text.Json.Serialization.Metadata;
 using System.Xml.Linq;
 using Flickr.Net.Core.Internals.Attributes;
@@ -27,10 +28,13 @@ public static class FlickrConvert
         {
             var options = new JsonSerializerOptions()
             {
-                NumberHandling = System.Text.Json.Serialization.JsonNumberHandling.AllowReadingFromString,
+                AllowTrailingCommas = true,
                 Converters =
                 {
-                    new BoolConverter(),
+                    new JsonStringEnumConverter(),
+                    AutoStringToNumberConverter.Instance,
+                    AutoNumberToStringConverter.Instance,
+                    BoolConverter.Instance,
                     TimestampToDateTimeConverter.Instance,
                     NsIdConverter.Instance,
                     IdConverter.Instance,
