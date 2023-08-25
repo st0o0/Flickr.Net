@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using System.Text.Json;
 using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals.Extensions;
 using Newtonsoft.Json.Linq;
@@ -54,7 +55,7 @@ public partial class Flickr : IFlickrUpload
 
         var result = await UploadDataAsync(stream, fileName, progress, uploadUri, parameters, cancellationToken);
 
-        return result.Value<string>();
+        return result.GetString();
     }
 
     async Task<string> IFlickrUpload.ReplacePictureAsync(Stream stream, string fileName, string photoId, IProgress<double> progress, CancellationToken cancellationToken)
@@ -81,11 +82,10 @@ public partial class Flickr : IFlickrUpload
         }
 
         var result = await UploadDataAsync(stream, fileName, progress, replaceUri, parameters, cancellationToken);
-
-        return result.Value<string>("#text");
+        return result.GetProperty("#text").GetString();
     }
 
-    private static async Task<JToken> UploadDataAsync(Stream imageStream, string fileName, IProgress<double> progress, Uri uploadUri, Dictionary<string, string> parameters, CancellationToken cancellationToken = default)
+    private static async Task<JsonElement> UploadDataAsync(Stream imageStream, string fileName, IProgress<double> progress, Uri uploadUri, Dictionary<string, string> parameters, CancellationToken cancellationToken = default)
     {
         var authHeader = FlickrResponder.OAuthCalculateAuthHeader(parameters);
 
