@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 using Flickr.Net.Core.Internals.Attributes;
 
 namespace Flickr.Net.Core;
@@ -6,85 +7,85 @@ namespace Flickr.Net.Core;
 [FlickrJsonPropertyName("photo")]
 public record PhotoInfo : PhotoBase, IBuddyIcon, IWebUrl, ISquareUrl, ILargeSquareUrl, IThumbnailUrl, ISmallUrl, ISmall320Url, ISmall400Url, IMediumUrl, IMedium640Url, IMedium800Url, ILargeUrl, ILarge1600Url, ILarge2048Url, IOriginalUrl
 {
-    [JsonProperty("farm")]
+    [JsonPropertyName("farm")]
     public int Farm { get; set; }
 
-    [JsonProperty("dateuploaded")]
+    [JsonPropertyName("dateuploaded")]
     public DateTime UploadedDate { get; set; }
 
-    [JsonProperty("isfavorite")]
+    [JsonPropertyName("isfavorite")]
     public bool IsFavorite { get; set; }
 
-    [JsonProperty("license")]
+    [JsonPropertyName("license")]
     public LicenseType License { get; set; }
 
-    [JsonProperty("safety_level")]
+    [JsonPropertyName("safety_level")]
     public SafetyLevel SafetyLevel { get; set; }
 
-    [JsonProperty("rotation")]
+    [JsonPropertyName("rotation")]
     public int Rotation { get; set; }
 
-    [JsonProperty("originalsecret")]
+    [JsonPropertyName("originalsecret")]
     public string OriginalSecret { get; set; }
 
-    [JsonProperty("originalformat")]
+    [JsonPropertyName("originalformat")]
     public string OriginalFormat { get; set; }
 
-    [JsonProperty("owner")]
+    [JsonPropertyName("owner")]
     public Owner Owner { get; set; }
 
-    [JsonProperty("title")]
+    [JsonPropertyName("title")]
     public Title Title { get; set; }
 
-    [JsonProperty("description")]
+    [JsonPropertyName("description")]
     public Description Description { get; set; }
 
-    [JsonProperty("visibility")]
+    [JsonPropertyName("visibility")]
     public Visibility Visibility { get; set; }
 
-    [JsonProperty("dates")]
+    [JsonPropertyName("dates")]
     public Dates Dates { get; set; }
 
-    [JsonProperty("views")]
+    [JsonPropertyName("views")]
     public int Views { get; set; }
 
-    [JsonProperty("editability")]
+    [JsonPropertyName("editability")]
     public Editability Editability { get; set; }
 
-    [JsonProperty("publiceditability")]
+    [JsonPropertyName("publiceditability")]
     public PublicEditability PublicEditability { get; set; }
 
-    [JsonProperty("usage")]
+    [JsonPropertyName("usage")]
     public Usage Usage { get; set; }
 
-    [JsonProperty("comments")]
+    [JsonPropertyName("comments")]
     public Comments Comments { get; set; }
 
-    [JsonProperty("notes")]
+    [JsonPropertyName("notes")]
     public Notes Notes { get; set; }
 
-    [JsonProperty("people")]
+    [JsonPropertyName("people")]
     public People People { get; set; }
 
-    [JsonProperty("tags")]
+    [JsonPropertyName("tags")]
     public PhotoInfoTags Tags { get; set; }
 
-    [JsonProperty("location")]
+    [JsonPropertyName("location")]
     public Location Location { get; set; }
 
-    [JsonProperty("geoperms")]
+    [JsonPropertyName("geoperms")]
     public GeoPermissions Geoperms { get; set; }
 
-    [JsonProperty("urls")]
+    [JsonPropertyName("urls")]
     public Urls Urls { get; set; }
 
-    [JsonProperty("media")]
+    [JsonPropertyName("media")]
     public MediaType Media { get; set; }
 }
 
 public struct Title
 {
-    [JsonProperty("_content")]
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 
     public static implicit operator string(Title username) => username.Content;
@@ -94,7 +95,7 @@ public struct Title
 
 public struct Comments
 {
-    [JsonProperty("_content")]
+    [JsonPropertyName("_content")]
     public int Content { get; set; }
 
     public static implicit operator int(Comments username) => username.Content;
@@ -108,15 +109,15 @@ public record PublicEditability : Editability
 
 public record Editability
 {
-    [JsonProperty("cancomment")]
+    [JsonPropertyName("cancomment")]
     public bool CanComment { get; set; }
 
-    [JsonProperty("canaddmeta")]
+    [JsonPropertyName("canaddmeta")]
     public bool CanAddMeta { get; set; }
 }
 
 public record People
 {
-    [JsonProperty("haspeople")]
+    [JsonPropertyName("haspeople")]
     public bool HasPeople { get; set; }
 }

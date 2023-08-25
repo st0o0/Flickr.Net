@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 using Flickr.Net.Core.Internals.Attributes;
 
 namespace Flickr.Net.Core;
@@ -6,9 +7,9 @@ namespace Flickr.Net.Core;
 [FlickrJsonPropertyName("domain")]
 public record Domain : FlickrEntityBase
 {
-    [JsonProperty("name")]
+    [JsonPropertyName("name")]
     public string Name { get; set; }
 
-    [JsonProperty("views")]
+    [JsonPropertyName("views")]
     public int Views { get; set; }
 }

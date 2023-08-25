@@ -1,56 +1,57 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 
 namespace Flickr.Net.Core;
 public record Profile : FlickrEntityBase<Id>
 {
-    [JsonProperty("nsid")]
+    [JsonPropertyName("nsid")]
     public string Nsid { get; set; }
 
-    [JsonProperty("join_date")]
+    [JsonPropertyName("join_date")]
     public DateTime JoinDate { get; set; }
 
-    [JsonProperty("occupation")]
+    [JsonPropertyName("occupation")]
     public string Occupation { get; set; }
 
-    [JsonProperty("hometown")]
+    [JsonPropertyName("hometown")]
     public string Hometown { get; set; }
 
-    [JsonProperty("showcase_set")]
+    [JsonPropertyName("showcase_set")]
     public string ShowcaseSet { get; set; }
 
-    [JsonProperty("showcase_set_title")]
+    [JsonPropertyName("showcase_set_title")]
     public string ShowcaseSetTitle { get; set; }
 
-    [JsonProperty("first_name")]
+    [JsonPropertyName("first_name")]
     public string FirstName { get; set; }
 
-    [JsonProperty("last_name")]
+    [JsonPropertyName("last_name")]
     public string LastName { get; set; }
 
-    [JsonProperty("email")]
+    [JsonPropertyName("email")]
     public string Email { get; set; }
 
-    [JsonProperty("profile_description")]
+    [JsonPropertyName("profile_description")]
     public string ProfileDescription { get; set; }
 
-    [JsonProperty("city")]
+    [JsonPropertyName("city")]
     public string City { get; set; }
 
-    [JsonProperty("country")]
+    [JsonPropertyName("country")]
     public string Country { get; set; }
 
-    [JsonProperty("facebook")]
+    [JsonPropertyName("facebook")]
     public string Facebook { get; set; }
 
-    [JsonProperty("twitter")]
+    [JsonPropertyName("twitter")]
     public string Twitter { get; set; }
 
-    [JsonProperty("tumblr")]
+    [JsonPropertyName("tumblr")]
     public string Tumblr { get; set; }
 
-    [JsonProperty("instagram")]
+    [JsonPropertyName("instagram")]
     public string Instagram { get; set; }
 
-    [JsonProperty("pinterest")]
+    [JsonPropertyName("pinterest")]
     public string Pinterest { get; set; }
 }

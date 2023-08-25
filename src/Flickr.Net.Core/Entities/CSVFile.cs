@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 using Flickr.Net.Core.Internals.Attributes;
 
 namespace Flickr.Net.Core;
@@ -6,12 +7,12 @@ namespace Flickr.Net.Core;
 [FlickrJsonPropertyName("csvfiles")]
 public record CSVFile : FlickrEntityBase
 {
-    [JsonProperty("href")]
+    [JsonPropertyName("href")]
     public string Href { get; set; }
 
-    [JsonProperty("type")]
+    [JsonPropertyName("type")]
     public string Type { get; set; }
 
-    [JsonProperty("date")]
+    [JsonPropertyName("date")]
     public DateOnly Date { get; set; }
 }

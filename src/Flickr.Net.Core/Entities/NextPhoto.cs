@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 using Flickr.Net.Core.Internals.Attributes;
 
 namespace Flickr.Net.Core;
@@ -8,33 +9,33 @@ namespace Flickr.Net.Core;
 [FlickrJsonPropertyName("nextphoto")]
 public record NextPhoto : FlickrEntityBase<Id>
 {
-    [JsonProperty("owner")]
+    [JsonPropertyName("owner")]
     public string Owner { get; set; }
 
-    [JsonProperty("secret")]
+    [JsonPropertyName("secret")]
     public string Secret { get; set; }
 
-    [JsonProperty("server")]
+    [JsonPropertyName("server")]
     public string Server { get; set; }
 
-    [JsonProperty("farm")]
+    [JsonPropertyName("farm")]
     public int Farm { get; set; }
 
-    [JsonProperty("title")]
+    [JsonPropertyName("title")]
     public string Title { get; set; }
 
-    [JsonProperty("url")]
+    [JsonPropertyName("url")]
     public string Url { get; set; }
 
-    [JsonProperty("thumb")]
+    [JsonPropertyName("thumb")]
     public string Thumb { get; set; }
 
-    [JsonProperty("license")]
+    [JsonPropertyName("license")]
     public LicenseType License { get; set; }
 
-    [JsonProperty("media")]
+    [JsonPropertyName("media")]
     public MediaType Media { get; set; }
 
-    [JsonProperty("is_faved")]
+    [JsonPropertyName("is_faved")]
     public bool IsFaved { get; set; }
 }

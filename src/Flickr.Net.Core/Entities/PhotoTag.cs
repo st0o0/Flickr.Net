@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 using Flickr.Net.Core.Internals.Attributes;
 
 namespace Flickr.Net.Core;
@@ -6,18 +7,18 @@ namespace Flickr.Net.Core;
 [FlickrJsonPropertyName("tag")]
 public record PhotoTag : TagBase, IFlickrEntity<Id>
 {
-    [JsonProperty("id")]
+    [JsonPropertyName("id")]
     public Id Id { get; set; }
 
-    [JsonProperty("author")]
+    [JsonPropertyName("author")]
     public string Author { get; set; }
 
-    [JsonProperty("authorname")]
+    [JsonPropertyName("authorname")]
     public string Authorname { get; set; }
 
-    [JsonProperty("raw")]
+    [JsonPropertyName("raw")]
     public string Raw { get; set; }
 
-    [JsonProperty("machine_tag")]
+    [JsonPropertyName("machine_tag")]
     public bool MachineTag { get; set; }
 }

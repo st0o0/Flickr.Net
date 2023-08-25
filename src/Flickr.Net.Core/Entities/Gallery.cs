@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 using Flickr.Net.Core.Internals.Attributes;
 
 namespace Flickr.Net.Core;
@@ -6,63 +7,63 @@ namespace Flickr.Net.Core;
 [FlickrJsonPropertyName("gallery")]
 public record Gallery : FlickrEntityBase<Id>, IBuddyIcon, IThumbnailUrl, ISquareUrl, ISmallUrl, IMediumUrl
 {
-    [JsonProperty("gallery_id")]
+    [JsonPropertyName("gallery_id")]
     public string GalleryId { get; set; }
 
-    [JsonProperty("url")]
+    [JsonPropertyName("url")]
     public string Url { get; set; }
 
-    [JsonProperty("owner")]
+    [JsonPropertyName("owner")]
     public string Owner { get; set; }
 
-    [JsonProperty("username")]
+    [JsonPropertyName("username")]
     public string Username { get; set; }
 
-    [JsonProperty("iconserver")]
+    [JsonPropertyName("iconserver")]
     public string IconServer { get; set; }
 
-    [JsonProperty("iconfarm")]
+    [JsonPropertyName("iconfarm")]
     public int IconFarm { get; set; }
 
-    [JsonProperty("primary_photo_id")]
+    [JsonPropertyName("primary_photo_id")]
     public string PrimaryPhotoId { get; set; }
 
-    [JsonProperty("date_create")]
+    [JsonPropertyName("date_create")]
     public DateTime CreateDate { get; set; }
 
-    [JsonProperty("date_update")]
+    [JsonPropertyName("date_update")]
     public DateTime UpdateDate { get; set; }
 
-    [JsonProperty("count_photos")]
+    [JsonPropertyName("count_photos")]
     public int PhotosCount { get; set; }
 
-    [JsonProperty("count_videos")]
+    [JsonPropertyName("count_videos")]
     public int VideosCount { get; set; }
 
-    [JsonProperty("count_total")]
+    [JsonPropertyName("count_total")]
     public int TotalCount { get; set; }
 
-    [JsonProperty("count_views")]
+    [JsonPropertyName("count_views")]
     public int ViewsCount { get; set; }
 
-    [JsonProperty("count_comments")]
+    [JsonPropertyName("count_comments")]
     public int CommentsCount { get; set; }
 
-    [JsonProperty("title")]
+    [JsonPropertyName("title")]
     public Title Title { get; set; }
 
-    [JsonProperty("description")]
+    [JsonPropertyName("description")]
     public Description Description { get; set; }
 
-    [JsonProperty("sort_group")]
+    [JsonPropertyName("sort_group")]
     public string SortGroup { get; set; }
 
-    [JsonProperty("primary_photo_server")]
+    [JsonPropertyName("primary_photo_server")]
     public string PrimaryPhotoServer { get; set; }
 
-    [JsonProperty("primary_photo_farm")]
+    [JsonPropertyName("primary_photo_farm")]
     public int PrimaryPhotoFarm { get; set; }
 
-    [JsonProperty("primary_photo_secret")]
+    [JsonPropertyName("primary_photo_secret")]
     public string PrimaryPhotoSecret { get; set; }
 }

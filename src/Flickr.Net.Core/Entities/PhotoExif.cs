@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 using Flickr.Net.Core.Internals.Attributes;
 
 namespace Flickr.Net.Core;
@@ -6,12 +7,12 @@ namespace Flickr.Net.Core;
 [FlickrJsonPropertyName("photo")]
 public record PhotoExif : PhotoBase
 {
-    [JsonProperty("farm")]
+    [JsonPropertyName("farm")]
     public int Farm { get; set; }
 
-    [JsonProperty("camera")]
+    [JsonPropertyName("camera")]
     public string Camera { get; set; }
 
-    [JsonProperty("exif")]
+    [JsonPropertyName("exif")]
     public List<Exif> Exifs { get; set; }
 }

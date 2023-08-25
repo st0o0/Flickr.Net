@@ -1,100 +1,101 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 
 namespace Flickr.Net.Core;
 
 public record Person : FlickrEntityBase<Id>, IBuddyIcon
 {
-    [JsonProperty("nsid")]
+    [JsonPropertyName("nsid")]
     public string Nsid { get; set; }
 
-    [JsonProperty("ispro")]
+    [JsonPropertyName("ispro")]
     public bool IsPro { get; set; }
 
-    [JsonProperty("is_deleted")]
+    [JsonPropertyName("is_deleted")]
     public bool IsDeleted { get; set; }
 
-    [JsonProperty("iconserver")]
+    [JsonPropertyName("iconserver")]
     public string IconServer { get; set; }
 
-    [JsonProperty("iconfarm")]
+    [JsonPropertyName("iconfarm")]
     public int IconFarm { get; set; }
 
-    [JsonProperty("path_alias")]
+    [JsonPropertyName("path_alias")]
     public object PathAlias { get; set; }
 
-    [JsonProperty("has_stats")]
+    [JsonPropertyName("has_stats")]
     public bool HasStats { get; set; }
 
-    [JsonProperty("username")]
+    [JsonPropertyName("username")]
     public Username Username { get; set; }
 
-    [JsonProperty("realname")]
+    [JsonPropertyName("realname")]
     public Realname Realname { get; set; }
 
-    [JsonProperty("mbox_sha1sum")]
+    [JsonPropertyName("mbox_sha1sum")]
     public MboxSha1sum MboxSha1sum { get; set; }
 
-    [JsonProperty("location")]
+    [JsonPropertyName("location")]
     public Location Location { get; set; }
 
-    [JsonProperty("description")]
+    [JsonPropertyName("description")]
     public Description Description { get; set; }
 
-    [JsonProperty("photosurl")]
+    [JsonPropertyName("photosurl")]
     public PhotosUrl PhotoUrl { get; set; }
 
-    [JsonProperty("profileurl")]
+    [JsonPropertyName("profileurl")]
     public ProfileUrl ProfileUrl { get; set; }
 
-    [JsonProperty("mobileurl")]
+    [JsonPropertyName("mobileurl")]
     public MobileUrl Mobileurl { get; set; }
 
-    [JsonProperty("photos")]
+    [JsonPropertyName("photos")]
     public PhotoInfos PhotoInfos { get; set; }
 
-    [JsonProperty("upload_count")]
+    [JsonPropertyName("upload_count")]
     public int UploadCount { get; set; }
 
-    [JsonProperty("upload_limit")]
+    [JsonPropertyName("upload_limit")]
     public int UploadLimit { get; set; }
 
-    [JsonProperty("upload_limit_status")]
+    [JsonPropertyName("upload_limit_status")]
     public string UploadLimitStatus { get; set; }
 
-    [JsonProperty("is_cognito_user")]
+    [JsonPropertyName("is_cognito_user")]
     public bool IsCognitoUser { get; set; }
 
-    [JsonProperty("all_rights_reserved_photos_count")]
+    [JsonPropertyName("all_rights_reserved_photos_count")]
     public int AllRightsReservedPhotosCount { get; set; }
 
-    [JsonProperty("has_adfree")]
+    [JsonPropertyName("has_adfree")]
     public bool HasAdfree { get; set; }
 
-    [JsonProperty("has_free_standard_shipping")]
+    [JsonPropertyName("has_free_standard_shipping")]
     public bool HasFreeStandardShipping { get; set; }
 
-    [JsonProperty("has_free_educational_resources")]
+    [JsonPropertyName("has_free_educational_resources")]
     public bool HasFreeEducationalResources { get; set; }
 }
 
 public struct PhotoInfos
 {
-    [JsonProperty("firstdatetaken")]
+    [JsonPropertyName("firstdatetaken")]
     public FirstDateTaken Firstdatetaken { get; set; }
 
-    [JsonProperty("firstdate")]
+    [JsonPropertyName("firstdate")]
     public FirstDate Firstdate { get; set; }
 
-    [JsonProperty("count")]
+    [JsonPropertyName("count")]
     public Count Count { get; set; }
 
-    [JsonProperty("views")]
+    [JsonPropertyName("views")]
     public PhotoInfoViews Views { get; set; }
 }
 
 public struct Username
 {
-    [JsonProperty("_content")]
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 
     public static implicit operator string(Username username) => username.Content;
@@ -104,7 +105,7 @@ public struct Username
 
 public struct PhotoInfoViews
 {
-    [JsonProperty("_content")]
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 
     public static implicit operator string(PhotoInfoViews username) => username.Content;
@@ -114,7 +115,7 @@ public struct PhotoInfoViews
 
 public struct Realname
 {
-    [JsonProperty("_content")]
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 
     public static implicit operator string(Realname username) => username.Content;
@@ -124,7 +125,7 @@ public struct Realname
 
 public struct PhotosUrl
 {
-    [JsonProperty("_content")]
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 
     public static implicit operator string(PhotosUrl username) => username.Content;
@@ -134,7 +135,7 @@ public struct PhotosUrl
 
 public struct ProfileUrl
 {
-    [JsonProperty("_content")]
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 
     public static implicit operator string(ProfileUrl username) => username.Content;
@@ -144,7 +145,7 @@ public struct ProfileUrl
 
 public struct Count
 {
-    [JsonProperty("_content")]
+    [JsonPropertyName("_content")]
     public int Content { get; set; }
 
     public static implicit operator int(Count username) => username.Content;
@@ -154,7 +155,7 @@ public struct Count
 
 public struct Description
 {
-    [JsonProperty("_content")]
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 
     public static implicit operator string(Description username) => username.Content;
@@ -164,7 +165,7 @@ public struct Description
 
 public struct FirstDate
 {
-    [JsonProperty("_content")]
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 
     public static implicit operator string(FirstDate username) => username.Content;
@@ -174,7 +175,7 @@ public struct FirstDate
 
 public struct FirstDateTaken
 {
-    [JsonProperty("_content")]
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 
     public static implicit operator string(FirstDateTaken username) => username.Content;
@@ -184,7 +185,7 @@ public struct FirstDateTaken
 
 public struct LocationInfo
 {
-    [JsonProperty("_content")]
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 
     public static implicit operator string(LocationInfo username) => username.Content;
@@ -194,7 +195,7 @@ public struct LocationInfo
 
 public struct MboxSha1sum
 {
-    [JsonProperty("_content")]
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 
     public static implicit operator string(MboxSha1sum username) => username.Content;
@@ -204,7 +205,7 @@ public struct MboxSha1sum
 
 public struct MobileUrl
 {
-    [JsonProperty("_content")]
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 
     public static implicit operator string(MobileUrl username) => username.Content;

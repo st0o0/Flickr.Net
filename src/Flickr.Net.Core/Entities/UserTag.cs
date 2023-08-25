@@ -1,10 +1,11 @@
-﻿using Flickr.Net.Core.Internals.Attributes;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Internals.Attributes;
 
 namespace Flickr.Net.Core;
 
 [FlickrJsonPropertyName("tag")]
 public record UserTag : TagBase
 {
-    [JsonProperty("count")]
+    [JsonPropertyName("count")]
     public int Count { get; set; }
 }

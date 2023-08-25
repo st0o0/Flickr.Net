@@ -1,15 +1,16 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 
 namespace Flickr.Net.Core;
 
 public record Camera : FlickrEntityBase<Id>
 {
-    [JsonProperty("name")]
+    [JsonPropertyName("name")]
     public string Name { get; set; }
 
-    [JsonProperty("details")]
+    [JsonPropertyName("details")]
     public Details Details { get; set; }
 
-    [JsonProperty("images")]
+    [JsonPropertyName("images")]
     public Image Image { get; set; }
 }

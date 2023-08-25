@@ -1,15 +1,16 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 
 namespace Flickr.Net.Core;
 
 public record PhotoCount : FlickrEntityBase
 {
-    [JsonProperty("count")]
+    [JsonPropertyName("count")]
     public int Count { get; set; }
 
-    [JsonProperty("fromdate")]
+    [JsonPropertyName("fromdate")]
     public DateTime FromDate { get; set; }
 
-    [JsonProperty("todate")]
+    [JsonPropertyName("todate")]
     public DateTime ToDate { get; set; }
 }

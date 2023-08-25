@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 using Flickr.Net.Core.Internals.Attributes;
 
 namespace Flickr.Net.Core;
@@ -6,33 +7,33 @@ namespace Flickr.Net.Core;
 [FlickrJsonPropertyName("collection")]
 public record Collection : FlickrEntityBase<Id>
 {
-    [JsonProperty("title")]
+    [JsonPropertyName("title")]
     public string Title { get; set; }
 
-    [JsonProperty("description")]
+    [JsonPropertyName("description")]
     public string Description { get; set; }
 
-    [JsonProperty("child_count")]
+    [JsonPropertyName("child_count")]
     public int ChildCount { get; set; }
 
-    [JsonProperty("datecreate")]
+    [JsonPropertyName("datecreate")]
     public DateTime CreateDate { get; set; }
 
-    [JsonProperty("iconlarge")]
+    [JsonPropertyName("iconlarge")]
     public string LargeIcon { get; set; }
 
-    [JsonProperty("iconsmall")]
+    [JsonPropertyName("iconsmall")]
     public string SmallIcon { get; set; }
 
-    [JsonProperty("server")]
+    [JsonPropertyName("server")]
     public string Server { get; set; }
 
-    [JsonProperty("secret")]
+    [JsonPropertyName("secret")]
     public string Secret { get; set; }
 
-    [JsonProperty("iconphotos")]
+    [JsonPropertyName("iconphotos")]
     public Photos IconPhotos { get; set; }
 
-    [JsonProperty("set")]
+    [JsonPropertyName("set")]
     public List<CollectionSet> Sets { get; set; }
 }

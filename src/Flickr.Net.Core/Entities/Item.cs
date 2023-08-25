@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 
 namespace Flickr.Net.Core;
 
@@ -8,116 +9,116 @@ public record Item : FlickrEntityBase<Id>, ISmallUrl, ISquareUrl, IBuddyIcon
 {
     /// <summary>
     /// </summary>
-    [JsonProperty("title")]
+    [JsonPropertyName("title")]
     public string Title { get; set; }
 
     /// <summary>
     /// </summary>
-    [JsonProperty("activity")]
+    [JsonPropertyName("activity")]
     public Activity Activity { get; set; }
 
     /// <summary>
     /// </summary>
-    [JsonProperty("type")]
+    [JsonPropertyName("type")]
     public ItemType Type { get; set; }
 
     /// <summary>
     /// </summary>
-    [JsonProperty("primary")]
+    [JsonPropertyName("primary")]
     public string Primary { get; set; }
 
     /// <summary>
     /// </summary>
-    [JsonProperty("secret")]
+    [JsonPropertyName("secret")]
     public string Secret { get; set; }
 
     /// <summary>
     /// </summary>
-    [JsonProperty("server")]
+    [JsonPropertyName("server")]
     public string Server { get; set; }
 
     /// <summary>
     /// </summary>
-    [JsonProperty("farm")]
+    [JsonPropertyName("farm")]
     public int Farm { get; set; }
 
     /// <summary>
     /// </summary>
-    [JsonProperty("comments")]
+    [JsonPropertyName("comments")]
     public int Comments { get; set; }
 
     /// <summary>
     /// </summary>
-    [JsonProperty("views")]
+    [JsonPropertyName("views")]
     public int Views { get; set; }
 
     /// <summary>
     /// </summary>
-    [JsonProperty("photos")]
+    [JsonPropertyName("photos")]
     public int Photos { get; set; }
 
     /// <summary>
     /// </summary>
-    [JsonProperty("more")]
+    [JsonPropertyName("more")]
     public int More { get; set; }
 
     /// <summary>
     /// </summary>
-    [JsonProperty("notes")]
+    [JsonPropertyName("notes")]
     public int Notes { get; set; }
 
     /// <summary>
     /// </summary>
-    [JsonProperty("faves")]
+    [JsonPropertyName("faves")]
     public int Favorites { get; set; }
 
     /// <summary>
     /// </summary>
-    [JsonProperty("owner")]
+    [JsonPropertyName("owner")]
     public string OwnerId { get; set; }
 
     /// <summary>
     /// </summary>
-    [JsonProperty("realname")]
+    [JsonPropertyName("realname")]
     public string RealName { get; set; }
 
     /// <summary>
     /// </summary>
-    [JsonProperty("ownername")]
+    [JsonPropertyName("ownername")]
     public string OwnerName { get; set; }
 
     /// <summary>
     /// </summary>
-    [JsonProperty("iconserver")]
+    [JsonPropertyName("iconserver")]
     public string OwnerServer { get; set; }
 
     /// <summary>
     /// </summary>
-    [JsonProperty("iconfarm")]
+    [JsonPropertyName("iconfarm")]
     public string OwnerFarm { get; set; }
 
     /// <summary>
     /// </summary>
-    [JsonProperty("notesnew")]
+    [JsonPropertyName("notesnew")]
     public string NewNotes { get; set; }
 
     /// <summary>
     /// </summary>
-    [JsonProperty("notesold")]
+    [JsonPropertyName("notesold")]
     public string OldNotes { get; set; }
 
     /// <summary>
     /// </summary>
-    [JsonProperty("commentsnew")]
+    [JsonPropertyName("commentsnew")]
     public string NewComments { get; set; }
 
     /// <summary>
     /// </summary>
-    [JsonProperty("commentsold")]
+    [JsonPropertyName("commentsold")]
     public string OldComments { get; set; }
 
     /// <summary>
     /// </summary>
-    [JsonProperty("media")]
+    [JsonPropertyName("media")]
     public MediaType Media { get; set; }
 }

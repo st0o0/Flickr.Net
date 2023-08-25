@@ -1,15 +1,16 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 
 namespace Flickr.Net.Core;
 
 public record Namespace : FlickrEntityBase
 {
-    [JsonProperty("usage")]
+    [JsonPropertyName("usage")]
     public string Usage { get; set; }
 
-    [JsonProperty("predicates")]
+    [JsonPropertyName("predicates")]
     public string Predicates { get; set; }
 
-    [JsonProperty("_content")]
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 }

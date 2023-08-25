@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 using Flickr.Net.Core.Internals.Attributes;
 
 namespace Flickr.Net.Core;
@@ -6,120 +7,120 @@ namespace Flickr.Net.Core;
 [FlickrJsonPropertyName("person")]
 public record PhotoPerson : FlickrEntityBase<NsId>, IBuddyIcon
 {
-    [JsonProperty("username")]
+    [JsonPropertyName("username")]
     public string Username { get; set; }
 
-    [JsonProperty("favedate")]
+    [JsonPropertyName("favedate")]
     public DateTime FaveDate { get; set; }
 
-    [JsonProperty("ispro")]
+    [JsonPropertyName("ispro")]
     public bool IsPro { get; set; }
 
-    [JsonProperty("is_deleted")]
+    [JsonPropertyName("is_deleted")]
     public bool IsDeleted { get; set; }
 
-    [JsonProperty("iconserver")]
+    [JsonPropertyName("iconserver")]
     public string IconServer { get; set; }
 
-    [JsonProperty("iconfarm")]
+    [JsonPropertyName("iconfarm")]
     public int IconFarm { get; set; }
 
-    [JsonProperty("path_alias")]
+    [JsonPropertyName("path_alias")]
     public string PathAlias { get; set; }
 
-    [JsonProperty("has_stats")]
+    [JsonPropertyName("has_stats")]
     public bool HasStats { get; set; }
 
-    [JsonProperty("pro_badge")]
+    [JsonPropertyName("pro_badge")]
     public string ProBadge { get; set; }
 
-    [JsonProperty("expire")]
+    [JsonPropertyName("expire")]
     public string Expire { get; set; }
 
-    [JsonProperty("gender")]
+    [JsonPropertyName("gender")]
     public string Gender { get; set; }
 
-    [JsonProperty("ignored")]
+    [JsonPropertyName("ignored")]
     public bool Ignored { get; set; }
 
-    [JsonProperty("contact")]
+    [JsonPropertyName("contact")]
     public bool Contact { get; set; }
 
-    [JsonProperty("friend")]
+    [JsonPropertyName("friend")]
     public bool Friend { get; set; }
 
-    [JsonProperty("family")]
+    [JsonPropertyName("family")]
     public bool Family { get; set; }
 
-    [JsonProperty("revcontact")]
+    [JsonPropertyName("revcontact")]
     public bool Revcontact { get; set; }
 
-    [JsonProperty("revfriend")]
+    [JsonPropertyName("revfriend")]
     public bool Revfriend { get; set; }
 
-    [JsonProperty("revfamily")]
+    [JsonPropertyName("revfamily")]
     public bool Revfamily { get; set; }
 
-    [JsonProperty("realname")]
+    [JsonPropertyName("realname")]
     public string Realname { get; set; }
 
-    [JsonProperty("location")]
+    [JsonPropertyName("location")]
     public string Location { get; set; }
 
-    [JsonProperty("timezone")]
+    [JsonPropertyName("timezone")]
     public TimeZone Timezone { get; set; }
 
-    [JsonProperty("description")]
+    [JsonPropertyName("description")]
     public string Description { get; set; }
 
-    [JsonProperty("photosurl")]
+    [JsonPropertyName("photosurl")]
     public string PhotosUrl { get; set; }
 
-    [JsonProperty("profileurl")]
+    [JsonPropertyName("profileurl")]
     public string ProfileUrl { get; set; }
 
-    [JsonProperty("mobileurl")]
+    [JsonPropertyName("mobileurl")]
     public string MobileUrl { get; set; }
 
-    [JsonProperty("photos")]
+    [JsonPropertyName("photos")]
     public PhotoDateInfos PhotoDateInfos { get; set; }
 
-    [JsonProperty("has_adfree")]
+    [JsonPropertyName("has_adfree")]
     public bool HasAdfree { get; set; }
 
-    [JsonProperty("has_free_standard_shipping")]
+    [JsonPropertyName("has_free_standard_shipping")]
     public bool HasFreeStandardShipping { get; set; }
 
-    [JsonProperty("has_free_educational_resources")]
+    [JsonPropertyName("has_free_educational_resources")]
     public bool HasFreeEducationalResources { get; set; }
 
-    [JsonProperty("mbox_sha1sum")]
+    [JsonPropertyName("mbox_sha1sum")]
     public string MboxSha1sum { get; set; }
 }
 
 public struct TimeZone
 {
-    [JsonProperty("label")]
+    [JsonPropertyName("label")]
     public string Label { get; set; }
 
-    [JsonProperty("offset")]
+    [JsonPropertyName("offset")]
     public string Offset { get; set; }
 
-    [JsonProperty("timezone_id")]
+    [JsonPropertyName("timezone_id")]
     public string TimezoneId { get; set; }
 
-    [JsonProperty("timezone")]
+    [JsonPropertyName("timezone")]
     public int Timezone { get; set; }
 }
 
 public struct PhotoDateInfos
 {
-    [JsonProperty("firstdatetaken")]
+    [JsonPropertyName("firstdatetaken")]
     public DateTime FirstDateTaken { get; set; }
 
-    [JsonProperty("firstdate")]
+    [JsonPropertyName("firstdate")]
     public DateTime FirstDate { get; set; }
 
-    [JsonProperty("count")]
+    [JsonPropertyName("count")]
     public int Count { get; set; }
 }
