@@ -4,6 +4,7 @@ using System.Text.Json.Serialization.Metadata;
 using System.Xml.Linq;
 using Flickr.Net.Core.Internals.Attributes;
 using Flickr.Net.Core.Internals.JsonConverters;
+using Flickr.Net.Core.Internals.JsonConverters.IdentifierConverters;
 
 namespace Flickr.Net.Core.Internals;
 
@@ -29,12 +30,17 @@ public static class FlickrConvert
                 Converters =
                 {
                     BoolConverter.Instance,
-                    TimestampToDateTimeConverter.Instance
+                    TimestampToDateTimeConverter.Instance,
+                    NsIdConverter.Instance,
+                    IdConverter.Instance,
+                    PhotoIdConverter.Instance,
+                    PhotosetIdConverter.Instance
                 },
                 TypeInfoResolver = new DefaultJsonTypeInfoResolver().WithAddedModifier(static typeInfo =>
                 {
                     foreach (JsonPropertyInfo property in typeInfo.Properties)
                     {
+                        property.Name = property.Name.ToLowerInvariant();
                         var attributes = property.AttributeProvider.GetCustomAttributes(typeof(JsonPropertyGenericTypeNameAttribute), false);
                         if (attributes.Length != 0 && attributes is JsonPropertyGenericTypeNameAttribute[] jsonAttributes)
                         {

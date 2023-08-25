@@ -5,6 +5,12 @@ namespace Flickr.Net.Core.Internals.JsonConverters.IdentifierConverters;
 
 public class PhotoIdConverter : System.Text.Json.Serialization.JsonConverter<PhotoId>
 {
+    public PhotoIdConverter() : base()
+    {
+    }
+
+    public static PhotoIdConverter Instance { get; } = new();
+
     public override PhotoId Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         return reader.GetString();
