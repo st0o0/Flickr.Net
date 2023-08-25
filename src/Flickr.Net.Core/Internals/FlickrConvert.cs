@@ -1,6 +1,5 @@
 ﻿using System.Reflection;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Text.Json.Serialization.Metadata;
 using System.Xml.Linq;
 using Flickr.Net.Core.Internals.Attributes;
@@ -31,7 +30,7 @@ public static class FlickrConvert
                 AllowTrailingCommas = true,
                 Converters =
                 {
-                    new JsonStringEnumConverter(),
+                    CustomJsonStringEnumConverter.Instance,
                     AutoStringToNumberConverter.Instance,
                     AutoNumberToStringConverter.Instance,
                     BoolConverter.Instance,
