@@ -2,7 +2,6 @@
 using System.Text.Json;
 using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals.Extensions;
-using Newtonsoft.Json.Linq;
 
 namespace Flickr.Net.Core;
 
