@@ -116,6 +116,7 @@ public record FlickrExtendedDataResult : FlickrResult
     public override string State { get; set; } = string.Empty;
 
     [System.Text.Json.Serialization.JsonExtensionData]
+    //TODO: replace JToken
     public IDictionary<string, JToken> Content { get; set; }
 }
 
