@@ -1,40 +1,41 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 
 namespace Flickr.Net.Core;
 
 public record Location : FlickrEntityBase
 {
-    [JsonProperty("latitude")]
+    [JsonPropertyName("latitude")]
     public double Latitude { get; set; }
 
-    [JsonProperty("longitude")]
+    [JsonPropertyName("longitude")]
     public double Longitude { get; set; }
 
-    [JsonProperty("accuracy")]
+    [JsonPropertyName("accuracy")]
     public GeoAccuracy Accuracy { get; set; }
 
-    [JsonProperty("context")]
+    [JsonPropertyName("context")]
     public GeoContext Context { get; set; }
 
-    [JsonProperty("locality")]
+    [JsonPropertyName("locality")]
     public Locality Locality { get; set; }
 
-    [JsonProperty("county")]
+    [JsonPropertyName("county")]
     public County County { get; set; }
 
-    [JsonProperty("region")]
+    [JsonPropertyName("region")]
     public Region Region { get; set; }
 
-    [JsonProperty("country")]
+    [JsonPropertyName("country")]
     public Country Country { get; set; }
 
-    [JsonProperty("neighbourhood")]
+    [JsonPropertyName("neighbourhood")]
     public Neighbourhood Neighbourhood { get; set; }
 }
 
 public struct Neighbourhood
 {
-    [JsonProperty("_content")]
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 
     public static implicit operator string(Neighbourhood username) => username.Content;
@@ -44,7 +45,7 @@ public struct Neighbourhood
 
 public struct Locality
 {
-    [JsonProperty("_content")]
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 
     public static implicit operator string(Locality username) => username.Content;
@@ -54,7 +55,7 @@ public struct Locality
 
 public struct Country
 {
-    [JsonProperty("_content")]
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 
     public static implicit operator string(Country username) => username.Content;
@@ -64,7 +65,7 @@ public struct Country
 
 public struct County
 {
-    [JsonProperty("_content")]
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 
     public static implicit operator string(County username) => username.Content;
@@ -74,7 +75,7 @@ public struct County
 
 public struct Region
 {
-    [JsonProperty("_content")]
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 
     public static implicit operator string(Region username) => username.Content;

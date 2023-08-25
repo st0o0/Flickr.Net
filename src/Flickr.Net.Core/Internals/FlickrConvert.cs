@@ -27,9 +27,10 @@ public static class FlickrConvert
         {
             var options = new JsonSerializerOptions()
             {
+                NumberHandling = System.Text.Json.Serialization.JsonNumberHandling.AllowReadingFromString,
                 Converters =
                 {
-                    BoolConverter.Instance,
+                    new BoolConverter(),
                     TimestampToDateTimeConverter.Instance,
                     NsIdConverter.Instance,
                     IdConverter.Instance,

@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 
 namespace Flickr.Net.Core;
 
@@ -8,6 +9,6 @@ public record Service : FlickrEntityBase<Id>
 {
     /// <summary>
     /// </summary>
-    [JsonProperty("_content")]
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 }

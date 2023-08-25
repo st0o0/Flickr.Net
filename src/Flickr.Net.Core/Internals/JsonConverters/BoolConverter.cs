@@ -1,4 +1,6 @@
-﻿namespace Flickr.Net.Core.Internals.JsonConverters;
+﻿using System.Text.Json;
+
+namespace Flickr.Net.Core.Internals.JsonConverters;
 
 /// <summary>
 /// </summary>
@@ -14,7 +16,6 @@ public class BoolConverter : System.Text.Json.Serialization.JsonConverter<bool>
     {
         return objectType == typeof(bool);
     }
-
 
     /// <summary>
     /// </summary>

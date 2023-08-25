@@ -1,12 +1,13 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 
 namespace Flickr.Net.Core;
 
 public record Url : FlickrEntityBase
 {
-    [JsonProperty("type")]
+    [JsonPropertyName("type")]
     public UrlType Type { get; set; }
 
-    [JsonProperty("_content")]
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 }

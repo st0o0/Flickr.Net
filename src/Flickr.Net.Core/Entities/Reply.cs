@@ -1,39 +1,40 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 
 namespace Flickr.Net.Core;
 
 public record Reply : FlickrEntityBase<Id>, IBuddyIcon
 {
-    [JsonProperty("author")]
+    [JsonPropertyName("author")]
     public string Author { get; set; }
 
-    [JsonProperty("authorname")]
+    [JsonPropertyName("authorname")]
     public string AuthorName { get; set; }
 
-    [JsonProperty("is_pro")]
+    [JsonPropertyName("is_pro")]
     public bool IsPro { get; set; }
 
-    [JsonProperty("role")]
+    [JsonPropertyName("role")]
     public MemberType Role { get; set; }
 
-    [JsonProperty("iconserver")]
+    [JsonPropertyName("iconserver")]
     public string IconServer { get; set; }
 
-    [JsonProperty("iconfarm")]
+    [JsonPropertyName("iconfarm")]
     public int IconFarm { get; set; }
 
-    [JsonProperty("can_edit")]
+    [JsonPropertyName("can_edit")]
     public bool CanEdit { get; set; }
 
-    [JsonProperty("can_delete")]
+    [JsonPropertyName("can_delete")]
     public bool CanDelete { get; set; }
 
-    [JsonProperty("datecreate")]
+    [JsonPropertyName("datecreate")]
     public DateTime CreateDate { get; set; }
 
-    [JsonProperty("lastedit")]
+    [JsonPropertyName("lastedit")]
     public DateTime LastEdit { get; set; }
 
-    [JsonProperty("message")]
+    [JsonPropertyName("message")]
     public List<string> Messages { get; set; }
 }

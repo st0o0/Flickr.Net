@@ -1,12 +1,13 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 
 namespace Flickr.Net.Core;
 
 public record Image : FlickrEntityBase
 {
-    [JsonProperty("small")]
+    [JsonPropertyName("small")]
     public string Small { get; set; }
 
-    [JsonProperty("large")]
+    [JsonPropertyName("large")]
     public string Large { get; set; }
 }

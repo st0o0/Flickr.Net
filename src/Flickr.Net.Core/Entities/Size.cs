@@ -1,24 +1,25 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 
 namespace Flickr.Net.Core;
 
 public record Size : FlickrEntityBase
 {
-    [JsonProperty("label")]
+    [JsonPropertyName("label")]
     public string Label { get; set; }
 
-    [JsonProperty("width")]
+    [JsonPropertyName("width")]
     public int Width { get; set; }
 
-    [JsonProperty("height")]
+    [JsonPropertyName("height")]
     public int Height { get; set; }
 
-    [JsonProperty("source")]
+    [JsonPropertyName("source")]
     public string Source { get; set; }
 
-    [JsonProperty("url")]
+    [JsonPropertyName("url")]
     public string Url { get; set; }
 
-    [JsonProperty("media")]
+    [JsonPropertyName("media")]
     public MediaType Media { get; set; }
 }

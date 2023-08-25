@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 using Flickr.Net.Core.Internals.Attributes;
 
 namespace Flickr.Net.Core;
@@ -26,22 +27,22 @@ public abstract record FlickrPaginationCollection<T> : FlickrCollection<T> where
 {
     /// <summary>
     /// </summary>
-    [JsonProperty("page")]
+    [JsonPropertyName("page")]
     public int Page { get; set; }
 
     /// <summary>
     /// </summary>
-    [JsonProperty("pages")]
+    [JsonPropertyName("pages")]
     public int Pages { get; set; }
 
     /// <summary>
     /// </summary>
-    [JsonProperty("perpage")]
+    [JsonPropertyName("perpage")]
     public int PerPage { get; set; }
 
     /// <summary>
     /// </summary>
-    [JsonProperty("total")]
+    [JsonPropertyName("total")]
     public int Total { get; set; }
 }
 
@@ -66,7 +67,7 @@ public record Cameras : FlickrCollection<Camera>
 {
     /// <summary>
     /// </summary>
-    [JsonProperty("brand")]
+    [JsonPropertyName("brand")]
     public string Brand { get; set; }
 }
 
@@ -125,7 +126,7 @@ public record UserGalleries : Galleries
 {
     /// <summary>
     /// </summary>
-    [JsonProperty("user_id")]
+    [JsonPropertyName("user_id")]
     public string UserId { get; set; }
 }
 
@@ -135,7 +136,7 @@ public record PhotoGalleries : Galleries
 {
     /// <summary>
     /// </summary>
-    [JsonProperty("photo_id")]
+    [JsonPropertyName("photo_id")]
     public string PhotoId { get; set; }
 }
 
@@ -148,7 +149,7 @@ public record GalleryPhotos : FlickrPaginationCollection<GalleryPhoto>
 [FlickrJsonPropertyName("replies")]
 public record Replies : FlickrCollection<Reply>
 {
-    [JsonProperty("topic")]
+    [JsonPropertyName("topic")]
     public Topic Topic { get; set; }
 }
 
@@ -156,31 +157,31 @@ public record Replies : FlickrCollection<Reply>
 [FlickrJsonPropertyName("topics")]
 public record Topics : FlickrPaginationCollection<Topic>
 {
-    [JsonProperty("group_id")]
+    [JsonPropertyName("group_id")]
     public string GroupId { get; set; }
 
-    [JsonProperty("iconserver")]
+    [JsonPropertyName("iconserver")]
     public string IconServer { get; set; }
 
-    [JsonProperty("iconfarm")]
+    [JsonPropertyName("iconfarm")]
     public string IconFarm { get; set; }
 
-    [JsonProperty("name")]
+    [JsonPropertyName("name")]
     public string Name { get; set; }
 
-    [JsonProperty("members")]
+    [JsonPropertyName("members")]
     public int Members { get; set; }
 
-    [JsonProperty("privacy")]
+    [JsonPropertyName("privacy")]
     public PoolPrivacy Privacy { get; set; }
 
-    [JsonProperty("lang")]
+    [JsonPropertyName("lang")]
     public string Lang { get; set; }
 
-    [JsonProperty("ispoolmoderated")]
+    [JsonPropertyName("ispoolmoderated")]
     public bool IsPoolModerated { get; set; }
 
-    [JsonIgnore]
+    [System.Text.Json.Serialization.JsonIgnore]
     public string GroupIconUrl => UtilityMethods.BuddyIcon(IconServer, IconFarm, GroupId);
 }
 
@@ -218,10 +219,10 @@ public record Predicates : FlickrPaginationCollection<Predicate>
 [FlickrJsonPropertyName("values")]
 public record Values : FlickrPaginationCollection<Value>
 {
-    [JsonProperty("namespace")]
+    [JsonPropertyName("namespace")]
     public string Namespace { get; set; }
 
-    [JsonProperty("predicate")]
+    [JsonPropertyName("predicate")]
     public string Predicate { get; set; }
 }
 
@@ -234,16 +235,16 @@ public record Pandas : FlickrCollection<Panda>
 [FlickrJsonPropertyName("photos")]
 public record PandaPhotos : FlickrCollection<PandaPhoto>
 {
-    [JsonProperty("interval")]
+    [JsonPropertyName("interval")]
     public int Interval { get; set; }
 
-    [JsonProperty("lastupdate")]
+    [JsonPropertyName("lastupdate")]
     public DateTime LastUpdate { get; set; }
 
-    [JsonProperty("total")]
+    [JsonPropertyName("total")]
     public int Total { get; set; }
 
-    [JsonProperty("panda")]
+    [JsonPropertyName("panda")]
     public string Panda { get; set; }
 }
 
@@ -266,16 +267,16 @@ public record PhotoCounts : FlickrCollection<PhotoCount>
 [FlickrJsonPropertyName("photo")]
 public record PhotoPersons : FlickrPaginationCollection<PhotoPerson>
 {
-    [JsonProperty("id")]
+    [JsonPropertyName("id")]
     public string Id { get; set; }
 
-    [JsonProperty("secret")]
+    [JsonPropertyName("secret")]
     public string Secret { get; set; }
 
-    [JsonProperty("server")]
+    [JsonPropertyName("server")]
     public string Server { get; set; }
 
-    [JsonProperty("farm")]
+    [JsonPropertyName("farm")]
     public int Farm { get; set; }
 }
 
@@ -293,13 +294,13 @@ public record PhotoInfoTags : FlickrCollection<PhotoTag>
 [FlickrJsonPropertyName("sizes")]
 public record Sizes : FlickrCollection<Size>
 {
-    [JsonProperty("canblog")]
+    [JsonPropertyName("canblog")]
     public bool CanBlog { get; set; }
 
-    [JsonProperty("canprint")]
+    [JsonPropertyName("canprint")]
     public bool CanPrint { get; set; }
 
-    [JsonProperty("candownload")]
+    [JsonPropertyName("candownload")]
     public bool CanDownload { get; set; }
 }
 
@@ -341,13 +342,13 @@ public record Tickets : FlickrCollection<Ticket>
 [FlickrJsonPropertyName("people")]
 public record PeoplePersons : FlickrCollection<PeoplePerson>
 {
-    [JsonProperty("total")]
+    [JsonPropertyName("total")]
     public int Total { get; set; }
 
-    [JsonProperty("photo_width")]
+    [JsonPropertyName("photo_width")]
     public int PhotoWidth { get; set; }
 
-    [JsonProperty("photo_height")]
+    [JsonPropertyName("photo_height")]
     public int PhotoHeight { get; set; }
 }
 
@@ -355,7 +356,7 @@ public record PeoplePersons : FlickrCollection<PeoplePerson>
 [FlickrJsonPropertyName("photosets")]
 public record Photosets : FlickrPaginationCollection<Photoset>
 {
-    [JsonProperty("cancreate")]
+    [JsonPropertyName("cancreate")]
     public bool CanCreate { get; set; }
 }
 
@@ -363,19 +364,19 @@ public record Photosets : FlickrPaginationCollection<Photoset>
 [FlickrJsonPropertyName("photoset")]
 public record PhotosetPhotos : FlickrPaginationCollection<PhotosetPhoto>
 {
-    [JsonProperty("id")]
+    [JsonPropertyName("id")]
     public string Id { get; set; }
 
-    [JsonProperty("primary")]
+    [JsonPropertyName("primary")]
     public string Primary { get; set; }
 
-    [JsonProperty("owner")]
+    [JsonPropertyName("owner")]
     public string Owner { get; set; }
 
-    [JsonProperty("ownername")]
+    [JsonPropertyName("ownername")]
     public string Ownername { get; set; }
 
-    [JsonProperty("title")]
+    [JsonPropertyName("title")]
     public string Title { get; set; }
 }
 
@@ -398,7 +399,7 @@ public record Domains : FlickrPaginationCollection<Domain>
 [FlickrJsonPropertyName("domain")]
 public record Referrers : FlickrPaginationCollection<Referrer>
 {
-    [JsonProperty("name")]
+    [JsonPropertyName("name")]
     public string Name { get; set; }
 }
 
@@ -411,10 +412,10 @@ public record CSVFiles : FlickrCollection<CSVFile>
 [FlickrJsonPropertyName("clusters")]
 public record Clusters : FlickrCollection<Cluster>
 {
-    [JsonProperty("source")]
+    [JsonPropertyName("source")]
     public string Source { get; set; }
 
-    [JsonProperty("total")]
+    [JsonPropertyName("total")]
     public int Total { get; set; }
 }
 
@@ -442,6 +443,6 @@ public record UserTags : FlickrCollection<UserTag>
 [FlickrJsonPropertyName("tags")]
 public record Tags : FlickrCollection<Tag>
 {
-    [JsonProperty("source")]
+    [JsonPropertyName("source")]
     public string Source { get; set; }
 }

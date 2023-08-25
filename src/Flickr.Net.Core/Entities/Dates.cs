@@ -1,23 +1,24 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 using Flickr.Net.Core.Internals.JsonConverters;
 
 namespace Flickr.Net.Core;
 
 public record Dates : FlickrEntityBase
 {
-    [JsonProperty("posted")]
+    [JsonPropertyName("posted")]
     public DateTime Posted { get; set; }
 
-    [JsonProperty("taken")]
-    [JsonConverter(typeof(DateTimeGranularityConverter))]
+    [JsonPropertyName("taken")]
+    [System.Text.Json.Serialization.JsonConverter(typeof(DateTimeGranularityConverter))]
     public DateTime Taken { get; set; }
 
-    [JsonProperty("takengranularity")]
+    [JsonPropertyName("takengranularity")]
     public DateGranularity TakenGranularity { get; set; }
 
-    [JsonProperty("takenunknown")]
+    [JsonPropertyName("takenunknown")]
     public bool TakenUnknown { get; set; }
 
-    [JsonProperty("lastupdate")]
+    [JsonPropertyName("lastupdate")]
     public DateTime LastUpdate { get; set; }
 }

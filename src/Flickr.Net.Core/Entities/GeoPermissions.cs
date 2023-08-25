@@ -1,18 +1,19 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 
 namespace Flickr.Net.Core;
 
 public record GeoPermissions : FlickrEntityBase
 {
-    [JsonProperty("ispublic")]
+    [JsonPropertyName("ispublic")]
     public bool IsPublic { get; set; }
 
-    [JsonProperty("iscontact")]
+    [JsonPropertyName("iscontact")]
     public bool IsContact { get; set; }
 
-    [JsonProperty("isfriend")]
+    [JsonPropertyName("isfriend")]
     public bool IsFriend { get; set; }
 
-    [JsonProperty("isfamily")]
+    [JsonPropertyName("isfamily")]
     public bool IsFamily { get; set; }
 }

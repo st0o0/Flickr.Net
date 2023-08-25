@@ -1,34 +1,36 @@
-﻿namespace Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+
+namespace Flickr.Net.Core.Bases;
 
 public abstract record PhotoBase : FlickrEntityBase<Id>
 {
-    [JsonProperty("secret")]
+    [JsonPropertyName("secret")]
     public string Secret { get; set; }
 
-    [JsonProperty("server")]
+    [JsonPropertyName("server")]
     public string Server { get; set; }
 }
 
 public abstract record DeluxePhotoBase : PhotoBase
 {
-    [JsonProperty("owner")]
+    [JsonPropertyName("owner")]
     public string Owner { get; set; }
 
-    [JsonProperty("farm")]
+    [JsonPropertyName("farm")]
     public string Farm { get; set; }
 
-    [JsonProperty("title")]
+    [JsonPropertyName("title")]
     public string Title { get; set; }
 }
 
 public abstract record UltraDeluxePhotoBase : DeluxePhotoBase
 {
-    [JsonProperty("ispublic")]
+    [JsonPropertyName("ispublic")]
     public bool IsPublic { get; set; }
 
-    [JsonProperty("isfriend")]
+    [JsonPropertyName("isfriend")]
     public bool IsFriend { get; set; }
 
-    [JsonProperty("isfamily")]
+    [JsonPropertyName("isfamily")]
     public bool IsFamily { get; set; }
 }

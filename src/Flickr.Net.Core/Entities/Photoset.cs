@@ -1,60 +1,61 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 
 namespace Flickr.Net.Core;
 
 public record Photoset : FlickrEntityBase<Id>, IThumbnailUrl, ISquareUrl, ISmallUrl
 {
-    [JsonProperty("owner")]
+    [JsonPropertyName("owner")]
     public string Owner { get; set; }
 
-    [JsonProperty("username")]
+    [JsonPropertyName("username")]
     public string Username { get; set; }
 
-    [JsonProperty("primary")]
+    [JsonPropertyName("primary")]
     public string Primary { get; set; }
 
-    [JsonProperty("secret")]
+    [JsonPropertyName("secret")]
     public string Secret { get; set; }
 
-    [JsonProperty("server")]
+    [JsonPropertyName("server")]
     public string Server { get; set; }
 
-    [JsonProperty("farm")]
+    [JsonPropertyName("farm")]
     public int Farm { get; set; }
 
-    [JsonProperty("count_views")]
+    [JsonPropertyName("count_views")]
     public int ViewsCount { get; set; }
 
-    [JsonProperty("count_comments")]
+    [JsonPropertyName("count_comments")]
     public int CommentsCount { get; set; }
 
-    [JsonProperty("count_photos")]
+    [JsonPropertyName("count_photos")]
     public int PhotosCount { get; set; }
 
-    [JsonProperty("count_videos")]
+    [JsonPropertyName("count_videos")]
     public int VideosCount { get; set; }
 
-    [JsonProperty("title")]
+    [JsonPropertyName("title")]
     public Title Title { get; set; }
 
-    [JsonProperty("description")]
+    [JsonPropertyName("description")]
     public Description Description { get; set; }
 
-    [JsonProperty("can_comment")]
+    [JsonPropertyName("can_comment")]
     public bool CanComment { get; set; }
 
-    [JsonProperty("date_create")]
+    [JsonPropertyName("date_create")]
     public DateTime CreateDate { get; set; }
 
-    [JsonProperty("date_update")]
+    [JsonPropertyName("date_update")]
     public DateTime UpdateDate { get; set; }
 
-    [JsonProperty("photos")]
+    [JsonPropertyName("photos")]
     public int Photos { get; set; }
 
-    [JsonProperty("visibility_can_see_set")]
+    [JsonPropertyName("visibility_can_see_set")]
     public bool VisibilityCanSeeSet { get; set; }
 
-    [JsonProperty("needs_interstitial")]
+    [JsonPropertyName("needs_interstitial")]
     public bool NeedsInterstitial { get; set; }
 }
