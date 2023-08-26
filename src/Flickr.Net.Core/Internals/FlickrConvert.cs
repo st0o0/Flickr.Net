@@ -3,6 +3,8 @@ using System.Text.Json;
 using System.Text.Json.Serialization.Metadata;
 using System.Xml.Linq;
 using Flickr.Net.Core.Internals.Attributes;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Flickr.Net.Core.Internals.JsonConverters;
 using Flickr.Net.Core.Internals.JsonConverters.IdentifierConverters;
 
