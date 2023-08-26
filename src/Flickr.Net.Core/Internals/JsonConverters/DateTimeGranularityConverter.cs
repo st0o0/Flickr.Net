@@ -16,7 +16,6 @@ public class DateTimeGranularityConverter : System.Text.Json.Serialization.JsonC
 
     /// <summary>
     /// </summary>
-
     public override DateTime Read(ref System.Text.Json.Utf8JsonReader reader, Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
     {
         var date = reader.GetString();

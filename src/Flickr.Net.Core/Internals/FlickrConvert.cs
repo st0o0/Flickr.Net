@@ -10,19 +10,27 @@ using Flickr.Net.Core.Internals.JsonConverters.IdentifierConverters;
 
 namespace Flickr.Net.Core.Internals;
 
+/// <summary>
+/// </summary>
 public static class FlickrConvert
 {
+    /// <summary>
+    /// </summary>
     public static T DeserializeObject<T>(Stream jsonTextStream)
     {
         return System.Text.Json.JsonSerializer.Deserialize<T>(jsonTextStream, Options);
     }
 
+    /// <summary>
+    /// </summary>
     public static string XmlToJson(string xml)
     {
         var doc = XDocument.Parse(xml);
         return JsonConvert.SerializeXNode(doc, Formatting.None, omitRootObject: true);
     }
 
+    /// <summary>
+    /// </summary>
     private static JsonSerializerOptions Options
     {
         get
@@ -37,10 +45,7 @@ public static class FlickrConvert
                     AutoNumberToStringConverter.Instance,
                     BoolConverter.Instance,
                     TimestampToDateTimeConverter.Instance,
-                    NsIdConverter.Instance,
-                    IdConverter.Instance,
-                    PhotoIdConverter.Instance,
-                    PhotosetIdConverter.Instance
+                    IdentifierTypeConverter.Instance
                 },
                 TypeInfoResolver = new DefaultJsonTypeInfoResolver().WithAddedModifier(static typeInfo =>
                 {
@@ -52,7 +57,6 @@ public static class FlickrConvert
                         {
                             if (jsonAttributes.Length > 1)
                             {
-                                //TODO: what to do then?
                                 throw new InvalidOperationException($"Property can't have more than one {typeof(JsonPropertyGenericTypeNameAttribute)}");
                             }
                             JsonPropertyGenericTypeNameAttribute attr = jsonAttributes[0];

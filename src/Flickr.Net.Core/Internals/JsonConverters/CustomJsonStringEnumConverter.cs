@@ -4,7 +4,6 @@ using System.Text.Json.Serialization;
 
 namespace Flickr.Net.Core.Internals.JsonConverters;
 
-//see https://stackoverflow.com/questions/59059989/system-text-json-how-do-i-specify-a-custom-name-for-an-enum-value
 public class CustomJsonStringEnumConverter : JsonConverterFactory
 {
     private readonly JsonNamingPolicy namingPolicy;
@@ -27,11 +26,13 @@ public class CustomJsonStringEnumConverter : JsonConverterFactory
 
     public override System.Text.Json.Serialization.JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
     {
-        var query = from field in typeToConvert.GetFields(BindingFlags.Public | BindingFlags.Static)
-                    let attr = field.GetCustomAttribute<EnumMemberAttribute>()
-                    where attr != null
-                    select (field.Name, attr.Value);
-        var dictionary = query.ToDictionary(p => p.Item1, p => p.Item2);
+        var dictionary = typeToConvert
+                    .GetFields(BindingFlags.Public | BindingFlags.Static)
+                    .Select(x => (attr:x.GetCustomAttribute<EnumMemberAttribute>(), field:x))
+                    .Where(x => x.attr != null)
+                    .Select(x => (x.field.Name, x.attr.Value))
+                    .ToDictionary(p => p.Item1, p => p.Item2);
+
         if (dictionary.Count > 0)
         {
             return new JsonStringEnumConverter(new DictionaryLookupNamingPolicy(dictionary, namingPolicy), allowIntegerValues).CreateConverter(typeToConvert, options);

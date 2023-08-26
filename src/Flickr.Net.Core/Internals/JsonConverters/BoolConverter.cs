@@ -6,10 +6,14 @@ namespace Flickr.Net.Core.Internals.JsonConverters;
 /// </summary>
 public class BoolConverter : System.Text.Json.Serialization.JsonConverter<bool>
 {
+    /// <summary>
+    /// </summary>
     public BoolConverter() : base()
     {
     }
 
+    /// <summary>
+    /// </summary>
     public static BoolConverter Instance { get; } = new();
 
     /// <summary>
