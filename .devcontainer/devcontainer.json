@@ -1,15 +1,15 @@
 {
-  "name": "Flickr.Net",
-  "service": "devhost",
-  "workspaceFolder": "/workspace",
-  "postCreateCommand": "bash ./.devcontainer/postCreateCommand.sh",
-"remoteUser": "root",
-"customizations": {
-	"vscode": {
-		"extensions": [
-			"ms-dotnettools.csharp",
-			"ms-dotnettools.csdevkit"
-		]
+	"name": "Flickr.Net",
+	"service": "devhost",
+	"workspaceFolder": "/workspace",
+	"postCreateCommand": "bash ./.devcontainer/postCreateCommand.sh",
+	"remoteUser": "root",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-dotnettools.csharp",
+				"ms-dotnettools.csdevkit"
+			]
+		}
 	}
-}
 }
