@@ -2,14 +2,6 @@
 	"name": "Flickr.Net",
 	"service": "devhost",
 	"workspaceFolder": "/workspace",
-	"postCreateCommand": "zsh ./.devcontainer/postCreateCommand.sh",
-	"remoteUser": "root",
-	"customizations": {
-		"vscode": {
-			"extensions": [
-				"ms-dotnettools.csdevkit",
-				"ms-dotnettools.csharp"
-			]
-		}
-	}
+	"postCreateCommand": "bash ./.devcontainer/postCreateCommand.sh",
+	"remoteUser": "vscode"
 }
