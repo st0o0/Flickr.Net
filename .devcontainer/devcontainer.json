@@ -3,5 +3,5 @@
 	"service": "devhost",
 	"workspaceFolder": "/workspace",
 	"remoteUser": "root",
-	"postCreateCommand": "bash ./.devcontainer/postCreateCommand.sh"
+	"postCreateCommand": "sh ./.devcontainer/postCreateCommand.sh"
 }
