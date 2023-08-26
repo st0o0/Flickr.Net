@@ -2,6 +2,6 @@
 	"name": "Flickr.Net",
 	"service": "devhost",
 	"workspaceFolder": "/workspace",
-	"postCreateCommand": "bash ./.devcontainer/postCreateCommand.sh",
-	"remoteUser": "vscode"
+	"remoteUser": "root",
+	"postCreateCommand": "bash ./.devcontainer/postCreateCommand.sh"
 }
