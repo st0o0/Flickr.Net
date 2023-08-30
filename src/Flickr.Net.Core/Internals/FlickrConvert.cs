@@ -60,29 +60,35 @@ public static class FlickrConvert
                                 throw new InvalidOperationException($"Property can't have more than one {typeof(JsonPropertyGenericTypeNameAttribute)}");
                             }
                             JsonPropertyGenericTypeNameAttribute attr = jsonAttributes[0];
-                            //TODO: this does get the correct value; please find something better
-                            Type type = property.GetType().GetProperties(BindingFlags.NonPublic | BindingFlags.Instance).Single(pi => pi.Name.Equals("DeclaringType")).GetValue(property, null) as Type;
-                            if (!type.IsGenericType)
+                            if (property.AttributeProvider is PropertyInfo pi)
                             {
-                                throw new InvalidOperationException($"{type} is not a generic type");
-                            }
-                            if (type.IsGenericTypeDefinition)
-                            {
-                                throw new InvalidOperationException($"{type} is a generic type definition, it must be a constructed generic type");
-                            }
+                                Type type = pi.DeclaringType;
+                                if (!type.IsGenericType)
+                                {
+                                    throw new InvalidOperationException($"{type} is not a generic type");
+                                }
+                                if (type.IsGenericTypeDefinition)
+                                {
+                                    throw new InvalidOperationException($"{type} is a generic type definition, it must be a constructed generic type");
+                                }
 
-                            Type[] typeArgs = type.GetGenericArguments();
-                            if (attr.TypeParameterPosition >= typeArgs.Length)
-                            {
-                                throw new ArgumentException($"Can't get type argument at position {attr.TypeParameterPosition}; {type} has only {typeArgs.Length} type arguments");
-                            }
-                            if (typeArgs[attr.TypeParameterPosition].IsDefined(typeof(FlickrJsonPropertyNameAttribute), true))
-                            {
-                                property.Name = typeArgs[attr.TypeParameterPosition].GetCustomAttribute<FlickrJsonPropertyNameAttribute>().Name;
+                                Type[] typeArgs = type.GetGenericArguments();
+                                if (attr.TypeParameterPosition >= typeArgs.Length)
+                                {
+                                    throw new ArgumentException($"Can't get type argument at position {attr.TypeParameterPosition}; {type} has only {typeArgs.Length} type arguments");
+                                }
+                                if (typeArgs[attr.TypeParameterPosition].IsDefined(typeof(FlickrJsonPropertyNameAttribute), true))
+                                {
+                                    property.Name = typeArgs[attr.TypeParameterPosition].GetCustomAttribute<FlickrJsonPropertyNameAttribute>().Name;
+                                }
+                                else
+                                {
+                                    property.Name = typeArgs[attr.TypeParameterPosition].Name.ToLower();
+                                }
                             }
                             else
                             {
-                                property.Name = typeArgs[attr.TypeParameterPosition].Name.ToLower();
+                                throw new InvalidOperationException($"Cannot determine declaring type for {property}");
                             }
                         }
                     }
