@@ -2,9 +2,8 @@
 using System.Text.Json;
 using System.Text.Json.Serialization.Metadata;
 using System.Xml.Linq;
+using System.Xml;
 using Flickr.Net.Core.Internals.Attributes;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using Flickr.Net.Core.Internals.JsonConverters;
 using Flickr.Net.Core.Internals.JsonConverters.IdentifierConverters;
 
@@ -25,8 +24,39 @@ public static class FlickrConvert
     /// </summary>
     public static string XmlToJson(string xml)
     {
-        var doc = XDocument.Parse(xml);
-        return JsonConvert.SerializeXNode(doc, Formatting.None, omitRootObject: true);
+        try
+        {
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(xml);
+
+            return JsonSerializer.Serialize(GetXmlData(XElement.Parse(xml)).First().Value);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error converting XML to JSON: {ex.Message}");
+            return null;
+        }
+    }
+
+    private static Dictionary<string, object> GetXmlData(XElement xml)
+    {
+        var attr = xml.Attributes().ToDictionary(d => $"@{d.Name.LocalName}", d => (object)d.Value);
+        if (xml.HasElements)
+        {
+            IEnumerable<Dictionary<string,object>> elements = xml.Elements().Select(e => GetXmlData(e));
+            foreach (var dict in elements)
+            {
+                attr.Add(dict.First().Key, dict.First().Value);
+            }
+            // foreach (var element in xml.Elements())
+            // {
+            //     attr.Add(element.Name.LocalName, GetXmlData(element));
+            // }
+            //attr.Add("_value", xml.Elements().Select(e => GetXmlData(e)));
+        } 
+        else if (!xml.IsEmpty) attr.Add("#text", xml.Value);
+
+        return new Dictionary<string, object> { { xml.Name.LocalName, attr } };
     }
 
     /// <summary>

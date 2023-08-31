@@ -2,8 +2,6 @@
 using System.Xml.Linq;
 using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Flickr.Net.Core.Test.Entities;
 
@@ -18,8 +16,7 @@ public class FlickrExtendedDataResultTests
             </rsp>
             """;
 
-        var doc = XDocument.Parse(xml);
-        var json = JsonConvert.SerializeXNode(doc, Formatting.None, omitRootObject: true);
+        var json = FlickrConvert.XmlToJson(xml);
         using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
 
         var result = FlickrConvert.DeserializeObject<FlickrExtendedDataResult>(ms);
@@ -39,8 +36,7 @@ public class FlickrExtendedDataResultTests
             </rsp>
             """;
 
-        var doc = XDocument.Parse(xml);
-        var json = JsonConvert.SerializeXNode(doc, Formatting.None, omitRootObject: true);
+        var json = FlickrConvert.XmlToJson(xml);
         using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
 
         var result = FlickrConvert.DeserializeObject<FlickrExtendedDataResult>(ms);
