@@ -1,49 +1,84 @@
 ﻿using Flickr.Net.Core.Internals.Attributes;
-using Flickr.Net.Core.Internals.JsonConverters.IdentifierConverters;
 
 namespace Flickr.Net.Core.Bases;
 
+/// <summary>
+/// </summary>
 public interface IIdentifierType
 {
+    /// <summary>
+    /// </summary>
+    string Id { get; }
 }
 
+/// <summary>
+/// </summary>
 public abstract record IdentifierType : IIdentifierType
 {
-    protected string _id;
+    /// <inheritdoc/>
+    public string Id { get; init; }
 
-    public static implicit operator string(IdentifierType value) => value._id;
+    /// <summary>
+    /// </summary>
+    public static implicit operator string(IdentifierType value) => value.Id;
 
-    public static implicit operator IdentifierType(string value) => new Id() { _id = value };
+    /// <summary>
+    /// </summary>
+    public static implicit operator IdentifierType(string value) => new Id() { Id = value };
 }
 
+/// <summary>
+/// </summary>
 [FlickrJsonPropertyName("id")]
 public record Id : IdentifierType
 {
-    public static implicit operator string(Id value) => value._id;
+    /// <summary>
+    /// </summary>
+    public static implicit operator string(Id value) => value.Id;
 
-    public static implicit operator Id(string value) => new Id() { _id = value };
+    /// <summary>
+    /// </summary>
+    public static implicit operator Id(string value) => new() { Id = value };
 }
 
+/// <summary>
+/// </summary>
 [FlickrJsonPropertyName("nsid")]
 public record NsId : IdentifierType
 {
-    public static implicit operator string(NsId value) => value._id;
+    /// <summary>
+    /// </summary>
+    public static implicit operator string(NsId value) => value.Id;
 
-    public static implicit operator NsId(string value) => new NsId() { _id = value };
+    /// <summary>
+    /// </summary>
+    public static implicit operator NsId(string value) => new() { Id = value };
 }
 
+/// <summary>
+/// </summary>
 [FlickrJsonPropertyName("photo_id")]
 public record PhotoId : IdentifierType
 {
-    public static implicit operator string(PhotoId value) => value._id;
+    /// <summary>
+    /// </summary>
+    public static implicit operator string(PhotoId value) => value.Id;
 
-    public static implicit operator PhotoId(string value) => new PhotoId() { _id = value };
+    /// <summary>
+    /// </summary>
+    public static implicit operator PhotoId(string value) => new() { Id = value };
 }
 
+/// <summary>
+/// </summary>
 [FlickrJsonPropertyName("photoset_id")]
 public record PhotosetId : IdentifierType
 {
-    public static implicit operator string(PhotosetId value) => value._id;
+    /// <summary>
+    /// </summary>
+    public static implicit operator string(PhotosetId value) => value.Id;
 
-    public static implicit operator PhotosetId(string value) => new PhotosetId() { _id = value };
+    /// <summary>
+    /// </summary>
+    public static implicit operator PhotosetId(string value) => new() { Id = value };
 }

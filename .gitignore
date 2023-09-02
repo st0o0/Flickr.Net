@@ -366,3 +366,4 @@ FodyWeavers.xsd
 /docs/SandCastleDocuments.xml
 
 *dotnet-install.sh
+.mono/**/values.xml

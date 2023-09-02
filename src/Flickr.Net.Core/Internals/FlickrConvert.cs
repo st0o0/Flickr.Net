@@ -43,18 +43,9 @@ public static class FlickrConvert
         var attr = xml.Attributes().ToDictionary(d => $"@{d.Name.LocalName}", d => (object)d.Value);
         if (xml.HasElements)
         {
-            IEnumerable<Dictionary<string,object>> elements = xml.Elements().Select(e => GetXmlData(e));
-            foreach (var dict in elements)
-            {
-                attr.Add(dict.First().Key, dict.First().Value);
-            }
-            // foreach (var element in xml.Elements())
-            // {
-            //     attr.Add(element.Name.LocalName, GetXmlData(element));
-            // }
-            //attr.Add("_value", xml.Elements().Select(e => GetXmlData(e)));
+            xml.Elements().Select(e => GetXmlData(e)).ToList().ForEach(e => attr.Add(e.First().Key, e.First().Value));
         } 
-        else if (!xml.IsEmpty) attr.Add("#text", xml.Value);
+        else if (!xml.IsEmpty) attr.Add("_content", xml.Value);
 
         return new Dictionary<string, object> { { xml.Name.LocalName, attr } };
     }

@@ -115,7 +115,7 @@ public record FlickrExtendedDataResult : FlickrResult
     [JsonPropertyName("@stat")]
     public override string State { get; set; } = string.Empty;
 
-    [System.Text.Json.Serialization.JsonExtensionData]
+    [JsonExtensionData]
     public IDictionary<string, JsonElement> Content { get; set; }
 }
 
@@ -127,4 +127,38 @@ public struct Count
     public static implicit operator int(Count count) => count.Content;
 
     public static implicit operator Count(int count) => new() { Content = count };
+}
+
+/// <summary>
+/// </summary>
+public static class FlickrExtendedDataResultExtensions
+{
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="result"></param>
+    /// <param name="content"></param>
+    /// <returns></returns>
+    public static bool TryGetContent(this FlickrExtendedDataResult result, out string content)
+    {
+        if (result.Content.TryGetValue("photoid", out var value) && value.TryGetProperty("_content", out var contentObject))
+        {
+            content = contentObject.GetString();
+            return true;
+        }
+        content = string.Empty;
+        return false;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="result"></param>
+    /// <returns></returns>
+    public static string GetContent(this FlickrExtendedDataResult result)
+    {
+        _ = result.TryGetContent(out var content);
+        return content ?? string.Empty;
+    }
 }

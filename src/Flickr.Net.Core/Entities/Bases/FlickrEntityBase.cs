@@ -2,19 +2,31 @@
 
 namespace Flickr.Net.Core.Bases;
 
-public abstract record FlickrEntityBase<TIdentifier> : IFlickrEntity<TIdentifier> where TIdentifier : IIdentifierType
+/// <summary>
+/// </summary>
+public abstract record FlickrEntityBase<TIdentifier> : IFlickrEntity<TIdentifier> where TIdentifier : IdentifierType
 {
+    /// <summary>
+    /// </summary>
     [JsonPropertyGenericTypeName(0)]
     public TIdentifier Id { get; set; }
 }
 
+/// <summary>
+/// </summary>
 public abstract record FlickrEntityBase : IFlickrEntity { }
 
-public interface IFlickrEntity<T> : IFlickrEntity where T : IIdentifierType
+/// <summary>
+/// </summary>
+public interface IFlickrEntity<T> : IFlickrEntity where T : IdentifierType
 {
+    /// <summary>
+    /// </summary>
     [JsonPropertyGenericTypeName(0)]
     public T Id { get; set; }
 }
 
+/// <summary>
+/// </summary>
 public interface IFlickrEntity
 { }

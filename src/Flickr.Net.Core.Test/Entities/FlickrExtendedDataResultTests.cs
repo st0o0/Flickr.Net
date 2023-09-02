@@ -23,8 +23,9 @@ public class FlickrExtendedDataResultTests
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
-        Assert.True(result.Content.TryGetValue("photoid", out var value));
-        Assert.Equal("1234", value.GetProperty("#text").GetString());
+        Assert.True(result.TryGetContent(out var content));
+        Assert.Equal("1234", content);
+        Assert.Equal("1234", result.GetContent());
     }
 
     [Fact]
@@ -43,7 +44,8 @@ public class FlickrExtendedDataResultTests
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
-        Assert.True(result.Content.TryGetValue("photoid", out var value));
-        Assert.Equal("1234", value.GetString());
+        Assert.True(result.TryGetContent(out var content));
+        Assert.Equal("1234", content);
+        Assert.Equal("1234", result.GetContent());
     }
 }
