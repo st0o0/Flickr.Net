@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Net.Http.Headers;
 using Flickr.Net.Core.Exceptions;
+using Flickr.Net.Core.Internals.Extensions;
 
 namespace Flickr.Net.Core.Internals;
 
@@ -47,16 +48,20 @@ public static partial class FlickrResponder
         parameters.Remove("api_sig");
 
         // If OAuth Access Token is set then add token and generate signature.
-        if (!string.IsNullOrEmpty(flickr.FlickrSettings.OAuthAccessToken) && !parameters.ContainsKey("oauth_token"))
-        {
-            parameters.Add("oauth_token", flickr.FlickrSettings.OAuthAccessToken);
-        }
 
-        if (!string.IsNullOrEmpty(flickr.FlickrSettings.OAuthAccessTokenSecret) && !parameters.ContainsKey("oauth_signature"))
-        {
-            var sig = ((IFlickrOAuth)flickr).CalculateSignature("POST", baseUrl, parameters, flickr.FlickrSettings.OAuthAccessTokenSecret);
-            parameters.Add("oauth_signature", sig);
-        }
+
+        parameters.AppendIf(
+            "oauth_token",
+            flickr.FlickrSettings.OAuthAccessToken,
+            x => !string.IsNullOrEmpty(x) && !parameters.ContainsKey("oauth_token")
+            );
+
+        parameters.AppendIf(
+            "oauth_signature",
+            flickr.FlickrSettings.OAuthAccessTokenSecret,
+            x => !string.IsNullOrEmpty(x) && !parameters.ContainsKey("oauth_signature"),
+            x => flickr.OAuth.CalculateSignature("POST", baseUrl, parameters, x)
+            );
 
         // Calculate post data, content header and auth header
         var data = new FormUrlEncodedContent(parameters.Where((pair) => !pair.Key.StartsWith("oauth", StringComparison.Ordinal)));
@@ -101,14 +106,7 @@ public static partial class FlickrResponder
         message.Content = data;
 
         var response = await client.SendAsync(message, cancellationToken);
-        try
-        {
-            response = response.EnsureSuccessStatusCode();
-        }
-        catch (Exception)
-        {
-            throw;
-        }
+        response = response.EnsureSuccessStatusCode();
 
         return await response.Content.ReadAsStreamAsync(cancellationToken);
     }

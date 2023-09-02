@@ -1,7 +1,11 @@
 ﻿namespace Flickr.Net.Core.Extensions;
 
+/// <summary>
+/// </summary>
 public static class ISquareUrlExtensions
 {
+    /// <summary>
+    /// </summary>
     public static string ToSquareUrl(this ISquareUrl value)
     {
         return value switch

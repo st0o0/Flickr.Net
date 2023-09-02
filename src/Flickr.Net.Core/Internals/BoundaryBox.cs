@@ -45,10 +45,7 @@ public class BoundaryBox
     /// <param name="points">A comma seperated list of co-ordinates defining the boundary box.</param>
     public BoundaryBox(string points)
     {
-        if (points == null)
-        {
-            throw new ArgumentNullException(nameof(points));
-        }
+        ArgumentNullException.ThrowIfNullOrEmpty(points);
 
         var splits = points.Split(',');
 

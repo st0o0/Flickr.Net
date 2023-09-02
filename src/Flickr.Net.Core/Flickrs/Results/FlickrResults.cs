@@ -28,6 +28,8 @@ public record FlickrResult : IFlickrEntity
     /// </summary>
     public bool HasError => State != "ok" || ErrorCode > 0;
 
+    /// <summary>
+    /// </summary>
     [JsonPropertyName("stat")]
     public virtual string State { get; set; } = string.Empty;
 
@@ -101,9 +103,13 @@ public record FlickrUnknownResult<T> : FlickrResult where T : UnknownResponse
 /// <typeparam name="T"></typeparam>
 public record FlickrStatsResult<T> : FlickrResult<T> where T : IFlickrEntity
 {
+    /// <summary>
+    /// </summary>
     [JsonPropertyName("period")]
     public string Period { get; set; }
 
+    /// <summary>
+    /// </summary>
     [JsonPropertyName("count")]
     public int Count { get; set; }
 }
@@ -112,20 +118,33 @@ public record FlickrStatsResult<T> : FlickrResult<T> where T : IFlickrEntity
 /// </summary>
 public record FlickrExtendedDataResult : FlickrResult
 {
+
+    /// <summary>
+    /// </summary>
     [JsonPropertyName("@stat")]
     public override string State { get; set; } = string.Empty;
 
+    /// <summary>
+    /// </summary>
     [JsonExtensionData]
     public IDictionary<string, JsonElement> Content { get; set; }
 }
 
+/// <summary>
+/// </summary>
 public struct Count
 {
+    /// <summary>
+    /// </summary>
     [JsonPropertyName("_content")]
     public int Content { get; set; }
 
+    /// <summary>
+    /// </summary>
     public static implicit operator int(Count count) => count.Content;
 
+    /// <summary>
+    /// </summary>
     public static implicit operator Count(int count) => new() { Content = count };
 }
 

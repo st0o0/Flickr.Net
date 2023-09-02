@@ -1,7 +1,11 @@
 ﻿namespace Flickr.Net.Core.Extensions;
 
+/// <summary>
+/// </summary>
 public static class IWebUrlExtensions
 {
+    /// <summary>
+    /// </summary>
     public static string ToWebUrl(this IWebUrl value)
     {
         return value switch

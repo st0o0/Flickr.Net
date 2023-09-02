@@ -1,7 +1,11 @@
 ﻿namespace Flickr.Net.Core.Extensions;
 
+/// <summary>
+/// </summary>
 public static class ISmallUrlExtensions
 {
+    /// <summary>
+    /// </summary>
     public static string ToSmallUrl(this ISmallUrl value) => value switch
     {
         Item item => ConvertItemToUrl(item),
