@@ -1,24 +1,25 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 
 namespace Flickr.Net.Core;
 
 public record Perms : FlickrEntityBase<Id>
 {
-    [JsonProperty("ispublic")]
+    [JsonPropertyName("ispublic")]
     public bool IsPublic { get; set; }
 
-    [JsonProperty("isfriend")]
+    [JsonPropertyName("isfriend")]
     public bool IsFriend { get; set; }
 
-    [JsonProperty("isfamily")]
+    [JsonPropertyName("isfamily")]
     public bool IsFamily { get; set; }
 
-    [JsonProperty("permcomment")]
+    [JsonPropertyName("permcomment")]
     public PermissionComment PermComment { get; set; }
 
-    [JsonProperty("permaddmeta")]
+    [JsonPropertyName("permaddmeta")]
     public PermissionAddMeta PermAddMeta { get; set; }
 
-    [JsonProperty("permprint")]
+    [JsonPropertyName("permprint")]
     public int PermPrint { get; set; }
 }

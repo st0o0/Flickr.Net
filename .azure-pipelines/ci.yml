@@ -39,6 +39,7 @@ stages:
             inputs:
               packageType: sdk
               version: $(netSdkVersion)
+              includePreviewVersions: $(netIncludePreview)
 
           - task: DotNetCoreCLI@2
             displayName: 'Restore NuGet dependencies'

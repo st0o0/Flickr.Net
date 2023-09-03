@@ -1,16 +1,17 @@
-﻿using Flickr.Net.Core.Internals.Attributes;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Internals.Attributes;
 
 namespace Flickr.Net.Core;
 
 [FlickrJsonPropertyName("tag")]
 public record Hottag : TagBase
 {
-    [JsonProperty("thm_data")]
+    [JsonPropertyName("thm_data")]
     public ThmData ThmData { get; set; }
 }
 
 public record ThmData
 {
-    [JsonProperty("photos")]
+    [JsonPropertyName("photos")]
     public ClusterPhotos Photos { get; set; }
 }

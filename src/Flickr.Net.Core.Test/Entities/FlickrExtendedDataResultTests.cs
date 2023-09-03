@@ -2,8 +2,6 @@
 using System.Xml.Linq;
 using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Flickr.Net.Core.Test.Entities;
 
@@ -18,18 +16,16 @@ public class FlickrExtendedDataResultTests
             </rsp>
             """;
 
-        var doc = XDocument.Parse(xml);
-        var json = JsonConvert.SerializeXNode(doc, Formatting.None, omitRootObject: true);
+        var json = FlickrConvert.XmlToJson(xml);
         using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-        using var sr = new StreamReader(ms);
-        using var reader = new JsonTextReader(sr);
 
-        var result = FlickrConvert.DeserializeObject<FlickrExtendedDataResult>(reader);
+        var result = FlickrConvert.DeserializeObject<FlickrExtendedDataResult>(ms);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
-        Assert.True(result.Content.TryGetValue("photoid", out var value));
-        Assert.Equal("1234", value.Value<string>("#text"));
+        Assert.True(result.TryGetContent(out var content));
+        Assert.Equal("1234", content);
+        Assert.Equal("1234", result.GetContent());
     }
 
     [Fact]
@@ -41,17 +37,15 @@ public class FlickrExtendedDataResultTests
             </rsp>
             """;
 
-        var doc = XDocument.Parse(xml);
-        var json = JsonConvert.SerializeXNode(doc, Formatting.None, omitRootObject: true);
+        var json = FlickrConvert.XmlToJson(xml);
         using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-        using var sr = new StreamReader(ms);
-        using var reader = new JsonTextReader(sr);
 
-        var result = FlickrConvert.DeserializeObject<FlickrExtendedDataResult>(reader);
+        var result = FlickrConvert.DeserializeObject<FlickrExtendedDataResult>(ms);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
-        Assert.True(result.Content.TryGetValue("photoid", out var value));
-        Assert.Equal("1234", value.Value<string>());
+        Assert.True(result.TryGetContent(out var content));
+        Assert.Equal("1234", content);
+        Assert.Equal("1234", result.GetContent());
     }
 }

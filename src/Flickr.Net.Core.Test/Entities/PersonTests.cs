@@ -1,7 +1,6 @@
 ﻿using System.Text;
 using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals;
-using Newtonsoft.Json;
 
 namespace Flickr.Net.Core.Test.Entities;
 
@@ -73,10 +72,8 @@ public class PersonTests
             """;
 
         using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-        using var sr = new StreamReader(ms);
-        using var reader = new JsonTextReader(sr);
 
-        var item = FlickrConvert.DeserializeObject<FlickrResult<Person>>(reader);
+        var item = FlickrConvert.DeserializeObject<FlickrResult<Person>>(ms);
 
         Assert.NotNull(item);
         Assert.False(item.HasError);

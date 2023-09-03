@@ -1,31 +1,32 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 
 namespace Flickr.Net.Core;
 
 public record Exif : FlickrEntityBase
 {
-    [JsonProperty("tagspace")]
+    [JsonPropertyName("tagspace")]
     public string TagSpace { get; set; }
 
-    [JsonProperty("tagspaceid")]
+    [JsonPropertyName("tagspaceid")]
     public int TagSpaceId { get; set; }
 
-    [JsonProperty("tag")]
+    [JsonPropertyName("tag")]
     public string Tag { get; set; }
 
-    [JsonProperty("label")]
+    [JsonPropertyName("label")]
     public string Label { get; set; }
 
-    [JsonProperty("raw")]
+    [JsonPropertyName("raw")]
     public Raw Raw { get; set; }
 
-    [JsonProperty("clean")]
+    [JsonPropertyName("clean")]
     public Clean Clean { get; set; }
 }
 
 public struct Raw
 {
-    [JsonProperty("_content")]
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 
     public static implicit operator string(Raw username) => username.Content;
@@ -35,7 +36,7 @@ public struct Raw
 
 public struct Clean
 {
-    [JsonProperty("_content")]
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 
     public static implicit operator string(Clean username) => username.Content;

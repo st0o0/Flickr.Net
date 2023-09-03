@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 
 namespace Flickr.Net.Core;
 
@@ -10,19 +11,19 @@ public record Blog : FlickrEntityBase<Id>
     /// <summary>
     /// The name you have assigned to the blog in Flickr. ///
     /// </summary>
-    [JsonProperty("name")]
+    [JsonPropertyName("name")]
     public string Name { get; set; }
 
     /// <summary>
     /// If Flickr stores the password for this then this will be 0, meaning you do not need to pass
     /// in the password when posting.
     /// </summary>
-    [JsonProperty("needspassword")]
+    [JsonPropertyName("needspassword")]
     public bool NeedPassword { get; set; }
 
     /// <summary>
     /// The URL of the blog website.
     /// </summary>
-    [JsonProperty("url")]
+    [JsonPropertyName("url")]
     public string Url { get; set; }
 }

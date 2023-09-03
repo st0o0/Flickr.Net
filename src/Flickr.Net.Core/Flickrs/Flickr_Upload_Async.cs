@@ -1,7 +1,6 @@
 ﻿using System.Text;
 using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals.Extensions;
-using Newtonsoft.Json.Linq;
 
 namespace Flickr.Net.Core;
 
@@ -44,17 +43,15 @@ public partial class Flickr : IFlickrUpload
             parameters.Remove("api_key");
             OAuthGetBasicParameters(parameters);
             parameters.Add("oauth_token", FlickrSettings.OAuthAccessToken);
-            var sig = ((IFlickrOAuth)this).CalculateSignature("POST", uploadUri.AbsoluteUri, parameters, FlickrSettings.OAuthAccessTokenSecret);
+            var sig = OAuth.CalculateSignature("POST", uploadUri.AbsoluteUri, parameters, FlickrSettings.OAuthAccessTokenSecret);
             parameters.Add("oauth_signature", sig);
         }
         else
         {
             parameters.Add("auth_token", _settings.ApiKey ?? string.Empty);
         }
-
-        var result = await UploadDataAsync(stream, fileName, progress, uploadUri, parameters, cancellationToken);
-
-        return result.Value<string>();
+        
+        return await UploadDataAsync(stream, fileName, progress, uploadUri, parameters, cancellationToken);
     }
 
     async Task<string> IFlickrUpload.ReplacePictureAsync(Stream stream, string fileName, string photoId, IProgress<double> progress, CancellationToken cancellationToken)
@@ -72,7 +69,7 @@ public partial class Flickr : IFlickrUpload
             parameters.Remove("api_key");
             OAuthGetBasicParameters(parameters);
             parameters.Add("oauth_token", FlickrSettings.OAuthAccessToken);
-            var sig = ((IFlickrOAuth)this).CalculateSignature("POST", replaceUri.AbsoluteUri, parameters, FlickrSettings.OAuthAccessTokenSecret);
+            var sig = OAuth.CalculateSignature("POST", replaceUri.AbsoluteUri, parameters, FlickrSettings.OAuthAccessTokenSecret);
             parameters.Add("oauth_signature", sig);
         }
         else
@@ -80,12 +77,10 @@ public partial class Flickr : IFlickrUpload
             parameters.Add("auth_token", _settings.ApiKey ?? string.Empty);
         }
 
-        var result = await UploadDataAsync(stream, fileName, progress, replaceUri, parameters, cancellationToken);
-
-        return result.Value<string>("#text");
+        return await UploadDataAsync(stream, fileName, progress, replaceUri, parameters, cancellationToken);
     }
 
-    private static async Task<JToken> UploadDataAsync(Stream imageStream, string fileName, IProgress<double> progress, Uri uploadUri, Dictionary<string, string> parameters, CancellationToken cancellationToken = default)
+    private static async Task<string> UploadDataAsync(Stream imageStream, string fileName, IProgress<double> progress, Uri uploadUri, Dictionary<string, string> parameters, CancellationToken cancellationToken = default)
     {
         var authHeader = FlickrResponder.OAuthCalculateAuthHeader(parameters);
 
@@ -115,14 +110,12 @@ public partial class Flickr : IFlickrUpload
         var json = FlickrConvert.XmlToJson(xml);
 
         using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-        using var sr = new StreamReader(ms);
-        using var reader = new JsonTextReader(sr);
 
-        var flickrResults = FlickrConvert.DeserializeObject<FlickrExtendedDataResult>(reader);
+        var flickrResults = FlickrConvert.DeserializeObject<FlickrExtendedDataResult>(ms);
 
         flickrResults = flickrResults.EnsureSuccessStatusCode();
 
-        if (flickrResults.Content.TryGetValue("photoid", out var value))
+        if (flickrResults.TryGetContent(out var value))
         {
             return value;
         }

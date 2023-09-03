@@ -1,122 +1,202 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
 using Flickr.Net.Core.Internals.Attributes;
 
 namespace Flickr.Net.Core;
 
+/// <summary>
+/// </summary>
 [FlickrJsonPropertyName("photo")]
 public record PhotoInfo : PhotoBase, IBuddyIcon, IWebUrl, ISquareUrl, ILargeSquareUrl, IThumbnailUrl, ISmallUrl, ISmall320Url, ISmall400Url, IMediumUrl, IMedium640Url, IMedium800Url, ILargeUrl, ILarge1600Url, ILarge2048Url, IOriginalUrl
 {
-    [JsonProperty("farm")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("farm")]
     public int Farm { get; set; }
 
-    [JsonProperty("dateuploaded")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("dateuploaded")]
     public DateTime UploadedDate { get; set; }
 
-    [JsonProperty("isfavorite")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("isfavorite")]
     public bool IsFavorite { get; set; }
 
-    [JsonProperty("license")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("license")]
     public LicenseType License { get; set; }
 
-    [JsonProperty("safety_level")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("safety_level")]
     public SafetyLevel SafetyLevel { get; set; }
 
-    [JsonProperty("rotation")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("rotation")]
     public int Rotation { get; set; }
 
-    [JsonProperty("originalsecret")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("originalsecret")]
     public string OriginalSecret { get; set; }
 
-    [JsonProperty("originalformat")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("originalformat")]
     public string OriginalFormat { get; set; }
 
-    [JsonProperty("owner")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("owner")]
     public Owner Owner { get; set; }
 
-    [JsonProperty("title")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("title")]
     public Title Title { get; set; }
 
-    [JsonProperty("description")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("description")]
     public Description Description { get; set; }
 
-    [JsonProperty("visibility")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("visibility")]
     public Visibility Visibility { get; set; }
 
-    [JsonProperty("dates")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("dates")]
     public Dates Dates { get; set; }
 
-    [JsonProperty("views")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("views")]
     public int Views { get; set; }
 
-    [JsonProperty("editability")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("editability")]
     public Editability Editability { get; set; }
 
-    [JsonProperty("publiceditability")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("publiceditability")]
     public PublicEditability PublicEditability { get; set; }
 
-    [JsonProperty("usage")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("usage")]
     public Usage Usage { get; set; }
 
-    [JsonProperty("comments")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("comments")]
     public Comments Comments { get; set; }
 
-    [JsonProperty("notes")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("notes")]
     public Notes Notes { get; set; }
 
-    [JsonProperty("people")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("people")]
     public People People { get; set; }
 
-    [JsonProperty("tags")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("tags")]
     public PhotoInfoTags Tags { get; set; }
 
-    [JsonProperty("location")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("location")]
     public Location Location { get; set; }
 
-    [JsonProperty("geoperms")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("geoperms")]
     public GeoPermissions Geoperms { get; set; }
 
-    [JsonProperty("urls")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("urls")]
     public Urls Urls { get; set; }
 
-    [JsonProperty("media")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("media")]
     public MediaType Media { get; set; }
 }
 
+/// <summary>
+/// </summary>
 public struct Title
 {
-    [JsonProperty("_content")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 
+    /// <summary>
+    /// </summary>
     public static implicit operator string(Title username) => username.Content;
 
+    /// <summary>
+    /// </summary>
     public static implicit operator Title(string username) => new() { Content = username };
 }
 
+/// <summary>
+/// </summary>
 public struct Comments
 {
-    [JsonProperty("_content")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("_content")]
     public int Content { get; set; }
 
+    /// <summary>
+    /// </summary>
     public static implicit operator int(Comments username) => username.Content;
 
+    /// <summary>
+    /// </summary>
     public static implicit operator Comments(int username) => new() { Content = username };
 }
 
+/// <summary>
+/// </summary>
 public record PublicEditability : Editability
 {
 }
 
+/// <summary>
+/// </summary>
 public record Editability
 {
-    [JsonProperty("cancomment")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("cancomment")]
     public bool CanComment { get; set; }
 
-    [JsonProperty("canaddmeta")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("canaddmeta")]
     public bool CanAddMeta { get; set; }
 }
 
+/// <summary>
+/// </summary>
 public record People
 {
-    [JsonProperty("haspeople")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("haspeople")]
     public bool HasPeople { get; set; }
 }

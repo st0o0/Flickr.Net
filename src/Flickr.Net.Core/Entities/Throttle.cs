@@ -1,15 +1,16 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 
 namespace Flickr.Net.Core;
 
 public record Throttle : FlickrEntityBase
 {
-    [JsonProperty("count")]
+    [JsonPropertyName("count")]
     public int Count { get; set; }
 
-    [JsonProperty("mode")]
+    [JsonPropertyName("mode")]
     public ThrottleMode Mode { get; set; }
 
-    [JsonProperty("remaining")]
+    [JsonPropertyName("remaining")]
     public int Remaining { get; set; }
 }

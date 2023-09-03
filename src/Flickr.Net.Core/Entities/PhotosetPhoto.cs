@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 using Flickr.Net.Core.Internals.Attributes;
 
 namespace Flickr.Net.Core;
@@ -6,21 +7,21 @@ namespace Flickr.Net.Core;
 [FlickrJsonPropertyName("photo")]
 public record PhotosetPhoto : PhotoBase
 {
-    [JsonProperty("farm")]
+    [JsonPropertyName("farm")]
     public int Farm { get; set; }
 
-    [JsonProperty("title")]
+    [JsonPropertyName("title")]
     public string Title { get; set; }
 
-    [JsonProperty("isprimary")]
+    [JsonPropertyName("isprimary")]
     public bool IsPrimary { get; set; }
 
-    [JsonProperty("ispublic")]
+    [JsonPropertyName("ispublic")]
     public bool IsPublic { get; set; }
 
-    [JsonProperty("isfriend")]
+    [JsonPropertyName("isfriend")]
     public bool IsFriend { get; set; }
 
-    [JsonProperty("isfamily")]
+    [JsonPropertyName("isfamily")]
     public bool IsFamily { get; set; }
 }

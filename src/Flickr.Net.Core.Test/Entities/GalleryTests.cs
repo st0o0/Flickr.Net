@@ -2,7 +2,6 @@
 using Flickr.Net.Core.Extensions;
 using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals;
-using Newtonsoft.Json;
 
 namespace Flickr.Net.Core.Test.Entities;
 
@@ -513,10 +512,8 @@ public class GalleryTests
             """;
 
         using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-        using var sr = new StreamReader(ms);
-        using var reader = new JsonTextReader(sr);
 
-        var result = FlickrConvert.DeserializeObject<FlickrResult<UserGalleries>>(reader);
+        var result = FlickrConvert.DeserializeObject<FlickrResult<UserGalleries>>(ms);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
@@ -581,10 +578,8 @@ public class GalleryTests
             """;
 
         using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-        using var sr = new StreamReader(ms);
-        using var reader = new JsonTextReader(sr);
 
-        var result = FlickrConvert.DeserializeObject<FlickrResult<PhotoGalleries>>(reader);
+        var result = FlickrConvert.DeserializeObject<FlickrResult<PhotoGalleries>>(ms);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
@@ -646,10 +641,8 @@ public class GalleryTests
             """;
 
         using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-        using var sr = new StreamReader(ms);
-        using var reader = new JsonTextReader(sr);
 
-        var result = FlickrConvert.DeserializeObject<FlickrResult<GalleryPhotos>>(reader);
+        var result = FlickrConvert.DeserializeObject<FlickrResult<GalleryPhotos>>(ms);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
@@ -729,10 +722,8 @@ public class GalleryTests
             """;
 
         using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-        using var sr = new StreamReader(ms);
-        using var reader = new JsonTextReader(sr);
 
-        var result = FlickrConvert.DeserializeObject<FlickrResult<GalleryInfo>>(reader);
+        var result = FlickrConvert.DeserializeObject<FlickrResult<GalleryInfo>>(ms);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);

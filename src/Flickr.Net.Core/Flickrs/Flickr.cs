@@ -41,8 +41,7 @@ public partial class Flickr
     /// Create a new instance of the <see cref="Flickr"/> class with no authentication.
     /// </summary>
     /// <param name="apiKey">Your Flickr API Key.</param>
-    public Flickr(string apiKey)
-        : this(apiKey, null)
+    public Flickr(string apiKey) : this(apiKey, null)
     {
     }
 

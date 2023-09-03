@@ -1,5 +1,7 @@
 ﻿namespace Flickr.Net.Core.Internals.Extensions;
 
+/// <summary>
+/// </summary>
 public static class ICollectionColorCodeExtensions
 {
     /// <summary>
@@ -44,22 +46,6 @@ public static class ICollectionColorCodeExtensions
             .Select(x => codeMap.GetValueOrDefault(x))
             .Where(x => !string.IsNullOrEmpty(x))
             .Distinct();
-
-        //foreach (var code in codes)
-        //{
-        //    if (string.IsNullOrEmpty(code))
-        //    {
-        //        continue;
-        //    }
-
-        // var c = code.ToLower(); if (c.Length == 1 && codeMap.ContainsValue(c)) {
-        // colorList.Add(c); }
-
-        //    if (codeMap.TryGetValue(c, out var value))
-        //    {
-        //        colorList.Add(value);
-        //    }
-        //}
 
         return string.Join(",", colorList.ToArray());
     }

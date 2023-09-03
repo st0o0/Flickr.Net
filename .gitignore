@@ -364,3 +364,6 @@ FodyWeavers.xsd
 /src/FlickrNet.Core/.editorconfig
 /docs/SandCastleDocuments.xml
 /docs/SandCastleDocuments.xml
+
+*dotnet-install.sh
+.mono/**/values.xml

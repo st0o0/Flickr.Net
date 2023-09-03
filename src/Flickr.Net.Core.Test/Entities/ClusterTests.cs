@@ -1,7 +1,6 @@
 ﻿using System.Text;
 using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals;
-using Newtonsoft.Json;
 
 namespace Flickr.Net.Core.Test.Entities;
 
@@ -185,10 +184,8 @@ public class ClusterTests
             """;
 
         using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-        using var sr = new StreamReader(ms);
-        using var reader = new JsonTextReader(sr);
 
-        var result = FlickrConvert.DeserializeObject<FlickrResult<Clusters>>(reader);
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Clusters>>(ms);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
@@ -437,10 +434,8 @@ public class ClusterTests
             """;
 
         using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-        using var sr = new StreamReader(ms);
-        using var reader = new JsonTextReader(sr);
 
-        var result = FlickrConvert.DeserializeObject<FlickrResult<ClusterPhotos>>(reader);
+        var result = FlickrConvert.DeserializeObject<FlickrResult<ClusterPhotos>>(ms);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
@@ -2573,10 +2568,8 @@ public class ClusterTests
             """;
 
         using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-        using var sr = new StreamReader(ms);
-        using var reader = new JsonTextReader(sr);
 
-        var result = FlickrConvert.DeserializeObject<FlickrStatsResult<Hottags>>(reader);
+        var result = FlickrConvert.DeserializeObject<FlickrStatsResult<Hottags>>(ms);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);

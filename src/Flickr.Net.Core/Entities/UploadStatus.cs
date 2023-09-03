@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 using Flickr.Net.Core.Internals.Attributes;
 
 namespace Flickr.Net.Core;
@@ -6,69 +7,69 @@ namespace Flickr.Net.Core;
 [FlickrJsonPropertyName("user")]
 public record UploadStatus : FlickrEntityBase<Id>
 {
-    [JsonProperty("ispro")]
+    [JsonPropertyName("ispro")]
     public bool IsPro { get; set; }
 
-    [JsonProperty("username")]
+    [JsonPropertyName("username")]
     public string Username { get; set; }
 
-    [JsonProperty("bandwidth")]
+    [JsonPropertyName("bandwidth")]
     public BandwidthStatus Bandwidth { get; set; }
 
-    [JsonProperty("filesize")]
+    [JsonPropertyName("filesize")]
     public FileSizeStatus Filesize { get; set; }
 
-    [JsonProperty("sets")]
+    [JsonPropertyName("sets")]
     public SetsStatus Sets { get; set; }
 
-    [JsonProperty("videos")]
+    [JsonPropertyName("videos")]
     public VideoStatus Videos { get; set; }
 }
 
 public record VideoStatus
 {
-    [JsonProperty("uploaded")]
+    [JsonPropertyName("uploaded")]
     public int Uploaded { get; set; }
 
-    [JsonProperty("remaining")]
+    [JsonPropertyName("remaining")]
     public string Remaining { get; set; }
 }
 
 public record SetsStatus
 {
-    [JsonProperty("created")]
+    [JsonPropertyName("created")]
     public int Created { get; set; }
 
-    [JsonProperty("remaining")]
+    [JsonPropertyName("remaining")]
     public string Remaining { get; set; }
 }
 
 public record FileSizeStatus
 {
-    [JsonProperty("maxbytes")]
+    [JsonPropertyName("maxbytes")]
     public long MaxBytes { get; set; }
 
-    [JsonProperty("maxkb")]
+    [JsonPropertyName("maxkb")]
     public long MaxKb { get; set; }
 }
 
 public record BandwidthStatus
 {
-    [JsonProperty("maxbytes")]
+    [JsonPropertyName("maxbytes")]
     public long MaxBytes { get; set; }
 
-    [JsonProperty("maxkb")]
+    [JsonPropertyName("maxkb")]
     public long MaxKb { get; set; }
 
-    [JsonProperty("usedbytes")]
+    [JsonPropertyName("usedbytes")]
     public long UsedBytes { get; set; }
 
-    [JsonProperty("usedkb")]
+    [JsonPropertyName("usedkb")]
     public long UsedKb { get; set; }
 
-    [JsonProperty("remainingbytes")]
+    [JsonPropertyName("remainingbytes")]
     public long RemainingBytes { get; set; }
 
-    [JsonProperty("remainingkb")]
+    [JsonPropertyName("remainingkb")]
     public long RemainingKb { get; set; }
 }

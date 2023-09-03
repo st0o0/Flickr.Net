@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 using Flickr.Net.Core.Internals.Attributes;
 
 namespace Flickr.Net.Core;
@@ -6,19 +7,19 @@ namespace Flickr.Net.Core;
 [FlickrJsonPropertyName("stats")]
 public record Views : FlickrEntityBase
 {
-    [JsonProperty("total")]
+    [JsonPropertyName("total")]
     public TotalViews Total { get; set; }
 
-    [JsonProperty("photos")]
+    [JsonPropertyName("photos")]
     public PhotoViews Photos { get; set; }
 
-    [JsonProperty("photostream")]
+    [JsonPropertyName("photostream")]
     public PhotostreamViews Photostream { get; set; }
 
-    [JsonProperty("sets")]
+    [JsonPropertyName("sets")]
     public SetViews Sets { get; set; }
 
-    [JsonProperty("collections")]
+    [JsonPropertyName("collections")]
     public CollectionViews Collections { get; set; }
 }
 
@@ -39,7 +40,7 @@ public record TotalViews : ViewBase
 
 public record ViewBase
 {
-    [JsonProperty("views")]
+    [JsonPropertyName("views")]
     public int Views { get; set; }
 
     public static implicit operator ViewBase(int value) => new() { Views = value };

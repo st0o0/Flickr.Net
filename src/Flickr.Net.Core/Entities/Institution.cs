@@ -1,15 +1,16 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 
 namespace Flickr.Net.Core;
 
 public record Institution : FlickrEntityBase<NsId>
 {
-    [JsonProperty("date_launch")]
+    [JsonPropertyName("date_launch")]
     public DateTime LaunchDate { get; set; }
 
-    [JsonProperty("name")]
+    [JsonPropertyName("name")]
     public string Name { get; set; }
 
-    [JsonProperty("urls")]
+    [JsonPropertyName("urls")]
     public Urls Urls { get; set; }
 }

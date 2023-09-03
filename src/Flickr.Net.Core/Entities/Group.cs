@@ -1,33 +1,34 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 
 namespace Flickr.Net.Core;
 
 public record Group : GroupBase, IBuddyIcon
 {
-    [JsonProperty("admin")]
+    [JsonPropertyName("admin")]
     public bool Admin { get; set; }
 
-    [JsonProperty("photos")]
+    [JsonPropertyName("photos")]
     public int Photos { get; set; }
 
-    [JsonProperty("privacy")]
+    [JsonPropertyName("privacy")]
     public PoolPrivacy Privacy { get; set; }
 
-    [JsonProperty("iconserver")]
+    [JsonPropertyName("iconserver")]
     public string IconServer { get; set; }
 
-    [JsonProperty("iconfarm")]
+    [JsonPropertyName("iconfarm")]
     public int IconFarm { get; set; }
 
-    [JsonProperty("members")]
+    [JsonPropertyName("members")]
     public int Members { get; set; }
 
-    [JsonProperty("pool_count")]
+    [JsonPropertyName("pool_count")]
     public int PoolCount { get; set; }
 
-    [JsonProperty("topic_count")]
+    [JsonPropertyName("topic_count")]
     public int TopicCount { get; set; }
 
-    [JsonProperty("invitation_only")]
+    [JsonPropertyName("invitation_only")]
     public bool InvitationOnly { get; set; }
 }

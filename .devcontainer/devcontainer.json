@@ -1,11 +1,14 @@
 {
-    "name": "Flickr.Net",
-    "service": "devhost",
-    "workspaceFolder": "/workspace",
-    "extensions": [
-      "ms-dotnettools.csdevkit",
-      "editorconfig.editorconfig",
-      "formulahendry.dotnet-test-explorer"
-    ],
-    "remoteUser": "vscode"
-  }
+	"name": "Flickr.Net",
+	"service": "devhost",
+	"remoteUser": "root",
+	"postCreateCommand": "sh ./.devcontainer/postCreateCommand.sh",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-dotnettools.csharp",
+				"ms-dotnettools.csdevkit"
+			]
+		}
+	}
+}

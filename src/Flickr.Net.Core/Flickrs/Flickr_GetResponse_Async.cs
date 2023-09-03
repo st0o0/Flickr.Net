@@ -13,9 +13,9 @@ public partial class Flickr
 {
     private Task<FlickrContextResult<TNextPhoto, TPrevPhoto>> GetContextResponseAsync<TNextPhoto, TPrevPhoto>(Dictionary<string, string> parameters, CancellationToken cancellationToken = default) where TNextPhoto : IFlickrEntity where TPrevPhoto : IFlickrEntity => GetGenericResponseAsync<FlickrContextResult<TNextPhoto, TPrevPhoto>>(parameters, cancellationToken);
 
-    private Task GetResponseAsync(Dictionary<string, string> parameters, CancellationToken cancellationToken = default) => GetGenericResponseAsync<FlickrExtendedDataResult>(parameters, cancellationToken);
-
     private Task<T> GetResponseAsync<T>(Dictionary<string, string> parameters, CancellationToken cancellationToken = default) where T : IFlickrEntity => GetGenericResponseAsync<FlickrResult<T>, T>(parameters, cancellationToken);
+
+    private async Task GetResponseAsync(Dictionary<string, string> parameters, CancellationToken cancellationToken = default) => _ = await GetGenericResponseAsync<FlickrExtendedDataResult>(parameters, cancellationToken);
 
     private async Task<TResponse> GetGenericResponseAsync<T, TResponse>(Dictionary<string, string> parameters, CancellationToken cancellationToken = default) where T : FlickrResult<TResponse> where TResponse : IFlickrEntity
     {
@@ -80,19 +80,10 @@ public partial class Flickr
             }
         }
 
-        try
-        {
-            using var sr = new StreamReader(resultStream);
-            using var reader = new JsonTextReader(sr);
-            var flickrResults = FlickrConvert.DeserializeObject<T>(reader);
-            resultStream.Dispose();
-            resultStream.Close();
+        var flickrResults = FlickrConvert.DeserializeObject<T>(resultStream);
+        resultStream.Dispose();
+        resultStream.Close();
 
-            return flickrResults.EnsureSuccessStatusCode();
-        }
-        catch (Exception)
-        {
-            throw;
-        }
+        return flickrResults.EnsureSuccessStatusCode();
     }
 }
