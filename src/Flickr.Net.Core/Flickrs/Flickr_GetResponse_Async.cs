@@ -52,7 +52,7 @@ public partial class Flickr
 
         if (FlickrCachingSettings.InstanceCacheDisabled)
         {
-            resultStream = await FlickrResponder.GetDataResponseAsync(this, BaseUri.AbsoluteUri, parameters, cancellationToken);
+            resultStream = await FlickrResponder.GetDataResponseAsync(this, BaseUri, parameters, cancellationToken);
         }
         else
         {
@@ -67,7 +67,7 @@ public partial class Flickr
             else
             {
                 Debug.WriteLine("Cache miss.");
-                resultStream = await FlickrResponder.GetDataResponseAsync(this, BaseUri.AbsoluteUri, parameters, cancellationToken);
+                resultStream = await FlickrResponder.GetDataResponseAsync(this, BaseUri, parameters, cancellationToken);
 
                 using var ms = new MemoryStream();
                 resultStream.CopyTo(ms);

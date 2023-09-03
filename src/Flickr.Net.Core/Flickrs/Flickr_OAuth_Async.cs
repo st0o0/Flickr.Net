@@ -34,7 +34,7 @@ public partial class Flickr : IFlickrOAuth
 
         parameters.Add("oauth_signature", sig);
 
-        var result = await FlickrResponder.GetDataResponseAsync(this, url, parameters, cancellationToken);
+        var result = await FlickrResponder.GetDataResponseAsync(this, new Uri(url), parameters, cancellationToken);
 
         using var streamReader = new StreamReader(result);
         var jsonstring = await streamReader.ReadToEndAsync(cancellationToken);
@@ -58,7 +58,7 @@ public partial class Flickr : IFlickrOAuth
 
         parameters.Add("oauth_signature", sig);
 
-        var result = await FlickrResponder.GetDataResponseAsync(this, url, parameters, cancellationToken);
+        var result = await FlickrResponder.GetDataResponseAsync(this, new Uri(url), parameters, cancellationToken);
 
         using var streamReader = new StreamReader(result);
         var jsonstring = await streamReader.ReadToEndAsync(cancellationToken);
