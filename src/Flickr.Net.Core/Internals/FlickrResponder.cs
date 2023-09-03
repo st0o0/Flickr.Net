@@ -15,13 +15,12 @@ public static partial class FlickrResponder
     /// <returns></returns>
     public static string OAuthCalculateAuthHeader(Dictionary<string, string> parameters)
     {
+        
+        var strings = parameters
+            .Where(pair => pair.Key.StartsWith("oauth", StringComparison.Ordinal))
+            .Select(pair => pair.Key + "=\"" + Uri.EscapeDataString(pair.Value) + "\"");
+        
         var sb = new StringBuilder();
-        var parametersStartingWithOauth = parameters
-            .Where((pair) => pair.Key.StartsWith("oauth", StringComparison.Ordinal));
-        foreach (var pair in parametersStartingWithOauth)
-        {
-            sb.Append(pair.Key + "=\"" + Uri.EscapeDataString(pair.Value) + "\",");
-        }
-        return sb.Remove(sb.Length - 1, 1).ToString();
+        return sb.AppendJoin(",", strings).Remove(sb.Length - 1, 1).ToString();
     }
 }
