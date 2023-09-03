@@ -128,11 +128,13 @@ stages:
           - checkout: none
           - download: current
             artifact: packages
+
           - task: UseDotNet@2
             displayName: Install .NET sdk
             inputs:
               packageType: sdk
               version: $(netSdkVersion)
+              includePreviewVersions: $(netIncludePreview)
               
           - task: NuGetAuthenticate@1
             displayName: 'NuGet Authenticate'
