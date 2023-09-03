@@ -96,6 +96,7 @@ stages:
             inputs:
               packageType: sdk
               version: $(netSdkVersion)
+              includePreviewVersions: $(netIncludePreview)
 
           - task: DotNetCoreCLI@2
             displayName: 'Run unit tests'
