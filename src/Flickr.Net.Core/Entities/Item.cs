@@ -1,5 +1,4 @@
 ﻿using System.Text.Json.Serialization;
-using Flickr.Net.Core.Bases;
 
 namespace Flickr.Net.Core;
 
@@ -95,7 +94,7 @@ public record Item : FlickrEntityBase<Id>, ISmallUrl, ISquareUrl, IBuddyIcon
     /// <summary>
     /// </summary>
     [JsonPropertyName("iconfarm")]
-    public string OwnerFarm { get; set; }
+    public int OwnerFarm { get; set; }
 
     /// <summary>
     /// </summary>

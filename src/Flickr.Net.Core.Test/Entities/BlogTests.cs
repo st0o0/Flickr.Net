@@ -40,6 +40,7 @@ public class BlogTests
         var items = result.Content;
         Assert.IsType<Blogs>(items);
         Assert.Equal(2, result.Content.Values.Count);
+        
     }
 
     [Fact]
