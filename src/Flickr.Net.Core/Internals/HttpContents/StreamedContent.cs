@@ -6,7 +6,7 @@ namespace Flickr.Net.Core.Internals.HttpContents;
 internal class StreamedContent : HttpContent
 {
     private CancellationToken _cancellationToken;
-    private Stream _fileStream;
+    private readonly Stream _fileStream;
     private IProgress<double> _progress;
 
     private class ContentStream : StreamWrapper

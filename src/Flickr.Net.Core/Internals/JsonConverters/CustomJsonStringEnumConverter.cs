@@ -4,12 +4,16 @@ using System.Text.Json.Serialization;
 
 namespace Flickr.Net.Core.Internals.JsonConverters;
 
+/// <summary>
+/// </summary>
 public class CustomJsonStringEnumConverter : JsonConverterFactory
 {
     private readonly JsonNamingPolicy namingPolicy;
     private readonly bool allowIntegerValues;
     private readonly JsonStringEnumConverter baseConverter;
 
+    /// <summary>
+    /// </summary>
     public CustomJsonStringEnumConverter(JsonNamingPolicy namingPolicy = null, bool allowIntegerValues = true)
     {
         this.namingPolicy = namingPolicy;
@@ -17,18 +21,24 @@ public class CustomJsonStringEnumConverter : JsonConverterFactory
         this.baseConverter = new JsonStringEnumConverter(namingPolicy, allowIntegerValues);
     }
 
+    /// <summary>
+    /// </summary>
     public static CustomJsonStringEnumConverter Instance { get; } = new();
 
+    /// <summary>
+    /// </summary>
     public override bool CanConvert(Type typeToConvert)
     {
         return baseConverter.CanConvert(typeToConvert);
     }
 
-    public override System.Text.Json.Serialization.JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
+    /// <summary>
+    /// </summary>
+    public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
     {
         var dictionary = typeToConvert
                     .GetFields(BindingFlags.Public | BindingFlags.Static)
-                    .Select(x => (attr:x.GetCustomAttribute<EnumMemberAttribute>(), field:x))
+                    .Select(x => (attr: x.GetCustomAttribute<EnumMemberAttribute>(), field: x))
                     .Where(x => x.attr != null)
                     .Select(x => (x.field.Name, x.attr.Value))
                     .ToDictionary(p => p.Item1, p => p.Item2);
@@ -44,12 +54,18 @@ public class CustomJsonStringEnumConverter : JsonConverterFactory
     }
 }
 
+/// <summary>
+/// </summary>
 public class JsonNamingPolicyDecorator : JsonNamingPolicy
 {
     private readonly JsonNamingPolicy underlyingNamingPolicy;
 
+    /// <summary>
+    /// </summary>
     public JsonNamingPolicyDecorator(JsonNamingPolicy underlyingNamingPolicy) => this.underlyingNamingPolicy = underlyingNamingPolicy;
 
+    /// <summary>
+    /// </summary>
     public override string ConvertName(string name) => underlyingNamingPolicy == null ? name : underlyingNamingPolicy.ConvertName(name);
 }
 

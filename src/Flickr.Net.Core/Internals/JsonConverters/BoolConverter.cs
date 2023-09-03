@@ -25,31 +25,24 @@ public class BoolConverter : System.Text.Json.Serialization.JsonConverter<bool>
 
     /// <summary>
     /// </summary>
-    public override bool Read(ref System.Text.Json.Utf8JsonReader reader, Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+    public override bool Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        switch (reader.TokenType)
+        return reader.TokenType switch
         {
-            case JsonTokenType.String:
-                return reader.ValueTextEquals("1");
+            JsonTokenType.String => reader.ValueTextEquals("1"),
+            JsonTokenType.Number => reader.TryGetInt64(out var l) ?
+                            l == 1 :
+                            reader.GetDouble() == 1d,
+            JsonTokenType.True => true,
+            JsonTokenType.False => false,
+            _ => throw new InvalidOperationException("Can only convert number or string to boolean"),
+        };
 
-            case JsonTokenType.Number:
-                return reader.TryGetInt64(out long l) ?
-                l == 1 :
-                reader.GetDouble() == 1d;
-
-            case JsonTokenType.True:
-                return true;
-            case JsonTokenType.False:
-                return false;
-
-            default:
-                throw new InvalidOperationException("Can only convert number or string to boolean");
-        }
     }
 
     /// <summary>
     /// </summary>
-    public override void Write(System.Text.Json.Utf8JsonWriter writer, bool value, System.Text.Json.JsonSerializerOptions options)
+    public override void Write(Utf8JsonWriter writer, bool value, JsonSerializerOptions options)
     {
         writer.WriteNumberValue(value ? 1 : 0);
     }

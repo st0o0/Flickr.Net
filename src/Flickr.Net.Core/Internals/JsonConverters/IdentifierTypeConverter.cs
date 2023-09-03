@@ -1,5 +1,4 @@
 ﻿using System.Text.Json;
-using Flickr.Net.Core.Bases;
 
 namespace Flickr.Net.Core.Internals.JsonConverters.IdentifierConverters;
 

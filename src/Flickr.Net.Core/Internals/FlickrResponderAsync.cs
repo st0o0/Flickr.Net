@@ -49,7 +49,6 @@ public static partial class FlickrResponder
 
         // If OAuth Access Token is set then add token and generate signature.
 
-
         parameters.AppendIf(
             "oauth_token",
             flickr.FlickrSettings.OAuthAccessToken,

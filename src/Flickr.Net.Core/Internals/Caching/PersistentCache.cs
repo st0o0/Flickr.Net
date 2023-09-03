@@ -63,10 +63,7 @@ public sealed class PersistentCache : IDisposable
     {
         set
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
+            ArgumentNullException.ThrowIfNullOrEmpty(key);
 
             ICacheItem oldItem;
 
@@ -76,10 +73,7 @@ public sealed class PersistentCache : IDisposable
                 oldItem = InternalSet(key, value);
                 Persist();
             }
-            if (oldItem != null)
-            {
-                oldItem.OnItemFlushed();
-            }
+            oldItem?.OnItemFlushed();
         }
     }
 
@@ -143,7 +137,7 @@ public sealed class PersistentCache : IDisposable
             throw new ArgumentException("Cannot shrink to a negative size", nameof(size));
         }
 
-        List<ICacheItem> flushed = new();
+        List<ICacheItem> flushed = [];
 
         using (lockFile.Acquire())
         {
@@ -174,10 +168,7 @@ public sealed class PersistentCache : IDisposable
         foreach (var flushedItem in flushed)
         {
             Debug.Assert(flushedItem != null, "Flushed item was null--programmer error");
-            if (flushedItem != null)
-            {
-                flushedItem.OnItemFlushed();
-            }
+            flushedItem?.OnItemFlushed();
         }
     }
 
@@ -216,14 +207,11 @@ public sealed class PersistentCache : IDisposable
 
     private ICacheItem InternalGet(string key)
     {
-        if (key == null)
-        {
-            throw new ArgumentNullException(nameof(key));
-        }
+        ArgumentNullException.ThrowIfNullOrEmpty(key);
 
-        if (dataTable.ContainsKey(key))
+        if (dataTable.TryGetValue(key, out var value))
         {
-            return dataTable[key];
+            return value;
         }
         else
         {
@@ -234,10 +222,7 @@ public sealed class PersistentCache : IDisposable
     /// <returns>The old value associated with <c>key</c>, if any.</returns>
     private ICacheItem InternalSet(string key, ICacheItem value)
     {
-        if (key == null)
-        {
-            throw new ArgumentNullException(nameof(key));
-        }
+        ArgumentNullException.ThrowIfNullOrEmpty(key);
 
         ICacheItem flushedItem;
 
@@ -254,12 +239,12 @@ public sealed class PersistentCache : IDisposable
 
     private ICacheItem RemoveKey(string key)
     {
-        if (!dataTable.ContainsKey(key))
+        if (!dataTable.TryGetValue(key, out var value))
         {
             return null;
         }
 
-        var cacheItem = dataTable[key];
+        var cacheItem = value;
         dataTable.Remove(key);
         dirty = true;
         return cacheItem;
@@ -365,9 +350,6 @@ public sealed class PersistentCache : IDisposable
 
     void IDisposable.Dispose()
     {
-        if (lockFile != null)
-        {
-            lockFile.Dispose();
-        }
+        lockFile?.Dispose();
     }
 }

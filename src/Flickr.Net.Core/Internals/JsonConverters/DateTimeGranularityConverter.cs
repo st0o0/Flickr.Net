@@ -1,5 +1,7 @@
 ﻿namespace Flickr.Net.Core.Internals.JsonConverters;
 
+    /// <summary>
+    /// </summary>
 public class DateTimeGranularityConverter : System.Text.Json.Serialization.JsonConverter<DateTime>
 {
     private static readonly DateTime UnixStartDate = new(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);

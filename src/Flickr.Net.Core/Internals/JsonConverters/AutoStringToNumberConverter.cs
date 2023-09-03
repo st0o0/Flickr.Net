@@ -2,14 +2,22 @@
 
 namespace Flickr.Net.Core.Internals.JsonConverters;
 
+    /// <summary>
+    /// </summary>
 public class AutoStringToNumberConverter : System.Text.Json.Serialization.JsonConverter<object>
 {
+    /// <summary>
+    /// </summary>
     public AutoStringToNumberConverter() : base()
     {
     }
 
+    /// <summary>
+    /// </summary>
     public static AutoStringToNumberConverter Instance { get; } = new ();
 
+    /// <summary>
+    /// </summary>
     public override bool CanConvert(Type typeToConvert)
     {
         // see https://stackoverflow.com/questions/1749966/c-sharp-how-to-determine-whether-a-type-is-a-number
@@ -33,6 +41,8 @@ public class AutoStringToNumberConverter : System.Text.Json.Serialization.JsonCo
         }
     }
 
+    /// <summary>
+    /// </summary>
     public override object Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         if (reader.TokenType == JsonTokenType.String)
@@ -62,12 +72,12 @@ public class AutoStringToNumberConverter : System.Text.Json.Serialization.JsonCo
                 return reader.GetDouble();
             }
         }
-        using (JsonDocument document = JsonDocument.ParseValue(ref reader))
-        {
-            throw new Exception($"unable to parse {document.RootElement.ToString()} to number");
-        }
+        using var document = JsonDocument.ParseValue(ref reader);
+        throw new Exception($"unable to parse {document.RootElement.ToString()} to number");
     }
 
+    /// <summary>
+    /// </summary>
     public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
     {
         writer.WriteRawValue(value.ToString());
