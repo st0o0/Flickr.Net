@@ -137,7 +137,7 @@ public sealed class PersistentCache : IDisposable
             throw new ArgumentException("Cannot shrink to a negative size", nameof(size));
         }
 
-        List<ICacheItem> flushed = [];
+        List<ICacheItem> flushed = new();
 
         using (lockFile.Acquire())
         {
