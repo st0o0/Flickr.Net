@@ -7,7 +7,8 @@
 		"vscode": {
 			"extensions": [
 				"ms-dotnettools.csharp",
-				"ms-dotnettools.csdevkit"
+				"ms-dotnettools.csdevkit",
+				"mhutchie.git-graph"
 			]
 		}
 	}
