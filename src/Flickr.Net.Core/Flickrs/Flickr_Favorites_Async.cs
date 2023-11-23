@@ -121,7 +121,7 @@ public interface IFlickrFavorites
     /// Gets the public favourites for a specified user.
     /// </summary>
     /// <remarks>
-    /// This function differs from <see cref="IFlickrFavorites.GetListAsync(string, DateTime?,
+    /// This function differs from <see cref="GetListAsync(string, DateTime?,
     /// DateTime?, PhotoSearchExtras, int, int, CancellationToken)"/> in that the user id is not optional.
     /// </remarks>
     /// <param name="userId">The is of the user whose favourites you wish to return.</param>

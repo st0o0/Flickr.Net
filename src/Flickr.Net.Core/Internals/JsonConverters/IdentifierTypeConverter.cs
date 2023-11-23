@@ -1,11 +1,12 @@
 ﻿using System.Text.Json;
+using System.Text.Json.Serialization;
 using Flickr.Net.Core.Bases;
 
 namespace Flickr.Net.Core.Internals.JsonConverters.IdentifierConverters;
 
 /// <summary>
 /// </summary>
-public class IdentifierTypeConverter : System.Text.Json.Serialization.JsonConverter<IdentifierType>
+public class IdentifierTypeConverter : JsonConverter<IdentifierType>
 {
     /// <summary>
     /// </summary>

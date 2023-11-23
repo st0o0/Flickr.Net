@@ -165,8 +165,8 @@ public interface IFlickrGalleries
     /// <param name="galleryId">
     /// The ID of the gallery to add a photo to.
     /// Note: this is the compound ID returned in methods like <see
-    ///       cref="IFlickrGalleries.GetListAsync(string, int, int, CancellationToken)"/>, and <see
-    ///       cref="IFlickrGalleries.GetListForPhotoAsync(string, int, int, CancellationToken)"/>.
+    ///       cref="GetListAsync(string, int, int, CancellationToken)"/>, and <see
+    ///       cref="GetListForPhotoAsync(string, int, int, CancellationToken)"/>.
     /// </param>
     /// <param name="photoId">The photo ID to add to the gallery</param>
     /// <param name="comment">A short comment or story to accompany the photo.</param>
@@ -198,8 +198,8 @@ public interface IFlickrGalleries
     /// <param name="galleryId">
     /// The ID of the gallery to add a photo to.
     /// Note: this is the compound ID returned in methods like <see
-    ///       cref="IFlickrGalleries.GetListAsync(string, int, int, CancellationToken)"/>, and <see
-    ///       cref="IFlickrGalleries.GetListForPhotoAsync(string, int, int, CancellationToken)"/>.
+    ///       cref="GetListAsync(string, int, int, CancellationToken)"/>, and <see
+    ///       cref="GetListForPhotoAsync(string, int, int, CancellationToken)"/>.
     /// </param>
     /// <param name="photoId">The photo ID to add to the gallery.</param>
     /// <param name="comment">The updated comment the photo.</param>

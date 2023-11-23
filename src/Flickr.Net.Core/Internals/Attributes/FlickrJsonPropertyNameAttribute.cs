@@ -2,17 +2,13 @@
 
 /// <summary>
 /// </summary>
+/// <remarks>
+/// </remarks>
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
-internal class FlickrJsonPropertyNameAttribute : Attribute
+internal class FlickrJsonPropertyNameAttribute(string JSONPropertyName) : Attribute
 {
-    /// <summary>
-    /// </summary>
-    public FlickrJsonPropertyNameAttribute(string JSONPropertyName)
-    {
-        Name = JSONPropertyName;
-    }
 
     /// <summary>
     /// </summary>
-    public string Name { get; }
+    public string Name { get; } = JSONPropertyName;
 }

@@ -1,7 +1,6 @@
 ﻿using System.Text;
 using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals;
-using Newtonsoft.Json;
 
 namespace Flickr.Net.Core.Test.Entities;
 

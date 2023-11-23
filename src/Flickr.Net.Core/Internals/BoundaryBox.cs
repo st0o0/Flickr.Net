@@ -14,13 +14,6 @@ public class BoundaryBox
     private double maximumLon = 180;
 
     /// <summary>
-    /// Default constructor
-    /// </summary>
-    public BoundaryBox()
-    {
-    }
-
-    /// <summary>
     /// Default constructor, specifying only the accuracy level.
     /// </summary>
     /// <param name="accuracy">The <see cref="GeoAccuracy"/> of the search parameter.</param>
@@ -45,28 +38,30 @@ public class BoundaryBox
     /// <param name="points">A comma seperated list of co-ordinates defining the boundary box.</param>
     public BoundaryBox(string points)
     {
-        if (points == null)
+        if (points != null)
+        {
+            var splits = points.Split(',');
+
+            if (splits.Length != 4)
+            {
+                throw new ArgumentException("Parameter must contain 4 values, seperated by commas.", nameof(points));
+            }
+
+            try
+            {
+                MinimumLongitude = double.Parse(splits[0], System.Globalization.NumberFormatInfo.InvariantInfo);
+                MinimumLatitude = double.Parse(splits[1], System.Globalization.NumberFormatInfo.InvariantInfo);
+                MaximumLongitude = double.Parse(splits[2], System.Globalization.NumberFormatInfo.InvariantInfo);
+                MaximumLatitude = double.Parse(splits[3], System.Globalization.NumberFormatInfo.InvariantInfo);
+            }
+            catch (FormatException)
+            {
+                throw new ArgumentException("Unable to parse points as integer values", nameof(points));
+            }
+        }
+        else
         {
             throw new ArgumentNullException(nameof(points));
-        }
-
-        var splits = points.Split(',');
-
-        if (splits.Length != 4)
-        {
-            throw new ArgumentException("Parameter must contain 4 values, seperated by commas.", nameof(points));
-        }
-
-        try
-        {
-            MinimumLongitude = double.Parse(splits[0], System.Globalization.NumberFormatInfo.InvariantInfo);
-            MinimumLatitude = double.Parse(splits[1], System.Globalization.NumberFormatInfo.InvariantInfo);
-            MaximumLongitude = double.Parse(splits[2], System.Globalization.NumberFormatInfo.InvariantInfo);
-            MaximumLatitude = double.Parse(splits[3], System.Globalization.NumberFormatInfo.InvariantInfo);
-        }
-        catch (FormatException)
-        {
-            throw new ArgumentException("Unable to parse points as integer values", nameof(points));
         }
     }
 

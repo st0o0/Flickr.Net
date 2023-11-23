@@ -1,8 +1,10 @@
-﻿namespace Flickr.Net.Core.Internals.JsonConverters;
+﻿using System.Text.Json.Serialization;
+
+namespace Flickr.Net.Core.Internals.JsonConverters;
 
 /// <summary>
 /// </summary>
-public class TimestampToDateTimeConverter : System.Text.Json.Serialization.JsonConverter<DateTime>
+public class TimestampToDateTimeConverter : JsonConverter<DateTime>
 {
     /// <summary>
     /// </summary>
@@ -10,10 +12,7 @@ public class TimestampToDateTimeConverter : System.Text.Json.Serialization.JsonC
 
     private static readonly DateTime UnixStartDate = new(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
-    private static DateTime UnixTimestampToDate(long timestamp)
-    {
-        return UnixStartDate.AddSeconds(timestamp);
-    }
+    private static DateTime UnixTimestampToDate(long timestamp) => UnixStartDate.AddSeconds(timestamp);
 
     /// <summary>
     /// </summary>

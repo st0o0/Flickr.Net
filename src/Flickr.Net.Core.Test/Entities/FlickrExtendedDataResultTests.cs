@@ -3,7 +3,6 @@ using System.Xml.Linq;
 using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Flickr.Net.Core.Test.Entities;
 

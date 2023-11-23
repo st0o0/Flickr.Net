@@ -6,21 +6,16 @@ namespace Flickr.Net.Core.Internals.Caching;
 /// <summary>
 /// Internal Cache class
 /// </summary>
-public class Cache
+/// <remarks>
+/// Initializes a new instance of the <see cref="Cache"/> class.
+/// </remarks>
+/// <param name="settings">The settings.</param>
+public class Cache(FlickrCachingSettings settings)
 {
     private static PersistentCache responses;
     private static readonly object lockObject = new();
 
-    private readonly FlickrCachingSettings _settings;
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="Cache"/> class.
-    /// </summary>
-    /// <param name="settings">The settings.</param>
-    public Cache(FlickrCachingSettings settings)
-    {
-        _settings = settings;
-    }
+    private readonly FlickrCachingSettings _settings = settings;
 
     /// <summary>
     /// A static object containing the list of cached responses from Flickr.

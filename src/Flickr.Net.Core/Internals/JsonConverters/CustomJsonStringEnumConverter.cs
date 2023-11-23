@@ -21,9 +21,7 @@ public class CustomJsonStringEnumConverter(JsonNamingPolicy namingPolicy = null,
     /// <summary>
     /// </summary>
     public override bool CanConvert(Type typeToConvert)
-    {
-        return baseConverter.CanConvert(typeToConvert);
-    }
+        => baseConverter.CanConvert(typeToConvert);
 
     /// <summary>
     /// </summary>

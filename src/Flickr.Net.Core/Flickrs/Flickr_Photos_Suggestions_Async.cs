@@ -119,7 +119,7 @@ public interface IFlickrPhotosSuggestions
 
     /// <summary>
     /// Rejects a suggestion made for a location on a photo. Currently doesn't appear to actually
-    /// work. Just use <see cref="IFlickrPhotosSuggestions.RemoveSuggestionAsync(string,
+    /// work. Just use <see cref="RemoveSuggestionAsync(string,
     /// CancellationToken)"/> instead.
     /// </summary>
     /// <param name="suggestionId">The ID of the suggestion to remove.</param>

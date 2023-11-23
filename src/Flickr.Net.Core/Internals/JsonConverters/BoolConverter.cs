@@ -1,10 +1,11 @@
 ﻿using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Flickr.Net.Core.Internals.JsonConverters;
 
 /// <summary>
 /// </summary>
-public class BoolConverter : System.Text.Json.Serialization.JsonConverter<bool>
+public class BoolConverter : JsonConverter<bool>
 {
     /// <summary>
     /// </summary>
@@ -25,7 +26,7 @@ public class BoolConverter : System.Text.Json.Serialization.JsonConverter<bool>
 
     /// <summary>
     /// </summary>
-    public override bool Read(ref System.Text.Json.Utf8JsonReader reader, Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+    public override bool Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         switch (reader.TokenType)
         {
@@ -49,7 +50,7 @@ public class BoolConverter : System.Text.Json.Serialization.JsonConverter<bool>
 
     /// <summary>
     /// </summary>
-    public override void Write(System.Text.Json.Utf8JsonWriter writer, bool value, System.Text.Json.JsonSerializerOptions options)
+    public override void Write(Utf8JsonWriter writer, bool value, JsonSerializerOptions options)
     {
         writer.WriteNumberValue(value ? 1 : 0);
     }
