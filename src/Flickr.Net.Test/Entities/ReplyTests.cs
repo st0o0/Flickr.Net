@@ -33,9 +33,7 @@ public class ReplyTests
             }
             """;
 
-        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-
-        var result = FlickrConvert.DeserializeObject<FlickrResult<Reply>>(ms);
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Reply>>(Encoding.UTF8.GetBytes(json));
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
@@ -134,9 +132,7 @@ public class ReplyTests
             }
             """;
 
-        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-
-        var result = FlickrConvert.DeserializeObject<FlickrResult<Replies>>(ms);
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Replies>>(Encoding.UTF8.GetBytes(json));
 
         Assert.NotNull(result);
         Assert.False(result.HasError);

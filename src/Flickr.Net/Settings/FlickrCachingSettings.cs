@@ -1,18 +1,15 @@
 using Flickr.Net.Configuration;
 
 namespace Flickr.Net.Settings;
+
 /// <summary>
 /// The flickr caching settings.
 /// </summary>
-
 public class FlickrCachingSettings
 {
     private readonly FlickrConfiguration _config;
 
-    internal FlickrCachingSettings(FlickrConfiguration config)
-    {
-        _config = config;
-    }
+    internal FlickrCachingSettings(FlickrConfiguration config) => _config = config;
 
     /// <summary>
     /// Gets or sets whether the cache should be disabled. Use only in extreme cases where you are

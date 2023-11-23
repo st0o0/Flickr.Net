@@ -38,9 +38,7 @@ public class PredicateTests
             }
             """;
 
-        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-
-        var result = FlickrConvert.DeserializeObject<FlickrResult<Predicates>>(ms);
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Predicates>>(Encoding.UTF8.GetBytes(json));
 
         Assert.NotNull(result);
         Assert.False(result.HasError);

@@ -112,10 +112,7 @@ public partial class Flickr : IFlickrUpload
 
         var xml = await responseMessage.Content.ReadAsStringAsync(cancellationToken);
         var json = FlickrConvert.XmlToJson(xml);
-
-        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-
-        var flickrResults = FlickrConvert.DeserializeObject<FlickrExtendedDataResult>(ms);
+        var flickrResults = FlickrConvert.DeserializeObject<FlickrExtendedDataResult>(Encoding.UTF8.GetBytes(json));
 
         flickrResults = flickrResults.EnsureSuccessStatusCode();
 

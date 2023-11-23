@@ -71,9 +71,7 @@ public class PersonTests
             }
             """;
 
-        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-
-        var item = FlickrConvert.DeserializeObject<FlickrResult<Person>>(ms);
+        var item = FlickrConvert.DeserializeObject<FlickrResult<Person>>(Encoding.UTF8.GetBytes(json));
 
         Assert.NotNull(item);
         Assert.False(item.HasError);

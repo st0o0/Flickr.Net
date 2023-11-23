@@ -1,18 +1,15 @@
 using Flickr.Net.Configuration;
 
 namespace Flickr.Net.Settings;
+
 /// <summary>
 /// The flickr settings.
 /// </summary>
-
 public class FlickrSettings
 {
     private readonly FlickrConfiguration _config;
 
-    internal FlickrSettings(FlickrConfiguration config)
-    {
-        _config = config;
-    }
+    internal FlickrSettings(FlickrConfiguration config) => _config = config;
 
     /// <summary>
     /// Get or set the API Key to be used by all calls. API key is mandatory for all calls to Flickr.

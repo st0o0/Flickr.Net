@@ -46,9 +46,7 @@ public class MethodTests
             }
             """;
 
-        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-
-        var result = FlickrConvert.DeserializeObject<FlickrResult<MethodInfo>>(ms);
+        var result = FlickrConvert.DeserializeObject<FlickrResult<MethodInfo>>(Encoding.UTF8.GetBytes(json));
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
@@ -754,9 +752,7 @@ public class MethodTests
             }
             """;
 
-        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-
-        var result = FlickrConvert.DeserializeObject<FlickrResult<Methods>>(ms);
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Methods>>(Encoding.UTF8.GetBytes(json));
 
         Assert.NotNull(result);
         Assert.False(result.HasError);

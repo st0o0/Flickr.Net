@@ -25,9 +25,7 @@ public class OAuthTests
             }
             """;
 
-        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-
-        var result = FlickrConvert.DeserializeObject<FlickrResult<OAuth>>(ms);
+        var result = FlickrConvert.DeserializeObject<FlickrResult<OAuth>>(Encoding.UTF8.GetBytes(json));
 
         Assert.NotNull(result);
         Assert.False(result.HasError);

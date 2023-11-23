@@ -112,9 +112,7 @@ public class ItemTests
             }
             """;
 
-        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-
-        var result = FlickrConvert.DeserializeObject<FlickrResult<Items>>(ms);
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Items>>(Encoding.UTF8.GetBytes(json));
 
         Assert.NotNull(result);
         Assert.False(result.HasError);

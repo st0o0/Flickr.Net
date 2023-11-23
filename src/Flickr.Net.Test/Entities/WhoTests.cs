@@ -12232,9 +12232,7 @@ public class WhoTests
             }
             """;
 
-        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-
-        var result = FlickrConvert.DeserializeObject<FlickrResult<Who>>(ms);
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Who>>(Encoding.UTF8.GetBytes(json));
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
@@ -13859,9 +13857,7 @@ public class WhoTests
             }
             """;
 
-        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-
-        var result = FlickrConvert.DeserializeObject<FlickrResult<Who>>(ms);
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Who>>(Encoding.UTF8.GetBytes(json));
 
         Assert.NotNull(result);
         Assert.False(result.HasError);

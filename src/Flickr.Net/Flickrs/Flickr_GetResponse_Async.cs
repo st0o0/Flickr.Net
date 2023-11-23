@@ -48,11 +48,11 @@ public partial class Flickr
 
         _lastRequest = url;
 
-        Stream resultStream;
+        byte[] resultArray;
 
         if (FlickrCachingSettings.InstanceCacheDisabled)
         {
-            resultStream = await FlickrResponder.GetDataResponseAsync(this, BaseUri.AbsoluteUri, parameters, cancellationToken);
+            resultArray = await FlickrResponder.GetDataResponseAsync(this, BaseUri.AbsoluteUri, parameters, cancellationToken);
         }
         else
         {
@@ -62,16 +62,14 @@ public partial class Flickr
             if (cached != null)
             {
                 Debug.WriteLine("Cache hit.");
-                resultStream = new MemoryStream(cached.Response);
+                resultArray = cached.Response;
             }
             else
             {
                 Debug.WriteLine("Cache miss.");
-                resultStream = await FlickrResponder.GetDataResponseAsync(this, BaseUri.AbsoluteUri, parameters, cancellationToken);
+                resultArray = await FlickrResponder.GetDataResponseAsync(this, BaseUri.AbsoluteUri, parameters, cancellationToken);
 
-                using var ms = new MemoryStream();
-                resultStream.CopyTo(ms);
-                var byteArray = ms.ToArray();
+                var byteArray = resultArray;
 
                 ResponseCacheItem resCache = new(new Uri(urlComplete), byteArray, DateTime.UtcNow);
 
@@ -82,10 +80,7 @@ public partial class Flickr
 
         try
         {
-            var flickrResults = FlickrConvert.DeserializeObject<T>(resultStream);
-            resultStream.Dispose();
-            resultStream.Close();
-
+            var flickrResults = FlickrConvert.DeserializeObject<T>(resultArray);
             return flickrResults.EnsureSuccessStatusCode();
         }
         catch (Exception)

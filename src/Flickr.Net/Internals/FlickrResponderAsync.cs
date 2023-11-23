@@ -18,7 +18,7 @@ public static partial class FlickrResponder
     /// <param name="parameters">A dictionary of parameters.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public static async Task<Stream> GetDataResponseAsync(Flickr flickr, string baseUrl, Dictionary<string, string> parameters, CancellationToken cancellationToken = default)
+    public static async Task<byte[]> GetDataResponseAsync(Flickr flickr, string baseUrl, Dictionary<string, string> parameters, CancellationToken cancellationToken = default)
     {
         var oAuth = parameters.ContainsKey("oauth_consumer_key");
 
@@ -34,12 +34,12 @@ public static partial class FlickrResponder
         }
     }
 
-    private static async Task<Stream> GetDataResponseNormalAsync(Flickr flickr, string baseUrl, Dictionary<string, string> parameters, CancellationToken cancellationToken = default)
+    private static async Task<byte[]> GetDataResponseNormalAsync(Flickr flickr, string baseUrl, Dictionary<string, string> parameters, CancellationToken cancellationToken = default)
     {
         return await DownloadDataAsync(baseUrl, new FormUrlEncodedContent(parameters), null, cancellationToken);
     }
 
-    private static async Task<Stream> GetDataResponseOAuthAsync(Flickr flickr, string baseUrl, Dictionary<string, string> parameters, CancellationToken cancellationToken = default)
+    private static async Task<byte[]> GetDataResponseOAuthAsync(Flickr flickr, string baseUrl, Dictionary<string, string> parameters, CancellationToken cancellationToken = default)
     {
         // Remove api key if it exists.
         parameters.Remove("api_key");
@@ -83,7 +83,7 @@ public static partial class FlickrResponder
         }
     }
 
-    private static async Task<Stream> DownloadDataAsync(string baseUrl, FormUrlEncodedContent data, string authHeader, CancellationToken cancellationToken = default)
+    private static async Task<byte[]> DownloadDataAsync(string baseUrl, FormUrlEncodedContent data, string authHeader, CancellationToken cancellationToken = default)
     {
         using HttpClient client = new();
 
@@ -110,6 +110,6 @@ public static partial class FlickrResponder
             throw;
         }
 
-        return await response.Content.ReadAsStreamAsync(cancellationToken);
+        return await response.Content.ReadAsByteArrayAsync(cancellationToken);
     }
 }

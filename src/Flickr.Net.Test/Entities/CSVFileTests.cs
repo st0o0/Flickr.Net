@@ -34,9 +34,7 @@ public class CSVFileTests
             }
             """;
 
-        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-
-        var result = FlickrConvert.DeserializeObject<FlickrResult<CSVFiles>>(ms);
+        var result = FlickrConvert.DeserializeObject<FlickrResult<CSVFiles>>(Encoding.UTF8.GetBytes(json));
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
