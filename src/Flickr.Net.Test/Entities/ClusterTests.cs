@@ -183,9 +183,8 @@ public class ClusterTests
             }
             """;
 
-        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
 
-        var result = FlickrConvert.DeserializeObject<FlickrResult<Clusters>>(ms);
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Clusters>>(Encoding.UTF8.GetBytes(json));
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
@@ -433,9 +432,7 @@ public class ClusterTests
             }
             """;
 
-        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-
-        var result = FlickrConvert.DeserializeObject<FlickrResult<ClusterPhotos>>(ms);
+        var result = FlickrConvert.DeserializeObject<FlickrResult<ClusterPhotos>>(Encoding.UTF8.GetBytes(json));
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
@@ -2567,9 +2564,7 @@ public class ClusterTests
             }
             """;
 
-        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-
-        var result = FlickrConvert.DeserializeObject<FlickrStatsResult<Hottags>>(ms);
+        var result = FlickrConvert.DeserializeObject<FlickrStatsResult<Hottags>>(Encoding.UTF8.GetBytes(json));
 
         Assert.NotNull(result);
         Assert.False(result.HasError);

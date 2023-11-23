@@ -44,9 +44,7 @@ public class GroupTests
             }
             """;
 
-        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-
-        var result = FlickrConvert.DeserializeObject<FlickrResult<GroupInfo>>(ms);
+        var result = FlickrConvert.DeserializeObject<FlickrResult<GroupInfo>>(Encoding.UTF8.GetBytes(json));
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
@@ -111,9 +109,7 @@ public class GroupTests
             }
             """;
 
-        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-
-        var result = FlickrConvert.DeserializeObject<FlickrResult<Groups>>(ms);
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Groups>>(Encoding.UTF8.GetBytes(json));
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
@@ -1245,9 +1241,7 @@ public class GroupTests
             }
             """;
 
-        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-
-        var result = FlickrConvert.DeserializeObject<FlickrResult<Groups>>(ms);
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Groups>>(Encoding.UTF8.GetBytes(json));
 
         Assert.NotNull(result);
         Assert.False(result.HasError);

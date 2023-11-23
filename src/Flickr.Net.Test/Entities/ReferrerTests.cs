@@ -6,10 +6,10 @@ namespace Flickr.Net.Test.Entities;
 
 public class ReferrerTests
 {
-    [Fact]
-    public void JsonStringToReferrers()
-    {
-        var json = /*lang=json,strict*/ """
+  [Fact]
+  public void JsonStringToReferrers()
+  {
+    var json = /*lang=json,strict*/ """
             {
               "stat": "ok",
               "domain": {
@@ -37,18 +37,16 @@ public class ReferrerTests
             }
             """;
 
-        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
+    var result = FlickrConvert.DeserializeObject<FlickrResult<Referrers>>(Encoding.UTF8.GetBytes(json));
 
-        var result = FlickrConvert.DeserializeObject<FlickrResult<Referrers>>(ms);
-
-        Assert.NotNull(result);
-        Assert.False(result.HasError);
-        var items = result.Content;
-        Assert.IsType<Referrers>(items);
-        Assert.NotEmpty(items.Values);
-        Assert.Equal(items.Total, items.Values.Count);
-        Assert.Equal(11, items.Values[0].Views);
-        Assert.Equal(8, items.Values[1].Views);
-        Assert.Equal(2, items.Values[2].Views);
-    }
+    Assert.NotNull(result);
+    Assert.False(result.HasError);
+    var items = result.Content;
+    Assert.IsType<Referrers>(items);
+    Assert.NotEmpty(items.Values);
+    Assert.Equal(items.Total, items.Values.Count);
+    Assert.Equal(11, items.Values[0].Views);
+    Assert.Equal(8, items.Values[1].Views);
+    Assert.Equal(2, items.Values[2].Views);
+  }
 }

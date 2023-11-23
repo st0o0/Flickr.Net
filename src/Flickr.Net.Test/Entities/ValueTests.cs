@@ -41,9 +41,7 @@ public class ValueTests
             }
             """;
 
-        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-
-        var result = FlickrConvert.DeserializeObject<FlickrResult<Values>>(ms);
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Values>>(Encoding.UTF8.GetBytes(json));
 
         Assert.NotNull(result);
         Assert.False(result.HasError);

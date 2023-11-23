@@ -63,9 +63,7 @@ public class ContactTests
             }
             """;
 
-        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-
-        var result = FlickrConvert.DeserializeObject<FlickrResult<Contacts>>(ms);
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Contacts>>(Encoding.UTF8.GetBytes(json));
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
