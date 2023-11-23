@@ -28,9 +28,7 @@ public class PandaTests
             }
             """;
 
-        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-
-        var result = FlickrConvert.DeserializeObject<FlickrResult<Pandas>>(ms);
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Pandas>>(Encoding.UTF8.GetBytes(json));
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
@@ -75,9 +73,7 @@ public class PandaTests
             }
             """;
 
-        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-
-        var result = FlickrConvert.DeserializeObject<FlickrResult<PandaPhotos>>(ms);
+        var result = FlickrConvert.DeserializeObject<FlickrResult<PandaPhotos>>(Encoding.UTF8.GetBytes(json));
 
         Assert.NotNull(result);
         Assert.False(result.HasError);

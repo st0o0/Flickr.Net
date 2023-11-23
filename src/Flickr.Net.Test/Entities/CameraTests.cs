@@ -48,9 +48,8 @@ public class CameraTests
             }
             """;
 
-        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
 
-        var result = FlickrConvert.DeserializeObject<FlickrResult<Cameras>>(ms);
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Cameras>>(Encoding.UTF8.GetBytes(json));
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
@@ -89,9 +88,7 @@ public class CameraTests
             }
             """;
 
-        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-
-        var result = FlickrConvert.DeserializeObject<FlickrResult<Brands>>(ms);
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Brands>>(Encoding.UTF8.GetBytes(json));
 
         Assert.NotNull(result);
         Assert.False(result.HasError);

@@ -170,9 +170,7 @@ public class TagTests
             }
             """;
 
-        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-
-        var result = FlickrConvert.DeserializeObject<FlickrResult<Tags>>(ms);
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Tags>>(Encoding.UTF8.GetBytes(json));
 
         Assert.NotNull(result);
         Assert.False(result.HasError);

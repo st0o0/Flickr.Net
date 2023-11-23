@@ -40,9 +40,7 @@ public class PhotosetTests
             }
             """;
 
-        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-
-        var result = FlickrConvert.DeserializeObject<FlickrResult<Photoset>>(ms);
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Photoset>>(Encoding.UTF8.GetBytes(json));
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
@@ -2332,9 +2330,7 @@ public class PhotosetTests
             }
             """;
 
-        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-
-        var result = FlickrConvert.DeserializeObject<FlickrResult<Photosets>>(ms);
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Photosets>>(Encoding.UTF8.GetBytes(json));
 
         Assert.NotNull(result);
         Assert.False(result.HasError);

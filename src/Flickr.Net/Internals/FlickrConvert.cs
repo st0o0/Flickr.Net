@@ -15,9 +15,9 @@ public static class FlickrConvert
 {
     /// <summary>
     /// </summary>
-    public static T DeserializeObject<T>(Stream jsonTextStream)
+    public static T DeserializeObject<T>(byte[] bytes)
     {
-        return System.Text.Json.JsonSerializer.Deserialize<T>(jsonTextStream, Options);
+        return System.Text.Json.JsonSerializer.Deserialize<T>(bytes, Options);
     }
 
     /// <summary>

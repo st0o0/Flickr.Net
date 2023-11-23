@@ -62,9 +62,8 @@ public class CollectionTests
               }
             }
             """;
-        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
 
-        var result = FlickrConvert.DeserializeObject<FlickrResult<Collection>>(ms);
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Collection>>(Encoding.UTF8.GetBytes(json));
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
@@ -130,9 +129,7 @@ public class CollectionTests
             }
             """;
 
-        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-
-        var result = FlickrConvert.DeserializeObject<FlickrResult<Collections>>(ms);
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Collections>>(Encoding.UTF8.GetBytes(json));
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
