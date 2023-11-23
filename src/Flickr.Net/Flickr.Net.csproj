@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.*" />
+    <PackageReference Include="System.Text.Json" Version="8.0.*" />
+  </ItemGroup>
+
+    <PropertyGroup>
+        <VSTestLogger>trx%3bLogFileName=$(MSBuildProjectName).trx</VSTestLogger>
+        <VSTestResultsDirectory>$(MSBuildThisFileDirectory)/TestResults/$(TargetFramework)</VSTestResultsDirectory>
+        <Title>Flickr API Client</Title>
+        <Description>
+            The API is an HTTP-based interface created for developers keen on building application for Flickr.
+        </Description>
+        <Authors>st0o0</Authors>
+        <Copyright>© | 2023 | st0o0 | Germany</Copyright>
+        <RepositoryUrl>https://github.com/st0o0/Flickr.Net.git</RepositoryUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/st0o0/Flickr.Net</PackageProjectUrl>
+        <PackageTags>Flickr;Api;Photo;Video</PackageTags>
+        <PackAsTool>False</PackAsTool>
+        <Company />
+        <GenerateDocumentationFile>True</GenerateDocumentationFile>
+        <DocumentationFile>$(ProjectDir)..\..\docs\SandCastleDocuments.xml</DocumentationFile>
+        <AssemblyName>Flickr.Net</AssemblyName>
+    </PropertyGroup>
+
+</Project>

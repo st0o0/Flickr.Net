@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flickr.Net.Core", "Flickr.Net.Core\Flickr.Net.Core.csproj", "{B96AD97A-883E-4A2A-B094-CE4202D48AD5}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flickr.Net.Core.Test", "Flickr.Net.Core.Test\Flickr.Net.Core.Test.csproj", "{32B37753-CEA2-4069-9455-0A7EC9EC6E2B}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A59BAE84-70E2-46A0-9E26-7413C103E2D7}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		NuGet.Config = NuGet.Config
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flickr.Net", "Flickr.Net\Flickr.Net.csproj", "{D72B5050-6BF3-4E05-B51B-4ECDDC24FE12}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flickr.Net.Test", "Flickr.Net.Test\Flickr.Net.Test.csproj", "{CF772D1A-9C57-4FA7-BB93-66D8085AF681}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +19,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B96AD97A-883E-4A2A-B094-CE4202D48AD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B96AD97A-883E-4A2A-B094-CE4202D48AD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B96AD97A-883E-4A2A-B094-CE4202D48AD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B96AD97A-883E-4A2A-B094-CE4202D48AD5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{32B37753-CEA2-4069-9455-0A7EC9EC6E2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{32B37753-CEA2-4069-9455-0A7EC9EC6E2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{32B37753-CEA2-4069-9455-0A7EC9EC6E2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{32B37753-CEA2-4069-9455-0A7EC9EC6E2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D72B5050-6BF3-4E05-B51B-4ECDDC24FE12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D72B5050-6BF3-4E05-B51B-4ECDDC24FE12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D72B5050-6BF3-4E05-B51B-4ECDDC24FE12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D72B5050-6BF3-4E05-B51B-4ECDDC24FE12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF772D1A-9C57-4FA7-BB93-66D8085AF681}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF772D1A-9C57-4FA7-BB93-66D8085AF681}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF772D1A-9C57-4FA7-BB93-66D8085AF681}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF772D1A-9C57-4FA7-BB93-66D8085AF681}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
