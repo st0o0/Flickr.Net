@@ -1,11 +1,10 @@
 trigger:
   branches:
     exclude:
-      - master
       - gh-pages
   paths:
     exclude:
-      - '.github'
+      - ".github"
       - docs
       - README.md
       - CHANGELOG.md
@@ -42,46 +41,46 @@ stages:
               includePreviewVersions: $(netIncludePreview)
 
           - task: DotNetCoreCLI@2
-            displayName: 'Restore NuGet dependencies'
+            displayName: "Restore NuGet dependencies"
             inputs:
-              command: 'restore'
-              projects: '$(projectPath)'
-              feedsToUse: 'select'
+              command: "restore"
+              projects: "$(projectPath)"
+              feedsToUse: "select"
               vstsFeed: $(internalFeedName)
-              includeNuGetOrg: true  
+              includeNuGetOrg: true
 
           - task: gitversion/setup@0
-            displayName: 'Setup git version'
+            displayName: "Setup git version"
             inputs:
-              versionSpec: '5.x'
+              versionSpec: "5.x"
 
           - task: gitversion/execute@0
-            displayName: 'Calculate git version'
+            displayName: "Calculate git version"
             inputs:
-              additionalArguments: '/updateprojectfiles'
+              additionalArguments: "/updateprojectfiles"
 
           - task: DotNetCoreCLI@2
-            displayName: 'Build projects [$(buildConfiguration)]'
+            displayName: "Build projects [$(buildConfiguration)]"
             inputs:
-              command: 'build'
-              projects: '$(projectPath)'
-              arguments: '--configuration $(buildConfiguration) --no-restore'
+              command: "build"
+              projects: "$(projectPath)"
+              arguments: "--configuration $(buildConfiguration) --no-restore"
               versioningScheme: byEnvVar
-              versionEnvVar: 'GitVersion.SemVer'
-          
+              versionEnvVar: "GitVersion.SemVer"
+
           - task: DotNetCoreCLI@2
-            displayName: 'Create NuGet package'
+            displayName: "Create NuGet package"
             inputs:
-              command: 'pack'
-              packagesToPack: '**/*.csproj;!**/*.Test.csproj'
-              versioningScheme: 'byEnvVar'
-              versionEnvVar: 'GitVersion.NuGetVersion'
+              command: "pack"
+              packagesToPack: "**/*.csproj;!**/*.Test.csproj"
+              versioningScheme: "byEnvVar"
+              versionEnvVar: "GitVersion.NuGetVersion"
               packDirectory: $(Build.ArtifactStagingDirectory)/packages/
               configuration: $(buildConfiguration)
-            
+
           - publish: $(Build.ArtifactStagingDirectory)/packages
             artifact: packages
-            
+
   - stage: Test
     dependsOn: Build
     displayName: 🧪 Test
@@ -98,10 +97,10 @@ stages:
               version: $(netSdkVersion)
 
           - task: DotNetCoreCLI@2
-            displayName: 'Run unit tests'
+            displayName: "Run unit tests"
             inputs:
-              command: 'test'
-              projects: '**/*.@(Test|Tests).csproj'
+              command: "test"
+              projects: "**/*.@(Test|Tests).csproj"
               arguments: >-
                 --configuration $(buildConfiguration) 
                 --collect:"XPlat Code Coverage"
@@ -110,7 +109,7 @@ stages:
               publishTestResults: true
 
           - task: PublishCodeCoverageResults@1
-            displayName: 'Publish code coverage'
+            displayName: "Publish code coverage"
             inputs:
               codeCoverageTool: Cobertura
               summaryFileLocation: $(Agent.TempDirectory)/*/coverage.cobertura.xml
@@ -124,7 +123,9 @@ stages:
         pool:
           vmImage: $(vmImage)
         steps:
-          - checkout: none
+          - checkout: self
+            fetchDepth: 0
+            persistCredentials: true
           - download: current
             artifact: packages
           - task: UseDotNet@2
@@ -132,16 +133,12 @@ stages:
             inputs:
               packageType: sdk
               version: $(netSdkVersion)
-              
-          - task: NuGetAuthenticate@1
-            displayName: 'NuGet Authenticate'
 
           - task: NuGetCommand@2
-            displayName: Publish CI package to Azure artifacts
+            displayName: Push CI Packages To Orga Feed
             inputs:
-              command: 'push'
-              packagesToPush: $(Pipeline.Workspace)/packages/*.*upkg
-              nuGetFeedType: 'internal'
-              vstsFeed: $(internalFeedName)
-              publishVstsFeed: $(internalFeedName)
+              command: "push"
+              packagesToPush: "$(Pipeline.Workspace)/packages/*.*upkg"
+              nuGetFeedType: "internal"
+              publishVstsFeed: "df073d1b-6358-4e76-b320-21161d87d536/4089c11d-57f8-4cc1-845f-8811a243c480"
               allowPackageConflicts: true
