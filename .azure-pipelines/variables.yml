@@ -2,7 +2,7 @@ variables:
   - name: netSdkVersion
     value: 8.0.x
   - name: netIncludePreview
-    value: true
+    value: false
   - name: buildConfiguration
     value: Release
   - name: vmImage
