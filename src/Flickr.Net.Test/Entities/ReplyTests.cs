@@ -7,10 +7,10 @@ namespace Flickr.Net.Test.Entities;
 
 public class ReplyTests
 {
-    [Fact]
-    public void JsonStringToReply()
-    {
-        var json = /*lang=json,strict*/ """
+  [Fact]
+  public void JsonStringToReply()
+  {
+    var json = /*lang=json,strict*/ """
             {
               "stat": "ok",
               "reply": {
@@ -33,23 +33,23 @@ public class ReplyTests
             }
             """;
 
-        var result = FlickrConvert.DeserializeObject<FlickrResult<Reply>>(Encoding.UTF8.GetBytes(json));
+    var result = FlickrConvert.DeserializeObject<FlickrResult<Reply>>(Encoding.UTF8.GetBytes(json));
 
-        Assert.NotNull(result);
-        Assert.False(result.HasError);
-        var items = result.Content;
-        Assert.IsType<Reply>(items);
-        Assert.IsType<MemberType>(items.Role);
-        Assert.Equal(MemberType.Admin, items.Role);
-        Assert.False(items.IsPro);
-        Assert.True(items.CanEdit);
-        Assert.True(items.CanDelete);
-    }
+    Assert.NotNull(result);
+    Assert.False(result.HasError);
+    var items = result.Content;
+    Assert.IsType<Reply>(items);
+    Assert.IsType<MemberType>(items.Role);
+    Assert.Equal(MemberType.Admin, items.Role);
+    Assert.False(items.IsPro);
+    Assert.True(items.CanEdit);
+    Assert.True(items.CanDelete);
+  }
 
-    [Fact]
-    public void JsonStringToReplies()
-    {
-        var json = /*lang=json,strict*/ """
+  [Fact]
+  public void JsonStringToReplies()
+  {
+    var json = /*lang=json,strict*/ """
             {
               "stat": "ok",
               "replies": {
@@ -132,20 +132,20 @@ public class ReplyTests
             }
             """;
 
-        var result = FlickrConvert.DeserializeObject<FlickrResult<Replies>>(Encoding.UTF8.GetBytes(json));
+    var result = FlickrConvert.DeserializeObject<FlickrResult<Replies>>(Encoding.UTF8.GetBytes(json));
 
-        Assert.NotNull(result);
-        Assert.False(result.HasError);
-        var items = result.Content;
-        Assert.IsType<Topic>(items.Topic);
-        Assert.Equal(8, items.Topic.Total);
-        Assert.False(items.Topic.IsSticky);
-        Assert.False(items.Topic.IsLocked);
-        Assert.False(items.Topic.CanReply);
-        Assert.False(items.Topic.CanDelete);
-        Assert.False(items.Topic.CanEdit);
-        Assert.IsType<Reply>(items.Values[0]);
-        Assert.IsType<MemberType>(items.Values[0].Role);
-        Assert.Equal(MemberType.Member, items.Values[0].Role);
-    }
+    Assert.NotNull(result);
+    Assert.False(result.HasError);
+    var items = result.Content;
+    Assert.IsType<Topic>(items.Topic);
+    Assert.Equal(8, items.Topic.Total);
+    Assert.False(items.Topic.IsSticky);
+    Assert.False(items.Topic.IsLocked);
+    Assert.False(items.Topic.CanReply);
+    Assert.False(items.Topic.CanDelete);
+    Assert.False(items.Topic.CanEdit);
+    Assert.IsType<Reply>(items.Values[0]);
+    Assert.IsType<MemberType>(items.Values[0].Role);
+    Assert.Equal(MemberType.Member, items.Values[0].Role);
+  }
 }
