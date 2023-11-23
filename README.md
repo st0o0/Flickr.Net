@@ -1,9 +1,9 @@
-# Flickr.Net.Core
+# Flickr.Net
 
-[![NuGet](https://img.shields.io/nuget/v/Flickr.Net.Core.svg?style=flat-square)](https://www.nuget.org/packages/Flickr.Net.Core)
-[![Nuget](https://img.shields.io/nuget/dt/Flickr.Net.Core)](https://www.nuget.org/packages/Flickr.Net.Core)
+[![NuGet](https://img.shields.io/nuget/v/Flickr.Net.svg?style=flat-square)](https://www.nuget.org/packages/Flickr.Net)
+[![Nuget](https://img.shields.io/nuget/dt/Flickr.Net)](https://www.nuget.org/packages/Flickr.Net)
 
-## How is Flickr.Net.Core Used?
+## How is Flickr.Net Used?
 
 WIP
 
@@ -16,8 +16,8 @@ WIP
 
 ## Install Flickr.Net via NuGet
 
-If you want to include Flickr.Net.Core in your project, you can [install it directly from NuGet](https://www.nuget.org/packages/Flickr.Net.Core/)
+If you want to include Flickr.Net in your project, you can [install it directly from NuGet](https://www.nuget.org/packages/Flickr.Net/)
 
 ```
-PM> Install-Package Flickr.Net.Core
+PM> Install-Package Flickr.Net
 ```
