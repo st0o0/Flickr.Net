@@ -47,7 +47,7 @@ stages:
           - task: gitversion/setup@0
             displayName: "Setup git version"
             inputs:
-              versionSpec: "5.x"
+              versionSpec: "5.12"
 
           - task: gitversion/execute@0
             displayName: "Calculate git version"
@@ -137,7 +137,7 @@ stages:
                 - task: gitversion/setup@0
                   displayName: "Setup git version"
                   inputs:
-                    versionSpec: "5.x"
+                    versionSpec: "5.12"
 
                 - task: gitversion/execute@0
                   displayName: "Calculate git version"
