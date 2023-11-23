@@ -6,7 +6,12 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"ms-dotnettools.csharp"
+				"ms-dotnettools.csharp",
+				"ms-dotnettools.csdevkit",
+				"mhutchie.git-graph",
+				"vivaxy.vscode-conventional-commits",
+				"GitHub.vscode-pull-request-github",
+				"ms-azure-devops.azure-pipelines"
 			]
 		}
 	}
