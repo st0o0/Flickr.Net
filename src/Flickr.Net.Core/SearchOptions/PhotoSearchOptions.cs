@@ -134,7 +134,7 @@ public record PhotoSearchOptions
     /// <summary>
     /// The licenses you wish to search for.
     /// </summary>
-    public Collection<LicenseType> Licenses { get; init; } = new();
+    public Collection<LicenseType> Licenses { get; init; } = [];
 
     /// <summary>
     /// Optional extras to return, defaults to all. See <see cref="PhotoSearchExtras"/> for more details.
@@ -334,7 +334,7 @@ public record PhotoSearchOptions
 
         var parameters = this.ToDictionary();
 
-        List<string> parts = new();
+        List<string> parts = [];
         foreach (var pair in parameters)
         {
             parts.Add(Uri.EscapeDataString(pair.Key) + "|" + Uri.EscapeDataString(pair.Value));

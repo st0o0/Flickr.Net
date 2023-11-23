@@ -18,7 +18,7 @@ public class IdentifierTypeConverter : System.Text.Json.Serialization.JsonConver
     /// <summary>
     /// </summary>
     public override bool CanConvert(Type typeToConvert)
-        => (typeToConvert) switch
+        => typeToConvert switch
         {
             var value when value == typeof(Id) => true,
             var value when value == typeof(NsId) => true,
@@ -31,7 +31,7 @@ public class IdentifierTypeConverter : System.Text.Json.Serialization.JsonConver
     /// <summary>
     /// </summary>
     public override IdentifierType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-        => (typeToConvert) switch
+        => typeToConvert switch
         {
             var value when value == typeof(Id) => (Id)reader.GetString(),
             var value when value == typeof(NsId) => (NsId)reader.GetString(),

@@ -4,6 +4,8 @@
 /// </summary>
 public class TimestampToDateTimeConverter : System.Text.Json.Serialization.JsonConverter<DateTime>
 {
+    /// <summary>
+    /// </summary>
     public static TimestampToDateTimeConverter Instance { get; } = new();
 
     private static readonly DateTime UnixStartDate = new(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
@@ -12,7 +14,6 @@ public class TimestampToDateTimeConverter : System.Text.Json.Serialization.JsonC
     {
         return UnixStartDate.AddSeconds(timestamp);
     }
-
 
     /// <summary>
     /// </summary>

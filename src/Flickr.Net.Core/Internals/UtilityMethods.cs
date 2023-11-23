@@ -333,7 +333,7 @@ public static class UtilityMethods
     /// <returns></returns>
     public static Dictionary<string, string> StringToDictionary(string response)
     {
-        Dictionary<string, string> dic = new();
+        Dictionary<string, string> dic = [];
 
         if (string.IsNullOrEmpty(response))
         {

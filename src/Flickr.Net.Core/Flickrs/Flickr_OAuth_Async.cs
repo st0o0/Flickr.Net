@@ -71,7 +71,7 @@ public partial class Flickr : IFlickrOAuth
         var key = FlickrSettings.ApiSecret + "&" + tokenSecret;
         var keyBytes = Encoding.UTF8.GetBytes(key);
 
-        SortedList<string, string> sorted = new();
+        SortedList<string, string> sorted = [];
         foreach (var pair in parameters)
         {
             sorted.Add(pair.Key, pair.Value);

@@ -1,7 +1,11 @@
 ﻿namespace Flickr.Net.Core.Extensions;
 
+/// <summary>
+/// </summary>
 public static class IThumbnailUrlExtensions
 {
+    /// <summary>
+    /// </summary>
     public static string ToThumbnailUrl(this IThumbnailUrl value)
     {
         return value switch

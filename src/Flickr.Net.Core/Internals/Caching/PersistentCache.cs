@@ -14,7 +14,7 @@ public sealed class PersistentCache : IDisposable
     // The in-memory representation of the cache. Use SortedList instead of Hashtable only to
     // maintain backward compatibility with previous serialization scheme. If we abandon backward
     // compatibility, we should switch to Hashtable.
-    private Dictionary<string, ICacheItem> dataTable = new();
+    private Dictionary<string, ICacheItem> dataTable = [];
 
     private readonly CacheItemPersister persister;
 
@@ -143,7 +143,7 @@ public sealed class PersistentCache : IDisposable
             throw new ArgumentException("Cannot shrink to a negative size", nameof(size));
         }
 
-        List<ICacheItem> flushed = new();
+        List<ICacheItem> flushed = [];
 
         using (lockFile.Acquire())
         {
@@ -322,7 +322,7 @@ public sealed class PersistentCache : IDisposable
 
     private Dictionary<string, ICacheItem> Load(Stream s)
     {
-        Dictionary<string, ICacheItem> table = new();
+        Dictionary<string, ICacheItem> table = [];
         var itemCount = UtilityMethods.ReadInt32(s);
         for (var i = 0; i < itemCount; i++)
         {

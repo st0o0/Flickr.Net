@@ -4,11 +4,17 @@ using Flickr.Net.Core.Internals.Attributes;
 
 namespace Flickr.Net.Core;
 
+/// <summary>
+/// </summary>
 [FlickrJsonPropertyName("method")]
 public record Method : FlickrEntityBase
 {
+    /// <summary>
+    /// </summary>
     [JsonPropertyName("_content")]
     public string Content { get; set; }
 
+    /// <summary>
+    /// </summary>
     public static implicit operator string(Method method) => method.Content;
 }

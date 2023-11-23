@@ -3,8 +3,12 @@ using Flickr.Net.Core.Bases;
 
 namespace Flickr.Net.Core;
 
+/// <summary>
+/// </summary>
 public record Panda : FlickrEntityBase
 {
+    /// <summary>
+    /// </summary>
     [JsonPropertyName("_content")]
     public string Content { get; set; }
 }

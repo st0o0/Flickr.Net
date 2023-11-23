@@ -1,5 +1,7 @@
 ﻿namespace Flickr.Net.Core.Internals.Extensions;
 
+/// <summary>
+/// </summary>
 public static class ICollectionColorCodeExtensions
 {
     /// <summary>

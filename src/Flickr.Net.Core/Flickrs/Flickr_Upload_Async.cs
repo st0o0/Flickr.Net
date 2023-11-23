@@ -19,7 +19,7 @@ public partial class Flickr : IFlickrUpload
 
         Uri uploadUri = new(UploadUrl);
 
-        Dictionary<string, string> parameters = new();
+        Dictionary<string, string> parameters = [];
 
         parameters.AppendIf("title", title, x => x != null && x.Length > 0, x => x);
 

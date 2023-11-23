@@ -1,7 +1,11 @@
 ﻿namespace Flickr.Net.Core.Extensions;
 
+/// <summary>
+/// </summary>
 public static class IBuddyIconExtensions
 {
+    /// <summary>
+    /// </summary>
     public static string ToBuddyIconUrl(this IBuddyIcon value)
     {
         return value switch

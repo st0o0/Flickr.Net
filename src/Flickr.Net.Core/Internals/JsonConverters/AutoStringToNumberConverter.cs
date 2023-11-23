@@ -2,47 +2,38 @@
 
 namespace Flickr.Net.Core.Internals.JsonConverters;
 
+/// <summary>
+/// </summary>
 public class AutoStringToNumberConverter : System.Text.Json.Serialization.JsonConverter<object>
 {
-    public AutoStringToNumberConverter() : base()
-    {
-    }
+    /// <summary>
+    /// </summary>
+    public static AutoStringToNumberConverter Instance { get; } = new();
 
-    public static AutoStringToNumberConverter Instance { get; } = new ();
-
+    /// <summary>
+    /// </summary>
     public override bool CanConvert(Type typeToConvert)
     {
         // see https://stackoverflow.com/questions/1749966/c-sharp-how-to-determine-whether-a-type-is-a-number
-        switch (Type.GetTypeCode(typeToConvert))
+        return Type.GetTypeCode(typeToConvert) switch
         {
-            case TypeCode.Byte:
-            case TypeCode.SByte:
-            case TypeCode.UInt16:
-            case TypeCode.UInt32:
-            case TypeCode.UInt64:
-            case TypeCode.Int16:
-            case TypeCode.Int32:
-            case TypeCode.Int64:
-            case TypeCode.Decimal:
-            case TypeCode.Double:
-            case TypeCode.Single:
-                return true;
-
-            default:
-                return false;
-        }
+            TypeCode.Byte or TypeCode.SByte or TypeCode.UInt16 or TypeCode.UInt32 or TypeCode.UInt64 or TypeCode.Int16 or TypeCode.Int32 or TypeCode.Int64 or TypeCode.Decimal or TypeCode.Double or TypeCode.Single => true,
+            _ => false,
+        };
     }
 
+    /// <summary>
+    /// </summary>
     public override object Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         if (reader.TokenType == JsonTokenType.String)
         {
             var s = reader.GetString();
-            if (long.TryParse(s, out long l))
+            if (long.TryParse(s, out var l))
             {
                 return Convert.ChangeType(l, typeToConvert);
             }
-            else if (double.TryParse(s, out double d))
+            else if (double.TryParse(s, out var d))
             {
                 return d;
             }
@@ -62,12 +53,12 @@ public class AutoStringToNumberConverter : System.Text.Json.Serialization.JsonCo
                 return reader.GetDouble();
             }
         }
-        using (JsonDocument document = JsonDocument.ParseValue(ref reader))
-        {
-            throw new Exception($"unable to parse {document.RootElement.ToString()} to number");
-        }
+        using var document = JsonDocument.ParseValue(ref reader);
+        throw new Exception($"unable to parse {document.RootElement} to number");
     }
 
+    /// <summary>
+    /// </summary>
     public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
     {
         writer.WriteRawValue(value.ToString());
