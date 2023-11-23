@@ -1,7 +1,11 @@
 ﻿namespace Flickr.Net.Core.Extensions;
 
+/// <summary>
+/// </summary>
 public static class IMediumExtensions
 {
+    /// <summary>
+    /// </summary>
     public static string ToMediumUrl(this IMediumUrl value)
     {
         return value switch

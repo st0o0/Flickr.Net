@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Core.Flickrs.Results;
+﻿using System.Text;
+using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals;
 
 namespace Flickr.Net.Core.Test.Entities;
@@ -27,7 +28,9 @@ public class PandaTests
             }
             """;
 
-        var result = FlickrConvert.DeserializeObject<FlickrResult<Pandas>>(json);
+        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
+
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Pandas>>(ms);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
@@ -72,7 +75,9 @@ public class PandaTests
             }
             """;
 
-        var result = FlickrConvert.DeserializeObject<FlickrResult<PandaPhotos>>(json);
+        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
+
+        var result = FlickrConvert.DeserializeObject<FlickrResult<PandaPhotos>>(ms);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);

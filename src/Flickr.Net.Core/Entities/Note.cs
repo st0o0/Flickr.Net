@@ -1,27 +1,44 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 
 namespace Flickr.Net.Core;
 
+/// <summary>
+/// </summary>
 public record Note : FlickrEntityBase<Id>
 {
-    [JsonProperty("author")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("author")]
     public string Author { get; set; }
 
-    [JsonProperty("authorname")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("authorname")]
     public string Authorname { get; set; }
 
-    [JsonProperty("x")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("x")]
     public int X { get; set; }
 
-    [JsonProperty("y")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("y")]
     public int Y { get; set; }
 
-    [JsonProperty("w")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("w")]
     public int W { get; set; }
 
-    [JsonProperty("h")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("h")]
     public int H { get; set; }
 
-    [JsonProperty("_content")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 }

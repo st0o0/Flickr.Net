@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Core.Flickrs.Results;
+﻿using System.Text;
+using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals;
 
 namespace Flickr.Net.Core.Test.Entities;
@@ -12231,7 +12232,9 @@ public class WhoTests
             }
             """;
 
-        var result = FlickrConvert.DeserializeObject<FlickrResult<Who>>(json);
+        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
+
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Who>>(ms);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
@@ -13856,7 +13859,9 @@ public class WhoTests
             }
             """;
 
-        var result = FlickrConvert.DeserializeObject<FlickrResult<Who>>(json);
+        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
+
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Who>>(ms);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);

@@ -10,6 +10,8 @@ namespace Flickr.Net.Core.Internals;
 public static class UtilityMethods
 {
     private static readonly DateTime UnixStartDate = new(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+    private const string PhotoUrlFormat = "https://farm{0}.staticflickr.com/{1}/{2}_{3}{4}.{5}";
+    private static readonly char[] separator = ['='];
 
     /// <summary>
     /// Encodes a URL quesrystring data component.
@@ -83,9 +85,9 @@ public static class UtilityMethods
         }
     }
 
-    internal static void WriteByteArray(Stream stream, string value)
+    internal static void WriteByteArray(Stream stream, byte[] value)
     {
-        WriteString(stream, value);
+        WriteString(stream, Encoding.UTF8.GetString(value));
     }
 
     internal static int ReadInt32(Stream s)
@@ -123,7 +125,13 @@ public static class UtilityMethods
         return new string(chars);
     }
 
-    private const string PhotoUrlFormat = "https://farm{0}.staticflickr.com/{1}/{2}_{3}{4}.{5}";
+    internal static byte[] ReadByteArray(Stream s)
+    {
+        using var ms = new MemoryStream();
+        s.CopyTo(ms);
+        return ms.ToArray();
+    }
+
 
     /// <summary>
     /// Urls the format.
@@ -153,6 +161,8 @@ public static class UtilityMethods
         }
     }
 
+    /// <summary>
+    /// </summary>
     public static string UrlFormat(Photoset p, SizeType size, string extension)
     {
         return UrlFormat(p.Farm, p.Server, p.Primary, p.Secret, size, extension);
@@ -324,7 +334,7 @@ public static class UtilityMethods
     /// <returns></returns>
     public static Dictionary<string, string> StringToDictionary(string response)
     {
-        Dictionary<string, string> dic = new();
+        Dictionary<string, string> dic = [];
 
         if (string.IsNullOrEmpty(response))
         {
@@ -335,7 +345,7 @@ public static class UtilityMethods
 
         foreach (var part in parts)
         {
-            var bits = part.Split(new[] { '=' }, 2, StringSplitOptions.RemoveEmptyEntries);
+            var bits = part.Split(separator, 2, StringSplitOptions.RemoveEmptyEntries);
             dic.Add(bits[0], bits.Length == 1 ? "" : Uri.UnescapeDataString(bits[1]));
         }
 
@@ -377,9 +387,9 @@ public static class UtilityMethods
     /// <returns>A string.</returns>
     public static string CleanCollectionId(string collectionId)
     {
-        return collectionId.IndexOf("-", StringComparison.Ordinal) < 0
+        return collectionId.IndexOf('-') < 0
                    ? collectionId
-                   : collectionId[(collectionId.IndexOf("-", StringComparison.Ordinal) + 1)..];
+                   : collectionId[(collectionId.IndexOf('-') + 1)..];
     }
 
     internal static string EscapeDataString(string value)

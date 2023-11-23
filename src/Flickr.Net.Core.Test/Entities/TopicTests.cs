@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Core.Enums;
+﻿using System.Text;
+using Flickr.Net.Core.Enums;
 using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals;
 
@@ -67,7 +68,9 @@ public class TopicTests
             }
             """;
 
-        var result = FlickrConvert.DeserializeObject<FlickrResult<Topics>>(json);
+        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
+
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Topics>>(ms);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
@@ -124,7 +127,9 @@ public class TopicTests
             }
             """;
 
-        var result = FlickrConvert.DeserializeObject<FlickrResult<TopicNames>>(json);
+        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
+
+        var result = FlickrConvert.DeserializeObject<FlickrResult<TopicNames>>(ms);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);

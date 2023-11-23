@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Core.Enums;
+﻿using System.Text;
+using Flickr.Net.Core.Enums;
 using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals;
 
@@ -24,7 +25,9 @@ public class OAuthTests
             }
             """;
 
-        var result = FlickrConvert.DeserializeObject<FlickrResult<OAuth>>(json);
+        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
+
+        var result = FlickrConvert.DeserializeObject<FlickrResult<OAuth>>(ms);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);

@@ -1,12 +1,19 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 
 namespace Flickr.Net.Core;
 
+/// <summary>
+/// </summary>
 public record GeoPerms : FlickrEntityBase<NsId>
 {
-    [JsonProperty("geoperms")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("geoperms")]
     public GeoPermissionType GeoPermissions { get; set; }
 
-    [JsonProperty("importgeoexif")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("importgeoexif")]
     public bool ImportGeoExif { get; set; }
 }

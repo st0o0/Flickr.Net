@@ -1,15 +1,24 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 
 namespace Flickr.Net.Core;
 
+/// <summary>
+/// </summary>
 public record License : FlickrEntityBase
 {
-    [JsonProperty("id")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("id")]
     public int Id { get; set; }
 
-    [JsonProperty("name")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("name")]
     public string Name { get; set; }
 
-    [JsonProperty("url")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("url")]
     public string Url { get; set; }
 }

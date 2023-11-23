@@ -1,6 +1,7 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json;
+using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 using Flickr.Net.Core.Internals.Attributes;
-using Newtonsoft.Json.Linq;
 
 namespace Flickr.Net.Core.Flickrs.Results;
 
@@ -27,19 +28,21 @@ public record FlickrResult : IFlickrEntity
     /// </summary>
     public bool HasError => State != "ok" || ErrorCode > 0;
 
-    [JsonProperty("stat")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("stat")]
     public virtual string State { get; set; } = string.Empty;
 
     /// <summary>
     /// If an error was returned by the Flickr API then this will contain the error code.
     /// </summary>
-    [JsonProperty("code")]
+    [JsonPropertyName("code")]
     public int ErrorCode { get; set; } = int.MinValue;
 
     /// <summary>
     /// If an error was returned by the Flickr API then this will contain the error message.
     /// </summary>
-    [JsonProperty("message")]
+    [JsonPropertyName("message")]
     public string ErrorMessage { get; set; } = string.Empty;
 }
 
@@ -51,7 +54,7 @@ public record FlickrContextResult<TNextPhoto, TPrevPhoto> : FlickrResult where T
 {
     /// <summary>
     /// </summary>
-    [JsonProperty("count")]
+    [JsonPropertyName("count")]
     public Count Count { get; set; }
 
     /// <summary>
@@ -100,10 +103,14 @@ public record FlickrUnknownResult<T> : FlickrResult where T : UnknownResponse
 /// <typeparam name="T"></typeparam>
 public record FlickrStatsResult<T> : FlickrResult<T> where T : IFlickrEntity
 {
-    [JsonProperty("period")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("period")]
     public string Period { get; set; }
 
-    [JsonProperty("count")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("count")]
     public int Count { get; set; }
 }
 
@@ -111,19 +118,31 @@ public record FlickrStatsResult<T> : FlickrResult<T> where T : IFlickrEntity
 /// </summary>
 public record FlickrExtendedDataResult : FlickrResult
 {
-    [JsonProperty("@stat")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("@stat")]
     public override string State { get; set; } = string.Empty;
 
+    /// <summary>
+    /// </summary>
     [JsonExtensionData]
-    public IDictionary<string, JToken> Content { get; set; }
+    public IDictionary<string, JsonElement> Content { get; set; }
 }
 
+/// <summary>
+/// </summary>
 public struct Count
 {
-    [JsonProperty("_content")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("_content")]
     public int Content { get; set; }
 
+    /// <summary>
+    /// </summary>
     public static implicit operator int(Count count) => count.Content;
 
+    /// <summary>
+    /// </summary>
     public static implicit operator Count(int count) => new() { Content = count };
 }

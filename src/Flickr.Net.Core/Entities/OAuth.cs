@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 using Flickr.Net.Core.Internals.Attributes;
 
 namespace Flickr.Net.Core;
@@ -14,18 +15,18 @@ public sealed record OAuth : FlickrEntityBase
     /// cref="IFlickrOAuth.GetAccessTokenAsync(OAuthRequestToken, string, CancellationToken)"/> or
     /// <see cref="IFlickrOAuth.CheckTokenAsync(CancellationToken)"/> methods.
     /// </summary>
-    [JsonProperty("token")]
+    [JsonPropertyName("token")]
     public string Token { get; set; }
 
     /// <summary>
     /// The permissions the current token allows the application to perform.
     /// </summary>
-    [JsonProperty("perms")]
+    [JsonPropertyName("perms")]
     public AuthLevel Perms { get; set; }
 
     /// <summary>
     /// The <see cref="User"/> object associated with the token. Readonly.
     /// </summary>
-    [JsonProperty("user")]
+    [JsonPropertyName("user")]
     public User User { get; set; }
 }

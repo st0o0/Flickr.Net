@@ -9,39 +9,32 @@ namespace Flickr.Net.Core.Internals.Caching;
 /// All public methods that read or write state must be protected by the lockFile. Private methods
 /// should not acquire the lockFile as it is not reentrant.
 /// </summary>
-public sealed class PersistentCache : IDisposable
+/// <remarks>
+/// Initializes a new instance of the <see cref="PersistentCache"/> for the given filename and
+/// cache type.
+/// </remarks>
+/// <param name="filename"></param>
+/// <param name="persister"></param>
+public sealed class PersistentCache(string filename, CacheItemPersister persister) : IDisposable
 {
     // The in-memory representation of the cache. Use SortedList instead of Hashtable only to
     // maintain backward compatibility with previous serialization scheme. If we abandon backward
     // compatibility, we should switch to Hashtable.
-    private Dictionary<string, ICacheItem> dataTable = new();
+    private Dictionary<string, ICacheItem> dataTable = [];
 
-    private readonly CacheItemPersister persister;
+    private readonly CacheItemPersister persister = persister;
 
     // true if dataTable contains changes vs. on-disk representation
     private bool dirty;
 
     // The persistent file representation of the cache.
-    private readonly FileInfo dataFile;
+    private readonly FileInfo dataFile = new FileInfo(filename);
 
     private DateTime timestamp;  // last-modified time of dataFile when cache data was last known to be in sync
     private long length;         // length of dataFile when cache data was last known to be in sync
 
     // The file-based mutex. Named (dataFile.FullName + ".lock")
-    private readonly LockFile lockFile;
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="PersistentCache"/> for the given filename and
-    /// cache type.
-    /// </summary>
-    /// <param name="filename"></param>
-    /// <param name="persister"></param>
-    public PersistentCache(string filename, CacheItemPersister persister)
-    {
-        this.persister = persister;
-        dataFile = new FileInfo(filename);
-        lockFile = new LockFile(filename + ".lock");
-    }
+    private readonly LockFile lockFile = new LockFile(filename + ".lock");
 
     /// <summary>
     /// Return all items in the cache. Works similarly to ArrayList.ToArray(Type).
@@ -76,10 +69,7 @@ public sealed class PersistentCache : IDisposable
                 oldItem = InternalSet(key, value);
                 Persist();
             }
-            if (oldItem != null)
-            {
-                oldItem.OnItemFlushed();
-            }
+            oldItem?.OnItemFlushed();
         }
     }
 
@@ -143,7 +133,7 @@ public sealed class PersistentCache : IDisposable
             throw new ArgumentException("Cannot shrink to a negative size", nameof(size));
         }
 
-        List<ICacheItem> flushed = new();
+        List<ICacheItem> flushed = [];
 
         using (lockFile.Acquire())
         {
@@ -174,10 +164,7 @@ public sealed class PersistentCache : IDisposable
         foreach (var flushedItem in flushed)
         {
             Debug.Assert(flushedItem != null, "Flushed item was null--programmer error");
-            if (flushedItem != null)
-            {
-                flushedItem.OnItemFlushed();
-            }
+            flushedItem?.OnItemFlushed();
         }
     }
 
@@ -216,50 +203,50 @@ public sealed class PersistentCache : IDisposable
 
     private ICacheItem InternalGet(string key)
     {
-        if (key == null)
+        if (key != null)
         {
-            throw new ArgumentNullException(nameof(key));
+            if (dataTable.TryGetValue(key, out var value))
+            {
+                return value;
+            }
+            else
+            {
+                return null;
+            }
         }
 
-        if (dataTable.ContainsKey(key))
-        {
-            return dataTable[key];
-        }
-        else
-        {
-            return null;
-        }
+        throw new ArgumentNullException(nameof(key));
     }
 
     /// <returns>The old value associated with <c>key</c>, if any.</returns>
     private ICacheItem InternalSet(string key, ICacheItem value)
     {
-        if (key == null)
+        if (key != null)
         {
-            throw new ArgumentNullException(nameof(key));
+            ICacheItem flushedItem;
+
+            flushedItem = RemoveKey(key);
+            if (value != null)  // don't ever let nulls get in
+            {
+                dataTable[key] = value;
+            }
+
+            dirty = dirty || !ReferenceEquals(flushedItem, value);
+
+            return flushedItem;
         }
 
-        ICacheItem flushedItem;
-
-        flushedItem = RemoveKey(key);
-        if (value != null)  // don't ever let nulls get in
-        {
-            dataTable[key] = value;
-        }
-
-        dirty = dirty || !ReferenceEquals(flushedItem, value);
-
-        return flushedItem;
+        throw new ArgumentNullException(nameof(key));
     }
 
     private ICacheItem RemoveKey(string key)
     {
-        if (!dataTable.ContainsKey(key))
+        if (!dataTable.TryGetValue(key, out var value))
         {
             return null;
         }
 
-        var cacheItem = dataTable[key];
+        var cacheItem = value;
         dataTable.Remove(key);
         dirty = true;
         return cacheItem;
@@ -322,7 +309,7 @@ public sealed class PersistentCache : IDisposable
 
     private Dictionary<string, ICacheItem> Load(Stream s)
     {
-        Dictionary<string, ICacheItem> table = new();
+        Dictionary<string, ICacheItem> table = [];
         var itemCount = UtilityMethods.ReadInt32(s);
         for (var i = 0; i < itemCount; i++)
         {
@@ -365,9 +352,6 @@ public sealed class PersistentCache : IDisposable
 
     void IDisposable.Dispose()
     {
-        if (lockFile != null)
-        {
-            lockFile.Dispose();
-        }
+        lockFile?.Dispose();
     }
 }

@@ -1,77 +1,126 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 using Flickr.Net.Core.Internals.Attributes;
 
 namespace Flickr.Net.Core;
 
+/// <summary>
+/// </summary>
 [FlickrJsonPropertyName("topic")]
 public record Topic : FlickrEntityBase, IBuddyIcon
 {
-    [JsonProperty("topic_id")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("topic_id")]
     public string TopicId { get; set; }
 
-    [JsonProperty("subject")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("subject")]
     public string Subject { get; set; }
 
-    [JsonProperty("group_id")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("group_id")]
     public string GroupId { get; set; }
 
-    [JsonProperty("iconserver")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("iconserver")]
     public string Iconserver { get; set; }
 
-    [JsonProperty("iconfarm")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("iconfarm")]
     public string Iconfarm { get; set; }
 
-    [JsonProperty("name")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("name")]
     public string Name { get; set; }
 
-    [JsonProperty("author")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("author")]
     public string Author { get; set; }
 
-    [JsonProperty("authorname")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("authorname")]
     public string AuthorName { get; set; }
 
-    [JsonProperty("role")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("role")]
     public MemberType Role { get; set; }
 
-    [JsonProperty("author_iconserver")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("author_iconserver")]
     public string AuthorIconServer { get; set; }
 
-    [JsonProperty("author_iconfarm")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("author_iconfarm")]
     public string AuthorIconFarm { get; set; }
 
-    [JsonProperty("can_edit")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("can_edit")]
     public bool CanEdit { get; set; }
 
-    [JsonProperty("can_delete")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("can_delete")]
     public bool CanDelete { get; set; }
 
-    [JsonProperty("can_reply")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("can_reply")]
     public bool CanReply { get; set; }
 
-    [JsonProperty("is_sticky")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("is_sticky")]
     public bool IsSticky { get; set; }
 
-    [JsonProperty("is_locked")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("is_locked")]
     public bool IsLocked { get; set; }
 
-    [JsonProperty("datecreate")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("datecreate")]
     public DateTime CreateDate { get; set; }
 
-    [JsonProperty("datelastpost")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("datelastpost")]
     public DateTime LastPostDate { get; set; }
 
-    [JsonProperty("total")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("total")]
     public int Total { get; set; }
 
-    [JsonProperty("page")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("page")]
     public int Page { get; set; }
 
-    [JsonProperty("per_page")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("per_page")]
     public int PerPage { get; set; }
 
-    [JsonProperty("pages")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("pages")]
     public int Pages { get; set; }
 
-    [JsonProperty("message")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("message")]
     public string Message { get; set; }
 }

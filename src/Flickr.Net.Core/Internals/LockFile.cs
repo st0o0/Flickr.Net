@@ -99,14 +99,9 @@ internal class LockFile : IDisposable
         }
     }
 
-    private class DisposeHelper : IDisposable
+    private class DisposeHelper(LockFile lockFile) : IDisposable
     {
-        private readonly LockFile lockFile;
-
-        public DisposeHelper(LockFile lockFile)
-        {
-            this.lockFile = lockFile;
-        }
+        private readonly LockFile lockFile = lockFile;
 
         public void Dispose()
         {

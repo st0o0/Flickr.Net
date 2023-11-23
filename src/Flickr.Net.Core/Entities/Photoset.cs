@@ -1,60 +1,99 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 
 namespace Flickr.Net.Core;
 
+/// <summary>
+/// </summary>
 public record Photoset : FlickrEntityBase<Id>, IThumbnailUrl, ISquareUrl, ISmallUrl
 {
-    [JsonProperty("owner")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("owner")]
     public string Owner { get; set; }
 
-    [JsonProperty("username")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("username")]
     public string Username { get; set; }
 
-    [JsonProperty("primary")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("primary")]
     public string Primary { get; set; }
 
-    [JsonProperty("secret")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("secret")]
     public string Secret { get; set; }
 
-    [JsonProperty("server")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("server")]
     public string Server { get; set; }
 
-    [JsonProperty("farm")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("farm")]
     public int Farm { get; set; }
 
-    [JsonProperty("count_views")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("count_views")]
     public int ViewsCount { get; set; }
 
-    [JsonProperty("count_comments")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("count_comments")]
     public int CommentsCount { get; set; }
 
-    [JsonProperty("count_photos")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("count_photos")]
     public int PhotosCount { get; set; }
 
-    [JsonProperty("count_videos")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("count_videos")]
     public int VideosCount { get; set; }
 
-    [JsonProperty("title")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("title")]
     public Title Title { get; set; }
 
-    [JsonProperty("description")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("description")]
     public Description Description { get; set; }
 
-    [JsonProperty("can_comment")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("can_comment")]
     public bool CanComment { get; set; }
 
-    [JsonProperty("date_create")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("date_create")]
     public DateTime CreateDate { get; set; }
 
-    [JsonProperty("date_update")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("date_update")]
     public DateTime UpdateDate { get; set; }
 
-    [JsonProperty("photos")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("photos")]
     public int Photos { get; set; }
 
-    [JsonProperty("visibility_can_see_set")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("visibility_can_see_set")]
     public bool VisibilityCanSeeSet { get; set; }
 
-    [JsonProperty("needs_interstitial")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("needs_interstitial")]
     public bool NeedsInterstitial { get; set; }
 }

@@ -1,213 +1,370 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 
 namespace Flickr.Net.Core;
 
+/// <summary>
+/// </summary>
 public record Person : FlickrEntityBase<Id>, IBuddyIcon
 {
-    [JsonProperty("nsid")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("nsid")]
     public string Nsid { get; set; }
 
-    [JsonProperty("ispro")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("ispro")]
     public bool IsPro { get; set; }
 
-    [JsonProperty("is_deleted")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("is_deleted")]
     public bool IsDeleted { get; set; }
 
-    [JsonProperty("iconserver")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("iconserver")]
     public string IconServer { get; set; }
 
-    [JsonProperty("iconfarm")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("iconfarm")]
     public int IconFarm { get; set; }
 
-    [JsonProperty("path_alias")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("path_alias")]
     public object PathAlias { get; set; }
 
-    [JsonProperty("has_stats")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("has_stats")]
     public bool HasStats { get; set; }
 
-    [JsonProperty("username")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("username")]
     public Username Username { get; set; }
 
-    [JsonProperty("realname")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("realname")]
     public Realname Realname { get; set; }
 
-    [JsonProperty("mbox_sha1sum")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("mbox_sha1sum")]
     public MboxSha1sum MboxSha1sum { get; set; }
 
-    [JsonProperty("location")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("location")]
     public Location Location { get; set; }
 
-    [JsonProperty("description")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("description")]
     public Description Description { get; set; }
 
-    [JsonProperty("photosurl")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("photosurl")]
     public PhotosUrl PhotoUrl { get; set; }
 
-    [JsonProperty("profileurl")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("profileurl")]
     public ProfileUrl ProfileUrl { get; set; }
 
-    [JsonProperty("mobileurl")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("mobileurl")]
     public MobileUrl Mobileurl { get; set; }
 
-    [JsonProperty("photos")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("photos")]
     public PhotoInfos PhotoInfos { get; set; }
 
-    [JsonProperty("upload_count")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("upload_count")]
     public int UploadCount { get; set; }
 
-    [JsonProperty("upload_limit")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("upload_limit")]
     public int UploadLimit { get; set; }
 
-    [JsonProperty("upload_limit_status")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("upload_limit_status")]
     public string UploadLimitStatus { get; set; }
 
-    [JsonProperty("is_cognito_user")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("is_cognito_user")]
     public bool IsCognitoUser { get; set; }
 
-    [JsonProperty("all_rights_reserved_photos_count")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("all_rights_reserved_photos_count")]
     public int AllRightsReservedPhotosCount { get; set; }
 
-    [JsonProperty("has_adfree")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("has_adfree")]
     public bool HasAdfree { get; set; }
 
-    [JsonProperty("has_free_standard_shipping")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("has_free_standard_shipping")]
     public bool HasFreeStandardShipping { get; set; }
 
-    [JsonProperty("has_free_educational_resources")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("has_free_educational_resources")]
     public bool HasFreeEducationalResources { get; set; }
 }
 
+/// <summary>
+/// </summary>
 public struct PhotoInfos
 {
-    [JsonProperty("firstdatetaken")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("firstdatetaken")]
     public FirstDateTaken Firstdatetaken { get; set; }
 
-    [JsonProperty("firstdate")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("firstdate")]
     public FirstDate Firstdate { get; set; }
 
-    [JsonProperty("count")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("count")]
     public Count Count { get; set; }
 
-    [JsonProperty("views")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("views")]
     public PhotoInfoViews Views { get; set; }
 }
 
+/// <summary>
+/// </summary>
 public struct Username
 {
-    [JsonProperty("_content")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 
+    /// <summary>
+    /// </summary>
     public static implicit operator string(Username username) => username.Content;
 
+    /// <summary>
+    /// </summary>
     public static implicit operator Username(string username) => new() { Content = username };
 }
 
+/// <summary>
+/// </summary>
 public struct PhotoInfoViews
 {
-    [JsonProperty("_content")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 
+    /// <summary>
+    /// </summary>
     public static implicit operator string(PhotoInfoViews username) => username.Content;
 
+    /// <summary>
+    /// </summary>
     public static implicit operator PhotoInfoViews(string username) => new() { Content = username };
 }
 
+/// <summary>
+/// </summary>
 public struct Realname
 {
-    [JsonProperty("_content")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 
+    /// <summary>
+    /// </summary>
     public static implicit operator string(Realname username) => username.Content;
 
+    /// <summary>
+    /// </summary>
     public static implicit operator Realname(string username) => new() { Content = username };
 }
 
+/// <summary>
+/// </summary>
 public struct PhotosUrl
 {
-    [JsonProperty("_content")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 
+    /// <summary>
+    /// </summary>
     public static implicit operator string(PhotosUrl username) => username.Content;
 
+    /// <summary>
+    /// </summary>
     public static implicit operator PhotosUrl(string username) => new() { Content = username };
 }
 
+/// <summary>
+/// </summary>
 public struct ProfileUrl
 {
-    [JsonProperty("_content")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 
+    /// <summary>
+    /// </summary>
     public static implicit operator string(ProfileUrl username) => username.Content;
 
+    /// <summary>
+    /// </summary>
     public static implicit operator ProfileUrl(string username) => new() { Content = username };
 }
 
+/// <summary>
+/// </summary>
 public struct Count
 {
-    [JsonProperty("_content")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("_content")]
     public int Content { get; set; }
 
+    /// <summary>
+    /// </summary>
     public static implicit operator int(Count username) => username.Content;
 
+    /// <summary>
+    /// </summary>
     public static implicit operator Count(int username) => new() { Content = username };
 }
 
+/// <summary>
+/// </summary>
 public struct Description
 {
-    [JsonProperty("_content")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 
+    /// <summary>
+    /// </summary>
     public static implicit operator string(Description username) => username.Content;
 
+    /// <summary>
+    /// </summary>
     public static implicit operator Description(string username) => new() { Content = username };
 }
 
+/// <summary>
+/// </summary>
 public struct FirstDate
 {
-    [JsonProperty("_content")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 
+    /// <summary>
+    /// </summary>
     public static implicit operator string(FirstDate username) => username.Content;
 
+    /// <summary>
+    /// </summary>
     public static implicit operator FirstDate(string username) => new() { Content = username };
 }
 
+/// <summary>
+/// </summary>
 public struct FirstDateTaken
 {
-    [JsonProperty("_content")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 
+    /// <summary>
+    /// </summary>
     public static implicit operator string(FirstDateTaken username) => username.Content;
 
+    /// <summary>
+    /// </summary>
     public static implicit operator FirstDateTaken(string username) => new() { Content = username };
 }
 
+/// <summary>
+/// </summary>
 public struct LocationInfo
 {
-    [JsonProperty("_content")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 
+    /// <summary>
+    /// </summary>
     public static implicit operator string(LocationInfo username) => username.Content;
 
+    /// <summary>
+    /// </summary>
     public static implicit operator LocationInfo(string username) => new() { Content = username };
 }
 
+/// <summary>
+/// </summary>
 public struct MboxSha1sum
 {
-    [JsonProperty("_content")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 
+    /// <summary>
+    /// </summary>
     public static implicit operator string(MboxSha1sum username) => username.Content;
 
+    /// <summary>
+    /// </summary>
     public static implicit operator MboxSha1sum(string username) => new() { Content = username };
 }
 
+/// <summary>
+/// </summary>
 public struct MobileUrl
 {
-    [JsonProperty("_content")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 
+    /// <summary>
+    /// </summary>
     public static implicit operator string(MobileUrl username) => username.Content;
 
+    /// <summary>
+    /// </summary>
     public static implicit operator MobileUrl(string username) => new() { Content = username };
 }

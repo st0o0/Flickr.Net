@@ -10,7 +10,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/src/Flickr.Net.Core.Test/bin/Debug/net7.0/Flickr.Net.Core.Test.dll",
+            "program": "${workspaceFolder}/src/Flickr.Net.Core.Test/bin/Debug/net8.0/Flickr.Net.Core.Test.dll",
             "args": [],
             "cwd": "${workspaceFolder}/src/Flickr.Net.Core.Test",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console

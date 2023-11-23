@@ -1,29 +1,46 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 using Flickr.Net.Core.Internals.Attributes;
 
 namespace Flickr.Net.Core;
 
+/// <summary>
+/// </summary>
 [FlickrJsonPropertyName("method")]
 public record MethodInfo : FlickrEntityBase
 {
-    [JsonProperty("name")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("name")]
     public string Name { get; set; }
 
-    [JsonProperty("needslogin")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("needslogin")]
     public bool NeedsLogin { get; set; }
 
-    [JsonProperty("description")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("description")]
     public string Description { get; set; }
 
-    [JsonProperty("response")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("response")]
     public string Response { get; set; }
 
-    [JsonProperty("explanation")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("explanation")]
     public string Explanation { get; set; }
 
-    [JsonProperty("arguments")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("arguments")]
     public List<Argument> Arguments { get; set; }
 
-    [JsonProperty("errors")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("errors")]
     public List<Error> Errors { get; set; }
 }

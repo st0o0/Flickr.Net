@@ -1,68 +1,111 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 using Flickr.Net.Core.Internals.Attributes;
 
 namespace Flickr.Net.Core;
 
+/// <summary>
+/// </summary>
 [FlickrJsonPropertyName("gallery")]
 public record Gallery : FlickrEntityBase<Id>, IBuddyIcon, IThumbnailUrl, ISquareUrl, ISmallUrl, IMediumUrl
 {
-    [JsonProperty("gallery_id")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("gallery_id")]
     public string GalleryId { get; set; }
 
-    [JsonProperty("url")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("url")]
     public string Url { get; set; }
 
-    [JsonProperty("owner")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("owner")]
     public string Owner { get; set; }
 
-    [JsonProperty("username")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("username")]
     public string Username { get; set; }
 
-    [JsonProperty("iconserver")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("iconserver")]
     public string IconServer { get; set; }
 
-    [JsonProperty("iconfarm")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("iconfarm")]
     public int IconFarm { get; set; }
 
-    [JsonProperty("primary_photo_id")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("primary_photo_id")]
     public string PrimaryPhotoId { get; set; }
 
-    [JsonProperty("date_create")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("date_create")]
     public DateTime CreateDate { get; set; }
 
-    [JsonProperty("date_update")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("date_update")]
     public DateTime UpdateDate { get; set; }
 
-    [JsonProperty("count_photos")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("count_photos")]
     public int PhotosCount { get; set; }
 
-    [JsonProperty("count_videos")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("count_videos")]
     public int VideosCount { get; set; }
 
-    [JsonProperty("count_total")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("count_total")]
     public int TotalCount { get; set; }
 
-    [JsonProperty("count_views")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("count_views")]
     public int ViewsCount { get; set; }
 
-    [JsonProperty("count_comments")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("count_comments")]
     public int CommentsCount { get; set; }
 
-    [JsonProperty("title")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("title")]
     public Title Title { get; set; }
 
-    [JsonProperty("description")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("description")]
     public Description Description { get; set; }
 
-    [JsonProperty("sort_group")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("sort_group")]
     public string SortGroup { get; set; }
 
-    [JsonProperty("primary_photo_server")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("primary_photo_server")]
     public string PrimaryPhotoServer { get; set; }
 
-    [JsonProperty("primary_photo_farm")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("primary_photo_farm")]
     public int PrimaryPhotoFarm { get; set; }
 
-    [JsonProperty("primary_photo_secret")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("primary_photo_secret")]
     public string PrimaryPhotoSecret { get; set; }
 }

@@ -1,12 +1,19 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 
 namespace Flickr.Net.Core;
 
+/// <summary>
+/// </summary>
 public record Permissions : FlickrEntityBase
 {
-    [JsonProperty("permcomment")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("permcomment")]
     public PermissionComment PermComment { get; set; }
 
-    [JsonProperty("permaddmeta")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("permaddmeta")]
     public PermissionAddMeta PermAddMeta { get; set; }
 }

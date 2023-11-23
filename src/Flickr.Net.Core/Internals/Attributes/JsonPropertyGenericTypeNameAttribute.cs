@@ -1,12 +1,7 @@
 ﻿namespace Flickr.Net.Core.Internals.Attributes;
 
 [AttributeUsage(AttributeTargets.Property)]
-internal class JsonPropertyGenericTypeNameAttribute : Attribute
+internal class JsonPropertyGenericTypeNameAttribute(int position) : Attribute
 {
-    public int TypeParameterPosition { get; }
-
-    public JsonPropertyGenericTypeNameAttribute(int position)
-    {
-        TypeParameterPosition = position;
-    }
+    public int TypeParameterPosition { get; } = position;
 }

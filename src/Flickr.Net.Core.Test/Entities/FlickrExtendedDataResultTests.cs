@@ -1,8 +1,8 @@
-﻿using System.Xml.Linq;
+﻿using System.Text;
+using System.Xml.Linq;
 using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Flickr.Net.Core.Test.Entities;
 
@@ -19,12 +19,14 @@ public class FlickrExtendedDataResultTests
 
         var doc = XDocument.Parse(xml);
         var json = JsonConvert.SerializeXNode(doc, Formatting.None, omitRootObject: true);
-        var result = FlickrConvert.DeserializeObject<FlickrExtendedDataResult>(json);
+        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
+
+        var result = FlickrConvert.DeserializeObject<FlickrExtendedDataResult>(ms);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
         Assert.True(result.Content.TryGetValue("photoid", out var value));
-        Assert.Equal("1234", value.Value<string>("#text"));
+        Assert.Equal("1234", value.GetProperty("#text").GetString());
     }
 
     [Fact]
@@ -38,11 +40,13 @@ public class FlickrExtendedDataResultTests
 
         var doc = XDocument.Parse(xml);
         var json = JsonConvert.SerializeXNode(doc, Formatting.None, omitRootObject: true);
-        var result = FlickrConvert.DeserializeObject<FlickrExtendedDataResult>(json);
+        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
+
+        var result = FlickrConvert.DeserializeObject<FlickrExtendedDataResult>(ms);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
         Assert.True(result.Content.TryGetValue("photoid", out var value));
-        Assert.Equal("1234", value.Value<string>());
+        Assert.Equal("1234", value.GetString());
     }
 }

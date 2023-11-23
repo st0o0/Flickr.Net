@@ -178,7 +178,7 @@ public interface IFlickrPeople
     Task<Person> GetInfoAsync(string userId, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Returns the limits for a person. See <see cref="PersonLimits"/> for more details.
+    /// Returns the limits for a person. See <see cref="Limits"/> for more details.
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>

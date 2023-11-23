@@ -1,39 +1,64 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 
 namespace Flickr.Net.Core;
 
+/// <summary>
+/// </summary>
 public record Reply : FlickrEntityBase<Id>, IBuddyIcon
 {
-    [JsonProperty("author")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("author")]
     public string Author { get; set; }
 
-    [JsonProperty("authorname")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("authorname")]
     public string AuthorName { get; set; }
 
-    [JsonProperty("is_pro")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("is_pro")]
     public bool IsPro { get; set; }
 
-    [JsonProperty("role")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("role")]
     public MemberType Role { get; set; }
 
-    [JsonProperty("iconserver")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("iconserver")]
     public string IconServer { get; set; }
 
-    [JsonProperty("iconfarm")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("iconfarm")]
     public int IconFarm { get; set; }
 
-    [JsonProperty("can_edit")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("can_edit")]
     public bool CanEdit { get; set; }
 
-    [JsonProperty("can_delete")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("can_delete")]
     public bool CanDelete { get; set; }
 
-    [JsonProperty("datecreate")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("datecreate")]
     public DateTime CreateDate { get; set; }
 
-    [JsonProperty("lastedit")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("lastedit")]
     public DateTime LastEdit { get; set; }
 
-    [JsonProperty("message")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("message")]
     public List<string> Messages { get; set; }
 }

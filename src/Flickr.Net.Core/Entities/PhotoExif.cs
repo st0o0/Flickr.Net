@@ -1,17 +1,26 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 using Flickr.Net.Core.Internals.Attributes;
 
 namespace Flickr.Net.Core;
 
+/// <summary>
+/// </summary>
 [FlickrJsonPropertyName("photo")]
 public record PhotoExif : PhotoBase
 {
-    [JsonProperty("farm")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("farm")]
     public int Farm { get; set; }
 
-    [JsonProperty("camera")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("camera")]
     public string Camera { get; set; }
 
-    [JsonProperty("exif")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("exif")]
     public List<Exif> Exifs { get; set; }
 }

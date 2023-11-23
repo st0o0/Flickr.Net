@@ -1,16 +1,25 @@
-﻿using Flickr.Net.Core.Internals.Attributes;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Internals.Attributes;
 
 namespace Flickr.Net.Core;
 
+/// <summary>
+/// </summary>
 [FlickrJsonPropertyName("error")]
 public record Argument
 {
-    [JsonProperty("name")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("name")]
     public string Name { get; set; }
 
-    [JsonProperty("optional")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("optional")]
     public bool Optional { get; set; }
 
-    [JsonProperty("_content")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 }

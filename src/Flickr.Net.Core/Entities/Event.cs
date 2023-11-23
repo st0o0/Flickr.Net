@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 
 namespace Flickr.Net.Core;
 
@@ -8,71 +9,71 @@ public record Event : FlickrEntityBase
 {
     /// <summary>
     /// </summary>
-    [JsonProperty("type")]
+    [JsonPropertyName("type")]
     public EventType Type { get; set; }
 
     /// <summary>
     /// </summary>
-    [JsonProperty("user")]
+    [JsonPropertyName("user")]
     public string User { get; set; }
 
     /// <summary>
     /// </summary>
-    [JsonProperty("username")]
+    [JsonPropertyName("username")]
     public string UserName { get; set; }
 
     /// <summary>
     /// </summary>
-    [JsonProperty("dateadded")]
+    [JsonPropertyName("dateadded")]
     public DateTime AddedDate { get; set; }
 
     /// <summary>
     /// </summary>
-    [JsonProperty("_content")]
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 
     /// <summary>
     /// </summary>
-    [JsonProperty("commentid")]
+    [JsonPropertyName("commentid")]
     public string CommentId { get; set; }
 
     /// <summary>
     /// </summary>
-    [JsonProperty("noteid")]
+    [JsonPropertyName("noteid")]
     public string NoteId { get; set; }
 
     /// <summary>
     /// </summary>
-    [JsonProperty("galleryid")]
+    [JsonPropertyName("galleryid")]
     public string GalleryId { get; set; }
 
     /// <summary>
     /// </summary>
-    [JsonProperty("iconserver")]
+    [JsonPropertyName("iconserver")]
     public string IconServer { get; set; }
 
     /// <summary>
     /// </summary>
-    [JsonProperty("iconfarm")]
+    [JsonPropertyName("iconfarm")]
     public string IconFarm { get; set; }
 
     /// <summary>
     /// </summary>
-    [JsonProperty("realname")]
+    [JsonPropertyName("realname")]
     public string RealName { get; set; }
 
     /// <summary>
     /// </summary>
-    [JsonProperty("group_id")]
+    [JsonPropertyName("group_id")]
     public string GroupId { get; set; }
 
     /// <summary>
     /// </summary>
-    [JsonProperty("group_name")]
+    [JsonPropertyName("group_name")]
     public string GroupName { get; set; }
 
     /// <summary>
     /// </summary>
-    [JsonProperty("is_muted")]
+    [JsonPropertyName("is_muted")]
     public bool IsMuted { get; set; }
 }

@@ -104,7 +104,7 @@ public interface IFlickrGroups
     IFlickrGroupsPools Pools { get; }
 
     /// <summary>
-    /// Returns a <see cref="GroupFullInfo"/> object containing details about a group.
+    /// Returns a <see cref="GroupInfo"/> object containing details about a group.
     /// </summary>
     /// <param name="groupId">The id of the group to return.</param>
     /// <param name="cancellationToken"></param>

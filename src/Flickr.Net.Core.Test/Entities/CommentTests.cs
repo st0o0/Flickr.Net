@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Core.Extensions;
+﻿using System.Text;
+using Flickr.Net.Core.Extensions;
 using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals;
 
@@ -97,8 +98,9 @@ public class CommentTests
                 "stat": "ok"
             }
             """;
+        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
 
-        var result = FlickrConvert.DeserializeObject<FlickrResult<PhotoComments>>(json);
+        var result = FlickrConvert.DeserializeObject<FlickrResult<PhotoComments>>(ms);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);

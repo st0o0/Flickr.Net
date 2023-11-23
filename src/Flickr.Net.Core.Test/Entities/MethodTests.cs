@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Core.Flickrs.Results;
+﻿using System.Text;
+using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals;
 
 namespace Flickr.Net.Core.Test.Entities;
@@ -45,7 +46,9 @@ public class MethodTests
             }
             """;
 
-        var result = FlickrConvert.DeserializeObject<FlickrResult<MethodInfo>>(json);
+        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
+
+        var result = FlickrConvert.DeserializeObject<FlickrResult<MethodInfo>>(ms);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
@@ -751,7 +754,9 @@ public class MethodTests
             }
             """;
 
-        var result = FlickrConvert.DeserializeObject<FlickrResult<Methods>>(json);
+        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
+
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Methods>>(ms);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);

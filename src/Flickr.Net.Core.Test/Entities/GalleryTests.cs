@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Core.Extensions;
+﻿using System.Text;
+using Flickr.Net.Core.Extensions;
 using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals;
 
@@ -510,7 +511,9 @@ public class GalleryTests
             }
             """;
 
-        var result = FlickrConvert.DeserializeObject<FlickrResult<UserGalleries>>(json);
+        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
+
+        var result = FlickrConvert.DeserializeObject<FlickrResult<UserGalleries>>(ms);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
@@ -574,7 +577,9 @@ public class GalleryTests
             }
             """;
 
-        var result = FlickrConvert.DeserializeObject<FlickrResult<PhotoGalleries>>(json);
+        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
+
+        var result = FlickrConvert.DeserializeObject<FlickrResult<PhotoGalleries>>(ms);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
@@ -635,7 +640,9 @@ public class GalleryTests
             }
             """;
 
-        var result = FlickrConvert.DeserializeObject<FlickrResult<GalleryPhotos>>(json);
+        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
+
+        var result = FlickrConvert.DeserializeObject<FlickrResult<GalleryPhotos>>(ms);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
@@ -714,7 +721,9 @@ public class GalleryTests
             }
             """;
 
-        var result = FlickrConvert.DeserializeObject<FlickrResult<GalleryInfo>>(json);
+        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
+
+        var result = FlickrConvert.DeserializeObject<FlickrResult<GalleryInfo>>(ms);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);

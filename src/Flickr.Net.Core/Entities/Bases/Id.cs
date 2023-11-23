@@ -2,46 +2,76 @@
 
 namespace Flickr.Net.Core.Bases;
 
+/// <summary>
+/// </summary>
 public interface IIdentifierType
 {
 }
 
-[FlickrJsonPropertyName("nsid")]
-public struct NsId : IIdentifierType
+/// <inheritdoc/>
+public abstract record IdentifierType : IIdentifierType
 {
-    private string _id;
+    /// <summary>
+    /// </summary>
+    protected string _id;
 
-    public static implicit operator string(NsId value) => value._id;
+    /// <summary>
+    /// </summary>
+    public static implicit operator string(IdentifierType value) => value._id;
 
-    public static implicit operator NsId(string value) => new() { _id = value };
+    /// <summary>
+    /// </summary>
+    public static implicit operator IdentifierType(string value) => new Id() { _id = value };
 }
 
+/// <inheritdoc/>
 [FlickrJsonPropertyName("id")]
-public struct Id : IIdentifierType
+public record Id : IdentifierType
 {
-    private string _id;
-
+    /// <summary>
+    /// </summary>
     public static implicit operator string(Id value) => value._id;
 
+    /// <summary>
+    /// </summary>
     public static implicit operator Id(string value) => new() { _id = value };
 }
 
-[FlickrJsonPropertyName("photo_id")]
-public struct PhotoId : IIdentifierType
+/// <inheritdoc/>
+[FlickrJsonPropertyName("nsid")]
+public record NsId : IdentifierType
 {
-    private string _id;
+    /// <summary>
+    /// </summary>
+    public static implicit operator string(NsId value) => value._id;
 
+    /// <summary>
+    /// </summary>
+    public static implicit operator NsId(string value) => new() { _id = value };
+}
+
+/// <inheritdoc/>
+[FlickrJsonPropertyName("photo_id")]
+public record PhotoId : IdentifierType
+{
+    /// <summary>
+    /// </summary>
     public static implicit operator string(PhotoId value) => value._id;
 
+    /// <summary>
+    /// </summary>
     public static implicit operator PhotoId(string value) => new() { _id = value };
 }
 
+/// <inheritdoc/>
 [FlickrJsonPropertyName("photoset_id")]
-public struct PhotosetId : IIdentifierType
+public record PhotosetId : IdentifierType
 {
-    private string _id;
-
+    /// <summary>
+    /// </summary>
     public static implicit operator string(PhotosetId value) => value._id;
 
+    /// <summary>
+    /// </summary>
     public static implicit operator PhotosetId(string value) => new() { _id = value };
 }

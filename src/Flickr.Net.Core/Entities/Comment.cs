@@ -1,38 +1,61 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 using Flickr.Net.Core.Internals.Attributes;
 
 namespace Flickr.Net.Core;
 
+/// <summary>
+/// </summary>
 [FlickrJsonPropertyName("comment")]
 public record Comment : FlickrEntityBase<Id>, IBuddyIcon
 {
-    [JsonProperty("author")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("author")]
     public string Author { get; set; }
 
-    [JsonProperty("author_is_deleted")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("author_is_deleted")]
     public bool AuthorIsDeleted { get; set; }
 
-    [JsonProperty("authorname")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("authorname")]
     public string Authorname { get; set; }
 
-    [JsonProperty("iconserver")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("iconserver")]
     public string IconServer { get; set; }
 
-    [JsonProperty("iconfarm")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("iconfarm")]
     public int IconFarm { get; set; }
 
-    [JsonProperty("datecreate")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("datecreate")]
     public DateTime CreateDate { get; set; }
 
-    [JsonProperty("permalink")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("permalink")]
     public string Permalink { get; set; }
 
-    [JsonProperty("path_alias")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("path_alias")]
     public string PathAlias { get; set; }
 
-    [JsonProperty("realname")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("realname")]
     public string Realname { get; set; }
 
-    [JsonProperty("_content")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 }

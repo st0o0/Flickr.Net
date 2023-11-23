@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Core.Flickrs.Results;
+﻿using System.Text;
+using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals;
 
 namespace Flickr.Net.Core.Test.Entities;
@@ -70,7 +71,9 @@ public class PersonTests
             }
             """;
 
-        var item = FlickrConvert.DeserializeObject<FlickrResult<Person>>(json);
+        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
+
+        var item = FlickrConvert.DeserializeObject<FlickrResult<Person>>(ms);
 
         Assert.NotNull(item);
         Assert.False(item.HasError);

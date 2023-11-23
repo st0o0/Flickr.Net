@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 using Flickr.Net.Core.Internals.Attributes;
 
 namespace Flickr.Net.Core;
@@ -8,33 +9,53 @@ namespace Flickr.Net.Core;
 [FlickrJsonPropertyName("prevphoto")]
 public record PrevPhoto : FlickrEntityBase<Id>
 {
-    [JsonProperty("owner")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("owner")]
     public string Owner { get; set; }
 
-    [JsonProperty("secret")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("secret")]
     public string Secret { get; set; }
 
-    [JsonProperty("server")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("server")]
     public string Server { get; set; }
 
-    [JsonProperty("farm")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("farm")]
     public int Farm { get; set; }
 
-    [JsonProperty("title")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("title")]
     public string Title { get; set; }
 
-    [JsonProperty("url")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("url")]
     public string Url { get; set; }
 
-    [JsonProperty("thumb")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("thumb")]
     public string Thumb { get; set; }
 
-    [JsonProperty("license")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("license")]
     public LicenseType License { get; set; }
 
-    [JsonProperty("media")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("media")]
     public MediaType Media { get; set; }
 
-    [JsonProperty("is_faved")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("is_faved")]
     public bool IsFaved { get; set; }
 }

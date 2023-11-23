@@ -2,17 +2,12 @@ namespace Flickr.Net.Core.Entities;
 
 /// <summary>
 /// </summary>
-public readonly struct WoeId
+/// <remarks>
+/// </remarks>
+/// <param name="woeId"></param>
+public readonly struct WoeId(string woeId)
 {
-    private readonly string _woeId;
-
-    /// <summary>
-    /// </summary>
-    /// <param name="woeId"></param>
-    public WoeId(string woeId)
-    {
-        _woeId = woeId;
-    }
+    private readonly string _woeId = woeId;
 
     /// <summary>
     /// </summary>

@@ -2,6 +2,8 @@
 
 namespace Flickr.Net.Core;
 
+/// <summary>
+/// </summary>
 [FlickrJsonPropertyName("tag")]
 public record ClusterTag : TagBase
 { }

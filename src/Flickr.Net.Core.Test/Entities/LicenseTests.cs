@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Core.Flickrs.Results;
+﻿using System.Text;
+using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals;
 
 namespace Flickr.Net.Core.Test.Entities;
@@ -73,7 +74,9 @@ public class LicenseTests
             }
             """;
 
-        var result = FlickrConvert.DeserializeObject<FlickrResult<Licenses>>(json);
+        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
+
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Licenses>>(ms);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);

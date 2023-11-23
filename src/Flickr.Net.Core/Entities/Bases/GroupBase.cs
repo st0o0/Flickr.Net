@@ -1,10 +1,17 @@
-﻿namespace Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
 
+namespace Flickr.Net.Core.Bases;
+
+/// <inheritdoc/>
 public record GroupBase : FlickrEntityBase<NsId>
 {
-    [JsonProperty("name")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("name")]
     public string Name { get; set; }
 
-    [JsonProperty("eighteenplus")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("eighteenplus")]
     public bool EighteenPlus { get; set; }
 }

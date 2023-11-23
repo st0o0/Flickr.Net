@@ -1,30 +1,49 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 
 namespace Flickr.Net.Core;
 
+/// <summary>
+/// </summary>
 public record Limits : FlickrEntityBase<NsId>
 {
-    [JsonProperty("photos")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("photos")]
     public PhotoLimits Photos { get; set; }
 
-    [JsonProperty("videos")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("videos")]
     public VideoLimits Videos { get; set; }
 }
 
+/// <summary>
+/// </summary>
 public record PhotoLimits
 {
-    [JsonProperty("maxdisplaypx")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("maxdisplaypx")]
     public int Maxdisplaypx { get; set; }
 
-    [JsonProperty("maxupload")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("maxupload")]
     public int Maxupload { get; set; }
 }
 
+/// <summary>
+/// </summary>
 public record VideoLimits
 {
-    [JsonProperty("maxduration")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("maxduration")]
     public int Maxduration { get; set; }
 
-    [JsonProperty("maxupload")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("maxupload")]
     public int Maxupload { get; set; }
 }

@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/src/Flickr.Net.Core.Test/Flickr.Net.Core.Test.csproj",
+                "${workspaceFolder}/src/Flickr.Net.sln",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/src/Flickr.Net.Core.Test/Flickr.Net.Core.Test.csproj",
+                "${workspaceFolder}/src/Flickr.Net.sln",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -33,7 +33,7 @@
                 "watch",
                 "run",
                 "--project",
-                "${workspaceFolder}/src/Flickr.Net.Core.Test/Flickr.Net.Core.Test.csproj"
+                "${workspaceFolder}/src/Flickr.Net.sln"
             ],
             "problemMatcher": "$msCompile"
         }

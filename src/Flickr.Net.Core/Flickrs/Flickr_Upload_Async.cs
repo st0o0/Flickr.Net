@@ -1,7 +1,7 @@
-﻿using Flickr.Net.Core.Exceptions.Handlers;
+﻿using System.Text;
+using System.Text.Json;
 using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals.Extensions;
-using Newtonsoft.Json.Linq;
 
 namespace Flickr.Net.Core;
 
@@ -19,7 +19,7 @@ public partial class Flickr : IFlickrUpload
 
         Uri uploadUri = new(UploadUrl);
 
-        Dictionary<string, string> parameters = new();
+        Dictionary<string, string> parameters = [];
 
         parameters.AppendIf("title", title, x => x != null && x.Length > 0, x => x);
 
@@ -54,7 +54,7 @@ public partial class Flickr : IFlickrUpload
 
         var result = await UploadDataAsync(stream, fileName, progress, uploadUri, parameters, cancellationToken);
 
-        return result.Value<string>();
+        return result.GetString();
     }
 
     async Task<string> IFlickrUpload.ReplacePictureAsync(Stream stream, string fileName, string photoId, IProgress<double> progress, CancellationToken cancellationToken)
@@ -81,11 +81,10 @@ public partial class Flickr : IFlickrUpload
         }
 
         var result = await UploadDataAsync(stream, fileName, progress, replaceUri, parameters, cancellationToken);
-
-        return result.Value<string>("#text");
+        return result.GetProperty("#text").GetString();
     }
 
-    private static async Task<JToken> UploadDataAsync(Stream imageStream, string fileName, IProgress<double> progress, Uri uploadUri, Dictionary<string, string> parameters, CancellationToken cancellationToken = default)
+    private static async Task<JsonElement> UploadDataAsync(Stream imageStream, string fileName, IProgress<double> progress, Uri uploadUri, Dictionary<string, string> parameters, CancellationToken cancellationToken = default)
     {
         var authHeader = FlickrResponder.OAuthCalculateAuthHeader(parameters);
 
@@ -114,12 +113,11 @@ public partial class Flickr : IFlickrUpload
         var xml = await responseMessage.Content.ReadAsStringAsync(cancellationToken);
         var json = FlickrConvert.XmlToJson(xml);
 
-        var flickrResults = FlickrConvert.DeserializeObject<FlickrExtendedDataResult>(json);
+        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
 
-        if (flickrResults.HasError)
-        {
-            throw ExceptionHandler.CreateResponseException(flickrResults);
-        }
+        var flickrResults = FlickrConvert.DeserializeObject<FlickrExtendedDataResult>(ms);
+
+        flickrResults = flickrResults.EnsureSuccessStatusCode();
 
         if (flickrResults.Content.TryGetValue("photoid", out var value))
         {

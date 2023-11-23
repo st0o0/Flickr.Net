@@ -1,15 +1,24 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 
 namespace Flickr.Net.Core;
 
+/// <summary>
+/// </summary>
 public record Ticket : FlickrEntityBase<Id>
 {
-    [JsonProperty("complete")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("complete")]
     public StatusType Complete { get; set; }
 
-    [JsonProperty("photoid")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("photoid")]
     public string PhotoId { get; set; }
 
-    [JsonProperty("invalid")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("invalid")]
     public bool Invalid { get; set; }
 }

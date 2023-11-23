@@ -1,26 +1,41 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 using Flickr.Net.Core.Internals.Attributes;
 
 namespace Flickr.Net.Core;
 
+/// <summary>
+/// </summary>
 [FlickrJsonPropertyName("photo")]
 public record PhotosetPhoto : PhotoBase
 {
-    [JsonProperty("farm")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("farm")]
     public int Farm { get; set; }
 
-    [JsonProperty("title")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("title")]
     public string Title { get; set; }
 
-    [JsonProperty("isprimary")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("isprimary")]
     public bool IsPrimary { get; set; }
 
-    [JsonProperty("ispublic")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("ispublic")]
     public bool IsPublic { get; set; }
 
-    [JsonProperty("isfriend")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("isfriend")]
     public bool IsFriend { get; set; }
 
-    [JsonProperty("isfamily")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("isfamily")]
     public bool IsFamily { get; set; }
 }

@@ -43,7 +43,7 @@ public static class PhotoSearchExtrasExtensions
 
     private static IEnumerable<Enum> GetValues(Enum enumeration)
     {
-        List<Enum> enumerations = new();
+        List<Enum> enumerations = [];
         var enumType = enumeration.GetType();
 
         foreach (var e in Enum.GetValues(enumType))

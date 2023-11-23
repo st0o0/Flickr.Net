@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Core.Enums;
+﻿using System.Text;
+using Flickr.Net.Core.Enums;
 using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals;
 
@@ -126,7 +127,9 @@ public class SizeTests
             }
             """;
 
-        var result = FlickrConvert.DeserializeObject<FlickrResult<Sizes>>(json);
+        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
+
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Sizes>>(ms);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);

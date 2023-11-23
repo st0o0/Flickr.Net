@@ -1,83 +1,144 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 
 namespace Flickr.Net.Core;
 
+/// <summary>
+/// </summary>
 public record Location : FlickrEntityBase
 {
-    [JsonProperty("latitude")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("latitude")]
     public double Latitude { get; set; }
 
-    [JsonProperty("longitude")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("longitude")]
     public double Longitude { get; set; }
 
-    [JsonProperty("accuracy")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("accuracy")]
     public GeoAccuracy Accuracy { get; set; }
 
-    [JsonProperty("context")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("context")]
     public GeoContext Context { get; set; }
 
-    [JsonProperty("locality")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("locality")]
     public Locality Locality { get; set; }
 
-    [JsonProperty("county")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("county")]
     public County County { get; set; }
 
-    [JsonProperty("region")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("region")]
     public Region Region { get; set; }
 
-    [JsonProperty("country")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("country")]
     public Country Country { get; set; }
 
-    [JsonProperty("neighbourhood")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("neighbourhood")]
     public Neighbourhood Neighbourhood { get; set; }
 }
 
+/// <summary>
+/// </summary>
 public struct Neighbourhood
 {
-    [JsonProperty("_content")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 
+    /// <summary>
+    /// </summary>
     public static implicit operator string(Neighbourhood username) => username.Content;
 
+    /// <summary>
+    /// </summary>
     public static implicit operator Neighbourhood(string username) => new() { Content = username };
 }
 
+/// <summary>
+/// </summary>
 public struct Locality
 {
-    [JsonProperty("_content")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 
+    /// <summary>
+    /// </summary>
     public static implicit operator string(Locality username) => username.Content;
 
+    /// <summary>
+    /// </summary>
     public static implicit operator Locality(string username) => new() { Content = username };
 }
 
+/// <summary>
+/// </summary>
 public struct Country
 {
-    [JsonProperty("_content")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 
+    /// <summary>
+    /// </summary>
     public static implicit operator string(Country username) => username.Content;
 
+    /// <summary>
+    /// </summary>
     public static implicit operator Country(string username) => new() { Content = username };
 }
 
+/// <summary>
+/// </summary>
 public struct County
 {
-    [JsonProperty("_content")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 
+    /// <summary>
+    /// </summary>
     public static implicit operator string(County username) => username.Content;
 
+    /// <summary>
+    /// </summary>
     public static implicit operator County(string username) => new() { Content = username };
 }
 
+/// <summary>
+/// </summary>
 public struct Region
 {
-    [JsonProperty("_content")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 
+    /// <summary>
+    /// </summary>
     public static implicit operator string(Region username) => username.Content;
 
+    /// <summary>
+    /// </summary>
     public static implicit operator Region(string username) => new() { Content = username };
 }

@@ -1,18 +1,29 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 
 namespace Flickr.Net.Core;
 
+/// <summary>
+/// </summary>
 public record Details : FlickrEntityBase
 {
-    [JsonProperty("megapixels")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("megapixels")]
     public string MegaPixels { get; set; }
 
-    [JsonProperty("zoom")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("zoom")]
     public string Zoom { get; set; }
 
-    [JsonProperty("lcd_size")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("lcd_size")]
     public string LcdSize { get; set; }
 
-    [JsonProperty("storage_type")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("storage_type")]
     public string StorageType { get; set; }
 }

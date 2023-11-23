@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Core.Flickrs.Results;
+﻿using System.Text;
+using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals;
 
 namespace Flickr.Net.Core.Test.Entities;
@@ -31,7 +32,9 @@ public class ViewsTests
             }
             """;
 
-        var result = FlickrConvert.DeserializeObject<FlickrResult<Views>>(json);
+        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
+
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Views>>(ms);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);

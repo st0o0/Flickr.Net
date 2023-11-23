@@ -36,7 +36,10 @@ public partial class Flickr : IFlickrOAuth
 
         var result = await FlickrResponder.GetDataResponseAsync(this, url, parameters, cancellationToken);
 
-        return OAuthRequestToken.ParseResponse(result);
+        using var streamReader = new StreamReader(result);
+        var jsonstring = await streamReader.ReadToEndAsync(cancellationToken);
+
+        return OAuthRequestToken.ParseResponse(jsonstring);
     }
 
     async Task<OAuthAccessToken> IFlickrOAuth.GetAccessTokenAsync(OAuthRequestToken requestToken, string verifier, CancellationToken cancellationToken)
@@ -57,7 +60,10 @@ public partial class Flickr : IFlickrOAuth
 
         var result = await FlickrResponder.GetDataResponseAsync(this, url, parameters, cancellationToken);
 
-        return OAuthAccessToken.ParseResponse(result);
+        using var streamReader = new StreamReader(result);
+        var jsonstring = await streamReader.ReadToEndAsync(cancellationToken);
+
+        return OAuthAccessToken.ParseResponse(jsonstring);
     }
 
     string IFlickrOAuth.CalculateSignature(string method, string url, Dictionary<string, string> parameters, string tokenSecret)
@@ -65,7 +71,7 @@ public partial class Flickr : IFlickrOAuth
         var key = FlickrSettings.ApiSecret + "&" + tokenSecret;
         var keyBytes = Encoding.UTF8.GetBytes(key);
 
-        SortedList<string, string> sorted = new();
+        SortedList<string, string> sorted = [];
         foreach (var pair in parameters)
         {
             sorted.Add(pair.Key, pair.Value);

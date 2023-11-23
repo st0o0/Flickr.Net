@@ -1,35 +1,56 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 using Flickr.Net.Core.Internals.Attributes;
 
 namespace Flickr.Net.Core;
 
+/// <summary>
+/// </summary>
 [FlickrJsonPropertyName("person")]
 public record PeoplePerson : FlickrEntityBase<NsId>
 {
-    [JsonProperty("username")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("username")]
     public string Username { get; set; }
 
-    [JsonProperty("iconserver")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("iconserver")]
     public string Iconserver { get; set; }
 
-    [JsonProperty("iconfarm")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("iconfarm")]
     public string Iconfarm { get; set; }
 
-    [JsonProperty("realname")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("realname")]
     public string Realname { get; set; }
 
-    [JsonProperty("added_by")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("added_by")]
     public string AddedBy { get; set; }
 
-    [JsonProperty("x")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("x")]
     public string X { get; set; }
 
-    [JsonProperty("y")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("y")]
     public string Y { get; set; }
 
-    [JsonProperty("w")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("w")]
     public string W { get; set; }
 
-    [JsonProperty("h")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("h")]
     public string H { get; set; }
 }

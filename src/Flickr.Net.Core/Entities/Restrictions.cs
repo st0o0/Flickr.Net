@@ -1,33 +1,54 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 
 namespace Flickr.Net.Core;
 
+/// <summary>
+/// </summary>
 public record Restrictions : FlickrEntityBase
 {
-    [JsonProperty("photos_ok")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("photos_ok")]
     public bool PhotosOk { get; set; }
 
-    [JsonProperty("videos_ok")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("videos_ok")]
     public bool VideosOk { get; set; }
 
-    [JsonProperty("images_ok")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("images_ok")]
     public bool ImagesOk { get; set; }
 
-    [JsonProperty("screens_ok")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("screens_ok")]
     public bool ScreensOk { get; set; }
 
-    [JsonProperty("art_ok")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("art_ok")]
     public bool ArtOk { get; set; }
 
-    [JsonProperty("safe_ok")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("safe_ok")]
     public bool SafeOk { get; set; }
 
-    [JsonProperty("moderate_ok")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("moderate_ok")]
     public bool ModerateOk { get; set; }
 
-    [JsonProperty("restricted_ok")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("restricted_ok")]
     public bool RestrictedOk { get; set; }
 
-    [JsonProperty("has_geo")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("has_geo")]
     public bool HasGeo { get; set; }
 }

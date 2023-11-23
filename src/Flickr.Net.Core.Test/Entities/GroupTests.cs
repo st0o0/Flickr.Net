@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Core.Enums;
+﻿using System.Text;
+using Flickr.Net.Core.Enums;
 using Flickr.Net.Core.Extensions;
 using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals;
@@ -43,7 +44,9 @@ public class GroupTests
             }
             """;
 
-        var result = FlickrConvert.DeserializeObject<FlickrResult<GroupInfo>>(json);
+        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
+
+        var result = FlickrConvert.DeserializeObject<FlickrResult<GroupInfo>>(ms);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
@@ -108,7 +111,9 @@ public class GroupTests
             }
             """;
 
-        var result = FlickrConvert.DeserializeObject<FlickrResult<Groups>>(json);
+        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
+
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Groups>>(ms);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
@@ -1240,7 +1245,9 @@ public class GroupTests
             }
             """;
 
-        var result = FlickrConvert.DeserializeObject<FlickrResult<Groups>>(json);
+        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
+
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Groups>>(ms);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);

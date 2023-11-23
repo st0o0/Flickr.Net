@@ -1,38 +1,61 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 using Flickr.Net.Core.Internals.Attributes;
 
 namespace Flickr.Net.Core;
 
+/// <summary>
+/// </summary>
 [FlickrJsonPropertyName("group")]
 public record GroupInfo : FlickrEntityBase<Id>, IBuddyIcon
 {
-    [JsonProperty("iconserver")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("iconserver")]
     public string IconServer { get; set; }
 
-    [JsonProperty("iconfarm")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("iconfarm")]
     public int IconFarm { get; set; }
 
-    [JsonProperty("lang")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("lang")]
     public string Lang { get; set; }
 
-    [JsonProperty("ispoolmoderated")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("ispoolmoderated")]
     public bool IsPoolModerated { get; set; }
 
-    [JsonProperty("name")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("name")]
     public string Name { get; set; }
 
-    [JsonProperty("description")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("description")]
     public string Description { get; set; }
 
-    [JsonProperty("members")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("members")]
     public int Members { get; set; }
 
-    [JsonProperty("privacy")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("privacy")]
     public PoolPrivacy Privacy { get; set; }
 
-    [JsonProperty("throttle")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("throttle")]
     public Throttle Throttle { get; set; }
 
-    [JsonProperty("restrictions")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("restrictions")]
     public Restrictions Restrictions { get; set; }
 }

@@ -1,125 +1,206 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 using Flickr.Net.Core.Internals.Attributes;
 
 namespace Flickr.Net.Core;
 
+/// <summary>
+/// </summary>
 [FlickrJsonPropertyName("person")]
 public record PhotoPerson : FlickrEntityBase<NsId>, IBuddyIcon
 {
-    [JsonProperty("username")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("username")]
     public string Username { get; set; }
 
-    [JsonProperty("favedate")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("favedate")]
     public DateTime FaveDate { get; set; }
 
-    [JsonProperty("ispro")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("ispro")]
     public bool IsPro { get; set; }
 
-    [JsonProperty("is_deleted")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("is_deleted")]
     public bool IsDeleted { get; set; }
 
-    [JsonProperty("iconserver")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("iconserver")]
     public string IconServer { get; set; }
 
-    [JsonProperty("iconfarm")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("iconfarm")]
     public int IconFarm { get; set; }
 
-    [JsonProperty("path_alias")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("path_alias")]
     public string PathAlias { get; set; }
 
-    [JsonProperty("has_stats")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("has_stats")]
     public bool HasStats { get; set; }
 
-    [JsonProperty("pro_badge")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("pro_badge")]
     public string ProBadge { get; set; }
 
-    [JsonProperty("expire")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("expire")]
     public string Expire { get; set; }
 
-    [JsonProperty("gender")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("gender")]
     public string Gender { get; set; }
 
-    [JsonProperty("ignored")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("ignored")]
     public bool Ignored { get; set; }
 
-    [JsonProperty("contact")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("contact")]
     public bool Contact { get; set; }
 
-    [JsonProperty("friend")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("friend")]
     public bool Friend { get; set; }
 
-    [JsonProperty("family")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("family")]
     public bool Family { get; set; }
 
-    [JsonProperty("revcontact")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("revcontact")]
     public bool Revcontact { get; set; }
 
-    [JsonProperty("revfriend")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("revfriend")]
     public bool Revfriend { get; set; }
 
-    [JsonProperty("revfamily")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("revfamily")]
     public bool Revfamily { get; set; }
 
-    [JsonProperty("realname")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("realname")]
     public string Realname { get; set; }
 
-    [JsonProperty("location")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("location")]
     public string Location { get; set; }
 
-    [JsonProperty("timezone")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("timezone")]
     public TimeZone Timezone { get; set; }
 
-    [JsonProperty("description")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("description")]
     public string Description { get; set; }
 
-    [JsonProperty("photosurl")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("photosurl")]
     public string PhotosUrl { get; set; }
 
-    [JsonProperty("profileurl")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("profileurl")]
     public string ProfileUrl { get; set; }
 
-    [JsonProperty("mobileurl")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("mobileurl")]
     public string MobileUrl { get; set; }
 
-    [JsonProperty("photos")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("photos")]
     public PhotoDateInfos PhotoDateInfos { get; set; }
 
-    [JsonProperty("has_adfree")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("has_adfree")]
     public bool HasAdfree { get; set; }
 
-    [JsonProperty("has_free_standard_shipping")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("has_free_standard_shipping")]
     public bool HasFreeStandardShipping { get; set; }
 
-    [JsonProperty("has_free_educational_resources")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("has_free_educational_resources")]
     public bool HasFreeEducationalResources { get; set; }
 
-    [JsonProperty("mbox_sha1sum")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("mbox_sha1sum")]
     public string MboxSha1sum { get; set; }
 }
 
+/// <summary>
+/// </summary>
 public struct TimeZone
 {
-    [JsonProperty("label")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("label")]
     public string Label { get; set; }
 
-    [JsonProperty("offset")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("offset")]
     public string Offset { get; set; }
 
-    [JsonProperty("timezone_id")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("timezone_id")]
     public string TimezoneId { get; set; }
 
-    [JsonProperty("timezone")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("timezone")]
     public int Timezone { get; set; }
 }
 
+/// <summary>
+/// </summary>
 public struct PhotoDateInfos
 {
-    [JsonProperty("firstdatetaken")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("firstdatetaken")]
     public DateTime FirstDateTaken { get; set; }
 
-    [JsonProperty("firstdate")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("firstdate")]
     public DateTime FirstDate { get; set; }
 
-    [JsonProperty("count")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("count")]
     public int Count { get; set; }
 }

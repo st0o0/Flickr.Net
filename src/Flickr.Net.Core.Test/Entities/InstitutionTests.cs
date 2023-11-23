@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Core.Enums;
+﻿using System.Text;
+using Flickr.Net.Core.Enums;
 using Flickr.Net.Core.Flickrs.Results;
 using Flickr.Net.Core.Internals;
 
@@ -61,7 +62,9 @@ public class InstitutionTests
             }
             """;
 
-        var result = FlickrConvert.DeserializeObject<FlickrResult<Institutions>>(json);
+        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
+
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Institutions>>(ms);
 
         Assert.NotNull(result);
         Assert.False(result.HasError);

@@ -1,44 +1,75 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 
 namespace Flickr.Net.Core;
 
+/// <summary>
+/// </summary>
 public record Exif : FlickrEntityBase
 {
-    [JsonProperty("tagspace")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("tagspace")]
     public string TagSpace { get; set; }
 
-    [JsonProperty("tagspaceid")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("tagspaceid")]
     public int TagSpaceId { get; set; }
 
-    [JsonProperty("tag")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("tag")]
     public string Tag { get; set; }
 
-    [JsonProperty("label")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("label")]
     public string Label { get; set; }
 
-    [JsonProperty("raw")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("raw")]
     public Raw Raw { get; set; }
 
-    [JsonProperty("clean")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("clean")]
     public Clean Clean { get; set; }
 }
 
+/// <summary>
+/// </summary>
 public struct Raw
 {
-    [JsonProperty("_content")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 
+    /// <summary>
+    /// </summary>
     public static implicit operator string(Raw username) => username.Content;
 
+    /// <summary>
+    /// </summary>
     public static implicit operator Raw(string username) => new() { Content = username };
 }
 
+/// <summary>
+/// </summary>
 public struct Clean
 {
-    [JsonProperty("_content")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("_content")]
     public string Content { get; set; }
 
+    /// <summary>
+    /// </summary>
     public static implicit operator string(Clean username) => username.Content;
 
+    /// <summary>
+    /// </summary>
     public static implicit operator Clean(string username) => new() { Content = username };
 }

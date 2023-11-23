@@ -1,27 +1,44 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 
 namespace Flickr.Net.Core;
 
+/// <summary>
+/// </summary>
 public record Subscription : FlickrEntityBase
 {
-    [JsonProperty("topic")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("topic")]
     public string Topic { get; set; }
 
-    [JsonProperty("callback")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("callback")]
     public string Callback { get; set; }
 
-    [JsonProperty("pending")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("pending")]
     public string Pending { get; set; }
 
-    [JsonProperty("date_create")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("date_create")]
     public DateTime CreateDate { get; set; }
 
-    [JsonProperty("lease_seconds")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("lease_seconds")]
     public string LeaseSeconds { get; set; }
 
-    [JsonProperty("expiry")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("expiry")]
     public DateTime Expiry { get; set; }
 
-    [JsonProperty("verify_attempts")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("verify_attempts")]
     public int VerifyAttempts { get; set; }
 }

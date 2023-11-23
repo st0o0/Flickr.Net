@@ -1,23 +1,36 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 using Flickr.Net.Core.Internals.Attributes;
 
 namespace Flickr.Net.Core;
 
+/// <summary>
+/// </summary>
 [FlickrJsonPropertyName("photo")]
 public record CoverPhoto : FlickrEntityBase
 {
-    [JsonProperty("url")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("url")]
     public string Url { get; set; }
 
-    [JsonProperty("width")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("width")]
     public int Width { get; set; }
 
-    [JsonProperty("height")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("height")]
     public int Height { get; set; }
 
-    [JsonProperty("is_primary")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("is_primary")]
     public bool IsPrimary { get; set; }
 
-    [JsonProperty("is_video")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("is_video")]
     public bool IsVideo { get; set; }
 }

@@ -1,18 +1,29 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 
 namespace Flickr.Net.Core;
 
+/// <summary>
+/// </summary>
 public record Usage : FlickrEntityBase
 {
-    [JsonProperty("candownload")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("candownload")]
     public bool CanDownload { get; set; }
 
-    [JsonProperty("canblog")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("canblog")]
     public bool CanBlog { get; set; }
 
-    [JsonProperty("canprint")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("canprint")]
     public bool CanPrint { get; set; }
 
-    [JsonProperty("canshare")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("canshare")]
     public bool CanShare { get; set; }
 }

@@ -1,1 +1,13 @@
-{"image":"mcr.microsoft.com/devcontainers/universal:2"}
+{
+	"name": "Flickr.Net",
+	"service": "devhost",
+	"remoteUser": "root",
+	"postCreateCommand": "sh ./.devcontainer/postCreateCommand.sh",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-dotnettools.csharp"
+			]
+		}
+	}
+}

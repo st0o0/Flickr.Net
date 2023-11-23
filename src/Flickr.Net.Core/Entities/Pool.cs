@@ -1,26 +1,41 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 using Flickr.Net.Core.Internals.Attributes;
 
 namespace Flickr.Net.Core;
 
+    /// <summary>
+    /// </summary>
 [FlickrJsonPropertyName("pool")]
 public record Pool : FlickrEntityBase<Id>
 {
-    [JsonProperty("title")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("title")]
     public string Title { get; set; }
 
-    [JsonProperty("url")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("url")]
     public string Url { get; set; }
 
-    [JsonProperty("iconserver")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("iconserver")]
     public string IconServer { get; set; }
 
-    [JsonProperty("iconfarm")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("iconfarm")]
     public int IconFarm { get; set; }
 
-    [JsonProperty("members")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("members")]
     public int Members { get; set; }
 
-    [JsonProperty("pool_count")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("pool_count")]
     public int PoolCount { get; set; }
 }

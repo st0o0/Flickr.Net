@@ -1,74 +1,121 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 using Flickr.Net.Core.Internals.Attributes;
 
 namespace Flickr.Net.Core;
 
+/// <summary>
+/// </summary>
 [FlickrJsonPropertyName("user")]
 public record UploadStatus : FlickrEntityBase<Id>
 {
-    [JsonProperty("ispro")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("ispro")]
     public bool IsPro { get; set; }
 
-    [JsonProperty("username")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("username")]
     public string Username { get; set; }
 
-    [JsonProperty("bandwidth")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("bandwidth")]
     public BandwidthStatus Bandwidth { get; set; }
 
-    [JsonProperty("filesize")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("filesize")]
     public FileSizeStatus Filesize { get; set; }
 
-    [JsonProperty("sets")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("sets")]
     public SetsStatus Sets { get; set; }
 
-    [JsonProperty("videos")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("videos")]
     public VideoStatus Videos { get; set; }
 }
 
+/// <summary>
+/// </summary>
 public record VideoStatus
 {
-    [JsonProperty("uploaded")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("uploaded")]
     public int Uploaded { get; set; }
 
-    [JsonProperty("remaining")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("remaining")]
     public string Remaining { get; set; }
 }
 
+/// <summary>
+/// </summary>
 public record SetsStatus
 {
-    [JsonProperty("created")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("created")]
     public int Created { get; set; }
 
-    [JsonProperty("remaining")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("remaining")]
     public string Remaining { get; set; }
 }
 
+/// <summary>
+/// </summary>
 public record FileSizeStatus
 {
-    [JsonProperty("maxbytes")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("maxbytes")]
     public long MaxBytes { get; set; }
 
-    [JsonProperty("maxkb")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("maxkb")]
     public long MaxKb { get; set; }
 }
 
+/// <summary>
+/// </summary>
 public record BandwidthStatus
 {
-    [JsonProperty("maxbytes")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("maxbytes")]
     public long MaxBytes { get; set; }
 
-    [JsonProperty("maxkb")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("maxkb")]
     public long MaxKb { get; set; }
 
-    [JsonProperty("usedbytes")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("usedbytes")]
     public long UsedBytes { get; set; }
 
-    [JsonProperty("usedkb")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("usedkb")]
     public long UsedKb { get; set; }
 
-    [JsonProperty("remainingbytes")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("remainingbytes")]
     public long RemainingBytes { get; set; }
 
-    [JsonProperty("remainingkb")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("remainingkb")]
     public long RemainingKb { get; set; }
 }

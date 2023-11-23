@@ -1,56 +1,94 @@
-﻿using Flickr.Net.Core.Bases;
+﻿using System.Text.Json.Serialization;
+using Flickr.Net.Core.Bases;
 
 namespace Flickr.Net.Core;
+
+/// <summary>
+/// </summary>
 public record Profile : FlickrEntityBase<Id>
 {
-    [JsonProperty("nsid")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("nsid")]
     public string Nsid { get; set; }
 
-    [JsonProperty("join_date")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("join_date")]
     public DateTime JoinDate { get; set; }
 
-    [JsonProperty("occupation")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("occupation")]
     public string Occupation { get; set; }
 
-    [JsonProperty("hometown")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("hometown")]
     public string Hometown { get; set; }
 
-    [JsonProperty("showcase_set")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("showcase_set")]
     public string ShowcaseSet { get; set; }
 
-    [JsonProperty("showcase_set_title")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("showcase_set_title")]
     public string ShowcaseSetTitle { get; set; }
 
-    [JsonProperty("first_name")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("first_name")]
     public string FirstName { get; set; }
 
-    [JsonProperty("last_name")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("last_name")]
     public string LastName { get; set; }
 
-    [JsonProperty("email")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("email")]
     public string Email { get; set; }
 
-    [JsonProperty("profile_description")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("profile_description")]
     public string ProfileDescription { get; set; }
 
-    [JsonProperty("city")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("city")]
     public string City { get; set; }
 
-    [JsonProperty("country")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("country")]
     public string Country { get; set; }
 
-    [JsonProperty("facebook")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("facebook")]
     public string Facebook { get; set; }
 
-    [JsonProperty("twitter")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("twitter")]
     public string Twitter { get; set; }
 
-    [JsonProperty("tumblr")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("tumblr")]
     public string Tumblr { get; set; }
 
-    [JsonProperty("instagram")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("instagram")]
     public string Instagram { get; set; }
 
-    [JsonProperty("pinterest")]
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("pinterest")]
     public string Pinterest { get; set; }
 }
