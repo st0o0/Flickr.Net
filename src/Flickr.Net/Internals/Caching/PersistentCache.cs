@@ -30,8 +30,8 @@ internal sealed class PersistentCache(string filename, CacheItemPersister persis
     // The persistent file representation of the cache.
     private readonly FileInfo dataFile = new FileInfo(filename);
 
-    private DateTime timestamp;  // last-modified time of dataFile when cache data was last known to be in sync
-    private long length;         // length of dataFile when cache data was last known to be in sync
+    private DateTime timestamp; // last-modified time of dataFile when cache data was last known to be in sync
+    private long length; // length of dataFile when cache data was last known to be in sync
 
     // The file-based mutex. Named (dataFile.FullName + ".lock")
     private readonly LockFile lockFile = new LockFile(filename + ".lock");
@@ -69,6 +69,7 @@ internal sealed class PersistentCache(string filename, CacheItemPersister persis
                 oldItem = InternalSet(key, value);
                 Persist();
             }
+
             oldItem?.OnItemFlushed();
         }
     }
@@ -187,7 +188,8 @@ internal sealed class PersistentCache(string filename, CacheItemPersister persis
     {
         if (!typeof(ICacheItem).IsAssignableFrom(valueType))
         {
-            throw new ArgumentException("Type " + valueType.FullName + " does not implement ICacheItem", nameof(valueType));
+            throw new ArgumentException("Type " + valueType.FullName + " does not implement ICacheItem",
+                nameof(valueType));
         }
 
         keys = new List<string>(dataTable.Keys).ToArray();
@@ -223,7 +225,7 @@ internal sealed class PersistentCache(string filename, CacheItemPersister persis
             ICacheItem flushedItem;
 
             flushedItem = RemoveKey(key);
-            if (value != null)  // don't ever let nulls get in
+            if (value != null) // don't ever let nulls get in
             {
                 dataTable[key] = value;
             }
@@ -326,6 +328,7 @@ internal sealed class PersistentCache(string filename, CacheItemPersister persis
                 return table;
             }
         }
+
         return table;
     }
 
@@ -347,8 +350,8 @@ internal sealed class PersistentCache(string filename, CacheItemPersister persis
         }
     }
 
-    void IDisposable.Dispose()
+    public void Dispose()
     {
-        lockFile?.Dispose();
+        lockFile.Dispose();
     }
 }
