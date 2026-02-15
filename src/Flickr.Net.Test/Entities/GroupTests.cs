@@ -3,6 +3,7 @@ using Flickr.Net.Enums;
 using Flickr.Net.Extensions;
 using Flickr.Net.Flickrs.Results;
 using Flickr.Net.Internals;
+using Xunit;
 
 namespace Flickr.Net.Test.Entities;
 

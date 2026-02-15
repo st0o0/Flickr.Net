@@ -1,4 +1,6 @@
-﻿namespace Flickr.Net.Enums;
+﻿using System.Runtime.Serialization;
+
+namespace Flickr.Net.Enums;
 
 /// <summary>
 /// Used to specify the authentication levels needed for the Auth methods.

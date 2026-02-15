@@ -1,4 +1,6 @@
-﻿namespace Flickr.Net.Enums;
+﻿using System.Runtime.Serialization;
+
+namespace Flickr.Net.Enums;
 
 /// <summary>
 /// The context to set a geotagged photo as. Used by <see

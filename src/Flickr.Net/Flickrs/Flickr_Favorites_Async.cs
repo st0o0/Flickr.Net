@@ -1,4 +1,6 @@
-﻿using Flickr.Net.Flickrs.Results;
+﻿using Flickr.Net.Enums;
+using Flickr.Net.Flickrs.Results;
+using Flickr.Net.Internals;
 using Flickr.Net.Internals.Extensions;
 
 namespace Flickr.Net;

@@ -1,6 +1,7 @@
 ﻿using Flickr.Net.Enums;
 using Flickr.Net.Internals;
 using Flickr.Net.Internals.Extensions;
+using Xunit;
 
 namespace Flickr.Net.Test.SearchOptions;
 
@@ -11,7 +12,7 @@ public class SearchOptionTests
     {
         var dateTimeNow = DateTime.Now;
 
-        var options = new PartialSearchOptions()
+        var options = new PartialSearchOptions
         {
             Extras = PhotoSearchExtras.All,
             MaxTakenDate = DateTime.UnixEpoch,

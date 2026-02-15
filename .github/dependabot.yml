@@ -1,0 +1,35 @@
+version: 2
+updates:
+
+  - package-ecosystem: nuget
+    directory: "/src"
+    schedule:
+      interval: daily
+      time: "11:00"
+    groups:
+      nuget-minor-patch:
+        update-types:
+          - "minor"
+          - "patch"
+      microsoft-packages:
+        patterns:
+          - "Microsoft.*"
+          - "System.*"
+        update-types:
+          - "major"
+
+  - package-ecosystem: nuget
+    directory: "/.config"
+    schedule:
+      interval: daily
+      time: "11:00"
+    groups:
+      build-tools:
+        patterns:
+          - "*"
+
+  - package-ecosystem: dotnet-sdk
+    directory: "/src"
+    schedule:
+      interval: daily
+      time: "11:00"

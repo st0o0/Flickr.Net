@@ -1,4 +1,6 @@
-﻿namespace Flickr.Net.Enums;
+﻿using System.Runtime.Serialization;
+
+namespace Flickr.Net.Enums;
 
 /// <summary>
 /// DateGranularity, used for setting taken date in <see cref="IFlickrPhotos.SetDatesAsync(string, DateTime?, DateTime?, DateGranularity, CancellationToken)"/>.

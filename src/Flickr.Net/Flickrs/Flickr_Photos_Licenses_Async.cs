@@ -1,4 +1,6 @@
-﻿namespace Flickr.Net;
+﻿using Flickr.Net.Enums;
+
+namespace Flickr.Net;
 
 /// <summary>
 /// The flickr.

@@ -1,4 +1,6 @@
-﻿namespace Flickr.Net.Enums;
+﻿using System.Runtime.Serialization;
+
+namespace Flickr.Net.Enums;
 
 /// <summary>
 /// The default privacy level for geographic information attached to the user's photos.

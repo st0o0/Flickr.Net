@@ -1,4 +1,5 @@
 ﻿using Flickr.Net.Entities;
+using Xunit;
 
 namespace Flickr.Net.Test;
 
@@ -13,7 +14,7 @@ public class StringToIdTests
     [Fact]
     public void WoeId_To_String()
     {
-        var id = "Test";
+        const string id = "Test";
         Assert.Equal(id, new WoeId(id));
     }
 
@@ -23,7 +24,7 @@ public class StringToIdTests
     [Fact]
     public void PlaceId_To_String()
     {
-        var id = "Test";
+        const string id = "Test";
         Assert.Equal(id, new PlaceId(id));
     }
 
@@ -33,7 +34,7 @@ public class StringToIdTests
     [Fact]
     public void String_To_PlaceId()
     {
-        var id = "Test";
+        const string id = "Test";
         PlaceId placeId = id;
 
         Assert.Equal(id, placeId);
@@ -45,7 +46,7 @@ public class StringToIdTests
     [Fact]
     public void String_To_WoeId()
     {
-        var id = "Test";
+        const string id = "Test";
         WoeId woeId = id;
 
         Assert.Equal(id, woeId);

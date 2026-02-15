@@ -1,4 +1,6 @@
-﻿namespace Flickr.Net.Enums;
+﻿using System.Runtime.Serialization;
+
+namespace Flickr.Net.Enums;
 
 /// <summary>
 /// An enumeration defining who can add meta data (tags and notes).

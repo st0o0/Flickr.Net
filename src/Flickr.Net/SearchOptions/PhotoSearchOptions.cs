@@ -1,3 +1,7 @@
+using System.Collections.ObjectModel;
+using Flickr.Net.Entities;
+using Flickr.Net.Enums;
+using Flickr.Net.Internals;
 using Flickr.Net.Internals.Extensions;
 
 namespace Flickr.Net;

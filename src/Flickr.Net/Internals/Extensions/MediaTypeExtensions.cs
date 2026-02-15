@@ -1,4 +1,6 @@
-﻿namespace Flickr.Net.Internals.Extensions;
+﻿using Flickr.Net.Enums;
+
+namespace Flickr.Net.Internals.Extensions;
 
 /// <summary>
 /// </summary>
@@ -13,6 +15,6 @@ public static class MediaTypeExtensions
     {
         MediaType.Photos or MediaType.Photo => "photos",
         MediaType.Videos or MediaType.Video => "videos",
-        _ or MediaType.All => "all",
+        _ => "all",
     };
 }

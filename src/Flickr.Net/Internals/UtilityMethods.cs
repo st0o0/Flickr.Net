@@ -1,6 +1,8 @@
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
+using Flickr.Net.Enums;
+using Flickr.Net.Internals.Extensions;
 
 namespace Flickr.Net.Internals;
 

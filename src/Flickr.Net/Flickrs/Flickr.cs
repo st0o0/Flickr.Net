@@ -1,6 +1,7 @@
 using System.Text;
 using Flickr.Net.Configuration;
 using Flickr.Net.Exceptions;
+using Flickr.Net.Internals;
 using Flickr.Net.Internals.Caching;
 using Flickr.Net.Internals.HttpContents;
 using Flickr.Net.Settings;
