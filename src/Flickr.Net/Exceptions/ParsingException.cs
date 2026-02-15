@@ -10,7 +10,7 @@ public class ParsingException : FlickrException
     /// <summary>
     /// Initializes a new instance of the <see cref="ParsingException"/> class.
     /// </summary>
-    public ParsingException() : base()
+    public ParsingException()
     { }
 
     /// <summary>

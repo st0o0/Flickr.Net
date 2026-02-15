@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Enums;
+﻿using System.Globalization;
+using Flickr.Net.Enums;
 using Flickr.Net.Flickrs.Results;
 using Flickr.Net.Internals.Extensions;
 
@@ -48,7 +49,7 @@ public partial class Flickr : IFlickrTags
 
         parameters.AppendIf("period", period, x => !string.IsNullOrEmpty(x), x => x);
 
-        parameters.AppendIf("count", count, x => x.HasValue && x > 0, x => x.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("count", count, x => x.HasValue && x > 0, x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
 
         return await GetGenericResponseAsync<FlickrStatsResult<Hottags>>(parameters, cancellationToken);
     }
@@ -85,7 +86,7 @@ public partial class Flickr : IFlickrTags
 
         parameters.AppendIf("user_id", userId, x => x != null && x.Length > 0, x => x);
 
-        parameters.AppendIf("count", count, x => x.HasValue && x > 0, x => x.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("count", count, x => x.HasValue && x > 0, x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<UserTags>(parameters, cancellationToken);
     }

@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Globalization;
+using System.Text;
 
 namespace Flickr.Net.Internals.Caching;
 
@@ -18,7 +19,7 @@ internal class ResponseCacheItemPersister : CacheItemPersister
         }
 
         var url = chunks[0];
-        DateTime creationTime = new(long.Parse(chunks[1], System.Globalization.NumberStyles.Any, System.Globalization.NumberFormatInfo.InvariantInfo));
+        DateTime creationTime = new(long.Parse(chunks[1], NumberStyles.Any, NumberFormatInfo.InvariantInfo));
         ResponseCacheItem item = new(new Uri(url), response, creationTime);
         return item;
     }
@@ -28,7 +29,7 @@ internal class ResponseCacheItemPersister : CacheItemPersister
         var item = (ResponseCacheItem)cacheItem;
         StringBuilder result = new();
         result.Append(item.Url.AbsoluteUri + "\n");
-        result.Append(item.CreationTime.Ticks.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        result.Append(item.CreationTime.Ticks.ToString(NumberFormatInfo.InvariantInfo));
         UtilityMethods.WriteString(outputStream, result.ToString());
         UtilityMethods.WriteByteArray(outputStream, item.Response);
     }

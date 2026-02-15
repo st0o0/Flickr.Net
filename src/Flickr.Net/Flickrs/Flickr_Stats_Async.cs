@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Enums;
+﻿using System.Globalization;
+using Flickr.Net.Enums;
 using Flickr.Net.Internals;
 using Flickr.Net.Internals.Extensions;
 
@@ -21,9 +22,9 @@ public partial class Flickr : IFlickrStats
 
         parameters.AppendIf("colletion_id", collectionId, x => !string.IsNullOrEmpty(x), x => x);
 
-        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<Domains>(parameters, cancellationToken);
     }
@@ -41,9 +42,9 @@ public partial class Flickr : IFlickrStats
 
         parameters.AppendIf("colletion_id", collectionId, x => !string.IsNullOrEmpty(x), x => x);
 
-        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<Referrers>(parameters, cancellationToken);
     }
@@ -86,9 +87,9 @@ public partial class Flickr : IFlickrStats
 
         parameters.AppendIf("photo_id", photoId, x => !string.IsNullOrEmpty(x), x => x);
 
-        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<Domains>(parameters, cancellationToken);
     }
@@ -106,9 +107,9 @@ public partial class Flickr : IFlickrStats
 
         parameters.AppendIf("photo_id", photoId, x => !string.IsNullOrEmpty(x), x => x);
 
-        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<Referrers>(parameters, cancellationToken);
     }
@@ -125,9 +126,9 @@ public partial class Flickr : IFlickrStats
 
         parameters.AppendIf("photoset_id", photosetId, x => !string.IsNullOrEmpty(x), x => x);
 
-        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<Domains>(parameters, cancellationToken);
     }
@@ -145,9 +146,9 @@ public partial class Flickr : IFlickrStats
 
         parameters.AppendIf("photoset_id", photosetId, x => !string.IsNullOrEmpty(x), x => x);
 
-        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<Referrers>(parameters, cancellationToken);
     }
@@ -190,9 +191,9 @@ public partial class Flickr : IFlickrStats
             { "date", UtilityMethods.DateToUnixTimestamp(date) }
         };
 
-        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<Domains>(parameters, cancellationToken);
     }
@@ -208,9 +209,9 @@ public partial class Flickr : IFlickrStats
             { "domain", domain }
         };
 
-        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<Referrers>(parameters, cancellationToken);
     }
@@ -241,9 +242,9 @@ public partial class Flickr : IFlickrStats
 
         parameters.AppendIf("sort", sort, x => x != PopularitySort.None, x => x.GetEnumMemberValue());
 
-        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<StatsPhotos>(parameters, cancellationToken);
     }

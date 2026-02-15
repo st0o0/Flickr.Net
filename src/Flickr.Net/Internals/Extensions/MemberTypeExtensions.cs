@@ -4,7 +4,7 @@ namespace Flickr.Net.Internals.Extensions;
 
 /// <summary>
 /// </summary>
-public static class MemberTypeExtensions
+internal static class MemberTypeExtensions
 {
     /// <summary>
     /// Members the type to string.

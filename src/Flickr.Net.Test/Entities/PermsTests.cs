@@ -11,20 +11,20 @@ public class PermsTests
     [Fact]
     public void JsonStringToPerms()
     {
-        var json = """
-            {
-                "perms": {
-                    "id": "52989763352",
-                    "ispublic": 1,
-                    "isfriend": 0,
-                    "isfamily": 0,
-                    "permcomment": 3,
-                    "permaddmeta": 2,
-                    "permprint": 0
-                },
-                "stat": "ok"
-            }
-            """;
+        const string json = """
+                            {
+                                "perms": {
+                                    "id": "52989763352",
+                                    "ispublic": 1,
+                                    "isfriend": 0,
+                                    "isfamily": 0,
+                                    "permcomment": 3,
+                                    "permaddmeta": 2,
+                                    "permprint": 0
+                                },
+                                "stat": "ok"
+                            }
+                            """;
 
         var result = FlickrConvert.DeserializeObject<FlickrResult<Perms>>(Encoding.UTF8.GetBytes(json));
 

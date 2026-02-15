@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Globalization;
+using System.Text;
 using Flickr.Net.Enums;
 using Flickr.Net.Flickrs.Results;
 using Flickr.Net.Internals;
@@ -11,14 +12,14 @@ public class UnknownResponseTests
     [Fact]
     public void JsonStringToCommentUnknownResponse()
     {
-        var json = /*lang=json,strict*/ """
-            {
-              "stat": "ok",
-              "comment": {
-                "id": "97777-72057594037941949-72057594037942602"
-              }
-            }
-            """;
+        const string json = """
+                            {
+                              "stat": "ok",
+                              "comment": {
+                                "id": "97777-72057594037941949-72057594037942602"
+                              }
+                            }
+                            """;
 
         var result = FlickrConvert.DeserializeObject<FlickrUnknownResult<CommentUnknownResponse>>(Encoding.UTF8.GetBytes(json));
 
@@ -32,14 +33,14 @@ public class UnknownResponseTests
     [Fact]
     public void JsonStringToNoteUnknownResponse()
     {
-        var json = /*lang=json,strict*/ """
-            {
-              "stat": "ok",
-              "note": {
-                "id": "1234"
-              }
-            }
-            """;
+        const string json = """
+                            {
+                              "stat": "ok",
+                              "note": {
+                                "id": "1234"
+                              }
+                            }
+                            """;
 
         var result = FlickrConvert.DeserializeObject<FlickrUnknownResult<NoteUnknownResponse>>(Encoding.UTF8.GetBytes(json));
 
@@ -54,15 +55,15 @@ public class UnknownResponseTests
     [Fact]
     public void JsonStringToPhotosetUnknownResponse()
     {
-        var json = /*lang=json,strict*/ """
-            {
-              "stat": "ok",
-              "photoset": {
-                "id": "1234",
-                "url": "http://www.flickr.com/photos/bees/sets/1234/"
-              }
-            }
-            """;
+        const string json = """
+                            {
+                              "stat": "ok",
+                              "photoset": {
+                                "id": "1234",
+                                "url": "http://www.flickr.com/photos/bees/sets/1234/"
+                              }
+                            }
+                            """;
 
         var result = FlickrConvert.DeserializeObject<FlickrUnknownResult<PhotosetUnknownResponse>>(Encoding.UTF8.GetBytes(json));
 
@@ -78,15 +79,15 @@ public class UnknownResponseTests
     [Fact]
     public void JsonStringToPersonUnknownResponse()
     {
-        var json = /*lang=json,strict*/ """
-            {
-              "stat": "ok",
-              "person": {
-                "nsid": "12037949754@N01",
-                "content_type": "1"
-              }
-            }
-            """;
+        const string json = """
+                            {
+                              "stat": "ok",
+                              "person": {
+                                "nsid": "12037949754@N01",
+                                "content_type": "1"
+                              }
+                            }
+                            """;
 
         var result = FlickrConvert.DeserializeObject<FlickrUnknownResult<PersonUnknownResponse>>(Encoding.UTF8.GetBytes(json));
 
@@ -96,21 +97,21 @@ public class UnknownResponseTests
         Assert.IsType<PersonUnknownResponse>(items);
         Assert.True(items.ContainsKey("nsid"));
         Assert.Equal("12037949754@N01", items.GetValueOrDefault("nsid"));
-        Assert.Equal(ContentType.Photo, (ContentType)int.Parse(items.GetValueOrDefault("content_type", string.Empty), System.Globalization.NumberFormatInfo.InvariantInfo));
+        Assert.Equal(ContentType.Photo, (ContentType)int.Parse(items.GetValueOrDefault("content_type", string.Empty), NumberFormatInfo.InvariantInfo));
     }
 
     [Fact]
     public void JsonStringToGroupUnknownResponse()
     {
-        var json = /*lang=json,strict*/ """
-            {
-              "stat": "ok",
-              "group": {
-                "nsid": "48508120860@N01",
-                "url": "http://www.flickr.com/groups/test1/"
-              }
-            }
-            """;
+        const string json = """
+                            {
+                              "stat": "ok",
+                              "group": {
+                                "nsid": "48508120860@N01",
+                                "url": "http://www.flickr.com/groups/test1/"
+                              }
+                            }
+                            """;
 
         var result = FlickrConvert.DeserializeObject<FlickrUnknownResult<GroupUnknownResponse>>(Encoding.UTF8.GetBytes(json));
 
@@ -125,15 +126,15 @@ public class UnknownResponseTests
     [Fact]
     public void JsonStringToUserUnknownResponse()
     {
-        var json = /*lang=json,strict*/ """
-            {
-              "stat": "ok",
-              "user": {
-                "id": "12037949632@N01",
-                "username": "Stewart"
-              }
-            }
-            """;
+        const string json = """
+                            {
+                              "stat": "ok",
+                              "user": {
+                                "id": "12037949632@N01",
+                                "username": "Stewart"
+                              }
+                            }
+                            """;
 
         var result = FlickrConvert.DeserializeObject<FlickrUnknownResult<UserUnknownResponse>>(Encoding.UTF8.GetBytes(json));
 

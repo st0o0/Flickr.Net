@@ -15,7 +15,7 @@ namespace Flickr.Net.Internals.Caching;
 /// </remarks>
 /// <param name="filename"></param>
 /// <param name="persister"></param>
-public sealed class PersistentCache(string filename, CacheItemPersister persister) : IDisposable
+internal sealed class PersistentCache(string filename, CacheItemPersister persister) : IDisposable
 {
     // The in-memory representation of the cache. Use SortedList instead of Hashtable only to
     // maintain backward compatibility with previous serialization scheme. If we abandon backward
@@ -174,14 +174,13 @@ public sealed class PersistentCache(string filename, CacheItemPersister persiste
         {
             return true;
         }
-        else if (age == TimeSpan.MaxValue)
+
+        if (age == TimeSpan.MaxValue)
         {
             return false;
         }
-        else
-        {
-            return test < DateTime.UtcNow - age;
-        }
+
+        return test < DateTime.UtcNow - age;
     }
 
     private void InternalGetAll(Type valueType, out string[] keys, out Array values)
@@ -209,10 +208,8 @@ public sealed class PersistentCache(string filename, CacheItemPersister persiste
             {
                 return value;
             }
-            else
-            {
-                return null;
-            }
+
+            return null;
         }
 
         throw new ArgumentNullException(nameof(key));

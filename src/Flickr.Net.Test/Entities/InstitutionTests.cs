@@ -11,57 +11,57 @@ public class InstitutionTests
     [Fact]
     public void JsonStringToInstitutions()
     {
-        var json = /*lang=json,strict*/ """
-            {
-              "stat": "ok",
-              "institutions": {
-                "institution": [
-                  {
-                    "nsid": "123456@N01",
-                    "date_launch": "1232000000",
-                    "name": "Institution",
-                    "urls": {
-                      "url": [
-                        {
-                          "type": "site",
-                          "_content": "http://example.com/"
-                        },
-                        {
-                          "type": "license",
-                          "_content": "http://example.com/commons/license"
-                        },
-                        {
-                          "type": "flickr",
-                          "_content": "http://flickr.com/photos/institution"
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "nsid": "123456@N01",
-                    "date_launch": "1232000000",
-                    "name": "Institution",
-                    "urls": {
-                      "url": [
-                        {
-                          "type": "site",
-                          "_content": "http://example.com/"
-                        },
-                        {
-                          "type": "license",
-                          "_content": "http://example.com/commons/license"
-                        },
-                        {
-                          "type": "flickr",
-                          "_content": "http://flickr.com/photos/institution"
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            }
-            """;
+        const string json = """
+                            {
+                              "stat": "ok",
+                              "institutions": {
+                                "institution": [
+                                  {
+                                    "nsid": "123456@N01",
+                                    "date_launch": "1232000000",
+                                    "name": "Institution",
+                                    "urls": {
+                                      "url": [
+                                        {
+                                          "type": "site",
+                                          "_content": "http://example.com/"
+                                        },
+                                        {
+                                          "type": "license",
+                                          "_content": "http://example.com/commons/license"
+                                        },
+                                        {
+                                          "type": "flickr",
+                                          "_content": "http://flickr.com/photos/institution"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  {
+                                    "nsid": "123456@N01",
+                                    "date_launch": "1232000000",
+                                    "name": "Institution",
+                                    "urls": {
+                                      "url": [
+                                        {
+                                          "type": "site",
+                                          "_content": "http://example.com/"
+                                        },
+                                        {
+                                          "type": "license",
+                                          "_content": "http://example.com/commons/license"
+                                        },
+                                        {
+                                          "type": "flickr",
+                                          "_content": "http://flickr.com/photos/institution"
+                                        }
+                                      ]
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                            """;
 
         var result = FlickrConvert.DeserializeObject<FlickrResult<Institutions>>(Encoding.UTF8.GetBytes(json));
 

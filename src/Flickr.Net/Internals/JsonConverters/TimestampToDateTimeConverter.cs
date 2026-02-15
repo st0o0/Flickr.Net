@@ -1,4 +1,6 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Globalization;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Flickr.Net.Internals.JsonConverters;
 
@@ -16,7 +18,7 @@ public class TimestampToDateTimeConverter : JsonConverter<DateTime>
 
     /// <summary>
     /// </summary>
-    public override DateTime Read(ref System.Text.Json.Utf8JsonReader reader, Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+    public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         var value = reader.GetString();
         if (value == null)
@@ -26,7 +28,7 @@ public class TimestampToDateTimeConverter : JsonConverter<DateTime>
 
         try
         {
-            return UnixTimestampToDate(long.Parse(value, System.Globalization.NumberStyles.Any, System.Globalization.NumberFormatInfo.InvariantInfo));
+            return UnixTimestampToDate(long.Parse(value, NumberStyles.Any, NumberFormatInfo.InvariantInfo));
         }
         catch (FormatException)
         {
@@ -36,7 +38,7 @@ public class TimestampToDateTimeConverter : JsonConverter<DateTime>
 
     /// <summary>
     /// </summary>
-    public override void Write(System.Text.Json.Utf8JsonWriter writer, DateTime value, System.Text.Json.JsonSerializerOptions options)
+    public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
     {
         var content = UtilityMethods.DateToUnixTimestamp(value);
         writer.WriteRawValue(content);

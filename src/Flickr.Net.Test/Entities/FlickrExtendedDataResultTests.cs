@@ -1,5 +1,4 @@
 ﻿using System.Text;
-using System.Xml;
 using System.Xml.Linq;
 using Flickr.Net.Flickrs.Results;
 using Flickr.Net.Internals;

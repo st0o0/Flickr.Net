@@ -1,10 +1,11 @@
+using System.Globalization;
 using Flickr.Net.Enums;
 
 namespace Flickr.Net.Internals.Extensions;
 
 /// <summary>
 /// </summary>
-public static class SearchOptionsExtensions
+internal static class SearchOptionsExtensions
 {
     /// <summary>
     /// </summary>
@@ -36,9 +37,9 @@ public static class SearchOptionsExtensions
 
         parameters.AppendIf("license", options.Licenses, x => x.Count != 0, x => string.Join(",", x.Distinct().Select(item => item.GetEnumMemberValue())));
 
-        parameters.AppendIf("per_page", options.PerPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("per_page", options.PerPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("page", options.Page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("page", options.Page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
         parameters.AppendIf("extras", options.Extras, x => x != PhotoSearchExtras.None, x => x.ToFlickrString());
 
@@ -56,11 +57,11 @@ public static class SearchOptionsExtensions
 
         parameters.AppendIf("has_geo", options.HasGeo, x => x != null, x => x.Value ? "1" : "0");
 
-        parameters.AppendIf("lat", options.Latitude, x => x != null, x => x.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("lat", options.Latitude, x => x != null, x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("lon", options.Longitude, x => x != null, x => x.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("lon", options.Longitude, x => x != null, x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("radius", options.Radius, x => x != null, x => x.Value.ToString("0.00000", System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("radius", options.Radius, x => x != null, x => x.Value.ToString("0.00000", NumberFormatInfo.InvariantInfo));
 
         parameters.AppendIf("radius_units", options.RadiusUnits, x => x != RadiusUnit.None, x => x.GetEnumMemberValue());
 
@@ -90,17 +91,17 @@ public static class SearchOptionsExtensions
 
         parameters.AppendIf("username", options.Username, x => !string.IsNullOrEmpty(x), x => x);
 
-        parameters.AppendIf("exif_min_exposure", options.ExifMinExposure, x => x != null, x => x.Value.ToString("0.00000", System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("exif_min_exposure", options.ExifMinExposure, x => x != null, x => x.Value.ToString("0.00000", NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("exif_max_exposure", options.ExifMaxExposure, x => x != null, x => x.Value.ToString("0.00000", System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("exif_max_exposure", options.ExifMaxExposure, x => x != null, x => x.Value.ToString("0.00000", NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("exif_min_aperture", options.ExifMinAperture, x => x != null, x => x.Value.ToString("0.00000", System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("exif_min_aperture", options.ExifMinAperture, x => x != null, x => x.Value.ToString("0.00000", NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("exif_max_aperture", options.ExifMaxAperture, x => x != null, x => x.Value.ToString("0.00000", System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("exif_max_aperture", options.ExifMaxAperture, x => x != null, x => x.Value.ToString("0.00000", NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("exif_min_focallen", options.ExifMinFocalLength, x => x != null, x => x.Value.ToString("0", System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("exif_min_focallen", options.ExifMinFocalLength, x => x != null, x => x.Value.ToString("0", NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("exif_max_focallen", options.ExifMaxFocalLength, x => x != null, x => x.Value.ToString("0", System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("exif_max_focallen", options.ExifMaxFocalLength, x => x != null, x => x.Value.ToString("0", NumberFormatInfo.InvariantInfo));
 
         parameters.AppendIf("exclude_user_id", options.ExcludeUserID, x => !string.IsNullOrEmpty(x), x => x);
 
@@ -135,9 +136,9 @@ public static class SearchOptionsExtensions
 
         parameters.AppendIf("sort", options.SortOrder, x => x != PhotoSearchSortOrder.None, x => x.ToFlickrString());
 
-        parameters.AppendIf("per_page", options.PerPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("per_page", options.PerPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("page", options.Page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("page", options.Page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
         parameters.AppendIf("privacy_filter", options.PrivacyFilter, x => x != PrivacyFilter.None, x => x.ToString("d"));
 

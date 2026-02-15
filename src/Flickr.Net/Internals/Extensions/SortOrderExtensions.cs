@@ -4,7 +4,7 @@ namespace Flickr.Net.Internals.Extensions;
 
 /// <summary>
 /// </summary>
-public static class SortOrderExtensions
+internal static class SortOrderExtensions
 {
     /// <summary>
     /// Converts a <see cref="PopularitySort"/> enum to a string.

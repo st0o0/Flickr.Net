@@ -4,7 +4,7 @@ namespace Flickr.Net.Internals.Extensions;
 
 /// <summary>
 /// </summary>
-public static class CollectionStyleExtensions
+internal static class CollectionStyleExtensions
 {
     /// <summary>
     /// Converts a collection of <see cref="Style"/> values to a string literal containing the

@@ -14,7 +14,7 @@ public class FlickrApiException : FlickrException
     /// </remarks>
     /// <param name="code">The error code supplied by Flickr.</param>
     /// <param name="message">The error message supplied by Flickr.</param>
-    public FlickrApiException(int code, string message) : base()
+    public FlickrApiException(int code, string message)
     {
         Code = code;
         OriginalMessage = message;
@@ -23,7 +23,7 @@ public class FlickrApiException : FlickrException
     /// <summary>
     /// Initializes a new instance of the <see cref="FlickrApiException"/> class.
     /// </summary>
-    public FlickrApiException() : base()
+    public FlickrApiException()
     { }
 
     /// <summary>

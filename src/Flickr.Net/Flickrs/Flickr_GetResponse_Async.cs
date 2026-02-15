@@ -79,14 +79,7 @@ public partial class Flickr
             }
         }
 
-        try
-        {
-            var flickrResults = FlickrConvert.DeserializeObject<T>(resultArray);
-            return flickrResults.EnsureSuccessStatusCode();
-        }
-        catch (Exception)
-        {
-            throw;
-        }
+        var flickrResults = FlickrConvert.DeserializeObject<T>(resultArray);
+        return flickrResults.EnsureSuccessStatusCode();
     }
 }

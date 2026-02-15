@@ -76,11 +76,5 @@ public class OAuthException : Exception
     /// <summary>
     /// The message for the exception.
     /// </summary>
-    public override string Message
-    {
-        get
-        {
-            return _mess;
-        }
-    }
+    public override string Message => _mess;
 }

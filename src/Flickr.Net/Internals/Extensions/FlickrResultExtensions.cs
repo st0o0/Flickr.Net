@@ -11,11 +11,6 @@ public static class FlickrResultExtensions
     /// </summary>
     public static T EnsureSuccessStatusCode<T>(this T flickrResult) where T : FlickrResult
     {
-        if (flickrResult.HasError)
-        {
-            throw ExceptionHandler.CreateResponseException(flickrResult);
-        }
-
-        return flickrResult;
+        return flickrResult.HasError ? throw ExceptionHandler.CreateResponseException(flickrResult) : flickrResult;
     }
 }

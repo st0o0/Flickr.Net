@@ -10,33 +10,33 @@ public class ReferrerTests
   [Fact]
   public void JsonStringToReferrers()
   {
-    var json = /*lang=json,strict*/ """
-            {
-              "stat": "ok",
-              "domain": {
-                "page": "1",
-                "perpage": "25",
-                "pages": "1",
-                "total": "3",
-                "name": "flickr.com",
-                "referrer": [
-                  {
-                    "url": "http://flickr.com/",
-                    "views": "11"
-                  },
-                  {
-                    "url": "http://flickr.com/photos/friends/",
-                    "views": "8"
-                  },
-                  {
-                    "url": "http://flickr.com/search/?q=stats+api",
-                    "views": "2",
-                    "searchterm": "stats api"
-                  }
-                ]
-              }
-            }
-            """;
+    const string json = """
+                        {
+                          "stat": "ok",
+                          "domain": {
+                            "page": "1",
+                            "perpage": "25",
+                            "pages": "1",
+                            "total": "3",
+                            "name": "flickr.com",
+                            "referrer": [
+                              {
+                                "url": "http://flickr.com/",
+                                "views": "11"
+                              },
+                              {
+                                "url": "http://flickr.com/photos/friends/",
+                                "views": "8"
+                              },
+                              {
+                                "url": "http://flickr.com/search/?q=stats+api",
+                                "views": "2",
+                                "searchterm": "stats api"
+                              }
+                            ]
+                          }
+                        }
+                        """;
 
     var result = FlickrConvert.DeserializeObject<FlickrResult<Referrers>>(Encoding.UTF8.GetBytes(json));
 

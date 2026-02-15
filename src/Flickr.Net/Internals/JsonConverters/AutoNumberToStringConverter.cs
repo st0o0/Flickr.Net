@@ -1,10 +1,11 @@
 ﻿using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Flickr.Net.Internals.JsonConverters;
 
 /// <summary>
 /// </summary>
-public class AutoNumberToStringConverter : System.Text.Json.Serialization.JsonConverter<string>
+public class AutoNumberToStringConverter : JsonConverter<string>
 {
     /// <summary>
     /// </summary>
@@ -14,15 +15,9 @@ public class AutoNumberToStringConverter : System.Text.Json.Serialization.JsonCo
     /// </summary>
     public override string Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        if (reader.TokenType == JsonTokenType.Number)
-        {
-            var value = reader.TryGetInt64(out var l) ?
-                l :
-                reader.GetDouble();
-            return value.ToString();
-        }
-        
-        return reader.GetString();
+        if (reader.TokenType != JsonTokenType.Number) return reader.GetString()!;
+        var value = reader.TryGetInt64(out var l) ? l : reader.GetDouble();
+        return value.ToString();
     }
 
     /// <summary>

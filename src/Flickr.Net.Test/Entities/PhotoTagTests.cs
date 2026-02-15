@@ -10,42 +10,42 @@ public class PhotoTagTests
     [Fact]
     public void JsonStringToPhotoTags()
     {
-        var json = /*lang=json,strict*/ """
-            {
-                "photo": {
-                    "id": "2619",
-                    "tags": {
-                        "tag": [
+        const string json = """
                             {
-                                "id": "6335-2619-14731",
-                                "author": "35034351963@N01",
-                                "authorname": "RodBegbie",
-                                "raw": "sfa",
-                                "_content": "sfa",
-                                "machine_tag": 0
-                            },
-                            {
-                                "id": "6335-2619-2757",
-                                "author": "35034351963@N01",
-                                "authorname": "RodBegbie",
-                                "raw": "concert",
-                                "_content": "concert",
-                                "machine_tag": 0
-                            },
-                            {
-                                "id": "6335-2619-19582",
-                                "author": "35034351963@N01",
-                                "authorname": "RodBegbie",
-                                "raw": "superfurryanimals",
-                                "_content": "superfurryanimals",
-                                "machine_tag": 0
+                                "photo": {
+                                    "id": "2619",
+                                    "tags": {
+                                        "tag": [
+                                            {
+                                                "id": "6335-2619-14731",
+                                                "author": "35034351963@N01",
+                                                "authorname": "RodBegbie",
+                                                "raw": "sfa",
+                                                "_content": "sfa",
+                                                "machine_tag": 0
+                                            },
+                                            {
+                                                "id": "6335-2619-2757",
+                                                "author": "35034351963@N01",
+                                                "authorname": "RodBegbie",
+                                                "raw": "concert",
+                                                "_content": "concert",
+                                                "machine_tag": 0
+                                            },
+                                            {
+                                                "id": "6335-2619-19582",
+                                                "author": "35034351963@N01",
+                                                "authorname": "RodBegbie",
+                                                "raw": "superfurryanimals",
+                                                "_content": "superfurryanimals",
+                                                "machine_tag": 0
+                                            }
+                                        ]
+                                    }
+                                },
+                                "stat": "ok"
                             }
-                        ]
-                    }
-                },
-                "stat": "ok"
-            }
-            """;
+                            """;
 
         var result = FlickrConvert.DeserializeObject<FlickrResult<PhotoTags>>(Encoding.UTF8.GetBytes(json));
 

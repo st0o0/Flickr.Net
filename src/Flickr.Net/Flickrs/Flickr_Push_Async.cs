@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Entities;
+﻿using System.Globalization;
+using Flickr.Net.Entities;
 using Flickr.Net.Enums;
 using Flickr.Net.Internals.Extensions;
 
@@ -59,21 +60,21 @@ public partial class Flickr : IFlickrPush
 
         parameters.AppendIf("verify_token", verifyToken, x => !string.IsNullOrEmpty(x), x => x);
 
-        parameters.AppendIf("lease_seconds", leaseSeconds, x => x != null && leaseSeconds > 0, x => x.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("lease_seconds", leaseSeconds, x => x != null && leaseSeconds > 0, x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
 
         parameters.AppendIf("woe_ids", woeIds, x => x != null && x.Any(), x => string.Join(",", x));
 
         parameters.AppendIf("place_ids", placeIds, x => x != null && x.Any(), x => string.Join(",", x));
 
-        parameters.AppendIf("lat", latitude, x => x.HasValue && x > 0 && topic == "geo", x => x.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("lat", latitude, x => x.HasValue && x > 0 && topic == "geo", x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("lon", longitude, x => x.HasValue && x > 0 && topic == "geo", x => x.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("lon", longitude, x => x.HasValue && x > 0 && topic == "geo", x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("radius", radius, x => x.HasValue && x > 0 && topic == "geo", x => x.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("radius", radius, x => x.HasValue && x > 0 && topic == "geo", x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
 
         parameters.AppendIf("radius_units", radiusUnits, x => x != RadiusUnit.None, x => radiusUnits.ToString("d"));
 
-        parameters.AppendIf("accuracy", accuracy, x => x != GeoAccuracy.None, x => ((int)x).ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("accuracy", accuracy, x => x != GeoAccuracy.None, x => ((int)x).ToString(NumberFormatInfo.InvariantInfo));
 
         parameters.AppendIf("nsids", nsids, x => x != null && x.Any() && topic == "commons", x => string.Join(",", x.ToArray()));
 

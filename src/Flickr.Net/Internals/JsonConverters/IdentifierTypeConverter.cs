@@ -10,7 +10,8 @@ public class IdentifierTypeConverter : JsonConverter<IdentifierType>
 {
     /// <summary>
     /// </summary>
-    public IdentifierTypeConverter() : base() { }
+    public IdentifierTypeConverter()
+    { }
 
     /// <summary>
     /// </summary>

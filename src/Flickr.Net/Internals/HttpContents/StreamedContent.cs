@@ -12,7 +12,7 @@ internal class StreamedContent(Stream fileStream, IProgress<double> progress, Ca
     private class ContentStream(Stream stream, IProgress<double> progress) : StreamWrapper(stream)
     {
         private IProgress<double> _progress = progress;
-        private long _position = 0;
+        private long _position;
 
         public override async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
         {

@@ -4,7 +4,7 @@
 /// An interface that knows how to read/write subclasses of ICacheItem. Obviously there will be a
 /// tight coupling between concrete implementations of ICacheItem and concrete implementations of ICacheItemPersister.
 /// </summary>
-public abstract class CacheItemPersister
+internal abstract class CacheItemPersister
 {
     /// <summary>
     /// Read a single cache item from the input stream.

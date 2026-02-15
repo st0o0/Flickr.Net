@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Internals.Extensions;
+﻿using System.Globalization;
+using Flickr.Net.Internals.Extensions;
 
 namespace Flickr.Net;
 
@@ -89,9 +90,9 @@ public partial class Flickr : IFlickrGroupsDiscussReplies
             { "topic_id", topicId }
         };
 
-        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<Replies>(parameters, cancellationToken);
     }

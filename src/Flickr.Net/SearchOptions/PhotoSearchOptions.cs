@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Text;
 using Flickr.Net.Entities;
 using Flickr.Net.Enums;
 using Flickr.Net.Internals;
@@ -25,7 +26,8 @@ public record PhotoSearchOptions
     /// </summary>
     /// <param name="userId">The ID of the User to search for.</param>
     public PhotoSearchOptions(string userId) : this(userId, null, TagMode.AllTags, null)
-    { }
+    {
+    }
 
     /// <summary>
     /// Create an instance of the <see cref="PhotoSearchOptions"/> for a given user ID and tag list.
@@ -33,7 +35,8 @@ public record PhotoSearchOptions
     /// <param name="userId">The ID of the User to search for.</param>
     /// <param name="tags">The tags (comma delimited) to search for. Will match all tags.</param>
     public PhotoSearchOptions(string userId, string tags) : this(userId, tags, TagMode.AllTags, null)
-    { }
+    {
+    }
 
     /// <summary>
     /// Create an instance of the <see cref="PhotoSearchOptions"/> for a given user ID and tag list,
@@ -43,7 +46,8 @@ public record PhotoSearchOptions
     /// <param name="tags">The tags (comma delimited) to search for.</param>
     /// <param name="tagMode">The <see cref="TagMode"/> to use to search.</param>
     public PhotoSearchOptions(string userId, string tags, TagMode tagMode) : this(userId, tags, tagMode, null)
-    { }
+    {
+    }
 
     /// <summary>
     /// Create an instance of the <see cref="PhotoSearchOptions"/> for a given user ID and tag list,
@@ -332,17 +336,15 @@ public record PhotoSearchOptions
     /// <returns></returns>
     public string CalculateSlideshowUrl()
     {
-        System.Text.StringBuilder sb = new();
+        StringBuilder sb = new();
         sb.Append("https://www.flickr.com/show.gne");
         sb.Append("?api_method=flickr.photos.search&method_params=");
 
         var parameters = this.ToDictionary();
 
         List<string> parts = [];
-        foreach (var pair in parameters)
-        {
-            parts.Add(Uri.EscapeDataString(pair.Key) + "|" + Uri.EscapeDataString(pair.Value));
-        }
+        parts.AddRange(
+            parameters.Select(pair => Uri.EscapeDataString(pair.Key) + "|" + Uri.EscapeDataString(pair.Value)));
 
         sb.Append(string.Join(";", parts.ToArray()));
 

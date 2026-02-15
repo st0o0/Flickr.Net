@@ -6,5 +6,4 @@ namespace Flickr.Net;
 /// <summary>
 /// </summary>
 [FlickrJsonPropertyName("group")]
-public record GroupSearchResult : GroupBase
-{ }
+public record GroupSearchResult : GroupBase;

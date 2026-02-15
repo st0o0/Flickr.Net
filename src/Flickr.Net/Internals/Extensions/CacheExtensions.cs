@@ -5,7 +5,7 @@ namespace Flickr.Net.Internals.Extensions;
 /// <summary>
 /// The cache extensions.
 /// </summary>
-public static class CacheExtensions
+internal static class CacheExtensions
 {
     /// <summary>
     /// Clears the cache for a particular URL.

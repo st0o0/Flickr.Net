@@ -1,5 +1,4 @@
 ﻿using Flickr.Net.Enums;
-using Flickr.Net.Internals;
 using Flickr.Net.Internals.Extensions;
 using Xunit;
 
@@ -47,7 +46,7 @@ public class SearchOptionTests
     {
         var dateTimeNow = DateTime.Now;
 
-        var options = new PhotoSearchOptions()
+        var options = new PhotoSearchOptions
         {
             Extras = PhotoSearchExtras.All,
             MaxTakenDate = DateTime.UnixEpoch,
@@ -80,7 +79,7 @@ public class SearchOptionTests
     [Fact]
     public void Tests()
     {
-        var t = PhotoSearchExtras.DateUploaded;
+        const PhotoSearchExtras t = PhotoSearchExtras.DateUploaded;
         Assert.False(t.HasFlag(PhotoSearchExtras.License));
         Assert.True(PhotoSearchExtras.All.HasFlag(t));
     }

@@ -1,3 +1,4 @@
+using System.Globalization;
 using Flickr.Net.Enums;
 
 namespace Flickr.Net.Internals;
@@ -7,9 +8,6 @@ namespace Flickr.Net.Internals;
 /// </summary>
 public class BoundaryBox
 {
-    private GeoAccuracy accuracy = GeoAccuracy.Street;
-    private bool isSet;
-
     private double minimumLat = -90;
     private double minimumLon = -180;
     private double maximumLat = 90;
@@ -40,30 +38,23 @@ public class BoundaryBox
     /// <param name="points">A comma seperated list of co-ordinates defining the boundary box.</param>
     public BoundaryBox(string points)
     {
-        if (points != null)
+        var splits = points.Split(',');
+
+        if (splits.Length != 4)
         {
-            var splits = points.Split(',');
-
-            if (splits.Length != 4)
-            {
-                throw new ArgumentException("Parameter must contain 4 values, seperated by commas.", nameof(points));
-            }
-
-            try
-            {
-                MinimumLongitude = double.Parse(splits[0], System.Globalization.NumberFormatInfo.InvariantInfo);
-                MinimumLatitude = double.Parse(splits[1], System.Globalization.NumberFormatInfo.InvariantInfo);
-                MaximumLongitude = double.Parse(splits[2], System.Globalization.NumberFormatInfo.InvariantInfo);
-                MaximumLatitude = double.Parse(splits[3], System.Globalization.NumberFormatInfo.InvariantInfo);
-            }
-            catch (FormatException)
-            {
-                throw new ArgumentException("Unable to parse points as integer values", nameof(points));
-            }
+            throw new ArgumentException("Parameter must contain 4 values, seperated by commas.", nameof(points));
         }
-        else
+
+        try
         {
-            throw new ArgumentNullException(nameof(points));
+            MinimumLongitude = double.Parse(splits[0], NumberFormatInfo.InvariantInfo);
+            MinimumLatitude = double.Parse(splits[1], NumberFormatInfo.InvariantInfo);
+            MaximumLongitude = double.Parse(splits[2], NumberFormatInfo.InvariantInfo);
+            MaximumLatitude = double.Parse(splits[3], NumberFormatInfo.InvariantInfo);
+        }
+        catch (FormatException)
+        {
+            throw new ArgumentException("Unable to parse points as integer values", nameof(points));
         }
     }
 
@@ -115,65 +106,46 @@ public class BoundaryBox
     /// <summary>
     /// Example boundary box for the UK.
     /// </summary>
-    public static BoundaryBox UK
-    {
-        get { return new BoundaryBox(-11.118164, 49.809632, 1.625977, 62.613562); }
-    }
+    public static BoundaryBox UK => new(-11.118164, 49.809632, 1.625977, 62.613562);
 
     /// <summary>
     /// Example boundary box for Newcastle upon Tyne, England.
     /// </summary>
-    public static BoundaryBox UKNewcastle
-    {
-        get { return new BoundaryBox(-1.71936, 54.935821, -1.389771, 55.145919); }
-    }
+    public static BoundaryBox UKNewcastle => new(-1.71936, 54.935821, -1.389771, 55.145919);
 
     /// <summary>
     /// Example boundary box for the USA (excludes Hawaii and Alaska).
     /// </summary>
-    public static BoundaryBox Usa
-    {
-        get { return new BoundaryBox(-130.429687, 22.43134, -58.535156, 49.382373); }
-    }
+    public static BoundaryBox Usa => new(-130.429687, 22.43134, -58.535156, 49.382373);
 
     /// <summary>
     /// Example boundary box for Canada.
     /// </summary>
-    public static BoundaryBox Canada
-    {
-        get { return new BoundaryBox(-143.085937, 41.640078, -58.535156, 73.578167); }
-    }
+    public static BoundaryBox Canada => new(-143.085937, 41.640078, -58.535156, 73.578167);
 
     /// <summary>
     /// Example boundary box for the whole world.
     /// </summary>
-    public static BoundaryBox World
-    {
-        get { return new BoundaryBox(-180, -90, 180, 90); }
-    }
+    public static BoundaryBox World => new(-180, -90, 180, 90);
 
     /// <summary>
     /// The search accuracy - optional. Defaults to <see cref="GeoAccuracy.Street"/>.
     /// </summary>
-    public GeoAccuracy Accuracy
-    {
-        get { return accuracy; }
-        set { accuracy = value; }
-    }
+    public GeoAccuracy Accuracy { get; init; } = GeoAccuracy.Street;
 
     /// <summary>
     /// The minimum latitude of the boundary box, i.e. bottom left hand corner.
     /// </summary>
     public double MinimumLatitude
     {
-        get { return minimumLat; }
-        set
+        get => minimumLat;
+        init
         {
-            if (value < -90 || value > 90)
+            if (value is < -90 or > 90)
             {
                 throw new ArgumentOutOfRangeException(nameof(value), "Must be between -90 and 90");
             }
-            isSet = true;
+            IsSet = true;
             minimumLat = value;
         }
     }
@@ -184,14 +156,14 @@ public class BoundaryBox
     /// </summary>
     public double MinimumLongitude
     {
-        get { return minimumLon; }
-        set
+        get => minimumLon;
+        init
         {
-            if (value < -180 || value > 180)
+            if (value is < -180 or > 180)
             {
                 throw new ArgumentOutOfRangeException(nameof(value), "Must be between -180 and 180");
             }
-            isSet = true;
+            IsSet = true;
             minimumLon = value;
         }
     }
@@ -201,14 +173,14 @@ public class BoundaryBox
     /// </summary>
     public double MaximumLatitude
     {
-        get { return maximumLat; }
-        set
+        get => maximumLat;
+        init
         {
-            if (value < -90 || value > 90)
+            if (value is < -90 or > 90)
             {
                 throw new ArgumentOutOfRangeException(nameof(value), "Must be between -90 and 90");
             }
-            isSet = true;
+            IsSet = true;
             maximumLat = value;
         }
     }
@@ -218,14 +190,14 @@ public class BoundaryBox
     /// </summary>
     public double MaximumLongitude
     {
-        get { return maximumLon; }
-        set
+        get => maximumLon;
+        init
         {
-            if (value < -180 || value > 180)
+            if (value is < -180 or > 180)
             {
                 throw new ArgumentOutOfRangeException(nameof(value), "Must be between -180 and 180");
             }
-            isSet = true;
+            IsSet = true;
             maximumLon = value;
         }
     }
@@ -233,10 +205,7 @@ public class BoundaryBox
     /// <summary>
     /// Gets weither the boundary box has been set or not.
     /// </summary>
-    internal bool IsSet
-    {
-        get { return isSet; }
-    }
+    internal bool IsSet { get; private set; }
 
     /// <summary>
     /// Overrides the ToString method.
@@ -244,7 +213,7 @@ public class BoundaryBox
     /// <returns>A comma seperated list of co-ordinates defining the boundary box.</returns>
     public override string ToString()
     {
-        return string.Format(System.Globalization.NumberFormatInfo.InvariantInfo, "{0},{1},{2},{3}", MinimumLongitude, MinimumLatitude, MaximumLongitude, MaximumLatitude);
+        return string.Format(NumberFormatInfo.InvariantInfo, "{0},{1},{2},{3}", MinimumLongitude, MinimumLatitude, MaximumLongitude, MaximumLatitude);
     }
 
     /// <summary>

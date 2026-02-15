@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Enums;
+﻿using System.Globalization;
+using Flickr.Net.Enums;
 using Flickr.Net.Exceptions;
 using Flickr.Net.Flickrs.Results;
 using Flickr.Net.Internals;
@@ -63,9 +64,9 @@ public partial class Flickr : IFlickrPhotos
     {
         CheckRequiresAuthentication();
 
-        if (count != 0 && (count < 10 || count > 50) && !singlePhoto)
+        if (count != 0 && count is < 10 or > 50 && !singlePhoto)
         {
-            throw new ArgumentOutOfRangeException(nameof(count), string.Format(System.Globalization.CultureInfo.InvariantCulture, "Count must be between 10 and 50. ({0})", count));
+            throw new ArgumentOutOfRangeException(nameof(count), string.Format(CultureInfo.InvariantCulture, "Count must be between 10 and 50. ({0})", count));
         }
 
         Dictionary<string, string> parameters = new()
@@ -73,7 +74,7 @@ public partial class Flickr : IFlickrPhotos
             { "method", "flickr.photos.getContactsPhotos" }
         };
 
-        parameters.AppendIf("count", count, x => x > 0 && !singlePhoto, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("count", count, x => x > 0 && !singlePhoto, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
         parameters.AppendIf("just_friends", justFriends, x => x, _ => "1");
 
@@ -94,7 +95,7 @@ public partial class Flickr : IFlickrPhotos
             { "user_id", userId }
         };
 
-        parameters.AppendIf("count", count, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("count", count, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
         parameters.AppendIf("just_friends", justFriends, x => x, x => "1");
 
@@ -155,9 +156,9 @@ public partial class Flickr : IFlickrPhotos
             { "photo_id", photoId }
         };
 
-        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<PhotoPersons>(parameters, cancellationToken);
     }
@@ -216,9 +217,9 @@ public partial class Flickr : IFlickrPhotos
 
         parameters.AppendIf("sort", sort, x => x != PopularSorting.None, x => x.GetEnumMemberValue());
 
-        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
         parameters.AppendIf("extras", extras, x => x != PhotoSearchExtras.None, x => x.ToFlickrString());
 
@@ -232,9 +233,9 @@ public partial class Flickr : IFlickrPhotos
             { "method", "flickr.photos.getRecent" },
         };
 
-        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
         parameters.AppendIf("extras", extras, x => x != PhotoSearchExtras.None, x => x.ToFlickrString());
 
@@ -298,9 +299,9 @@ public partial class Flickr : IFlickrPhotos
             { "min_date", UtilityMethods.DateToUnixTimestamp(minDate) }
         };
 
-        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
         parameters.AppendIf("extras", extras, x => x != PhotoSearchExtras.None, x => x.ToFlickrString());
 
@@ -354,7 +355,7 @@ public partial class Flickr : IFlickrPhotos
 
         parameters.AppendIf("date_posted", datePosted, x => x.HasValue && x != DateTime.MinValue, x => x.Value.ToUnixTimestamp());
 
-        parameters.AppendIf("date_taken", dateTaken, x => x.HasValue && x != DateTime.MinValue, x => x.Value.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.DateTimeFormatInfo.InvariantInfo));
+        parameters.AppendIf("date_taken", dateTaken, x => x.HasValue && x != DateTime.MinValue, x => x.Value.ToString("yyyy-MM-dd HH:mm:ss", DateTimeFormatInfo.InvariantInfo));
 
         parameters.AppendIf("date_taken_granularity", granularity, _ => dateTaken.HasValue && dateTaken != DateTime.MinValue, x => x.ToString("d"));
 

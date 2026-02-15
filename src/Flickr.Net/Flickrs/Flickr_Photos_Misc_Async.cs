@@ -1,4 +1,6 @@
-﻿namespace Flickr.Net;
+﻿using System.Globalization;
+
+namespace Flickr.Net;
 
 /// <summary>
 /// The flickr.
@@ -7,7 +9,7 @@ public partial class Flickr : IFlickrPhotosMisc
 {
     async Task IFlickrPhotosMisc.RotateAsync(string photoId, int degrees, CancellationToken cancellationToken)
     {
-        ArgumentNullException.ThrowIfNullOrEmpty(photoId, nameof(photoId));
+        ArgumentNullException.ThrowIfNullOrEmpty(photoId);
 
         if (degrees != 90 && degrees != 180 && degrees != 270)
         {
@@ -18,7 +20,7 @@ public partial class Flickr : IFlickrPhotosMisc
         {
             { "method", "flickr.photos.transform.rotate" },
             { "photo_id", photoId },
-            { "degrees", degrees.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) }
+            { "degrees", degrees.ToString(NumberFormatInfo.InvariantInfo) }
         };
 
         await GetResponseAsync(parameters, cancellationToken);

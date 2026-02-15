@@ -10,49 +10,49 @@ public class StatsPhotosTests
     [Fact]
     public void JsonStringToStatsPhotos()
     {
-        var json = """
-            {
-              "stat": "ok",
-              "photos": {
-                "page": "2",
-                "pages": "89",
-                "perpage": "10",
-                "total": "881",
-                "photo": [
-                  {
-                    "id": "2636",
-                    "owner": "47058503995@N01",
-                    "secret": "a123456",
-                    "server": "2",
-                    "title": "test_04",
-                    "ispublic": "1",
-                    "isfriend": "0",
-                    "isfamily": "0",
-                    "stats": {
-                      "views": "941",
-                      "comments": "18",
-                      "favorites": "2"
-                    }
-                  },
-                  {
-                    "id": "2635",
-                    "owner": "47058503995@N01",
-                    "secret": "b123456",
-                    "server": "2",
-                    "title": "test_03",
-                    "ispublic": "0",
-                    "isfriend": "1",
-                    "isfamily": "1",
-                    "stats": {
-                      "views": "141",
-                      "comments": "1",
-                      "favorites": "2"
-                    }
-                  }
-                ]
-              }
-            }
-            """;
+        const string json = """
+                            {
+                              "stat": "ok",
+                              "photos": {
+                                "page": "2",
+                                "pages": "89",
+                                "perpage": "10",
+                                "total": "881",
+                                "photo": [
+                                  {
+                                    "id": "2636",
+                                    "owner": "47058503995@N01",
+                                    "secret": "a123456",
+                                    "server": "2",
+                                    "title": "test_04",
+                                    "ispublic": "1",
+                                    "isfriend": "0",
+                                    "isfamily": "0",
+                                    "stats": {
+                                      "views": "941",
+                                      "comments": "18",
+                                      "favorites": "2"
+                                    }
+                                  },
+                                  {
+                                    "id": "2635",
+                                    "owner": "47058503995@N01",
+                                    "secret": "b123456",
+                                    "server": "2",
+                                    "title": "test_03",
+                                    "ispublic": "0",
+                                    "isfriend": "1",
+                                    "isfamily": "1",
+                                    "stats": {
+                                      "views": "141",
+                                      "comments": "1",
+                                      "favorites": "2"
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                            """;
 
         var result = FlickrConvert.DeserializeObject<FlickrResult<StatsPhotos>>(Encoding.UTF8.GetBytes(json));
 

@@ -6,5 +6,4 @@ namespace Flickr.Net.Internals;
 /// The response returned by the <see cref="IFlickrTest.EchoAsync(Dictionary{string, string},
 /// CancellationToken)"/> method.
 /// </summary>
-public sealed class EchoResponseDictionary : Dictionary<string, string>, IFlickrEntity
-{ }
+public sealed class EchoResponseDictionary : Dictionary<string, string>, IFlickrEntity;

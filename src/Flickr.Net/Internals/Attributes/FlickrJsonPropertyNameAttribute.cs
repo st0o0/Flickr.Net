@@ -5,10 +5,10 @@
 /// <remarks>
 /// </remarks>
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
-internal class FlickrJsonPropertyNameAttribute(string JSONPropertyName) : Attribute
+internal class FlickrJsonPropertyNameAttribute(string jsonPropertyName) : Attribute
 {
 
     /// <summary>
     /// </summary>
-    public string Name { get; } = JSONPropertyName;
+    public string Name { get; } = jsonPropertyName;
 }

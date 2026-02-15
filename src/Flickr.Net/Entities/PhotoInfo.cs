@@ -174,9 +174,7 @@ public struct Comments
 
 /// <summary>
 /// </summary>
-public record PublicEditability : Editability
-{
-}
+public record PublicEditability : Editability;
 
 /// <summary>
 /// </summary>

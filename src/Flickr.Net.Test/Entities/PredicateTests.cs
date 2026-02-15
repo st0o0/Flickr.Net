@@ -10,34 +10,34 @@ public class PredicateTests
     [Fact]
     public void JsonStringToPredicates()
     {
-        var json = /*lang=json,strict*/ """
-            {
-              "stat": "ok",
-              "predicates": {
-                "page": "1",
-                "pages": "1",
-                "total": "3",
-                "perpage": "500",
-                "predicate": [
-                  {
-                    "usage": "20",
-                    "namespaces": "1",
-                    "_content": "elbow"
-                  },
-                  {
-                    "usage": "52",
-                    "namespaces": "2",
-                    "_content": "face"
-                  },
-                  {
-                    "usage": "10",
-                    "namespaces": "1",
-                    "_content": "hand"
-                  }
-                ]
-              }
-            }
-            """;
+        const string json = """
+                            {
+                              "stat": "ok",
+                              "predicates": {
+                                "page": "1",
+                                "pages": "1",
+                                "total": "3",
+                                "perpage": "500",
+                                "predicate": [
+                                  {
+                                    "usage": "20",
+                                    "namespaces": "1",
+                                    "_content": "elbow"
+                                  },
+                                  {
+                                    "usage": "52",
+                                    "namespaces": "2",
+                                    "_content": "face"
+                                  },
+                                  {
+                                    "usage": "10",
+                                    "namespaces": "1",
+                                    "_content": "hand"
+                                  }
+                                ]
+                              }
+                            }
+                            """;
 
         var result = FlickrConvert.DeserializeObject<FlickrResult<Predicates>>(Encoding.UTF8.GetBytes(json));
 

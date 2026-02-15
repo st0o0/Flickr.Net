@@ -8,7 +8,7 @@ public class FlickrWebException : FlickrException
     /// <summary>
     /// Initializes a new instance of the <see cref="FlickrWebException"/> class.
     /// </summary>
-    public FlickrWebException() : base()
+    public FlickrWebException()
     { }
 
     /// <summary>

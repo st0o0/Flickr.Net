@@ -6,5 +6,4 @@ namespace Flickr.Net;
 /// <summary>
 /// </summary>
 [FlickrJsonPropertyName("photo")]
-public record ClusterPhoto : UltraDeluxePhotoBase
-{ }
+public record ClusterPhoto : UltraDeluxePhotoBase;

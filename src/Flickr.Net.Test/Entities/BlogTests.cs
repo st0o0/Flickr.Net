@@ -10,27 +10,27 @@ public class BlogTests
     [Fact]
     public void JsonStringToBlogs()
     {
-        var json = /*lang=json*/ """
-            {
-            "stat": "ok",
-            "blogs":{
-            "blog": [
-                        {
-                            "id"		: "73",
-                            "name"		: "Bloxus test",
-                            "needspassword"	: "0",
-                            "url"		: "http://remote.bloxus.com/"
-                        },
-                        {
-                            "id"		: "74",
-                            "name"		: "Manila Test",
-                            "needspassword"	: "1",
-                            "url"		: "http://flickrtest1.userland.com/"
-                        }
-                    ]
-                }
-            }
-            """;
+        const string json = """
+                            {
+                            "stat": "ok",
+                            "blogs":{
+                            "blog": [
+                                        {
+                                            "id"		: "73",
+                                            "name"		: "Bloxus test",
+                                            "needspassword"	: "0",
+                                            "url"		: "http://remote.bloxus.com/"
+                                        },
+                                        {
+                                            "id"		: "74",
+                                            "name"		: "Manila Test",
+                                            "needspassword"	: "1",
+                                            "url"		: "http://flickrtest1.userland.com/"
+                                        }
+                                    ]
+                                }
+                            }
+                            """;
 
         var result = FlickrConvert.DeserializeObject<FlickrResult<Blogs>>(Encoding.UTF8.GetBytes(json));
 

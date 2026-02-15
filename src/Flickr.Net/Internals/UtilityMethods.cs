@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -33,7 +34,7 @@ public static class UtilityMethods
     public static string DateToUnixTimestamp(DateTime date)
     {
         var ts = date - UnixStartDate;
-        return ts.TotalSeconds.ToString("0", System.Globalization.NumberFormatInfo.InvariantInfo);
+        return ts.TotalSeconds.ToString("0", NumberFormatInfo.InvariantInfo);
     }
 
     /// <summary>
@@ -50,7 +51,7 @@ public static class UtilityMethods
 
         try
         {
-            return UnixTimestampToDate(long.Parse(timestamp, System.Globalization.NumberStyles.Any, System.Globalization.NumberFormatInfo.InvariantInfo));
+            return UnixTimestampToDate(long.Parse(timestamp, NumberStyles.Any, NumberFormatInfo.InvariantInfo));
         }
         catch (FormatException)
         {
@@ -157,10 +158,8 @@ public static class UtilityMethods
         {
             return UrlFormat(p.Farm, p.Server, p.Id, p.OriginalSecret, size, extension);
         }
-        else
-        {
-            return UrlFormat(p.Farm, p.Server, p.Id, p.Secret, size, extension);
-        }
+
+        return UrlFormat(p.Farm, p.Server, p.Id, p.Secret, size, extension);
     }
 
     /// <summary>
@@ -189,7 +188,7 @@ public static class UtilityMethods
 
     private static string UrlFormat(string format, params object[] parameters)
     {
-        return string.Format(System.Globalization.CultureInfo.InvariantCulture, format, parameters);
+        return string.Format(CultureInfo.InvariantCulture, format, parameters);
     }
 
     /// <summary>
@@ -246,11 +245,11 @@ public static class UtilityMethods
     {
         var format1 = "yyyy-MM-dd";
         var format2 = "yyyy-MM-dd hh:mm:ss";
-        var iformat = System.Globalization.DateTimeFormatInfo.InvariantInfo;
+        var iformat = DateTimeFormatInfo.InvariantInfo;
 
         try
         {
-            return DateTime.ParseExact(p, format1, iformat, System.Globalization.DateTimeStyles.None);
+            return DateTime.ParseExact(p, format1, iformat, DateTimeStyles.None);
         }
         catch (FormatException)
         {
@@ -258,7 +257,7 @@ public static class UtilityMethods
 
         try
         {
-            return DateTime.ParseExact(p, format2, iformat, System.Globalization.DateTimeStyles.None);
+            return DateTime.ParseExact(p, format2, iformat, DateTimeStyles.None);
         }
         catch (FormatException)
         {
@@ -288,21 +287,12 @@ public static class UtilityMethods
 
         if (date.EndsWith("-00-01 00:00:00", StringComparison.Ordinal))
         {
-            output = new DateTime(int.Parse(date.Substring(0, 4), System.Globalization.NumberFormatInfo.InvariantInfo), 1, 1);
+            output = new DateTime(int.Parse(date.Substring(0, 4), NumberFormatInfo.InvariantInfo), 1, 1);
             return output;
         }
 
         var format = "yyyy-MM-dd HH:mm:ss";
-        try
-        {
-            output = DateTime.ParseExact(date, format, System.Globalization.DateTimeFormatInfo.InvariantInfo, System.Globalization.DateTimeStyles.None);
-        }
-        catch (FormatException)
-        {
-#if DEBUG
-            throw;
-#endif
-        }
+        output = DateTime.ParseExact(date, format, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None);
         return output;
     }
 
@@ -320,10 +310,8 @@ public static class UtilityMethods
         {
             return "https://www.flickr.com/images/buddyicon.jpg";
         }
-        else
-        {
-            return string.Format(System.Globalization.CultureInfo.InvariantCulture, "https://farm{0}.staticflickr.com/{1}/buddyicons/{2}.jpg", farm, server, userId);
-        }
+
+        return string.Format(CultureInfo.InvariantCulture, "https://farm{0}.staticflickr.com/{1}/buddyicons/{2}.jpg", farm, server, userId);
     }
 
     /// <summary>
