@@ -11,7 +11,7 @@ public abstract record FlickrEntityBase<TIdentifier> : IFlickrEntity<TIdentifier
 }
 
 /// <inheritdoc/>
-public abstract record FlickrEntityBase : IFlickrEntity { }
+public abstract record FlickrEntityBase : IFlickrEntity;
 
 /// <inheritdoc/>
 public interface IFlickrEntity<T> : IFlickrEntity where T : IIdentifierType
@@ -24,5 +24,4 @@ public interface IFlickrEntity<T> : IFlickrEntity where T : IIdentifierType
 
 /// <summary>
 /// </summary>
-public interface IFlickrEntity
-{ }
+public interface IFlickrEntity;

@@ -8,7 +8,7 @@ public class ResponseXmlException : FlickrException
     /// <summary>
     /// Initializes a new instance of the <see cref="ResponseXmlException"/> class.
     /// </summary>
-    public ResponseXmlException() : base()
+    public ResponseXmlException()
     { }
 
     /// <summary>

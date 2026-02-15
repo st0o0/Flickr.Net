@@ -2,75 +2,60 @@
 
 /// <summary>
 /// </summary>
-public interface IThumbnailUrl
-{ }
+public interface IThumbnailUrl;
 
 /// <summary>
 /// </summary>
-public interface ISquareUrl
-{ }
+public interface ISquareUrl;
 
 /// <summary>
 /// </summary>
-public interface ILargeSquareUrl
-{ }
+public interface ILargeSquareUrl;
 
 /// <summary>
 /// </summary>
-public interface ISmallUrl
-{ }
+public interface ISmallUrl;
 
 /// <summary>
 /// </summary>
-public interface ISmall320Url
-{ }
+public interface ISmall320Url;
 
 /// <summary>
 /// </summary>
-public interface ISmall400Url
-{ }
+public interface ISmall400Url;
 
 /// <summary>
 /// </summary>
-public interface IMediumUrl
-{ }
+public interface IMediumUrl;
 
 /// <summary>
 /// </summary>
-public interface IMedium640Url
-{ }
+public interface IMedium640Url;
 
 /// <summary>
 /// </summary>
-public interface IMedium800Url
-{ }
+public interface IMedium800Url;
 
 /// <summary>
 /// </summary>
-public interface ILargeUrl
-{ }
+public interface ILargeUrl;
 
 /// <summary>
 /// </summary>
-public interface ILarge1600Url
-{ }
+public interface ILarge1600Url;
 
 /// <summary>
 /// </summary>
-public interface ILarge2048Url
-{ }
+public interface ILarge2048Url;
 
 /// <summary>
 /// </summary>
-public interface IOriginalUrl
-{ }
+public interface IOriginalUrl;
 
 /// <summary>
 /// </summary>
-public interface IBuddyIcon
-{ }
+public interface IBuddyIcon;
 
 /// <summary>
 /// </summary>
-public interface IWebUrl
-{ }
+public interface IWebUrl;

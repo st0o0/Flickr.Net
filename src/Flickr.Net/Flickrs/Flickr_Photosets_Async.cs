@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Enums;
+﻿using System.Globalization;
+using Flickr.Net.Enums;
 using Flickr.Net.Flickrs.Results;
 using Flickr.Net.Internals.Extensions;
 
@@ -119,9 +120,9 @@ public partial class Flickr : IFlickrPhotosets
 
         parameters.AppendIf("user_id", userId, x => x != null, x => x);
 
-        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<Photosets>(parameters, cancellationToken);
     }
@@ -138,9 +139,9 @@ public partial class Flickr : IFlickrPhotosets
 
         parameters.AppendIf("privacy_filter", privacyFilter, x => x != PrivacyFilter.None, x => x.ToString("d"));
 
-        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
         parameters.AppendIf("media", media, x => x != MediaType.None, x => media.ToFlickrString());
 

@@ -10,44 +10,44 @@ public class CameraTests
     [Fact]
     public void JsonStringToCameras()
     {
-        var json = /*lang=json,strict*/ """
-            {
-              "stat": "ok",
-              "cameras": {
-                "brand": "apple",
-                "camera": [
-                  {
-                    "id": "iphone_9000",
-                    "name": "iPhone 9000",
-                    "details": {
-                      "megapixels": "22.0",
-                      "zoom": "3.0",
-                      "lcd_size": "40.5",
-                      "storage_type": "Flash"
-                    },
-                    "images": {
-                      "small": "http://farm3.staticflickr.com/1234/cameras/123456_model_small_123456.jpg",
-                      "large": "http://farm3.staticflickr.com/1234/cameras/123456_model_large_123456.jpg"
-                    }
-                  },
-                  {
-                    "id": "iphone_9000",
-                    "name": "iPhone 9000",
-                    "details": {
-                      "megapixels": "22.0",
-                      "zoom": "3.0",
-                      "lcd_size": "40.5",
-                      "storage_type": "Flash"
-                    },
-                    "images": {
-                      "small": "http://farm3.staticflickr.com/1234/cameras/123456_model_small_123456.jpg",
-                      "large": "http://farm3.staticflickr.com/1234/cameras/123456_model_large_123456.jpg"
-                    }
-                  }
-                ]
-              }
-            }
-            """;
+        const string json = """
+                            {
+                              "stat": "ok",
+                              "cameras": {
+                                "brand": "apple",
+                                "camera": [
+                                  {
+                                    "id": "iphone_9000",
+                                    "name": "iPhone 9000",
+                                    "details": {
+                                      "megapixels": "22.0",
+                                      "zoom": "3.0",
+                                      "lcd_size": "40.5",
+                                      "storage_type": "Flash"
+                                    },
+                                    "images": {
+                                      "small": "http://farm3.staticflickr.com/1234/cameras/123456_model_small_123456.jpg",
+                                      "large": "http://farm3.staticflickr.com/1234/cameras/123456_model_large_123456.jpg"
+                                    }
+                                  },
+                                  {
+                                    "id": "iphone_9000",
+                                    "name": "iPhone 9000",
+                                    "details": {
+                                      "megapixels": "22.0",
+                                      "zoom": "3.0",
+                                      "lcd_size": "40.5",
+                                      "storage_type": "Flash"
+                                    },
+                                    "images": {
+                                      "small": "http://farm3.staticflickr.com/1234/cameras/123456_model_small_123456.jpg",
+                                      "large": "http://farm3.staticflickr.com/1234/cameras/123456_model_large_123456.jpg"
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                            """;
 
 
         var result = FlickrConvert.DeserializeObject<FlickrResult<Cameras>>(Encoding.UTF8.GetBytes(json));
@@ -67,27 +67,27 @@ public class CameraTests
     [Fact]
     public void JsonStringToBrands()
     {
-        var json = /*lang=json,strict*/ """
-            {
-              "stat": "ok",
-              "brands": {
-                "brand": [
-                  {
-                    "id": "canon",
-                    "_content": "Canon"
-                  },
-                  {
-                    "id": "nikon",
-                    "_content": "Nikon"
-                  },
-                  {
-                    "id": "apple",
-                    "_content": "Apple"
-                  }
-                ]
-              }
-            }
-            """;
+        const string json = """
+                            {
+                              "stat": "ok",
+                              "brands": {
+                                "brand": [
+                                  {
+                                    "id": "canon",
+                                    "_content": "Canon"
+                                  },
+                                  {
+                                    "id": "nikon",
+                                    "_content": "Nikon"
+                                  },
+                                  {
+                                    "id": "apple",
+                                    "_content": "Apple"
+                                  }
+                                ]
+                              }
+                            }
+                            """;
 
         var result = FlickrConvert.DeserializeObject<FlickrResult<Brands>>(Encoding.UTF8.GetBytes(json));
 

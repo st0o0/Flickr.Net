@@ -3,7 +3,7 @@
 /// <summary>
 /// An item that can be stored in a cache.
 /// </summary>
-public interface ICacheItem
+internal interface ICacheItem
 {
     /// <summary>
     /// The time this cache item was created.

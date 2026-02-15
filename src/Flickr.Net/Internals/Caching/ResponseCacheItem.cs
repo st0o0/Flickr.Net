@@ -9,7 +9,7 @@
 /// <param name="url"></param>
 /// <param name="response"></param>
 /// <param name="creationTime"></param>
-public sealed class ResponseCacheItem(Uri url, byte[] response, DateTime creationTime) : ICacheItem
+internal sealed class ResponseCacheItem(Uri url, byte[] response, DateTime creationTime) : ICacheItem
 {
     /// <summary>
     /// Gets or sets the original URL of the request.

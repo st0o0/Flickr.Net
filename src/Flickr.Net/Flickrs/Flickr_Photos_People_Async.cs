@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Internals.Extensions;
+﻿using System.Globalization;
+using Flickr.Net.Internals.Extensions;
 
 namespace Flickr.Net;
 
@@ -18,13 +19,13 @@ public partial class Flickr : IFlickrPhotosPeople
             { "user_id", userId }
         };
 
-        parameters.AppendIf("person_x", personX, x => x.HasValue, x => x.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("person_x", personX, x => x.HasValue, x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("person_y", personY, x => x.HasValue, x => x.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("person_y", personY, x => x.HasValue, x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("person_w", personWidth, x => x.HasValue, x => x.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("person_w", personWidth, x => x.HasValue, x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("person_h", personHeight, x => x.HasValue, x => x.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("person_h", personHeight, x => x.HasValue, x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
 
         await GetResponseAsync(parameters, cancellationToken);
     }
@@ -66,10 +67,10 @@ public partial class Flickr : IFlickrPhotosPeople
             { "method", "flickr.photos.people.editCoords" },
             { "photo_id", photoId },
             { "user_id", userId },
-            { "person_x", personX.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) },
-            { "person_y", personY.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) },
-            { "person_w", personWidth.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) },
-            { "person_h", personHeight.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) }
+            { "person_x", personX.ToString(NumberFormatInfo.InvariantInfo) },
+            { "person_y", personY.ToString(NumberFormatInfo.InvariantInfo) },
+            { "person_w", personWidth.ToString(NumberFormatInfo.InvariantInfo) },
+            { "person_h", personHeight.ToString(NumberFormatInfo.InvariantInfo) }
         };
 
         await GetResponseAsync(parameters, cancellationToken);

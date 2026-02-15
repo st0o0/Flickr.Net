@@ -17,7 +17,7 @@ public static partial class FlickrResponder
     {
         var sb = new StringBuilder();
         var parametersStartingWithOauth = parameters
-            .Where((pair) => pair.Key.StartsWith("oauth", StringComparison.Ordinal));
+            .Where(pair => pair.Key.StartsWith("oauth", StringComparison.Ordinal));
         foreach (var pair in parametersStartingWithOauth)
         {
             sb.Append(pair.Key + "=\"" + Uri.EscapeDataString(pair.Value) + "\",");

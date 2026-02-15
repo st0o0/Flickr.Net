@@ -10,59 +10,59 @@ public class ContactTests
     [Fact]
     public void JsonStringToContacts()
     {
-        var json = /*lang=json,strict*/ """
-            {
-                "contacts": {
-                    "page": 1,
-                    "pages": 1,
-                    "per_page": 1000,
-                    "perpage": 1000,
-                    "total": 3,
-                    "contact": [
-                        {
-                            "nsid": "66956608@N06",
-                            "username": "Flickr",
-                            "iconserver": "3741",
-                            "iconfarm": 4,
-                            "ignored": 0,
-                            "rev_ignored": 0,
-                            "realname": "Flickr",
-                            "friend": 0,
-                            "family": 0,
-                            "path_alias": "flickr",
-                            "location": ""
-                        },
-                        {
-                            "nsid": "153496924@N03",
-                            "username": "KaAuenwasser",
-                            "iconserver": "7921",
-                            "iconfarm": 8,
-                            "ignored": 0,
-                            "rev_ignored": 0,
-                            "realname": "Stephan Gehrlein",
-                            "friend": 0,
-                            "family": 0,
-                            "path_alias": "kaauenwasser",
-                            "location": "Karlsruhe, Deutschland"
-                        },
-                        {
-                            "nsid": "148774494@N04",
-                            "username": "reipa59",
-                            "iconserver": "4163",
-                            "iconfarm": 5,
-                            "ignored": 0,
-                            "rev_ignored": 0,
-                            "realname": "",
-                            "friend": 0,
-                            "family": 0,
-                            "path_alias": "reinerpaul",
-                            "location": ""
-                        }
-                    ]
-                },
-                "stat": "ok"
-            }
-            """;
+        const string json = """
+                            {
+                                "contacts": {
+                                    "page": 1,
+                                    "pages": 1,
+                                    "per_page": 1000,
+                                    "perpage": 1000,
+                                    "total": 3,
+                                    "contact": [
+                                        {
+                                            "nsid": "66956608@N06",
+                                            "username": "Flickr",
+                                            "iconserver": "3741",
+                                            "iconfarm": 4,
+                                            "ignored": 0,
+                                            "rev_ignored": 0,
+                                            "realname": "Flickr",
+                                            "friend": 0,
+                                            "family": 0,
+                                            "path_alias": "flickr",
+                                            "location": ""
+                                        },
+                                        {
+                                            "nsid": "153496924@N03",
+                                            "username": "KaAuenwasser",
+                                            "iconserver": "7921",
+                                            "iconfarm": 8,
+                                            "ignored": 0,
+                                            "rev_ignored": 0,
+                                            "realname": "Stephan Gehrlein",
+                                            "friend": 0,
+                                            "family": 0,
+                                            "path_alias": "kaauenwasser",
+                                            "location": "Karlsruhe, Deutschland"
+                                        },
+                                        {
+                                            "nsid": "148774494@N04",
+                                            "username": "reipa59",
+                                            "iconserver": "4163",
+                                            "iconfarm": 5,
+                                            "ignored": 0,
+                                            "rev_ignored": 0,
+                                            "realname": "",
+                                            "friend": 0,
+                                            "family": 0,
+                                            "path_alias": "reinerpaul",
+                                            "location": ""
+                                        }
+                                    ]
+                                },
+                                "stat": "ok"
+                            }
+                            """;
 
         var result = FlickrConvert.DeserializeObject<FlickrResult<Contacts>>(Encoding.UTF8.GetBytes(json));
 

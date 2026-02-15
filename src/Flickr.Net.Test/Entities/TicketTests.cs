@@ -10,32 +10,32 @@ public class TicketTests
     [Fact]
     public void JsonStringToTickets()
     {
-        var json = /*lang=json,strict*/ """
-            {
-              "stat": "ok",
-              "uploader": {
-                "ticket": [
-                  {
-                    "id": "128",
-                    "complete": "1",
-                    "photoid": "2995"
-                  },
-                  {
-                    "id": "129",
-                    "complete": "0"
-                  },
-                  {
-                    "id": "130",
-                    "complete": "2"
-                  },
-                  {
-                    "id": "131",
-                    "invalid": "1"
-                  }
-                ]
-              }
-            }
-            """;
+        const string json = """
+                            {
+                              "stat": "ok",
+                              "uploader": {
+                                "ticket": [
+                                  {
+                                    "id": "128",
+                                    "complete": "1",
+                                    "photoid": "2995"
+                                  },
+                                  {
+                                    "id": "129",
+                                    "complete": "0"
+                                  },
+                                  {
+                                    "id": "130",
+                                    "complete": "2"
+                                  },
+                                  {
+                                    "id": "131",
+                                    "invalid": "1"
+                                  }
+                                ]
+                              }
+                            }
+                            """;
 
         var result = FlickrConvert.DeserializeObject<FlickrResult<Tickets>>(Encoding.UTF8.GetBytes(json));
 

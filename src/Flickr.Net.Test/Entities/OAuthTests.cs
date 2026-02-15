@@ -11,20 +11,20 @@ public class OAuthTests
     [Fact]
     public void JsonStringToOAuth()
     {
-        var json = /*lang=json,strict*/ """
-            {
-              "stat": "ok",
-              "oauth": {
-                "token": "72157627611980735-09e87c3024f733da",
-                "perms": "write",
-                "user": {
-                  "nsid": "1121451801@N07",
-                  "username": "jamalf",
-                  "fullname": "Jamal F"
-                }
-              }
-            }
-            """;
+        const string json = """
+                            {
+                              "stat": "ok",
+                              "oauth": {
+                                "token": "72157627611980735-09e87c3024f733da",
+                                "perms": "write",
+                                "user": {
+                                  "nsid": "1121451801@N07",
+                                  "username": "jamalf",
+                                  "fullname": "Jamal F"
+                                }
+                              }
+                            }
+                            """;
 
         var result = FlickrConvert.DeserializeObject<FlickrResult<OAuth>>(Encoding.UTF8.GetBytes(json));
 

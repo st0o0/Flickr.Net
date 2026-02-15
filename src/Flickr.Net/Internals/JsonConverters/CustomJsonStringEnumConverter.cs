@@ -39,10 +39,8 @@ public class CustomJsonStringEnumConverter(JsonNamingPolicy namingPolicy = null,
         {
             return new JsonStringEnumConverter(new DictionaryLookupNamingPolicy(dictionary, namingPolicy), allowIntegerValues).CreateConverter(typeToConvert, options);
         }
-        else
-        {
-            return baseConverter.CreateConverter(typeToConvert, options);
-        }
+
+        return baseConverter.CreateConverter(typeToConvert, options);
     }
 }
 

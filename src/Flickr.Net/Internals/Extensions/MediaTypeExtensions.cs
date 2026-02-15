@@ -4,7 +4,7 @@ namespace Flickr.Net.Internals.Extensions;
 
 /// <summary>
 /// </summary>
-public static class MediaTypeExtensions
+internal static class MediaTypeExtensions
 {
     /// <summary>
     /// Converts a <see cref="MediaType"/> enumeration into a string used by Flickr.

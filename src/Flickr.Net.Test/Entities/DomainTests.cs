@@ -10,31 +10,31 @@ public class DomainTests
     [Fact]
     public void JsonStringToDomains()
     {
-        var json = /*lang=json,strict*/ """
-            {
-              "stat": "ok",
-              "domains": {
-                "page": "1",
-                "perpage": "25",
-                "pages": "1",
-                "total": "3",
-                "domain": [
-                  {
-                    "name": "images.search.yahoo.com",
-                    "views": "127"
-                  },
-                  {
-                    "name": "flickr.com",
-                    "views": "122"
-                  },
-                  {
-                    "name": "images.google.com",
-                    "views": "70"
-                  }
-                ]
-              }
-            }
-            """;
+        const string json = """
+                            {
+                              "stat": "ok",
+                              "domains": {
+                                "page": "1",
+                                "perpage": "25",
+                                "pages": "1",
+                                "total": "3",
+                                "domain": [
+                                  {
+                                    "name": "images.search.yahoo.com",
+                                    "views": "127"
+                                  },
+                                  {
+                                    "name": "flickr.com",
+                                    "views": "122"
+                                  },
+                                  {
+                                    "name": "images.google.com",
+                                    "views": "70"
+                                  }
+                                ]
+                              }
+                            }
+                            """;
 
         var result = FlickrConvert.DeserializeObject<FlickrResult<Domains>>(Encoding.UTF8.GetBytes(json));
 

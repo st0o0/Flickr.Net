@@ -1,6 +1,6 @@
-﻿using Flickr.Net.Entities;
+﻿using System.Globalization;
+using Flickr.Net.Entities;
 using Flickr.Net.Enums;
-using Flickr.Net.Internals;
 using Flickr.Net.Internals.Extensions;
 
 namespace Flickr.Net;
@@ -83,8 +83,8 @@ public partial class Flickr : IFlickrPhotosSuggestions
         {
             { "method", "flickr.photos.suggestions.suggestLocation" },
             { "photo_id", photoId },
-            { "lat", latitude.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) },
-            { "lon", longitude.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) }
+            { "lat", latitude.ToString(NumberFormatInfo.InvariantInfo) },
+            { "lon", longitude.ToString(NumberFormatInfo.InvariantInfo) }
         };
 
         parameters.AppendIf("accuracy", accuracy, x => x != GeoAccuracy.None, x => x.ToString("D"));

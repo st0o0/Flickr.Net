@@ -1,6 +1,6 @@
-﻿using Flickr.Net.Enums;
+﻿using System.Globalization;
+using Flickr.Net.Enums;
 using Flickr.Net.Flickrs.Results;
-using Flickr.Net.Internals;
 using Flickr.Net.Internals.Extensions;
 
 namespace Flickr.Net;
@@ -50,9 +50,9 @@ public partial class Flickr : IFlickrFavorites
 
         parameters.AppendIf("extras", extras, x => x != PhotoSearchExtras.None, x => x.ToFlickrString());
 
-        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }
@@ -65,9 +65,9 @@ public partial class Flickr : IFlickrFavorites
             { "user_id", userId }
         };
 
-        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
     }

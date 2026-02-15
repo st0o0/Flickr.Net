@@ -8,7 +8,7 @@ public class CacheException : Exception
     /// <summary>
     /// Initializes a new instance of the <see cref="CacheException"/> class.
     /// </summary>
-    public CacheException() : base()
+    public CacheException()
     { }
 
     /// <summary>

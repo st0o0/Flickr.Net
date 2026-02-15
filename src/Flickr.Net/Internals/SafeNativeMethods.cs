@@ -1,9 +1,12 @@
-﻿namespace Flickr.Net.Internals;
+﻿using System.Runtime.InteropServices;
+using System.Security;
+
+namespace Flickr.Net.Internals;
 
 /// <summary>
 /// Summary description for SafeNativeMethods.
 /// </summary>
-[System.Security.SuppressUnmanagedCodeSecurity]
+[SuppressUnmanagedCodeSecurity]
 internal class SafeNativeMethods
 {
     private SafeNativeMethods()
@@ -12,6 +15,6 @@ internal class SafeNativeMethods
 
     internal static int GetErrorCode(IOException ioe)
     {
-        return System.Runtime.InteropServices.Marshal.GetHRForException(ioe) & 0xFFFF;
+        return Marshal.GetHRForException(ioe) & 0xFFFF;
     }
 }

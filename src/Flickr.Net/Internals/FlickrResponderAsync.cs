@@ -28,10 +28,8 @@ public static partial class FlickrResponder
         {
             return await GetDataResponseOAuthAsync(flickr, baseUrl, parameters, cancellationToken);
         }
-        else
-        {
-            return await GetDataResponseNormalAsync(flickr, baseUrl, parameters, cancellationToken);
-        }
+
+        return await GetDataResponseNormalAsync(flickr, baseUrl, parameters, cancellationToken);
     }
 
     private static async Task<byte[]> GetDataResponseNormalAsync(Flickr flickr, string baseUrl, Dictionary<string, string> parameters, CancellationToken cancellationToken = default)
@@ -59,7 +57,7 @@ public static partial class FlickrResponder
         }
 
         // Calculate post data, content header and auth header
-        var data = new FormUrlEncodedContent(parameters.Where((pair) => !pair.Key.StartsWith("oauth", StringComparison.Ordinal)));
+        var data = new FormUrlEncodedContent(parameters.Where(pair => !pair.Key.StartsWith("oauth", StringComparison.Ordinal)));
         var authHeader = OAuthCalculateAuthHeader(parameters);
 
         // Download data.
@@ -101,14 +99,7 @@ public static partial class FlickrResponder
         message.Content = data;
 
         var response = await client.SendAsync(message, cancellationToken);
-        try
-        {
-            response = response.EnsureSuccessStatusCode();
-        }
-        catch (Exception)
-        {
-            throw;
-        }
+        response = response.EnsureSuccessStatusCode();
 
         return await response.Content.ReadAsByteArrayAsync(cancellationToken);
     }

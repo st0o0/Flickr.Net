@@ -1,4 +1,6 @@
-﻿namespace Flickr.Net;
+﻿using System.Globalization;
+
+namespace Flickr.Net;
 
 /// <summary>
 /// The flickr.
@@ -11,10 +13,10 @@ public partial class Flickr : IFlickrPhotosNotes
         {
             { "method", "flickr.photos.notes.add" },
             { "photo_id", photoId },
-            { "note_x", noteX.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) },
-            { "note_y", noteY.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) },
-            { "note_w", noteWidth.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) },
-            { "note_h", noteHeight.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) },
+            { "note_x", noteX.ToString(NumberFormatInfo.InvariantInfo) },
+            { "note_y", noteY.ToString(NumberFormatInfo.InvariantInfo) },
+            { "note_w", noteWidth.ToString(NumberFormatInfo.InvariantInfo) },
+            { "note_h", noteHeight.ToString(NumberFormatInfo.InvariantInfo) },
             { "note_text", noteText }
         };
 
@@ -40,10 +42,10 @@ public partial class Flickr : IFlickrPhotosNotes
         {
             { "method", "flickr.photos.notes.edit" },
             { "note_id", noteId },
-            { "note_x", noteX.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) },
-            { "note_y", noteY.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) },
-            { "note_w", noteWidth.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) },
-            { "note_h", noteHeight.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) },
+            { "note_x", noteX.ToString(NumberFormatInfo.InvariantInfo) },
+            { "note_y", noteY.ToString(NumberFormatInfo.InvariantInfo) },
+            { "note_w", noteWidth.ToString(NumberFormatInfo.InvariantInfo) },
+            { "note_h", noteHeight.ToString(NumberFormatInfo.InvariantInfo) },
             { "note_text", noteText }
         };
 

@@ -1,13 +1,13 @@
 ﻿using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization.Metadata;
-using System.Xml;
 using System.Xml.Linq;
 using Flickr.Net.Internals.Attributes;
-using Newtonsoft.Json;
 using Flickr.Net.Internals.JsonConverters;
 using Flickr.Net.Internals.JsonConverters.IdentifierConverters;
+using Newtonsoft.Json;
 using Formatting = Newtonsoft.Json.Formatting;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace Flickr.Net.Internals;
 
@@ -19,7 +19,7 @@ public static class FlickrConvert
     /// </summary>
     public static T DeserializeObject<T>(byte[] bytes)
     {
-        return System.Text.Json.JsonSerializer.Deserialize<T>(bytes, Options);
+        return JsonSerializer.Deserialize<T>(bytes, Options);
     }
 
     /// <summary>

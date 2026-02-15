@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Enums;
+﻿using System.Globalization;
+using Flickr.Net.Enums;
 
 namespace Flickr.Net;
 
@@ -18,7 +19,7 @@ public partial class Flickr : IFlickrPrefs
 
         var result = await GetResponseAsync<PersonUnknownResponse>(parameters, cancellationToken);
 
-        return (ContentType)int.Parse(result.GetValueOrDefault("content_type", "0"), System.Globalization.NumberFormatInfo.InvariantInfo);
+        return (ContentType)int.Parse(result.GetValueOrDefault("content_type", "0"), NumberFormatInfo.InvariantInfo);
     }
 
     async Task<GeoPerms> IFlickrPrefs.GetGeoPermsAsync(CancellationToken cancellationToken)
@@ -44,7 +45,7 @@ public partial class Flickr : IFlickrPrefs
 
         var result = await GetResponseAsync<PersonUnknownResponse>(parameters, cancellationToken);
 
-        return (HiddenFromSearch)int.Parse(result.GetValueOrDefault("hidden", "0"), System.Globalization.NumberFormatInfo.InvariantInfo);
+        return (HiddenFromSearch)int.Parse(result.GetValueOrDefault("hidden", "0"), NumberFormatInfo.InvariantInfo);
     }
 
     async Task<PrivacyFilter> IFlickrPrefs.GetPrivacyAsync(CancellationToken cancellationToken)
@@ -58,7 +59,7 @@ public partial class Flickr : IFlickrPrefs
 
         var result = await GetResponseAsync<PersonUnknownResponse>(parameters, cancellationToken);
 
-        return (PrivacyFilter)int.Parse(result.GetValueOrDefault("privacy", "0"), System.Globalization.NumberFormatInfo.InvariantInfo);
+        return (PrivacyFilter)int.Parse(result.GetValueOrDefault("privacy", "0"), NumberFormatInfo.InvariantInfo);
     }
 
     async Task<SafetyLevel> IFlickrPrefs.GetSafetyLevelAsync(CancellationToken cancellationToken)
@@ -72,7 +73,7 @@ public partial class Flickr : IFlickrPrefs
 
         var result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
 
-        return (SafetyLevel)int.Parse(result.GetValueOrDefault("safety_level", "0"), System.Globalization.NumberFormatInfo.InvariantInfo);
+        return (SafetyLevel)int.Parse(result.GetValueOrDefault("safety_level", "0"), NumberFormatInfo.InvariantInfo);
     }
 }
 

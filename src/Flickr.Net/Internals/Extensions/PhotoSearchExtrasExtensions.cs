@@ -4,7 +4,7 @@ namespace Flickr.Net.Internals.Extensions;
 
 /// <summary>
 /// </summary>
-public static class PhotoSearchExtrasExtensions
+internal static class PhotoSearchExtrasExtensions
 {
     /// <summary>
     /// Utility method to convert the <see cref="PhotoSearchExtras"/> enum to a string.

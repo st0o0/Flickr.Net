@@ -10,28 +10,28 @@ public class ViewsTests
     [Fact]
     public void JsonStringToViews()
     {
-        var json = /*lang=json,strict*/ """
-            {
-              "stat": "ok",
-              "stats": {
-                "total": {
-                  "views": "469"
-                },
-                "photos": {
-                  "views": "386"
-                },
-                "photostream": {
-                  "views": "72"
-                },
-                "sets": {
-                  "views": "11"
-                },
-                "collections": {
-                  "views": "0"
-                }
-              }
-            }
-            """;
+        const string json = """
+                            {
+                              "stat": "ok",
+                              "stats": {
+                                "total": {
+                                  "views": "469"
+                                },
+                                "photos": {
+                                  "views": "386"
+                                },
+                                "photostream": {
+                                  "views": "72"
+                                },
+                                "sets": {
+                                  "views": "11"
+                                },
+                                "collections": {
+                                  "views": "0"
+                                }
+                              }
+                            }
+                            """;
 
         var result = FlickrConvert.DeserializeObject<FlickrResult<Views>>(Encoding.UTF8.GetBytes(json));
 

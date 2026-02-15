@@ -2,7 +2,7 @@
 
 /// <summary>
 /// </summary>
-public static class DictionaryExtensions
+internal static class DictionaryExtensions
 {
     /// <summary>
     /// Appends the if.

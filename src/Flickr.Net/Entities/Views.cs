@@ -37,28 +37,23 @@ public record Views : FlickrEntityBase
 
 /// <summary>
 /// </summary>
-public record CollectionViews : ViewBase
-{ }
+public record CollectionViews : ViewBase;
 
 /// <summary>
 /// </summary>
-public record PhotoViews : ViewBase
-{ }
+public record PhotoViews : ViewBase;
 
 /// <summary>
 /// </summary>
-public record PhotostreamViews : ViewBase
-{ }
+public record PhotostreamViews : ViewBase;
 
 /// <summary>
 /// </summary>
-public record SetViews : ViewBase
-{ }
+public record SetViews : ViewBase;
 
 /// <summary>
 /// </summary>
-public record TotalViews : ViewBase
-{ }
+public record TotalViews : ViewBase;
 
 /// <summary>
 /// </summary>

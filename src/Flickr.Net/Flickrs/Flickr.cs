@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Text;
 using Flickr.Net.Configuration;
 using Flickr.Net.Exceptions;
@@ -23,9 +24,6 @@ namespace Flickr.Net;
 /// </example>
 public partial class Flickr
 {
-    private readonly Cache _cache;
-    private readonly FlickrSettings _settings;
-    private readonly FlickrCachingSettings _cachingSettings;
     private string _lastRequest;
 
     /// <summary>
@@ -33,9 +31,9 @@ public partial class Flickr
     /// </summary>
     public Flickr(FlickrConfiguration config)
     {
-        _cachingSettings = new FlickrCachingSettings(config);
-        _cache = new Cache(_cachingSettings);
-        _settings = new FlickrSettings(config);
+        FlickrCachingSettings = new FlickrCachingSettings(config);
+        Cache = new Cache(FlickrCachingSettings);
+        FlickrSettings = new FlickrSettings(config);
     }
 
     /// <summary>
@@ -55,7 +53,7 @@ public partial class Flickr
     /// <param name="apiKey">Your Flickr API Key.</param>
     /// <param name="sharedSecret">Your Flickr Shared Secret.</param>
     public Flickr(string apiKey, string sharedSecret)
-        : this(new FlickrConfiguration() { ApiKey = apiKey, SharedSecret = sharedSecret })
+        : this(new FlickrConfiguration { ApiKey = apiKey, SharedSecret = sharedSecret })
     {
     }
 
@@ -77,7 +75,7 @@ public partial class Flickr
 
     /// <summary>
     /// </summary>
-    protected Cache Cache => _cache;
+    internal Cache Cache { get; }
 
     /// <summary>
     /// property for all activity functions
@@ -207,28 +205,22 @@ public partial class Flickr
     /// <summary>
     /// Gets the flickr caching settings.
     /// </summary>
-    public FlickrCachingSettings FlickrCachingSettings => _cachingSettings;
+    public FlickrCachingSettings FlickrCachingSettings { get; }
 
     /// <summary>
     /// Gets the flickr settings.
     /// </summary>
-    public FlickrSettings FlickrSettings => _settings;
+    public FlickrSettings FlickrSettings { get; }
 
     /// <summary>
     /// Checks to see if a shared secret and an api token are stored in the object. Does not check
     /// if these values are valid values.
     /// </summary>
-    public bool IsAuthenticated
-    {
-        get
-        {
-            return _settings.ApiSecret != null && _settings.ApiKey != null;
-        }
-    }
+    public bool IsAuthenticated => FlickrSettings.ApiSecret != null && FlickrSettings.ApiKey != null;
 
     internal void CheckApiKey()
     {
-        if (string.IsNullOrEmpty(_settings.ApiKey))
+        if (string.IsNullOrEmpty(FlickrSettings.ApiKey))
         {
             throw new ApiKeyRequiredException();
         }
@@ -238,7 +230,7 @@ public partial class Flickr
     {
         CheckApiKey();
 
-        if (string.IsNullOrEmpty(_settings.ApiSecret))
+        if (string.IsNullOrEmpty(FlickrSettings.ApiSecret))
         {
             throw new SignatureRequiredException();
         }
@@ -248,7 +240,8 @@ public partial class Flickr
     {
         CheckSigned();
 
-        if (!string.IsNullOrEmpty(_settings.OAuthAccessToken) && !string.IsNullOrEmpty(_settings.OAuthAccessTokenSecret))
+        if (!string.IsNullOrEmpty(FlickrSettings.OAuthAccessToken) &&
+            !string.IsNullOrEmpty(FlickrSettings.OAuthAccessTokenSecret))
         {
             return;
         }
@@ -280,26 +273,29 @@ public partial class Flickr
         foreach (var pair in parameters)
         {
             var escapedValue = UtilityMethods.EscapeDataString(pair.Value ?? "");
-            url.AppendFormat(System.Globalization.CultureInfo.InvariantCulture, "{0}={1}&", pair.Key, escapedValue);
+            url.AppendFormat(CultureInfo.InvariantCulture, "{0}={1}&", pair.Key, escapedValue);
         }
 
-        return BaseUri.AbsoluteUri + url.ToString();
+        return BaseUri.AbsoluteUri + url;
     }
 
     private string CalculateAuthSignature(Dictionary<string, string> parameters)
     {
         var sorted = parameters.OrderBy(p => p.Key);
 
-        var sb = new StringBuilder(_settings.ApiKey);
+        var sb = new StringBuilder(FlickrSettings.ApiKey);
         foreach (var pair in sorted)
         {
             sb.Append(pair.Key);
             sb.Append(pair.Value);
         }
+
         return UtilityMethods.MD5Hash(sb.ToString());
     }
 
-    private static MultipartFormDataContent CreateUploadData(Stream imageStream, string fileName, IProgress<double> progress, Dictionary<string, string> parameters, string boundary, CancellationToken cancellationToken = default)
+    private static MultipartFormDataContent CreateUploadData(Stream imageStream, string fileName,
+        IProgress<double> progress, Dictionary<string, string> parameters, string boundary,
+        CancellationToken cancellationToken = default)
     {
         //bool oAuth = parameters.ContainsKey("oauth_consumer_key");
 
@@ -314,6 +310,7 @@ public partial class Flickr
             {
                 continue;
             }
+
             content.Add(new StringContent(i.Value), i.Key);
         }
 
@@ -341,9 +338,9 @@ internal static class FlickrExtensions
     {
         return
         (
-             character == 0x9 /* == '\t' == 9   */          ||
-             character == 0xA /* == '\n' == 10  */          ||
-             character == 0xD /* == '\r' == 13  */          ||
+            character == 0x9 /* == '\t' == 9   */ ||
+            character == 0xA /* == '\n' == 10  */ ||
+            character == 0xD /* == '\r' == 13  */ ||
             (character >= 0x20 && character <= 0xD7FF) ||
             (character >= 0xE000 && character <= 0xFFFD) ||
             (character >= 0x10000 && character <= 0x10FFFF)

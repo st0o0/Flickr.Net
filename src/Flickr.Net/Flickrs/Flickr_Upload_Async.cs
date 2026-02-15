@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Globalization;
+using System.Text;
 using System.Text.Json;
 using Flickr.Net.Enums;
 using Flickr.Net.Flickrs.Results;
@@ -51,7 +52,7 @@ public partial class Flickr : IFlickrUpload
         }
         else
         {
-            parameters.Add("auth_token", _settings.ApiKey ?? string.Empty);
+            parameters.Add("auth_token", FlickrSettings.ApiKey ?? string.Empty);
         }
 
         var result = await UploadDataAsync(stream, fileName, progress, uploadUri, parameters, cancellationToken);
@@ -79,7 +80,7 @@ public partial class Flickr : IFlickrUpload
         }
         else
         {
-            parameters.Add("auth_token", _settings.ApiKey ?? string.Empty);
+            parameters.Add("auth_token", FlickrSettings.ApiKey ?? string.Empty);
         }
 
         var result = await UploadDataAsync(stream, fileName, progress, replaceUri, parameters, cancellationToken);
@@ -90,7 +91,7 @@ public partial class Flickr : IFlickrUpload
     {
         var authHeader = FlickrResponder.OAuthCalculateAuthHeader(parameters);
 
-        var boundary = "FLICKR_MIME_" + DateTime.Now.ToString("yyyyMMddhhmmss", System.Globalization.DateTimeFormatInfo.InvariantInfo);
+        var boundary = "FLICKR_MIME_" + DateTime.Now.ToString("yyyyMMddhhmmss", DateTimeFormatInfo.InvariantInfo);
 
         var content = CreateUploadData(imageStream, fileName, progress, parameters, boundary, cancellationToken);
 

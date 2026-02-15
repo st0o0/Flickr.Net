@@ -4,9 +4,7 @@ namespace Flickr.Net.Bases;
 
 /// <summary>
 /// </summary>
-public interface IIdentifierType
-{
-}
+public interface IIdentifierType;
 
 /// <inheritdoc/>
 public abstract record IdentifierType : IIdentifierType
@@ -21,7 +19,7 @@ public abstract record IdentifierType : IIdentifierType
 
     /// <summary>
     /// </summary>
-    public static implicit operator IdentifierType(string value) => new Id() { _id = value };
+    public static implicit operator IdentifierType(string value) => new Id { _id = value };
 }
 
 /// <inheritdoc/>

@@ -1,4 +1,4 @@
-﻿using Flickr.Net.Internals;
+﻿using System.Globalization;
 using Flickr.Net.Internals.Extensions;
 
 namespace Flickr.Net;
@@ -17,9 +17,9 @@ public partial class Flickr : IFlickrMachineTags
 
         parameters.AppendIf("predicate", predicate, x => !string.IsNullOrEmpty(x), x => x);
 
-        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<Namespaces>(parameters, cancellationToken);
     }
@@ -35,9 +35,9 @@ public partial class Flickr : IFlickrMachineTags
 
         parameters.AppendIf("predicate", predicate, x => !string.IsNullOrEmpty(x), x => x);
 
-        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<Pairs>(parameters, cancellationToken);
     }
@@ -51,9 +51,9 @@ public partial class Flickr : IFlickrMachineTags
 
         parameters.AppendIf("namespace", namespaceName, x => !string.IsNullOrEmpty(x), x => x);
 
-        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<Predicates>(parameters, cancellationToken);
     }
@@ -88,9 +88,9 @@ public partial class Flickr : IFlickrMachineTags
             { "predicate", predicate }
         };
 
-        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<Values>(parameters, cancellationToken);
     }

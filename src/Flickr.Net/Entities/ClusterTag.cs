@@ -5,5 +5,4 @@ namespace Flickr.Net;
 /// <summary>
 /// </summary>
 [FlickrJsonPropertyName("tag")]
-public record ClusterTag : TagBase
-{ }
+public record ClusterTag : TagBase;

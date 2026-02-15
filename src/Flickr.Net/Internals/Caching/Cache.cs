@@ -10,12 +10,10 @@ namespace Flickr.Net.Internals.Caching;
 /// Initializes a new instance of the <see cref="Cache"/> class.
 /// </remarks>
 /// <param name="settings">The settings.</param>
-public class Cache(FlickrCachingSettings settings)
+internal class Cache(FlickrCachingSettings settings)
 {
-    private static PersistentCache responses;
-    private static readonly object lockObject = new();
-
-    private readonly FlickrCachingSettings _settings = settings;
+    private static PersistentCache? responses;
+    private readonly object lockObject = new();
 
     /// <summary>
     /// A static object containing the list of cached responses from Flickr.
@@ -26,7 +24,8 @@ public class Cache(FlickrCachingSettings settings)
         {
             lock (lockObject)
             {
-                responses ??= new PersistentCache(Path.Combine(CacheLocation, "responseCache.dat"), new ResponseCacheItemPersister());
+                responses ??= new PersistentCache(Path.Combine(CacheLocation, "responseCache.dat"),
+                    new ResponseCacheItemPersister());
 
                 return responses;
             }
@@ -36,20 +35,20 @@ public class Cache(FlickrCachingSettings settings)
     /// <summary>
     /// Returns weither of not the cache is currently disabled.
     /// </summary>
-    public bool CacheDisabled => _settings.CacheDisabled;
+    public bool CacheDisabled => settings.CacheDisabled;
 
     /// <summary>
     /// Returns the currently set location for the cache.
     /// </summary>
     [DisallowNull]
-    public string CacheLocation => _settings.CacheLocation;
+    public string CacheLocation => settings.CacheLocation;
 
-    internal long CacheSizeLimit => _settings.CacheSizeLimit;
+    internal long CacheSizeLimit => settings.CacheSizeLimit;
 
     /// <summary>
     /// The default timeout for cachable objects within the cache.
     /// </summary>
-    public TimeSpan CacheTimeout => _settings.CacheTimeout;
+    public TimeSpan CacheTimeout => settings.CacheTimeout;
 
     /// <summary>
     /// Remove a specific URL from the cache.

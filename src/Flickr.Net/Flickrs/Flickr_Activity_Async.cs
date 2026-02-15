@@ -1,5 +1,5 @@
-﻿using Flickr.Net.Enums;
-using Flickr.Net.Internals;
+﻿using System.Globalization;
+using Flickr.Net.Enums;
 using Flickr.Net.Internals.Extensions;
 
 namespace Flickr.Net;
@@ -18,9 +18,9 @@ public partial class Flickr : IFlickrActivity
             { "method", "flickr.activity.userComments" }
         };
 
-        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<Items>(parameters, cancellationToken);
     }
@@ -32,7 +32,7 @@ public partial class Flickr : IFlickrActivity
             throw new ArgumentOutOfRangeException(nameof(timePeriod), "Time Period should be greater than 0");
         }
 
-        ArgumentNullException.ThrowIfNull(timeType, nameof(timeType));
+        ArgumentNullException.ThrowIfNull(timeType);
 
         var timeframe = timePeriod + timeType.GetEnumMemberValue();
 
@@ -45,9 +45,9 @@ public partial class Flickr : IFlickrActivity
 
         parameters.AppendIf("timeframe", timeframe, x => x != null && x.Length > 0, x => x);
 
-        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<Items>(parameters, cancellationToken);
     }

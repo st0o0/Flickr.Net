@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Entities;
+﻿using System.Globalization;
+using Flickr.Net.Entities;
 using Flickr.Net.Enums;
 using Flickr.Net.Internals.Extensions;
 using Flickr.Net.NewEntities.Flickr_Photos;
@@ -17,8 +18,8 @@ public partial class Flickr : IFlickrPhotosGeo
         Dictionary<string, string> parameters = new()
         {
             { "method", "flickr.photos.geo.batchCorrectLocation" },
-            { "lat", latitude.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) },
-            { "lon", longitude.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) },
+            { "lat", latitude.ToString(NumberFormatInfo.InvariantInfo) },
+            { "lon", longitude.ToString(NumberFormatInfo.InvariantInfo) },
             { "accuracy", accuracy.ToString("D") }
         };
 
@@ -34,8 +35,8 @@ public partial class Flickr : IFlickrPhotosGeo
         Dictionary<string, string> parameters = new()
         {
             { "method", "flickr.photos.geo.batchCorrectLocation" },
-            { "lat", latitude.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) },
-            { "lon", longitude.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) },
+            { "lat", latitude.ToString(NumberFormatInfo.InvariantInfo) },
+            { "lon", longitude.ToString(NumberFormatInfo.InvariantInfo) },
             { "accuracy", accuracy.ToString("D") }
         };
 
@@ -103,15 +104,15 @@ public partial class Flickr : IFlickrPhotosGeo
         Dictionary<string, string> parameters = new()
         {
             { "method", "flickr.photos.geo.photosForLocation" },
-            { "lat", latitude.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) },
-            { "lon", longitude.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) }
+            { "lat", latitude.ToString(NumberFormatInfo.InvariantInfo) },
+            { "lon", longitude.ToString(NumberFormatInfo.InvariantInfo) }
         };
 
         parameters.AppendIf("accuracy", accuracy, x => x != GeoAccuracy.None, x => x.ToString("D"));
 
-        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
         parameters.AppendIf("extras", extras, x => x != PhotoSearchExtras.None, x => x.ToFlickrString());
 
@@ -147,8 +148,8 @@ public partial class Flickr : IFlickrPhotosGeo
         {
             { "method", "flickr.photos.geo.setLocation" },
             { "photo_id", photoId },
-            { "lat", latitude.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) },
-            { "lon", longitude.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) }
+            { "lat", latitude.ToString(NumberFormatInfo.InvariantInfo) },
+            { "lon", longitude.ToString(NumberFormatInfo.InvariantInfo) }
         };
 
         parameters.AppendIf("accuracy", accuracy, x => x != GeoAccuracy.None, x => x.ToString("D"));

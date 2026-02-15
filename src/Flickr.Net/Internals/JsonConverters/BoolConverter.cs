@@ -9,7 +9,7 @@ public class BoolConverter : JsonConverter<bool>
 {
     /// <summary>
     /// </summary>
-    public BoolConverter() : base()
+    public BoolConverter()
     {
     }
 
@@ -34,7 +34,7 @@ public class BoolConverter : JsonConverter<bool>
                 return reader.ValueTextEquals("1");
 
             case JsonTokenType.Number:
-                return reader.TryGetInt64(out long l) ?
+                return reader.TryGetInt64(out var l) ?
                 l == 1 :
                 reader.GetDouble() == 1d;
 

@@ -1,5 +1,5 @@
-﻿using Flickr.Net.Enums;
-using Flickr.Net.Internals;
+﻿using System.Globalization;
+using Flickr.Net.Enums;
 using Flickr.Net.Internals.Extensions;
 
 namespace Flickr.Net;
@@ -20,9 +20,9 @@ public partial class Flickr : IFlickrContacts
 
         parameters.AppendIf("filter", filter, x => x != ContactType.None, x => x.ToString().ToLower());
 
-        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<Contacts>(parameters, cancellationToken);
     }
@@ -51,9 +51,9 @@ public partial class Flickr : IFlickrContacts
             { "user_id", userId }
         };
 
-        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<Contacts>(parameters, cancellationToken);
     }
@@ -67,9 +67,9 @@ public partial class Flickr : IFlickrContacts
             { "method", "flickr.contacts.getTaggingSuggestions" }
         };
 
-        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<Contacts>(parameters, cancellationToken);
     }

@@ -2,7 +2,7 @@
 
 /// <summary>
 /// </summary>
-public static class ICollectionColorCodeExtensions
+internal static class ICollectionColorCodeExtensions
 {
     /// <summary>
     /// Colors the codes to string.
