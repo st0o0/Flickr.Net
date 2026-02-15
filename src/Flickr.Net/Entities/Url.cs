@@ -1,5 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
+using Flickr.Net.Enums;
 
 namespace Flickr.Net;
 

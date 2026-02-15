@@ -1,6 +1,7 @@
 using System.Reflection;
+using System.Runtime.Serialization;
 
-namespace Flickr.Net.Internals;
+namespace Flickr.Net.Internals.Extensions;
 
 internal static class EnumExtensions
 {

@@ -1,34 +1,41 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>disable</Nullable>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.*" />
-    <PackageReference Include="System.Text.Json" Version="8.0.*" />
-  </ItemGroup>
-
     <PropertyGroup>
-        <VSTestLogger>trx%3bLogFileName=$(MSBuildProjectName).trx</VSTestLogger>
-        <VSTestResultsDirectory>$(MSBuildThisFileDirectory)/TestResults/$(TargetFramework)</VSTestResultsDirectory>
-        <Title>Flickr API Client</Title>
-        <Description>
-            The API is an HTTP-based interface created for developers keen on building application for Flickr.
-        </Description>
         <Authors>st0o0</Authors>
-        <Copyright>© | 2023 | st0o0 | Germany</Copyright>
-        <RepositoryUrl>https://github.com/st0o0/Flickr.Net.git</RepositoryUrl>
-        <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <PackageProjectUrl>https://github.com/st0o0/Flickr.Net</PackageProjectUrl>
+        <Title>Flickr API Client</Title>
+        <Description>The API is an HTTP-based interface created for developers keen on building application for Flickr.</Description>
         <PackageTags>Flickr;Api;Photo;Video</PackageTags>
-        <PackAsTool>False</PackAsTool>
-        <Company />
-        <GenerateDocumentationFile>True</GenerateDocumentationFile>
-        <DocumentationFile>$(ProjectDir)..\..\docs\SandCastleDocuments.xml</DocumentationFile>
-        <AssemblyName>Flickr.Net</AssemblyName>
+        <PackageIcon>logo_small.png</PackageIcon>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <PackageProjectUrl>https://github.com/st0o0/Flickr.Net</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/st0o0/Flickr.Net.git</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <Copyright>Copyright (c) 2023-$([System.DateTime]::Now.Year) st0o0</Copyright>
     </PropertyGroup>
+    <PropertyGroup>
+        <IsPackable>true</IsPackable>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    </PropertyGroup>
+    <PropertyGroup>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <DebugType>embedded</DebugType>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <InternalsVisibleTo Include="Flickr.Net.Test"/>
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Newtonsoft.Json"/>
+        <PackageReference Include="System.Text.Json"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="../../README.md" Pack="true" Visible="false" PackagePath="\"/>
+        <None Include="../../LICENSE" Pack="true" Visible="false" PackagePath="\"/>
+        <!--        <None Include="../../docs/public/logo_small.png" Visible="false" Pack="true" PackagePath="\"/>-->
+        <None Remove="packages.lock.json"/>
+    </ItemGroup>
 
 </Project>

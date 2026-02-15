@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Flickr.Net.Bases;
 using Flickr.Net.Flickrs.Results;
+using Flickr.Net.Internals;
 using Flickr.Net.Internals.Caching;
 using Flickr.Net.Internals.Extensions;
 

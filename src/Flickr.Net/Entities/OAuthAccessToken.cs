@@ -1,4 +1,6 @@
-﻿namespace Flickr.Net.Entities;
+﻿using Flickr.Net.Internals;
+
+namespace Flickr.Net.Entities;
 
 /// <summary>
 /// The access authentication token return by Flickr after a successful authentication.

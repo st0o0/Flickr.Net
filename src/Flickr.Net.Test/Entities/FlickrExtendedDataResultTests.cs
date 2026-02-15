@@ -1,8 +1,11 @@
 ﻿using System.Text;
+using System.Xml;
 using System.Xml.Linq;
 using Flickr.Net.Flickrs.Results;
 using Flickr.Net.Internals;
 using Newtonsoft.Json;
+using Xunit;
+using Formatting = Newtonsoft.Json.Formatting;
 
 namespace Flickr.Net.Test.Entities;
 
@@ -11,11 +14,11 @@ public class FlickrExtendedDataResultTests
     [Fact]
     public void ReplaceReponse()
     {
-        var xml = """
-            <rsp stat="ok">
-            <photoid secret="abcdef" originalsecret="abcdef">1234</photoid>
-            </rsp>
-            """;
+        const string xml = """
+                           <rsp stat="ok">
+                           <photoid secret="abcdef" originalsecret="abcdef">1234</photoid>
+                           </rsp>
+                           """;
 
         var doc = XDocument.Parse(xml);
         var json = JsonConvert.SerializeXNode(doc, Formatting.None, omitRootObject: true);
@@ -31,11 +34,11 @@ public class FlickrExtendedDataResultTests
     [Fact]
     public void UploadResponse()
     {
-        var xml = """
-            <rsp stat="ok">
-            <photoid>1234</photoid>
-            </rsp>
-            """;
+        const string xml = """
+                           <rsp stat="ok">
+                           <photoid>1234</photoid>
+                           </rsp>
+                           """;
 
         var doc = XDocument.Parse(xml);
         var json = JsonConvert.SerializeXNode(doc, Formatting.None, omitRootObject: true);

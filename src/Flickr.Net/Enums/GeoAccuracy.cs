@@ -1,3 +1,6 @@
+using System.Runtime.Serialization;
+using Flickr.Net.Internals;
+
 namespace Flickr.Net.Enums;
 
 /// <summary>

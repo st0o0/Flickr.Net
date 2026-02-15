@@ -1,11 +1,13 @@
 ﻿using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization.Metadata;
+using System.Xml;
 using System.Xml.Linq;
 using Flickr.Net.Internals.Attributes;
 using Newtonsoft.Json;
 using Flickr.Net.Internals.JsonConverters;
 using Flickr.Net.Internals.JsonConverters.IdentifierConverters;
+using Formatting = Newtonsoft.Json.Formatting;
 
 namespace Flickr.Net.Internals;
 
@@ -34,7 +36,7 @@ public static class FlickrConvert
     {
         get
         {
-            var options = new JsonSerializerOptions()
+            var options = new JsonSerializerOptions
             {
                 AllowTrailingCommas = true,
                 Converters =
@@ -83,7 +85,7 @@ public static class FlickrConvert
 
                             if (typeArgs[attr.TypeParameterPosition].IsDefined(typeof(FlickrJsonPropertyNameAttribute), true))
                             {
-                                property.Name = typeArgs[attr.TypeParameterPosition].GetCustomAttribute<FlickrJsonPropertyNameAttribute>().Name;
+                                property.Name = typeArgs[attr.TypeParameterPosition].GetCustomAttribute<FlickrJsonPropertyNameAttribute>()!.Name;
                             }
                             else
                             {

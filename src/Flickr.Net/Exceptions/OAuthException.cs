@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using Flickr.Net.Internals;
 
 namespace Flickr.Net.Exceptions;
 

@@ -5,13 +5,22 @@ VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A59BAE84-70E2-46A0-9E26-7413C103E2D7}"
 	ProjectSection(SolutionItems) = preProject
-		.editorconfig = .editorconfig
-		NuGet.Config = NuGet.Config
+		..\.github\workflows\build-and-release.yml = ..\.github\workflows\build-and-release.yml
+		..\.github\workflows\docs.yml = ..\.github\workflows\docs.yml
+		..\LICENSE = ..\LICENSE
+		..\README.md = ..\README.md
+		global.json = global.json
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flickr.Net", "Flickr.Net\Flickr.Net.csproj", "{D72B5050-6BF3-4E05-B51B-4ECDDC24FE12}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flickr.Net.Test", "Flickr.Net.Test\Flickr.Net.Test.csproj", "{CF772D1A-9C57-4FA7-BB93-66D8085AF681}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Props", "Props", "{CE494F77-02B6-469F-81A7-93D6C56AF62F}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+		Directory.Packages.props = Directory.Packages.props
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

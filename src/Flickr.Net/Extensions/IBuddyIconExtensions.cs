@@ -1,4 +1,6 @@
-﻿namespace Flickr.Net.Extensions;
+﻿using Flickr.Net.Internals;
+
+namespace Flickr.Net.Extensions;
 
 /// <summary>
 /// </summary>
