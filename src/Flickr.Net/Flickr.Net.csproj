@@ -4,7 +4,7 @@
         <Title>Flickr API Client</Title>
         <Description>The API is an HTTP-based interface created for developers keen on building application for Flickr.</Description>
         <PackageTags>Flickr;Api;Photo;Video</PackageTags>
-        <PackageIcon>logo_small.png</PackageIcon>
+        <!--        <PackageIcon>logo_small.png</PackageIcon>-->
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageProjectUrl>https://github.com/st0o0/Flickr.Net</PackageProjectUrl>

@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "createdAt": "2026-02-15T06:27:11.4396406+00:00",
+  "updatedAt": "2026-02-15T06:27:11.4416395+00:00",
+  "description": "Initial baseline created by 'slopwatch init' on 2026-02-15 06:27:11 UTC",
+  "entries": [
+    {
+      "hash": "84e5829b6946053c",
+      "ruleId": "SW003",
+      "filePath": "src/Flickr.Net/Internals/LockFile.cs",
+      "lineNumber": 90,
+      "codeSnippet": "catch (IOException)\r\n                {\r\n                    // could fail if already acquired elsewhere\r\n                }",
+      "message": "Empty catch block swallows exceptions without handling",
+      "baselinedAt": "2026-02-15T06:27:11.4415193+00:00"
+    },
+    {
+      "hash": "a2d64fcf64bccc06",
+      "ruleId": "SW003",
+      "filePath": "src/Flickr.Net/Internals/UtilityMethods.cs",
+      "lineNumber": 255,
+      "codeSnippet": "catch (FormatException)\r\n        {\r\n        }",
+      "message": "Empty catch block swallows exceptions without handling",
+      "baselinedAt": "2026-02-15T06:27:11.4415744+00:00"
+    },
+    {
+      "hash": "f937ffd4d96ce617",
+      "ruleId": "SW003",
+      "filePath": "src/Flickr.Net/Internals/UtilityMethods.cs",
+      "lineNumber": 300,
+      "codeSnippet": "catch (FormatException)\r\n        {\r\n#if DEBUG\r\n            throw;\r\n#endif\r\n    // ...",
+      "message": "Empty catch block swallows exceptions without handling",
+      "baselinedAt": "2026-02-15T06:27:11.4416356+00:00"
+    },
+    {
+      "hash": "0fee9847472d06c4",
+      "ruleId": "SW003",
+      "filePath": "src/Flickr.Net/Internals/JsonConverters/DateTimeGranularityConverter.cs",
+      "lineNumber": 47,
+      "codeSnippet": "catch { }",
+      "message": "Empty catch block swallows exceptions without handling",
+      "baselinedAt": "2026-02-15T06:27:11.4416378+00:00"
+    }
+  ]
+}
