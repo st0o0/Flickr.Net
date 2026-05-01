@@ -321,6 +321,12 @@ public partial class Flickr : IFlickrPhotos
 
     async Task<PagedPhotos> IFlickrPhotos.SearchAsync(PhotoSearchOptions options, CancellationToken cancellationToken)
     {
+        // Merge default extras from configuration if set
+        if (FlickrSettings.DefaultSearchExtras.HasValue)
+        {
+            options = options with { Extras = options.Extras | FlickrSettings.DefaultSearchExtras.Value };
+        }
+
         Dictionary<string, string> parameters = new()
         {
             { "method", "flickr.photos.search" }
