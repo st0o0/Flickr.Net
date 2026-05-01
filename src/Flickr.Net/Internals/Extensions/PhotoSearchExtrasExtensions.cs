@@ -31,32 +31,14 @@ internal static class PhotoSearchExtrasExtensions
         return string.Join(",", results.Where(s => !string.IsNullOrWhiteSpace(s)).Distinct().ToList());
     }
 
-    private static IEnumerable<Enum> GetFlags(Enum input)
+    private static IEnumerable<PhotoSearchExtras> GetFlags(PhotoSearchExtras input)
     {
-        var i = Convert.ToInt64(input);
-        foreach (var value in GetValues(input))
+        foreach (var value in Enum.GetValues<PhotoSearchExtras>())
         {
-            if ((i & Convert.ToInt64(value)) != 0)
+            if (value != 0 && input.HasFlag(value))
             {
                 yield return value;
             }
         }
-    }
-
-    private static IEnumerable<Enum> GetValues(Enum enumeration)
-    {
-        List<Enum> enumerations = [];
-        var enumType = enumeration.GetType();
-
-        foreach (var e in Enum.GetValues(enumType))
-        {
-            var flag = (Enum)e;
-            if (enumeration.HasFlag(flag))
-            {
-                enumerations.Add(flag);
-            }
-        }
-
-        return enumerations;
     }
 }

@@ -13,4 +13,8 @@ public record Photo : UltraDeluxePhotoBase
     /// </summary>
     [JsonPropertyName("dateadded")]
     public DateTime AddedDate { get; set; }
+    /// <summary>
+    /// </summary>
+    [JsonPropertyName("datetaken")]
+    public DateTime DateTaken { get; set; }
 }

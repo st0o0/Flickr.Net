@@ -31,7 +31,7 @@ public class CustomJsonStringEnumConverter(JsonNamingPolicy namingPolicy = null,
         var dictionary = typeToConvert
                     .GetFields(BindingFlags.Public | BindingFlags.Static)
                     .Select(x => (attr: x.GetCustomAttribute<EnumMemberAttribute>(), field: x))
-                    .Where(x => x.attr != null)
+                    .Where(x => x.attr != null && !string.IsNullOrEmpty(x.attr.Value))
                     .Select(x => (x.field.Name, x.attr.Value))
                     .ToDictionary(p => p.Name, p => p.Value);
 

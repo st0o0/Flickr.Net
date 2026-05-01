@@ -23,6 +23,7 @@ public static partial class FlickrResponder
         var oAuth = parameters.ContainsKey("oauth_consumer_key");
 
         parameters.TryAdd("format", "json");
+        parameters.TryAdd("nojsoncallback", "1");
 
         if (oAuth)
         {

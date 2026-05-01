@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Diagnostics;
 
 namespace Flickr.Net.Internals.Caching;
@@ -39,13 +38,13 @@ internal sealed class PersistentCache(string filename, CacheItemPersister persis
     /// <summary>
     /// Return all items in the cache. Works similarly to ArrayList.ToArray(Type).
     /// </summary>
-    public ICacheItem[] ToArray(Type valueType)
+    public ICacheItem[] ToArray()
     {
         using (lockFile.Acquire())
         {
             Refresh();
-            InternalGetAll(valueType, out var keys, out var values);
-            return (ICacheItem[])values;
+            InternalGetAll(out var keys, out var values);
+            return values;
         }
     }
 
@@ -139,9 +138,9 @@ internal sealed class PersistentCache(string filename, CacheItemPersister persis
         {
             Refresh();
 
-            InternalGetAll(typeof(ICacheItem), out var keys, out var values);
+            InternalGetAll(out var keys, out var values);
             long totalSize = 0;
-            foreach (ICacheItem cacheItem in values)
+            foreach (var cacheItem in values)
             {
                 totalSize += cacheItem.FileSize;
             }
@@ -153,7 +152,7 @@ internal sealed class PersistentCache(string filename, CacheItemPersister persis
                     break;
                 }
 
-                var cacheItem = (ICacheItem)values.GetValue(i);
+                var cacheItem = values[i];
                 totalSize -= cacheItem.FileSize;
                 flushed.Add(RemoveKey(keys[i]));
             }
@@ -183,18 +182,13 @@ internal sealed class PersistentCache(string filename, CacheItemPersister persis
         return test < DateTime.UtcNow - age;
     }
 
-    private void InternalGetAll(Type valueType, out string[] keys, out Array values)
+    private void InternalGetAll(out string[] keys, out ICacheItem[] values)
     {
-        if (!typeof(ICacheItem).IsAssignableFrom(valueType))
-        {
-            throw new ArgumentException("Type " + valueType.FullName + " does not implement ICacheItem", nameof(valueType));
-        }
-
         keys = new List<string>(dataTable.Keys).ToArray();
-        values = Array.CreateInstance(valueType, keys.Length);
+        values = new ICacheItem[keys.Length];
         for (var i = 0; i < keys.Length; i++)
         {
-            values.SetValue(dataTable[keys[i]], i);
+            values[i] = dataTable[keys[i]];
         }
 
         Array.Sort(values, keys, new CreationTimeComparer());
@@ -339,11 +333,11 @@ internal sealed class PersistentCache(string filename, CacheItemPersister persis
         }
     }
 
-    private class CreationTimeComparer : IComparer
+    private class CreationTimeComparer : IComparer<ICacheItem>
     {
-        public int Compare(object x, object y)
+        public int Compare(ICacheItem x, ICacheItem y)
         {
-            return ((ICacheItem)x).CreationTime.CompareTo(((ICacheItem)y).CreationTime);
+            return x.CreationTime.CompareTo(y.CreationTime);
         }
     }
 
