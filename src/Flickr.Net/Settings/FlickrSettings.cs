@@ -1,4 +1,5 @@
 using Flickr.Net.Configuration;
+using Flickr.Net.Enums;
 
 namespace Flickr.Net.Settings;
 
@@ -36,4 +37,11 @@ public class FlickrSettings
     /// Internal timeout for all web requests in milliseconds. Defaults to 30 seconds.
     /// </summary>
     public int HttpTimeout { get; set; } = 3600000;
+
+    /// <summary>
+    /// Default extras to include in photo search results.
+    /// When set, these are automatically merged with any per-call extras in <see cref="IFlickrPhotos.SearchAsync"/>.
+    /// Configured via <see cref="FlickrConfiguration.DefaultSearchExtras"/>.
+    /// </summary>
+    public PhotoSearchExtras? DefaultSearchExtras => _config.DefaultSearchExtras;
 }
