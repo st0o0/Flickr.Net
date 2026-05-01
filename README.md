@@ -2,7 +2,6 @@
 
 [![NuGet](https://img.shields.io/nuget/v/Flickr.Net.svg)](https://www.nuget.org/packages/Flickr.Net/)
 [![NuGet Downloads](https://img.shields.io/nuget/dt/Flickr.Net.svg)](https://www.nuget.org/packages/Flickr.Net/)
-[![License](https://img.shields.io/github/license/st0o0/Flickr.Net.svg)](LICENSE)
 
 A modern, fully-featured .NET client library for the Flickr API with comprehensive support for photos, albums, galleries, and user management.
 
@@ -190,7 +189,6 @@ flickr.Proxy = proxy;
 For detailed API documentation, visit:
 
 - [Flickr API Documentation](https://www.flickr.com/services/api/)
-- [Full API Reference](https://github.com/st0o0/Flickr.Net/wiki)
 
 ## 🤝 Contributing
 
@@ -204,7 +202,7 @@ Contributions are welcome! Please feel free to submit a Pull Request. For major 
 
 ## 📋 Requirements
 
-- .NET 8.0 or higher
+- .NET 10.0 or higher
 - Flickr API key and secret ([Get yours here](https://www.flickr.com/services/apps/create/))
 
 ## 📝 License
