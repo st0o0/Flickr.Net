@@ -180,8 +180,8 @@ jobs:
           cat > notes.md << EOF
           🎯 Flickr.Net v$VERSION
           
-          [![NuGet](https://img.shields.io/nuget/v/Signal.Bot?logo=nuget)](https://nuget.org/packages/Signal.Bot)
-          [![GitHub](https://img.shields.io/github/last-commit/st0o0/Signal.Bot/main?logo=github)](https://github.com/st0o0/Signal.Bot)
+          [![NuGet](https://img.shields.io/nuget/v/Flickr.Net?logo=nuget)](https://nuget.org/packages/Flickr.Net)
+          [![GitHub](https://img.shields.io/github/last-commit/st0o0/Flickr.Net/main?logo=github)](https://github.com/st0o0/Flickr.Net)
           
           EOF
           
@@ -200,7 +200,7 @@ jobs:
         with:
           tag_name: "v${{ needs.build.outputs.releaseVersion }}"
           target_commitish: ${{ github.sha }}
-          name: "Flickr.Net v${{ needs.build.outputs.releaseVersion }}"
+          name: "v${{ needs.build.outputs.releaseVersion }}"
           body: ${{ steps.notes.outputs.release-notes }}
           draft: false
           prerelease: false
