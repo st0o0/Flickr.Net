@@ -147,7 +147,7 @@ jobs:
     needs: build
     environment:
       name: nuget
-      url: https://www.nuget.org/packages/Signal.Bot
+      url: https://www.nuget.org/packages/Flickr.Net
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     
     steps:
