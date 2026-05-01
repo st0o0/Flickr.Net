@@ -128,9 +128,9 @@ public partial class Flickr : IFlickrPhotos
             { "method", "flickr.photos.getCounts" }
         };
 
-        parameters.AppendIf("dates", dates, x => x != null && x.Length > 0, x => string.Join(",", x.Select(Item => Item.ToUnixTimestamp())));
+        parameters.AppendIf("dates", dates, x => x is { Length: > 0 }, x => string.Join(",", x.Select(Item => Item.ToUnixTimestamp())));
 
-        parameters.AppendIf("taken_dates", takenDates, x => x != null && x.Length > 0, x => string.Join(",", x.Select(Item => Item.ToUnixTimestamp())));
+        parameters.AppendIf("taken_dates", takenDates, x => x is { Length: > 0 }, x => string.Join(",", x.Select(Item => Item.ToUnixTimestamp())));
 
         return await GetResponseAsync<PhotoCounts>(parameters, cancellationToken);
     }

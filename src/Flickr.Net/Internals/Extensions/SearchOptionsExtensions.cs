@@ -47,9 +47,9 @@ internal static class SearchOptionsExtensions
 
         parameters.AppendIf("privacy_filter", options.PrivacyFilter, x => x != PrivacyFilter.None, x => x.ToString("d"));
 
-        parameters.AppendIf("bbox", options.BoundaryBox, x => x != null && x.IsSet, x => x.ToString());
+        parameters.AppendIf("bbox", options.BoundaryBox, x => x is { IsSet: true }, x => x.ToString());
 
-        parameters.AppendIf("accuracy", options.BoundaryBox, x => x != null && x.IsSet && x.Accuracy != GeoAccuracy.None, x => x.Accuracy.ToString("d"));
+        parameters.AppendIf("accuracy", options.BoundaryBox, x => x is { IsSet: true } && x.Accuracy != GeoAccuracy.None, x => x.Accuracy.ToString("d"));
 
         parameters.AppendIf("safe_search", options.SafeSearch, x => x != SafetyLevel.None, x => x.ToString("d"));
 

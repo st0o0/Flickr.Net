@@ -27,7 +27,7 @@ public partial class Flickr : IFlickrUrls
             { "method", "flickr.urls.getUserPhotos" }
         };
 
-        if (userId != null && userId.Length > 0)
+        if (userId is { Length: > 0 })
         {
             parameters.Add("user_id", userId);
         }

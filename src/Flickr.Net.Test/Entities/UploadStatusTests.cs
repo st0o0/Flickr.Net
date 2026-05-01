@@ -1,7 +1,6 @@
-﻿using System.Text;
+using System.Text;
 using Flickr.Net.Flickrs.Results;
 using Flickr.Net.Internals;
-using Xunit;
 
 namespace Flickr.Net.Test.Entities;
 

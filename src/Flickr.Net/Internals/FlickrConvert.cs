@@ -54,7 +54,7 @@ public static class FlickrConvert
                     {
                         property.Name = property.Name.ToLowerInvariant();
                         var attributes = property.AttributeProvider?.GetCustomAttributes(typeof(JsonPropertyGenericTypeNameAttribute), false);
-                        if (attributes is { Length: > 0 } && attributes is JsonPropertyGenericTypeNameAttribute[] jsonAttributes)
+                        if (attributes is { Length: > 0 } and JsonPropertyGenericTypeNameAttribute[] jsonAttributes)
                         {
                             if (jsonAttributes.Length > 1)
                             {
