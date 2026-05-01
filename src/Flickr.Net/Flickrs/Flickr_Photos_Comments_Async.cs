@@ -68,7 +68,7 @@ public partial class Flickr : IFlickrPhotosComments
 
         parameters.AppendIf("date_lastcomment", dateLastComment, x => x.HasValue && x != DateTime.MinValue, x => x.Value.ToUnixTimestamp());
 
-        parameters.AppendIf("contacts_filter", contactsFilter, x => x != null && x.Length > 0, x => string.Join(",", x));
+        parameters.AppendIf("contacts_filter", contactsFilter, x => x is { Length: > 0 }, x => string.Join(",", x));
 
         parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 

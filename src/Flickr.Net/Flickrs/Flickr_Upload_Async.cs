@@ -24,11 +24,11 @@ public partial class Flickr : IFlickrUpload
 
         Dictionary<string, string> parameters = [];
 
-        parameters.AppendIf("title", title, x => x != null && x.Length > 0, x => x);
+        parameters.AppendIf("title", title, x => x is { Length: > 0 }, x => x);
 
-        parameters.AppendIf("description", description, x => x != null && x.Length > 0, x => x);
+        parameters.AppendIf("description", description, x => x is { Length: > 0 }, x => x);
 
-        parameters.AppendIf("tags", tags, x => x != null && x.Length > 0, x => x);
+        parameters.AppendIf("tags", tags, x => x is { Length: > 0 }, x => x);
 
         parameters.Add("is_public", isPublic ? "1" : "0");
 
@@ -52,7 +52,7 @@ public partial class Flickr : IFlickrUpload
         }
         else
         {
-            parameters.Add("auth_token", FlickrSettings.ApiKey ?? string.Empty);
+            parameters.Add("auth_token", FlickrSettings.ApiKey);
         }
 
         var result = await UploadDataAsync(stream, fileName, progress, uploadUri, parameters, cancellationToken);
@@ -67,7 +67,7 @@ public partial class Flickr : IFlickrUpload
         Dictionary<string, string> parameters = new()
         {
             { "photo_id", photoId },
-            { "api_key", FlickrSettings.ApiKey ?? string.Empty }
+            { "api_key", FlickrSettings.ApiKey }
         };
 
         if (!string.IsNullOrEmpty(FlickrSettings.OAuthAccessToken))
@@ -80,7 +80,7 @@ public partial class Flickr : IFlickrUpload
         }
         else
         {
-            parameters.Add("auth_token", FlickrSettings.ApiKey ?? string.Empty);
+            parameters.Add("auth_token", FlickrSettings.ApiKey);
         }
 
         var result = await UploadDataAsync(stream, fileName, progress, replaceUri, parameters, cancellationToken);
@@ -151,10 +151,10 @@ public interface IFlickrUpload
     /// <param name="hiddenFromSearch">Is the photo hidden from public searches.</param>
     /// <param name="progress"></param>
     /// <param name="cancellationToken"></param>
-    Task<string> UploadPictureAsync(Stream stream, string fileName, string title = null,
-        string description = null, string tags = null, bool isPublic = false, bool isFamily = false, bool isFriend = false,
+    Task<string> UploadPictureAsync(Stream stream, string fileName, string? title = null,
+        string? description = null, string? tags = null, bool isPublic = false, bool isFamily = false, bool isFriend = false,
         ContentType contentType = ContentType.None, SafetyLevel safetyLevel = SafetyLevel.None, HiddenFromSearch hiddenFromSearch = HiddenFromSearch.None,
-        IProgress<double> progress = default, CancellationToken cancellationToken = default);
+        IProgress<double>? progress = null, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Replace an existing photo on Flickr.
@@ -164,5 +164,5 @@ public interface IFlickrUpload
     /// <param name="photoId">The ID of the photo to replace.</param>
     /// <param name="progress"></param>
     /// <param name="cancellationToken"></param>
-    Task<string> ReplacePictureAsync(Stream stream, string fileName, string photoId, IProgress<double> progress = default, CancellationToken cancellationToken = default);
+    Task<string> ReplacePictureAsync(Stream stream, string fileName, string photoId, IProgress<double>? progress = null, CancellationToken cancellationToken = default);
 }

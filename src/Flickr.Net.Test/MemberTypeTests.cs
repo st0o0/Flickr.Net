@@ -1,6 +1,5 @@
-﻿using Flickr.Net.Enums;
+using Flickr.Net.Enums;
 using Flickr.Net.Internals.Extensions;
-using Xunit;
 
 namespace Flickr.Net.Test;
 

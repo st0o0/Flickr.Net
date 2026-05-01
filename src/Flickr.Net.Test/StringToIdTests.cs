@@ -1,5 +1,4 @@
-﻿using Flickr.Net.Entities;
-using Xunit;
+using Flickr.Net.Entities;
 
 namespace Flickr.Net.Test;
 

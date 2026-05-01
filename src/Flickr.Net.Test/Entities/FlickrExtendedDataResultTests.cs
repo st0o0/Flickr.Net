@@ -1,9 +1,8 @@
-﻿using System.Text;
+using System.Text;
 using System.Xml.Linq;
 using Flickr.Net.Flickrs.Results;
 using Flickr.Net.Internals;
 using Newtonsoft.Json;
-using Xunit;
 using Formatting = Newtonsoft.Json.Formatting;
 
 namespace Flickr.Net.Test.Entities;

@@ -66,11 +66,11 @@ public partial class Flickr : IFlickrPush
 
         parameters.AppendIf("place_ids", placeIds, x => x != null && x.Any(), x => string.Join(",", x));
 
-        parameters.AppendIf("lat", latitude, x => x.HasValue && x > 0 && topic == "geo", x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("lat", latitude, x => x is > 0 && topic == "geo", x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("lon", longitude, x => x.HasValue && x > 0 && topic == "geo", x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("lon", longitude, x => x is > 0 && topic == "geo", x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("radius", radius, x => x.HasValue && x > 0 && topic == "geo", x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("radius", radius, x => x is > 0 && topic == "geo", x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
 
         parameters.AppendIf("radius_units", radiusUnits, x => x != RadiusUnit.None, x => radiusUnits.ToString("d"));
 

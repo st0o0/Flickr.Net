@@ -216,7 +216,7 @@ public partial class Flickr
     /// Checks to see if a shared secret and an api token are stored in the object. Does not check
     /// if these values are valid values.
     /// </summary>
-    public bool IsAuthenticated => FlickrSettings.ApiSecret != null && FlickrSettings.ApiKey != null;
+    public bool IsAuthenticated => FlickrSettings is { ApiSecret: not null, ApiKey: not null };
 
     internal void CheckApiKey()
     {
@@ -341,9 +341,9 @@ internal static class FlickrExtensions
             character == 0x9 /* == '\t' == 9   */ ||
             character == 0xA /* == '\n' == 10  */ ||
             character == 0xD /* == '\r' == 13  */ ||
-            (character >= 0x20 && character <= 0xD7FF) ||
-            (character >= 0xE000 && character <= 0xFFFD) ||
-            (character >= 0x10000 && character <= 0x10FFFF)
+            character is >= 0x20 and <= 0xD7FF ||
+            character is >= 0xE000 and <= 0xFFFD ||
+            character is >= 0x10000 and <= 0x10FFFF
         );
     }
 }

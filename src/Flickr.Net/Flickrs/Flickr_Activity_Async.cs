@@ -43,7 +43,7 @@ public partial class Flickr : IFlickrActivity
             { "method", "flickr.activity.userPhotos" }
         };
 
-        parameters.AppendIf("timeframe", timeframe, x => x != null && x.Length > 0, x => x);
+        parameters.AppendIf("timeframe", timeframe, x => x is { Length: > 0 }, x => x);
 
         parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 

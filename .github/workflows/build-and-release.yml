@@ -16,7 +16,6 @@ permissions:
   contents: write
   deployments: write
   checks: write
-  pull-requests: write
 
 jobs:
   build:
@@ -101,15 +100,17 @@ jobs:
           /p:ContinuousIntegrationBuild=true
 
       - name: Run tests
+        working-directory: src
         run: >
-          dotnet test 
-          --configuration Release 
-          --no-build 
-          --collect:"XPlat Code Coverage" 
-          --logger trx 
-          --results-directory ${{ env.TEST_OUTPUT_DIRECTORY }} 
-          --verbosity normal 
-          ${{ env.PROJECT_PATH }} 
+          dotnet test
+          --configuration Release
+          --no-ansi
+          --no-build
+          --results-directory ${{ env.TEST_OUTPUT_DIRECTORY }}
+          --coverage
+          --coverage-output-format cobertura
+          --coverage-output ${{ env.TEST_OUTPUT_DIRECTORY }}/coverage.cobertura.xml
+          --solution *.sln
 
       - name: Create NuGet package
         run: >
@@ -124,7 +125,7 @@ jobs:
       - name: Report Code Coverage
         uses: danielpalme/ReportGenerator-GitHub-Action@5
         with:
-          reports: '${{ env.TEST_OUTPUT_DIRECTORY }}/*/*cobertura.xml'
+          reports: '${{ env.TEST_OUTPUT_DIRECTORY }}/**/coverage.cobertura.xml'
           targetdir: '${{ env.COVERAGE_REPORT_DIRECTORY }}'
           reporttypes: 'MarkdownSummaryGithub'
           tag: '${{ steps.gitversion.outputs.fullSemVer }}'
