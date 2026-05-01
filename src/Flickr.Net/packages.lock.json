@@ -10,9 +10,9 @@
       },
       "System.Text.Json": {
         "type": "Direct",
-        "requested": "[8.0.6, )",
-        "resolved": "8.0.6",
-        "contentHash": "BvSpVBsVN9b+Y+wONbvJOHd1HjXQf33+XiC28ZMOwRsYb42mz3Q8YHnpTSwpwJLqYCMqM+0UUVC3V+pi25XfkQ=="
+        "requested": "[10.0.7, )",
+        "resolved": "10.0.7",
+        "contentHash": "F8Pu2QLUMeniVbtiyk7n7LCfFYxlcJ8ASaSwglJyq6dxa34iCQrikQszsgJClIJWuSWjcyhKkV7daAzYJqeVwA=="
       }
     }
   }
