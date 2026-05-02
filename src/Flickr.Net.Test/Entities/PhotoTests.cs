@@ -36,9 +36,7 @@ public class PhotoTests
         Assert.False(result.HasError);
         var photo = result.Content.Values[0];
         Assert.Equal("A test description", photo.Description.Content);
-        // Note: DateTaken currently returns default due to TimestampToDateTimeConverter
-        // not supporting Flickr's "YYYY-MM-DD HH:mm:ss" date format.
-        // Assert.Equal(new DateTime(2024, 3, 15, 14, 30, 0), photo.DateTaken);
+        Assert.Equal(new DateTime(2024, 3, 15, 14, 30, 0), photo.DateTaken);
     }
 
     [Fact]

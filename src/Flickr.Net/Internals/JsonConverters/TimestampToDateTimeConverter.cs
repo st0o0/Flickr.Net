@@ -32,6 +32,11 @@ public class TimestampToDateTimeConverter : JsonConverter<DateTime>
         }
         catch (FormatException)
         {
+            if (DateTime.TryParseExact(value, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out var parsed))
+            {
+                return parsed;
+            }
+
             return DateTime.MinValue;
         }
     }
