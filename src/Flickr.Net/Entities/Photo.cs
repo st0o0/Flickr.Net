@@ -23,4 +23,11 @@ public record Photo : UltraDeluxePhotoBase
     /// </summary>
     [JsonPropertyName("description")]
     public Description Description { get; set; }
+
+    /// <summary>
+    /// A space-delimited list of all tags on the photo. Only populated
+    /// when PhotoSearchExtras.Tags is included in the search's Extras.
+    /// </summary>
+    [JsonPropertyName("tags")]
+    public string? Tags { get; set; }
 }

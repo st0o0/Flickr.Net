@@ -62,4 +62,29 @@ public class PhotoTests
         string description = photo.Description;
         Assert.Equal("A test description", description);
     }
+
+    [Fact]
+    public void PhotoTagsAreDeserialized()
+    {
+        const string json = """{"photos":{"page":1,"pages":1,"perpage":10,"total":1,"photo":[{"id":"52931686549","owner":"192376927@N06","secret":"9b203d4894","server":"65535","farm":66,"title":"DSC04707","ispublic":1,"isfriend":0,"isfamily":0,"tags":"norge oslo sommer"}]},"stat":"ok"}""";
+
+        var result = FlickrConvert.DeserializeObject<FlickrResult<PagedPhotos>>(Encoding.UTF8.GetBytes(json));
+
+        Assert.NotNull(result);
+        Assert.False(result.HasError);
+        var photo = result.Content.Values[0];
+        Assert.Equal("norge oslo sommer", photo.Tags);
+    }
+
+    [Fact]
+    public void PhotoTagsIsNullWhenNotPresent()
+    {
+        const string json = """{"photos":{"page":1,"pages":1,"perpage":10,"total":1,"photo":[{"id":"52931686549","owner":"192376927@N06","secret":"9b203d4894","server":"65535","farm":66,"title":"DSC04707","ispublic":1,"isfriend":0,"isfamily":0}]},"stat":"ok"}""";
+
+        var result = FlickrConvert.DeserializeObject<FlickrResult<PagedPhotos>>(Encoding.UTF8.GetBytes(json));
+
+        Assert.NotNull(result);
+        var photo = result.Content.Values[0];
+        Assert.Null(photo.Tags);
+    }
 }
