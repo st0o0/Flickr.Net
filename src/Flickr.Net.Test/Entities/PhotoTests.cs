@@ -87,4 +87,58 @@ public class PhotoTests
         var photo = result.Content.Values[0];
         Assert.Null(photo.Tags);
     }
+
+    [Fact]
+    public void PhotoOriginalDimensionsAreDeserialized()
+    {
+        // o_dims extra: Flickr returns o_width/o_height as strings.
+        const string json = """{"photos":{"page":1,"pages":1,"perpage":10,"total":1,"photo":[{"id":"55462305733","owner":"64917450@N00","secret":"dd5725ef2a","server":"65535","farm":66,"title":"Sjusjoeen","ispublic":1,"isfriend":0,"isfamily":0,"o_width":"5712","o_height":"4284"}]},"stat":"ok"}""";
+
+        var result = FlickrConvert.DeserializeObject<FlickrResult<PagedPhotos>>(Encoding.UTF8.GetBytes(json));
+
+        Assert.NotNull(result);
+        Assert.False(result.HasError);
+        var photo = result.Content.Values[0];
+        Assert.Equal("5712", photo.OriginalWidth);
+        Assert.Equal("4284", photo.OriginalHeight);
+    }
+
+    [Fact]
+    public void PhotoSizeUrlsAndDimensionsAreDeserialized()
+    {
+        // url_l/url_n/url_sq extras: width_*/height_* are numbers, url_* are strings.
+        const string json = """{"photos":{"page":1,"pages":1,"perpage":10,"total":1,"photo":[{"id":"55462305733","owner":"64917450@N00","secret":"dd5725ef2a","server":"65535","farm":66,"title":"Sjusjoeen","ispublic":1,"isfriend":0,"isfamily":0,"url_sq":"https://live.staticflickr.com/65535/55462305733_dd5725ef2a_s.jpg","height_sq":75,"width_sq":75,"url_l":"https://live.staticflickr.com/65535/55462305733_dd5725ef2a_b.jpg","height_l":768,"width_l":1024,"url_n":"https://live.staticflickr.com/65535/55462305733_dd5725ef2a_n.jpg","height_n":240,"width_n":320}]},"stat":"ok"}""";
+
+        var result = FlickrConvert.DeserializeObject<FlickrResult<PagedPhotos>>(Encoding.UTF8.GetBytes(json));
+
+        Assert.NotNull(result);
+        Assert.False(result.HasError);
+        var photo = result.Content.Values[0];
+        Assert.Equal("https://live.staticflickr.com/65535/55462305733_dd5725ef2a_s.jpg", photo.SquareUrl);
+        Assert.Equal(75, photo.SquareWidth);
+        Assert.Equal(75, photo.SquareHeight);
+        Assert.Equal("https://live.staticflickr.com/65535/55462305733_dd5725ef2a_b.jpg", photo.LargeUrl);
+        Assert.Equal(1024, photo.LargeWidth);
+        Assert.Equal(768, photo.LargeHeight);
+        Assert.Equal("https://live.staticflickr.com/65535/55462305733_dd5725ef2a_n.jpg", photo.Small320Url);
+        Assert.Equal(320, photo.Small320Width);
+        Assert.Equal(240, photo.Small320Height);
+    }
+
+    [Fact]
+    public void PhotoDimensionsAreNullWhenNotPresent()
+    {
+        const string json = """{"photos":{"page":1,"pages":1,"perpage":10,"total":1,"photo":[{"id":"52931686549","owner":"192376927@N06","secret":"9b203d4894","server":"65535","farm":66,"title":"DSC04707","ispublic":1,"isfriend":0,"isfamily":0}]},"stat":"ok"}""";
+
+        var result = FlickrConvert.DeserializeObject<FlickrResult<PagedPhotos>>(Encoding.UTF8.GetBytes(json));
+
+        Assert.NotNull(result);
+        var photo = result.Content.Values[0];
+        Assert.Null(photo.OriginalWidth);
+        Assert.Null(photo.OriginalHeight);
+        Assert.Null(photo.LargeUrl);
+        Assert.Null(photo.LargeWidth);
+        Assert.Null(photo.LargeHeight);
+        Assert.Null(photo.Small320Url);
+    }
 }

@@ -15,6 +15,8 @@ public class AutoStringToNumberConverter : JsonConverter<object>
     /// </summary>
     public override bool CanConvert(Type typeToConvert)
     {
+        typeToConvert = Nullable.GetUnderlyingType(typeToConvert) ?? typeToConvert;
+
         // see https://stackoverflow.com/questions/1749966/c-sharp-how-to-determine-whether-a-type-is-a-number
         return Type.GetTypeCode(typeToConvert) switch
         {
@@ -28,6 +30,8 @@ public class AutoStringToNumberConverter : JsonConverter<object>
     /// </summary>
     public override object Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
+        typeToConvert = Nullable.GetUnderlyingType(typeToConvert) ?? typeToConvert;
+
         switch (reader.TokenType)
         {
             case JsonTokenType.String:
