@@ -19,6 +19,17 @@ public record Photo : UltraDeluxePhotoBase
     public DateTime DateTaken { get; set; }
 
     /// <summary>
+    /// The date the photo was uploaded (posted) to Flickr, as a unix
+    /// timestamp in seconds. Only populated when
+    /// PhotoSearchExtras.DateUploaded is included in the search's Extras.
+    /// The shared TimestampToDateTimeConverter handles the conversion to
+    /// DateTime (UTC). Unlike "datetaken", this attribute is only emitted
+    /// for flickr.photos.search results when the extra is requested.
+    /// </summary>
+    [JsonPropertyName("dateupload")]
+    public DateTime DateUploaded { get; set; }
+
+    /// <summary>
     /// The description of the photo.
     /// </summary>
     [JsonPropertyName("description")]

@@ -136,6 +136,39 @@ public class PhotoTests
     }
 
     [Fact]
+    public void PhotoDateUploadedIsDeserialized()
+    {
+        // date_upload extra: Flickr returns dateupload as a unix timestamp
+        // string (seconds since epoch). The shared TimestampToDateTimeConverter
+        // converts it to a UTC DateTime. datetaken (a "yyyy-MM-dd HH:mm:ss"
+        // string) can arrive in the same payload and keeps parsing unchanged.
+        const string json = """{"photos":{"page":1,"pages":1,"perpage":10,"total":1,"photo":[{"id":"55462305733","owner":"64917450@N00","secret":"dd5725ef2a","server":"65535","farm":66,"title":"Sjusjoeen","ispublic":1,"isfriend":0,"isfamily":0,"dateupload":"1724630400","datetaken":"2024-08-26 14:23:11","datetakengranularity":"0","datetakenunknown":"0"}]},"stat":"ok"}""";
+
+        var result = FlickrConvert.DeserializeObject<FlickrResult<PagedPhotos>>(Encoding.UTF8.GetBytes(json));
+
+        Assert.NotNull(result);
+        Assert.False(result.HasError);
+        var photo = result.Content.Values[0];
+        Assert.Equal(new DateTime(2024, 8, 26, 0, 0, 0, DateTimeKind.Utc), photo.DateUploaded);
+        Assert.Equal(new DateTime(2024, 8, 26, 14, 23, 11), photo.DateTaken);
+    }
+
+    [Fact]
+    public void PhotoDateUploadedIsDefaultWhenExtraNotRequested()
+    {
+        // Without extras=date_upload, flickr.photos.search simply omits the
+        // attribute — non-nullable DateTime stays at its default.
+        const string json = """{"photos":{"page":1,"pages":1,"perpage":10,"total":1,"photo":[{"id":"55488459867","owner":"64917450@N00","secret":"1b3782cfb1","server":"65535","farm":66,"title":"Trilletur på Bygdøy","ispublic":1,"isfriend":0,"isfamily":0}]},"stat":"ok"}""";
+
+        var result = FlickrConvert.DeserializeObject<FlickrResult<PagedPhotos>>(Encoding.UTF8.GetBytes(json));
+
+        Assert.NotNull(result);
+        Assert.False(result.HasError);
+        var photo = result.Content.Values[0];
+        Assert.Equal(default(DateTime), photo.DateUploaded);
+    }
+
+    [Fact]
     public void PhotoOriginalDimensionsAreDeserialized()
     {
         // o_dims extra: Flickr returns o_width/o_height as strings.
