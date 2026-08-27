@@ -300,4 +300,24 @@ public record Photo : UltraDeluxePhotoBase
     /// </summary>
     [JsonPropertyName("height_o")]
     public int? OriginalUrlHeight { get; set; }
+
+    /// <summary>
+    /// The latitude of the photo's geolocation. Only populated when
+    /// PhotoSearchExtras.Geo is included in the search's Extras and the
+    /// photo carries geo data. Flickr returns the value as a string
+    /// (e.g. "59.927008"); the shared AutoStringToNumberConverter handles
+    /// the conversion to double.
+    /// </summary>
+    [JsonPropertyName("latitude")]
+    public double? Latitude { get; set; }
+
+    /// <summary>
+    /// The longitude of the photo's geolocation. Only populated when
+    /// PhotoSearchExtras.Geo is included in the search's Extras and the
+    /// photo carries geo data. Flickr returns the value as a string
+    /// (e.g. "10.704894"); the shared AutoStringToNumberConverter handles
+    /// the conversion to double.
+    /// </summary>
+    [JsonPropertyName("longitude")]
+    public double? Longitude { get; set; }
 }
