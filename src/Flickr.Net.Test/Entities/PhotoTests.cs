@@ -105,6 +105,24 @@ public class PhotoTests
     }
 
     [Fact]
+    public void PhotoGeoCoordinatesAreZeroForPhotosWithoutGeo()
+    {
+        // Verified against the live API: when extras=geo is requested and the
+        // photo has NO geo data, Flickr emits unquoted numeric zeros (while
+        // real coordinates come back as strings). The mapping stays faithful
+        // to the payload — consumers should treat 0/0 as "no geolocation".
+        const string json = """{"photos":{"page":1,"pages":1,"perpage":10,"total":1,"photo":[{"id":"200500001","owner":"64917450@N00","secret":"***","server":"123","farm":1,"title":"Old photo without geo","ispublic":1,"isfriend":0,"isfamily":0,"latitude":0,"longitude":0,"accuracy":"0","context":0,"place_id":null,"woeid":null,"geo_is_public":1,"geo_is_contact":0,"geo_is_friend":0,"geo_is_family":0}]},"stat":"ok"}""";
+
+        var result = FlickrConvert.DeserializeObject<FlickrResult<PagedPhotos>>(Encoding.UTF8.GetBytes(json));
+
+        Assert.NotNull(result);
+        Assert.False(result.HasError);
+        var photo = result.Content.Values[0];
+        Assert.Equal(0d, photo.Latitude);
+        Assert.Equal(0d, photo.Longitude);
+    }
+
+    [Fact]
     public void PhotoGeoCoordinatesAreNullWhenGeoExtraNotRequested()
     {
         const string json = """{"photos":{"page":1,"pages":1,"perpage":10,"total":1,"photo":[{"id":"55488459867","owner":"64917450@N00","secret":"1b3782cfb1","server":"65535","farm":66,"title":"Trilletur på Bygdøy","ispublic":1,"isfriend":0,"isfamily":0}]},"stat":"ok"}""";
