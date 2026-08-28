@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Globalization;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Flickr.Net.Internals.JsonConverters;
@@ -37,16 +38,25 @@ public class AutoStringToNumberConverter : JsonConverter<object>
             case JsonTokenType.String:
             {
                 var s = reader.GetString();
-                if (long.TryParse(s, out var l))
+
+                // Flickr emits numbers with a dot decimal separator ("59.928958").
+                // Parse invariant: the ambient CurrentCulture may expect a comma
+                // (e.g. nb-NO hosts), which made every decimal string throw
+                // "unable to parse ... to number" and broke photo search.
+                if (long.TryParse(s, NumberStyles.Integer, CultureInfo.InvariantCulture, out var l))
                 {
-                    return Convert.ChangeType(l, typeToConvert);
+                    return Convert.ChangeType(l, typeToConvert, CultureInfo.InvariantCulture);
                 }
 
-                return double.TryParse(s, out var d) ? d : throw new Exception($"unable to parse {s} to number");
+                return double.TryParse(s, NumberStyles.Float, CultureInfo.InvariantCulture, out var d)
+                    ? Convert.ChangeType(d, typeToConvert, CultureInfo.InvariantCulture)
+                    : throw new Exception($"unable to parse {s} to number");
             }
             case JsonTokenType.Number:
             {
-                return reader.TryGetInt64(out var l) ? Convert.ChangeType(l, typeToConvert) : reader.GetDouble();
+                return reader.TryGetInt64(out var l)
+                    ? Convert.ChangeType(l, typeToConvert, CultureInfo.InvariantCulture)
+                    : Convert.ChangeType(reader.GetDouble(), typeToConvert, CultureInfo.InvariantCulture);
             }
             default:
             {
@@ -60,6 +70,8 @@ public class AutoStringToNumberConverter : JsonConverter<object>
     /// </summary>
     public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
     {
-        writer.WriteRawValue(value.ToString());
+        // Invariant so a comma-decimal CurrentCulture never emits "59,928958"
+        // (invalid JSON number) when these entities are serialized back out.
+        writer.WriteRawValue(Convert.ToString(value, CultureInfo.InvariantCulture)!, skipInputValidation: true);
     }
 }
