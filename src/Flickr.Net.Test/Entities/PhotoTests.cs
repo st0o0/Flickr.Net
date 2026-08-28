@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Text;
 using Flickr.Net.Flickrs.Results;
 using Flickr.Net.Internals;
@@ -121,6 +122,58 @@ public class PhotoTests
         var photo = result.Content.Values[0];
         Assert.Equal(0d, photo.Latitude);
         Assert.Equal(0d, photo.Longitude);
+    }
+
+    [Fact]
+    public void PhotoGeoCoordinatesParseUnderCommaDecimalCulture()
+    {
+        // 2026-08-28 prod incident: decimal-string lat/lon failed
+        // double.TryParse under CurrentCulture (nb-NO uses a comma decimal
+        // separator) and every photo search threw "unable to parse 59.928958
+        // to number". Regression: parsing must be culture-invariant.
+        const string json = """{"photos":{"page":1,"pages":1,"perpage":10,"total":1,"photo":[{"id":"55488108983","owner":"64917450@N00","secret":"b16718dd5b","server":"65535","farm":66,"title":"Ettermiddag i Frognerparken","ispublic":1,"isfriend":0,"isfamily":0,"latitude":"59.928958","longitude":"10.704894","accuracy":"16","context":0,"place_id":null,"woeid":"6940544","geo_is_public":1,"geo_is_contact":0,"geo_is_friend":0,"geo_is_family":0}]},"stat":"ok"}""";
+
+        var original = CultureInfo.CurrentCulture;
+        CultureInfo.CurrentCulture = new CultureInfo("nb-NO");
+        try
+        {
+            var result = FlickrConvert.DeserializeObject<FlickrResult<PagedPhotos>>(Encoding.UTF8.GetBytes(json));
+
+            Assert.NotNull(result);
+            Assert.False(result.HasError);
+            var photo = result.Content.Values[0];
+            Assert.Equal(59.928958, photo.Latitude);
+            Assert.Equal(10.704894, photo.Longitude);
+        }
+        finally
+        {
+            CultureInfo.CurrentCulture = original;
+        }
+    }
+
+    [Fact]
+    public void PhotoGeoZeroCoordinatesParseUnderCommaDecimalCulture()
+    {
+        // Unquoted numeric zeros (photos without geo) must also stay
+        // culture-safe on the raw-number branch.
+        const string json = """{"photos":{"page":1,"pages":1,"perpage":10,"total":1,"photo":[{"id":"200500001","owner":"64917450@N00","secret":"***","server":"123","farm":1,"title":"Old photo without geo","ispublic":1,"isfriend":0,"isfamily":0,"latitude":0,"longitude":0,"accuracy":"0","context":0,"place_id":null,"woeid":null,"geo_is_public":1,"geo_is_contact":0,"geo_is_friend":0,"geo_is_family":0}]},"stat":"ok"}""";
+
+        var original = CultureInfo.CurrentCulture;
+        CultureInfo.CurrentCulture = new CultureInfo("nb-NO");
+        try
+        {
+            var result = FlickrConvert.DeserializeObject<FlickrResult<PagedPhotos>>(Encoding.UTF8.GetBytes(json));
+
+            Assert.NotNull(result);
+            Assert.False(result.HasError);
+            var photo = result.Content.Values[0];
+            Assert.Equal(0d, photo.Latitude);
+            Assert.Equal(0d, photo.Longitude);
+        }
+        finally
+        {
+            CultureInfo.CurrentCulture = original;
+        }
     }
 
     [Fact]
