@@ -91,17 +91,18 @@ public class PhotoTests
     [Fact]
     public void PhotoGeoCoordinatesAreDeserialized()
     {
-        // geo extra: Flickr returns latitude/longitude as strings
-        // (real response from flickr.photos.search with extras=geo).
-        const string json = """{"photos":{"page":1,"pages":1,"perpage":10,"total":1,"photo":[{"id":"55488108983","owner":"64917450@N00","secret":"b16718dd5b","server":"65535","farm":66,"title":"Ettermiddag i Frognerparken","ispublic":1,"isfriend":0,"isfamily":0,"latitude":"59.927008","longitude":"10.704894","accuracy":"16","context":0,"place_id":null,"woeid":"6940544","geo_is_public":1,"geo_is_contact":0,"geo_is_friend":0,"geo_is_family":0}]},"stat":"ok"}""";
+        // geo extra: Flickr returns latitude/longitude as strings. Response
+        // shape captured from the live flickr.photos.search API (extras=geo);
+        // values replaced with synthetic data.
+        const string json = """{"photos":{"page":1,"pages":1,"perpage":10,"total":1,"photo":[{"id":"55500000001","owner":"12345678@N00","secret":"a1b2c3d4e5","server":"65535","farm":66,"title":"Afternoon in the Park","ispublic":1,"isfriend":0,"isfamily":0,"latitude":"48.858370","longitude":"2.294485","accuracy":"16","context":0,"place_id":null,"woeid":"1234567","geo_is_public":1,"geo_is_contact":0,"geo_is_friend":0,"geo_is_family":0}]},"stat":"ok"}""";
 
         var result = FlickrConvert.DeserializeObject<FlickrResult<PagedPhotos>>(Encoding.UTF8.GetBytes(json));
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
         var photo = result.Content.Values[0];
-        Assert.Equal(59.927008, photo.Latitude);
-        Assert.Equal(10.704894, photo.Longitude);
+        Assert.Equal(48.858370, photo.Latitude);
+        Assert.Equal(2.294485, photo.Longitude);
     }
 
     [Fact]
@@ -111,7 +112,7 @@ public class PhotoTests
         // photo has NO geo data, Flickr emits unquoted numeric zeros (while
         // real coordinates come back as strings). The mapping stays faithful
         // to the payload — consumers should treat 0/0 as "no geolocation".
-        const string json = """{"photos":{"page":1,"pages":1,"perpage":10,"total":1,"photo":[{"id":"200500001","owner":"64917450@N00","secret":"***","server":"123","farm":1,"title":"Old photo without geo","ispublic":1,"isfriend":0,"isfamily":0,"latitude":0,"longitude":0,"accuracy":"0","context":0,"place_id":null,"woeid":null,"geo_is_public":1,"geo_is_contact":0,"geo_is_friend":0,"geo_is_family":0}]},"stat":"ok"}""";
+        const string json = """{"photos":{"page":1,"pages":1,"perpage":10,"total":1,"photo":[{"id":"200500001","owner":"12345678@N00","secret":"***","server":"123","farm":1,"title":"Old photo without geo","ispublic":1,"isfriend":0,"isfamily":0,"latitude":0,"longitude":0,"accuracy":"0","context":0,"place_id":null,"woeid":null,"geo_is_public":1,"geo_is_contact":0,"geo_is_friend":0,"geo_is_family":0}]},"stat":"ok"}""";
 
         var result = FlickrConvert.DeserializeObject<FlickrResult<PagedPhotos>>(Encoding.UTF8.GetBytes(json));
 
@@ -125,7 +126,7 @@ public class PhotoTests
     [Fact]
     public void PhotoGeoCoordinatesAreNullWhenGeoExtraNotRequested()
     {
-        const string json = """{"photos":{"page":1,"pages":1,"perpage":10,"total":1,"photo":[{"id":"55488459867","owner":"64917450@N00","secret":"1b3782cfb1","server":"65535","farm":66,"title":"Trilletur på Bygdøy","ispublic":1,"isfriend":0,"isfamily":0}]},"stat":"ok"}""";
+        const string json = """{"photos":{"page":1,"pages":1,"perpage":10,"total":1,"photo":[{"id":"55500000002","owner":"12345678@N00","secret":"b2c3d4e5f6","server":"65535","farm":66,"title":"Stroll by the Sea","ispublic":1,"isfriend":0,"isfamily":0}]},"stat":"ok"}""";
 
         var result = FlickrConvert.DeserializeObject<FlickrResult<PagedPhotos>>(Encoding.UTF8.GetBytes(json));
 
@@ -142,7 +143,7 @@ public class PhotoTests
         // string (seconds since epoch). The shared TimestampToDateTimeConverter
         // converts it to a UTC DateTime. datetaken (a "yyyy-MM-dd HH:mm:ss"
         // string) can arrive in the same payload and keeps parsing unchanged.
-        const string json = """{"photos":{"page":1,"pages":1,"perpage":10,"total":1,"photo":[{"id":"55462305733","owner":"64917450@N00","secret":"dd5725ef2a","server":"65535","farm":66,"title":"Sjusjoeen","ispublic":1,"isfriend":0,"isfamily":0,"dateupload":"1724630400","datetaken":"2024-08-26 14:23:11","datetakengranularity":"0","datetakenunknown":"0"}]},"stat":"ok"}""";
+        const string json = """{"photos":{"page":1,"pages":1,"perpage":10,"total":1,"photo":[{"id":"55500000003","owner":"12345678@N00","secret":"c3d4e5f6a7","server":"65535","farm":66,"title":"Lake District","ispublic":1,"isfriend":0,"isfamily":0,"dateupload":"1724630400","datetaken":"2024-08-26 14:23:11","datetakengranularity":"0","datetakenunknown":"0"}]},"stat":"ok"}""";
 
         var result = FlickrConvert.DeserializeObject<FlickrResult<PagedPhotos>>(Encoding.UTF8.GetBytes(json));
 
@@ -158,7 +159,7 @@ public class PhotoTests
     {
         // Without extras=date_upload, flickr.photos.search simply omits the
         // attribute — non-nullable DateTime stays at its default.
-        const string json = """{"photos":{"page":1,"pages":1,"perpage":10,"total":1,"photo":[{"id":"55488459867","owner":"64917450@N00","secret":"1b3782cfb1","server":"65535","farm":66,"title":"Trilletur på Bygdøy","ispublic":1,"isfriend":0,"isfamily":0}]},"stat":"ok"}""";
+        const string json = """{"photos":{"page":1,"pages":1,"perpage":10,"total":1,"photo":[{"id":"55500000002","owner":"12345678@N00","secret":"b2c3d4e5f6","server":"65535","farm":66,"title":"Stroll by the Sea","ispublic":1,"isfriend":0,"isfamily":0}]},"stat":"ok"}""";
 
         var result = FlickrConvert.DeserializeObject<FlickrResult<PagedPhotos>>(Encoding.UTF8.GetBytes(json));
 
@@ -172,7 +173,7 @@ public class PhotoTests
     public void PhotoOriginalDimensionsAreDeserialized()
     {
         // o_dims extra: Flickr returns o_width/o_height as strings.
-        const string json = """{"photos":{"page":1,"pages":1,"perpage":10,"total":1,"photo":[{"id":"55462305733","owner":"64917450@N00","secret":"dd5725ef2a","server":"65535","farm":66,"title":"Sjusjoeen","ispublic":1,"isfriend":0,"isfamily":0,"o_width":"5712","o_height":"4284"}]},"stat":"ok"}""";
+        const string json = """{"photos":{"page":1,"pages":1,"perpage":10,"total":1,"photo":[{"id":"55500000003","owner":"12345678@N00","secret":"c3d4e5f6a7","server":"65535","farm":66,"title":"Lake District","ispublic":1,"isfriend":0,"isfamily":0,"o_width":"5712","o_height":"4284"}]},"stat":"ok"}""";
 
         var result = FlickrConvert.DeserializeObject<FlickrResult<PagedPhotos>>(Encoding.UTF8.GetBytes(json));
 
@@ -187,20 +188,20 @@ public class PhotoTests
     public void PhotoSizeUrlsAndDimensionsAreDeserialized()
     {
         // url_l/url_n/url_sq extras: width_*/height_* are numbers, url_* are strings.
-        const string json = """{"photos":{"page":1,"pages":1,"perpage":10,"total":1,"photo":[{"id":"55462305733","owner":"64917450@N00","secret":"dd5725ef2a","server":"65535","farm":66,"title":"Sjusjoeen","ispublic":1,"isfriend":0,"isfamily":0,"url_sq":"https://live.staticflickr.com/65535/55462305733_dd5725ef2a_s.jpg","height_sq":75,"width_sq":75,"url_l":"https://live.staticflickr.com/65535/55462305733_dd5725ef2a_b.jpg","height_l":768,"width_l":1024,"url_n":"https://live.staticflickr.com/65535/55462305733_dd5725ef2a_n.jpg","height_n":240,"width_n":320}]},"stat":"ok"}""";
+        const string json = """{"photos":{"page":1,"pages":1,"perpage":10,"total":1,"photo":[{"id":"55500000003","owner":"12345678@N00","secret":"c3d4e5f6a7","server":"65535","farm":66,"title":"Lake District","ispublic":1,"isfriend":0,"isfamily":0,"url_sq":"https://live.staticflickr.com/65535/55500000003_c3d4e5f6a7_s.jpg","height_sq":75,"width_sq":75,"url_l":"https://live.staticflickr.com/65535/55500000003_c3d4e5f6a7_b.jpg","height_l":768,"width_l":1024,"url_n":"https://live.staticflickr.com/65535/55500000003_c3d4e5f6a7_n.jpg","height_n":240,"width_n":320}]},"stat":"ok"}""";
 
         var result = FlickrConvert.DeserializeObject<FlickrResult<PagedPhotos>>(Encoding.UTF8.GetBytes(json));
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
         var photo = result.Content.Values[0];
-        Assert.Equal("https://live.staticflickr.com/65535/55462305733_dd5725ef2a_s.jpg", photo.SquareUrl);
+        Assert.Equal("https://live.staticflickr.com/65535/55500000003_c3d4e5f6a7_s.jpg", photo.SquareUrl);
         Assert.Equal(75, photo.SquareWidth);
         Assert.Equal(75, photo.SquareHeight);
-        Assert.Equal("https://live.staticflickr.com/65535/55462305733_dd5725ef2a_b.jpg", photo.LargeUrl);
+        Assert.Equal("https://live.staticflickr.com/65535/55500000003_c3d4e5f6a7_b.jpg", photo.LargeUrl);
         Assert.Equal(1024, photo.LargeWidth);
         Assert.Equal(768, photo.LargeHeight);
-        Assert.Equal("https://live.staticflickr.com/65535/55462305733_dd5725ef2a_n.jpg", photo.Small320Url);
+        Assert.Equal("https://live.staticflickr.com/65535/55500000003_c3d4e5f6a7_n.jpg", photo.Small320Url);
         Assert.Equal(320, photo.Small320Width);
         Assert.Equal(240, photo.Small320Height);
     }
