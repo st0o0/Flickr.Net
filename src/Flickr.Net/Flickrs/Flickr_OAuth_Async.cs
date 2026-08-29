@@ -57,7 +57,7 @@ public partial class Flickr : IFlickrOAuth
 
         parameters.Add("oauth_verifier", verifier);
 
-        parameters.Add("oauth_token", requestToken.TokenSecret);
+        parameters.Add("oauth_token", requestToken.Token);
 
         var sig = ((IFlickrOAuth)this).CalculateSignature("POST", url, parameters, requestToken.TokenSecret);
 
