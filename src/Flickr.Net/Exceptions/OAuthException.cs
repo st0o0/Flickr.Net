@@ -27,16 +27,19 @@ public class OAuthException : Exception
     /// <param name="innerException"></param>
     public OAuthException(string response, Exception innerException) : base("OAuth Exception", innerException)
     {
+        FullResponse = response;
+
         try
         {
             OAuthErrorPameters = UtilityMethods.StringToDictionary(response);
         }
         catch (Exception)
         {
-            throw new Exception("Failed to parse OAuth error message: " + FullResponse, innerException);
+            OAuthErrorPameters = [];
         }
 
-        _mess = "OAuth Exception occurred: " + OAuthErrorPameters["oauth_problem"];
+        _mess = "OAuth Exception occurred: " +
+            (OAuthErrorPameters.TryGetValue("oauth_problem", out var problem) ? problem : FullResponse);
     }
 
     /// <summary>
@@ -44,33 +47,9 @@ public class OAuthException : Exception
     /// </summary>
     /// <param name="response"></param>
     /// <param name="innerException"></param>
-    public OAuthException(byte[] response, Exception innerException) : base("OAuth Exception", innerException)
+    public OAuthException(byte[] response, Exception innerException)
+        : this(Encoding.UTF8.GetString(response), innerException)
     {
-        try
-        {
-            OAuthErrorPameters = UtilityMethods.StringToDictionary(Encoding.UTF8.GetString(response));
-        }
-        catch (Exception)
-        {
-            throw new Exception("Failed to parse OAuth error message: " + FullResponse, innerException);
-        }
-
-        _mess = "OAuth Exception occurred: " + OAuthErrorPameters["oauth_problem"];
-    }
-
-    /// <summary>
-    /// Constructor for the OAuthException class.
-    /// </summary>
-    /// <param name="innerException"></param>
-    public OAuthException(Exception innerException) : base("OAuth Exception", innerException)
-    {
-        var exception = innerException as HttpRequestException;
-        if (exception == null)
-        {
-            return;
-        }
-
-        _mess = "OAuth Exception occurred: " + OAuthErrorPameters["oauth_problem"];
     }
 
     /// <summary>

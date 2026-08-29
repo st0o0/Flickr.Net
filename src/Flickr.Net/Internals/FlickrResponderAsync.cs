@@ -22,8 +22,14 @@ public static partial class FlickrResponder
     {
         var oAuth = parameters.ContainsKey("oauth_consumer_key");
 
-        parameters.TryAdd("format", "json");
-        parameters.TryAdd("nojsoncallback", "1");
+        // Pre-signed OAuth requests (request/access token flows) must not gain parameters
+        // after the signature was computed: Flickr covers all body parameters in the
+        // signature base string, so any post-signature addition invalidates the signature.
+        if (!parameters.ContainsKey("oauth_signature"))
+        {
+            parameters.TryAdd("format", "json");
+            parameters.TryAdd("nojsoncallback", "1");
+        }
 
         if (oAuth)
         {
@@ -35,7 +41,7 @@ public static partial class FlickrResponder
 
     private static async Task<byte[]> GetDataResponseNormalAsync(Flickr flickr, string baseUrl, Dictionary<string, string> parameters, CancellationToken cancellationToken = default)
     {
-        return await DownloadDataAsync(baseUrl, new FormUrlEncodedContent(parameters), null, cancellationToken);
+        return await DownloadDataAsync(baseUrl, new FormUrlEncodedContent(parameters), null, isOAuth: false, cancellationToken);
     }
 
     private static async Task<byte[]> GetDataResponseOAuthAsync(Flickr flickr, string baseUrl, Dictionary<string, string> parameters, CancellationToken cancellationToken = default)
@@ -61,28 +67,10 @@ public static partial class FlickrResponder
         var data = new FormUrlEncodedContent(parameters.Where(pair => !pair.Key.StartsWith("oauth", StringComparison.Ordinal)));
         var authHeader = OAuthCalculateAuthHeader(parameters);
 
-        // Download data.
-        try
-        {
-            return await DownloadDataAsync(baseUrl, data, authHeader, cancellationToken);
-        }
-        catch (HttpRequestException ex)
-        {
-            if (ex == null)
-            {
-                throw;
-            }
-
-            if (ex.StatusCode != HttpStatusCode.BadRequest && ex.StatusCode != HttpStatusCode.Unauthorized)
-            {
-                throw;
-            }
-
-            throw new OAuthException(ex.Message, ex);
-        }
+        return await DownloadDataAsync(baseUrl, data, authHeader, isOAuth: true, cancellationToken);
     }
 
-    private static async Task<byte[]> DownloadDataAsync(string baseUrl, FormUrlEncodedContent data, string authHeader, CancellationToken cancellationToken = default)
+    private static async Task<byte[]> DownloadDataAsync(string baseUrl, FormUrlEncodedContent data, string authHeader, bool isOAuth, CancellationToken cancellationToken = default)
     {
         using HttpClient client = new();
 
@@ -100,7 +88,24 @@ public static partial class FlickrResponder
         message.Content = data;
 
         var response = await client.SendAsync(message, cancellationToken);
-        response = response.EnsureSuccessStatusCode();
+
+        if (!response.IsSuccessStatusCode)
+        {
+            var body = await response.Content.ReadAsStringAsync(cancellationToken);
+
+            if (isOAuth && response.StatusCode is HttpStatusCode.BadRequest or HttpStatusCode.Unauthorized)
+            {
+                throw new OAuthException(body, new HttpRequestException(
+                    $"Response status code does not indicate success: {(int)response.StatusCode} ({response.StatusCode}).",
+                    inner: null,
+                    response.StatusCode));
+            }
+
+            throw new HttpRequestException(
+                $"Response status code does not indicate success: {(int)response.StatusCode} ({response.StatusCode}).",
+                inner: null,
+                response.StatusCode);
+        }
 
         return await response.Content.ReadAsByteArrayAsync(cancellationToken);
     }
