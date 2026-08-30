@@ -1,4 +1,5 @@
 using System.Globalization;
+using System.Reflection;
 using System.Text;
 using Flickr.Net.Flickrs.Results;
 using Flickr.Net.Internals;
@@ -220,6 +221,23 @@ public class PhotoTests
         Assert.False(result.HasError);
         var photo = result.Content.Values[0];
         Assert.Equal(default(DateTime), photo.DateUploaded);
+    }
+
+    [Fact]
+    public void PhotoAddedDateIsMarkedObsolete()
+    {
+        // AddedDate ("dateadded") is a dead field: no endpoint deserialized
+        // into Photo ever returns that attribute (photos.search returns
+        // dateupload; photosets.getPhotos — the endpoint that does return
+        // dateadded — deserializes into PhotosetPhoto : PhotoBase, which
+        // doesn't map it). Locked in via [Obsolete] pointing at DateUploaded
+        // until outright removal in a future major version.
+        var property = typeof(Photo).GetProperty("AddedDate");
+        Assert.NotNull(property);
+
+        var obsolete = property!.GetCustomAttribute<ObsoleteAttribute>();
+        Assert.NotNull(obsolete);
+        Assert.Contains("DateUploaded", obsolete!.Message);
     }
 
     [Fact]
