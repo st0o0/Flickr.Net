@@ -1,0 +1,24 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    uses: st0o0/github-workflows/.github/workflows/dotnet-release-nuget.yml@main
+    with:
+      solution-file: Flickr.Net.sln
+      package-name: Flickr.Net
+    secrets:
+      NUGET_USER: ${{ secrets.NUGET_USER }}
+    permissions:
+      contents: write
+      pull-requests: write
+      checks: write
+      id-token: write

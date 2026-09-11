@@ -1,0 +1,19 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    uses: st0o0/github-workflows/.github/workflows/dotnet-ci.yml@main
+    with:
+      solution-file: Flickr.Net.sln
+      has-dockerfile: false
