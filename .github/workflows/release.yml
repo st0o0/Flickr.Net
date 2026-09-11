@@ -13,7 +13,7 @@ jobs:
   release:
     uses: st0o0/github-workflows/.github/workflows/dotnet-release-nuget.yml@main
     with:
-      solution-file: Flickr.Net.sln
+      solution-file: Flickr.Net.slnx
       package-name: Flickr.Net
     secrets:
       NUGET_USER: ${{ secrets.NUGET_USER }}

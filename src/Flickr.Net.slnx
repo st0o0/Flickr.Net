@@ -1,0 +1,14 @@
+<Solution>
+  <Folder Name="/Props/">
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path="../.gitignore" />
+    <File Path="../LICENSE" />
+    <File Path="../README.md" />
+    <File Path="global.json" />
+  </Folder>
+  <Project Path="Flickr.Net.Test/Flickr.Net.Test.csproj" />
+  <Project Path="Flickr.Net/Flickr.Net.csproj" />
+</Solution>

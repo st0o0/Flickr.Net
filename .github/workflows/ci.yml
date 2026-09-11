@@ -2,6 +2,8 @@ name: CI
 
 on:
   pull_request:
+    paths:
+      - 'src/**'
 
 permissions:
   contents: read
@@ -14,7 +16,7 @@ jobs:
   dotnet:
     uses: st0o0/github-workflows/.github/workflows/dotnet-ci.yml@main
     with:
-      solution-file: Flickr.Net.sln
+      solution-file: Flickr.Net.slnx
       has-dockerfile: false
 
   commits:
