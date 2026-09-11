@@ -4,8 +4,8 @@ using Flickr.Net.Enums;
 
 namespace Flickr.Net;
 
-    /// <summary>
-    /// </summary>
+/// <summary>
+/// </summary>
 public record Member : FlickrEntityBase<NsId>, IBuddyIcon
 {
     /// <summary>

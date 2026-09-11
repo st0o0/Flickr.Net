@@ -36,33 +36,33 @@ public class AutoStringToNumberConverter : JsonConverter<object>
         switch (reader.TokenType)
         {
             case JsonTokenType.String:
-            {
-                var s = reader.GetString();
-
-                // Flickr emits numbers with a dot decimal separator ("59.928958").
-                // Parse invariant: the ambient CurrentCulture may expect a comma
-                // (e.g. nb-NO hosts), which made every decimal string throw
-                // "unable to parse ... to number" and broke photo search.
-                if (long.TryParse(s, NumberStyles.Integer, CultureInfo.InvariantCulture, out var l))
                 {
-                    return Convert.ChangeType(l, typeToConvert, CultureInfo.InvariantCulture);
-                }
+                    var s = reader.GetString();
 
-                return double.TryParse(s, NumberStyles.Float, CultureInfo.InvariantCulture, out var d)
-                    ? Convert.ChangeType(d, typeToConvert, CultureInfo.InvariantCulture)
-                    : throw new Exception($"unable to parse {s} to number");
-            }
+                    // Flickr emits numbers with a dot decimal separator ("59.928958").
+                    // Parse invariant: the ambient CurrentCulture may expect a comma
+                    // (e.g. nb-NO hosts), which made every decimal string throw
+                    // "unable to parse ... to number" and broke photo search.
+                    if (long.TryParse(s, NumberStyles.Integer, CultureInfo.InvariantCulture, out var l))
+                    {
+                        return Convert.ChangeType(l, typeToConvert, CultureInfo.InvariantCulture);
+                    }
+
+                    return double.TryParse(s, NumberStyles.Float, CultureInfo.InvariantCulture, out var d)
+                        ? Convert.ChangeType(d, typeToConvert, CultureInfo.InvariantCulture)
+                        : throw new Exception($"unable to parse {s} to number");
+                }
             case JsonTokenType.Number:
-            {
-                return reader.TryGetInt64(out var l)
-                    ? Convert.ChangeType(l, typeToConvert, CultureInfo.InvariantCulture)
-                    : Convert.ChangeType(reader.GetDouble(), typeToConvert, CultureInfo.InvariantCulture);
-            }
+                {
+                    return reader.TryGetInt64(out var l)
+                        ? Convert.ChangeType(l, typeToConvert, CultureInfo.InvariantCulture)
+                        : Convert.ChangeType(reader.GetDouble(), typeToConvert, CultureInfo.InvariantCulture);
+                }
             default:
-            {
-                using var document = JsonDocument.ParseValue(ref reader);
-                throw new Exception($"unable to parse {document.RootElement} to number");
-            }
+                {
+                    using var document = JsonDocument.ParseValue(ref reader);
+                    throw new Exception($"unable to parse {document.RootElement} to number");
+                }
         }
     }
 

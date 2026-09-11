@@ -4,8 +4,8 @@ using Flickr.Net.Internals.Attributes;
 
 namespace Flickr.Net;
 
-    /// <summary>
-    /// </summary>
+/// <summary>
+/// </summary>
 [FlickrJsonPropertyName("domain")]
 public record Domain : FlickrEntityBase
 {

@@ -32,8 +32,6 @@ public partial class Flickr : IFlickrActivity
             throw new ArgumentOutOfRangeException(nameof(timePeriod), "Time Period should be greater than 0");
         }
 
-        ArgumentNullException.ThrowIfNull(timeType);
-
         var timeframe = timePeriod + timeType.GetEnumMemberValue();
 
         CheckRequiresAuthentication();

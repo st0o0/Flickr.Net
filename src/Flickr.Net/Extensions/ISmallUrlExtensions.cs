@@ -3,8 +3,8 @@ using Flickr.Net.Internals;
 
 namespace Flickr.Net.Extensions;
 
-    /// <summary>
-    /// </summary>
+/// <summary>
+/// </summary>
 public static class ISmallUrlExtensions
 {
     /// <summary>

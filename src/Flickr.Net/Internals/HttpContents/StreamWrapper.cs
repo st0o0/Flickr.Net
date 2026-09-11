@@ -64,6 +64,6 @@ internal class StreamWrapper(Stream stream) : Stream
     public override void Write(byte[] buffer, int offset, int count)
         => InnerStream.Write(buffer, offset, count);
 
-    protected override void Dispose(bool disposing) 
+    protected override void Dispose(bool disposing)
         => InnerStream.Dispose();
 }
