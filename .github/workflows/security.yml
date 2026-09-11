@@ -1,8 +1,10 @@
 name: Security
 
 on:
-  push:
-    branches: [main]
+  pull_request:
+    paths:
+      - 'src/Directory.Packages.props'
+      - 'src/**/*.csproj'
   schedule:
     - cron: '0 6 * * 1'
   workflow_dispatch:
