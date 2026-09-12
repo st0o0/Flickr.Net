@@ -2,12 +2,6 @@ name: CI
 
 on:
   pull_request:
-    paths-ignore:
-      - '**.md'
-      - '.release-please-manifest.json'
-      - 'release-please-config.json'
-      - 'docs/**'
-      - 'LICENSE'
 
 permissions:
   contents: read
