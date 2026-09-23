@@ -43,6 +43,8 @@ public interface IFlickrClient : IDisposable
     IFlickrPanda Panda { get; }
     /// <summary>Provides access to Flickr people API methods.</summary>
     IFlickrPeople People { get; }
+    /// <summary>Provides access to Flickr places API methods.</summary>
+    IFlickrPlaces Places { get; }
     /// <summary>Provides access to Flickr photos API methods.</summary>
     IFlickrPhotos Photos { get; }
     /// <summary>Provides access to Flickr photo comments API methods.</summary>
@@ -81,4 +83,6 @@ public interface IFlickrClient : IDisposable
     IFlickrUpload Upload { get; }
     /// <summary>Provides access to Flickr URL API methods.</summary>
     IFlickrUrls Urls { get; }
+    /// <summary>Provides access to Flickr testimonials API methods.</summary>
+    IFlickrTestimonials Testimonials { get; }
 }

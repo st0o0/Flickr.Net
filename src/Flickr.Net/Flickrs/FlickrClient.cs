@@ -63,13 +63,10 @@ public sealed partial class FlickrClient : IFlickrClient
     }
 
     /// <summary>Gets the Flickr upload endpoint URL.</summary>
-    protected static string UploadUrl => "https://up.flickr.com/services/upload/";
-    /// <summary>Gets the Flickr photo replace endpoint URL.</summary>
-    protected static string ReplaceUrl => "https://up.flickr.com/services/replace/";
-    /// <summary>Gets the Flickr authentication endpoint URL.</summary>
-    protected static string AuthUrl => "https://www.flickr.com/services/auth/";
-    /// <summary>Gets the base URI for the Flickr REST API.</summary>
-    protected static Uri BaseUri => new("https://api.flickr.com/services/rest/");
+    private static string UploadUrl => "https://up.flickr.com/services/upload/";
+    private static string ReplaceUrl => "https://up.flickr.com/services/replace/";
+    private static string AuthUrl => "https://www.flickr.com/services/auth/";
+    private static Uri BaseUri => new("https://api.flickr.com/services/rest/");
 
     /// <inheritdoc />
     public IFlickrActivity Activity => this;
@@ -110,6 +107,8 @@ public sealed partial class FlickrClient : IFlickrClient
     /// <inheritdoc />
     public IFlickrPeople People => this;
     /// <inheritdoc />
+    public IFlickrPlaces Places => this;
+    /// <inheritdoc />
     public IFlickrPhotos Photos => this;
     /// <inheritdoc />
     public IFlickrPhotosComments PhotosComments => this;
@@ -147,6 +146,8 @@ public sealed partial class FlickrClient : IFlickrClient
     public IFlickrUpload Upload => this;
     /// <inheritdoc />
     public IFlickrUrls Urls => this;
+    /// <inheritdoc />
+    public IFlickrTestimonials Testimonials => this;
 
     /// <summary>Gets the current Flickr settings for this client instance.</summary>
     public FlickrSettings FlickrSettings { get; }
