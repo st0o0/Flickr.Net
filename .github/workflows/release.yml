@@ -52,7 +52,7 @@ jobs:
           --source https://api.nuget.org/v3/index.json
           --skip-duplicate ./packages/*.nupkg
       - name: Attach .nupkg to GitHub Release
-        env:
-          GH_TOKEN: ${{ github.token }}
-          VERSION: ${{ needs.release-please.outputs.version }}
-        run: gh release upload "v${VERSION}" ./packages/*.nupkg --clobber
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ needs.release-please.outputs.version }}
+          files: ./packages/*.nupkg
