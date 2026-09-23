@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using Flickr.Net.Enums;
 using Flickr.Net.Exceptions;
 using Flickr.Net.Internals.Extensions;
@@ -138,6 +138,25 @@ public sealed partial class FlickrClient : IFlickrPeople
 
         return await GetResponseAsync<Groups>(parameters, cancellationToken);
     }
+
+    async Task<PagedPhotos> IFlickrPeople.GetPublicPhotosAsync(string userId, SafetyLevel safeSearch, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken)
+    {
+        Dictionary<string, string> parameters = new()
+        {
+            { "method", "flickr.people.getPublicPhotos" },
+            { "user_id", userId }
+        };
+
+        parameters.AppendIf("safe_search", safeSearch, x => x != SafetyLevel.None, x => x.ToString("d"));
+
+        parameters.AppendIf("extras", extras, x => x != PhotoSearchExtras.None, x => x.ToFlickrString());
+
+        parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
+
+        parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
+
+        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
+    }
 }
 
 /// <summary>
@@ -241,4 +260,15 @@ public interface IFlickrPeople
     /// <param name="userId">The user id to get groups for.</param>
     /// <param name="cancellationToken"></param>
     Task<Groups> GetPublicGroupsAsync(string userId, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Returns a list of public photos for the given user.
+    /// </summary>
+    /// <param name="userId">The NSID of the user whose public photos to return.</param>
+    /// <param name="safeSearch">Safe search setting.</param>
+    /// <param name="extras">A list of extra information to fetch for each returned record.</param>
+    /// <param name="page">The page of results to return. Defaults to 1.</param>
+    /// <param name="perPage">Number of photos to return per page. Defaults to 100. Maximum is 500.</param>
+    /// <param name="cancellationToken"></param>
+    Task<PagedPhotos> GetPublicPhotosAsync(string userId, SafetyLevel safeSearch = SafetyLevel.None, PhotoSearchExtras extras = PhotoSearchExtras.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 }

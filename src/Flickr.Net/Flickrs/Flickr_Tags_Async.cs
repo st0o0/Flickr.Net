@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using Flickr.Net.Enums;
 using Flickr.Net.Flickrs.Results;
 using Flickr.Net.Internals.Extensions;
@@ -113,6 +113,20 @@ public sealed partial class FlickrClient : IFlickrTags
 
         return await GetResponseAsync<Tags>(parameters, cancellationToken);
     }
+
+    async Task<RawTags> IFlickrTags.GetListUserRawAsync(string? tag, CancellationToken cancellationToken)
+    {
+        CheckRequiresAuthentication();
+
+        Dictionary<string, string> parameters = new()
+        {
+            { "method", "flickr.tags.getListUserRaw" }
+        };
+
+        parameters.AppendIf("tag", tag, x => !string.IsNullOrEmpty(x), x => x);
+
+        return await GetResponseAsync<RawTags>(parameters, cancellationToken);
+    }
 }
 
 /// <summary>
@@ -146,7 +160,7 @@ public interface IFlickrTags
     /// The number of tags to return. Defaults to 20. Maximum allowed value is 200.
     /// </param>
     /// <param name="cancellationToken"></param>
-    Task<FlickrStatsResult<Hottags>> GetHotListAsync(string period = null, int? count = null, CancellationToken cancellationToken = default);
+    Task<FlickrStatsResult<Hottags>> GetHotListAsync(string? period = null, int? count = null, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get the tag list for a given photo.
@@ -176,7 +190,7 @@ public interface IFlickrTags
     /// Number of popular tags to return. defaults to 10 when this argument is not present.
     /// </param>
     /// <param name="cancellationToken"></param>
-    Task<UserTags> GetListUserPopularAsync(string userId = null, int? count = null, CancellationToken cancellationToken = default);
+    Task<UserTags> GetListUserPopularAsync(string? userId = null, int? count = null, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Returns a collection of the most frequently used tags for the authenticated user.
@@ -190,4 +204,11 @@ public interface IFlickrTags
     /// <param name="tag">The tag to fetch related tags for.</param>
     /// <param name="cancellationToken"></param>
     Task<Tags> GetRelatedAsync(string tag, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Returns the raw versions of a tag (or all tags) for the authenticated user.
+    /// </summary>
+    /// <param name="tag">The tag to return raw versions for. If omitted, all tags are returned.</param>
+    /// <param name="cancellationToken"></param>
+    Task<RawTags> GetListUserRawAsync(string? tag = null, CancellationToken cancellationToken = default);
 }

@@ -1,4 +1,5 @@
-﻿using Flickr.Net.Enums;
+using Flickr.Net.Enums;
+using Flickr.Net.Internals.Extensions;
 
 namespace Flickr.Net;
 
@@ -30,6 +31,31 @@ public sealed partial class FlickrClient : IFlickrPhotosLicenses
 
         await GetResponseAsync(parameters, cancellationToken);
     }
+
+    async Task<Licenses> IFlickrPhotosLicenses.GetAvailableAsync(string? photoId, CancellationToken cancellationToken)
+    {
+        Dictionary<string, string> parameters = new()
+        {
+            { "method", "flickr.photos.licenses.getAvailable" }
+        };
+
+        parameters.AppendIf("photo_id", photoId, x => !string.IsNullOrEmpty(x), x => x);
+
+        return await GetResponseAsync<Licenses>(parameters, cancellationToken);
+    }
+
+    async Task<LicenseHistoryEntries> IFlickrPhotosLicenses.GetLicenseHistoryAsync(string photoId, CancellationToken cancellationToken)
+    {
+        CheckRequiresAuthentication();
+
+        Dictionary<string, string> parameters = new()
+        {
+            { "method", "flickr.photos.licenses.getLicenseHistory" },
+            { "photo_id", photoId }
+        };
+
+        return await GetResponseAsync<LicenseHistoryEntries>(parameters, cancellationToken);
+    }
 }
 
 /// <summary>
@@ -54,4 +80,18 @@ public interface IFlickrPhotosLicenses
     /// </param>
     /// <param name="cancellationToken"></param>
     Task SetLicenseAsync(string photoId, LicenseType license, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Returns the available licenses for a given photo, or all licenses if no photo is specified.
+    /// </summary>
+    /// <param name="photoId">The photo to get available licenses for. If omitted, all licenses are returned.</param>
+    /// <param name="cancellationToken"></param>
+    Task<Licenses> GetAvailableAsync(string? photoId = null, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Returns the license change history for a photo.
+    /// </summary>
+    /// <param name="photoId">The photo to get the license history for.</param>
+    /// <param name="cancellationToken"></param>
+    Task<LicenseHistoryEntries> GetLicenseHistoryAsync(string photoId, CancellationToken cancellationToken = default);
 }

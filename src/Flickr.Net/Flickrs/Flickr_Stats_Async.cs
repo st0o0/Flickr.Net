@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using Flickr.Net.Enums;
 using Flickr.Net.Internals;
 using Flickr.Net.Internals.Extensions;
@@ -262,6 +262,18 @@ public sealed partial class FlickrClient : IFlickrStats
 
         return await GetResponseAsync<Views>(parameters, cancellationToken);
     }
+
+    async Task<PopularPhotoDateRange> IFlickrStats.GetMostPopularPhotoDateRangeAsync(CancellationToken cancellationToken)
+    {
+        CheckRequiresAuthentication();
+
+        Dictionary<string, string> parameters = new()
+        {
+            { "method", "flickr.stats.getMostPopularPhotoDateRange" }
+        };
+
+        return await GetResponseAsync<PopularPhotoDateRange>(parameters, cancellationToken);
+    }
 }
 
 /// <summary>
@@ -288,7 +300,7 @@ public interface IFlickrStats
     /// maximum allowed value is 100.
     /// </param>
     /// <param name="cancellationToken"></param>
-    Task<Domains> GetCollectionDomainsAsync(DateTime date, string collectionId = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<Domains> GetCollectionDomainsAsync(DateTime date, string? collectionId = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get a list of referrers from a given domain to a collection.
@@ -306,7 +318,7 @@ public interface IFlickrStats
     /// The number of referrers to return per page. The default is 25 and the maximum is 100.
     /// </param>
     /// <param name="cancellationToken"></param>
-    Task<Referrers> GetCollectionReferrersAsync(DateTime date, string domain, string collectionId = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<Referrers> GetCollectionReferrersAsync(DateTime date, string domain, string? collectionId = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Returns the number of views on the given date for the given collection. Only <see
@@ -342,7 +354,7 @@ public interface IFlickrStats
     /// maximum allowed value is 100.
     /// </param>
     /// <param name="cancellationToken"></param>
-    Task<Domains> GetPhotoDomainsAsync(DateTime date, string photoId = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<Domains> GetPhotoDomainsAsync(DateTime date, string? photoId = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get a list of referrers from a given domain to a photo.
@@ -360,7 +372,7 @@ public interface IFlickrStats
     /// The number of referrers to return per page. The default is 25 and the maximum is 100.
     /// </param>
     /// <param name="cancellationToken"></param>
-    Task<Referrers> GetPhotoReferrersAsync(DateTime date, string domain, string photoId = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<Referrers> GetPhotoReferrersAsync(DateTime date, string domain, string? photoId = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get a list of referring domains for a photoset.
@@ -380,7 +392,7 @@ public interface IFlickrStats
     /// maximum allowed value is 100.
     /// </param>
     /// <param name="cancellationToken"></param>
-    Task<Domains> GetPhotosetDomainsAsync(DateTime date, string photosetId = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<Domains> GetPhotosetDomainsAsync(DateTime date, string? photosetId = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get a list of referrers from a given domain to a photoset.
@@ -398,7 +410,7 @@ public interface IFlickrStats
     /// The number of referrers to return per page. The default is 25 and the maximum is 100.
     /// </param>
     /// <param name="cancellationToken"></param>
-    Task<Referrers> GetPhotosetReferrersAsync(DateTime date, string domain, string photosetId = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<Referrers> GetPhotosetReferrersAsync(DateTime date, string domain, string? photosetId = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Returns the number of views and comments on the given date for the given photoset. Only <see
@@ -485,4 +497,10 @@ public interface IFlickrStats
     /// <param name="date">The date to return the overall view count for.</param>
     /// <param name="cancellationToken"></param>
     Task<Views> GetTotalViewsAsync(DateTime date, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Returns the date range for which the most popular photo statistics are available.
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    Task<PopularPhotoDateRange> GetMostPopularPhotoDateRangeAsync(CancellationToken cancellationToken = default);
 }
