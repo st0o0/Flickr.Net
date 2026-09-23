@@ -9,6 +9,8 @@ concurrency:
   group: release
   cancel-in-progress: false
 
+permissions: {}
+
 jobs:
   release-please:
     uses: st0o0/github-workflows/.github/workflows/release-please.yml@main
@@ -19,65 +21,10 @@ jobs:
   build:
     needs: release-please
     if: needs.release-please.outputs.release_created == 'true'
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    permissions:
-      contents: read
-    steps:
-      - uses: actions/checkout@v7
-
-      - uses: actions/setup-dotnet@v6
-        with:
-          global-json-file: src/global.json
-          cache: true
-          cache-dependency-path: "**/packages.lock.json"
-
-      - run: dotnet tool restore
-
-      - name: Slopwatch
-        run: dotnet tool run slopwatch analyze --fail-on warning
-
-      - name: Restore
-        run: dotnet restore --locked-mode src/Flickr.Net.slnx
-
-      - name: Build
-        run: >-
-          dotnet build --configuration Release --no-restore
-          src/Flickr.Net.slnx
-          /p:Version=${{ needs.release-please.outputs.version }}
-          /p:ContinuousIntegrationBuild=true
-
-      - name: Test
-        working-directory: src
-        run: >-
-          dotnet test --solution Flickr.Net.slnx
-          --configuration Release --no-ansi --no-build
-          --coverage --coverage-output-format cobertura
-          --coverage-output ${{ github.workspace }}/testresults/coverage.cobertura.xml
-          --results-directory ${{ github.workspace }}/testresults
-
-      - name: Pack
-        run: >-
-          dotnet pack --configuration Release --no-build
-          --output ./packages
-          src/Flickr.Net.slnx
-          /p:PackageVersion=${{ needs.release-please.outputs.version }}
-          /p:PackageReleaseNotes="https://github.com/${{ github.repository }}/releases/tag/v${{ needs.release-please.outputs.version }}"
-
-      - uses: danielpalme/ReportGenerator-GitHub-Action@5
-        with:
-          reports: ${{ github.workspace }}/testresults/**/coverage.cobertura.xml
-          targetdir: ./coveragereport
-          reporttypes: MarkdownSummaryGithub
-          tag: ${{ needs.release-please.outputs.version }}
-
-      - if: always()
-        run: cat ./coveragereport/SummaryGithub.md >> $GITHUB_STEP_SUMMARY
-
-      - uses: actions/upload-artifact@v7
-        with:
-          name: nuget-packages
-          path: ./packages/*.nupkg
+    uses: st0o0/github-workflows/.github/workflows/dotnet-build-nuget.yml@main
+    with:
+      version: ${{ needs.release-please.outputs.version }}
+      solution-file: Flickr.Net.slnx
 
   publish:
     needs: [release-please, build]
@@ -90,24 +37,20 @@ jobs:
       url: https://www.nuget.org/packages/Flickr.Net
     steps:
       - uses: actions/setup-dotnet@v6
-
       - uses: actions/download-artifact@v8
         with:
           name: nuget-packages
           path: ./packages
-
       - uses: NuGet/login@v1
         id: nuget-login
         with:
           user: ${{ secrets.NUGET_USER }}
-
       - name: Push to NuGet
         run: >-
           dotnet nuget push
           --api-key ${{ steps.nuget-login.outputs.NUGET_API_KEY }}
           --source https://api.nuget.org/v3/index.json
           --skip-duplicate ./packages/*.nupkg
-
       - name: Attach .nupkg to GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
