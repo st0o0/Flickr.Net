@@ -1,16 +1,12 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 using Flickr.Net.Internals.Attributes;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
 [FlickrJsonPropertyName("photo")]
+/// <summary>Represents a photo returned by a Flickr Panda.</summary>
 public record PandaPhoto : DeluxePhotoBase
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("ownername")]
-    public string OwnerName { get; set; }
+{    [JsonPropertyName("ownername")]
+    /// <summary>The display name of the owner.</summary>
+    public string? OwnerName { get; init; }
 }

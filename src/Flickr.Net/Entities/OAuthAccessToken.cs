@@ -1,4 +1,4 @@
-﻿using Flickr.Net.Internals;
+using Flickr.Net.Internals;
 
 namespace Flickr.Net.Entities;
 
@@ -10,27 +10,27 @@ public record OAuthAccessToken
     /// <summary>
     /// The access token string.
     /// </summary>
-    public string Token { get; set; }
+    public string? Token { get; init; }
 
     ///<summary>
     /// The access token secret.
     ///  </summary>
-    public string TokenSecret { get; set; }
+    public string? TokenSecret { get; init; }
 
     ///<summary>
     /// The user id of the authenticated user.
     ///</summary>
-    public string UserId { get; set; }
+    public string? UserId { get; init; }
 
     ///<summary>
     /// The username (screenname) of the authenticated user. ///
     ///</summary>
-    public string Username { get; set; }
+    public string? Username { get; init; }
 
     ///<summary>
     /// The full name of the authenticated user. ///
     /// </summary>
-    public string FullName { get; set; }
+    public string? FullName { get; init; }
 
     ///<summary>
     /// Parses a URL parameter encoded string and returns a new

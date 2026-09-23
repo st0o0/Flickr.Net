@@ -1,80 +1,50 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 using Flickr.Net.Enums;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
+/// <summary>Represents an activity event such as a comment, note, or fave.</summary>
 public record Event : FlickrEntityBase
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("type")]
-    public EventType Type { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("type")]
+    /// <summary>The type.</summary>
+    public EventType Type { get; init; }
     [JsonPropertyName("user")]
-    public string User { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The NSID of the user.</summary>
+    public string? User { get; init; }
     [JsonPropertyName("username")]
-    public string UserName { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The username.</summary>
+    public string? UserName { get; init; }
     [JsonPropertyName("dateadded")]
-    public DateTime AddedDate { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The date the item was added.</summary>
+    public DateTime AddedDate { get; init; }
     [JsonPropertyName("_content")]
-    public string Content { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The text content.</summary>
+    public string? Content { get; init; }
     [JsonPropertyName("commentid")]
-    public string CommentId { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The comment identifier.</summary>
+    public string? CommentId { get; init; }
     [JsonPropertyName("noteid")]
-    public string NoteId { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The note identifier.</summary>
+    public string? NoteId { get; init; }
     [JsonPropertyName("galleryid")]
-    public string GalleryId { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The gallery identifier.</summary>
+    public string? GalleryId { get; init; }
     [JsonPropertyName("iconserver")]
-    public string IconServer { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The icon server for buddy icon URL construction.</summary>
+    public string? IconServer { get; init; }
     [JsonPropertyName("iconfarm")]
-    public string IconFarm { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The icon farm for buddy icon URL construction.</summary>
+    public string? IconFarm { get; init; }
     [JsonPropertyName("realname")]
-    public string RealName { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The real name.</summary>
+    public string? RealName { get; init; }
     [JsonPropertyName("group_id")]
-    public string GroupId { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The group NSID.</summary>
+    public string? GroupId { get; init; }
     [JsonPropertyName("group_name")]
-    public string GroupName { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The group name.</summary>
+    public string? GroupName { get; init; }
     [JsonPropertyName("is_muted")]
-    public bool IsMuted { get; set; }
+    /// <summary>Whether the event is muted.</summary>
+    public bool IsMuted { get; init; }
 }

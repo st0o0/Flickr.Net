@@ -1,26 +1,18 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 using Flickr.Net.Internals.Attributes;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
 [FlickrJsonPropertyName("csvfiles")]
+/// <summary>Represents a downloadable CSV stats file from Flickr.</summary>
 public record CSVFile : FlickrEntityBase
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("href")]
-    public string Href { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("href")]
+    /// <summary>The download URL.</summary>
+    public string? Href { get; init; }
     [JsonPropertyName("type")]
-    public string Type { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The type.</summary>
+    public string? Type { get; init; }
     [JsonPropertyName("date")]
-    public DateOnly Date { get; set; }
+    /// <summary>The date.</summary>
+    public DateOnly Date { get; init; }
 }

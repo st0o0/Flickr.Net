@@ -1,61 +1,39 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 using Flickr.Net.Internals.Attributes;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
 [FlickrJsonPropertyName("collection")]
+/// <summary>Represents a collection of photosets organized by the user.</summary>
 public record Collection : FlickrEntityBase<Id>
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("title")]
-    public string Title { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("title")]
+    /// <summary>The title.</summary>
+    public string? Title { get; init; }
     [JsonPropertyName("description")]
-    public string Description { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The description.</summary>
+    public string? Description { get; init; }
     [JsonPropertyName("child_count")]
-    public int ChildCount { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The number of child collections or sets.</summary>
+    public int ChildCount { get; init; }
     [JsonPropertyName("datecreate")]
-    public DateTime CreateDate { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The creation date.</summary>
+    public DateTime CreateDate { get; init; }
     [JsonPropertyName("iconlarge")]
-    public string LargeIcon { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The URL of the large collection icon.</summary>
+    public string? LargeIcon { get; init; }
     [JsonPropertyName("iconsmall")]
-    public string SmallIcon { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The URL of the small collection icon.</summary>
+    public string? SmallIcon { get; init; }
     [JsonPropertyName("server")]
-    public string Server { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The server identifier used in URL construction.</summary>
+    public string? Server { get; init; }
     [JsonPropertyName("secret")]
-    public string Secret { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The photo secret used in URL construction.</summary>
+    public string? Secret { get; init; }
     [JsonPropertyName("iconphotos")]
-    public Photos IconPhotos { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The photos used for the collection icon mosaic.</summary>
+    public Photos? IconPhotos { get; init; }
     [JsonPropertyName("set")]
-    public List<CollectionSet> Sets { get; set; }
+    /// <summary>The photosets within this collection.</summary>
+    public List<CollectionSet> Sets { get; init; } = [];
 }

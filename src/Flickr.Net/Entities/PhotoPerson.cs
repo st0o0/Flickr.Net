@@ -12,123 +12,123 @@ public record PhotoPerson : FlickrEntityBase<NsId>, IBuddyIcon
 {
     /// <summary>Gets or sets the person's username.</summary>
     [JsonPropertyName("username")]
-    public string Username { get; set; }
+    public string? Username { get; init; }
 
     /// <summary>Gets or sets the date the person favorited the photo.</summary>
     [JsonPropertyName("favedate")]
-    public DateTime FaveDate { get; set; }
+    public DateTime FaveDate { get; init; }
 
     /// <summary>Gets or sets whether the person has a Pro account.</summary>
     [JsonPropertyName("ispro")]
-    public bool IsPro { get; set; }
+    public bool IsPro { get; init; }
 
     /// <summary>Gets or sets whether the person's account has been deleted.</summary>
     [JsonPropertyName("is_deleted")]
-    public bool IsDeleted { get; set; }
+    public bool IsDeleted { get; init; }
 
     /// <summary>Gets or sets the icon server for the person's buddy icon.</summary>
     [JsonPropertyName("iconserver")]
-    public string IconServer { get; set; }
+    public string? IconServer { get; init; }
 
     /// <summary>Gets or sets the icon farm for the person's buddy icon.</summary>
     [JsonPropertyName("iconfarm")]
-    public int IconFarm { get; set; }
+    public int IconFarm { get; init; }
 
     /// <summary>Gets or sets the person's custom URL path alias.</summary>
     [JsonPropertyName("path_alias")]
-    public string PathAlias { get; set; }
+    public string? PathAlias { get; init; }
 
     /// <summary>Gets or sets whether the person has access to stats.</summary>
     [JsonPropertyName("has_stats")]
-    public bool HasStats { get; set; }
+    public bool HasStats { get; init; }
 
     /// <summary>Gets or sets the person's Pro badge type.</summary>
     [JsonPropertyName("pro_badge")]
-    public string ProBadge { get; set; }
+    public string? ProBadge { get; init; }
 
     /// <summary>Gets or sets the account expiration date.</summary>
     [JsonPropertyName("expire")]
-    public string Expire { get; set; }
+    public string? Expire { get; init; }
 
     /// <summary>Gets or sets the person's gender.</summary>
     [JsonPropertyName("gender")]
-    public string Gender { get; set; }
+    public string? Gender { get; init; }
 
     /// <summary>Gets or sets whether the person is ignored by the calling user.</summary>
     [JsonPropertyName("ignored")]
-    public bool Ignored { get; set; }
+    public bool Ignored { get; init; }
 
     /// <summary>Gets or sets whether the person is a contact of the calling user.</summary>
     [JsonPropertyName("contact")]
-    public bool Contact { get; set; }
+    public bool Contact { get; init; }
 
     /// <summary>Gets or sets whether the person is a friend of the calling user.</summary>
     [JsonPropertyName("friend")]
-    public bool Friend { get; set; }
+    public bool Friend { get; init; }
 
     /// <summary>Gets or sets whether the person is family of the calling user.</summary>
     [JsonPropertyName("family")]
-    public bool Family { get; set; }
+    public bool Family { get; init; }
 
     /// <summary>Gets or sets whether the person considers the calling user a contact.</summary>
     [JsonPropertyName("revcontact")]
-    public bool Revcontact { get; set; }
+    public bool Revcontact { get; init; }
 
     /// <summary>Gets or sets whether the person considers the calling user a friend.</summary>
     [JsonPropertyName("revfriend")]
-    public bool Revfriend { get; set; }
+    public bool Revfriend { get; init; }
 
     /// <summary>Gets or sets whether the person considers the calling user family.</summary>
     [JsonPropertyName("revfamily")]
-    public bool Revfamily { get; set; }
+    public bool Revfamily { get; init; }
 
     /// <summary>Gets or sets the person's real name.</summary>
     [JsonPropertyName("realname")]
-    public string Realname { get; set; }
+    public string? Realname { get; init; }
 
     /// <summary>Gets or sets the person's location.</summary>
     [JsonPropertyName("location")]
-    public string Location { get; set; }
+    public string? Location { get; init; }
 
     /// <summary>Gets or sets the person's timezone information.</summary>
     [JsonPropertyName("timezone")]
-    public TimeZone Timezone { get; set; }
+    public TimeZone Timezone { get; init; }
 
     /// <summary>Gets or sets the person's profile description.</summary>
     [JsonPropertyName("description")]
-    public string Description { get; set; }
+    public string? Description { get; init; }
 
     /// <summary>Gets or sets the URL to the person's photo stream.</summary>
     [JsonPropertyName("photosurl")]
-    public string PhotosUrl { get; set; }
+    public string? PhotosUrl { get; init; }
 
     /// <summary>Gets or sets the URL to the person's profile page.</summary>
     [JsonPropertyName("profileurl")]
-    public string ProfileUrl { get; set; }
+    public string? ProfileUrl { get; init; }
 
     /// <summary>Gets or sets the person's mobile URL.</summary>
     [JsonPropertyName("mobileurl")]
-    public string MobileUrl { get; set; }
+    public string? MobileUrl { get; init; }
 
     /// <summary>Gets or sets aggregated photo date information.</summary>
     [JsonPropertyName("photos")]
-    public PhotoDateInfos PhotoDateInfos { get; set; }
+    public PhotoDateInfos PhotoDateInfos { get; init; }
 
     /// <summary>Gets or sets whether the person has an ad-free experience.</summary>
     [JsonPropertyName("has_adfree")]
-    public bool HasAdfree { get; set; }
+    public bool HasAdfree { get; init; }
 
     /// <summary>Gets or sets whether the person has free standard shipping.</summary>
     [JsonPropertyName("has_free_standard_shipping")]
-    public bool HasFreeStandardShipping { get; set; }
+    public bool HasFreeStandardShipping { get; init; }
 
     /// <summary>Gets or sets whether the person has free educational resources.</summary>
     [JsonPropertyName("has_free_educational_resources")]
-    public bool HasFreeEducationalResources { get; set; }
+    public bool HasFreeEducationalResources { get; init; }
 
     /// <summary>Gets or sets the SHA1 hash of the person's email address.</summary>
     [JsonPropertyName("mbox_sha1sum")]
-    public string MboxSha1sum { get; set; }
+    public string? MboxSha1sum { get; init; }
 }
 
 /// <summary>
@@ -138,19 +138,19 @@ public struct TimeZone
 {
     /// <summary>Gets or sets the timezone display label.</summary>
     [JsonPropertyName("label")]
-    public string Label { get; set; }
+    public string? Label { get; init; }
 
     /// <summary>Gets or sets the UTC offset string.</summary>
     [JsonPropertyName("offset")]
-    public string Offset { get; set; }
+    public string? Offset { get; init; }
 
     /// <summary>Gets or sets the IANA timezone identifier.</summary>
     [JsonPropertyName("timezone_id")]
-    public string TimezoneId { get; set; }
+    public string? TimezoneId { get; init; }
 
     /// <summary>Gets or sets the timezone numeric offset.</summary>
     [JsonPropertyName("timezone")]
-    public int Timezone { get; set; }
+    public int Timezone { get; init; }
 }
 
 /// <summary>
@@ -160,13 +160,13 @@ public struct PhotoDateInfos
 {
     /// <summary>Gets or sets the date the user's first photo was taken.</summary>
     [JsonPropertyName("firstdatetaken")]
-    public DateTime FirstDateTaken { get; set; }
+    public DateTime FirstDateTaken { get; init; }
 
     /// <summary>Gets or sets the date the user's first photo was uploaded.</summary>
     [JsonPropertyName("firstdate")]
-    public DateTime FirstDate { get; set; }
+    public DateTime FirstDate { get; init; }
 
     /// <summary>Gets or sets the total photo count.</summary>
     [JsonPropertyName("count")]
-    public int Count { get; set; }
+    public int Count { get; init; }
 }

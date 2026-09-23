@@ -1,25 +1,17 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Internals.Attributes;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
 [FlickrJsonPropertyName("error")]
+/// <summary>Represents an error response from the Flickr API.</summary>
 public record Error
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("code")]
-    public int Code { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("code")]
+    /// <summary>The error code.</summary>
+    public int Code { get; init; }
     [JsonPropertyName("message")]
-    public string Message { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The error message.</summary>
+    public string? Message { get; init; }
     [JsonPropertyName("_content")]
-    public string Content { get; set; }
+    /// <summary>The text content.</summary>
+    public string? Content { get; init; }
 }

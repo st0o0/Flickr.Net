@@ -1,21 +1,15 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 using Flickr.Net.Internals.Attributes;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
 [FlickrJsonPropertyName("cluster")]
+/// <summary>Represents a tag cluster — a group of related tags.</summary>
 public record Cluster : FlickrEntityBase
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("total")]
-    public int Total { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("total")]
+    /// <summary>The total count.</summary>
+    public int Total { get; init; }
     [JsonPropertyName("tag")]
-    public List<ClusterTag> Tags { get; set; }
+    /// <summary>The tags.</summary>
+    public List<ClusterTag> Tags { get; init; } = [];
 }

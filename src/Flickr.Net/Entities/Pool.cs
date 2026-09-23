@@ -1,41 +1,27 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 using Flickr.Net.Internals.Attributes;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
 [FlickrJsonPropertyName("pool")]
+/// <summary>Represents a group pool context for a photo.</summary>
 public record Pool : FlickrEntityBase<Id>
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("title")]
-    public string Title { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("title")]
+    /// <summary>The title.</summary>
+    public string? Title { get; init; }
     [JsonPropertyName("url")]
-    public string Url { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The URL.</summary>
+    public string? Url { get; init; }
     [JsonPropertyName("iconserver")]
-    public string IconServer { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The icon server for buddy icon URL construction.</summary>
+    public string? IconServer { get; init; }
     [JsonPropertyName("iconfarm")]
-    public int IconFarm { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The icon farm for buddy icon URL construction.</summary>
+    public int IconFarm { get; init; }
     [JsonPropertyName("members")]
-    public int Members { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The number of members.</summary>
+    public int Members { get; init; }
     [JsonPropertyName("pool_count")]
-    public int PoolCount { get; set; }
+    /// <summary>The number of photos in the pool.</summary>
+    public int PoolCount { get; init; }
 }

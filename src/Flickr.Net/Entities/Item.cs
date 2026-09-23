@@ -1,125 +1,76 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 using Flickr.Net.Enums;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
+/// <summary>Represents an item (photo or photoset) in a user's recent activity feed.</summary>
 public record Item : FlickrEntityBase<Id>, ISmallUrl, ISquareUrl, IBuddyIcon
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("title")]
-    public string Title { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("title")]
+    /// <summary>The title.</summary>
+    public string? Title { get; init; }
     [JsonPropertyName("activity")]
-    public Activity Activity { get; set; }
-
-    /// <summary>
-    /// </summary>
+    public Activity? Activity { get; init; }
     [JsonPropertyName("type")]
-    public ItemType Type { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The type.</summary>
+    public ItemType Type { get; init; }
     [JsonPropertyName("primary")]
-    public string Primary { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The primary photo identifier.</summary>
+    public string? Primary { get; init; }
     [JsonPropertyName("secret")]
-    public string Secret { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The photo secret used in URL construction.</summary>
+    public string? Secret { get; init; }
     [JsonPropertyName("server")]
-    public string Server { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The server identifier used in URL construction.</summary>
+    public string? Server { get; init; }
     [JsonPropertyName("farm")]
-    public int Farm { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The farm identifier used in URL construction.</summary>
+    public int Farm { get; init; }
     [JsonPropertyName("comments")]
-    public int Comments { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The comments.</summary>
+    public int Comments { get; init; }
     [JsonPropertyName("views")]
-    public int Views { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The number of views.</summary>
+    public int Views { get; init; }
     [JsonPropertyName("photos")]
-    public int Photos { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The number of photos.</summary>
+    public int Photos { get; init; }
     [JsonPropertyName("more")]
-    public int More { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The count of additional items not included in this response.</summary>
+    public int More { get; init; }
     [JsonPropertyName("notes")]
-    public int Notes { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The number of notes.</summary>
+    public int Notes { get; init; }
     [JsonPropertyName("faves")]
-    public int Favorites { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The number of favorites.</summary>
+    public int Favorites { get; init; }
     [JsonPropertyName("owner")]
-    public string OwnerId { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The NSID of the owner.</summary>
+    public string? OwnerId { get; init; }
     [JsonPropertyName("realname")]
-    public string RealName { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The real name.</summary>
+    public string? RealName { get; init; }
     [JsonPropertyName("ownername")]
-    public string OwnerName { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The display name of the owner.</summary>
+    public string? OwnerName { get; init; }
     [JsonPropertyName("iconserver")]
-    public string OwnerServer { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The icon server of the owner.</summary>
+    public string? OwnerServer { get; init; }
     [JsonPropertyName("iconfarm")]
-    public string OwnerFarm { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The icon farm of the owner.</summary>
+    public string? OwnerFarm { get; init; }
     [JsonPropertyName("notesnew")]
-    public string NewNotes { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The count of new notes since last check.</summary>
+    public string? NewNotes { get; init; }
     [JsonPropertyName("notesold")]
-    public string OldNotes { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The count of previously seen notes.</summary>
+    public string? OldNotes { get; init; }
     [JsonPropertyName("commentsnew")]
-    public string NewComments { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The count of new comments since last check.</summary>
+    public string? NewComments { get; init; }
     [JsonPropertyName("commentsold")]
-    public string OldComments { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The count of previously seen comments.</summary>
+    public string? OldComments { get; init; }
     [JsonPropertyName("media")]
-    public MediaType Media { get; set; }
+    /// <summary>The media type (photo or video).</summary>
+    public MediaType Media { get; init; }
 }

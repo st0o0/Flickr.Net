@@ -1,26 +1,18 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 using Flickr.Net.Internals.Attributes;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
 [FlickrJsonPropertyName("photo")]
+/// <summary>Represents a photo within a gallery.</summary>
 public record GalleryPhoto : UltraDeluxePhotoBase
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("is_primary")]
-    public bool IsPrimary { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("is_primary")]
+    /// <summary>Whether this is the primary photo.</summary>
+    public bool IsPrimary { get; init; }
     [JsonPropertyName("has_comment")]
-    public bool HasComments { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>Whether the photo has comments in this gallery.</summary>
+    public bool HasComments { get; init; }
     [JsonPropertyName("comment")]
-    public List<string> Comments { get; set; } = [];
+    /// <summary>The comments.</summary>
+    public List<string> Comments { get; init; } = [];
 }

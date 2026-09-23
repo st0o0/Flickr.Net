@@ -1,75 +1,45 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
+/// <summary>Represents a single EXIF/IPTC/XMP tag from a photo.</summary>
 public record Exif : FlickrEntityBase
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("tagspace")]
-    public string TagSpace { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("tagspace")]
+    /// <summary>The EXIF tag space (e.g. ExifIFD, IFD0).</summary>
+    public string? TagSpace { get; init; }
     [JsonPropertyName("tagspaceid")]
-    public int TagSpaceId { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The numeric identifier of the tag space.</summary>
+    public int TagSpaceId { get; init; }
     [JsonPropertyName("tag")]
-    public string Tag { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The EXIF tag name.</summary>
+    public string? Tag { get; init; }
     [JsonPropertyName("label")]
-    public string Label { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The human-readable label for the EXIF tag.</summary>
+    public string? Label { get; init; }
     [JsonPropertyName("raw")]
-    public Raw Raw { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The raw EXIF value.</summary>
+    public Raw Raw { get; init; }
     [JsonPropertyName("clean")]
-    public Clean Clean { get; set; }
+    /// <summary>The cleaned/formatted EXIF value.</summary>
+    public Clean Clean { get; init; }
 }
-
-/// <summary>
-/// </summary>
+/// <summary>Wraps a raw EXIF tag value.</summary>
 public struct Raw
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("_content")]
-    public string Content { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("_content")]
+    /// <summary>The text content.</summary>
+    public string? Content { get; init; }
+    /// <summary>Converts to the underlying string value.</summary>
     public static implicit operator string(Raw username) => username.Content;
-
-    /// <summary>
-    /// </summary>
+    /// <summary>Converts from a string value.</summary>
     public static implicit operator Raw(string username) => new() { Content = username };
 }
-
-/// <summary>
-/// </summary>
+/// <summary>Wraps a cleaned/formatted EXIF tag value.</summary>
 public struct Clean
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("_content")]
-    public string Content { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("_content")]
+    /// <summary>The text content.</summary>
+    public string? Content { get; init; }
+    /// <summary>Converts to the underlying string value.</summary>
     public static implicit operator string(Clean username) => username.Content;
-
-    /// <summary>
-    /// </summary>
+    /// <summary>Converts from a string value.</summary>
     public static implicit operator Clean(string username) => new() { Content = username };
 }

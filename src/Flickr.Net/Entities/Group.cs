@@ -1,55 +1,35 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 using Flickr.Net.Enums;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
+/// <summary>Represents a Flickr group.</summary>
 public record Group : GroupBase, IBuddyIcon
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("admin")]
-    public bool Admin { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("admin")]
+    /// <summary>Whether the current user is an admin of this group.</summary>
+    public bool Admin { get; init; }
     [JsonPropertyName("photos")]
-    public int Photos { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The number of photos.</summary>
+    public int Photos { get; init; }
     [JsonPropertyName("privacy")]
-    public PoolPrivacy Privacy { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The privacy level.</summary>
+    public PoolPrivacy Privacy { get; init; }
     [JsonPropertyName("iconserver")]
-    public string IconServer { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The icon server for buddy icon URL construction.</summary>
+    public string? IconServer { get; init; }
     [JsonPropertyName("iconfarm")]
-    public int IconFarm { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The icon farm for buddy icon URL construction.</summary>
+    public int IconFarm { get; init; }
     [JsonPropertyName("members")]
-    public int Members { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The number of members.</summary>
+    public int Members { get; init; }
     [JsonPropertyName("pool_count")]
-    public int PoolCount { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The number of photos in the pool.</summary>
+    public int PoolCount { get; init; }
     [JsonPropertyName("topic_count")]
-    public int TopicCount { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The number of discussion topics.</summary>
+    public int TopicCount { get; init; }
     [JsonPropertyName("invitation_only")]
-    public bool InvitationOnly { get; set; }
+    /// <summary>Whether membership requires an invitation.</summary>
+    public bool InvitationOnly { get; init; }
 }

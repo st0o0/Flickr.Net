@@ -1,62 +1,46 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 using Flickr.Net.Enums;
 using Flickr.Net.Internals.Attributes;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
 [FlickrJsonPropertyName("group")]
+/// <summary>Detailed information about a Flickr group.</summary>
 public record GroupInfo : FlickrEntityBase<Id>, IBuddyIcon
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("iconserver")]
-    public string IconServer { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("iconserver")]
+    /// <summary>The icon server for buddy icon URL construction.</summary>
+    public string? IconServer { get; init; }
     [JsonPropertyName("iconfarm")]
-    public int IconFarm { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The icon farm for buddy icon URL construction.</summary>
+    public int IconFarm { get; init; }
     [JsonPropertyName("lang")]
-    public string Lang { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The group's primary language.</summary>
+    public string? Lang { get; init; }
     [JsonPropertyName("ispoolmoderated")]
-    public bool IsPoolModerated { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>Whether the group pool is moderated.</summary>
+    public bool IsPoolModerated { get; init; }
     [JsonPropertyName("name")]
-    public string Name { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The display name.</summary>
+    public string? Name { get; init; }
     [JsonPropertyName("description")]
-    public string Description { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The description.</summary>
+    public string? Description { get; init; }
     [JsonPropertyName("members")]
-    public int Members { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The number of members.</summary>
+    public int Members { get; init; }
     [JsonPropertyName("privacy")]
-    public PoolPrivacy Privacy { get; set; }
+    /// <summary>The privacy level.</summary>
+    public PoolPrivacy Privacy { get; init; }
+    /// <summary>The number of photos in the group pool.</summary>
+    [JsonPropertyName("pool_count")]
+    public int? PoolCount { get; init; }
 
-    /// <summary>
-    /// </summary>
+    /// <summary>The number of discussion topics in the group.</summary>
+    [JsonPropertyName("topic_count")]
+    public int? TopicCount { get; init; }
+
     [JsonPropertyName("throttle")]
-    public Throttle Throttle { get; set; }
-
-    /// <summary>
-    /// </summary>
+    public Throttle? Throttle { get; init; }
     [JsonPropertyName("restrictions")]
-    public Restrictions Restrictions { get; set; }
+    public Restrictions? Restrictions { get; init; }
 }

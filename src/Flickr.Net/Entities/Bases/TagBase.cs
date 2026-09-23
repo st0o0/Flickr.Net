@@ -1,13 +1,11 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 
 namespace Flickr.Net;
 
 /// <inheritdoc/>
 public record TagBase : FlickrEntityBase
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("_content")]
-    public string Content { get; set; }
+{    [JsonPropertyName("_content")]
+    /// <summary>The text content.</summary>
+    public string? Content { get; init; }
 }

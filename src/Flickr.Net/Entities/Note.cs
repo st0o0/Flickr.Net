@@ -1,44 +1,28 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
+/// <summary>Represents a note (annotation) on a photo.</summary>
 public record Note : FlickrEntityBase<Id>
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("author")]
-    public string Author { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("author")]
+    /// <summary>The NSID of the author.</summary>
+    public string? Author { get; init; }
     [JsonPropertyName("authorname")]
-    public string Authorname { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The display name of the author.</summary>
+    public string? Authorname { get; init; }
     [JsonPropertyName("x")]
-    public int X { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The X coordinate.</summary>
+    public int X { get; init; }
     [JsonPropertyName("y")]
-    public int Y { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The Y coordinate.</summary>
+    public int Y { get; init; }
     [JsonPropertyName("w")]
-    public int W { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The width.</summary>
+    public int W { get; init; }
     [JsonPropertyName("h")]
-    public int H { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The height.</summary>
+    public int H { get; init; }
     [JsonPropertyName("_content")]
-    public string Content { get; set; }
+    /// <summary>The text content.</summary>
+    public string? Content { get; init; }
 }

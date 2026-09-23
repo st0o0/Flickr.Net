@@ -1,55 +1,39 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Flickr.Net.Bases;
 
 /// <inheritdoc/>
 public abstract record PhotoBase : FlickrEntityBase<Id>
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("secret")]
-    public string Secret { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("secret")]
+    /// <summary>The photo secret used in URL construction.</summary>
+    public string? Secret { get; init; }
     [JsonPropertyName("server")]
-    public string Server { get; set; }
+    /// <summary>The server identifier used in URL construction.</summary>
+    public string? Server { get; init; }
 }
 
 /// <inheritdoc/>
 public abstract record DeluxePhotoBase : PhotoBase
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("owner")]
-    public string Owner { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("owner")]
+    /// <summary>The NSID of the owner.</summary>
+    public string? Owner { get; init; }
     [JsonPropertyName("farm")]
-    public string Farm { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The farm identifier used in URL construction.</summary>
+    public string? Farm { get; init; }
     [JsonPropertyName("title")]
-    public string Title { get; set; }
+    /// <summary>The title.</summary>
+    public string? Title { get; init; }
 }
 
 /// <inheritdoc/>
 public abstract record UltraDeluxePhotoBase : DeluxePhotoBase
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("ispublic")]
-    public bool IsPublic { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("ispublic")]
+    /// <summary>Whether the content is publicly visible.</summary>
+    public bool IsPublic { get; init; }
     [JsonPropertyName("isfriend")]
-    public bool IsFriend { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>Whether the content is visible to friends.</summary>
+    public bool IsFriend { get; init; }
     [JsonPropertyName("isfamily")]
-    public bool IsFamily { get; set; }
+    /// <summary>Whether the content is visible to family.</summary>
+    public bool IsFamily { get; init; }
 }

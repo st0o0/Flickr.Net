@@ -1,29 +1,19 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
+/// <summary>Represents bandwidth and storage usage statistics.</summary>
 public record Usage : FlickrEntityBase
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("candownload")]
-    public bool CanDownload { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("candownload")]
+    /// <summary>Whether the photo can be downloaded.</summary>
+    public bool CanDownload { get; init; }
     [JsonPropertyName("canblog")]
-    public bool CanBlog { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>Whether the photo can be blogged.</summary>
+    public bool CanBlog { get; init; }
     [JsonPropertyName("canprint")]
-    public bool CanPrint { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>Whether the photo can be printed.</summary>
+    public bool CanPrint { get; init; }
     [JsonPropertyName("canshare")]
-    public bool CanShare { get; set; }
+    /// <summary>Whether the photo can be shared.</summary>
+    public bool CanShare { get; init; }
 }

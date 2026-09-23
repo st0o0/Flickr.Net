@@ -1,56 +1,36 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 using Flickr.Net.Internals.Attributes;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
 [FlickrJsonPropertyName("person")]
+/// <summary>Represents a person tagged in a photo (people in photos).</summary>
 public record PeoplePerson : FlickrEntityBase<NsId>
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("username")]
-    public string Username { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("username")]
+    /// <summary>The username.</summary>
+    public string? Username { get; init; }
     [JsonPropertyName("iconserver")]
-    public string Iconserver { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The icon server for buddy icon URL construction.</summary>
+    public string? IconServer { get; init; }
     [JsonPropertyName("iconfarm")]
-    public string Iconfarm { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The icon farm for buddy icon URL construction.</summary>
+    public string? IconFarm { get; init; }
     [JsonPropertyName("realname")]
-    public string Realname { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The real name.</summary>
+    public string? Realname { get; init; }
     [JsonPropertyName("added_by")]
-    public string AddedBy { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The NSID of the user who added this person tag.</summary>
+    public string? AddedBy { get; init; }
     [JsonPropertyName("x")]
-    public string X { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The X coordinate.</summary>
+    public string? X { get; init; }
     [JsonPropertyName("y")]
-    public string Y { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The Y coordinate.</summary>
+    public string? Y { get; init; }
     [JsonPropertyName("w")]
-    public string W { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The width.</summary>
+    public string? W { get; init; }
     [JsonPropertyName("h")]
-    public string H { get; set; }
+    /// <summary>The height.</summary>
+    public string? H { get; init; }
 }

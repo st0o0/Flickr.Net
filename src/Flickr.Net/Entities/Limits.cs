@@ -1,49 +1,29 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
+/// <summary>Represents upload limits for a user's account.</summary>
 public record Limits : FlickrEntityBase<NsId>
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("photos")]
-    public PhotoLimits Photos { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("photos")]
+    public PhotoLimits? Photos { get; init; }
     [JsonPropertyName("videos")]
-    public VideoLimits Videos { get; set; }
+    public VideoLimits? Videos { get; init; }
 }
-
-/// <summary>
-/// </summary>
+/// <summary>Photo-specific upload and display limits.</summary>
 public record PhotoLimits
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("maxdisplaypx")]
-    public int Maxdisplaypx { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("maxdisplaypx")]
+    /// <summary>The maximum display size in pixels.</summary>
+    public int Maxdisplaypx { get; init; }
     [JsonPropertyName("maxupload")]
-    public int Maxupload { get; set; }
+    /// <summary>The maximum upload file size in bytes.</summary>
+    public int Maxupload { get; init; }
 }
-
-/// <summary>
-/// </summary>
+/// <summary>Video-specific upload and duration limits.</summary>
 public record VideoLimits
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("maxduration")]
-    public int Maxduration { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("maxduration")]
+    /// <summary>The maximum video duration in seconds.</summary>
+    public int Maxduration { get; init; }
     [JsonPropertyName("maxupload")]
-    public int Maxupload { get; set; }
+    /// <summary>The maximum upload file size in bytes.</summary>
+    public int Maxupload { get; init; }
 }

@@ -1,24 +1,16 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
+/// <summary>Represents a camera model within a brand.</summary>
 public record Camera : FlickrEntityBase<Id>
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("name")]
-    public string Name { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("name")]
+    /// <summary>The display name.</summary>
+    public string? Name { get; init; }
     [JsonPropertyName("details")]
-    public Details Details { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The technical specifications.</summary>
+    public Details? Details { get; init; }
     [JsonPropertyName("images")]
-    public Image Image { get; set; }
+    /// <summary>The product images for this camera.</summary>
+    public Image? Image { get; init; }
 }

@@ -1,74 +1,34 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 using Flickr.Net.Internals.Attributes;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
 [FlickrJsonPropertyName("stats")]
+/// <summary>Represents total view counts across a user's content.</summary>
 public record Views : FlickrEntityBase
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("total")]
-    public TotalViews Total { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("total")]
+    public TotalViews? Total { get; init; }
     [JsonPropertyName("photos")]
-    public PhotoViews Photos { get; set; }
-
-    /// <summary>
-    /// </summary>
+    public PhotoViews? Photos { get; init; }
     [JsonPropertyName("photostream")]
-    public PhotostreamViews Photostream { get; set; }
-
-    /// <summary>
-    /// </summary>
+    public PhotostreamViews Photostream { get; init; }
     [JsonPropertyName("sets")]
-    public SetViews Sets { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The photosets within this collection.</summary>
+    public SetViews Sets { get; init; }
     [JsonPropertyName("collections")]
-    public CollectionViews Collections { get; set; }
+    public CollectionViews Collections { get; init; }
 }
-
-/// <summary>
-/// </summary>
 public record CollectionViews : ViewBase;
-
-/// <summary>
-/// </summary>
 public record PhotoViews : ViewBase;
-
-/// <summary>
-/// </summary>
 public record PhotostreamViews : ViewBase;
-
-/// <summary>
-/// </summary>
 public record SetViews : ViewBase;
-
-/// <summary>
-/// </summary>
 public record TotalViews : ViewBase;
-
-/// <summary>
-/// </summary>
 public record ViewBase
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("views")]
-    public int Views { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("views")]
+    /// <summary>The number of views.</summary>
+    public int Views { get; init; }
+    /// <summary>Converts from a string value.</summary>
     public static implicit operator ViewBase(int value) => new() { Views = value };
-
-    /// <summary>
-    /// </summary>
+    /// <summary>Converts from a string value.</summary>
     public static implicit operator int(ViewBase value) => value.Views;
 }

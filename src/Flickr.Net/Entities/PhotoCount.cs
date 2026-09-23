@@ -1,24 +1,16 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
+/// <summary>Represents a count of photos within a date range.</summary>
 public record PhotoCount : FlickrEntityBase
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("count")]
-    public int Count { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("count")]
+    /// <summary>The count.</summary>
+    public int Count { get; init; }
     [JsonPropertyName("fromdate")]
-    public DateTime FromDate { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The start date of the range.</summary>
+    public DateTime FromDate { get; init; }
     [JsonPropertyName("todate")]
-    public DateTime ToDate { get; set; }
+    /// <summary>The end date of the range.</summary>
+    public DateTime ToDate { get; init; }
 }

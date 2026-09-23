@@ -1,30 +1,20 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 using Flickr.Net.Enums;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
+/// <summary>Represents a member of a Flickr group.</summary>
 public record Member : FlickrEntityBase<NsId>, IBuddyIcon
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("username")]
-    public string UserName { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("username")]
+    /// <summary>The username.</summary>
+    public string? UserName { get; init; }
     [JsonPropertyName("iconserver")]
-    public string IconServer { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The icon server for buddy icon URL construction.</summary>
+    public string? IconServer { get; init; }
     [JsonPropertyName("iconfarm")]
-    public string IconFarm { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The icon farm for buddy icon URL construction.</summary>
+    public string? IconFarm { get; init; }
     [JsonPropertyName("membertype")]
-    public MemberType Type { get; set; }
+    /// <summary>The type.</summary>
+    public MemberType Type { get; init; }
 }

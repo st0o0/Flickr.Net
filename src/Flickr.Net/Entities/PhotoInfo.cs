@@ -13,103 +13,107 @@ public record PhotoInfo : PhotoBase, IBuddyIcon, IWebUrl, ISquareUrl, ILargeSqua
 {
     /// <summary>Gets or sets the server farm ID.</summary>
     [JsonPropertyName("farm")]
-    public int Farm { get; set; }
+    public int Farm { get; init; }
 
     /// <summary>Gets or sets the date the photo was uploaded.</summary>
     [JsonPropertyName("dateuploaded")]
-    public DateTime UploadedDate { get; set; }
+    public DateTime UploadedDate { get; init; }
 
     /// <summary>Gets or sets whether the photo is a favorite of the calling user.</summary>
     [JsonPropertyName("isfavorite")]
-    public bool IsFavorite { get; set; }
+    public bool IsFavorite { get; init; }
 
     /// <summary>Gets or sets the license type of the photo.</summary>
     [JsonPropertyName("license")]
-    public LicenseType License { get; set; }
+    public LicenseType License { get; init; }
 
     /// <summary>Gets or sets the safety level of the photo.</summary>
     [JsonPropertyName("safety_level")]
-    public SafetyLevel SafetyLevel { get; set; }
+    public SafetyLevel SafetyLevel { get; init; }
 
     /// <summary>Gets or sets the rotation angle in degrees.</summary>
     [JsonPropertyName("rotation")]
-    public int Rotation { get; set; }
+    public int Rotation { get; init; }
 
     /// <summary>Gets or sets the secret for accessing the original image.</summary>
     [JsonPropertyName("originalsecret")]
-    public string OriginalSecret { get; set; }
+    public string? OriginalSecret { get; init; }
 
     /// <summary>Gets or sets the file format of the original image.</summary>
     [JsonPropertyName("originalformat")]
-    public string OriginalFormat { get; set; }
+    public string? OriginalFormat { get; init; }
 
     /// <summary>Gets or sets the photo owner information.</summary>
     [JsonPropertyName("owner")]
-    public Owner Owner { get; set; }
+    public Owner? Owner { get; init; }
 
     /// <summary>Gets or sets the photo title.</summary>
     [JsonPropertyName("title")]
-    public Title Title { get; set; }
+    public Title Title { get; init; }
 
     /// <summary>Gets or sets the photo description.</summary>
     [JsonPropertyName("description")]
-    public Description Description { get; set; }
+    public Description Description { get; init; }
 
     /// <summary>Gets or sets the photo visibility settings.</summary>
     [JsonPropertyName("visibility")]
-    public Visibility Visibility { get; set; }
+    public Visibility? Visibility { get; init; }
 
     /// <summary>Gets or sets the photo date information.</summary>
     [JsonPropertyName("dates")]
-    public Dates Dates { get; set; }
+    public Dates? Dates { get; init; }
 
     /// <summary>Gets or sets the total view count.</summary>
     [JsonPropertyName("views")]
-    public int Views { get; set; }
+    public int Views { get; init; }
 
     /// <summary>Gets or sets the editability permissions for the calling user.</summary>
     [JsonPropertyName("editability")]
-    public Editability Editability { get; set; }
+    public Editability? Editability { get; init; }
 
     /// <summary>Gets or sets the public editability permissions.</summary>
     [JsonPropertyName("publiceditability")]
-    public PublicEditability PublicEditability { get; set; }
+    public PublicEditability? PublicEditability { get; init; }
 
     /// <summary>Gets or sets the usage restrictions for the photo.</summary>
     [JsonPropertyName("usage")]
-    public Usage Usage { get; set; }
+    public Usage? Usage { get; init; }
 
     /// <summary>Gets or sets the comment count.</summary>
     [JsonPropertyName("comments")]
-    public Comments Comments { get; set; }
+    public Comments Comments { get; init; }
 
     /// <summary>Gets or sets the photo notes.</summary>
     [JsonPropertyName("notes")]
-    public Notes Notes { get; set; }
+    public Notes? Notes { get; init; }
 
     /// <summary>Gets or sets the people tagged in the photo.</summary>
     [JsonPropertyName("people")]
-    public People People { get; set; }
+    public People? People { get; init; }
 
     /// <summary>Gets or sets the photo tags.</summary>
     [JsonPropertyName("tags")]
-    public PhotoInfoTags Tags { get; set; }
+    public PhotoInfoTags? Tags { get; init; }
 
     /// <summary>Gets or sets the photo's geographic location.</summary>
     [JsonPropertyName("location")]
-    public Location Location { get; set; }
+    public Location Location { get; init; }
+
+    /// <summary>Permissions granted to the calling user for this photo (owner-only).</summary>
+    [JsonPropertyName("permissions")]
+    public PhotoPermissions? Permissions { get; init; }
 
     /// <summary>Gets or sets the geographic permissions.</summary>
     [JsonPropertyName("geoperms")]
-    public GeoPermissions Geoperms { get; set; }
+    public GeoPermissions? Geoperms { get; init; }
 
     /// <summary>Gets or sets the URLs associated with the photo.</summary>
     [JsonPropertyName("urls")]
-    public Urls Urls { get; set; }
+    public Urls? Urls { get; init; }
 
     /// <summary>Gets or sets the media type (photo or video).</summary>
     [JsonPropertyName("media")]
-    public MediaType Media { get; set; }
+    public MediaType Media { get; init; }
 }
 
 /// <summary>
@@ -119,7 +123,7 @@ public struct Title
 {
     /// <summary>Gets or sets the title string value.</summary>
     [JsonPropertyName("_content")]
-    public string Content { get; set; }
+    public string? Content { get; init; }
 
     /// <summary>Implicitly converts a <see cref="Title"/> to a string.</summary>
     public static implicit operator string(Title username) => username.Content;
@@ -135,7 +139,7 @@ public struct Comments
 {
     /// <summary>Gets or sets the comment count value.</summary>
     [JsonPropertyName("_content")]
-    public int Content { get; set; }
+    public int Content { get; init; }
 
     /// <summary>Implicitly converts a <see cref="Comments"/> to an int.</summary>
     public static implicit operator int(Comments username) => username.Content;
@@ -156,11 +160,11 @@ public record Editability
 {
     /// <summary>Gets or sets whether commenting is allowed.</summary>
     [JsonPropertyName("cancomment")]
-    public bool CanComment { get; set; }
+    public bool CanComment { get; init; }
 
     /// <summary>Gets or sets whether adding metadata is allowed.</summary>
     [JsonPropertyName("canaddmeta")]
-    public bool CanAddMeta { get; set; }
+    public bool CanAddMeta { get; init; }
 }
 
 /// <summary>
@@ -170,5 +174,19 @@ public record People
 {
     /// <summary>Gets or sets whether the photo has people tagged.</summary>
     [JsonPropertyName("haspeople")]
-    public bool HasPeople { get; set; }
+    public bool HasPeople { get; init; }
+}
+
+/// <summary>
+/// Represents the permissions for a photo returned to the owner.
+/// </summary>
+public record PhotoPermissions
+{
+    /// <summary>Who can comment on the photo (0=nobody, 1=friends/family, 2=contacts, 3=everybody).</summary>
+    [JsonPropertyName("permcomment")]
+    public int PermComment { get; init; }
+
+    /// <summary>Who can add metadata (0=nobody, 1=friends/family, 2=contacts, 3=everybody).</summary>
+    [JsonPropertyName("permaddmeta")]
+    public int PermAddMeta { get; init; }
 }

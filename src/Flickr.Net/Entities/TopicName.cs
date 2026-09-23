@@ -1,21 +1,14 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 using Flickr.Net.Internals.Attributes;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
 [FlickrJsonPropertyName("topic")]
+/// <summary>Wraps a topic name text value.</summary>
 public record TopicName : FlickrEntityBase
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("name")]
-    public string Name { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("name")]
+    /// <summary>The display name.</summary>
+    public string? Name { get; init; }
     [JsonPropertyName("display_name")]
-    public string DisplayName { get; set; }
+    public string? DisplayName { get; init; }
 }

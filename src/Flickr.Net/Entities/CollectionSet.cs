@@ -1,19 +1,13 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
+/// <summary>Represents a photoset reference within a collection.</summary>
 public record CollectionSet : FlickrEntityBase<Id>
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("title")]
-    public string Title { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("title")]
+    /// <summary>The title.</summary>
+    public string? Title { get; init; }
     [JsonPropertyName("description")]
-    public string Description { get; set; }
+    /// <summary>The description.</summary>
+    public string? Description { get; init; }
 }

@@ -1,46 +1,28 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 using Flickr.Net.Internals.Attributes;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
 [FlickrJsonPropertyName("method")]
+/// <summary>Detailed information about a Flickr API method.</summary>
 public record MethodInfo : FlickrEntityBase
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("name")]
-    public string Name { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("name")]
+    /// <summary>The display name.</summary>
+    public string? Name { get; init; }
     [JsonPropertyName("needslogin")]
-    public bool NeedsLogin { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>Whether this method requires authentication.</summary>
+    public bool NeedsLogin { get; init; }
     [JsonPropertyName("description")]
-    public string Description { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The description.</summary>
+    public string? Description { get; init; }
     [JsonPropertyName("response")]
-    public string Response { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The expected response format.</summary>
+    public string? Response { get; init; }
     [JsonPropertyName("explanation")]
-    public string Explanation { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The explanation text.</summary>
+    public string? Explanation { get; init; }
     [JsonPropertyName("arguments")]
-    public List<Argument> Arguments { get; set; }
-
-    /// <summary>
-    /// </summary>
+    public List<Argument>? Arguments { get; init; }
     [JsonPropertyName("errors")]
-    public List<Error> Errors { get; set; }
+    public List<Error>? Errors { get; init; }
 }

@@ -1,62 +1,39 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 using Flickr.Net.Enums;
 using Flickr.Net.Internals.Attributes;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
 [FlickrJsonPropertyName("prevphoto")]
+/// <summary>Represents the previous photo in a context navigation sequence.</summary>
 public record PrevPhoto : FlickrEntityBase<Id>
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("owner")]
-    public string Owner { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("owner")]
+    /// <summary>The NSID of the owner.</summary>
+    public string? Owner { get; init; }
     [JsonPropertyName("secret")]
-    public string Secret { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The photo secret used in URL construction.</summary>
+    public string? Secret { get; init; }
     [JsonPropertyName("server")]
-    public string Server { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The server identifier used in URL construction.</summary>
+    public string? Server { get; init; }
     [JsonPropertyName("farm")]
-    public int Farm { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The farm identifier used in URL construction.</summary>
+    public int Farm { get; init; }
     [JsonPropertyName("title")]
-    public string Title { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The title.</summary>
+    public string? Title { get; init; }
     [JsonPropertyName("url")]
-    public string Url { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The URL.</summary>
+    public string? Url { get; init; }
     [JsonPropertyName("thumb")]
-    public string Thumb { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The thumbnail URL.</summary>
+    public string? Thumb { get; init; }
     [JsonPropertyName("license")]
-    public LicenseType License { get; set; }
-
-    /// <summary>
-    /// </summary>
+    public LicenseType License { get; init; }
     [JsonPropertyName("media")]
-    public MediaType Media { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The media type (photo or video).</summary>
+    public MediaType Media { get; init; }
     [JsonPropertyName("is_faved")]
-    public bool IsFaved { get; set; }
+    /// <summary>Whether the current user has favorited this photo.</summary>
+    public bool IsFaved { get; init; }
 }

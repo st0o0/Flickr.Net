@@ -1,20 +1,14 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 using Flickr.Net.Enums;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
+/// <summary>Represents the permission settings for a photo.</summary>
 public record Permissions : FlickrEntityBase
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("permcomment")]
-    public PermissionComment PermComment { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("permcomment")]
+    /// <summary>The permission level for commenting.</summary>
+    public PermissionComment PermComment { get; init; }
     [JsonPropertyName("permaddmeta")]
-    public PermissionAddMeta PermAddMeta { get; set; }
+    /// <summary>The permission level for adding metadata.</summary>
+    public PermissionAddMeta PermAddMeta { get; init; }
 }

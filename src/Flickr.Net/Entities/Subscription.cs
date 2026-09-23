@@ -1,44 +1,25 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
+/// <summary>Represents a push notification subscription.</summary>
 public record Subscription : FlickrEntityBase
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("topic")]
-    public string Topic { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("topic")]
+    /// <summary>The topic.</summary>
+    public string? Topic { get; init; }
     [JsonPropertyName("callback")]
-    public string Callback { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The callback URL.</summary>
+    public string? Callback { get; init; }
     [JsonPropertyName("pending")]
-    public string Pending { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>Whether the subscription is pending.</summary>
+    public string? Pending { get; init; }
     [JsonPropertyName("date_create")]
-    public DateTime CreateDate { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The creation date.</summary>
+    public DateTime CreateDate { get; init; }
     [JsonPropertyName("lease_seconds")]
-    public string LeaseSeconds { get; set; }
-
-    /// <summary>
-    /// </summary>
+    public string? LeaseSeconds { get; init; }
     [JsonPropertyName("expiry")]
-    public DateTime Expiry { get; set; }
-
-    /// <summary>
-    /// </summary>
+    public DateTime Expiry { get; init; }
     [JsonPropertyName("verify_attempts")]
-    public int VerifyAttempts { get; set; }
+    public int VerifyAttempts { get; init; }
 }

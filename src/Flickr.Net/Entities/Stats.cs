@@ -1,26 +1,18 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 using Flickr.Net.Internals.Attributes;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
 [FlickrJsonPropertyName("stats")]
+/// <summary>Represents view statistics for a date.</summary>
 public record Stats : FlickrEntityBase
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("views")]
-    public int Views { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("views")]
+    /// <summary>The number of views.</summary>
+    public int Views { get; init; }
     [JsonPropertyName("comments")]
-    public int Comments { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The comments.</summary>
+    public int Comments { get; init; }
     [JsonPropertyName("favorites")]
-    public int Favorites { get; set; }
+    /// <summary>The number of favorites.</summary>
+    public int Favorites { get; init; }
 }

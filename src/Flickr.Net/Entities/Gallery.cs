@@ -1,111 +1,69 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 using Flickr.Net.Internals.Attributes;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
 [FlickrJsonPropertyName("gallery")]
+/// <summary>Represents a Flickr gallery — a curated collection of other users' photos.</summary>
 public record Gallery : FlickrEntityBase<Id>, IBuddyIcon, IThumbnailUrl, ISquareUrl, ISmallUrl, IMediumUrl
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("gallery_id")]
-    public string GalleryId { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("gallery_id")]
+    /// <summary>The gallery identifier.</summary>
+    public string? GalleryId { get; init; }
     [JsonPropertyName("url")]
-    public string Url { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The URL.</summary>
+    public string? Url { get; init; }
     [JsonPropertyName("owner")]
-    public string Owner { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The NSID of the owner.</summary>
+    public string? Owner { get; init; }
     [JsonPropertyName("username")]
-    public string Username { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The username.</summary>
+    public string? Username { get; init; }
     [JsonPropertyName("iconserver")]
-    public string IconServer { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The icon server for buddy icon URL construction.</summary>
+    public string? IconServer { get; init; }
     [JsonPropertyName("iconfarm")]
-    public int IconFarm { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The icon farm for buddy icon URL construction.</summary>
+    public int IconFarm { get; init; }
     [JsonPropertyName("primary_photo_id")]
-    public string PrimaryPhotoId { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The identifier of the primary/cover photo.</summary>
+    public string? PrimaryPhotoId { get; init; }
     [JsonPropertyName("date_create")]
-    public DateTime CreateDate { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The creation date.</summary>
+    public DateTime CreateDate { get; init; }
     [JsonPropertyName("date_update")]
-    public DateTime UpdateDate { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The last update date.</summary>
+    public DateTime UpdateDate { get; init; }
     [JsonPropertyName("count_photos")]
-    public int PhotosCount { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The number of photos.</summary>
+    public int PhotosCount { get; init; }
     [JsonPropertyName("count_videos")]
-    public int VideosCount { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The number of videos.</summary>
+    public int VideosCount { get; init; }
     [JsonPropertyName("count_total")]
-    public int TotalCount { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The total number of items.</summary>
+    public int TotalCount { get; init; }
     [JsonPropertyName("count_views")]
-    public int ViewsCount { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The number of views.</summary>
+    public int ViewsCount { get; init; }
     [JsonPropertyName("count_comments")]
-    public int CommentsCount { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The number of comments.</summary>
+    public int CommentsCount { get; init; }
     [JsonPropertyName("title")]
-    public Title Title { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The title.</summary>
+    public Title Title { get; init; }
     [JsonPropertyName("description")]
-    public Description Description { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The description.</summary>
+    public Description Description { get; init; }
     [JsonPropertyName("sort_group")]
-    public string SortGroup { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The sort group identifier.</summary>
+    public string? SortGroup { get; init; }
     [JsonPropertyName("primary_photo_server")]
-    public string PrimaryPhotoServer { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The server of the primary photo.</summary>
+    public string? PrimaryPhotoServer { get; init; }
     [JsonPropertyName("primary_photo_farm")]
-    public int PrimaryPhotoFarm { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The farm of the primary photo.</summary>
+    public int PrimaryPhotoFarm { get; init; }
     [JsonPropertyName("primary_photo_secret")]
-    public string PrimaryPhotoSecret { get; set; }
+    /// <summary>The secret of the primary photo.</summary>
+    public string? PrimaryPhotoSecret { get; init; }
 }

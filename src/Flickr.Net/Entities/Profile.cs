@@ -1,94 +1,42 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
+/// <summary>Represents a user's profile information.</summary>
 public record Profile : FlickrEntityBase<Id>
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("nsid")]
-    public string Nsid { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("nsid")]
+    public string? Nsid { get; init; }
     [JsonPropertyName("join_date")]
-    public DateTime JoinDate { get; set; }
-
-    /// <summary>
-    /// </summary>
+    public DateTime JoinDate { get; init; }
     [JsonPropertyName("occupation")]
-    public string Occupation { get; set; }
-
-    /// <summary>
-    /// </summary>
+    public string? Occupation { get; init; }
     [JsonPropertyName("hometown")]
-    public string Hometown { get; set; }
-
-    /// <summary>
-    /// </summary>
+    public string? Hometown { get; init; }
     [JsonPropertyName("showcase_set")]
-    public string ShowcaseSet { get; set; }
-
-    /// <summary>
-    /// </summary>
+    public string? ShowcaseSet { get; init; }
     [JsonPropertyName("showcase_set_title")]
-    public string ShowcaseSetTitle { get; set; }
-
-    /// <summary>
-    /// </summary>
+    public string? ShowcaseSetTitle { get; init; }
     [JsonPropertyName("first_name")]
-    public string FirstName { get; set; }
-
-    /// <summary>
-    /// </summary>
+    public string? FirstName { get; init; }
     [JsonPropertyName("last_name")]
-    public string LastName { get; set; }
-
-    /// <summary>
-    /// </summary>
+    public string? LastName { get; init; }
     [JsonPropertyName("email")]
-    public string Email { get; set; }
-
-    /// <summary>
-    /// </summary>
+    public string? Email { get; init; }
     [JsonPropertyName("profile_description")]
-    public string ProfileDescription { get; set; }
-
-    /// <summary>
-    /// </summary>
+    public string? ProfileDescription { get; init; }
     [JsonPropertyName("city")]
-    public string City { get; set; }
-
-    /// <summary>
-    /// </summary>
+    public string? City { get; init; }
     [JsonPropertyName("country")]
-    public string Country { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The country place information.</summary>
+    public string? Country { get; init; }
     [JsonPropertyName("facebook")]
-    public string Facebook { get; set; }
-
-    /// <summary>
-    /// </summary>
+    public string? Facebook { get; init; }
     [JsonPropertyName("twitter")]
-    public string Twitter { get; set; }
-
-    /// <summary>
-    /// </summary>
+    public string? Twitter { get; init; }
     [JsonPropertyName("tumblr")]
-    public string Tumblr { get; set; }
-
-    /// <summary>
-    /// </summary>
+    public string? Tumblr { get; init; }
     [JsonPropertyName("instagram")]
-    public string Instagram { get; set; }
-
-    /// <summary>
-    /// </summary>
+    public string? Instagram { get; init; }
     [JsonPropertyName("pinterest")]
-    public string Pinterest { get; set; }
+    public string? Pinterest { get; init; }
 }

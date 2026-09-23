@@ -1,14 +1,10 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
+/// <summary>Represents a Flickr Panda — a content discovery agent.</summary>
 public record Panda : FlickrEntityBase
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("_content")]
-    public string Content { get; set; }
+{    [JsonPropertyName("_content")]
+    /// <summary>The text content.</summary>
+    public string? Content { get; init; }
 }

@@ -1,21 +1,15 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 using Flickr.Net.Internals.Attributes;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
 [FlickrJsonPropertyName("domain")]
+/// <summary>Represents a referring domain in Flickr stats.</summary>
 public record Domain : FlickrEntityBase
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("name")]
-    public string Name { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("name")]
+    /// <summary>The display name.</summary>
+    public string? Name { get; init; }
     [JsonPropertyName("views")]
-    public int Views { get; set; }
+    /// <summary>The number of views.</summary>
+    public int Views { get; init; }
 }

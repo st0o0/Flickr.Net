@@ -1,20 +1,14 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 using Flickr.Net.Enums;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
+/// <summary>Represents a user's default geo permission preferences.</summary>
 public record GeoPerms : FlickrEntityBase<NsId>
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("geoperms")]
-    public GeoPermissionType GeoPermissions { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("geoperms")]
+    /// <summary>The default geo permission type.</summary>
+    public GeoPermissionType GeoPermissions { get; init; }
     [JsonPropertyName("importgeoexif")]
-    public bool ImportGeoExif { get; set; }
+    /// <summary>Whether to import geo data from EXIF tags.</summary>
+    public bool ImportGeoExif { get; init; }
 }

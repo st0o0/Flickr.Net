@@ -1,19 +1,13 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
+/// <summary>Represents camera product images in small and large sizes.</summary>
 public record Image : FlickrEntityBase
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("small")]
-    public string Small { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("small")]
+    /// <summary>The small image URL.</summary>
+    public string? Small { get; init; }
     [JsonPropertyName("large")]
-    public string Large { get; set; }
+    /// <summary>The large image URL.</summary>
+    public string? Large { get; init; }
 }

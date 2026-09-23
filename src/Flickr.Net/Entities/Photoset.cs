@@ -1,99 +1,61 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
+/// <summary>Represents a photoset (album) on Flickr.</summary>
 public record Photoset : FlickrEntityBase<Id>, IThumbnailUrl, ISquareUrl, ISmallUrl
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("owner")]
-    public string Owner { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("owner")]
+    /// <summary>The NSID of the owner.</summary>
+    public string? Owner { get; init; }
     [JsonPropertyName("username")]
-    public string Username { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The username.</summary>
+    public string? Username { get; init; }
     [JsonPropertyName("primary")]
-    public string Primary { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The primary photo identifier.</summary>
+    public string? Primary { get; init; }
     [JsonPropertyName("secret")]
-    public string Secret { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The photo secret used in URL construction.</summary>
+    public string? Secret { get; init; }
     [JsonPropertyName("server")]
-    public string Server { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The server identifier used in URL construction.</summary>
+    public string? Server { get; init; }
     [JsonPropertyName("farm")]
-    public int Farm { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The farm identifier used in URL construction.</summary>
+    public int Farm { get; init; }
     [JsonPropertyName("count_views")]
-    public int ViewsCount { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The number of views.</summary>
+    public int ViewsCount { get; init; }
     [JsonPropertyName("count_comments")]
-    public int CommentsCount { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The number of comments.</summary>
+    public int CommentsCount { get; init; }
     [JsonPropertyName("count_photos")]
-    public int PhotosCount { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The number of photos.</summary>
+    public int PhotosCount { get; init; }
     [JsonPropertyName("count_videos")]
-    public int VideosCount { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The number of videos.</summary>
+    public int VideosCount { get; init; }
     [JsonPropertyName("title")]
-    public Title Title { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The title.</summary>
+    public Title Title { get; init; }
     [JsonPropertyName("description")]
-    public Description Description { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The description.</summary>
+    public Description Description { get; init; }
     [JsonPropertyName("can_comment")]
-    public bool CanComment { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>Whether the current user can comment on this photoset.</summary>
+    public bool CanComment { get; init; }
     [JsonPropertyName("date_create")]
-    public DateTime CreateDate { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The creation date.</summary>
+    public DateTime CreateDate { get; init; }
     [JsonPropertyName("date_update")]
-    public DateTime UpdateDate { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The last update date.</summary>
+    public DateTime UpdateDate { get; init; }
     [JsonPropertyName("photos")]
-    public int Photos { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The number of photos.</summary>
+    public int Photos { get; init; }
     [JsonPropertyName("visibility_can_see_set")]
-    public bool VisibilityCanSeeSet { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>Whether the set is visible to the current user.</summary>
+    public bool VisibilityCanSeeSet { get; init; }
     [JsonPropertyName("needs_interstitial")]
-    public bool NeedsInterstitial { get; set; }
+    /// <summary>Whether an interstitial page is needed before viewing.</summary>
+    public bool NeedsInterstitial { get; init; }
 }

@@ -1,17 +1,13 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Flickr.Net.Bases;
 
 /// <inheritdoc/>
 public record GroupBase : FlickrEntityBase<NsId>
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("name")]
-    public string Name { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("name")]
+    /// <summary>The display name.</summary>
+    public string? Name { get; init; }
     [JsonPropertyName("eighteenplus")]
-    public bool EighteenPlus { get; set; }
+    /// <summary>Whether the group is restricted to 18+ content.</summary>
+    public bool EighteenPlus { get; init; }
 }

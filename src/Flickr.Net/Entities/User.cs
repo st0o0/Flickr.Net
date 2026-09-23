@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 using Flickr.Net.Internals;
 using Flickr.Net.Internals.Attributes;
@@ -15,12 +15,12 @@ public record User : FlickrEntityBase<NsId>
     /// The username of the found user.
     /// </summary>
     [JsonPropertyName("username")]
-    public string UserName { get; set; }
+    public string? UserName { get; init; }
 
     /// <summary>
     /// The full name of the user. Only returned by <see
     /// cref="IFlickrOAuth.GetAccessTokenAsync(OAuthRequestToken, string, CancellationToken)"/>.
     /// </summary>
     [JsonPropertyName("fullname")]
-    public string FullName { get; set; }
+    public string? FullName { get; init; }
 }

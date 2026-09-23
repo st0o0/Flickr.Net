@@ -1,26 +1,17 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 using Flickr.Net.Internals.Attributes;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
 [FlickrJsonPropertyName("photo")]
+/// <summary>Contains EXIF data for a specific photo.</summary>
 public record PhotoExif : PhotoBase
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("farm")]
-    public int Farm { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("farm")]
+    /// <summary>The farm identifier used in URL construction.</summary>
+    public int Farm { get; init; }
     [JsonPropertyName("camera")]
-    public string Camera { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The camera model used.</summary>
+    public string? Camera { get; init; }
     [JsonPropertyName("exif")]
-    public List<Exif> Exifs { get; set; }
+    public List<Exif>? Exifs { get; init; }
 }

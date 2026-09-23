@@ -1,20 +1,14 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 using Flickr.Net.Enums;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
+/// <summary>Represents a URL associated with a Flickr entity.</summary>
 public record Url : FlickrEntityBase
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("type")]
-    public UrlType Type { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("type")]
+    /// <summary>The type.</summary>
+    public UrlType Type { get; init; }
     [JsonPropertyName("_content")]
-    public string Content { get; set; }
+    /// <summary>The text content.</summary>
+    public string? Content { get; init; }
 }

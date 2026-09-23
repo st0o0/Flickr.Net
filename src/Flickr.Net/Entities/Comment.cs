@@ -1,61 +1,39 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 using Flickr.Net.Internals.Attributes;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
 [FlickrJsonPropertyName("comment")]
+/// <summary>Represents a comment on a photo.</summary>
 public record Comment : FlickrEntityBase<Id>, IBuddyIcon
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("author")]
-    public string Author { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("author")]
+    /// <summary>The NSID of the author.</summary>
+    public string? Author { get; init; }
     [JsonPropertyName("author_is_deleted")]
-    public bool AuthorIsDeleted { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>Whether the author's account has been deleted.</summary>
+    public bool AuthorIsDeleted { get; init; }
     [JsonPropertyName("authorname")]
-    public string Authorname { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The display name of the author.</summary>
+    public string? Authorname { get; init; }
     [JsonPropertyName("iconserver")]
-    public string IconServer { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The icon server for buddy icon URL construction.</summary>
+    public string? IconServer { get; init; }
     [JsonPropertyName("iconfarm")]
-    public int IconFarm { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The icon farm for buddy icon URL construction.</summary>
+    public int IconFarm { get; init; }
     [JsonPropertyName("datecreate")]
-    public DateTime CreateDate { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The creation date.</summary>
+    public DateTime CreateDate { get; init; }
     [JsonPropertyName("permalink")]
-    public string Permalink { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The permanent URL link.</summary>
+    public string? Permalink { get; init; }
     [JsonPropertyName("path_alias")]
-    public string PathAlias { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The URL-friendly path alias.</summary>
+    public string? PathAlias { get; init; }
     [JsonPropertyName("realname")]
-    public string Realname { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The real name.</summary>
+    public string? Realname { get; init; }
     [JsonPropertyName("_content")]
-    public string Content { get; set; }
+    /// <summary>The text content.</summary>
+    public string? Content { get; init; }
 }

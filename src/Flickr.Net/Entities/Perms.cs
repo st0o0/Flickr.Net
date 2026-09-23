@@ -1,40 +1,26 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 using Flickr.Net.Enums;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
+/// <summary>Represents the OAuth permission level granted to an application.</summary>
 public record Perms : FlickrEntityBase<Id>
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("ispublic")]
-    public bool IsPublic { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("ispublic")]
+    /// <summary>Whether the content is publicly visible.</summary>
+    public bool IsPublic { get; init; }
     [JsonPropertyName("isfriend")]
-    public bool IsFriend { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>Whether the content is visible to friends.</summary>
+    public bool IsFriend { get; init; }
     [JsonPropertyName("isfamily")]
-    public bool IsFamily { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>Whether the content is visible to family.</summary>
+    public bool IsFamily { get; init; }
     [JsonPropertyName("permcomment")]
-    public PermissionComment PermComment { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The permission level for commenting.</summary>
+    public PermissionComment PermComment { get; init; }
     [JsonPropertyName("permaddmeta")]
-    public PermissionAddMeta PermAddMeta { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The permission level for adding metadata.</summary>
+    public PermissionAddMeta PermAddMeta { get; init; }
     [JsonPropertyName("permprint")]
-    public int PermPrint { get; set; }
+    /// <summary>The permission level for printing.</summary>
+    public int PermPrint { get; init; }
 }

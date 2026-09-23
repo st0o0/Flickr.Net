@@ -1,44 +1,28 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
+/// <summary>Represents the owner of a photo with profile details.</summary>
 public record Owner : FlickrEntityBase<NsId>
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("username")]
-    public string Username { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("username")]
+    /// <summary>The username.</summary>
+    public string? Username { get; init; }
     [JsonPropertyName("realname")]
-    public string Realname { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The real name.</summary>
+    public string? Realname { get; init; }
     [JsonPropertyName("location")]
-    public string Location { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The user's location.</summary>
+    public string? Location { get; init; }
     [JsonPropertyName("iconserver")]
-    public string IconServer { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The icon server for buddy icon URL construction.</summary>
+    public string? IconServer { get; init; }
     [JsonPropertyName("iconfarm")]
-    public int IconFarm { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The icon farm for buddy icon URL construction.</summary>
+    public int IconFarm { get; init; }
     [JsonPropertyName("path_alias")]
-    public string PathAlias { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The URL-friendly path alias.</summary>
+    public string? PathAlias { get; init; }
     [JsonPropertyName("gift")]
-    public Gift Gift { get; set; }
+    /// <summary>The gift eligibility information.</summary>
+    public Gift? Gift { get; init; }
 }

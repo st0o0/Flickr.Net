@@ -10,99 +10,123 @@ public record Person : FlickrEntityBase<Id>, IBuddyIcon
 {
     /// <summary>Gets or sets the user's NSID.</summary>
     [JsonPropertyName("nsid")]
-    public string Nsid { get; set; }
+    public string? Nsid { get; init; }
 
     /// <summary>Gets or sets whether the user has a Pro account.</summary>
     [JsonPropertyName("ispro")]
-    public bool IsPro { get; set; }
+    public bool IsPro { get; init; }
 
     /// <summary>Gets or sets whether the user account has been deleted.</summary>
     [JsonPropertyName("is_deleted")]
-    public bool IsDeleted { get; set; }
+    public bool IsDeleted { get; init; }
 
     /// <summary>Gets or sets the icon server for the user's buddy icon.</summary>
     [JsonPropertyName("iconserver")]
-    public string IconServer { get; set; }
+    public string? IconServer { get; init; }
 
     /// <summary>Gets or sets the icon farm for the user's buddy icon.</summary>
     [JsonPropertyName("iconfarm")]
-    public int IconFarm { get; set; }
+    public int IconFarm { get; init; }
 
     /// <summary>Gets or sets the user's custom URL path alias.</summary>
     [JsonPropertyName("path_alias")]
-    public object PathAlias { get; set; }
+    public string? PathAlias { get; init; }
+
+    /// <summary>Whether the authenticated user has added this person as a contact.</summary>
+    [JsonPropertyName("contact")]
+    public bool? Contact { get; init; }
+
+    /// <summary>Whether the authenticated user has marked this person as a friend.</summary>
+    [JsonPropertyName("friend")]
+    public bool? Friend { get; init; }
+
+    /// <summary>Whether the authenticated user has marked this person as family.</summary>
+    [JsonPropertyName("family")]
+    public bool? Family { get; init; }
+
+    /// <summary>Whether this person has added the authenticated user as a contact.</summary>
+    [JsonPropertyName("revcontact")]
+    public bool? RevContact { get; init; }
+
+    /// <summary>Whether this person has marked the authenticated user as a friend.</summary>
+    [JsonPropertyName("revfriend")]
+    public bool? RevFriend { get; init; }
+
+    /// <summary>Whether this person has marked the authenticated user as a family member.</summary>
+    [JsonPropertyName("revfamily")]
+    public bool? RevFamily { get; init; }
 
     /// <summary>Gets or sets whether the user has access to stats.</summary>
     [JsonPropertyName("has_stats")]
-    public bool HasStats { get; set; }
+    public bool HasStats { get; init; }
 
     /// <summary>Gets or sets the user's username.</summary>
     [JsonPropertyName("username")]
-    public Username Username { get; set; }
+    public Username Username { get; init; }
 
     /// <summary>Gets or sets the user's real name.</summary>
     [JsonPropertyName("realname")]
-    public Realname Realname { get; set; }
+    public Realname Realname { get; init; }
 
     /// <summary>Gets or sets the SHA1 hash of the user's email address.</summary>
     [JsonPropertyName("mbox_sha1sum")]
-    public MboxSha1sum MboxSha1sum { get; set; }
+    public MboxSha1sum MboxSha1sum { get; init; }
 
     /// <summary>Gets or sets the user's location.</summary>
     [JsonPropertyName("location")]
-    public Location Location { get; set; }
+    public Location? Location { get; init; }
 
     /// <summary>Gets or sets the user's profile description.</summary>
     [JsonPropertyName("description")]
-    public Description Description { get; set; }
+    public Description Description { get; init; }
 
     /// <summary>Gets or sets the URL to the user's photo stream.</summary>
     [JsonPropertyName("photosurl")]
-    public PhotosUrl PhotoUrl { get; set; }
+    public PhotosUrl PhotoUrl { get; init; }
 
     /// <summary>Gets or sets the URL to the user's profile page.</summary>
     [JsonPropertyName("profileurl")]
-    public ProfileUrl ProfileUrl { get; set; }
+    public ProfileUrl ProfileUrl { get; init; }
 
     /// <summary>Gets or sets the user's mobile URL.</summary>
     [JsonPropertyName("mobileurl")]
-    public MobileUrl Mobileurl { get; set; }
+    public MobileUrl Mobileurl { get; init; }
 
     /// <summary>Gets or sets aggregated photo information for the user.</summary>
     [JsonPropertyName("photos")]
-    public PhotoInfos PhotoInfos { get; set; }
+    public PhotoInfos PhotoInfos { get; init; }
 
     /// <summary>Gets or sets the number of photos the user has uploaded.</summary>
     [JsonPropertyName("upload_count")]
-    public int UploadCount { get; set; }
+    public int UploadCount { get; init; }
 
     /// <summary>Gets or sets the user's upload limit.</summary>
     [JsonPropertyName("upload_limit")]
-    public int UploadLimit { get; set; }
+    public int UploadLimit { get; init; }
 
     /// <summary>Gets or sets the status of the user's upload limit.</summary>
     [JsonPropertyName("upload_limit_status")]
-    public string UploadLimitStatus { get; set; }
+    public string? UploadLimitStatus { get; init; }
 
     /// <summary>Gets or sets whether the user is a Cognito user.</summary>
     [JsonPropertyName("is_cognito_user")]
-    public bool IsCognitoUser { get; set; }
+    public bool IsCognitoUser { get; init; }
 
     /// <summary>Gets or sets the count of the user's all-rights-reserved photos.</summary>
     [JsonPropertyName("all_rights_reserved_photos_count")]
-    public int AllRightsReservedPhotosCount { get; set; }
+    public int AllRightsReservedPhotosCount { get; init; }
 
     /// <summary>Gets or sets whether the user has an ad-free experience.</summary>
     [JsonPropertyName("has_adfree")]
-    public bool HasAdfree { get; set; }
+    public bool HasAdfree { get; init; }
 
     /// <summary>Gets or sets whether the user has free standard shipping.</summary>
     [JsonPropertyName("has_free_standard_shipping")]
-    public bool HasFreeStandardShipping { get; set; }
+    public bool HasFreeStandardShipping { get; init; }
 
     /// <summary>Gets or sets whether the user has free educational resources.</summary>
     [JsonPropertyName("has_free_educational_resources")]
-    public bool HasFreeEducationalResources { get; set; }
+    public bool HasFreeEducationalResources { get; init; }
 }
 
 /// <summary>
@@ -112,19 +136,19 @@ public struct PhotoInfos
 {
     /// <summary>Gets or sets the date the user's first photo was taken.</summary>
     [JsonPropertyName("firstdatetaken")]
-    public FirstDateTaken Firstdatetaken { get; set; }
+    public FirstDateTaken Firstdatetaken { get; init; }
 
     /// <summary>Gets or sets the date the user's first photo was uploaded.</summary>
     [JsonPropertyName("firstdate")]
-    public FirstDate Firstdate { get; set; }
+    public FirstDate Firstdate { get; init; }
 
     /// <summary>Gets or sets the total photo count.</summary>
     [JsonPropertyName("count")]
-    public Count Count { get; set; }
+    public Count Count { get; init; }
 
     /// <summary>Gets or sets the total view count.</summary>
     [JsonPropertyName("views")]
-    public PhotoInfoViews Views { get; set; }
+    public PhotoInfoViews Views { get; init; }
 }
 
 /// <summary>
@@ -134,7 +158,7 @@ public struct Username
 {
     /// <summary>Gets or sets the username string value.</summary>
     [JsonPropertyName("_content")]
-    public string Content { get; set; }
+    public string? Content { get; init; }
 
     /// <summary>Implicitly converts a <see cref="Username"/> to a string.</summary>
     public static implicit operator string(Username username) => username.Content;
@@ -150,7 +174,7 @@ public struct PhotoInfoViews
 {
     /// <summary>Gets or sets the view count string value.</summary>
     [JsonPropertyName("_content")]
-    public string Content { get; set; }
+    public string? Content { get; init; }
 
     /// <summary>Implicitly converts a <see cref="PhotoInfoViews"/> to a string.</summary>
     public static implicit operator string(PhotoInfoViews username) => username.Content;
@@ -166,7 +190,7 @@ public struct Realname
 {
     /// <summary>Gets or sets the real name string value.</summary>
     [JsonPropertyName("_content")]
-    public string Content { get; set; }
+    public string? Content { get; init; }
 
     /// <summary>Implicitly converts a <see cref="Realname"/> to a string.</summary>
     public static implicit operator string(Realname username) => username.Content;
@@ -182,7 +206,7 @@ public struct PhotosUrl
 {
     /// <summary>Gets or sets the URL string value.</summary>
     [JsonPropertyName("_content")]
-    public string Content { get; set; }
+    public string? Content { get; init; }
 
     /// <summary>Implicitly converts a <see cref="PhotosUrl"/> to a string.</summary>
     public static implicit operator string(PhotosUrl username) => username.Content;
@@ -198,7 +222,7 @@ public struct ProfileUrl
 {
     /// <summary>Gets or sets the URL string value.</summary>
     [JsonPropertyName("_content")]
-    public string Content { get; set; }
+    public string? Content { get; init; }
 
     /// <summary>Implicitly converts a <see cref="ProfileUrl"/> to a string.</summary>
     public static implicit operator string(ProfileUrl username) => username.Content;
@@ -214,7 +238,7 @@ public struct Count
 {
     /// <summary>Gets or sets the integer count value.</summary>
     [JsonPropertyName("_content")]
-    public int Content { get; set; }
+    public int Content { get; init; }
 
     /// <summary>Implicitly converts a <see cref="Count"/> to an int.</summary>
     public static implicit operator int(Count username) => username.Content;
@@ -230,7 +254,7 @@ public struct Description
 {
     /// <summary>Gets or sets the description string value.</summary>
     [JsonPropertyName("_content")]
-    public string Content { get; set; }
+    public string? Content { get; init; }
 
     /// <summary>Implicitly converts a <see cref="Description"/> to a string.</summary>
     public static implicit operator string(Description username) => username.Content;
@@ -246,7 +270,7 @@ public struct FirstDate
 {
     /// <summary>Gets or sets the date string value.</summary>
     [JsonPropertyName("_content")]
-    public string Content { get; set; }
+    public string? Content { get; init; }
 
     /// <summary>Implicitly converts a <see cref="FirstDate"/> to a string.</summary>
     public static implicit operator string(FirstDate username) => username.Content;
@@ -262,7 +286,7 @@ public struct FirstDateTaken
 {
     /// <summary>Gets or sets the date string value.</summary>
     [JsonPropertyName("_content")]
-    public string Content { get; set; }
+    public string? Content { get; init; }
 
     /// <summary>Implicitly converts a <see cref="FirstDateTaken"/> to a string.</summary>
     public static implicit operator string(FirstDateTaken username) => username.Content;
@@ -278,7 +302,7 @@ public struct LocationInfo
 {
     /// <summary>Gets or sets the location string value.</summary>
     [JsonPropertyName("_content")]
-    public string Content { get; set; }
+    public string? Content { get; init; }
 
     /// <summary>Implicitly converts a <see cref="LocationInfo"/> to a string.</summary>
     public static implicit operator string(LocationInfo username) => username.Content;
@@ -294,7 +318,7 @@ public struct MboxSha1sum
 {
     /// <summary>Gets or sets the SHA1 hash string value.</summary>
     [JsonPropertyName("_content")]
-    public string Content { get; set; }
+    public string? Content { get; init; }
 
     /// <summary>Implicitly converts a <see cref="MboxSha1sum"/> to a string.</summary>
     public static implicit operator string(MboxSha1sum username) => username.Content;
@@ -310,7 +334,7 @@ public struct MobileUrl
 {
     /// <summary>Gets or sets the URL string value.</summary>
     [JsonPropertyName("_content")]
-    public string Content { get; set; }
+    public string? Content { get; init; }
 
     /// <summary>Implicitly converts a <see cref="MobileUrl"/> to a string.</summary>
     public static implicit operator string(MobileUrl username) => username.Content;

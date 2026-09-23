@@ -1,25 +1,17 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 using Flickr.Net.Enums;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
+/// <summary>Represents an asynchronous upload ticket.</summary>
 public record Ticket : FlickrEntityBase<Id>
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("complete")]
-    public StatusType Complete { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("complete")]
+    /// <summary>The completion status.</summary>
+    public StatusType Complete { get; init; }
     [JsonPropertyName("photoid")]
-    public string PhotoId { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The photo identifier.</summary>
+    public string? PhotoId { get; init; }
     [JsonPropertyName("invalid")]
-    public bool Invalid { get; set; }
+    /// <summary>Whether the ticket is invalid.</summary>
+    public bool Invalid { get; init; }
 }

@@ -1,4 +1,4 @@
-﻿namespace Flickr.Net.Internals;
+namespace Flickr.Net.Internals;
 
 /// <summary>
 /// Class containing details of the OAUth request token returned by Flickr.
@@ -8,12 +8,12 @@ public record OAuthRequestToken
     /// <summary>
     /// The request token string.
     /// </summary>
-    public string Token { get; set; }
+    public string? Token { get; init; }
 
     /// <summary>
     /// The request token secret.
     /// </summary>
-    public string TokenSecret { get; set; }
+    public string? TokenSecret { get; init; }
 
     /// <summary>
     /// Parses a URL parameter encoded string and returns a new <see cref="OAuthRequestToken"/>

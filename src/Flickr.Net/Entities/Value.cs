@@ -1,39 +1,21 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
+/// <summary>Represents a machine tag value.</summary>
 public record Value : FlickrEntityBase
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("usage")]
-    public string Usage { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("usage")]
+    public string? Usage { get; init; }
     [JsonPropertyName("namespace")]
-    public string Namespace { get; set; }
-
-    /// <summary>
-    /// </summary>
+    public string? Namespace { get; init; }
     [JsonPropertyName("predicate")]
-    public string Predicate { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The predicate name.</summary>
+    public string? Predicate { get; init; }
     [JsonPropertyName("first_added")]
-    public DateTime FirstAdded { get; set; }
-
-    /// <summary>
-    /// </summary>
+    public DateTime FirstAdded { get; init; }
     [JsonPropertyName("last_added")]
-    public DateTime LastAdded { get; set; }
-
-    /// <summary>
-    /// </summary>
+    public DateTime LastAdded { get; init; }
     [JsonPropertyName("_content")]
-    public string Content { get; set; }
+    /// <summary>The text content.</summary>
+    public string? Content { get; init; }
 }

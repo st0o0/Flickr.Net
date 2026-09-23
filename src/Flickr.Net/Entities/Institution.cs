@@ -1,24 +1,15 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
+/// <summary>Represents a Flickr Commons institution (library, museum, archive).</summary>
 public record Institution : FlickrEntityBase<NsId>
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("date_launch")]
-    public DateTime LaunchDate { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("date_launch")]
+    /// <summary>The launch date.</summary>
+    public DateTime LaunchDate { get; init; }
     [JsonPropertyName("name")]
-    public string Name { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The display name.</summary>
+    public string? Name { get; init; }
     [JsonPropertyName("urls")]
-    public Urls Urls { get; set; }
+    public Urls? Urls { get; init; }
 }

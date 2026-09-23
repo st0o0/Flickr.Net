@@ -1,121 +1,66 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 using Flickr.Net.Internals.Attributes;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
 [FlickrJsonPropertyName("user")]
+/// <summary>Represents a user's upload bandwidth and storage status.</summary>
 public record UploadStatus : FlickrEntityBase<Id>
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("ispro")]
-    public bool IsPro { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("ispro")]
+    /// <summary>Whether the user has a Pro account.</summary>
+    public bool IsPro { get; init; }
     [JsonPropertyName("username")]
-    public string Username { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The username.</summary>
+    public string? Username { get; init; }
     [JsonPropertyName("bandwidth")]
-    public BandwidthStatus Bandwidth { get; set; }
-
-    /// <summary>
-    /// </summary>
+    public BandwidthStatus? Bandwidth { get; init; }
     [JsonPropertyName("filesize")]
-    public FileSizeStatus Filesize { get; set; }
-
-    /// <summary>
-    /// </summary>
+    public FileSizeStatus? Filesize { get; init; }
     [JsonPropertyName("sets")]
-    public SetsStatus Sets { get; set; }
-
-    /// <summary>
-    /// </summary>
+    public SetsStatus? Sets { get; init; }
     [JsonPropertyName("videos")]
-    public VideoStatus Videos { get; set; }
+    public VideoStatus? Videos { get; init; }
 }
-
-/// <summary>
-/// </summary>
 public record VideoStatus
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("uploaded")]
-    public int Uploaded { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("uploaded")]
+    /// <summary>The count of uploads.</summary>
+    public int Uploaded { get; init; }
     [JsonPropertyName("remaining")]
-    public string Remaining { get; set; }
+    /// <summary>The remaining allowance.</summary>
+    public string? Remaining { get; init; }
 }
-
-/// <summary>
-/// </summary>
 public record SetsStatus
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("created")]
-    public int Created { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("created")]
+    public int Created { get; init; }
     [JsonPropertyName("remaining")]
-    public string Remaining { get; set; }
+    /// <summary>The remaining allowance.</summary>
+    public string? Remaining { get; init; }
 }
-
-/// <summary>
-/// </summary>
 public record FileSizeStatus
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("maxbytes")]
-    public long MaxBytes { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("maxbytes")]
+    /// <summary>The maximum size in bytes.</summary>
+    public long MaxBytes { get; init; }
     [JsonPropertyName("maxkb")]
-    public long MaxKb { get; set; }
+    /// <summary>The maximum size in kilobytes.</summary>
+    public long MaxKb { get; init; }
 }
-
-/// <summary>
-/// </summary>
 public record BandwidthStatus
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("maxbytes")]
-    public long MaxBytes { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("maxbytes")]
+    /// <summary>The maximum size in bytes.</summary>
+    public long MaxBytes { get; init; }
     [JsonPropertyName("maxkb")]
-    public long MaxKb { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The maximum size in kilobytes.</summary>
+    public long MaxKb { get; init; }
     [JsonPropertyName("usedbytes")]
-    public long UsedBytes { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The used bytes.</summary>
+    public long UsedBytes { get; init; }
     [JsonPropertyName("usedkb")]
-    public long UsedKb { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The used kilobytes.</summary>
+    public long UsedKb { get; init; }
     [JsonPropertyName("remainingbytes")]
-    public long RemainingBytes { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The remaining bytes.</summary>
+    public long RemainingBytes { get; init; }
     [JsonPropertyName("remainingkb")]
-    public long RemainingKb { get; set; }
+    /// <summary>The remaining kilobytes.</summary>
+    public long RemainingKb { get; init; }
 }

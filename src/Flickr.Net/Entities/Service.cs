@@ -1,14 +1,10 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
+/// <summary>Represents a blog service supported by Flickr.</summary>
 public record Service : FlickrEntityBase<Id>
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("_content")]
-    public string Content { get; set; }
+{    [JsonPropertyName("_content")]
+    /// <summary>The text content.</summary>
+    public string? Content { get; init; }
 }

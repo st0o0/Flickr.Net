@@ -1,54 +1,31 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
+/// <summary>Represents content restrictions for a Flickr group.</summary>
 public record Restrictions : FlickrEntityBase
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("photos_ok")]
-    public bool PhotosOk { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("photos_ok")]
+    /// <summary>Whether photos are allowed.</summary>
+    public bool PhotosOk { get; init; }
     [JsonPropertyName("videos_ok")]
-    public bool VideosOk { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>Whether videos are allowed.</summary>
+    public bool VideosOk { get; init; }
     [JsonPropertyName("images_ok")]
-    public bool ImagesOk { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>Whether images are allowed.</summary>
+    public bool ImagesOk { get; init; }
     [JsonPropertyName("screens_ok")]
-    public bool ScreensOk { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>Whether screenshots are allowed.</summary>
+    public bool ScreensOk { get; init; }
     [JsonPropertyName("art_ok")]
-    public bool ArtOk { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>Whether art/illustrations are allowed.</summary>
+    public bool ArtOk { get; init; }
     [JsonPropertyName("safe_ok")]
-    public bool SafeOk { get; set; }
-
-    /// <summary>
-    /// </summary>
+    public bool SafeOk { get; init; }
     [JsonPropertyName("moderate_ok")]
-    public bool ModerateOk { get; set; }
-
-    /// <summary>
-    /// </summary>
+    public bool ModerateOk { get; init; }
     [JsonPropertyName("restricted_ok")]
-    public bool RestrictedOk { get; set; }
-
-    /// <summary>
-    /// </summary>
+    public bool RestrictedOk { get; init; }
     [JsonPropertyName("has_geo")]
-    public bool HasGeo { get; set; }
+    /// <summary>Whether the content has geo data.</summary>
+    public bool HasGeo { get; init; }
 }

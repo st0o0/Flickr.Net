@@ -1,8 +1,6 @@
-﻿using Flickr.Net.Internals.Attributes;
+using Flickr.Net.Internals.Attributes;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
 [FlickrJsonPropertyName("tag")]
+/// <summary>Represents a tag.</summary>
 public record Tag : TagBase;

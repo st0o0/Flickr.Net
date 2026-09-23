@@ -1,20 +1,14 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Internals.Attributes;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
 [FlickrJsonPropertyName("gallery")]
+/// <summary>Extended gallery information including cover photos and state.</summary>
 public record GalleryInfo : Gallery
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("cover_photos")]
-    public CoverPhotos CoverPhotos { get; set; } = null;
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("cover_photos")]
+    /// <summary>The cover photos for the gallery.</summary>
+    public CoverPhotos? CoverPhotos { get; init; }
     [JsonPropertyName("current_state")]
-    public string CurrentState { get; set; } = null;
+    /// <summary>The current state of the gallery.</summary>
+    public string? CurrentState { get; init; } = null;
 }

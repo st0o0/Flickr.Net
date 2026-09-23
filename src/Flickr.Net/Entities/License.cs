@@ -1,24 +1,16 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
+/// <summary>Represents a photo license type available on Flickr.</summary>
 public record License : FlickrEntityBase
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("id")]
-    public int Id { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("id")]
+    /// <summary>The unique identifier.</summary>
+    public int Id { get; init; }
     [JsonPropertyName("name")]
-    public string Name { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The display name.</summary>
+    public string? Name { get; init; }
     [JsonPropertyName("url")]
-    public string Url { get; set; }
+    /// <summary>The URL.</summary>
+    public string? Url { get; init; }
 }

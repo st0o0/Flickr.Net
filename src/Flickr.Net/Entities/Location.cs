@@ -11,39 +11,39 @@ public record Location : FlickrEntityBase
 {
     /// <summary>Gets or sets the latitude coordinate.</summary>
     [JsonPropertyName("latitude")]
-    public double Latitude { get; set; }
+    public double Latitude { get; init; }
 
     /// <summary>Gets or sets the longitude coordinate.</summary>
     [JsonPropertyName("longitude")]
-    public double Longitude { get; set; }
+    public double Longitude { get; init; }
 
     /// <summary>Gets or sets the accuracy level of the location.</summary>
     [JsonPropertyName("accuracy")]
-    public GeoAccuracy Accuracy { get; set; }
+    public GeoAccuracy Accuracy { get; init; }
 
     /// <summary>Gets or sets the context of the location (indoors/outdoors).</summary>
     [JsonPropertyName("context")]
-    public GeoContext Context { get; set; }
+    public GeoContext Context { get; init; }
 
     /// <summary>Gets or sets the locality (city/town).</summary>
     [JsonPropertyName("locality")]
-    public Locality Locality { get; set; }
+    public Locality Locality { get; init; }
 
     /// <summary>Gets or sets the county.</summary>
     [JsonPropertyName("county")]
-    public County County { get; set; }
+    public County County { get; init; }
 
     /// <summary>Gets or sets the region (state/province).</summary>
     [JsonPropertyName("region")]
-    public Region Region { get; set; }
+    public Region Region { get; init; }
 
     /// <summary>Gets or sets the country.</summary>
     [JsonPropertyName("country")]
-    public Country Country { get; set; }
+    public Country Country { get; init; }
 
     /// <summary>Gets or sets the neighbourhood.</summary>
     [JsonPropertyName("neighbourhood")]
-    public Neighbourhood Neighbourhood { get; set; }
+    public Neighbourhood Neighbourhood { get; init; }
 }
 
 /// <summary>
@@ -53,7 +53,7 @@ public struct Neighbourhood
 {
     /// <summary>Gets or sets the neighbourhood name.</summary>
     [JsonPropertyName("_content")]
-    public string Content { get; set; }
+    public string? Content { get; init; }
 
     /// <summary>Implicitly converts a <see cref="Neighbourhood"/> to a string.</summary>
     public static implicit operator string(Neighbourhood username) => username.Content;
@@ -69,7 +69,7 @@ public struct Locality
 {
     /// <summary>Gets or sets the locality name.</summary>
     [JsonPropertyName("_content")]
-    public string Content { get; set; }
+    public string? Content { get; init; }
 
     /// <summary>Implicitly converts a <see cref="Locality"/> to a string.</summary>
     public static implicit operator string(Locality username) => username.Content;
@@ -85,7 +85,7 @@ public struct Country
 {
     /// <summary>Gets or sets the country name.</summary>
     [JsonPropertyName("_content")]
-    public string Content { get; set; }
+    public string? Content { get; init; }
 
     /// <summary>Implicitly converts a <see cref="Country"/> to a string.</summary>
     public static implicit operator string(Country username) => username.Content;
@@ -101,7 +101,7 @@ public struct County
 {
     /// <summary>Gets or sets the county name.</summary>
     [JsonPropertyName("_content")]
-    public string Content { get; set; }
+    public string? Content { get; init; }
 
     /// <summary>Implicitly converts a <see cref="County"/> to a string.</summary>
     public static implicit operator string(County username) => username.Content;
@@ -117,7 +117,7 @@ public struct Region
 {
     /// <summary>Gets or sets the region name.</summary>
     [JsonPropertyName("_content")]
-    public string Content { get; set; }
+    public string? Content { get; init; }
 
     /// <summary>Implicitly converts a <see cref="Region"/> to a string.</summary>
     public static implicit operator string(Region username) => username.Content;

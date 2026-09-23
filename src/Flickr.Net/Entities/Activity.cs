@@ -1,14 +1,10 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
+/// <summary>Represents activity (comments, notes, etc.) on a photo or photoset.</summary>
 public record Activity : FlickrEntityBase
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("event")]
-    public List<Event> Events { get; set; } = [];
+{    [JsonPropertyName("event")]
+    /// <summary>The list of activity events.</summary>
+    public List<Event> Events { get; init; } = [];
 }

@@ -1,4 +1,4 @@
-﻿using Flickr.Net.Internals.Attributes;
+using Flickr.Net.Internals.Attributes;
 
 namespace Flickr.Net.Bases;
 
@@ -7,7 +7,7 @@ public abstract record FlickrEntityBase<TIdentifier> : IFlickrEntity<TIdentifier
 {
     /// <inheritdoc/>
     [JsonPropertyGenericTypeName(0)]
-    public TIdentifier Id { get; set; }
+    public TIdentifier Id { get; init; } = default!;
 }
 
 /// <inheritdoc/>
@@ -15,13 +15,9 @@ public abstract record FlickrEntityBase : IFlickrEntity;
 
 /// <inheritdoc/>
 public interface IFlickrEntity<T> : IFlickrEntity where T : IIdentifierType
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyGenericTypeName(0)]
-    public T Id { get; set; }
+{    [JsonPropertyGenericTypeName(0)]
+    /// <summary>The unique identifier.</summary>
+    public T Id { get; init; }
 }
-
-/// <summary>
-/// </summary>
+/// <summary>Marker interface for all Flickr API entity types.</summary>
 public interface IFlickrEntity;

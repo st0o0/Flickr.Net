@@ -1,65 +1,39 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 using Flickr.Net.Enums;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
+/// <summary>Represents a reply in a group discussion topic.</summary>
 public record Reply : FlickrEntityBase<Id>, IBuddyIcon
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("author")]
-    public string Author { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("author")]
+    /// <summary>The NSID of the author.</summary>
+    public string? Author { get; init; }
     [JsonPropertyName("authorname")]
-    public string AuthorName { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The display name of the author.</summary>
+    public string? AuthorName { get; init; }
     [JsonPropertyName("is_pro")]
-    public bool IsPro { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>Whether the user has a Pro account.</summary>
+    public bool IsPro { get; init; }
     [JsonPropertyName("role")]
-    public MemberType Role { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The member role in the group.</summary>
+    public MemberType Role { get; init; }
     [JsonPropertyName("iconserver")]
-    public string IconServer { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The icon server for buddy icon URL construction.</summary>
+    public string? IconServer { get; init; }
     [JsonPropertyName("iconfarm")]
-    public int IconFarm { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The icon farm for buddy icon URL construction.</summary>
+    public int IconFarm { get; init; }
     [JsonPropertyName("can_edit")]
-    public bool CanEdit { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>Whether the current user can edit this.</summary>
+    public bool CanEdit { get; init; }
     [JsonPropertyName("can_delete")]
-    public bool CanDelete { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>Whether the current user can delete this.</summary>
+    public bool CanDelete { get; init; }
     [JsonPropertyName("datecreate")]
-    public DateTime CreateDate { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The creation date.</summary>
+    public DateTime CreateDate { get; init; }
     [JsonPropertyName("lastedit")]
-    public DateTime LastEdit { get; set; }
-
-    /// <summary>
-    /// </summary>
+    public DateTime LastEdit { get; init; }
     [JsonPropertyName("message")]
-    public List<string> Messages { get; set; }
+    public List<string> Messages { get; init; } = [];
 }

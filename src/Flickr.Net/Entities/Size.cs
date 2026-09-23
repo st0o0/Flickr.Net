@@ -1,40 +1,26 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 using Flickr.Net.Enums;
 
 namespace Flickr.Net;
-
-/// <summary>
-/// </summary>
+/// <summary>Represents an available size variant of a photo.</summary>
 public record Size : FlickrEntityBase
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("label")]
-    public string Label { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("label")]
+    /// <summary>The human-readable label for the EXIF tag.</summary>
+    public string? Label { get; init; }
     [JsonPropertyName("width")]
-    public int Width { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The width in pixels.</summary>
+    public int Width { get; init; }
     [JsonPropertyName("height")]
-    public int Height { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The height in pixels.</summary>
+    public int Height { get; init; }
     [JsonPropertyName("source")]
-    public string Source { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The source URL.</summary>
+    public string? Source { get; init; }
     [JsonPropertyName("url")]
-    public string Url { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The URL.</summary>
+    public string? Url { get; init; }
     [JsonPropertyName("media")]
-    public MediaType Media { get; set; }
+    /// <summary>The media type (photo or video).</summary>
+    public MediaType Media { get; init; }
 }
