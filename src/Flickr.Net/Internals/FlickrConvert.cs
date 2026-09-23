@@ -1,8 +1,6 @@
 using System.Text.Json;
+using System.Text.Json.Nodes;
 using System.Xml.Linq;
-using Newtonsoft.Json;
-using Formatting = Newtonsoft.Json.Formatting;
-using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace Flickr.Net.Internals;
 
@@ -16,7 +14,7 @@ public static class FlickrConvert
     /// </summary>
     public static T DeserializeObject<T>(byte[] bytes)
     {
-        return JsonSerializer.Deserialize<T>(bytes, FlickrJsonOptions.Default);
+        return JsonSerializer.Deserialize<T>(bytes, FlickrJsonOptions.Default)!;
     }
 
     /// <summary>
@@ -25,6 +23,52 @@ public static class FlickrConvert
     public static string XmlToJson(string xml)
     {
         var doc = XDocument.Parse(xml);
-        return JsonConvert.SerializeXNode(doc, Formatting.None, omitRootObject: true);
+        var json = ConvertElement(doc.Root!);
+        return json.ToJsonString();
+    }
+
+    private static JsonNode ConvertElement(XElement element)
+    {
+        var obj = new JsonObject();
+
+        foreach (var attr in element.Attributes())
+        {
+            obj[attr.Name.LocalName] = attr.Value;
+        }
+
+        foreach (var group in element.Elements().GroupBy(e => e.Name.LocalName))
+        {
+            var items = group.ToList();
+            if (items.Count == 1)
+            {
+                var child = items[0];
+                if (child.HasElements || child.HasAttributes)
+                {
+                    obj[group.Key] = ConvertElement(child);
+                }
+                else
+                {
+                    obj[group.Key] = child.Value;
+                }
+            }
+            else
+            {
+                var array = new JsonArray();
+                foreach (var child in items)
+                {
+                    array.Add(child.HasElements || child.HasAttributes
+                        ? ConvertElement(child)
+                        : JsonValue.Create(child.Value));
+                }
+                obj[group.Key] = array;
+            }
+        }
+
+        if (!element.HasElements && !string.IsNullOrEmpty(element.Value) && element.HasAttributes)
+        {
+            obj["_content"] = element.Value;
+        }
+
+        return obj;
     }
 }
