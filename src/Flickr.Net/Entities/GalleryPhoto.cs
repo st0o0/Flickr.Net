@@ -3,10 +3,12 @@ using Flickr.Net.Bases;
 using Flickr.Net.Internals.Attributes;
 
 namespace Flickr.Net;
+
 [FlickrJsonPropertyName("photo")]
 /// <summary>Represents a photo within a gallery.</summary>
 public record GalleryPhoto : UltraDeluxePhotoBase
-{    [JsonPropertyName("is_primary")]
+{
+    [JsonPropertyName("is_primary")]
     /// <summary>Whether this is the primary photo.</summary>
     public bool IsPrimary { get; init; }
     [JsonPropertyName("has_comment")]

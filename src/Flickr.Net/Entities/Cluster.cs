@@ -3,10 +3,12 @@ using Flickr.Net.Bases;
 using Flickr.Net.Internals.Attributes;
 
 namespace Flickr.Net;
+
 [FlickrJsonPropertyName("cluster")]
 /// <summary>Represents a tag cluster — a group of related tags.</summary>
 public record Cluster : FlickrEntityBase
-{    [JsonPropertyName("total")]
+{
+    [JsonPropertyName("total")]
     /// <summary>The total count.</summary>
     public int Total { get; init; }
     [JsonPropertyName("tag")]

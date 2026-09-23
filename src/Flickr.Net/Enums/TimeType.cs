@@ -6,7 +6,8 @@ namespace Flickr.Net.Enums;
 /// The time type.
 /// </summary>
 public enum TimeType
-{    [EnumMember(Value = "h")]
+{
+    [EnumMember(Value = "h")]
     Hours,
     [EnumMember(Value = "d")]
     Days

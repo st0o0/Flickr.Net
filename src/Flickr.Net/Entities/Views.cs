@@ -3,10 +3,12 @@ using Flickr.Net.Bases;
 using Flickr.Net.Internals.Attributes;
 
 namespace Flickr.Net;
+
 [FlickrJsonPropertyName("stats")]
 /// <summary>Represents total view counts across a user's content.</summary>
 public record Views : FlickrEntityBase
-{    [JsonPropertyName("total")]
+{
+    [JsonPropertyName("total")]
     public TotalViews? Total { get; init; }
     [JsonPropertyName("photos")]
     public PhotoViews? Photos { get; init; }
@@ -24,7 +26,8 @@ public record PhotostreamViews : ViewBase;
 public record SetViews : ViewBase;
 public record TotalViews : ViewBase;
 public record ViewBase
-{    [JsonPropertyName("views")]
+{
+    [JsonPropertyName("views")]
     /// <summary>The number of views.</summary>
     public int Views { get; init; }
     /// <summary>Converts from a string value.</summary>

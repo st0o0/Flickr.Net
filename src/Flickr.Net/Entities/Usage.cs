@@ -4,7 +4,8 @@ using Flickr.Net.Bases;
 namespace Flickr.Net;
 /// <summary>Represents bandwidth and storage usage statistics.</summary>
 public record Usage : FlickrEntityBase
-{    [JsonPropertyName("candownload")]
+{
+    [JsonPropertyName("candownload")]
     /// <summary>Whether the photo can be downloaded.</summary>
     public bool CanDownload { get; init; }
     [JsonPropertyName("canblog")]

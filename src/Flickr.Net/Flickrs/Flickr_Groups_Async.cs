@@ -91,7 +91,8 @@ public sealed partial class FlickrClient : IFlickrGroups
 /// The flickr groups.
 /// </summary>
 public interface IFlickrGroups
-{    IFlickrGroupsDiscuss Discuss { get; }
+{
+    IFlickrGroupsDiscuss Discuss { get; }
     IFlickrGroupsMembers Members { get; }
     IFlickrGroupsPools Pools { get; }
 

@@ -4,7 +4,8 @@ using Flickr.Net.Bases;
 namespace Flickr.Net;
 /// <summary>Represents a camera model within a brand.</summary>
 public record Camera : FlickrEntityBase<Id>
-{    [JsonPropertyName("name")]
+{
+    [JsonPropertyName("name")]
     /// <summary>The display name.</summary>
     public string? Name { get; init; }
     [JsonPropertyName("details")]

@@ -4,7 +4,8 @@ using System.Text.Json.Serialization;
 namespace Flickr.Net.Internals.JsonConverters;
 /// <summary>Converts JSON numbers to string values during deserialization.</summary>
 public sealed class AutoNumberToStringConverter : JsonConverter<string>
-{    public static AutoNumberToStringConverter Instance { get; } = new();
+{
+    public static AutoNumberToStringConverter Instance { get; } = new();
     public override string Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         if (reader.TokenType != JsonTokenType.Number) return reader.GetString()!;

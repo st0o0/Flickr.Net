@@ -3,10 +3,12 @@ using Flickr.Net.Bases;
 using Flickr.Net.Internals.Attributes;
 
 namespace Flickr.Net;
+
 [FlickrJsonPropertyName("set")]
 /// <summary>Represents a photoset context for a photo.</summary>
 public record Set : FlickrEntityBase<Id>
-{    [JsonPropertyName("title")]
+{
+    [JsonPropertyName("title")]
     /// <summary>The title.</summary>
     public string? Title { get; init; }
     [JsonPropertyName("primary")]

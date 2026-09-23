@@ -4,7 +4,8 @@ using Flickr.Net.Bases;
 namespace Flickr.Net;
 /// <summary>Represents content restrictions for a Flickr group.</summary>
 public record Restrictions : FlickrEntityBase
-{    [JsonPropertyName("photos_ok")]
+{
+    [JsonPropertyName("photos_ok")]
     /// <summary>Whether photos are allowed.</summary>
     public bool PhotosOk { get; init; }
     [JsonPropertyName("videos_ok")]

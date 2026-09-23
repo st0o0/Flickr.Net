@@ -5,7 +5,8 @@ using Flickr.Net.Enums;
 namespace Flickr.Net;
 /// <summary>Represents an activity event such as a comment, note, or fave.</summary>
 public record Event : FlickrEntityBase
-{    [JsonPropertyName("type")]
+{
+    [JsonPropertyName("type")]
     /// <summary>The type.</summary>
     public EventType Type { get; init; }
     [JsonPropertyName("user")]

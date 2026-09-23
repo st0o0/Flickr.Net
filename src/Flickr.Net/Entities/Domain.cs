@@ -3,10 +3,12 @@ using Flickr.Net.Bases;
 using Flickr.Net.Internals.Attributes;
 
 namespace Flickr.Net;
+
 [FlickrJsonPropertyName("domain")]
 /// <summary>Represents a referring domain in Flickr stats.</summary>
 public record Domain : FlickrEntityBase
-{    [JsonPropertyName("name")]
+{
+    [JsonPropertyName("name")]
     /// <summary>The display name.</summary>
     public string? Name { get; init; }
     [JsonPropertyName("views")]

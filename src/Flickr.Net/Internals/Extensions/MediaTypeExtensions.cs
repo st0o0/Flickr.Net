@@ -1,6 +1,7 @@
 using Flickr.Net.Enums;
 
 namespace Flickr.Net.Internals.Extensions;
+
 internal static class MediaTypeExtensions
 {
     /// <summary>

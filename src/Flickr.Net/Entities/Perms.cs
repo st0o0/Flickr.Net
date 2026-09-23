@@ -5,7 +5,8 @@ using Flickr.Net.Enums;
 namespace Flickr.Net;
 /// <summary>Represents the OAuth permission level granted to an application.</summary>
 public record Perms : FlickrEntityBase<Id>
-{    [JsonPropertyName("ispublic")]
+{
+    [JsonPropertyName("ispublic")]
     /// <summary>Whether the content is publicly visible.</summary>
     public bool IsPublic { get; init; }
     [JsonPropertyName("isfriend")]

@@ -4,7 +4,8 @@ using Flickr.Net.Bases;
 namespace Flickr.Net;
 /// <summary>Represents a photo license type available on Flickr.</summary>
 public record License : FlickrEntityBase
-{    [JsonPropertyName("id")]
+{
+    [JsonPropertyName("id")]
     /// <summary>The unique identifier.</summary>
     public int Id { get; init; }
     [JsonPropertyName("name")]

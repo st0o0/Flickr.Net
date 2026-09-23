@@ -4,10 +4,12 @@ using Flickr.Net.Enums;
 using Flickr.Net.Internals.Attributes;
 
 namespace Flickr.Net;
+
 [FlickrJsonPropertyName("topic")]
 /// <summary>Represents a discussion topic in a group.</summary>
 public record Topic : FlickrEntityBase, IBuddyIcon
-{    [JsonPropertyName("topic_id")]
+{
+    [JsonPropertyName("topic_id")]
     public string? TopicId { get; init; }
     [JsonPropertyName("subject")]
     /// <summary>The subject line.</summary>

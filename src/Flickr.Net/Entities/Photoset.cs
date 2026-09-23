@@ -4,7 +4,8 @@ using Flickr.Net.Bases;
 namespace Flickr.Net;
 /// <summary>Represents a photoset (album) on Flickr.</summary>
 public record Photoset : FlickrEntityBase<Id>, IThumbnailUrl, ISquareUrl, ISmallUrl
-{    [JsonPropertyName("owner")]
+{
+    [JsonPropertyName("owner")]
     /// <summary>The NSID of the owner.</summary>
     public string? Owner { get; init; }
     [JsonPropertyName("username")]

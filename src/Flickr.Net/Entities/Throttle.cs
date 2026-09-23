@@ -5,7 +5,8 @@ using Flickr.Net.Enums;
 namespace Flickr.Net;
 /// <summary>Represents the posting throttle settings for a group.</summary>
 public record Throttle : FlickrEntityBase
-{    [JsonPropertyName("count")]
+{
+    [JsonPropertyName("count")]
     /// <summary>The count.</summary>
     public int Count { get; init; }
     [JsonPropertyName("mode")]

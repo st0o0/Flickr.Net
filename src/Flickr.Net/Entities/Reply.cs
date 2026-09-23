@@ -5,7 +5,8 @@ using Flickr.Net.Enums;
 namespace Flickr.Net;
 /// <summary>Represents a reply in a group discussion topic.</summary>
 public record Reply : FlickrEntityBase<Id>, IBuddyIcon
-{    [JsonPropertyName("author")]
+{
+    [JsonPropertyName("author")]
     /// <summary>The NSID of the author.</summary>
     public string? Author { get; init; }
     [JsonPropertyName("authorname")]

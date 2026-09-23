@@ -4,7 +4,8 @@ using Flickr.Net.Bases;
 namespace Flickr.Net;
 /// <summary>Represents a user's profile information.</summary>
 public record Profile : FlickrEntityBase<Id>
-{    [JsonPropertyName("nsid")]
+{
+    [JsonPropertyName("nsid")]
     public string? Nsid { get; init; }
     [JsonPropertyName("join_date")]
     public DateTime JoinDate { get; init; }

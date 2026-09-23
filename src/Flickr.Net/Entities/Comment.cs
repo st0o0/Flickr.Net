@@ -3,10 +3,12 @@ using Flickr.Net.Bases;
 using Flickr.Net.Internals.Attributes;
 
 namespace Flickr.Net;
+
 [FlickrJsonPropertyName("comment")]
 /// <summary>Represents a comment on a photo.</summary>
 public record Comment : FlickrEntityBase<Id>, IBuddyIcon
-{    [JsonPropertyName("author")]
+{
+    [JsonPropertyName("author")]
     /// <summary>The NSID of the author.</summary>
     public string? Author { get; init; }
     [JsonPropertyName("author_is_deleted")]

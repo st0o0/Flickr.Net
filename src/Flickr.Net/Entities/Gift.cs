@@ -4,7 +4,8 @@ using Flickr.Net.Bases;
 namespace Flickr.Net;
 /// <summary>Represents gift/pro subscription eligibility information.</summary>
 public record Gift : FlickrEntityBase
-{    [JsonPropertyName("gift_eligible")]
+{
+    [JsonPropertyName("gift_eligible")]
     /// <summary>Whether the user is eligible to receive gifts.</summary>
     public bool GiftEligible { get; init; }
     [JsonPropertyName("eligible_durations")]

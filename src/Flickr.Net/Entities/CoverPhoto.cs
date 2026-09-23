@@ -3,10 +3,12 @@ using Flickr.Net.Bases;
 using Flickr.Net.Internals.Attributes;
 
 namespace Flickr.Net;
+
 [FlickrJsonPropertyName("photo")]
 /// <summary>Represents a cover photo for a gallery.</summary>
 public record CoverPhoto : FlickrEntityBase
-{    [JsonPropertyName("url")]
+{
+    [JsonPropertyName("url")]
     /// <summary>The URL.</summary>
     public string? Url { get; init; }
     [JsonPropertyName("width")]

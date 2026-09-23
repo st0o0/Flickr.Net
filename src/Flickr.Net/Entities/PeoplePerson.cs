@@ -3,10 +3,12 @@ using Flickr.Net.Bases;
 using Flickr.Net.Internals.Attributes;
 
 namespace Flickr.Net;
+
 [FlickrJsonPropertyName("person")]
 /// <summary>Represents a person tagged in a photo (people in photos).</summary>
 public record PeoplePerson : FlickrEntityBase<NsId>
-{    [JsonPropertyName("username")]
+{
+    [JsonPropertyName("username")]
     /// <summary>The username.</summary>
     public string? Username { get; init; }
     [JsonPropertyName("iconserver")]

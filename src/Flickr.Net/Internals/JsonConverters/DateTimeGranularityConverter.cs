@@ -5,7 +5,8 @@ using System.Text.Json.Serialization;
 namespace Flickr.Net.Internals.JsonConverters;
 /// <summary>Converts Flickr date strings with variable granularity to <see cref="DateTime"/>.</summary>
 public sealed class DateTimeGranularityConverter : JsonConverter<DateTime>
-{    public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
+{
+    public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
     {
         writer.WriteRawValue(value.ToString("yyyy-MM-dd HH:mm:ss", DateTimeFormatInfo.InvariantInfo));
     }

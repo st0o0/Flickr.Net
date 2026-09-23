@@ -2,8 +2,10 @@ using Flickr.Net.Exceptions.Handlers;
 using Flickr.Net.Flickrs.Results;
 
 namespace Flickr.Net.Internals.Extensions;
+
 public static class FlickrResultExtensions
-{    public static T EnsureSuccessStatusCode<T>(this T flickrResult) where T : FlickrResult
+{
+    public static T EnsureSuccessStatusCode<T>(this T flickrResult) where T : FlickrResult
     {
         return flickrResult.HasError ? throw ExceptionHandler.CreateResponseException(flickrResult) : flickrResult;
     }

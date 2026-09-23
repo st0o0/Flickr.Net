@@ -15,7 +15,8 @@ public abstract record FlickrEntityBase : IFlickrEntity;
 
 /// <inheritdoc/>
 public interface IFlickrEntity<T> : IFlickrEntity where T : IIdentifierType
-{    [JsonPropertyGenericTypeName(0)]
+{
+    [JsonPropertyGenericTypeName(0)]
     /// <summary>The unique identifier.</summary>
     public T Id { get; init; }
 }

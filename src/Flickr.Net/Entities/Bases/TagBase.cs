@@ -5,7 +5,8 @@ namespace Flickr.Net;
 
 /// <inheritdoc/>
 public record TagBase : FlickrEntityBase
-{    [JsonPropertyName("_content")]
+{
+    [JsonPropertyName("_content")]
     /// <summary>The text content.</summary>
     public string? Content { get; init; }
 }

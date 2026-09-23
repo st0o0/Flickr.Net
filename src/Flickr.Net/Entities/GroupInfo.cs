@@ -4,10 +4,12 @@ using Flickr.Net.Enums;
 using Flickr.Net.Internals.Attributes;
 
 namespace Flickr.Net;
+
 [FlickrJsonPropertyName("group")]
 /// <summary>Detailed information about a Flickr group.</summary>
 public record GroupInfo : FlickrEntityBase<Id>, IBuddyIcon
-{    [JsonPropertyName("iconserver")]
+{
+    [JsonPropertyName("iconserver")]
     /// <summary>The icon server for buddy icon URL construction.</summary>
     public string? IconServer { get; init; }
     [JsonPropertyName("iconfarm")]

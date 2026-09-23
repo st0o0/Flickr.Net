@@ -4,7 +4,8 @@ using Flickr.Net.Bases;
 namespace Flickr.Net;
 /// <summary>Represents a photoset reference within a collection.</summary>
 public record CollectionSet : FlickrEntityBase<Id>
-{    [JsonPropertyName("title")]
+{
+    [JsonPropertyName("title")]
     /// <summary>The title.</summary>
     public string? Title { get; init; }
     [JsonPropertyName("description")]

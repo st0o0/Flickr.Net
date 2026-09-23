@@ -3,10 +3,12 @@ using Flickr.Net.Bases;
 using Flickr.Net.Internals.Attributes;
 
 namespace Flickr.Net;
+
 [FlickrJsonPropertyName("user")]
 /// <summary>Represents a user's upload bandwidth and storage status.</summary>
 public record UploadStatus : FlickrEntityBase<Id>
-{    [JsonPropertyName("ispro")]
+{
+    [JsonPropertyName("ispro")]
     /// <summary>Whether the user has a Pro account.</summary>
     public bool IsPro { get; init; }
     [JsonPropertyName("username")]
@@ -22,7 +24,8 @@ public record UploadStatus : FlickrEntityBase<Id>
     public VideoStatus? Videos { get; init; }
 }
 public record VideoStatus
-{    [JsonPropertyName("uploaded")]
+{
+    [JsonPropertyName("uploaded")]
     /// <summary>The count of uploads.</summary>
     public int Uploaded { get; init; }
     [JsonPropertyName("remaining")]
@@ -30,14 +33,16 @@ public record VideoStatus
     public string? Remaining { get; init; }
 }
 public record SetsStatus
-{    [JsonPropertyName("created")]
+{
+    [JsonPropertyName("created")]
     public int Created { get; init; }
     [JsonPropertyName("remaining")]
     /// <summary>The remaining allowance.</summary>
     public string? Remaining { get; init; }
 }
 public record FileSizeStatus
-{    [JsonPropertyName("maxbytes")]
+{
+    [JsonPropertyName("maxbytes")]
     /// <summary>The maximum size in bytes.</summary>
     public long MaxBytes { get; init; }
     [JsonPropertyName("maxkb")]
@@ -45,7 +50,8 @@ public record FileSizeStatus
     public long MaxKb { get; init; }
 }
 public record BandwidthStatus
-{    [JsonPropertyName("maxbytes")]
+{
+    [JsonPropertyName("maxbytes")]
     /// <summary>The maximum size in bytes.</summary>
     public long MaxBytes { get; init; }
     [JsonPropertyName("maxkb")]

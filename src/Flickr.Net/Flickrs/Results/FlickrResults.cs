@@ -46,7 +46,8 @@ public record FlickrResult : IFlickrEntity
 /// <typeparam name="TNextPhoto"></typeparam>
 /// <typeparam name="TPrevPhoto"></typeparam>
 public record FlickrContextResult<TNextPhoto, TPrevPhoto> : FlickrResult where TNextPhoto : IFlickrEntity where TPrevPhoto : IFlickrEntity
-{    [JsonPropertyName("count")]
+{
+    [JsonPropertyName("count")]
     /// <summary>The count.</summary>
     public Count Count { get; init; }
     [JsonPropertyGenericTypeName(0)]
@@ -59,7 +60,8 @@ public record FlickrContextResult<TNextPhoto, TPrevPhoto> : FlickrResult where T
 /// <typeparam name="TPrimary"></typeparam>
 /// <typeparam name="TSecond"></typeparam>
 public record FlickrAllContextResult<TPrimary, TSecond> : FlickrResult where TPrimary : IFlickrEntity where TSecond : IFlickrEntity
-{    [JsonPropertyGenericTypeName(0)]
+{
+    [JsonPropertyGenericTypeName(0)]
     /// <summary>The primary photo identifier.</summary>
     public List<TPrimary> Primary { get; init; } = [];
     [JsonPropertyGenericTypeName(1)]
@@ -81,7 +83,8 @@ public record FlickrUnknownResult<T> : FlickrResult where T : UnknownResponse
 }
 /// <typeparam name="T"></typeparam>
 public record FlickrStatsResult<T> : FlickrResult<T> where T : IFlickrEntity
-{    [JsonPropertyName("period")]
+{
+    [JsonPropertyName("period")]
     /// <summary>The stats period.</summary>
     public string? Period { get; init; }
     [JsonPropertyName("count")]
@@ -90,7 +93,8 @@ public record FlickrStatsResult<T> : FlickrResult<T> where T : IFlickrEntity
 }
 /// <summary>Result type for Flickr API responses with dynamic/unknown content structure.</summary>
 public record FlickrExtendedDataResult : FlickrResult
-{    [JsonPropertyName("@stat")]
+{
+    [JsonPropertyName("@stat")]
     /// <summary>The response status.</summary>
     public override string State { get; init; } = string.Empty;
     [JsonExtensionData]

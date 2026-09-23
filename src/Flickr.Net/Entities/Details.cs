@@ -4,7 +4,8 @@ using Flickr.Net.Bases;
 namespace Flickr.Net;
 /// <summary>Represents technical details of a camera model.</summary>
 public record Details : FlickrEntityBase
-{    [JsonPropertyName("megapixels")]
+{
+    [JsonPropertyName("megapixels")]
     /// <summary>The megapixel count.</summary>
     public string? MegaPixels { get; init; }
     [JsonPropertyName("zoom")]

@@ -4,7 +4,8 @@ using Flickr.Net.Bases;
 namespace Flickr.Net;
 /// <summary>Represents a contact (friend/family) of a Flickr user.</summary>
 public record Contact : FlickrEntityBase<NsId>, IBuddyIcon
-{    [JsonPropertyName("username")]
+{
+    [JsonPropertyName("username")]
     /// <summary>The username.</summary>
     public string? UserName { get; init; }
     [JsonPropertyName("iconserver")]

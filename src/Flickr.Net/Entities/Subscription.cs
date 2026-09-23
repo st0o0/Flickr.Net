@@ -4,7 +4,8 @@ using Flickr.Net.Bases;
 namespace Flickr.Net;
 /// <summary>Represents a push notification subscription.</summary>
 public record Subscription : FlickrEntityBase
-{    [JsonPropertyName("topic")]
+{
+    [JsonPropertyName("topic")]
     /// <summary>The topic.</summary>
     public string? Topic { get; init; }
     [JsonPropertyName("callback")]

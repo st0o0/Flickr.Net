@@ -4,7 +4,8 @@ using Flickr.Net.Bases;
 namespace Flickr.Net;
 /// <summary>Represents the geo/location visibility permissions for a photo.</summary>
 public record GeoPermissions : FlickrEntityBase
-{    [JsonPropertyName("ispublic")]
+{
+    [JsonPropertyName("ispublic")]
     /// <summary>Whether the content is publicly visible.</summary>
     public bool IsPublic { get; init; }
     [JsonPropertyName("iscontact")]

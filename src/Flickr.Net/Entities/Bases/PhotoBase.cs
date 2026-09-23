@@ -4,7 +4,8 @@ namespace Flickr.Net.Bases;
 
 /// <inheritdoc/>
 public abstract record PhotoBase : FlickrEntityBase<Id>
-{    [JsonPropertyName("secret")]
+{
+    [JsonPropertyName("secret")]
     /// <summary>The photo secret used in URL construction.</summary>
     public string? Secret { get; init; }
     [JsonPropertyName("server")]
@@ -14,7 +15,8 @@ public abstract record PhotoBase : FlickrEntityBase<Id>
 
 /// <inheritdoc/>
 public abstract record DeluxePhotoBase : PhotoBase
-{    [JsonPropertyName("owner")]
+{
+    [JsonPropertyName("owner")]
     /// <summary>The NSID of the owner.</summary>
     public string? Owner { get; init; }
     [JsonPropertyName("farm")]
@@ -27,7 +29,8 @@ public abstract record DeluxePhotoBase : PhotoBase
 
 /// <inheritdoc/>
 public abstract record UltraDeluxePhotoBase : DeluxePhotoBase
-{    [JsonPropertyName("ispublic")]
+{
+    [JsonPropertyName("ispublic")]
     /// <summary>Whether the content is publicly visible.</summary>
     public bool IsPublic { get; init; }
     [JsonPropertyName("isfriend")]

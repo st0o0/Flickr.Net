@@ -4,7 +4,8 @@ using Flickr.Net.Bases;
 namespace Flickr.Net;
 /// <summary>Represents a single EXIF/IPTC/XMP tag from a photo.</summary>
 public record Exif : FlickrEntityBase
-{    [JsonPropertyName("tagspace")]
+{
+    [JsonPropertyName("tagspace")]
     /// <summary>The EXIF tag space (e.g. ExifIFD, IFD0).</summary>
     public string? TagSpace { get; init; }
     [JsonPropertyName("tagspaceid")]
@@ -25,7 +26,8 @@ public record Exif : FlickrEntityBase
 }
 /// <summary>Wraps a raw EXIF tag value.</summary>
 public struct Raw
-{    [JsonPropertyName("_content")]
+{
+    [JsonPropertyName("_content")]
     /// <summary>The text content.</summary>
     public string? Content { get; init; }
     /// <summary>Converts to the underlying string value.</summary>
@@ -35,7 +37,8 @@ public struct Raw
 }
 /// <summary>Wraps a cleaned/formatted EXIF tag value.</summary>
 public struct Clean
-{    [JsonPropertyName("_content")]
+{
+    [JsonPropertyName("_content")]
     /// <summary>The text content.</summary>
     public string? Content { get; init; }
     /// <summary>Converts to the underlying string value.</summary>

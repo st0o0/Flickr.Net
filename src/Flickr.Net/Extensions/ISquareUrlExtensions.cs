@@ -4,7 +4,8 @@ using Flickr.Net.Internals;
 namespace Flickr.Net.Extensions;
 /// <summary>Extension methods for constructing square (75x75) image URLs.</summary>
 public static class ISquareUrlExtensions
-{    public static string ToSquareUrl(this ISquareUrl value)
+{
+    public static string ToSquareUrl(this ISquareUrl value)
     {
         return value switch
         {

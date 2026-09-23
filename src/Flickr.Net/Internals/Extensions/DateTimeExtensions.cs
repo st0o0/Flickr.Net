@@ -1,6 +1,7 @@
 using System.Globalization;
 
 namespace Flickr.Net.Internals.Extensions;
+
 internal static class DateTimeExtensions
 {
     private static readonly DateTime UnixStartDate = DateTime.UnixEpoch;

@@ -4,7 +4,8 @@ namespace Flickr.Net.Bases;
 
 /// <inheritdoc/>
 public record GroupBase : FlickrEntityBase<NsId>
-{    [JsonPropertyName("name")]
+{
+    [JsonPropertyName("name")]
     /// <summary>The display name.</summary>
     public string? Name { get; init; }
     [JsonPropertyName("eighteenplus")]

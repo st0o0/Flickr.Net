@@ -5,7 +5,8 @@ using Flickr.Net.Enums;
 namespace Flickr.Net;
 /// <summary>Represents an asynchronous upload ticket.</summary>
 public record Ticket : FlickrEntityBase<Id>
-{    [JsonPropertyName("complete")]
+{
+    [JsonPropertyName("complete")]
     /// <summary>The completion status.</summary>
     public StatusType Complete { get; init; }
     [JsonPropertyName("photoid")]

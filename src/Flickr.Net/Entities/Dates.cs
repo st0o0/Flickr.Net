@@ -6,7 +6,8 @@ using Flickr.Net.Internals.JsonConverters;
 namespace Flickr.Net;
 /// <summary>Represents the various dates associated with a photo.</summary>
 public record Dates : FlickrEntityBase
-{    [JsonPropertyName("posted")]
+{
+    [JsonPropertyName("posted")]
     /// <summary>The date the photo was posted (uploaded).</summary>
     public DateTime Posted { get; init; }
     [JsonPropertyName("taken")]

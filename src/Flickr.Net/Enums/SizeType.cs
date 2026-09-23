@@ -3,7 +3,8 @@ using System.Runtime.Serialization;
 namespace Flickr.Net.Enums;
 /// <summary>Flickr photo size suffixes used in static photo URLs.</summary>
 public enum SizeType
-{    [EnumMember(Value = "_t")]
+{
+    [EnumMember(Value = "_t")]
     Thumbnail,
     [EnumMember(Value = "_s")]
     Square,

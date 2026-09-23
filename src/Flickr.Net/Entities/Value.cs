@@ -4,7 +4,8 @@ using Flickr.Net.Bases;
 namespace Flickr.Net;
 /// <summary>Represents a machine tag value.</summary>
 public record Value : FlickrEntityBase
-{    [JsonPropertyName("usage")]
+{
+    [JsonPropertyName("usage")]
     public string? Usage { get; init; }
     [JsonPropertyName("namespace")]
     public string? Namespace { get; init; }

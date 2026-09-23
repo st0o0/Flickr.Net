@@ -5,7 +5,8 @@ using System.Text.Json.Serialization;
 namespace Flickr.Net.Internals.JsonConverters;
 /// <summary>Converts Unix timestamps (as strings) to <see cref="DateTime"/>.</summary>
 public sealed class TimestampToDateTimeConverter : JsonConverter<DateTime>
-{    public static TimestampToDateTimeConverter Instance { get; } = new();
+{
+    public static TimestampToDateTimeConverter Instance { get; } = new();
 
     private static DateTime UnixTimestampToDate(long timestamp) =>
         DateTimeOffset.FromUnixTimeSeconds(timestamp).UtcDateTime;

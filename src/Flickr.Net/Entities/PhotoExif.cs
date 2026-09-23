@@ -3,10 +3,12 @@ using Flickr.Net.Bases;
 using Flickr.Net.Internals.Attributes;
 
 namespace Flickr.Net;
+
 [FlickrJsonPropertyName("photo")]
 /// <summary>Contains EXIF data for a specific photo.</summary>
 public record PhotoExif : PhotoBase
-{    [JsonPropertyName("farm")]
+{
+    [JsonPropertyName("farm")]
     /// <summary>The farm identifier used in URL construction.</summary>
     public int Farm { get; init; }
     [JsonPropertyName("camera")]

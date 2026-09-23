@@ -4,7 +4,8 @@ using Flickr.Net.Internals;
 namespace Flickr.Net.Extensions;
 /// <summary>Extension methods for constructing medium (500px) image URLs.</summary>
 public static class IMediumExtensions
-{    public static string ToMediumUrl(this IMediumUrl value)
+{
+    public static string ToMediumUrl(this IMediumUrl value)
     {
         return value switch
         {

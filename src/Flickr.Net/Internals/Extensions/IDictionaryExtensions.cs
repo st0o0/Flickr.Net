@@ -1,4 +1,5 @@
 namespace Flickr.Net.Internals.Extensions;
+
 internal static class DictionaryExtensions
 {
     /// <summary>

@@ -6,7 +6,8 @@ namespace Flickr.Net.Enums;
 /// The popular sorting.
 /// </summary>
 public enum PopularSorting
-{    [EnumMember(Value = "")]
+{
+    [EnumMember(Value = "")]
     None,
     [EnumMember(Value = "faves")]
     Faves,

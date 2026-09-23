@@ -4,7 +4,8 @@ using Flickr.Net.Bases;
 namespace Flickr.Net;
 /// <summary>Represents a note (annotation) on a photo.</summary>
 public record Note : FlickrEntityBase<Id>
-{    [JsonPropertyName("author")]
+{
+    [JsonPropertyName("author")]
     /// <summary>The NSID of the author.</summary>
     public string? Author { get; init; }
     [JsonPropertyName("authorname")]

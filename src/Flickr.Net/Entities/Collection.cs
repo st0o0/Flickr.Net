@@ -3,10 +3,12 @@ using Flickr.Net.Bases;
 using Flickr.Net.Internals.Attributes;
 
 namespace Flickr.Net;
+
 [FlickrJsonPropertyName("collection")]
 /// <summary>Represents a collection of photosets organized by the user.</summary>
 public record Collection : FlickrEntityBase<Id>
-{    [JsonPropertyName("title")]
+{
+    [JsonPropertyName("title")]
     /// <summary>The title.</summary>
     public string? Title { get; init; }
     [JsonPropertyName("description")]

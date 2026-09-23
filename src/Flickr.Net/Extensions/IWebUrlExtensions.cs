@@ -3,7 +3,8 @@ using System.Globalization;
 namespace Flickr.Net.Extensions;
 /// <summary>Extension methods for constructing Flickr web page URLs.</summary>
 public static class IWebUrlExtensions
-{    public static string ToWebUrl(this IWebUrl value)
+{
+    public static string ToWebUrl(this IWebUrl value)
     {
         return value switch
         {

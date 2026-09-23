@@ -4,7 +4,8 @@ using Flickr.Net.Internals;
 namespace Flickr.Net.Extensions;
 /// <summary>Extension methods for constructing thumbnail image URLs.</summary>
 public static class IThumbnailUrlExtensions
-{    public static string ToThumbnailUrl(this IThumbnailUrl value)
+{
+    public static string ToThumbnailUrl(this IThumbnailUrl value)
     {
         return value switch
         {

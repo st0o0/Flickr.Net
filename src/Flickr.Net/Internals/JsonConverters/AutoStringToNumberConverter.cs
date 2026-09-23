@@ -5,7 +5,8 @@ using System.Text.Json.Serialization;
 namespace Flickr.Net.Internals.JsonConverters;
 /// <summary>Converts JSON string values to numeric types during deserialization.</summary>
 public sealed class AutoStringToNumberConverter : JsonConverter<object>
-{    public static AutoStringToNumberConverter Instance { get; } = new();
+{
+    public static AutoStringToNumberConverter Instance { get; } = new();
     public override bool CanConvert(Type typeToConvert)
     {
         typeToConvert = Nullable.GetUnderlyingType(typeToConvert) ?? typeToConvert;

@@ -5,7 +5,8 @@ using Flickr.Net.Enums;
 namespace Flickr.Net;
 /// <summary>Represents an available size variant of a photo.</summary>
 public record Size : FlickrEntityBase
-{    [JsonPropertyName("label")]
+{
+    [JsonPropertyName("label")]
     /// <summary>The human-readable label for the EXIF tag.</summary>
     public string? Label { get; init; }
     [JsonPropertyName("width")]

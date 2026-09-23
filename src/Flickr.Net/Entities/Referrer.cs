@@ -3,10 +3,12 @@ using Flickr.Net.Bases;
 using Flickr.Net.Internals.Attributes;
 
 namespace Flickr.Net;
+
 [FlickrJsonPropertyName("referrer")]
 /// <summary>Represents a referring URL in Flickr stats.</summary>
 public record Referrer : FlickrEntityBase
-{    [JsonPropertyName("url")]
+{
+    [JsonPropertyName("url")]
     /// <summary>The URL.</summary>
     public string? Url { get; init; }
     [JsonPropertyName("views")]

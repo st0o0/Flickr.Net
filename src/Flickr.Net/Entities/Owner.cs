@@ -4,7 +4,8 @@ using Flickr.Net.Bases;
 namespace Flickr.Net;
 /// <summary>Represents the owner of a photo with profile details.</summary>
 public record Owner : FlickrEntityBase<NsId>
-{    [JsonPropertyName("username")]
+{
+    [JsonPropertyName("username")]
     /// <summary>The username.</summary>
     public string? Username { get; init; }
     [JsonPropertyName("realname")]

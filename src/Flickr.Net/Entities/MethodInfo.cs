@@ -3,10 +3,12 @@ using Flickr.Net.Bases;
 using Flickr.Net.Internals.Attributes;
 
 namespace Flickr.Net;
+
 [FlickrJsonPropertyName("method")]
 /// <summary>Detailed information about a Flickr API method.</summary>
 public record MethodInfo : FlickrEntityBase
-{    [JsonPropertyName("name")]
+{
+    [JsonPropertyName("name")]
     /// <summary>The display name.</summary>
     public string? Name { get; init; }
     [JsonPropertyName("needslogin")]

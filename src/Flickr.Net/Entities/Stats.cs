@@ -3,10 +3,12 @@ using Flickr.Net.Bases;
 using Flickr.Net.Internals.Attributes;
 
 namespace Flickr.Net;
+
 [FlickrJsonPropertyName("stats")]
 /// <summary>Represents view statistics for a date.</summary>
 public record Stats : FlickrEntityBase
-{    [JsonPropertyName("views")]
+{
+    [JsonPropertyName("views")]
     /// <summary>The number of views.</summary>
     public int Views { get; init; }
     [JsonPropertyName("comments")]

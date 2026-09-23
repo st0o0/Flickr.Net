@@ -5,7 +5,8 @@ using Flickr.Net.Enums;
 namespace Flickr.Net;
 /// <summary>Represents a Flickr group.</summary>
 public record Group : GroupBase, IBuddyIcon
-{    [JsonPropertyName("admin")]
+{
+    [JsonPropertyName("admin")]
     /// <summary>Whether the current user is an admin of this group.</summary>
     public bool Admin { get; init; }
     [JsonPropertyName("photos")]

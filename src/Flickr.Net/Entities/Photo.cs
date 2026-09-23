@@ -3,6 +3,7 @@ using Flickr.Net.Bases;
 using Flickr.Net.Internals.Attributes;
 
 namespace Flickr.Net;
+
 [FlickrJsonPropertyName("photo")]
 /// <summary>Represents a photo returned from a Flickr search or listing.</summary>
 public record Photo : UltraDeluxePhotoBase
@@ -20,7 +21,8 @@ public record Photo : UltraDeluxePhotoBase
     /// </summary>
     [JsonPropertyName("dateadded")]
     [Obsolete("Photo.AddedDate is never populated by any current Flickr API response and always returns default(DateTime). Use Photo.DateUploaded (PhotoSearchExtras.DateUploaded) instead.")]
-    public DateTime AddedDate { get; init; }    [JsonPropertyName("datetaken")]
+    public DateTime AddedDate { get; init; }
+    [JsonPropertyName("datetaken")]
     /// <summary>The date the photo was taken.</summary>
     public DateTime DateTaken { get; init; }
 

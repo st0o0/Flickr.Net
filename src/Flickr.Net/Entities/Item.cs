@@ -5,7 +5,8 @@ using Flickr.Net.Enums;
 namespace Flickr.Net;
 /// <summary>Represents an item (photo or photoset) in a user's recent activity feed.</summary>
 public record Item : FlickrEntityBase<Id>, ISmallUrl, ISquareUrl, IBuddyIcon
-{    [JsonPropertyName("title")]
+{
+    [JsonPropertyName("title")]
     /// <summary>The title.</summary>
     public string? Title { get; init; }
     [JsonPropertyName("activity")]

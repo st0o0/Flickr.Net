@@ -4,10 +4,12 @@ using Flickr.Net.Enums;
 using Flickr.Net.Internals.Attributes;
 
 namespace Flickr.Net;
+
 [FlickrJsonPropertyName("prevphoto")]
 /// <summary>Represents the previous photo in a context navigation sequence.</summary>
 public record PrevPhoto : FlickrEntityBase<Id>
-{    [JsonPropertyName("owner")]
+{
+    [JsonPropertyName("owner")]
     /// <summary>The NSID of the owner.</summary>
     public string? Owner { get; init; }
     [JsonPropertyName("secret")]
