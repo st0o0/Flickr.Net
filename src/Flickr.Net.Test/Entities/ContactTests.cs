@@ -75,4 +75,50 @@ public class ContactTests
         Assert.False(items.Values[0].Ignored);
         Assert.Equal(items.Total, items.Values.Count);
     }
+
+    [Fact]
+    public void ContactWithReverseRelationshipFields()
+    {
+        const string json = """
+            {
+                "contacts": {
+                    "page": 1,
+                    "pages": 1,
+                    "per_page": 10,
+                    "perpage": 10,
+                    "total": 1,
+                    "contact": [
+                        {
+                            "nsid": "66956608@N06",
+                            "username": "Flickr",
+                            "iconserver": "3741",
+                            "iconfarm": 4,
+                            "ignored": 0,
+                            "rev_ignored": 0,
+                            "realname": "Flickr",
+                            "friend": 1,
+                            "family": 1,
+                            "path_alias": "flickr",
+                            "location": "",
+                            "rev_contact": 1,
+                            "rev_friend": 0,
+                            "rev_family": 1
+                        }
+                    ]
+                },
+                "stat": "ok"
+            }
+            """;
+
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Contacts>>(Encoding.UTF8.GetBytes(json));
+
+        Assert.NotNull(result);
+        Assert.False(result.HasError);
+        var contact = result.Content.Values[0];
+        Assert.True(contact.Friend);
+        Assert.True(contact.Family);
+        Assert.True(contact.RevContact);
+        Assert.False(contact.RevFriend);
+        Assert.True(contact.RevFamily);
+    }
 }

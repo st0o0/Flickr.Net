@@ -85,4 +85,123 @@ public class PersonTests
         Assert.False(items.HasFreeStandardShipping);
         Assert.False(items.HasFreeEducationalResources);
     }
+
+    [Fact]
+    public void PersonPathAliasIsString()
+    {
+        const string json = """
+            {
+                "person": {
+                    "id": "12345678@N00",
+                    "nsid": "12345678@N00",
+                    "ispro": 1,
+                    "is_deleted": 0,
+                    "iconserver": "65535",
+                    "iconfarm": 66,
+                    "path_alias": "janedoe",
+                    "has_stats": 0,
+                    "username": { "_content": "janedoe" },
+                    "realname": { "_content": "Jane Doe" },
+                    "photos": {
+                        "firstdatetaken": { "_content": "2020-01-01 00:00:00" },
+                        "firstdate": { "_content": "1577836800" },
+                        "count": { "_content": 100 },
+                        "views": { "_content": "500" }
+                    }
+                },
+                "stat": "ok"
+            }
+            """;
+
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Person>>(Encoding.UTF8.GetBytes(json));
+
+        Assert.NotNull(result);
+        var person = result.Content;
+        Assert.Equal("janedoe", person.PathAlias);
+        Assert.IsType<string>(person.PathAlias);
+    }
+
+    [Fact]
+    public void PersonWithRelationshipFields()
+    {
+        const string json = """
+            {
+                "person": {
+                    "id": "12345678@N00",
+                    "nsid": "12345678@N00",
+                    "ispro": 0,
+                    "is_deleted": 0,
+                    "iconserver": "65535",
+                    "iconfarm": 66,
+                    "path_alias": null,
+                    "has_stats": 0,
+                    "contact": 1,
+                    "friend": 1,
+                    "family": 0,
+                    "revcontact": 1,
+                    "revfriend": 0,
+                    "revfamily": 0,
+                    "username": { "_content": "bob" },
+                    "realname": { "_content": "Bob Smith" },
+                    "photos": {
+                        "firstdatetaken": { "_content": "2021-01-01 00:00:00" },
+                        "firstdate": { "_content": "1609459200" },
+                        "count": { "_content": 50 },
+                        "views": { "_content": "200" }
+                    }
+                },
+                "stat": "ok"
+            }
+            """;
+
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Person>>(Encoding.UTF8.GetBytes(json));
+
+        Assert.NotNull(result);
+        var person = result.Content;
+        Assert.True(person.Contact);
+        Assert.True(person.Friend);
+        Assert.False(person.Family);
+        Assert.True(person.RevContact);
+        Assert.False(person.RevFriend);
+        Assert.False(person.RevFamily);
+    }
+
+    [Fact]
+    public void PersonRelationshipFieldsNullWhenUnauthenticated()
+    {
+        const string json = """
+            {
+                "person": {
+                    "id": "12345678@N00",
+                    "nsid": "12345678@N00",
+                    "ispro": 0,
+                    "is_deleted": 0,
+                    "iconserver": "0",
+                    "iconfarm": 0,
+                    "path_alias": null,
+                    "has_stats": 0,
+                    "username": { "_content": "anonymous" },
+                    "realname": { "_content": "" },
+                    "photos": {
+                        "firstdatetaken": { "_content": "" },
+                        "firstdate": { "_content": "" },
+                        "count": { "_content": 0 },
+                        "views": { "_content": "0" }
+                    }
+                },
+                "stat": "ok"
+            }
+            """;
+
+        var result = FlickrConvert.DeserializeObject<FlickrResult<Person>>(Encoding.UTF8.GetBytes(json));
+
+        Assert.NotNull(result);
+        var person = result.Content;
+        Assert.Null(person.Contact);
+        Assert.Null(person.Friend);
+        Assert.Null(person.Family);
+        Assert.Null(person.RevContact);
+        Assert.Null(person.RevFriend);
+        Assert.Null(person.RevFamily);
+    }
 }

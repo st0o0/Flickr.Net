@@ -8,7 +8,7 @@ public class DefaultSearchExtrasTests
     [Fact]
     public void DefaultSearchExtrasIsNullByDefault()
     {
-        var config = new FlickrConfiguration { ApiKey = "test" };
+        var config = new FlickrConfiguration { ApiKey = "test", SharedSecret = "secret" };
         Assert.Null(config.DefaultSearchExtras);
     }
 
@@ -18,6 +18,7 @@ public class DefaultSearchExtrasTests
         var config = new FlickrConfiguration
         {
             ApiKey = "test",
+            SharedSecret = "secret",
             DefaultSearchExtras = PhotoSearchExtras.Description | PhotoSearchExtras.DateTaken
         };
 

@@ -154,5 +154,7 @@ public class FlickrClientTests
         Assert.NotNull(client.Test);
         Assert.NotNull(client.Upload);
         Assert.NotNull(client.Urls);
+        Assert.NotNull(client.Places);
+        Assert.NotNull(client.Testimonials);
     }
 }

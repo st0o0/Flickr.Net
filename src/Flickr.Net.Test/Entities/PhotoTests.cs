@@ -278,6 +278,90 @@ public class PhotoTests
     }
 
     [Fact]
+    public void PhotoExtrasCountFavesAndComments()
+    {
+        const string json = """{"photos":{"page":1,"pages":1,"perpage":10,"total":1,"photo":[{"id":"55500000001","owner":"12345678@N00","secret":"a1b2c3d4e5","server":"65535","farm":66,"title":"Popular Photo","ispublic":1,"isfriend":0,"isfamily":0,"count_faves":"42","count_comments":"7"}]},"stat":"ok"}""";
+
+        var result = FlickrConvert.DeserializeObject<FlickrResult<PagedPhotos>>(Encoding.UTF8.GetBytes(json));
+
+        Assert.NotNull(result);
+        var photo = result.Content.Values[0];
+        Assert.Equal(42, photo.CountFaves);
+        Assert.Equal(7, photo.CountComments);
+    }
+
+    [Fact]
+    public void PhotoExtrasMediaAndOwnerInfo()
+    {
+        const string json = """{"photos":{"page":1,"pages":1,"perpage":10,"total":1,"photo":[{"id":"55500000001","owner":"12345678@N00","secret":"a1b2c3d4e5","server":"65535","farm":66,"title":"Video Clip","ispublic":1,"isfriend":0,"isfamily":0,"media":"video","media_status":"ready","pathalias":"janedoe","ownername":"Jane Doe","views":"1500","license":"4"}]},"stat":"ok"}""";
+
+        var result = FlickrConvert.DeserializeObject<FlickrResult<PagedPhotos>>(Encoding.UTF8.GetBytes(json));
+
+        Assert.NotNull(result);
+        var photo = result.Content.Values[0];
+        Assert.Equal("video", photo.Media);
+        Assert.Equal("ready", photo.MediaStatus);
+        Assert.Equal("janedoe", photo.PathAlias);
+        Assert.Equal("Jane Doe", photo.OwnerName);
+        Assert.Equal(1500, photo.Views);
+        Assert.Equal(4, photo.License);
+    }
+
+    [Fact]
+    public void PhotoExtrasGeoPermissions()
+    {
+        const string json = """{"photos":{"page":1,"pages":1,"perpage":10,"total":1,"photo":[{"id":"55500000001","owner":"12345678@N00","secret":"a1b2c3d4e5","server":"65535","farm":66,"title":"Geo Photo","ispublic":1,"isfriend":0,"isfamily":0,"latitude":"48.858","longitude":"2.294","geo_is_family":1,"geo_is_friend":1,"geo_is_contact":0,"geo_is_public":1}]},"stat":"ok"}""";
+
+        var result = FlickrConvert.DeserializeObject<FlickrResult<PagedPhotos>>(Encoding.UTF8.GetBytes(json));
+
+        Assert.NotNull(result);
+        var photo = result.Content.Values[0];
+        Assert.True(photo.GeoIsFamily);
+        Assert.True(photo.GeoIsFriend);
+        Assert.False(photo.GeoIsContact);
+        Assert.True(photo.GeoIsPublic);
+    }
+
+    [Fact]
+    public void PhotoExtrasOriginalInfo()
+    {
+        const string json = """{"photos":{"page":1,"pages":1,"perpage":10,"total":1,"photo":[{"id":"55500000001","owner":"12345678@N00","secret":"a1b2c3d4e5","server":"65535","farm":66,"title":"Original Info","ispublic":1,"isfriend":0,"isfamily":0,"originalformat":"jpg","originalsecret":"f6a7b8c9d0","machine_tags":"dc:author=flickr","rotation":90,"iconserver":"65535","iconfarm":66}]},"stat":"ok"}""";
+
+        var result = FlickrConvert.DeserializeObject<FlickrResult<PagedPhotos>>(Encoding.UTF8.GetBytes(json));
+
+        Assert.NotNull(result);
+        var photo = result.Content.Values[0];
+        Assert.Equal("jpg", photo.OriginalFormat);
+        Assert.Equal("f6a7b8c9d0", photo.OriginalSecret);
+        Assert.Equal("dc:author=flickr", photo.MachineTags);
+        Assert.Equal(90, photo.Rotation);
+        Assert.Equal("65535", photo.IconServer);
+        Assert.Equal(66, photo.IconFarm);
+    }
+
+    [Fact]
+    public void PhotoExtrasAreNullWhenNotRequested()
+    {
+        const string json = """{"photos":{"page":1,"pages":1,"perpage":10,"total":1,"photo":[{"id":"52931686549","owner":"192376927@N06","secret":"9b203d4894","server":"65535","farm":66,"title":"DSC04707","ispublic":1,"isfriend":0,"isfamily":0}]},"stat":"ok"}""";
+
+        var result = FlickrConvert.DeserializeObject<FlickrResult<PagedPhotos>>(Encoding.UTF8.GetBytes(json));
+
+        Assert.NotNull(result);
+        var photo = result.Content.Values[0];
+        Assert.Null(photo.CountFaves);
+        Assert.Null(photo.CountComments);
+        Assert.Null(photo.Media);
+        Assert.Null(photo.PathAlias);
+        Assert.Null(photo.OwnerName);
+        Assert.Null(photo.Views);
+        Assert.Null(photo.License);
+        Assert.Null(photo.GeoIsFamily);
+        Assert.Null(photo.OriginalFormat);
+        Assert.Null(photo.MachineTags);
+        Assert.Null(photo.Rotation);
+    }
+
+    [Fact]
     public void PhotoDimensionsAreNullWhenNotPresent()
     {
         const string json = """{"photos":{"page":1,"pages":1,"perpage":10,"total":1,"photo":[{"id":"52931686549","owner":"192376927@N06","secret":"9b203d4894","server":"65535","farm":66,"title":"DSC04707","ispublic":1,"isfriend":0,"isfamily":0}]},"stat":"ok"}""";

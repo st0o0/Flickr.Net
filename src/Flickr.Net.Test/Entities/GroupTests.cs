@@ -124,6 +124,54 @@ public class GroupTests
     }
 
     [Fact]
+    public void GroupInfoWithPoolAndTopicCount()
+    {
+        const string json = """
+            {
+              "stat": "ok",
+              "group": {
+                "id": "34427465497@N01",
+                "iconserver": "1",
+                "iconfarm": "1",
+                "lang": "en-us",
+                "ispoolmoderated": "0",
+                "name": "Test Group",
+                "description": "A test group",
+                "members": "100",
+                "privacy": "3",
+                "pool_count": 500,
+                "topic_count": 25,
+                "throttle": {
+                  "count": "10",
+                  "mode": "month",
+                  "remaining": "3"
+                },
+                "restrictions": {
+                  "photos_ok": "1",
+                  "videos_ok": "1",
+                  "images_ok": "1",
+                  "screens_ok": "1",
+                  "art_ok": "1",
+                  "safe_ok": "1",
+                  "moderate_ok": "0",
+                  "restricted_ok": "0",
+                  "has_geo": "0"
+                }
+              }
+            }
+            """;
+
+        var result = FlickrConvert.DeserializeObject<FlickrResult<GroupInfo>>(Encoding.UTF8.GetBytes(json));
+
+        Assert.NotNull(result);
+        Assert.False(result.HasError);
+        var group = result.Content;
+        Assert.Equal(500, group.PoolCount);
+        Assert.Equal(25, group.TopicCount);
+        Assert.Equal(100, group.Members);
+    }
+
+    [Fact]
     public void JsonStringToGroups_LongJson()
     {
         const string json = """
