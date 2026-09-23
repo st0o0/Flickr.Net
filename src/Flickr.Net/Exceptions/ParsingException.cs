@@ -5,7 +5,7 @@
 /// </summary>
 /// <remarks>Usually because an unexpected element or attribute was encountered.</remarks>
 [Serializable]
-public class ParsingException : FlickrException
+public sealed class ParsingException : FlickrException
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="ParsingException"/> class.

@@ -3,7 +3,7 @@ namespace Flickr.Net.Exceptions;
 /// <summary>
 /// Exception thrown when an error parsing the returned XML.
 /// </summary>
-public class ResponseXmlException : FlickrException
+public sealed class ResponseXmlException : FlickrException
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="ResponseXmlException"/> class.

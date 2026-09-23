@@ -3,7 +3,7 @@
 /// <summary>
 /// An internal class used for catching caching exceptions.
 /// </summary>
-public class CacheException : Exception
+public sealed class CacheException : Exception
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="CacheException"/> class.

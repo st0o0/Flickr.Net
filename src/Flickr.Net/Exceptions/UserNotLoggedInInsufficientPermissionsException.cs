@@ -7,7 +7,7 @@
 /// The method requires user authentication but the user was not logged in, or the authenticated
 /// method call did not have the required permissions.
 /// </remarks>
-public class UserNotLoggedInInsufficientPermissionsException : FlickrApiException
+public sealed class UserNotLoggedInInsufficientPermissionsException : FlickrApiException
 {
     internal UserNotLoggedInInsufficientPermissionsException(string message) : base(99, message)
     { }

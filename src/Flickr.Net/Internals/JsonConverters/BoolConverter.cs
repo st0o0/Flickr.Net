@@ -1,31 +1,12 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Flickr.Net.Internals.JsonConverters;
-
-/// <summary>
-/// </summary>
-public class BoolConverter : JsonConverter<bool>
+/// <summary>Converts Flickr's numeric boolean values (0/1) to <see langword="bool"/>.</summary>
+public sealed class BoolConverter : JsonConverter<bool>
 {
-    /// <summary>
-    /// </summary>
-    public BoolConverter()
-    {
-    }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>Gets the singleton instance.</summary>
     public static BoolConverter Instance { get; } = new();
-
-    /// <summary>
-    /// </summary>
-    public override bool CanConvert(Type objectType)
-    {
-        return objectType == typeof(bool);
-    }
-
-    /// <summary>
-    /// </summary>
     public override bool Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         switch (reader.TokenType)
@@ -47,9 +28,6 @@ public class BoolConverter : JsonConverter<bool>
                 throw new InvalidOperationException("Can only convert number or string to boolean");
         }
     }
-
-    /// <summary>
-    /// </summary>
     public override void Write(Utf8JsonWriter writer, bool value, JsonSerializerOptions options)
     {
         writer.WriteNumberValue(value ? 1 : 0);

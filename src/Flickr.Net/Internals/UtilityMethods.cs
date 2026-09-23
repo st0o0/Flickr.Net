@@ -161,9 +161,6 @@ public static class UtilityMethods
 
         return UrlFormat(p.Farm, p.Server, p.Id, p.Secret, size, extension);
     }
-
-    /// <summary>
-    /// </summary>
     public static string UrlFormat(Photoset p, SizeType size, string extension)
     {
         return UrlFormat(p.Farm, p.Server, p.Primary, p.Secret, size, extension);

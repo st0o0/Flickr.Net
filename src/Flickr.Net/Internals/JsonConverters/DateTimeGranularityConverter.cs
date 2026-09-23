@@ -1,25 +1,14 @@
-﻿using System.Globalization;
+using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Flickr.Net.Internals.JsonConverters;
-
-/// <summary>
-/// </summary>
-public class DateTimeGranularityConverter : JsonConverter<DateTime>
-{
-    /// <summary>
-    /// </summary>
-    public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
+/// <summary>Converts Flickr date strings with variable granularity to <see cref="DateTime"/>.</summary>
+public sealed class DateTimeGranularityConverter : JsonConverter<DateTime>
+{    public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
     {
-        var content = "";
-        if (value is DateTime dateTime)
-            content = dateTime.ToString("yyyy-MM-dd HH:mm:ss", DateTimeFormatInfo.InvariantInfo);
-        writer.WriteRawValue(content);
+        writer.WriteRawValue(value.ToString("yyyy-MM-dd HH:mm:ss", DateTimeFormatInfo.InvariantInfo));
     }
-
-    /// <summary>
-    /// </summary>
     public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         var date = reader.GetString();

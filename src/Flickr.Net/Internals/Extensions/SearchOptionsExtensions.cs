@@ -2,14 +2,8 @@ using System.Globalization;
 using Flickr.Net.Enums;
 
 namespace Flickr.Net.Internals.Extensions;
-
-/// <summary>
-/// </summary>
 internal static class SearchOptionsExtensions
-{
-    /// <summary>
-    /// </summary>
-    internal static IDictionary<string, string> ToDictionary(this PhotoSearchOptions options)
+{    internal static IDictionary<string, string> ToDictionary(this PhotoSearchOptions options)
     {
         var parameters = new Dictionary<string, string>();
 
@@ -117,9 +111,6 @@ internal static class SearchOptionsExtensions
 
         return parameters;
     }
-
-    /// <summary>
-    /// </summary>
     internal static IDictionary<string, string> ToDictionary(this PartialSearchOptions options)
     {
         var parameters = new Dictionary<string, string>();

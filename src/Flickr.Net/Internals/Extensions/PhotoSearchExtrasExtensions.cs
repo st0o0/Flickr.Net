@@ -1,9 +1,6 @@
 using Flickr.Net.Enums;
 
 namespace Flickr.Net.Internals.Extensions;
-
-/// <summary>
-/// </summary>
 internal static class PhotoSearchExtrasExtensions
 {
     /// <summary>

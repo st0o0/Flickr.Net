@@ -3,7 +3,7 @@ namespace Flickr.Net.Exceptions;
 /// <summary>
 /// Exception thrown is no API key is supplied.
 /// </summary>
-public class ApiKeyRequiredException : FlickrException
+public sealed class ApiKeyRequiredException : FlickrException
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="ApiKeyRequiredException"/> class.

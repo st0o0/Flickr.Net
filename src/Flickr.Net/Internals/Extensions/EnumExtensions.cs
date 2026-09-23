@@ -20,7 +20,7 @@ internal static class EnumExtensions
 
             if (attr.IsValueSetExplicitly)
             {
-                return attr.Value;
+                return attr.Value!;
             }
             return string.Empty;
         }

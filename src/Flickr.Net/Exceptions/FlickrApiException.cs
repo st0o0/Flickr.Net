@@ -51,7 +51,7 @@ public class FlickrApiException : FlickrException
     /// <summary>
     /// Gets the orignal message returned by Flickr.
     /// </summary>
-    public string OriginalMessage { get; set; }
+    public string? OriginalMessage { get; set; }
 
     /// <summary>
     /// Overrides the message to return custom error message.

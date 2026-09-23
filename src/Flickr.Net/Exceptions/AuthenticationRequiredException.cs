@@ -3,7 +3,7 @@ namespace Flickr.Net.Exceptions;
 /// <summary>
 /// Exception thrown when method requires authentication but no authentication token is supplied.
 /// </summary>
-public class AuthenticationRequiredException : FlickrException
+public sealed class AuthenticationRequiredException : FlickrException
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="AuthenticationRequiredException"/> class.

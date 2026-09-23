@@ -28,7 +28,7 @@ internal class StreamedContent(Stream fileStream, IProgress<double> progress, Ca
         return Task.FromResult<Stream>(new ContentStream(_fileStream, _progress));
     }
 
-    protected override async Task SerializeToStreamAsync(Stream stream, TransportContext context)
+    protected override async Task SerializeToStreamAsync(Stream stream, TransportContext? context)
     {
         await _fileStream.CopyToAsync(stream, _progress, cancellationToken: _cancellationToken);
     }

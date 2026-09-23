@@ -1,7 +1,4 @@
-﻿namespace Flickr.Net.Internals.Extensions;
-
-/// <summary>
-/// </summary>
+namespace Flickr.Net.Internals.Extensions;
 internal static class DictionaryExtensions
 {
     /// <summary>
@@ -30,9 +27,6 @@ internal static class DictionaryExtensions
             pairs.Add(key, defaultValue);
         }
     }
-
-    /// <summary>
-    /// </summary>
     /// <typeparam name="TKey"></typeparam>
     /// <typeparam name="TTargetValue"></typeparam>
     /// <typeparam name="TSourceValue"></typeparam>
@@ -48,9 +42,6 @@ internal static class DictionaryExtensions
             pairs.Add(key, func(value));
         }
     }
-
-    /// <summary>
-    /// </summary>
     /// <typeparam name="TKey"></typeparam>
     /// <typeparam name="TSourceValue"></typeparam>
     /// <param name="pairs"></param>

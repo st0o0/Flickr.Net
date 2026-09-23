@@ -1,9 +1,6 @@
-﻿using Flickr.Net.Enums;
+using Flickr.Net.Enums;
 
 namespace Flickr.Net.Internals.Extensions;
-
-/// <summary>
-/// </summary>
 internal static class MemberTypeExtensions
 {
     /// <summary>
@@ -37,30 +34,18 @@ internal static class MemberTypeExtensions
 
         return string.Join(",", types.ToArray());
     }
-
-    /// <summary>
-    /// </summary>
     public static bool Has(this MemberType type, in MemberType value)
     {
         return value <= type;
     }
-
-    /// <summary>
-    /// </summary>
     public static bool Is(this MemberType type, MemberType value)
     {
         return type == value;
     }
-
-    /// <summary>
-    /// </summary>
     public static MemberType Add(this MemberType type, MemberType value)
     {
         return type | value;
     }
-
-    /// <summary>
-    /// </summary>
     public static MemberType Remove(this MemberType type, MemberType value)
     {
         return type & ~value;

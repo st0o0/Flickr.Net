@@ -1,24 +1,13 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 
 namespace Flickr.Net.Internals.JsonConverters.IdentifierConverters;
-
-/// <summary>
-/// </summary>
-public class IdentifierTypeConverter : JsonConverter<IdentifierType>
+/// <summary>Converts Flickr identifier strings to strongly-typed <see cref="IdentifierType"/> records.</summary>
+public sealed class IdentifierTypeConverter : JsonConverter<IdentifierType>
 {
-    /// <summary>
-    /// </summary>
-    public IdentifierTypeConverter()
-    { }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>Gets the singleton instance.</summary>
     public static IdentifierTypeConverter Instance { get; } = new();
-
-    /// <summary>
-    /// </summary>
     public override bool CanConvert(Type typeToConvert)
         => typeToConvert switch
         {
@@ -29,9 +18,6 @@ public class IdentifierTypeConverter : JsonConverter<IdentifierType>
             var value when value == typeof(IdentifierType) => true,
             _ => false
         };
-
-    /// <summary>
-    /// </summary>
     public override IdentifierType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         => typeToConvert switch
         {
@@ -41,9 +27,6 @@ public class IdentifierTypeConverter : JsonConverter<IdentifierType>
             var value when value == typeof(PhotosetId) => (PhotosetId)reader.GetString(),
             _ => default
         };
-
-    /// <summary>
-    /// </summary>
     public override void Write(Utf8JsonWriter writer, IdentifierType value, JsonSerializerOptions options)
         => writer.WriteRawValue((string)value);
 }

@@ -1,19 +1,11 @@
-﻿using System.Globalization;
+using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Flickr.Net.Internals.JsonConverters;
-
-/// <summary>
-/// </summary>
-public class AutoStringToNumberConverter : JsonConverter<object>
-{
-    /// <summary>
-    /// </summary>
-    public static AutoStringToNumberConverter Instance { get; } = new();
-
-    /// <summary>
-    /// </summary>
+/// <summary>Converts JSON string values to numeric types during deserialization.</summary>
+public sealed class AutoStringToNumberConverter : JsonConverter<object>
+{    public static AutoStringToNumberConverter Instance { get; } = new();
     public override bool CanConvert(Type typeToConvert)
     {
         typeToConvert = Nullable.GetUnderlyingType(typeToConvert) ?? typeToConvert;
@@ -26,9 +18,6 @@ public class AutoStringToNumberConverter : JsonConverter<object>
             _ => false,
         };
     }
-
-    /// <summary>
-    /// </summary>
     public override object Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         typeToConvert = Nullable.GetUnderlyingType(typeToConvert) ?? typeToConvert;
@@ -50,7 +39,7 @@ public class AutoStringToNumberConverter : JsonConverter<object>
 
                     return double.TryParse(s, NumberStyles.Float, CultureInfo.InvariantCulture, out var d)
                         ? Convert.ChangeType(d, typeToConvert, CultureInfo.InvariantCulture)
-                        : throw new Exception($"unable to parse {s} to number");
+                        : throw new JsonException($"unable to parse {s} to number");
                 }
             case JsonTokenType.Number:
                 {
@@ -61,13 +50,10 @@ public class AutoStringToNumberConverter : JsonConverter<object>
             default:
                 {
                     using var document = JsonDocument.ParseValue(ref reader);
-                    throw new Exception($"unable to parse {document.RootElement} to number");
+                    throw new JsonException($"unable to parse {document.RootElement} to number");
                 }
         }
     }
-
-    /// <summary>
-    /// </summary>
     public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
     {
         // Invariant so a comma-decimal CurrentCulture never emits "59,928958"

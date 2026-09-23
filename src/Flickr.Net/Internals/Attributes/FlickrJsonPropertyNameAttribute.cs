@@ -1,14 +1,7 @@
-﻿namespace Flickr.Net.Internals.Attributes;
-
-/// <summary>
-/// </summary>
-/// <remarks>
-/// </remarks>
+namespace Flickr.Net.Internals.Attributes;
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
 internal class FlickrJsonPropertyNameAttribute(string jsonPropertyName) : Attribute
 {
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The display name.</summary>
     public string Name { get; } = jsonPropertyName;
 }

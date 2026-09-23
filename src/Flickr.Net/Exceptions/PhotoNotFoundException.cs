@@ -6,7 +6,7 @@
 /// <remarks>
 /// This could mean the photo does not exist, or that you do not have permission to view the photo.
 /// </remarks>
-public class PhotoNotFoundException : FlickrApiException
+public sealed class PhotoNotFoundException : FlickrApiException
 {
     internal PhotoNotFoundException(int code, string message) : base(code, message)
     { }

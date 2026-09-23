@@ -6,7 +6,7 @@ namespace Flickr.Net.Exceptions;
 /// <summary>
 /// An OAuth error occurred when calling one of the OAuth authentication flow methods.
 /// </summary>
-public class OAuthException : Exception
+public sealed class OAuthException : Exception
 {
     private readonly string _mess;
 
