@@ -1,23 +1,12 @@
-﻿using System.Runtime.Serialization;
+using System.Runtime.Serialization;
 
 namespace Flickr.Net.Enums;
-
-/// <summary>
-/// </summary>
+/// <summary>Status of an asynchronous upload ticket.</summary>
 public enum StatusType
-{
-    /// <summary>
-    /// </summary>
-    [EnumMember(Value = "0")]
+{    [EnumMember(Value = "0")]
     NotCompleted = 0,
-
-    /// <summary>
-    /// </summary>
     [EnumMember(Value = "1")]
     Completed = 1,
-
-    /// <summary>
-    /// </summary>
     [EnumMember(Value = "2")]
     Failed = 2,
 }

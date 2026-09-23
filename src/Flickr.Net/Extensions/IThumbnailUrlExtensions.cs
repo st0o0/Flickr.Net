@@ -1,15 +1,10 @@
-﻿using Flickr.Net.Enums;
+using Flickr.Net.Enums;
 using Flickr.Net.Internals;
 
 namespace Flickr.Net.Extensions;
-
-/// <summary>
-/// </summary>
+/// <summary>Extension methods for constructing thumbnail image URLs.</summary>
 public static class IThumbnailUrlExtensions
-{
-    /// <summary>
-    /// </summary>
-    public static string ToThumbnailUrl(this IThumbnailUrl value)
+{    public static string ToThumbnailUrl(this IThumbnailUrl value)
     {
         return value switch
         {

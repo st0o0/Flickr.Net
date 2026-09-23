@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using Flickr.Net.Enums;
 using Flickr.Net.Flickrs.Results;
 using Flickr.Net.Internals.Extensions;
@@ -117,7 +117,7 @@ public interface IFlickrFavorites
     /// <param name="page">The page to download this time.</param>
     /// <param name="perPage">Number of photos to include per page.</param>
     /// <param name="cancellationToken"></param>
-    Task<PagedPhotos> GetListAsync(string userId = null, DateTime? minFavoriteDate = null, DateTime? maxFavoriteDate = null, PhotoSearchExtras extras = PhotoSearchExtras.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<PagedPhotos> GetListAsync(string? userId = null, DateTime? minFavoriteDate = null, DateTime? maxFavoriteDate = null, PhotoSearchExtras extras = PhotoSearchExtras.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets the public favourites for a specified user.

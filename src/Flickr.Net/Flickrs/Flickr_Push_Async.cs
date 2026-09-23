@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using Flickr.Net.Entities;
 using Flickr.Net.Enums;
 using Flickr.Net.Internals.Extensions;
@@ -152,7 +152,7 @@ public interface IFlickrPush
     /// listed will be included in the subscription. Only valid if the topic is 'tags'
     /// </param>
     /// <param name="cancellationToken"></param>
-    Task SubscribeAsync(string topic, string callback, string verify, string verifyToken = null,
+    Task SubscribeAsync(string topic, string callback, string verify, string? verifyToken = null,
                                    int? leaseSeconds = null, IEnumerable<WoeId> woeIds = null, IEnumerable<PlaceId> placeIds = null, double? latitude = null,
                                    double? longitude = null, int? radius = null, RadiusUnit radiusUnits = RadiusUnit.None, GeoAccuracy accuracy = GeoAccuracy.None,
                                    IEnumerable<string> nsids = null, IEnumerable<string> tags = null, CancellationToken cancellationToken = default);
@@ -167,5 +167,5 @@ public interface IFlickrPush
     /// The verification token to include in the unsubscribe verification process.
     /// </param>
     /// <param name="cancellationToken"></param>
-    Task UnsubscribeAsync(string topic, string callback, string verify, string verifyToken = null, CancellationToken cancellationToken = default);
+    Task UnsubscribeAsync(string topic, string callback, string verify, string? verifyToken = null, CancellationToken cancellationToken = default);
 }

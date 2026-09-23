@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using Flickr.Net.Enums;
 using Flickr.Net.Flickrs.Results;
 using Flickr.Net.Internals.Extensions;
@@ -130,7 +130,7 @@ public interface IFlickrGroupsPools
     /// <param name="page">The page to return.</param>
     /// <param name="perPage">The number of photos per page.</param>
     /// <param name="cancellationToken"></param>
-    Task<PagedPhotos> GetPhotosAsync(string groupId, string tags = null, string userId = null, PhotoSearchExtras extras = PhotoSearchExtras.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<PagedPhotos> GetPhotosAsync(string groupId, string? tags = null, string? userId = null, PhotoSearchExtras extras = PhotoSearchExtras.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Remove a picture from a group.

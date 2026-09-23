@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using Flickr.Net.Internals.Extensions;
 
 namespace Flickr.Net;
@@ -115,7 +115,7 @@ public interface IFlickrMachineTags
     /// maximum allowed value is 500.
     /// </param>
     /// <param name="cancellationToken"></param>
-    Task<Namespaces> GetNamespacesAsync(string predicate = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<Namespaces> GetNamespacesAsync(string? predicate = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Return a list of unique namespace and predicate pairs, optionally limited by predicate or
@@ -135,7 +135,7 @@ public interface IFlickrMachineTags
     /// maximum allowed value is 500.
     /// </param>
     /// <param name="cancellationToken"></param>
-    Task<Pairs> GetPairsAsync(string namespaceName = null, string predicate = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<Pairs> GetPairsAsync(string? namespaceName = null, string? predicate = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Return a list of unique predicates, optionally limited by a given namespace, in alphabetical order.
@@ -151,7 +151,7 @@ public interface IFlickrMachineTags
     /// The maximum allowed value is 500.
     /// </param>
     /// <param name="cancellationToken"></param>
-    Task<Predicates> GetPredicatesAsync(string namespaceName = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<Predicates> GetPredicatesAsync(string? namespaceName = null, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Fetch recently used (or created) machine tags values.
@@ -162,7 +162,7 @@ public interface IFlickrMachineTags
     /// Only return machine tags values that have been added since this timestamp.
     /// </param>
     /// <param name="cancellationToken"></param>
-    Task<Values> GetRecentValuesAsync(string namespaceName = null, string predicate = null, DateTime? addedSince = null, CancellationToken cancellationToken = default);
+    Task<Values> GetRecentValuesAsync(string? namespaceName = null, string? predicate = null, DateTime? addedSince = null, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Return a list of unique values for a namespace and predicate.

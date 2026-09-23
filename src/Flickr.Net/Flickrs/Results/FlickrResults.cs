@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 using Flickr.Net.Internals.Attributes;
@@ -15,7 +15,7 @@ public record FlickrResult<T> : FlickrResult where T : IFlickrEntity
     /// If the call was successful then this contains the result.
     /// </summary>
     [JsonPropertyGenericTypeName(0)]
-    public T Content { get; set; }
+    public T? Content { get; init; }
 }
 
 /// <summary>
@@ -27,62 +27,44 @@ public record FlickrResult : IFlickrEntity
     /// True if the result returned an error.
     /// </summary>
     public bool HasError => State != "ok" || ErrorCode > 0;
-
-    /// <summary>
-    /// </summary>
     [JsonPropertyName("stat")]
-    public virtual string State { get; set; } = string.Empty;
+    /// <summary>The response status.</summary>
+    public virtual string State { get; init; } = string.Empty;
 
     /// <summary>
     /// If an error was returned by the Flickr API then this will contain the error code.
     /// </summary>
     [JsonPropertyName("code")]
-    public int ErrorCode { get; set; } = int.MinValue;
+    public int ErrorCode { get; init; } = int.MinValue;
 
     /// <summary>
     /// If an error was returned by the Flickr API then this will contain the error message.
     /// </summary>
     [JsonPropertyName("message")]
-    public string ErrorMessage { get; set; } = string.Empty;
+    public string ErrorMessage { get; init; } = string.Empty;
 }
-
-/// <summary>
-/// </summary>
 /// <typeparam name="TNextPhoto"></typeparam>
 /// <typeparam name="TPrevPhoto"></typeparam>
 public record FlickrContextResult<TNextPhoto, TPrevPhoto> : FlickrResult where TNextPhoto : IFlickrEntity where TPrevPhoto : IFlickrEntity
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("count")]
-    public Count Count { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("count")]
+    /// <summary>The count.</summary>
+    public Count Count { get; init; }
     [JsonPropertyGenericTypeName(0)]
-    public TNextPhoto NextPhoto { get; set; }
-
-    /// <summary>
-    /// </summary>
+    /// <summary>The next photo in the context.</summary>
+    public TNextPhoto? NextPhoto { get; init; }
     [JsonPropertyGenericTypeName(1)]
-    public TPrevPhoto PrevPhoto { get; set; }
+    /// <summary>The previous photo in the context.</summary>
+    public TPrevPhoto? PrevPhoto { get; init; }
 }
-
-/// <summary>
-/// </summary>
 /// <typeparam name="TPrimary"></typeparam>
 /// <typeparam name="TSecond"></typeparam>
 public record FlickrAllContextResult<TPrimary, TSecond> : FlickrResult where TPrimary : IFlickrEntity where TSecond : IFlickrEntity
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyGenericTypeName(0)]
-    public List<TPrimary> Primary { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyGenericTypeName(0)]
+    /// <summary>The primary photo identifier.</summary>
+    public List<TPrimary> Primary { get; init; } = [];
     [JsonPropertyGenericTypeName(1)]
-    public List<TSecond> Second { get; set; }
+    /// <summary>The secondary items.</summary>
+    public List<TSecond> Second { get; init; } = [];
 }
 
 /// <summary>
@@ -95,54 +77,23 @@ public record FlickrUnknownResult<T> : FlickrResult where T : UnknownResponse
     /// If the call was successful then this contains the result.
     /// </summary>
     [JsonPropertyGenericTypeName(0)]
-    public T Content { get; set; }
+    public T? Content { get; init; }
 }
-
-/// <summary>
-/// </summary>
 /// <typeparam name="T"></typeparam>
 public record FlickrStatsResult<T> : FlickrResult<T> where T : IFlickrEntity
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("period")]
-    public string Period { get; set; }
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("period")]
+    /// <summary>The stats period.</summary>
+    public string? Period { get; init; }
     [JsonPropertyName("count")]
-    public int Count { get; set; }
+    /// <summary>The count.</summary>
+    public int Count { get; init; }
 }
-
-/// <summary>
-/// </summary>
+/// <summary>Result type for Flickr API responses with dynamic/unknown content structure.</summary>
 public record FlickrExtendedDataResult : FlickrResult
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("@stat")]
-    public override string State { get; set; } = string.Empty;
-
-    /// <summary>
-    /// </summary>
+{    [JsonPropertyName("@stat")]
+    /// <summary>The response status.</summary>
+    public override string State { get; init; } = string.Empty;
     [JsonExtensionData]
-    public IDictionary<string, JsonElement> Content { get; set; }
-}
-
-/// <summary>
-/// </summary>
-public struct Count
-{
-    /// <summary>
-    /// </summary>
-    [JsonPropertyName("_content")]
-    public int Content { get; set; }
-
-    /// <summary>
-    /// </summary>
-    public static implicit operator int(Count count) => count.Content;
-
-    /// <summary>
-    /// </summary>
-    public static implicit operator Count(int count) => new() { Content = count };
+    /// <summary>The text content.</summary>
+    public IDictionary<string, JsonElement> Content { get; init; } = new Dictionary<string, JsonElement>();
 }

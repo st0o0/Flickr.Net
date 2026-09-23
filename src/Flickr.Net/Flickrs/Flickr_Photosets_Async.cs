@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using Flickr.Net.Enums;
 using Flickr.Net.Flickrs.Results;
 using Flickr.Net.Internals.Extensions;
@@ -238,7 +238,7 @@ public interface IFlickrPhotosets
     /// </param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<string> CreateAsync(string title, string primaryPhotoId, string description = null, CancellationToken cancellationToken = default);
+    Task<string> CreateAsync(string title, string primaryPhotoId, string? description = null, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Deletes the specified photoset.
@@ -255,7 +255,7 @@ public interface IFlickrPhotosets
     /// <param name="description">The new description for the photoset.</param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task EditMetaAsync(string photosetId, string title, string description = null, CancellationToken cancellationToken = default);
+    Task EditMetaAsync(string photosetId, string title, string? description = null, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Sets the photos for a photoset.

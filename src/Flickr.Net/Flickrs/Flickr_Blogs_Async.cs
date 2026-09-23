@@ -1,4 +1,4 @@
-﻿using Flickr.Net.Internals.Extensions;
+using Flickr.Net.Internals.Extensions;
 
 namespace Flickr.Net;
 
@@ -73,5 +73,5 @@ public interface IFlickrBlogs
     /// <param name="description">The body of the blog post.</param>
     /// <param name="blogPassword">The password of the blog if it is not already stored in flickr.</param>
     /// <param name="cancellationToken"></param>
-    Task PostPhotoAsync(string blogId, string photoId, string title, string description, string blogPassword = null, CancellationToken cancellationToken = default);
+    Task PostPhotoAsync(string blogId, string photoId, string title, string description, string? blogPassword = null, CancellationToken cancellationToken = default);
 }

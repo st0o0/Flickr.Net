@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using Flickr.Net.Entities;
 using Flickr.Net.Enums;
 using Flickr.Net.Internals.Extensions;
@@ -147,5 +147,5 @@ public interface IFlickrPhotosSuggestions
     /// <param name="placeId">The Flickr place id of the location to suggest.</param>
     /// <param name="note">A note to add to the suggestion.</param>
     /// <param name="cancellationToken"></param>
-    Task SuggestLocationAsync(string photoId, double latitude, double longitude, GeoAccuracy accuracy = GeoAccuracy.None, WoeId? woeId = null, PlaceId? placeId = null, string note = null, CancellationToken cancellationToken = default);
+    Task SuggestLocationAsync(string photoId, double latitude, double longitude, GeoAccuracy accuracy = GeoAccuracy.None, WoeId? woeId = null, PlaceId? placeId = null, string? note = null, CancellationToken cancellationToken = default);
 }

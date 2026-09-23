@@ -1,4 +1,4 @@
-﻿using System.Runtime.Serialization;
+using System.Runtime.Serialization;
 
 namespace Flickr.Net.Enums;
 
@@ -6,14 +6,8 @@ namespace Flickr.Net.Enums;
 /// The time type.
 /// </summary>
 public enum TimeType
-{
-    /// <summary>
-    /// </summary>
-    [EnumMember(Value = "h")]
+{    [EnumMember(Value = "h")]
     Hours,
-
-    /// <summary>
-    /// </summary>
     [EnumMember(Value = "d")]
     Days
 }

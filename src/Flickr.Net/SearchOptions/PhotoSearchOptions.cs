@@ -25,7 +25,7 @@ public record PhotoSearchOptions
     /// passed in.
     /// </summary>
     /// <param name="userId">The ID of the User to search for.</param>
-    public PhotoSearchOptions(string userId) : this(userId, null, TagMode.AllTags, null)
+    public PhotoSearchOptions(string? userId) : this(userId, null, TagMode.AllTags, null)
     {
     }
 
@@ -34,7 +34,7 @@ public record PhotoSearchOptions
     /// </summary>
     /// <param name="userId">The ID of the User to search for.</param>
     /// <param name="tags">The tags (comma delimited) to search for. Will match all tags.</param>
-    public PhotoSearchOptions(string userId, string tags) : this(userId, tags, TagMode.AllTags, null)
+    public PhotoSearchOptions(string? userId, string? tags) : this(userId, tags, TagMode.AllTags, null)
     {
     }
 
@@ -45,7 +45,7 @@ public record PhotoSearchOptions
     /// <param name="userId">The ID of the User to search for.</param>
     /// <param name="tags">The tags (comma delimited) to search for.</param>
     /// <param name="tagMode">The <see cref="TagMode"/> to use to search.</param>
-    public PhotoSearchOptions(string userId, string tags, TagMode tagMode) : this(userId, tags, tagMode, null)
+    public PhotoSearchOptions(string? userId, string? tags, TagMode tagMode) : this(userId, tags, tagMode, null)
     {
     }
 
@@ -57,7 +57,7 @@ public record PhotoSearchOptions
     /// <param name="tags">The tags (comma delimited) to search for.</param>
     /// <param name="tagMode">The <see cref="TagMode"/> to use to search.</param>
     /// <param name="text">The text to search for in photo title and descriptions.</param>
-    public PhotoSearchOptions(string userId, string tags, TagMode tagMode, string text)
+    public PhotoSearchOptions(string? userId, string? tags, TagMode tagMode, string? text)
     {
         UserId = userId;
         Tags = tags;
@@ -68,7 +68,7 @@ public record PhotoSearchOptions
     /// <summary>
     /// The user Id of the user to search on. Defaults to null for no specific user.
     /// </summary>
-    public string UserId { get; init; }
+    public string? UserId { get; init; }
 
     /// <summary>
     /// The geocontext for the resulting photos.
@@ -78,12 +78,12 @@ public record PhotoSearchOptions
     /// <summary>
     /// The group id of the group to search within.
     /// </summary>
-    public string GroupId { get; init; }
+    public string? GroupId { get; init; }
 
     /// <summary>
     /// A comma delimited list of tags
     /// </summary>
-    public string Tags { get; init; }
+    public string? Tags { get; init; }
 
     /// <summary>
     /// Tag mode can either be 'all', or 'any'. Defaults to <see cref="TagMode.AllTags"/>
@@ -97,7 +97,7 @@ public record PhotoSearchOptions
     /// See https://www.flickr.com/services/api/flickr.photos.search.html for details on how to
     /// search for machine tags.
     /// </remarks>
-    public string MachineTags { get; init; }
+    public string? MachineTags { get; init; }
 
     /// <summary>
     /// The machine tag mode.
@@ -108,7 +108,7 @@ public record PhotoSearchOptions
     /// <summary>
     /// Search for the given text in photo titles and descriptions.
     /// </summary>
-    public string Text { get; init; }
+    public string? Text { get; init; }
 
     /// <summary>
     /// Minimum date uploaded. Defaults to <see cref="DateTime.MinValue"/> which signifies that the
@@ -172,7 +172,7 @@ public record PhotoSearchOptions
     /// <summary>
     /// The boundary box for which to search for geo location photos.
     /// </summary>
-    public BoundaryBox BoundaryBox { get; init; }
+    public BoundaryBox? BoundaryBox { get; init; }
 
     /// <summary>
     /// Which type of safe search to perform.
@@ -249,22 +249,22 @@ public record PhotoSearchOptions
     /// <summary>
     /// If set then will return photos tagged as containing the given person.
     /// </summary>
-    public string PersonId { get; init; }
+    public string? PersonId { get; init; }
 
     /// <summary>
     /// Search for photos taken with a particular camera.
     /// </summary>
-    public string Camera { get; init; }
+    public string? Camera { get; init; }
 
     /// <summary>
     /// I've no idea what this does. The Flickr API comment is simply: Jump, jump!
     /// </summary>
-    public string JumpTo { get; init; }
+    public string? JumpTo { get; init; }
 
     /// <summary>
     /// Search for photos by the users 'username'
     /// </summary>
-    public string Username { get; init; }
+    public string? Username { get; init; }
 
     /// <summary>
     /// The minimum exposure to return photos for.
@@ -299,22 +299,22 @@ public record PhotoSearchOptions
     /// <summary>
     /// Exclude a specific user ID from the search results.
     /// </summary>
-    public string ExcludeUserID { get; init; }
+    public string? ExcludeUserID { get; init; }
 
     /// <summary>
     /// The ID of the Foursquare Venue to return photos for.
     /// </summary>
-    public string FoursquareVenueID { get; init; }
+    public string? FoursquareVenueID { get; init; }
 
     /// <summary>
     /// The WOE ID of the Foursquare Venue to return photos for.
     /// </summary>
-    public string FoursquareWoeID { get; init; }
+    public string? FoursquareWoeID { get; init; }
 
     /// <summary>
     /// The path alias for a group to search.
     /// </summary>
-    public string GroupPathAlias { get; init; }
+    public string? GroupPathAlias { get; init; }
 
     /// <summary>
     /// A list of the new color codes.
@@ -323,12 +323,12 @@ public record PhotoSearchOptions
     /// Acceptable values are "0"-"9" and "a"-"e". Or you can use a color name such as "yellow",
     /// "blue", "green" etc.
     /// </remarks>
-    public ICollection<string> ColorCodes { get; init; }
+    public ICollection<string>? ColorCodes { get; init; }
 
     /// <summary>
     /// A collection of styles the search results will be filtered against.
     /// </summary>
-    public ICollection<Style> Styles { get; init; }
+    public ICollection<Style>? Styles { get; init; }
 
     /// <summary>
     /// Calculates the Uri for a Flash slideshow for the given search options.

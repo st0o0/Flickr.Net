@@ -1,33 +1,16 @@
-﻿using System.Runtime.Serialization;
+using System.Runtime.Serialization;
 
 namespace Flickr.Net.Enums;
-
-/// <summary>
-/// </summary>
+/// <summary>Type of URL associated with a Flickr entity.</summary>
 public enum UrlType
-{
-    /// <summary>
-    /// </summary>
-    [EnumMember(Value = "none")]
+{    [EnumMember(Value = "none")]
     None,
-
-    /// <summary>
-    /// </summary>
     [EnumMember(Value = "site")]
     Site,
-
-    /// <summary>
-    /// </summary>
     [EnumMember(Value = "license")]
     License,
-
-    /// <summary>
-    /// </summary>
     [EnumMember(Value = "flickr")]
     Flickr,
-
-    /// <summary>
-    /// </summary>
     [EnumMember(Value = "photopage")]
     PhotoPage,
 }

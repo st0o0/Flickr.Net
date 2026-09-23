@@ -1,14 +1,9 @@
-﻿using Flickr.Net.Internals;
+using Flickr.Net.Internals;
 
 namespace Flickr.Net.Extensions;
-
-/// <summary>
-/// </summary>
+/// <summary>Extension methods for constructing buddy icon (avatar) URLs.</summary>
 public static class IBuddyIconExtensions
-{
-    /// <summary>
-    /// </summary>
-    public static string ToBuddyIconUrl(this IBuddyIcon value)
+{    public static string ToBuddyIconUrl(this IBuddyIcon value)
     {
         return value switch
         {

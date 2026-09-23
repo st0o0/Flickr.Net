@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using Flickr.Net.Entities;
 using Flickr.Net.Enums;
 using Flickr.Net.Internals.Extensions;

@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using Flickr.Net.Enums;
 using Flickr.Net.Internals.Extensions;
 
@@ -174,7 +174,7 @@ public interface IFlickrGalleries
     /// <param name="comment">A short comment or story to accompany the photo.</param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task AddPhotoAsync(string galleryId, string photoId, string comment = null, CancellationToken cancellationToken = default);
+    Task AddPhotoAsync(string galleryId, string photoId, string? comment = null, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Create a new gallery for the calling user.
@@ -183,7 +183,7 @@ public interface IFlickrGalleries
     /// <param name="description">A short description for the gallery.</param>
     /// <param name="primaryPhotoId">The first photo to add to your gallery.</param>
     /// <param name="cancellationToken"></param>
-    Task CreateAsync(string title, string description, string primaryPhotoId = null, CancellationToken cancellationToken = default);
+    Task CreateAsync(string title, string description, string? primaryPhotoId = null, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Modify the meta-data for a gallery.
@@ -192,7 +192,7 @@ public interface IFlickrGalleries
     /// <param name="title">The new title for the gallery.</param>
     /// <param name="description">The new description for the gallery.</param>
     /// <param name="cancellationToken"></param>
-    Task EditMetaAsync(string galleryId, string title, string description = null, CancellationToken cancellationToken = default);
+    Task EditMetaAsync(string galleryId, string title, string? description = null, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Edit the comment for a gallery photo.
@@ -279,5 +279,5 @@ public interface IFlickrGalleries
     /// <param name="fullResponse"></param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task RemovePhoto(string galleryId, string photoId, string fullResponse = null, CancellationToken cancellationToken = default);
+    Task RemovePhoto(string galleryId, string photoId, string? fullResponse = null, CancellationToken cancellationToken = default);
 }

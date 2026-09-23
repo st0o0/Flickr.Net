@@ -1,4 +1,4 @@
-﻿using Flickr.Net.Internals.Extensions;
+using Flickr.Net.Internals.Extensions;
 
 namespace Flickr.Net;
 
@@ -62,5 +62,5 @@ public interface IFlickrCollections
     /// The ID of the user to fetch the tree for, or null if using the authenticated user.
     /// </param>
     /// <param name="cancellationToken"></param>
-    Task<Collections> GetTreeAsync(string collectionId = null, string userId = null, CancellationToken cancellationToken = default);
+    Task<Collections> GetTreeAsync(string? collectionId = null, string? userId = null, CancellationToken cancellationToken = default);
 }

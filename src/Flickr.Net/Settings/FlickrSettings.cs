@@ -26,12 +26,12 @@ public class FlickrSettings
     /// <summary>
     /// OAuth Access Token. Needed for authenticated access using OAuth to Flickr.
     /// </summary>
-    public string OAuthAccessToken { get; set; }
+    public string? OAuthAccessToken { get; set; }
 
     /// <summary>
     /// OAuth Access Token Secret. Needed for authenticated access using OAuth to Flickr.
     /// </summary>
-    public string OAuthAccessTokenSecret { get; set; }
+    public string? OAuthAccessTokenSecret { get; set; }
 
     /// <summary>
     /// Internal timeout for all web requests in milliseconds. Defaults to 30 seconds.

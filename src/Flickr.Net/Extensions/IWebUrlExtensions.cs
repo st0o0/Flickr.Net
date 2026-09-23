@@ -1,14 +1,9 @@
-﻿using System.Globalization;
+using System.Globalization;
 
 namespace Flickr.Net.Extensions;
-
-/// <summary>
-/// </summary>
+/// <summary>Extension methods for constructing Flickr web page URLs.</summary>
 public static class IWebUrlExtensions
-{
-    /// <summary>
-    /// </summary>
-    public static string ToWebUrl(this IWebUrl value)
+{    public static string ToWebUrl(this IWebUrl value)
     {
         return value switch
         {

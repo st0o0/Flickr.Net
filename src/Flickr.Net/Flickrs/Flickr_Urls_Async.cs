@@ -1,4 +1,4 @@
-﻿using Flickr.Net.Internals.Extensions;
+using Flickr.Net.Internals.Extensions;
 
 namespace Flickr.Net;
 
@@ -108,7 +108,7 @@ public interface IFlickrUrls
     /// The NSID of the user to fetch the url for. If omitted, the calling user is assumed.
     /// </param>
     /// <param name="cancellationToken"></param>
-    Task<string> GetUserPhotosAsync(string userId = null, CancellationToken cancellationToken = default);
+    Task<string> GetUserPhotosAsync(string? userId = null, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Returns the url to a user's profile.
@@ -118,7 +118,7 @@ public interface IFlickrUrls
     /// </param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<string> GetUserProfileAsync(string userId = null, CancellationToken cancellationToken = default);
+    Task<string> GetUserProfileAsync(string? userId = null, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Returns gallery info, by url.

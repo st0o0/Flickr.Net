@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using Flickr.Net.Enums;
 using Flickr.Net.Exceptions;
 using Flickr.Net.Flickrs.Results;
@@ -563,7 +563,7 @@ public interface IFlickrPhotos
     /// </param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<PhotoExif> GetExifAsync(string photoId, string secret = null, CancellationToken cancellationToken = default);
+    Task<PhotoExif> GetExifAsync(string photoId, string? secret = null, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get the list of favourites for a photo.
@@ -585,7 +585,7 @@ public interface IFlickrPhotos
     /// </param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<PhotoInfo> GetInfoAsync(string photoId, string secret = null, CancellationToken cancellationToken = default);
+    Task<PhotoInfo> GetInfoAsync(string photoId, string? secret = null, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets a list of the authenticated users photos which are not in a set.
@@ -741,7 +741,7 @@ public interface IFlickrPhotos
     /// <param name="cancellationToken"></param>
     /// <exception cref="FlickrApiException">Thrown when the photo id cannot be found.</exception>
     /// <return></return>
-    Task SetMetaAsync(string photoId, string title = null, string description = null, CancellationToken cancellationToken = default);
+    Task SetMetaAsync(string photoId, string? title = null, string? description = null, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Set the permissions on a photo.

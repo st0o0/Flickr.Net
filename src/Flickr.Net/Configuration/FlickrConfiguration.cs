@@ -10,12 +10,12 @@ public class FlickrConfiguration
     /// <summary>
     /// Gets or sets the api key.
     /// </summary>
-    public string ApiKey { get; set; }
+    public required string ApiKey { get; set; }
 
     /// <summary>
     /// Gets or sets the shared secret.
     /// </summary>
-    public string SharedSecret { get; set; }
+    public required string SharedSecret { get; set; }
 
     /// <summary>
     /// Gets or sets the default extras to include in photo search results.

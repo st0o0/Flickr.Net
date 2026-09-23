@@ -1,15 +1,10 @@
-﻿using Flickr.Net.Enums;
+using Flickr.Net.Enums;
 using Flickr.Net.Internals;
 
 namespace Flickr.Net.Extensions;
-
-/// <summary>
-/// </summary>
+/// <summary>Extension methods for constructing original size image URLs.</summary>
 public static class IOriginalUrlExtensions
-{
-    /// <summary>
-    /// </summary>
-    public static string ToOriginalUrl(this IOriginalUrl value) => value switch
+{    public static string ToOriginalUrl(this IOriginalUrl value) => value switch
     {
         PhotoInfo photoInfo => UtilityMethods.UrlFormat(photoInfo, SizeType.Original, "jpg"),
         _ => string.Empty

@@ -1,15 +1,10 @@
-﻿using Flickr.Net.Enums;
+using Flickr.Net.Enums;
 using Flickr.Net.Internals;
 
 namespace Flickr.Net.Extensions;
-
-/// <summary>
-/// </summary>
+/// <summary>Extension methods for constructing medium (500px) image URLs.</summary>
 public static class IMediumExtensions
-{
-    /// <summary>
-    /// </summary>
-    public static string ToMediumUrl(this IMediumUrl value)
+{    public static string ToMediumUrl(this IMediumUrl value)
     {
         return value switch
         {

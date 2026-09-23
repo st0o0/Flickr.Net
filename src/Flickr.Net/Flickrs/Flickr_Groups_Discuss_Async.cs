@@ -1,4 +1,4 @@
-﻿namespace Flickr.Net;
+namespace Flickr.Net;
 
 /// <summary>
 /// The flickr.
@@ -14,12 +14,6 @@ public sealed partial class FlickrClient : IFlickrGroupsDiscuss
 /// The flickr groups discuss.
 /// </summary>
 public interface IFlickrGroupsDiscuss
-{
-    /// <summary>
-    /// </summary>
-    IFlickrGroupsDiscussReplies Replies { get; }
-
-    /// <summary>
-    /// </summary>
+{    IFlickrGroupsDiscussReplies Replies { get; }
     IFlickrGroupsDiscussTopics Topics { get; }
 }

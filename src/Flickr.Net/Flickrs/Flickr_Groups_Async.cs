@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using Flickr.Net.Internals.Extensions;
 
 namespace Flickr.Net;
@@ -91,17 +91,8 @@ public sealed partial class FlickrClient : IFlickrGroups
 /// The flickr groups.
 /// </summary>
 public interface IFlickrGroups
-{
-    /// <summary>
-    /// </summary>
-    IFlickrGroupsDiscuss Discuss { get; }
-
-    /// <summary>
-    /// </summary>
+{    IFlickrGroupsDiscuss Discuss { get; }
     IFlickrGroupsMembers Members { get; }
-
-    /// <summary>
-    /// </summary>
     IFlickrGroupsPools Pools { get; }
 
     /// <summary>
