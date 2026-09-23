@@ -1,6 +1,6 @@
 # Migration Guide
 
-## v2.0.0
+## v0.4.0
 
 ### `Flickr` → `FlickrClient`
 

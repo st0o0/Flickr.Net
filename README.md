@@ -149,7 +149,7 @@ services.AddFlickr(o =>
 
 ## Migration
 
-Upgrading from v1.x? See the [Migration Guide](MIGRATION.md).
+Upgrading from v0.3.x? See the [Migration Guide](MIGRATION.md).
 
 ## Requirements
 
