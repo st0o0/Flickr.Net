@@ -22,6 +22,8 @@ jobs:
     needs: release-please
     if: needs.release-please.outputs.release_created == 'true'
     uses: st0o0/github-workflows/.github/workflows/dotnet-build-nuget.yml@main
+    permissions:
+      contents: read
     with:
       version: ${{ needs.release-please.outputs.version }}
       solution-file: Flickr.Net.slnx
