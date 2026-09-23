@@ -52,7 +52,7 @@ jobs:
           --source https://api.nuget.org/v3/index.json
           --skip-duplicate ./packages/*.nupkg
       - name: Attach .nupkg to GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: v${{ needs.release-please.outputs.version }}
           files: ./packages/*.nupkg
