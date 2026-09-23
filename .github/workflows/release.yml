@@ -9,8 +9,6 @@ concurrency:
   group: release
   cancel-in-progress: false
 
-permissions: {}
-
 jobs:
   release-please:
     uses: st0o0/github-workflows/.github/workflows/release-please.yml@main
