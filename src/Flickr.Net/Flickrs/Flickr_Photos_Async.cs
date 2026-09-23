@@ -10,7 +10,7 @@ namespace Flickr.Net;
 /// <summary>
 /// The flickr.
 /// </summary>
-public partial class Flickr : IFlickrPhotos
+public sealed partial class FlickrClient : IFlickrPhotos
 {
     IFlickrPhotosComments IFlickrPhotos.Comments => this;
 

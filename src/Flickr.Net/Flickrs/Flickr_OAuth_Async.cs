@@ -10,7 +10,7 @@ namespace Flickr.Net;
 /// <summary>
 /// The flickr.
 /// </summary>
-public partial class Flickr : IFlickrOAuth
+public sealed partial class FlickrClient : IFlickrOAuth
 {
     async Task<OAuth> IFlickrOAuth.CheckTokenAsync(CancellationToken cancellationToken)
     {
@@ -38,7 +38,7 @@ public partial class Flickr : IFlickrOAuth
 
         parameters.Add("oauth_signature", sig);
 
-        var result = await FlickrResponder.GetDataResponseAsync(this, url, parameters, cancellationToken);
+        var result = await _responder.GetDataResponseAsync(this, url, parameters, cancellationToken);
 
         using var stream = new MemoryStream(result);
         using var streamReader = new StreamReader(stream);
@@ -63,7 +63,7 @@ public partial class Flickr : IFlickrOAuth
 
         parameters.Add("oauth_signature", sig);
 
-        var result = await FlickrResponder.GetDataResponseAsync(this, url, parameters, cancellationToken);
+        var result = await _responder.GetDataResponseAsync(this, url, parameters, cancellationToken);
 
         using var stream = new MemoryStream(result);
         using var streamReader = new StreamReader(stream);

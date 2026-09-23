@@ -11,7 +11,7 @@ namespace Flickr.Net;
 /// <summary>
 /// The flickr.
 /// </summary>
-public partial class Flickr : IFlickrUpload
+public sealed partial class FlickrClient : IFlickrUpload
 {
     async Task<string> IFlickrUpload.UploadPictureAsync(Stream stream, string fileName, string title,
          string description, string tags, bool isPublic, bool isFamily, bool isFriend,
@@ -87,7 +87,7 @@ public partial class Flickr : IFlickrUpload
         return result.GetProperty("#text").GetString();
     }
 
-    private static async Task<JsonElement> UploadDataAsync(Stream imageStream, string fileName, IProgress<double> progress, Uri uploadUri, Dictionary<string, string> parameters, CancellationToken cancellationToken = default)
+    private async Task<JsonElement> UploadDataAsync(Stream imageStream, string fileName, IProgress<double> progress, Uri uploadUri, Dictionary<string, string> parameters, CancellationToken cancellationToken = default)
     {
         var authHeader = FlickrResponder.OAuthCalculateAuthHeader(parameters);
 
@@ -107,9 +107,7 @@ public partial class Flickr : IFlickrUpload
             requestMessage.Headers.Add("Authorization", authHeader);
         }
 
-        var client = new HttpClient();
-
-        var responseMessage = await client.SendAsync(requestMessage, cancellationToken);
+        var responseMessage = await _httpClient.SendAsync(requestMessage, cancellationToken);
 
         responseMessage.EnsureSuccessStatusCode();
 

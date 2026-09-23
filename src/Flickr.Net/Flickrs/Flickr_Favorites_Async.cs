@@ -8,7 +8,7 @@ namespace Flickr.Net;
 /// <summary>
 /// The flickr.
 /// </summary>
-public partial class Flickr : IFlickrFavorites
+public sealed partial class FlickrClient : IFlickrFavorites
 {
     async Task IFlickrFavorites.AddAsync(string photoId, CancellationToken cancellationToken)
     {

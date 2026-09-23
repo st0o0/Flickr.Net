@@ -1,19 +1,17 @@
-﻿using System.Text;
+using System.Text;
 
 namespace Flickr.Net.Internals;
 
-/// <summary>
-/// Flickr library interaction with the web goes in here.
-/// </summary>
-public static partial class FlickrResponder
+internal partial class FlickrResponder
 {
-    /// <summary>
-    /// Returns the string for the Authorisation header to be used for OAuth authentication.
-    /// Parameters other than OAuth ones are ignored.
-    /// </summary>
-    /// <param name="parameters">OAuth and other parameters.</param>
-    /// <returns></returns>
-    public static string OAuthCalculateAuthHeader(Dictionary<string, string> parameters)
+    private readonly HttpClient _httpClient;
+
+    internal FlickrResponder(HttpClient httpClient)
+    {
+        _httpClient = httpClient;
+    }
+
+    internal static string OAuthCalculateAuthHeader(Dictionary<string, string> parameters)
     {
         var sb = new StringBuilder();
         var parametersStartingWithOauth = parameters

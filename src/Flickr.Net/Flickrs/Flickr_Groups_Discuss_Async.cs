@@ -3,7 +3,7 @@
 /// <summary>
 /// The flickr.
 /// </summary>
-public partial class Flickr : IFlickrGroupsDiscuss
+public sealed partial class FlickrClient : IFlickrGroupsDiscuss
 {
     IFlickrGroupsDiscussReplies IFlickrGroupsDiscuss.Replies => this;
 

@@ -3,7 +3,7 @@
 /// <summary>
 /// The flickr.
 /// </summary>
-public partial class Flickr : IFlickrPhotosetsComments
+public sealed partial class FlickrClient : IFlickrPhotosetsComments
 {
     async Task<string> IFlickrPhotosetsComments.AddCommentAsync(string photosetId, string commentText, CancellationToken cancellationToken)
     {

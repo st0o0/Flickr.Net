@@ -6,7 +6,7 @@ namespace Flickr.Net;
 /// <summary>
 /// The flickr.
 /// </summary>
-public partial class Flickr : IFlickrMachineTags
+public sealed partial class FlickrClient : IFlickrMachineTags
 {
     async Task<Namespaces> IFlickrMachineTags.GetNamespacesAsync(string predicate, int page, int perPage, CancellationToken cancellationToken)
     {

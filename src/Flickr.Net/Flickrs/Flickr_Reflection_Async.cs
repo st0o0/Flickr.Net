@@ -3,7 +3,7 @@
 /// <summary>
 /// The flickr.
 /// </summary>
-public partial class Flickr : IFlickrReflection
+public sealed partial class FlickrClient : IFlickrReflection
 {
     async Task<Method> IFlickrReflection.GetMethodInfoAsync(string methodName, CancellationToken cancellationToken)
     {

@@ -8,7 +8,7 @@ namespace Flickr.Net;
 /// <summary>
 /// The flickr.
 /// </summary>
-public partial class Flickr : IFlickrPhotosets
+public sealed partial class FlickrClient : IFlickrPhotosets
 {
     IFlickrPhotosetsComments IFlickrPhotosets.Comments => this;
 

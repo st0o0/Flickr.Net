@@ -3,7 +3,7 @@
 /// <summary>
 /// The flickr.
 /// </summary>
-public partial class Flickr : IFlickrCommons
+public sealed partial class FlickrClient : IFlickrCommons
 {
     async Task<Institutions> IFlickrCommons.GetInstitutionsAsync(CancellationToken cancellationToken)
     {

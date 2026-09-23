@@ -5,7 +5,7 @@ namespace Flickr.Net;
 /// <summary>
 /// The flickr.
 /// </summary>
-public partial class Flickr : IFlickrPhotosMisc
+public sealed partial class FlickrClient : IFlickrPhotosMisc
 {
     async Task IFlickrPhotosMisc.RotateAsync(string photoId, int degrees, CancellationToken cancellationToken)
     {

@@ -7,7 +7,7 @@ namespace Flickr.Net;
 /// <summary>
 /// The flickr.
 /// </summary>
-public partial class Flickr : IFlickrInterestingness
+public sealed partial class FlickrClient : IFlickrInterestingness
 {
     async Task<PagedPhotos> IFlickrInterestingness.GetListAsync(DateTime? date, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken)
     {

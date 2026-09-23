@@ -1,10 +1,5 @@
-﻿using System.Reflection;
 using System.Text.Json;
-using System.Text.Json.Serialization.Metadata;
 using System.Xml.Linq;
-using Flickr.Net.Internals.Attributes;
-using Flickr.Net.Internals.JsonConverters;
-using Flickr.Net.Internals.JsonConverters.IdentifierConverters;
 using Newtonsoft.Json;
 using Formatting = Newtonsoft.Json.Formatting;
 using JsonSerializer = System.Text.Json.JsonSerializer;
@@ -12,86 +7,24 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 namespace Flickr.Net.Internals;
 
 /// <summary>
+/// Handles deserialization of Flickr API responses and XML-to-JSON conversion.
 /// </summary>
 public static class FlickrConvert
 {
     /// <summary>
+    /// Deserializes a byte array into the specified type using the shared <see cref="FlickrJsonOptions"/>.
     /// </summary>
     public static T DeserializeObject<T>(byte[] bytes)
     {
-        return JsonSerializer.Deserialize<T>(bytes, Options);
+        return JsonSerializer.Deserialize<T>(bytes, FlickrJsonOptions.Default);
     }
 
     /// <summary>
+    /// Converts an XML string to its JSON representation.
     /// </summary>
     public static string XmlToJson(string xml)
     {
         var doc = XDocument.Parse(xml);
         return JsonConvert.SerializeXNode(doc, Formatting.None, omitRootObject: true);
-    }
-
-    /// <summary>
-    /// </summary>
-    private static JsonSerializerOptions Options
-    {
-        get
-        {
-            var options = new JsonSerializerOptions
-            {
-                AllowTrailingCommas = true,
-                Converters =
-                {
-                    CustomJsonStringEnumConverter.Instance,
-                    AutoStringToNumberConverter.Instance,
-                    AutoNumberToStringConverter.Instance,
-                    BoolConverter.Instance,
-                    TimestampToDateTimeConverter.Instance,
-                    IdentifierTypeConverter.Instance
-                },
-                TypeInfoResolver = new DefaultJsonTypeInfoResolver().WithAddedModifier(static typeInfo =>
-                {
-                    foreach (var property in typeInfo.Properties)
-                    {
-                        property.Name = property.Name.ToLowerInvariant();
-                        var attributes = property.AttributeProvider?.GetCustomAttributes(typeof(JsonPropertyGenericTypeNameAttribute), false);
-                        if (attributes is { Length: > 0 } and JsonPropertyGenericTypeNameAttribute[] jsonAttributes)
-                        {
-                            if (jsonAttributes.Length > 1)
-                            {
-                                throw new InvalidOperationException($"Property can't have more than one {typeof(JsonPropertyGenericTypeNameAttribute)}");
-                            }
-                            var attr = jsonAttributes[0];
-                            var type = property.DeclaringType;
-                            if (!type.IsGenericType)
-                            {
-                                throw new InvalidOperationException($"{type} is not a generic type");
-                            }
-
-                            if (type.IsGenericTypeDefinition)
-                            {
-                                throw new InvalidOperationException($"{type} is a generic type definition, it must be a constructed generic type");
-                            }
-
-                            var typeArgs = type.GetGenericArguments();
-                            if (attr.TypeParameterPosition >= typeArgs.Length)
-                            {
-                                throw new ArgumentException($"Can't get type argument at position {attr.TypeParameterPosition}; {type} has only {typeArgs.Length} type arguments");
-                            }
-
-                            if (typeArgs[attr.TypeParameterPosition].IsDefined(typeof(FlickrJsonPropertyNameAttribute), true))
-                            {
-                                property.Name = typeArgs[attr.TypeParameterPosition].GetCustomAttribute<FlickrJsonPropertyNameAttribute>()!.Name;
-                            }
-                            else
-                            {
-                                property.Name = typeArgs[attr.TypeParameterPosition].Name.ToLower();
-                            }
-                        }
-                    }
-                })
-            };
-
-            return options;
-        }
     }
 }

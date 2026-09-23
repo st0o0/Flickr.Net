@@ -6,7 +6,7 @@ namespace Flickr.Net;
 /// <summary>
 /// The flickr.
 /// </summary>
-public partial class Flickr : IFlickrPrefs
+public sealed partial class FlickrClient : IFlickrPrefs
 {
     async Task<ContentType> IFlickrPrefs.GetContentTypeAsync(CancellationToken cancellationToken)
     {

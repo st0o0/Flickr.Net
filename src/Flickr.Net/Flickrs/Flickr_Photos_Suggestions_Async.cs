@@ -8,7 +8,7 @@ namespace Flickr.Net;
 /// <summary>
 /// The flickr.
 /// </summary>
-public partial class Flickr : IFlickrPhotosSuggestions
+public sealed partial class FlickrClient : IFlickrPhotosSuggestions
 {
     async Task IFlickrPhotosSuggestions.ApproveSuggestionAsync(string suggestionId, CancellationToken cancellationToken)
     {

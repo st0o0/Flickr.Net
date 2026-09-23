@@ -7,7 +7,7 @@ namespace Flickr.Net;
 /// <summary>
 /// The flickr.
 /// </summary>
-public partial class Flickr : IFlickrPanda
+public sealed partial class FlickrClient : IFlickrPanda
 {
     async Task<Pandas> IFlickrPanda.GetListAsync(CancellationToken cancellationToken)
 

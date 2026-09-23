@@ -8,7 +8,7 @@ namespace Flickr.Net;
 /// <summary>
 /// The flickr.
 /// </summary>
-public partial class Flickr : IFlickrPush
+public sealed partial class FlickrClient : IFlickrPush
 {
     async Task<Subscriptions> IFlickrPush.GetSubscriptionsAsync(CancellationToken cancellationToken)
     {

@@ -5,7 +5,7 @@ namespace Flickr.Net;
 /// <summary>
 /// The flickr.
 /// </summary>
-public partial class Flickr : IFlickrTest
+public sealed partial class FlickrClient : IFlickrTest
 {
     async Task<User> IFlickrTest.LoginAsync(CancellationToken cancellationToken)
     {

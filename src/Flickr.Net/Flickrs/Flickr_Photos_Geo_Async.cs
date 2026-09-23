@@ -9,7 +9,7 @@ namespace Flickr.Net;
 /// <summary>
 /// The flickr.
 /// </summary>
-public partial class Flickr : IFlickrPhotosGeo
+public sealed partial class FlickrClient : IFlickrPhotosGeo
 {
     async Task IFlickrPhotosGeo.BatchCorrectLocationAsync(PlaceId placeId, double latitude, double longitude, GeoAccuracy accuracy, CancellationToken cancellationToken)
     {

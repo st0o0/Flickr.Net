@@ -18,26 +18,6 @@ public class FlickrConfiguration
     public string SharedSecret { get; set; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether cache disabled.
-    /// </summary>
-    public bool CacheDisabled { get; set; }
-
-    /// <summary>
-    /// Gets or sets the cache location.
-    /// </summary>
-    public string CacheLocation { get; set; }
-
-    /// <summary>
-    /// Gets or sets the cache size.
-    /// </summary>
-    public int CacheSize { get; set; } = 0;
-
-    /// <summary>
-    /// Gets or sets the cache timeout.
-    /// </summary>
-    public TimeSpan CacheTimeout { get; set; } = TimeSpan.MinValue;
-
-    /// <summary>
     /// Gets or sets the default extras to include in photo search results.
     /// When set, these extras are automatically merged with any extras specified in
     /// <see cref="PhotoSearchOptions.Extras"/> on a per-call basis.
@@ -49,7 +29,7 @@ public class FlickrConfiguration
     ///     ApiKey = "...",
     ///     DefaultSearchExtras = PhotoSearchExtras.Description | PhotoSearchExtras.DateTaken
     /// };
-    /// var flickr = new Flickr(config);
+    /// var flickr = new FlickrClient(config);
     /// // All SearchAsync calls will now include description and date_taken automatically
     /// </code>
     /// </example>

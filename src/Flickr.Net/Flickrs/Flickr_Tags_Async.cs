@@ -8,7 +8,7 @@ namespace Flickr.Net;
 /// <summary>
 /// The flickr.
 /// </summary>
-public partial class Flickr : IFlickrTags
+public sealed partial class FlickrClient : IFlickrTags
 {
     async Task<ClusterPhotos> IFlickrTags.GetClusterPhotosAsync(string clusterId, string sourceTag, PhotoSearchExtras extras, CancellationToken cancellationToken)
     {

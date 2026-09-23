@@ -8,7 +8,7 @@ namespace Flickr.Net;
 /// <summary>
 /// The flickr.
 /// </summary>
-public partial class Flickr : IFlickrPeople
+public sealed partial class FlickrClient : IFlickrPeople
 {
     async Task<User> IFlickrPeople.FindByEmailAsync(string emailAddress, CancellationToken cancellationToken)
     {

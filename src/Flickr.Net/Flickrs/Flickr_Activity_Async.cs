@@ -7,7 +7,7 @@ namespace Flickr.Net;
 /// <summary>
 /// The flickr.
 /// </summary>
-public partial class Flickr : IFlickrActivity
+public sealed partial class FlickrClient : IFlickrActivity
 {
     async Task<Items> IFlickrActivity.UserCommentsAsync(int page, int perPage, CancellationToken cancellationToken)
     {

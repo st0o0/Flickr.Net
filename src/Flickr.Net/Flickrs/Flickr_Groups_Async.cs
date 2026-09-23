@@ -6,7 +6,7 @@ namespace Flickr.Net;
 /// <summary>
 /// The flickr.
 /// </summary>
-public partial class Flickr : IFlickrGroups
+public sealed partial class FlickrClient : IFlickrGroups
 {
     IFlickrGroupsDiscuss IFlickrGroups.Discuss => this;
 

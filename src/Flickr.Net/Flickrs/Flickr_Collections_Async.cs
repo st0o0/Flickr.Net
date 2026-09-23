@@ -5,7 +5,7 @@ namespace Flickr.Net;
 /// <summary>
 /// The flickr.
 /// </summary>
-public partial class Flickr : IFlickrCollections
+public sealed partial class FlickrClient : IFlickrCollections
 {
     async Task<Collection> IFlickrCollections.GetInfoAsync(string collectionId, CancellationToken cancellationToken)
     {

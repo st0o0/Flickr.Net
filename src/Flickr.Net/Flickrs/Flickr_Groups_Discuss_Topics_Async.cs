@@ -6,7 +6,7 @@ namespace Flickr.Net;
 /// <summary>
 /// The flickr.
 /// </summary>
-public partial class Flickr : IFlickrGroupsDiscussTopics
+public sealed partial class FlickrClient : IFlickrGroupsDiscussTopics
 {
     async Task IFlickrGroupsDiscussTopics.TopicsAddAsync(string groupId, string subject, string message, CancellationToken cancellationToken)
     {

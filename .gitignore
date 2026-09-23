@@ -40,6 +40,9 @@ results/
 # Claude Code
 .claude/
 
+# OpenSpec
+openspec/
+
 # Worktrees
 .worktrees/
 

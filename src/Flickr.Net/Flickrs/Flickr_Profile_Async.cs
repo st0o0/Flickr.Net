@@ -3,7 +3,7 @@
 /// <summary>
 /// The flickr.
 /// </summary>
-public partial class Flickr : IFlickrProfile
+public sealed partial class FlickrClient : IFlickrProfile
 {
     async Task<Profile> IFlickrProfile.GetProfileAsync(string userId, CancellationToken cancellationToken)
     {

@@ -1,0 +1,66 @@
+using System.Reflection;
+using System.Text.Json;
+using System.Text.Json.Serialization.Metadata;
+using Flickr.Net.Internals.Attributes;
+using Flickr.Net.Internals.JsonConverters;
+using Flickr.Net.Internals.JsonConverters.IdentifierConverters;
+
+namespace Flickr.Net.Internals;
+
+internal static class FlickrJsonOptions
+{
+    public static readonly JsonSerializerOptions Default = new()
+    {
+        AllowTrailingCommas = true,
+        Converters =
+        {
+            CustomJsonStringEnumConverter.Instance,
+            AutoStringToNumberConverter.Instance,
+            AutoNumberToStringConverter.Instance,
+            BoolConverter.Instance,
+            TimestampToDateTimeConverter.Instance,
+            IdentifierTypeConverter.Instance
+        },
+        TypeInfoResolver = new DefaultJsonTypeInfoResolver().WithAddedModifier(static typeInfo =>
+        {
+            foreach (var property in typeInfo.Properties)
+            {
+                property.Name = property.Name.ToLowerInvariant();
+                var attributes = property.AttributeProvider?.GetCustomAttributes(typeof(JsonPropertyGenericTypeNameAttribute), false);
+                if (attributes is { Length: > 0 } and JsonPropertyGenericTypeNameAttribute[] jsonAttributes)
+                {
+                    if (jsonAttributes.Length > 1)
+                    {
+                        throw new InvalidOperationException($"Property can't have more than one {typeof(JsonPropertyGenericTypeNameAttribute)}");
+                    }
+                    var attr = jsonAttributes[0];
+                    var type = property.DeclaringType;
+                    if (!type.IsGenericType)
+                    {
+                        throw new InvalidOperationException($"{type} is not a generic type");
+                    }
+
+                    if (type.IsGenericTypeDefinition)
+                    {
+                        throw new InvalidOperationException($"{type} is a generic type definition, it must be a constructed generic type");
+                    }
+
+                    var typeArgs = type.GetGenericArguments();
+                    if (attr.TypeParameterPosition >= typeArgs.Length)
+                    {
+                        throw new ArgumentException($"Can't get type argument at position {attr.TypeParameterPosition}; {type} has only {typeArgs.Length} type arguments");
+                    }
+
+                    if (typeArgs[attr.TypeParameterPosition].IsDefined(typeof(FlickrJsonPropertyNameAttribute), true))
+                    {
+                        property.Name = typeArgs[attr.TypeParameterPosition].GetCustomAttribute<FlickrJsonPropertyNameAttribute>()!.Name;
+                    }
+                    else
+                    {
+                        property.Name = typeArgs[attr.TypeParameterPosition].Name.ToLower();
+                    }
+                }
+            }
+        })
+    };
+}
