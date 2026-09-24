@@ -1,6 +1,5 @@
 # Flickr.Net
 
-[![CI](https://img.shields.io/github/actions/workflow/status/st0o0/Flickr.Net/ci.yml?style=flat-square&label=CI)](https://github.com/st0o0/Flickr.Net/actions/workflows/ci.yml)
 [![NuGet](https://img.shields.io/nuget/v/Flickr.Net.svg?style=flat-square)](https://www.nuget.org/packages/Flickr.Net/)
 [![NuGet Downloads](https://img.shields.io/nuget/dt/Flickr.Net.svg?style=flat-square)](https://www.nuget.org/packages/Flickr.Net/)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue.svg?style=flat-square)](LICENSE)
