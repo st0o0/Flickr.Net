@@ -1,3 +1,4 @@
+using System.Collections.Frozen;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text.Json;
@@ -25,7 +26,7 @@ public class CustomJsonStringEnumConverter(JsonNamingPolicy? namingPolicy = null
 
         if (dictionary.Count > 0)
         {
-            return new JsonStringEnumConverter(new DictionaryLookupNamingPolicy(dictionary, namingPolicy), allowIntegerValues).CreateConverter(typeToConvert, options);
+            return new JsonStringEnumConverter(new DictionaryLookupNamingPolicy(dictionary.ToFrozenDictionary(), namingPolicy), allowIntegerValues).CreateConverter(typeToConvert, options);
         }
 
         return baseConverter.CreateConverter(typeToConvert, options);
@@ -37,9 +38,9 @@ internal class JsonNamingPolicyDecorator(JsonNamingPolicy? underlyingNamingPolic
     public override string ConvertName(string name) => underlyingNamingPolicy == null ? name : underlyingNamingPolicy.ConvertName(name);
 }
 
-internal class DictionaryLookupNamingPolicy(Dictionary<string, string> dictionary, JsonNamingPolicy? underlyingNamingPolicy) : JsonNamingPolicyDecorator(underlyingNamingPolicy)
+internal class DictionaryLookupNamingPolicy(FrozenDictionary<string, string> dictionary, JsonNamingPolicy? underlyingNamingPolicy) : JsonNamingPolicyDecorator(underlyingNamingPolicy)
 {
-    private readonly Dictionary<string, string> dictionary = dictionary ?? throw new ArgumentNullException();
+    private readonly FrozenDictionary<string, string> dictionary = dictionary ?? throw new ArgumentNullException();
 
     public override string ConvertName(string name) => dictionary.TryGetValue(name, out var value) ? value : base.ConvertName(name);
 }

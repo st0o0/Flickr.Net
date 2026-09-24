@@ -18,6 +18,22 @@ public static class FlickrConvert
     }
 
     /// <summary>
+    /// Deserializes a JSON string into the specified type using the shared <see cref="FlickrJsonOptions"/>.
+    /// </summary>
+    public static T DeserializeObject<T>(string json)
+    {
+        return JsonSerializer.Deserialize<T>(json, FlickrJsonOptions.Default)!;
+    }
+
+    /// <summary>
+    /// Deserializes a stream into the specified type using the shared <see cref="FlickrJsonOptions"/>.
+    /// </summary>
+    public static async ValueTask<T> DeserializeObjectAsync<T>(Stream stream, CancellationToken cancellationToken = default)
+    {
+        return (await JsonSerializer.DeserializeAsync<T>(stream, FlickrJsonOptions.Default, cancellationToken).ConfigureAwait(false))!;
+    }
+
+    /// <summary>
     /// Converts an XML string to its JSON representation.
     /// </summary>
     public static string XmlToJson(string xml)
