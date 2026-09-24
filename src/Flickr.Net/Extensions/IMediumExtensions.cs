@@ -2,6 +2,7 @@ using Flickr.Net.Enums;
 using Flickr.Net.Internals;
 
 namespace Flickr.Net.Extensions;
+
 /// <summary>Extension methods for constructing medium (500px) image URLs.</summary>
 public static class IMediumExtensions
 {
@@ -9,7 +10,10 @@ public static class IMediumExtensions
     {
         return value switch
         {
-            Gallery gallery => UtilityMethods.UrlFormat(gallery.PrimaryPhotoFarm, gallery.PrimaryPhotoServer, gallery.PrimaryPhotoId, gallery.PrimaryPhotoSecret, SizeType.Medium, "jpg"),
+            Gallery { PrimaryPhotoServer: not null, PrimaryPhotoId: not null, PrimaryPhotoSecret: not null } gallery =>
+                UtilityMethods.UrlFormat(
+                    gallery.PrimaryPhotoFarm, gallery.PrimaryPhotoServer, gallery.PrimaryPhotoId,
+                    gallery.PrimaryPhotoSecret, SizeType.Medium, "jpg"),
             _ => string.Empty
         };
     }

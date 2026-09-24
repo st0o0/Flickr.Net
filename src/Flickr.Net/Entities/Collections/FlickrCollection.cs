@@ -170,7 +170,7 @@ public record Topics : FlickrPaginationCollection<Topic>
 
     /// <summary>Gets the constructed URL for the group's icon.</summary>
     [JsonIgnore]
-    public string GroupIconUrl => UtilityMethods.BuddyIcon(IconServer, IconFarm, GroupId);
+    public string GroupIconUrl => UtilityMethods.BuddyIcon(IconServer!, IconFarm!, GroupId!);
 }
 
 /// <inheritdoc/>

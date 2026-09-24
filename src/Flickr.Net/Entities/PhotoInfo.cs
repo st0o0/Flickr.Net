@@ -97,7 +97,7 @@ public record PhotoInfo : PhotoBase, IBuddyIcon, IWebUrl, ISquareUrl, ILargeSqua
 
     /// <summary>Gets or sets the photo's geographic location.</summary>
     [JsonPropertyName("location")]
-    public Location Location { get; init; }
+    public Location? Location { get; init; }
 
     /// <summary>Permissions granted to the calling user for this photo (owner-only).</summary>
     [JsonPropertyName("permissions")]
@@ -126,7 +126,7 @@ public struct Title
     public string? Content { get; init; }
 
     /// <summary>Implicitly converts a <see cref="Title"/> to a string.</summary>
-    public static implicit operator string(Title username) => username.Content;
+    public static implicit operator string(Title username) => username.Content!;
 
     /// <summary>Implicitly converts a string to a <see cref="Title"/>.</summary>
     public static implicit operator Title(string username) => new() { Content = username };

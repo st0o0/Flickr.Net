@@ -31,7 +31,7 @@ public struct Raw
     /// <summary>The text content.</summary>
     public string? Content { get; init; }
     /// <summary>Converts to the underlying string value.</summary>
-    public static implicit operator string(Raw username) => username.Content;
+    public static implicit operator string(Raw username) => username.Content!;
     /// <summary>Converts from a string value.</summary>
     public static implicit operator Raw(string username) => new() { Content = username };
 }
@@ -42,7 +42,7 @@ public struct Clean
     /// <summary>The text content.</summary>
     public string? Content { get; init; }
     /// <summary>Converts to the underlying string value.</summary>
-    public static implicit operator string(Clean username) => username.Content;
+    public static implicit operator string(Clean username) => username.Content!;
     /// <summary>Converts from a string value.</summary>
     public static implicit operator Clean(string username) => new() { Content = username };
 }

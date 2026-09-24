@@ -161,7 +161,7 @@ public struct Username
     public string? Content { get; init; }
 
     /// <summary>Implicitly converts a <see cref="Username"/> to a string.</summary>
-    public static implicit operator string(Username username) => username.Content;
+    public static implicit operator string(Username username) => username.Content!;
 
     /// <summary>Implicitly converts a string to a <see cref="Username"/>.</summary>
     public static implicit operator Username(string username) => new() { Content = username };
@@ -177,7 +177,7 @@ public struct PhotoInfoViews
     public string? Content { get; init; }
 
     /// <summary>Implicitly converts a <see cref="PhotoInfoViews"/> to a string.</summary>
-    public static implicit operator string(PhotoInfoViews username) => username.Content;
+    public static implicit operator string(PhotoInfoViews username) => username.Content!;
 
     /// <summary>Implicitly converts a string to a <see cref="PhotoInfoViews"/>.</summary>
     public static implicit operator PhotoInfoViews(string username) => new() { Content = username };
@@ -193,7 +193,7 @@ public struct Realname
     public string? Content { get; init; }
 
     /// <summary>Implicitly converts a <see cref="Realname"/> to a string.</summary>
-    public static implicit operator string(Realname username) => username.Content;
+    public static implicit operator string(Realname username) => username.Content!;
 
     /// <summary>Implicitly converts a string to a <see cref="Realname"/>.</summary>
     public static implicit operator Realname(string username) => new() { Content = username };
@@ -209,7 +209,7 @@ public struct PhotosUrl
     public string? Content { get; init; }
 
     /// <summary>Implicitly converts a <see cref="PhotosUrl"/> to a string.</summary>
-    public static implicit operator string(PhotosUrl username) => username.Content;
+    public static implicit operator string(PhotosUrl username) => username.Content!;
 
     /// <summary>Implicitly converts a string to a <see cref="PhotosUrl"/>.</summary>
     public static implicit operator PhotosUrl(string username) => new() { Content = username };
@@ -225,7 +225,7 @@ public struct ProfileUrl
     public string? Content { get; init; }
 
     /// <summary>Implicitly converts a <see cref="ProfileUrl"/> to a string.</summary>
-    public static implicit operator string(ProfileUrl username) => username.Content;
+    public static implicit operator string(ProfileUrl username) => username.Content!;
 
     /// <summary>Implicitly converts a string to a <see cref="ProfileUrl"/>.</summary>
     public static implicit operator ProfileUrl(string username) => new() { Content = username };
@@ -257,7 +257,7 @@ public struct Description
     public string? Content { get; init; }
 
     /// <summary>Implicitly converts a <see cref="Description"/> to a string.</summary>
-    public static implicit operator string(Description username) => username.Content;
+    public static implicit operator string(Description username) => username.Content!;
 
     /// <summary>Implicitly converts a string to a <see cref="Description"/>.</summary>
     public static implicit operator Description(string username) => new() { Content = username };
@@ -273,7 +273,7 @@ public struct FirstDate
     public string? Content { get; init; }
 
     /// <summary>Implicitly converts a <see cref="FirstDate"/> to a string.</summary>
-    public static implicit operator string(FirstDate username) => username.Content;
+    public static implicit operator string(FirstDate username) => username.Content!;
 
     /// <summary>Implicitly converts a string to a <see cref="FirstDate"/>.</summary>
     public static implicit operator FirstDate(string username) => new() { Content = username };
@@ -289,7 +289,7 @@ public struct FirstDateTaken
     public string? Content { get; init; }
 
     /// <summary>Implicitly converts a <see cref="FirstDateTaken"/> to a string.</summary>
-    public static implicit operator string(FirstDateTaken username) => username.Content;
+    public static implicit operator string(FirstDateTaken username) => username.Content!;
 
     /// <summary>Implicitly converts a string to a <see cref="FirstDateTaken"/>.</summary>
     public static implicit operator FirstDateTaken(string username) => new() { Content = username };
@@ -305,7 +305,7 @@ public struct LocationInfo
     public string? Content { get; init; }
 
     /// <summary>Implicitly converts a <see cref="LocationInfo"/> to a string.</summary>
-    public static implicit operator string(LocationInfo username) => username.Content;
+    public static implicit operator string(LocationInfo username) => username.Content!;
 
     /// <summary>Implicitly converts a string to a <see cref="LocationInfo"/>.</summary>
     public static implicit operator LocationInfo(string username) => new() { Content = username };
@@ -321,7 +321,7 @@ public struct MboxSha1sum
     public string? Content { get; init; }
 
     /// <summary>Implicitly converts a <see cref="MboxSha1sum"/> to a string.</summary>
-    public static implicit operator string(MboxSha1sum username) => username.Content;
+    public static implicit operator string(MboxSha1sum username) => username.Content!;
 
     /// <summary>Implicitly converts a string to a <see cref="MboxSha1sum"/>.</summary>
     public static implicit operator MboxSha1sum(string username) => new() { Content = username };
@@ -337,7 +337,7 @@ public struct MobileUrl
     public string? Content { get; init; }
 
     /// <summary>Implicitly converts a <see cref="MobileUrl"/> to a string.</summary>
-    public static implicit operator string(MobileUrl username) => username.Content;
+    public static implicit operator string(MobileUrl username) => username.Content!;
 
     /// <summary>Implicitly converts a string to a <see cref="MobileUrl"/>.</summary>
     public static implicit operator MobileUrl(string username) => new() { Content = username };

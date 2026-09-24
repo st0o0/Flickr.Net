@@ -12,5 +12,5 @@ public record Method : FlickrEntityBase
     /// <summary>The text content.</summary>
     public string? Content { get; init; }
     /// <summary>Converts to the underlying string value.</summary>
-    public static implicit operator string(Method method) => method.Content;
+    public static implicit operator string(Method method) => method.Content!;
 }

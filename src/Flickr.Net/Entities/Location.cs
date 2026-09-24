@@ -56,7 +56,7 @@ public struct Neighbourhood
     public string? Content { get; init; }
 
     /// <summary>Implicitly converts a <see cref="Neighbourhood"/> to a string.</summary>
-    public static implicit operator string(Neighbourhood username) => username.Content;
+    public static implicit operator string(Neighbourhood username) => username.Content!;
 
     /// <summary>Implicitly converts a string to a <see cref="Neighbourhood"/>.</summary>
     public static implicit operator Neighbourhood(string username) => new() { Content = username };
@@ -72,7 +72,7 @@ public struct Locality
     public string? Content { get; init; }
 
     /// <summary>Implicitly converts a <see cref="Locality"/> to a string.</summary>
-    public static implicit operator string(Locality username) => username.Content;
+    public static implicit operator string(Locality username) => username.Content!;
 
     /// <summary>Implicitly converts a string to a <see cref="Locality"/>.</summary>
     public static implicit operator Locality(string username) => new() { Content = username };
@@ -88,7 +88,7 @@ public struct Country
     public string? Content { get; init; }
 
     /// <summary>Implicitly converts a <see cref="Country"/> to a string.</summary>
-    public static implicit operator string(Country username) => username.Content;
+    public static implicit operator string(Country username) => username.Content!;
 
     /// <summary>Implicitly converts a string to a <see cref="Country"/>.</summary>
     public static implicit operator Country(string username) => new() { Content = username };
@@ -104,7 +104,7 @@ public struct County
     public string? Content { get; init; }
 
     /// <summary>Implicitly converts a <see cref="County"/> to a string.</summary>
-    public static implicit operator string(County username) => username.Content;
+    public static implicit operator string(County username) => username.Content!;
 
     /// <summary>Implicitly converts a string to a <see cref="County"/>.</summary>
     public static implicit operator County(string username) => new() { Content = username };
@@ -120,7 +120,7 @@ public struct Region
     public string? Content { get; init; }
 
     /// <summary>Implicitly converts a <see cref="Region"/> to a string.</summary>
-    public static implicit operator string(Region username) => username.Content;
+    public static implicit operator string(Region username) => username.Content!;
 
     /// <summary>Implicitly converts a string to a <see cref="Region"/>.</summary>
     public static implicit operator Region(string username) => new() { Content = username };

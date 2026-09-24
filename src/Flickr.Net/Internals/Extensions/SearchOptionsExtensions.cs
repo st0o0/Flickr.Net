@@ -9,17 +9,17 @@ internal static class SearchOptionsExtensions
     {
         var parameters = new Dictionary<string, string>();
 
-        parameters.AppendIf("user_id", options.UserId, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("user_id", options.UserId, x => !string.IsNullOrEmpty(x), x => x!);
 
-        parameters.AppendIf("group_id", options.GroupId, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("group_id", options.GroupId, x => !string.IsNullOrEmpty(x), x => x!);
 
-        parameters.AppendIf("text", options.Text, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("text", options.Text, x => !string.IsNullOrEmpty(x), x => x!);
 
-        parameters.AppendIf("tags", options.Tags, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("tags", options.Tags, x => !string.IsNullOrEmpty(x), x => x!);
 
         parameters.AppendIf("tag_mode", options.TagMode, x => x != TagMode.None, x => x.GetEnumMemberValue());
 
-        parameters.AppendIf("machine_tags", options.MachineTags, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("machine_tags", options.MachineTags, x => !string.IsNullOrEmpty(x), x => x!);
 
         parameters.AppendIf("machine_tag_mode", options.MachineTagMode, x => x != MachineTagMode.None, x => x.GetEnumMemberValue());
 
@@ -43,21 +43,21 @@ internal static class SearchOptionsExtensions
 
         parameters.AppendIf("privacy_filter", options.PrivacyFilter, x => x != PrivacyFilter.None, x => x.ToString("d"));
 
-        parameters.AppendIf("bbox", options.BoundaryBox, x => x is { IsSet: true }, x => x.ToString());
+        parameters.AppendIf("bbox", options.BoundaryBox, x => x is { IsSet: true }, x => x!.ToString());
 
-        parameters.AppendIf("accuracy", options.BoundaryBox, x => x is { IsSet: true } && x.Accuracy != GeoAccuracy.None, x => x.Accuracy.ToString("d"));
+        parameters.AppendIf("accuracy", options.BoundaryBox, x => x is { IsSet: true } && x.Accuracy != GeoAccuracy.None, x => x!.Accuracy.ToString("d"));
 
         parameters.AppendIf("safe_search", options.SafeSearch, x => x != SafetyLevel.None, x => x.ToString("d"));
 
         parameters.AppendIf("content_type", options.ContentType, x => x != ContentTypeSearch.None, x => x.ToString("d"));
 
-        parameters.AppendIf("has_geo", options.HasGeo, x => x != null, x => x.Value ? "1" : "0");
+        parameters.AppendIf("has_geo", options.HasGeo, x => x != null, x => x!.Value ? "1" : "0");
 
-        parameters.AppendIf("lat", options.Latitude, x => x != null, x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("lat", options.Latitude, x => x != null, x => x!.Value.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("lon", options.Longitude, x => x != null, x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("lon", options.Longitude, x => x != null, x => x!.Value.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("radius", options.Radius, x => x != null, x => x.Value.ToString("0.00000", NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("radius", options.Radius, x => x != null, x => x!.Value.ToString("0.00000", NumberFormatInfo.InvariantInfo));
 
         parameters.AppendIf("radius_units", options.RadiusUnits, x => x != RadiusUnit.None, x => x.GetEnumMemberValue());
 
@@ -79,37 +79,37 @@ internal static class SearchOptionsExtensions
 
         parameters.AppendIf("faves", options.Faves, x => x, x => "1");
 
-        parameters.AppendIf("person_id", options.PersonId, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("person_id", options.PersonId, x => !string.IsNullOrEmpty(x), x => x!);
 
-        parameters.AppendIf("camera", options.Camera, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("camera", options.Camera, x => !string.IsNullOrEmpty(x), x => x!);
 
-        parameters.AppendIf("jump_to", options.JumpTo, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("jump_to", options.JumpTo, x => !string.IsNullOrEmpty(x), x => x!);
 
-        parameters.AppendIf("username", options.Username, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("username", options.Username, x => !string.IsNullOrEmpty(x), x => x!);
 
-        parameters.AppendIf("exif_min_exposure", options.ExifMinExposure, x => x != null, x => x.Value.ToString("0.00000", NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("exif_min_exposure", options.ExifMinExposure, x => x != null, x => x!.Value.ToString("0.00000", NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("exif_max_exposure", options.ExifMaxExposure, x => x != null, x => x.Value.ToString("0.00000", NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("exif_max_exposure", options.ExifMaxExposure, x => x != null, x => x!.Value.ToString("0.00000", NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("exif_min_aperture", options.ExifMinAperture, x => x != null, x => x.Value.ToString("0.00000", NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("exif_min_aperture", options.ExifMinAperture, x => x != null, x => x!.Value.ToString("0.00000", NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("exif_max_aperture", options.ExifMaxAperture, x => x != null, x => x.Value.ToString("0.00000", NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("exif_max_aperture", options.ExifMaxAperture, x => x != null, x => x!.Value.ToString("0.00000", NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("exif_min_focallen", options.ExifMinFocalLength, x => x != null, x => x.Value.ToString("0", NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("exif_min_focallen", options.ExifMinFocalLength, x => x != null, x => x!.Value.ToString("0", NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("exif_max_focallen", options.ExifMaxFocalLength, x => x != null, x => x.Value.ToString("0", NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("exif_max_focallen", options.ExifMaxFocalLength, x => x != null, x => x!.Value.ToString("0", NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("exclude_user_id", options.ExcludeUserID, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("exclude_user_id", options.ExcludeUserID, x => !string.IsNullOrEmpty(x), x => x!);
 
-        parameters.AppendIf("foursquare_venueid", options.FoursquareVenueID, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("foursquare_venueid", options.FoursquareVenueID, x => !string.IsNullOrEmpty(x), x => x!);
 
-        parameters.AppendIf("foursquare_woeid", options.FoursquareWoeID, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("foursquare_woeid", options.FoursquareWoeID, x => !string.IsNullOrEmpty(x), x => x!);
 
-        parameters.AppendIf("group_path_alias", options.GroupPathAlias, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("group_path_alias", options.GroupPathAlias, x => !string.IsNullOrEmpty(x), x => x!);
 
-        parameters.AppendIf("color_codes", options.ColorCodes, x => x != null && x.Count != 0, x => x.ToFlickrString());
+        parameters.AppendIf("color_codes", options.ColorCodes, x => x != null && x.Count != 0, x => x!.ToFlickrString());
 
-        parameters.AppendIf("styles", options.Styles, x => x != null && x.Count != 0, x => x.ToFlickrString());
+        parameters.AppendIf("styles", options.Styles, x => x != null && x.Count != 0, x => x!.ToFlickrString());
 
         return parameters;
     }

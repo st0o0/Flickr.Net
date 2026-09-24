@@ -13,12 +13,12 @@ public record Views : FlickrEntityBase
     [JsonPropertyName("photos")]
     public PhotoViews? Photos { get; init; }
     [JsonPropertyName("photostream")]
-    public PhotostreamViews Photostream { get; init; }
+    public PhotostreamViews? Photostream { get; init; }
     [JsonPropertyName("sets")]
     /// <summary>The photosets within this collection.</summary>
-    public SetViews Sets { get; init; }
+    public SetViews? Sets { get; init; }
     [JsonPropertyName("collections")]
-    public CollectionViews Collections { get; init; }
+    public CollectionViews? Collections { get; init; }
 }
 public record CollectionViews : ViewBase;
 public record PhotoViews : ViewBase;

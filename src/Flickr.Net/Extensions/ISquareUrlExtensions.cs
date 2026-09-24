@@ -10,7 +10,7 @@ public static class ISquareUrlExtensions
         return value switch
         {
             Item item => ConvertItemToUrl(item),
-            Gallery gallery => UtilityMethods.UrlFormat(gallery.PrimaryPhotoFarm, gallery.PrimaryPhotoServer, gallery.PrimaryPhotoId, gallery.PrimaryPhotoSecret, SizeType.Square, "jpg"),
+            Gallery gallery => UtilityMethods.UrlFormat(gallery.PrimaryPhotoFarm, gallery.PrimaryPhotoServer!, gallery.PrimaryPhotoId!, gallery.PrimaryPhotoSecret!, SizeType.Square, "jpg"),
             PhotoInfo photoInfo => UtilityMethods.UrlFormat(photoInfo, SizeType.Square, "jpg"),
             Photoset photoset => UtilityMethods.UrlFormat(photoset, SizeType.Square, "jpg"),
             _ => string.Empty
@@ -21,8 +21,8 @@ public static class ISquareUrlExtensions
     {
         return item.Type switch
         {
-            ItemType.Photo => UtilityMethods.UrlFormat(item.Farm, item.Server, item.Id, item.Secret, SizeType.Square, "jpg"),
-            ItemType.Photoset or ItemType.Gallery => UtilityMethods.UrlFormat(item.Farm, item.Server, item.Primary, item.Secret, SizeType.Square, "jpg"),
+            ItemType.Photo => UtilityMethods.UrlFormat(item.Farm, item.Server!, item.Id, item.Secret!, SizeType.Square, "jpg"),
+            ItemType.Photoset or ItemType.Gallery => UtilityMethods.UrlFormat(item.Farm, item.Server!, item.Primary!, item.Secret!, SizeType.Square, "jpg"),
             _ => string.Empty
         };
     }

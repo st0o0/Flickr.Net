@@ -9,7 +9,7 @@ public static class IThumbnailUrlExtensions
     {
         return value switch
         {
-            Gallery gallery => UtilityMethods.UrlFormat(gallery.PrimaryPhotoFarm, gallery.PrimaryPhotoServer, gallery.PrimaryPhotoId, gallery.PrimaryPhotoSecret, SizeType.Thumbnail, "jpg"),
+            Gallery gallery => UtilityMethods.UrlFormat(gallery.PrimaryPhotoFarm, gallery.PrimaryPhotoServer!, gallery.PrimaryPhotoId!, gallery.PrimaryPhotoSecret!, SizeType.Thumbnail, "jpg"),
             Photoset photoset => UtilityMethods.UrlFormat(photoset, SizeType.Thumbnail, "jpg"),
             _ => string.Empty
         };

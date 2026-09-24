@@ -143,7 +143,7 @@ public static class UtilityMethods
     /// <param name="size">The size.</param>
     /// <param name="extension">The extension.</param>
     /// <returns>A string.</returns>
-    public static string UrlFormat(Photo p, SizeType size, string extension) => UrlFormat(p.Farm, p.Server, p.Id, p.Secret, size, extension);
+    public static string UrlFormat(Photo p, SizeType size, string extension) => UrlFormat(p.Farm!, p.Server!, p.Id!, p.Secret!, size, extension);
 
     /// <summary>
     /// Urls the format.
@@ -156,14 +156,14 @@ public static class UtilityMethods
     {
         if (size == SizeType.Original)
         {
-            return UrlFormat(p.Farm, p.Server, p.Id, p.OriginalSecret, size, extension);
+            return UrlFormat(p.Farm, p.Server!, p.Id, p.OriginalSecret!, size, extension);
         }
 
-        return UrlFormat(p.Farm, p.Server, p.Id, p.Secret, size, extension);
+        return UrlFormat(p.Farm, p.Server!, p.Id, p.Secret!, size, extension);
     }
     public static string UrlFormat(Photoset p, SizeType size, string extension)
     {
-        return UrlFormat(p.Farm, p.Server, p.Primary, p.Secret, size, extension);
+        return UrlFormat(p.Farm, p.Server!, p.Primary!, p.Secret!, size, extension);
     }
 
     /// <summary>
