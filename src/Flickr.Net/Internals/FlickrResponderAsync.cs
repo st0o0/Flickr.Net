@@ -51,7 +51,7 @@ internal partial class FlickrResponder
         return await DownloadDataAsync(baseUrl, data, authHeader, isOAuth: true, cancellationToken).ConfigureAwait(false);
     }
 
-    private async Task<byte[]> DownloadDataAsync(string baseUrl, FormUrlEncodedContent data, string authHeader, bool isOAuth, CancellationToken cancellationToken = default)
+    private async Task<byte[]> DownloadDataAsync(string baseUrl, FormUrlEncodedContent data, string? authHeader, bool isOAuth, CancellationToken cancellationToken = default)
     {
         HttpRequestMessage message = new()
         {
@@ -133,7 +133,7 @@ internal partial class FlickrResponder
         return await DownloadDataStreamAsync(baseUrl, data, authHeader, isOAuth: true, cancellationToken).ConfigureAwait(false);
     }
 
-    private async Task<Stream> DownloadDataStreamAsync(string baseUrl, FormUrlEncodedContent data, string authHeader, bool isOAuth, CancellationToken cancellationToken = default)
+    private async Task<Stream> DownloadDataStreamAsync(string baseUrl, FormUrlEncodedContent data, string? authHeader, bool isOAuth, CancellationToken cancellationToken = default)
     {
         HttpRequestMessage message = new()
         {

@@ -119,7 +119,7 @@ public sealed partial class FlickrClient : IFlickrPhotos
         return await GetResponseAsync<FlickrContextResult<NextPhoto, PrevPhoto>>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
-    async Task<PhotoCounts> IFlickrPhotos.GetCountsAsync(DateTime[] dates, DateTime[] takenDates, CancellationToken cancellationToken)
+    async Task<PhotoCounts> IFlickrPhotos.GetCountsAsync(DateTime[]? dates, DateTime[]? takenDates, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -135,7 +135,7 @@ public sealed partial class FlickrClient : IFlickrPhotos
         return await GetResponseAsync<PhotoCounts>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
-    async Task<PhotoExif> IFlickrPhotos.GetExifAsync(string photoId, string secret, CancellationToken cancellationToken)
+    async Task<PhotoExif> IFlickrPhotos.GetExifAsync(string photoId, string? secret, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -163,7 +163,7 @@ public sealed partial class FlickrClient : IFlickrPhotos
         return await GetResponseAsync<PhotoPersons>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
-    async Task<PhotoInfo> IFlickrPhotos.GetInfoAsync(string photoId, string secret, CancellationToken cancellationToken)
+    async Task<PhotoInfo> IFlickrPhotos.GetInfoAsync(string photoId, string? secret, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -368,7 +368,7 @@ public sealed partial class FlickrClient : IFlickrPhotos
         await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
-    async Task IFlickrPhotos.SetMetaAsync(string photoId, string title, string description, CancellationToken cancellationToken)
+    async Task IFlickrPhotos.SetMetaAsync(string photoId, string? title, string? description, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -552,7 +552,7 @@ public interface IFlickrPhotos
     /// <param name="takenDates">Comma-delimited list of dates in unix timestamp format. Optional.</param>
     /// <param name="cancellationToken"></param>
     /// <return></return>
-    Task<PhotoCounts> GetCountsAsync(DateTime[] dates = null, DateTime[] takenDates = null, CancellationToken cancellationToken = default);
+    Task<PhotoCounts> GetCountsAsync(DateTime[]? dates = null, DateTime[]? takenDates = null, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets the EXIF data for a given Photo ID.

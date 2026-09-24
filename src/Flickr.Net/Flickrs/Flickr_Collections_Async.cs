@@ -20,7 +20,7 @@ public sealed partial class FlickrClient : IFlickrCollections
         return await GetResponseAsync<Collection>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
-    async Task<Collections> IFlickrCollections.GetTreeAsync(string collectionId, string userId, CancellationToken cancellationToken)
+    async Task<Collections> IFlickrCollections.GetTreeAsync(string? collectionId, string? userId, CancellationToken cancellationToken)
     {
         if (string.IsNullOrEmpty(userId))
         {

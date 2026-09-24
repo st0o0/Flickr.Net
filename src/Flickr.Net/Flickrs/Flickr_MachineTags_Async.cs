@@ -8,7 +8,7 @@ namespace Flickr.Net;
 /// </summary>
 public sealed partial class FlickrClient : IFlickrMachineTags
 {
-    async Task<Namespaces> IFlickrMachineTags.GetNamespacesAsync(string predicate, int page, int perPage, CancellationToken cancellationToken)
+    async Task<Namespaces> IFlickrMachineTags.GetNamespacesAsync(string? predicate, int page, int perPage, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -24,7 +24,7 @@ public sealed partial class FlickrClient : IFlickrMachineTags
         return await GetResponseAsync<Namespaces>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
-    async Task<Pairs> IFlickrMachineTags.GetPairsAsync(string namespaceName, string predicate, int page, int perPage, CancellationToken cancellationToken)
+    async Task<Pairs> IFlickrMachineTags.GetPairsAsync(string? namespaceName, string? predicate, int page, int perPage, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -42,7 +42,7 @@ public sealed partial class FlickrClient : IFlickrMachineTags
         return await GetResponseAsync<Pairs>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
-    async Task<Predicates> IFlickrMachineTags.GetPredicatesAsync(string namespaceName, int page, int perPage, CancellationToken cancellationToken)
+    async Task<Predicates> IFlickrMachineTags.GetPredicatesAsync(string? namespaceName, int page, int perPage, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -58,7 +58,7 @@ public sealed partial class FlickrClient : IFlickrMachineTags
         return await GetResponseAsync<Predicates>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
-    async Task<Values> IFlickrMachineTags.GetRecentValuesAsync(string namespaceName, string predicate, DateTime? addedSince, CancellationToken cancellationToken)
+    async Task<Values> IFlickrMachineTags.GetRecentValuesAsync(string? namespaceName, string? predicate, DateTime? addedSince, CancellationToken cancellationToken)
     {
         if (string.IsNullOrEmpty(namespaceName) && string.IsNullOrEmpty(predicate) && addedSince == DateTime.MinValue)
         {

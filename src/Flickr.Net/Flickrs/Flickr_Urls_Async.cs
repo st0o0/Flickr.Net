@@ -20,7 +20,7 @@ public sealed partial class FlickrClient : IFlickrUrls
         return result.GetValueOrDefault("url", string.Empty);
     }
 
-    async Task<string> IFlickrUrls.GetUserPhotosAsync(string userId, CancellationToken cancellationToken)
+    async Task<string> IFlickrUrls.GetUserPhotosAsync(string? userId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -37,7 +37,7 @@ public sealed partial class FlickrClient : IFlickrUrls
         return result.GetValueOrDefault("url", string.Empty);
     }
 
-    async Task<string> IFlickrUrls.GetUserProfileAsync(string userId, CancellationToken cancellationToken)
+    async Task<string> IFlickrUrls.GetUserProfileAsync(string? userId, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {

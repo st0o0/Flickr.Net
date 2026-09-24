@@ -10,7 +10,7 @@ namespace Flickr.Net;
 /// </summary>
 public sealed partial class FlickrClient : IFlickrStats
 {
-    async Task<Domains> IFlickrStats.GetCollectionDomainsAsync(DateTime date, string collectionId, int page, int perPage, CancellationToken cancellationToken)
+    async Task<Domains> IFlickrStats.GetCollectionDomainsAsync(DateTime date, string? collectionId, int page, int perPage, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -29,7 +29,7 @@ public sealed partial class FlickrClient : IFlickrStats
         return await GetResponseAsync<Domains>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
-    async Task<Referrers> IFlickrStats.GetCollectionReferrersAsync(DateTime date, string domain, string collectionId, int page, int perPage, CancellationToken cancellationToken)
+    async Task<Referrers> IFlickrStats.GetCollectionReferrersAsync(DateTime date, string domain, string? collectionId, int page, int perPage, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -75,7 +75,7 @@ public sealed partial class FlickrClient : IFlickrStats
         return await GetResponseAsync<CSVFiles>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
-    async Task<Domains> IFlickrStats.GetPhotoDomainsAsync(DateTime date, string photoId, int page, int perPage, CancellationToken cancellationToken)
+    async Task<Domains> IFlickrStats.GetPhotoDomainsAsync(DateTime date, string? photoId, int page, int perPage, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -94,7 +94,7 @@ public sealed partial class FlickrClient : IFlickrStats
         return await GetResponseAsync<Domains>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
-    async Task<Referrers> IFlickrStats.GetPhotoReferrersAsync(DateTime date, string domain, string photoId, int page, int perPage, CancellationToken cancellationToken)
+    async Task<Referrers> IFlickrStats.GetPhotoReferrersAsync(DateTime date, string domain, string? photoId, int page, int perPage, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -114,7 +114,7 @@ public sealed partial class FlickrClient : IFlickrStats
         return await GetResponseAsync<Referrers>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
-    async Task<Domains> IFlickrStats.GetPhotosetDomainsAsync(DateTime date, string photosetId, int page, int perPage, CancellationToken cancellationToken)
+    async Task<Domains> IFlickrStats.GetPhotosetDomainsAsync(DateTime date, string? photosetId, int page, int perPage, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -133,7 +133,7 @@ public sealed partial class FlickrClient : IFlickrStats
         return await GetResponseAsync<Domains>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
-    async Task<Referrers> IFlickrStats.GetPhotosetReferrersAsync(DateTime date, string domain, string photosetId, int page, int perPage, CancellationToken cancellationToken)
+    async Task<Referrers> IFlickrStats.GetPhotosetReferrersAsync(DateTime date, string domain, string? photosetId, int page, int perPage, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 

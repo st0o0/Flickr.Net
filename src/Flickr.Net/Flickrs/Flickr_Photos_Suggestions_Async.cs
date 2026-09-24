@@ -75,7 +75,7 @@ public sealed partial class FlickrClient : IFlickrPhotosSuggestions
         await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
-    async Task IFlickrPhotosSuggestions.SuggestLocationAsync(string photoId, double latitude, double longitude, GeoAccuracy accuracy, WoeId? woeId, PlaceId? placeId, string note, CancellationToken cancellationToken)
+    async Task IFlickrPhotosSuggestions.SuggestLocationAsync(string photoId, double latitude, double longitude, GeoAccuracy accuracy, WoeId? woeId, PlaceId? placeId, string? note, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 

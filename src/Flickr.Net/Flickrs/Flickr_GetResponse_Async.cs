@@ -2,7 +2,6 @@ using Flickr.Net.Bases;
 using Flickr.Net.Flickrs.Results;
 using Flickr.Net.Internals;
 using Flickr.Net.Internals.Extensions;
-using Microsoft.Extensions.Caching.Hybrid;
 
 namespace Flickr.Net;
 
@@ -18,12 +17,12 @@ public sealed partial class FlickrClient
     {
         var result = await GetGenericResponseAsync<T>(parameters, cancellationToken).ConfigureAwait(false);
 
-        if (result.Content is TResponse value)
+        if (result.Content is { } value)
         {
             return value;
         }
 
-        return default;
+        return default!;
     }
 
     private async Task<T> GetGenericResponseAsync<T>(Dictionary<string, string> parameters, CancellationToken cancellationToken = default) where T : FlickrResult

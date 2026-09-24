@@ -26,7 +26,7 @@ public sealed partial class FlickrClient : IFlickrPhotosets
         await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
-    async Task<string> IFlickrPhotosets.CreateAsync(string title, string primaryPhotoId, string description, CancellationToken cancellationToken)
+    async Task<string> IFlickrPhotosets.CreateAsync(string title, string primaryPhotoId, string? description, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -57,7 +57,7 @@ public sealed partial class FlickrClient : IFlickrPhotosets
         await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
-    async Task IFlickrPhotosets.EditMetaAsync(string photosetId, string title, string description, CancellationToken cancellationToken)
+    async Task IFlickrPhotosets.EditMetaAsync(string photosetId, string title, string? description, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 

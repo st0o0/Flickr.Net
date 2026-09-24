@@ -32,10 +32,10 @@ public sealed partial class FlickrClient : IFlickrPush
         return await GetResponseAsync<TopicNames>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
-    async Task IFlickrPush.SubscribeAsync(string topic, string callback, string verify, string verifyToken,
-                                  int? leaseSeconds, IEnumerable<WoeId> woeIds, IEnumerable<PlaceId> placeIds, double? latitude,
+    async Task IFlickrPush.SubscribeAsync(string topic, string callback, string verify, string? verifyToken,
+                                  int? leaseSeconds, IEnumerable<WoeId>? woeIds, IEnumerable<PlaceId>? placeIds, double? latitude,
                                   double? longitude, int? radius, RadiusUnit radiusUnits, GeoAccuracy accuracy,
-                                  IEnumerable<string> nsids, IEnumerable<string> tags, CancellationToken cancellationToken)
+                                  IEnumerable<string>? nsids, IEnumerable<string>? tags, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -83,7 +83,7 @@ public sealed partial class FlickrClient : IFlickrPush
         await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
-    async Task IFlickrPush.UnsubscribeAsync(string topic, string callback, string verify, string verifyToken, CancellationToken cancellationToken)
+    async Task IFlickrPush.UnsubscribeAsync(string topic, string callback, string verify, string? verifyToken, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -153,9 +153,9 @@ public interface IFlickrPush
     /// </param>
     /// <param name="cancellationToken"></param>
     Task SubscribeAsync(string topic, string callback, string verify, string? verifyToken = null,
-                                   int? leaseSeconds = null, IEnumerable<WoeId> woeIds = null, IEnumerable<PlaceId> placeIds = null, double? latitude = null,
+                                   int? leaseSeconds = null, IEnumerable<WoeId>? woeIds = null, IEnumerable<PlaceId>? placeIds = null, double? latitude = null,
                                    double? longitude = null, int? radius = null, RadiusUnit radiusUnits = RadiusUnit.None, GeoAccuracy accuracy = GeoAccuracy.None,
-                                   IEnumerable<string> nsids = null, IEnumerable<string> tags = null, CancellationToken cancellationToken = default);
+                                   IEnumerable<string>? nsids = null, IEnumerable<string>? tags = null, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Unsubscribe from a particular push subscription.

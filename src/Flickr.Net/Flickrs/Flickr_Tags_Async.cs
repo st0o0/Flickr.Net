@@ -35,7 +35,7 @@ public sealed partial class FlickrClient : IFlickrTags
         return await GetResponseAsync<Clusters>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
-    async Task<FlickrStatsResult<Hottags>> IFlickrTags.GetHotListAsync(string period, int? count, CancellationToken cancellationToken)
+    async Task<FlickrStatsResult<Hottags>> IFlickrTags.GetHotListAsync(string? period, int? count, CancellationToken cancellationToken)
     {
         if (!string.IsNullOrEmpty(period) && period != "day" && period != "week")
         {
@@ -77,7 +77,7 @@ public sealed partial class FlickrClient : IFlickrTags
         return await GetResponseAsync<Tags>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
-    async Task<UserTags> IFlickrTags.GetListUserPopularAsync(string userId, int? count, CancellationToken cancellationToken)
+    async Task<UserTags> IFlickrTags.GetListUserPopularAsync(string? userId, int? count, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {

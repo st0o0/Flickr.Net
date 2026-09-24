@@ -9,7 +9,7 @@ namespace Flickr.Net;
 /// </summary>
 public sealed partial class FlickrClient : IFlickrGalleries
 {
-    async Task IFlickrGalleries.AddPhotoAsync(string galleryId, string photoId, string comment, CancellationToken cancellationToken)
+    async Task IFlickrGalleries.AddPhotoAsync(string galleryId, string photoId, string? comment, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {
@@ -23,7 +23,7 @@ public sealed partial class FlickrClient : IFlickrGalleries
         await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
-    async Task IFlickrGalleries.CreateAsync(string title, string description, string primaryPhotoId, CancellationToken cancellationToken)
+    async Task IFlickrGalleries.CreateAsync(string title, string description, string? primaryPhotoId, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -39,7 +39,7 @@ public sealed partial class FlickrClient : IFlickrGalleries
         await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
-    async Task IFlickrGalleries.EditMetaAsync(string galleryId, string title, string description, CancellationToken cancellationToken)
+    async Task IFlickrGalleries.EditMetaAsync(string galleryId, string title, string? description, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -140,7 +140,7 @@ public sealed partial class FlickrClient : IFlickrGalleries
         return await GetResponseAsync<GalleryPhotos>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
-    async Task IFlickrGalleries.RemovePhoto(string galleryId, string photoId, string fullResponse, CancellationToken cancellationToken)
+    async Task IFlickrGalleries.RemovePhoto(string galleryId, string photoId, string? fullResponse, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 

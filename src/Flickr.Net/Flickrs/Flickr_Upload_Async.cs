@@ -5,7 +5,6 @@ using Flickr.Net.Enums;
 using Flickr.Net.Flickrs.Results;
 using Flickr.Net.Internals;
 using Flickr.Net.Internals.Extensions;
-using Flickr.Net.Internals.HttpContents;
 
 namespace Flickr.Net;
 
@@ -14,10 +13,10 @@ namespace Flickr.Net;
 /// </summary>
 public sealed partial class FlickrClient : IFlickrUpload
 {
-    async Task<string> IFlickrUpload.UploadPictureAsync(Stream stream, string fileName, string title,
-         string description, string tags, bool isPublic, bool isFamily, bool isFriend,
+    async Task<string> IFlickrUpload.UploadPictureAsync(Stream stream, string fileName, string? title,
+         string? description, string? tags, bool isPublic, bool isFamily, bool isFriend,
          ContentType contentType, SafetyLevel safetyLevel, HiddenFromSearch hiddenFromSearch,
-         IProgress<double> progress, CancellationToken cancellationToken)
+         IProgress<double>? progress, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -48,7 +47,7 @@ public sealed partial class FlickrClient : IFlickrUpload
         return result.GetString()!;
     }
 
-    async Task<string> IFlickrUpload.ReplacePictureAsync(Stream stream, string fileName, string photoId, IProgress<double> progress, CancellationToken cancellationToken)
+    async Task<string> IFlickrUpload.ReplacePictureAsync(Stream stream, string fileName, string photoId, IProgress<double>? progress, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 

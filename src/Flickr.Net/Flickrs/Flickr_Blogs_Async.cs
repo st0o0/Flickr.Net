@@ -29,7 +29,7 @@ public sealed partial class FlickrClient : IFlickrBlogs
         return await GetResponseAsync<Services>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
-    async Task IFlickrBlogs.PostPhotoAsync(string blogId, string photoId, string title, string description, string blogPassword, CancellationToken cancellationToken)
+    async Task IFlickrBlogs.PostPhotoAsync(string blogId, string photoId, string title, string description, string? blogPassword, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {

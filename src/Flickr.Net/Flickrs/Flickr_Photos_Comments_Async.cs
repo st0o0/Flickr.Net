@@ -57,7 +57,7 @@ public sealed partial class FlickrClient : IFlickrPhotosComments
         return await GetResponseAsync<PhotoComments>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
-    async Task<PagedPhotos> IFlickrPhotosComments.GetRecentForContactsAsync(DateTime? dateLastComment, string[] contactsFilter, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken)
+    async Task<PagedPhotos> IFlickrPhotosComments.GetRecentForContactsAsync(DateTime? dateLastComment, string[]? contactsFilter, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -132,5 +132,5 @@ public interface IFlickrPhotosComments
     /// maximum allowed value is 500.
     /// </param>
     /// <param name="cancellationToken"></param>
-    Task<PagedPhotos> GetRecentForContactsAsync(DateTime? dateLastComment = null, string[] contactsFilter = null, PhotoSearchExtras extras = PhotoSearchExtras.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
+    Task<PagedPhotos> GetRecentForContactsAsync(DateTime? dateLastComment = null, string[]? contactsFilter = null, PhotoSearchExtras extras = PhotoSearchExtras.None, int page = 0, int perPage = 0, CancellationToken cancellationToken = default);
 }

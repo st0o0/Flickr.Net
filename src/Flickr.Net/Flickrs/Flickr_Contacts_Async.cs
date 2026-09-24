@@ -36,7 +36,7 @@ public sealed partial class FlickrClient : IFlickrContacts
             { "method", "flickr.contacts.getListRecentlyUploaded" }
         };
 
-        parameters.AppendIf("date_lastupload", dateLastUpdated, x => x.HasValue && x > DateTime.MinValue, x => x.Value.ToUnixTimestamp());
+        parameters.AppendIf("date_lastupload", dateLastUpdated, x => x.HasValue && x > DateTime.MinValue, x => x!.Value.ToUnixTimestamp());
 
         parameters.AppendIf("filter", filter, x => x != ContactSearch.None, x => x == ContactSearch.AllContacts ? "all" : "ff");
 

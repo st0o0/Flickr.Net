@@ -33,7 +33,7 @@ public sealed partial class FlickrClient : IFlickrFavorites
         return await GetContextResponseAsync<NextPhoto, PrevPhoto>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
-    async Task<PagedPhotos> IFlickrFavorites.GetListAsync(string userId, DateTime? minFavoriteDate, DateTime? maxFavoriteDate, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken)
+    async Task<PagedPhotos> IFlickrFavorites.GetListAsync(string? userId, DateTime? minFavoriteDate, DateTime? maxFavoriteDate, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
 
@@ -44,9 +44,9 @@ public sealed partial class FlickrClient : IFlickrFavorites
 
         parameters.AppendIf("user_id", userId, x => x != null, x => x);
 
-        parameters.AppendIf("min_fav_date", maxFavoriteDate, x => x.HasValue && x > DateTime.MinValue, x => x.Value.ToUnixTimestamp());
+        parameters.AppendIf("min_fav_date", maxFavoriteDate, x => x.HasValue && x > DateTime.MinValue, x => x!.Value.ToUnixTimestamp());
 
-        parameters.AppendIf("max_fav_date", maxFavoriteDate, x => x.HasValue && x > DateTime.MinValue, x => x.Value.ToUnixTimestamp());
+        parameters.AppendIf("max_fav_date", maxFavoriteDate, x => x.HasValue && x > DateTime.MinValue, x => x!.Value.ToUnixTimestamp());
 
         parameters.AppendIf("extras", extras, x => x != PhotoSearchExtras.None, x => x.ToFlickrString());
 

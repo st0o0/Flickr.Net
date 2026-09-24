@@ -50,7 +50,7 @@ public sealed partial class FlickrClient : IFlickrGroupsPools
         return await GetResponseAsync<Groups>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
-    async Task<PagedPhotos> IFlickrGroupsPools.GetPhotosAsync(string groupId, string tags, string userId, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken)
+    async Task<PagedPhotos> IFlickrGroupsPools.GetPhotosAsync(string groupId, string? tags, string? userId, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken)
     {
         Dictionary<string, string> parameters = new()
         {

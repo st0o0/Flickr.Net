@@ -57,8 +57,8 @@ public sealed partial class FlickrClient : IFlickrClient
     /// </summary>
     /// <param name="apiKey">Your Flickr API key.</param>
     /// <param name="sharedSecret">Your Flickr shared secret.</param>
-    public FlickrClient(string apiKey, string sharedSecret)
-        : this(new FlickrConfiguration { ApiKey = apiKey, SharedSecret = sharedSecret })
+    public FlickrClient(string apiKey, string? sharedSecret)
+        : this(new FlickrConfiguration { ApiKey = apiKey, SharedSecret = sharedSecret ?? string.Empty })
     {
     }
 
