@@ -47,6 +47,17 @@ All leaf exception classes (e.g. `PhotoNotFoundException`, `UserNotFoundExceptio
 
 **Not sealed** (base classes): `FlickrException`, `FlickrApiException`.
 
+### IAsyncDisposable support
+
+`IFlickrClient` now implements `IAsyncDisposable` in addition to `IDisposable`. Use `await using` for async disposal:
+
+```diff
+- using var flickr = new FlickrClient("apiKey", "secret");
++ await using var flickr = new FlickrClient("apiKey", "secret");
+```
+
+`using` still works — this is additive, not a removal.
+
 ### Removed types
 
 - `SafeNativeMethods` — unused internal class, removed entirely.
