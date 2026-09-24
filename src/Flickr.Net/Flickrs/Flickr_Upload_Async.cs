@@ -1,10 +1,11 @@
 using System.Globalization;
-using System.Text;
+using System.Net.Http.Headers;
 using System.Text.Json;
 using Flickr.Net.Enums;
 using Flickr.Net.Flickrs.Results;
 using Flickr.Net.Internals;
 using Flickr.Net.Internals.Extensions;
+using Flickr.Net.Internals.HttpContents;
 
 namespace Flickr.Net;
 
@@ -19,8 +20,6 @@ public sealed partial class FlickrClient : IFlickrUpload
          IProgress<double> progress, CancellationToken cancellationToken)
     {
         CheckRequiresAuthentication();
-
-        Uri uploadUri = new(UploadUrl);
 
         Dictionary<string, string> parameters = [];
 
@@ -42,60 +41,45 @@ public sealed partial class FlickrClient : IFlickrUpload
 
         parameters.AppendIf("hidden", hiddenFromSearch, x => x != HiddenFromSearch.None, x => x.ToString("D"));
 
-        if (!string.IsNullOrEmpty(FlickrSettings.OAuthAccessToken))
-        {
-            parameters.Remove("api_key");
-            OAuthGetBasicParameters(parameters);
-            parameters.Add("oauth_token", FlickrSettings.OAuthAccessToken);
-            var sig = ((IFlickrOAuth)this).CalculateSignature("POST", uploadUri.AbsoluteUri, parameters, FlickrSettings.OAuthAccessTokenSecret);
-            parameters.Add("oauth_signature", sig);
-        }
-        else
-        {
-            parameters.Add("auth_token", FlickrSettings.ApiKey);
-        }
+        SignUploadParameters(parameters, UploadUrl);
 
-        var result = await UploadDataAsync(stream, fileName, progress, uploadUri, parameters, cancellationToken);
+        var result = await UploadDataAsync(stream, fileName, progress, new Uri(UploadUrl), parameters, cancellationToken).ConfigureAwait(false);
 
-        return result.GetString();
+        return result.GetString()!;
     }
 
     async Task<string> IFlickrUpload.ReplacePictureAsync(Stream stream, string fileName, string photoId, IProgress<double> progress, CancellationToken cancellationToken)
     {
-        Uri replaceUri = new(ReplaceUrl);
+        CheckRequiresAuthentication();
 
         Dictionary<string, string> parameters = new()
         {
-            { "photo_id", photoId },
-            { "api_key", FlickrSettings.ApiKey }
+            { "photo_id", photoId }
         };
 
-        if (!string.IsNullOrEmpty(FlickrSettings.OAuthAccessToken))
-        {
-            parameters.Remove("api_key");
-            OAuthGetBasicParameters(parameters);
-            parameters.Add("oauth_token", FlickrSettings.OAuthAccessToken);
-            var sig = ((IFlickrOAuth)this).CalculateSignature("POST", replaceUri.AbsoluteUri, parameters, FlickrSettings.OAuthAccessTokenSecret);
-            parameters.Add("oauth_signature", sig);
-        }
-        else
-        {
-            parameters.Add("auth_token", FlickrSettings.ApiKey);
-        }
+        SignUploadParameters(parameters, ReplaceUrl);
 
-        var result = await UploadDataAsync(stream, fileName, progress, replaceUri, parameters, cancellationToken);
-        return result.GetProperty("#text").GetString();
+        var result = await UploadDataAsync(stream, fileName, progress, new Uri(ReplaceUrl), parameters, cancellationToken).ConfigureAwait(false);
+        return result.GetProperty("_content").GetString()!;
+    }
+
+    private void SignUploadParameters(Dictionary<string, string> parameters, string url)
+    {
+        OAuthGetBasicParameters(parameters);
+        parameters.Add("oauth_token", FlickrSettings.OAuthAccessToken);
+        var sig = ((IFlickrOAuth)this).CalculateSignature("POST", url, parameters, FlickrSettings.OAuthAccessTokenSecret);
+        parameters.Add("oauth_signature", sig);
     }
 
     private async Task<JsonElement> UploadDataAsync(Stream imageStream, string fileName, IProgress<double> progress, Uri uploadUri, Dictionary<string, string> parameters, CancellationToken cancellationToken = default)
     {
         var authHeader = FlickrResponder.OAuthCalculateAuthHeader(parameters);
 
-        var boundary = "FLICKR_MIME_" + DateTime.Now.ToString("yyyyMMddhhmmss", DateTimeFormatInfo.InvariantInfo);
+        var boundary = "FLICKR_MIME_" + DateTime.UtcNow.ToString("yyyyMMddHHmmss", DateTimeFormatInfo.InvariantInfo);
 
-        var content = CreateUploadData(imageStream, fileName, progress, parameters, boundary, cancellationToken);
+        using var content = CreateUploadData(imageStream, fileName, progress, parameters, boundary, cancellationToken);
 
-        HttpRequestMessage requestMessage = new()
+        using HttpRequestMessage requestMessage = new()
         {
             RequestUri = uploadUri,
             Method = HttpMethod.Post,
@@ -104,16 +88,16 @@ public sealed partial class FlickrClient : IFlickrUpload
 
         if (!string.IsNullOrEmpty(authHeader))
         {
-            requestMessage.Headers.Add("Authorization", authHeader);
+            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("OAuth", authHeader.Replace("OAuth ", ""));
         }
 
-        var responseMessage = await _httpClient.SendAsync(requestMessage, cancellationToken);
+        using var responseMessage = await _httpClient.SendAsync(requestMessage, cancellationToken).ConfigureAwait(false);
 
         responseMessage.EnsureSuccessStatusCode();
 
-        var xml = await responseMessage.Content.ReadAsStringAsync(cancellationToken);
+        var xml = await responseMessage.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
         var json = FlickrConvert.XmlToJson(xml);
-        var flickrResults = FlickrConvert.DeserializeObject<FlickrExtendedDataResult>(Encoding.UTF8.GetBytes(json));
+        var flickrResults = FlickrConvert.DeserializeObject<FlickrExtendedDataResult>(json);
 
         flickrResults = flickrResults.EnsureSuccessStatusCode();
 
@@ -134,7 +118,7 @@ public interface IFlickrUpload
     /// <summary>
     /// UploadPicture method that does all the uploading work.
     /// </summary>
-    /// <param name="stream">The <see cref="Stream"/> object containing the pphoto to be uploaded.</param>
+    /// <param name="stream">The <see cref="Stream"/> object containing the photo to be uploaded.</param>
     /// <param name="fileName">
     /// The filename of the file to upload. Used as the title if title is null.
     /// </param>
