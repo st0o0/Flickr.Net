@@ -63,10 +63,10 @@ public sealed partial class FlickrClient : IFlickrClient
     }
 
     /// <summary>Gets the Flickr upload endpoint URL.</summary>
-    private static string UploadUrl => "https://up.flickr.com/services/upload/";
-    private static string ReplaceUrl => "https://up.flickr.com/services/replace/";
-    private static string AuthUrl => "https://www.flickr.com/services/auth/";
-    private static Uri BaseUri => new("https://api.flickr.com/services/rest/");
+    internal string UploadUrl { get; init; } = "https://up.flickr.com/services/upload/";
+    internal string ReplaceUrl { get; init; } = "https://up.flickr.com/services/replace/";
+    internal string AuthUrl { get; init; } = "https://www.flickr.com/services/auth/";
+    internal Uri BaseUri { get; init; } = new("https://api.flickr.com/services/rest/");
 
     /// <inheritdoc />
     public IFlickrActivity Activity => this;
