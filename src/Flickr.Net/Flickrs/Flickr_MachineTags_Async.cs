@@ -21,7 +21,7 @@ public sealed partial class FlickrClient : IFlickrMachineTags
 
         parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<Namespaces>(parameters, cancellationToken);
+        return await GetResponseAsync<Namespaces>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Pairs> IFlickrMachineTags.GetPairsAsync(string namespaceName, string predicate, int page, int perPage, CancellationToken cancellationToken)
@@ -39,7 +39,7 @@ public sealed partial class FlickrClient : IFlickrMachineTags
 
         parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<Pairs>(parameters, cancellationToken);
+        return await GetResponseAsync<Pairs>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Predicates> IFlickrMachineTags.GetPredicatesAsync(string namespaceName, int page, int perPage, CancellationToken cancellationToken)
@@ -55,7 +55,7 @@ public sealed partial class FlickrClient : IFlickrMachineTags
 
         parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<Predicates>(parameters, cancellationToken);
+        return await GetResponseAsync<Predicates>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Values> IFlickrMachineTags.GetRecentValuesAsync(string namespaceName, string predicate, DateTime? addedSince, CancellationToken cancellationToken)
@@ -76,7 +76,7 @@ public sealed partial class FlickrClient : IFlickrMachineTags
 
         parameters.AppendIf("added_since", addedSince, x => x.HasValue && x > DateTime.MinValue, x => x.Value.ToUnixTimestamp());
 
-        return await GetResponseAsync<Values>(parameters, cancellationToken);
+        return await GetResponseAsync<Values>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Values> IFlickrMachineTags.GetValuesAsync(string namespaceName, string predicate, int page, int perPage, CancellationToken cancellationToken)
@@ -92,7 +92,7 @@ public sealed partial class FlickrClient : IFlickrMachineTags
 
         parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<Values>(parameters, cancellationToken);
+        return await GetResponseAsync<Values>(parameters, cancellationToken).ConfigureAwait(false);
     }
 }
 

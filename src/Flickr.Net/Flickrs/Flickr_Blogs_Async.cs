@@ -16,7 +16,7 @@ public sealed partial class FlickrClient : IFlickrBlogs
             { "method", "flickr.blogs.getList" }
         };
 
-        return await GetResponseAsync<Blogs>(parameters, cancellationToken);
+        return await GetResponseAsync<Blogs>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Services> IFlickrBlogs.GetServicesAsync(CancellationToken cancellationToken)
@@ -26,7 +26,7 @@ public sealed partial class FlickrClient : IFlickrBlogs
             { "method", "flickr.blogs.getServices" }
         };
 
-        return await GetResponseAsync<Services>(parameters, cancellationToken);
+        return await GetResponseAsync<Services>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task IFlickrBlogs.PostPhotoAsync(string blogId, string photoId, string title, string description, string blogPassword, CancellationToken cancellationToken)
@@ -42,7 +42,7 @@ public sealed partial class FlickrClient : IFlickrBlogs
 
         parameters.AppendIf("blog_password", blogPassword, x => x != null, x => x);
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 }
 

@@ -17,7 +17,7 @@ public sealed partial class FlickrClient : IFlickrPanda
             { "method", "flickr.panda.getList" }
         };
 
-        return await GetResponseAsync<Pandas>(parameters, cancellationToken);
+        return await GetResponseAsync<Pandas>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<PandaPhotos> IFlickrPanda.GetPhotosAsync(string pandaName, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken)
@@ -34,7 +34,7 @@ public sealed partial class FlickrClient : IFlickrPanda
 
         parameters.AppendIf("extras", extras, x => x != PhotoSearchExtras.None, x => x.ToFlickrString());
 
-        return await GetResponseAsync<PandaPhotos>(parameters, cancellationToken);
+        return await GetResponseAsync<PandaPhotos>(parameters, cancellationToken).ConfigureAwait(false);
     }
 }
 

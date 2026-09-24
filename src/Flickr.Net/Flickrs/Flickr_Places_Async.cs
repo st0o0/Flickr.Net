@@ -16,7 +16,7 @@ public sealed partial class FlickrClient : IFlickrPlaces
             { "query", query }
         };
 
-        return await GetResponseAsync<Places>(parameters, cancellationToken);
+        return await GetResponseAsync<Places>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Places> IFlickrPlaces.FindByLatLonAsync(double lat, double lon, int? accuracy, CancellationToken cancellationToken)
@@ -30,7 +30,7 @@ public sealed partial class FlickrClient : IFlickrPlaces
 
         parameters.AppendIf("accuracy", accuracy, x => x is > 0, x => x!.Value.ToString(NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<Places>(parameters, cancellationToken);
+        return await GetResponseAsync<Places>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Place> IFlickrPlaces.GetInfoAsync(string placeId, string? woeId, CancellationToken cancellationToken)
@@ -43,7 +43,7 @@ public sealed partial class FlickrClient : IFlickrPlaces
         parameters.AppendIf("place_id", placeId, x => !string.IsNullOrEmpty(x), x => x);
         parameters.AppendIf("woe_id", woeId, x => !string.IsNullOrEmpty(x), x => x!);
 
-        return await GetResponseAsync<Place>(parameters, cancellationToken);
+        return await GetResponseAsync<Place>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Place> IFlickrPlaces.GetInfoByUrlAsync(string url, CancellationToken cancellationToken)
@@ -54,7 +54,7 @@ public sealed partial class FlickrClient : IFlickrPlaces
             { "url", url }
         };
 
-        return await GetResponseAsync<Place>(parameters, cancellationToken);
+        return await GetResponseAsync<Place>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Place> IFlickrPlaces.ResolvePlaceIdAsync(string placeId, CancellationToken cancellationToken)
@@ -65,7 +65,7 @@ public sealed partial class FlickrClient : IFlickrPlaces
             { "place_id", placeId }
         };
 
-        return await GetResponseAsync<Place>(parameters, cancellationToken);
+        return await GetResponseAsync<Place>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Place> IFlickrPlaces.ResolvePlaceUrlAsync(string url, CancellationToken cancellationToken)
@@ -76,7 +76,7 @@ public sealed partial class FlickrClient : IFlickrPlaces
             { "url", url }
         };
 
-        return await GetResponseAsync<Place>(parameters, cancellationToken);
+        return await GetResponseAsync<Place>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Places> IFlickrPlaces.GetChildrenWithPhotosPublicAsync(string? placeId, string? woeId, CancellationToken cancellationToken)
@@ -89,7 +89,7 @@ public sealed partial class FlickrClient : IFlickrPlaces
         parameters.AppendIf("place_id", placeId, x => !string.IsNullOrEmpty(x), x => x!);
         parameters.AppendIf("woe_id", woeId, x => !string.IsNullOrEmpty(x), x => x!);
 
-        return await GetResponseAsync<Places>(parameters, cancellationToken);
+        return await GetResponseAsync<Places>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<PlaceTypes> IFlickrPlaces.GetPlaceTypesAsync(CancellationToken cancellationToken)
@@ -99,7 +99,7 @@ public sealed partial class FlickrClient : IFlickrPlaces
             { "method", "flickr.places.getPlaceTypes" }
         };
 
-        return await GetResponseAsync<PlaceTypes>(parameters, cancellationToken);
+        return await GetResponseAsync<PlaceTypes>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<ShapeHistory> IFlickrPlaces.GetShapeHistoryAsync(string? placeId, string? woeId, CancellationToken cancellationToken)
@@ -112,7 +112,7 @@ public sealed partial class FlickrClient : IFlickrPlaces
         parameters.AppendIf("place_id", placeId, x => !string.IsNullOrEmpty(x), x => x!);
         parameters.AppendIf("woe_id", woeId, x => !string.IsNullOrEmpty(x), x => x!);
 
-        return await GetResponseAsync<ShapeHistory>(parameters, cancellationToken);
+        return await GetResponseAsync<ShapeHistory>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Places> IFlickrPlaces.GetTopPlacesListAsync(int placeTypeId, string? date, string? woeId, string? placeId, CancellationToken cancellationToken)
@@ -127,7 +127,7 @@ public sealed partial class FlickrClient : IFlickrPlaces
         parameters.AppendIf("woe_id", woeId, x => !string.IsNullOrEmpty(x), x => x!);
         parameters.AppendIf("place_id", placeId, x => !string.IsNullOrEmpty(x), x => x!);
 
-        return await GetResponseAsync<Places>(parameters, cancellationToken);
+        return await GetResponseAsync<Places>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Places> IFlickrPlaces.PlacesForBoundingBoxAsync(double minLon, double minLat, double maxLon, double maxLat, int? placeTypeId, CancellationToken cancellationToken)
@@ -142,7 +142,7 @@ public sealed partial class FlickrClient : IFlickrPlaces
 
         parameters.AppendIf("place_type_id", placeTypeId, x => x is > 0, x => x!.Value.ToString(NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<Places>(parameters, cancellationToken);
+        return await GetResponseAsync<Places>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Places> IFlickrPlaces.PlacesForContactsAsync(int? placeTypeId, string? woeId, string? placeId, int? threshold, string? minUploadDate, string? maxUploadDate, string? minTakenDate, string? maxTakenDate, CancellationToken cancellationToken)
@@ -163,7 +163,7 @@ public sealed partial class FlickrClient : IFlickrPlaces
         parameters.AppendIf("min_taken_date", minTakenDate, x => !string.IsNullOrEmpty(x), x => x!);
         parameters.AppendIf("max_taken_date", maxTakenDate, x => !string.IsNullOrEmpty(x), x => x!);
 
-        return await GetResponseAsync<Places>(parameters, cancellationToken);
+        return await GetResponseAsync<Places>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Places> IFlickrPlaces.PlacesForTagsAsync(int placeTypeId, string? woeId, string? placeId, int? threshold, string? tags, string? tagMode, string? machineTags, string? machineTagMode, string? minUploadDate, string? maxUploadDate, string? minTakenDate, string? maxTakenDate, CancellationToken cancellationToken)
@@ -186,7 +186,7 @@ public sealed partial class FlickrClient : IFlickrPlaces
         parameters.AppendIf("min_taken_date", minTakenDate, x => !string.IsNullOrEmpty(x), x => x!);
         parameters.AppendIf("max_taken_date", maxTakenDate, x => !string.IsNullOrEmpty(x), x => x!);
 
-        return await GetResponseAsync<Places>(parameters, cancellationToken);
+        return await GetResponseAsync<Places>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Places> IFlickrPlaces.PlacesForUserAsync(int? placeTypeId, string? woeId, string? placeId, int? threshold, string? minUploadDate, string? maxUploadDate, string? minTakenDate, string? maxTakenDate, CancellationToken cancellationToken)
@@ -207,7 +207,7 @@ public sealed partial class FlickrClient : IFlickrPlaces
         parameters.AppendIf("min_taken_date", minTakenDate, x => !string.IsNullOrEmpty(x), x => x!);
         parameters.AppendIf("max_taken_date", maxTakenDate, x => !string.IsNullOrEmpty(x), x => x!);
 
-        return await GetResponseAsync<Places>(parameters, cancellationToken);
+        return await GetResponseAsync<Places>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<PlaceTags> IFlickrPlaces.TagsForPlaceAsync(string? woeId, string? placeId, string? minUploadDate, string? maxUploadDate, string? minTakenDate, string? maxTakenDate, CancellationToken cancellationToken)
@@ -224,7 +224,7 @@ public sealed partial class FlickrClient : IFlickrPlaces
         parameters.AppendIf("min_taken_date", minTakenDate, x => !string.IsNullOrEmpty(x), x => x!);
         parameters.AppendIf("max_taken_date", maxTakenDate, x => !string.IsNullOrEmpty(x), x => x!);
 
-        return await GetResponseAsync<PlaceTags>(parameters, cancellationToken);
+        return await GetResponseAsync<PlaceTags>(parameters, cancellationToken).ConfigureAwait(false);
     }
 }
 

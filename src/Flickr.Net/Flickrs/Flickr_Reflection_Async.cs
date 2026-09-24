@@ -13,7 +13,7 @@ public sealed partial class FlickrClient : IFlickrReflection
             { "method_name", methodName }
         };
 
-        return await GetResponseAsync<Method>(parameters, cancellationToken);
+        return await GetResponseAsync<Method>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Methods> IFlickrReflection.GetMethodsAsync(CancellationToken cancellationToken)
@@ -23,7 +23,7 @@ public sealed partial class FlickrClient : IFlickrReflection
             { "method", "flickr.reflection.getMethods" }
         };
 
-        return await GetResponseAsync<Methods>(parameters, cancellationToken);
+        return await GetResponseAsync<Methods>(parameters, cancellationToken).ConfigureAwait(false);
     }
 }
 

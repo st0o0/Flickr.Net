@@ -12,7 +12,7 @@ public sealed partial class FlickrClient : IFlickrCommons
             { "method", "flickr.commons.getInstitutions" }
         };
 
-        return await GetResponseAsync<Institutions>(parameters, cancellationToken);
+        return await GetResponseAsync<Institutions>(parameters, cancellationToken).ConfigureAwait(false);
     }
 }
 

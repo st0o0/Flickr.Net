@@ -22,7 +22,7 @@ public sealed partial class FlickrClient : IFlickrGroups
             { "group_id", groupId }
         };
 
-        return await GetResponseAsync<GroupInfo>(parameters, cancellationToken);
+        return await GetResponseAsync<GroupInfo>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task IFlickrGroups.JoinAsync(string groupId, bool acceptsRules, CancellationToken cancellationToken)
@@ -37,7 +37,7 @@ public sealed partial class FlickrClient : IFlickrGroups
 
         parameters.AppendIf("accept_rules", acceptsRules, x => x, _ => "1");
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task IFlickrGroups.JoinRequestAsync(string groupId, string message, bool acceptsRules, CancellationToken cancellationToken)
@@ -53,7 +53,7 @@ public sealed partial class FlickrClient : IFlickrGroups
 
         parameters.AppendIf("accept_rules", acceptsRules, x => x, _ => "1");
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task IFlickrGroups.LeaveAsync(string groupId, bool deletePhotos, CancellationToken cancellationToken)
@@ -68,7 +68,7 @@ public sealed partial class FlickrClient : IFlickrGroups
 
         parameters.AppendIf("delete_photos", deletePhotos, x => x, _ => "1");
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Groups> IFlickrGroups.SearchAsync(string text, int page, int perPage, CancellationToken cancellationToken)
@@ -83,7 +83,7 @@ public sealed partial class FlickrClient : IFlickrGroups
 
         parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<Groups>(parameters, cancellationToken);
+        return await GetResponseAsync<Groups>(parameters, cancellationToken).ConfigureAwait(false);
     }
 }
 

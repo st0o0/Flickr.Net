@@ -23,7 +23,7 @@ public sealed partial class FlickrClient : IFlickrGroupsDiscussReplies
             { "message", message }
         };
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task IFlickrGroupsDiscussReplies.DeleteAsync(string topicId, string replyId, CancellationToken cancellationToken)
@@ -41,7 +41,7 @@ public sealed partial class FlickrClient : IFlickrGroupsDiscussReplies
             { "reply_id", replyId }
         };
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task IFlickrGroupsDiscussReplies.EditAsync(string topicId, string replyId, string message, CancellationToken cancellationToken)
@@ -62,7 +62,7 @@ public sealed partial class FlickrClient : IFlickrGroupsDiscussReplies
             { "message", message }
         };
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Reply> IFlickrGroupsDiscussReplies.GetInfoAsync(string topicId, string replyId, CancellationToken cancellationToken)
@@ -77,7 +77,7 @@ public sealed partial class FlickrClient : IFlickrGroupsDiscussReplies
             { "reply_id", replyId }
         };
 
-        return await GetResponseAsync<Reply>(parameters, cancellationToken);
+        return await GetResponseAsync<Reply>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Replies> IFlickrGroupsDiscussReplies.GetListAsync(string topicId, int perPage, int page, CancellationToken cancellationToken)
@@ -94,7 +94,7 @@ public sealed partial class FlickrClient : IFlickrGroupsDiscussReplies
 
         parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<Replies>(parameters, cancellationToken);
+        return await GetResponseAsync<Replies>(parameters, cancellationToken).ConfigureAwait(false);
     }
 }
 

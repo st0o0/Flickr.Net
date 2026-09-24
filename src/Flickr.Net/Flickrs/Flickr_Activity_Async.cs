@@ -22,7 +22,7 @@ public sealed partial class FlickrClient : IFlickrActivity
 
         parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<Items>(parameters, cancellationToken);
+        return await GetResponseAsync<Items>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Items> IFlickrActivity.UserPhotosAsync(int timePeriod, TimeType timeType, int page, int perPage, CancellationToken cancellationToken)
@@ -47,7 +47,7 @@ public sealed partial class FlickrClient : IFlickrActivity
 
         parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<Items>(parameters, cancellationToken);
+        return await GetResponseAsync<Items>(parameters, cancellationToken).ConfigureAwait(false);
     }
 }
 

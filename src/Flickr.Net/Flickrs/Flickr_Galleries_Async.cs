@@ -20,7 +20,7 @@ public sealed partial class FlickrClient : IFlickrGalleries
 
         parameters.AppendIf("comment", comment, x => !string.IsNullOrEmpty(x), x => x);
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task IFlickrGalleries.CreateAsync(string title, string description, string primaryPhotoId, CancellationToken cancellationToken)
@@ -36,7 +36,7 @@ public sealed partial class FlickrClient : IFlickrGalleries
 
         parameters.AppendIf("primary_photo_id", primaryPhotoId, x => !string.IsNullOrEmpty(x), x => x);
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task IFlickrGalleries.EditMetaAsync(string galleryId, string title, string description, CancellationToken cancellationToken)
@@ -52,7 +52,7 @@ public sealed partial class FlickrClient : IFlickrGalleries
 
         parameters.AppendIf("description", description, x => !string.IsNullOrEmpty(x), x => x);
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task IFlickrGalleries.EditPhotoAsync(string galleryId, string photoId, string comment, CancellationToken cancellationToken)
@@ -67,7 +67,7 @@ public sealed partial class FlickrClient : IFlickrGalleries
             { "comment", comment }
         };
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task IFlickrGalleries.EditPhotosAsync(string galleryId, string primaryPhotoId, IEnumerable<string> photoIds, CancellationToken cancellationToken)
@@ -82,7 +82,7 @@ public sealed partial class FlickrClient : IFlickrGalleries
             { "photo_ids", string.Join(",", photoIds.ToArray())}
         };
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<GalleryInfo> IFlickrGalleries.GetInfoAsync(string galleryId, CancellationToken cancellationToken)
@@ -93,7 +93,7 @@ public sealed partial class FlickrClient : IFlickrGalleries
             { "gallery_id", galleryId }
         };
 
-        return await GetResponseAsync<GalleryInfo>(parameters, cancellationToken);
+        return await GetResponseAsync<GalleryInfo>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Galleries> IFlickrGalleries.GetListAsync(string userId, int page, int perPage, CancellationToken cancellationToken)
@@ -109,7 +109,7 @@ public sealed partial class FlickrClient : IFlickrGalleries
 
         parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<UserGalleries>(parameters, cancellationToken);
+        return await GetResponseAsync<UserGalleries>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Galleries> IFlickrGalleries.GetListForPhotoAsync(string photoId, int page, int perPage, CancellationToken cancellationToken)
@@ -124,7 +124,7 @@ public sealed partial class FlickrClient : IFlickrGalleries
 
         parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<PhotoGalleries>(parameters, cancellationToken);
+        return await GetResponseAsync<PhotoGalleries>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<GalleryPhotos> IFlickrGalleries.GetPhotosAsync(string galleryId, PhotoSearchExtras extras, CancellationToken cancellationToken)
@@ -137,7 +137,7 @@ public sealed partial class FlickrClient : IFlickrGalleries
 
         parameters.AppendIf("extras", extras, x => x != PhotoSearchExtras.None, x => x.ToFlickrString());
 
-        return await GetResponseAsync<GalleryPhotos>(parameters, cancellationToken);
+        return await GetResponseAsync<GalleryPhotos>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task IFlickrGalleries.RemovePhoto(string galleryId, string photoId, string fullResponse, CancellationToken cancellationToken)
@@ -152,7 +152,7 @@ public sealed partial class FlickrClient : IFlickrGalleries
             { "full_response", fullResponse ?? "" }
         };
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 }
 

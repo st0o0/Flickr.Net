@@ -15,7 +15,7 @@ public sealed partial class FlickrClient : IFlickrPhotosLicenses
             { "method", "flickr.photos.licenses.getInfo" },
         };
 
-        return await GetResponseAsync<Licenses>(parameters, cancellationToken);
+        return await GetResponseAsync<Licenses>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task IFlickrPhotosLicenses.SetLicenseAsync(string photoId, LicenseType license, CancellationToken cancellationToken)
@@ -29,7 +29,7 @@ public sealed partial class FlickrClient : IFlickrPhotosLicenses
             { "license_id", license.ToString("d") }
         };
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Licenses> IFlickrPhotosLicenses.GetAvailableAsync(string? photoId, CancellationToken cancellationToken)
@@ -41,7 +41,7 @@ public sealed partial class FlickrClient : IFlickrPhotosLicenses
 
         parameters.AppendIf("photo_id", photoId, x => !string.IsNullOrEmpty(x), x => x);
 
-        return await GetResponseAsync<Licenses>(parameters, cancellationToken);
+        return await GetResponseAsync<Licenses>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<LicenseHistoryEntries> IFlickrPhotosLicenses.GetLicenseHistoryAsync(string photoId, CancellationToken cancellationToken)
@@ -54,7 +54,7 @@ public sealed partial class FlickrClient : IFlickrPhotosLicenses
             { "photo_id", photoId }
         };
 
-        return await GetResponseAsync<LicenseHistoryEntries>(parameters, cancellationToken);
+        return await GetResponseAsync<LicenseHistoryEntries>(parameters, cancellationToken).ConfigureAwait(false);
     }
 }
 

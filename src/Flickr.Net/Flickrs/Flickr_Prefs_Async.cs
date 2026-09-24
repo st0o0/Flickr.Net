@@ -17,7 +17,7 @@ public sealed partial class FlickrClient : IFlickrPrefs
             { "method", "flickr.prefs.getContentType" }
         };
 
-        var result = await GetResponseAsync<PersonUnknownResponse>(parameters, cancellationToken);
+        var result = await GetResponseAsync<PersonUnknownResponse>(parameters, cancellationToken).ConfigureAwait(false);
 
         return (ContentType)int.Parse(result.GetValueOrDefault("content_type", "0"), NumberFormatInfo.InvariantInfo);
     }
@@ -31,7 +31,7 @@ public sealed partial class FlickrClient : IFlickrPrefs
             { "method", "flickr.prefs.getGeoPerms" }
         };
 
-        return await GetResponseAsync<GeoPerms>(parameters, cancellationToken);
+        return await GetResponseAsync<GeoPerms>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<HiddenFromSearch> IFlickrPrefs.GetHiddenAsync(CancellationToken cancellationToken)
@@ -43,7 +43,7 @@ public sealed partial class FlickrClient : IFlickrPrefs
             { "method", "flickr.prefs.getHidden" }
         };
 
-        var result = await GetResponseAsync<PersonUnknownResponse>(parameters, cancellationToken);
+        var result = await GetResponseAsync<PersonUnknownResponse>(parameters, cancellationToken).ConfigureAwait(false);
 
         return (HiddenFromSearch)int.Parse(result.GetValueOrDefault("hidden", "0"), NumberFormatInfo.InvariantInfo);
     }
@@ -57,7 +57,7 @@ public sealed partial class FlickrClient : IFlickrPrefs
             { "method", "flickr.prefs.getPrivacy" }
         };
 
-        var result = await GetResponseAsync<PersonUnknownResponse>(parameters, cancellationToken);
+        var result = await GetResponseAsync<PersonUnknownResponse>(parameters, cancellationToken).ConfigureAwait(false);
 
         return (PrivacyFilter)int.Parse(result.GetValueOrDefault("privacy", "0"), NumberFormatInfo.InvariantInfo);
     }
@@ -71,7 +71,7 @@ public sealed partial class FlickrClient : IFlickrPrefs
             { "method", "flickr.prefs.getSafetyLevel" }
         };
 
-        var result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
+        var result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken).ConfigureAwait(false);
 
         return (SafetyLevel)int.Parse(result.GetValueOrDefault("safety_level", "0"), NumberFormatInfo.InvariantInfo);
     }

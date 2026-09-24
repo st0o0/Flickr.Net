@@ -14,7 +14,7 @@ public sealed partial class FlickrClient : IFlickrTest
             { "method", "flickr.test.login" }
         };
 
-        return await GetResponseAsync<User>(parameters, cancellationToken);
+        return await GetResponseAsync<User>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task IFlickrTest.NullAsync(CancellationToken cancellationToken)
@@ -24,14 +24,14 @@ public sealed partial class FlickrClient : IFlickrTest
             { "method", "flickr.test.null" }
         };
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<EchoResponseDictionary> IFlickrTest.EchoAsync(Dictionary<string, string> parameters, CancellationToken cancellationToken)
     {
         parameters.Add("method", "flickr.test.echo");
 
-        return await GetResponseAsync<EchoResponseDictionary>(parameters, cancellationToken);
+        return await GetResponseAsync<EchoResponseDictionary>(parameters, cancellationToken).ConfigureAwait(false);
     }
 }
 

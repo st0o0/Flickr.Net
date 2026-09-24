@@ -21,7 +21,7 @@ public sealed partial class FlickrClient : IFlickrTags
 
         parameters.AppendIf("extras", extras, x => x != PhotoSearchExtras.None, x => x.ToFlickrString());
 
-        return await GetResponseAsync<ClusterPhotos>(parameters, cancellationToken);
+        return await GetResponseAsync<ClusterPhotos>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Clusters> IFlickrTags.GetClustersAsync(string tag, CancellationToken cancellationToken)
@@ -32,7 +32,7 @@ public sealed partial class FlickrClient : IFlickrTags
             { "tag", tag }
         };
 
-        return await GetResponseAsync<Clusters>(parameters, cancellationToken);
+        return await GetResponseAsync<Clusters>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<FlickrStatsResult<Hottags>> IFlickrTags.GetHotListAsync(string period, int? count, CancellationToken cancellationToken)
@@ -51,7 +51,7 @@ public sealed partial class FlickrClient : IFlickrTags
 
         parameters.AppendIf("count", count, x => x is > 0, x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
 
-        return await GetGenericResponseAsync<FlickrStatsResult<Hottags>>(parameters, cancellationToken);
+        return await GetGenericResponseAsync<FlickrStatsResult<Hottags>>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<PhotoTags> IFlickrTags.GetListPhotoAsync(string photoId, CancellationToken cancellationToken)
@@ -62,7 +62,7 @@ public sealed partial class FlickrClient : IFlickrTags
             { "photo_id", photoId }
         };
 
-        return await GetResponseAsync<PhotoTags>(parameters, cancellationToken);
+        return await GetResponseAsync<PhotoTags>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Tags> IFlickrTags.GetListUserAsync(string userId, CancellationToken cancellationToken)
@@ -74,7 +74,7 @@ public sealed partial class FlickrClient : IFlickrTags
 
         parameters.AppendIf("user_id", userId, x => x is { Length: > 0 }, x => x);
 
-        return await GetResponseAsync<Tags>(parameters, cancellationToken);
+        return await GetResponseAsync<Tags>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<UserTags> IFlickrTags.GetListUserPopularAsync(string userId, int? count, CancellationToken cancellationToken)
@@ -88,7 +88,7 @@ public sealed partial class FlickrClient : IFlickrTags
 
         parameters.AppendIf("count", count, x => x is > 0, x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<UserTags>(parameters, cancellationToken);
+        return await GetResponseAsync<UserTags>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<UserTags> IFlickrTags.GetMostFrequentlyUsedAsync(CancellationToken cancellationToken)
@@ -100,7 +100,7 @@ public sealed partial class FlickrClient : IFlickrTags
             { "method", "flickr.tags.getMostFrequentlyUsed" }
         };
 
-        return await GetResponseAsync<UserTags>(parameters, cancellationToken);
+        return await GetResponseAsync<UserTags>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Tags> IFlickrTags.GetRelatedAsync(string tag, CancellationToken cancellationToken)
@@ -111,7 +111,7 @@ public sealed partial class FlickrClient : IFlickrTags
             { "tag", tag }
         };
 
-        return await GetResponseAsync<Tags>(parameters, cancellationToken);
+        return await GetResponseAsync<Tags>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<RawTags> IFlickrTags.GetListUserRawAsync(string? tag, CancellationToken cancellationToken)
@@ -125,7 +125,7 @@ public sealed partial class FlickrClient : IFlickrTags
 
         parameters.AppendIf("tag", tag, x => !string.IsNullOrEmpty(x), x => x);
 
-        return await GetResponseAsync<RawTags>(parameters, cancellationToken);
+        return await GetResponseAsync<RawTags>(parameters, cancellationToken).ConfigureAwait(false);
     }
 }
 

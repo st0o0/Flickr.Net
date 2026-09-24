@@ -26,7 +26,7 @@ public sealed partial class FlickrClient : IFlickrStats
 
         parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<Domains>(parameters, cancellationToken);
+        return await GetResponseAsync<Domains>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Referrers> IFlickrStats.GetCollectionReferrersAsync(DateTime date, string domain, string collectionId, int page, int perPage, CancellationToken cancellationToken)
@@ -46,7 +46,7 @@ public sealed partial class FlickrClient : IFlickrStats
 
         parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<Referrers>(parameters, cancellationToken);
+        return await GetResponseAsync<Referrers>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Stats> IFlickrStats.GetCollectionStatsAsync(DateTime date, string collectionId, CancellationToken cancellationToken)
@@ -60,7 +60,7 @@ public sealed partial class FlickrClient : IFlickrStats
             { "collection_id", UtilityMethods.CleanCollectionId(collectionId) }
         };
 
-        return await GetResponseAsync<Stats>(parameters, cancellationToken);
+        return await GetResponseAsync<Stats>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<CSVFiles> IFlickrStats.GetCsvFilesAsync(CancellationToken cancellationToken)
@@ -72,7 +72,7 @@ public sealed partial class FlickrClient : IFlickrStats
             { "method", "flickr.stats.getCSVFiles" }
         };
 
-        return await GetResponseAsync<CSVFiles>(parameters, cancellationToken);
+        return await GetResponseAsync<CSVFiles>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Domains> IFlickrStats.GetPhotoDomainsAsync(DateTime date, string photoId, int page, int perPage, CancellationToken cancellationToken)
@@ -91,7 +91,7 @@ public sealed partial class FlickrClient : IFlickrStats
 
         parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<Domains>(parameters, cancellationToken);
+        return await GetResponseAsync<Domains>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Referrers> IFlickrStats.GetPhotoReferrersAsync(DateTime date, string domain, string photoId, int page, int perPage, CancellationToken cancellationToken)
@@ -111,7 +111,7 @@ public sealed partial class FlickrClient : IFlickrStats
 
         parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<Referrers>(parameters, cancellationToken);
+        return await GetResponseAsync<Referrers>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Domains> IFlickrStats.GetPhotosetDomainsAsync(DateTime date, string photosetId, int page, int perPage, CancellationToken cancellationToken)
@@ -130,7 +130,7 @@ public sealed partial class FlickrClient : IFlickrStats
 
         parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<Domains>(parameters, cancellationToken);
+        return await GetResponseAsync<Domains>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Referrers> IFlickrStats.GetPhotosetReferrersAsync(DateTime date, string domain, string photosetId, int page, int perPage, CancellationToken cancellationToken)
@@ -150,7 +150,7 @@ public sealed partial class FlickrClient : IFlickrStats
 
         parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<Referrers>(parameters, cancellationToken);
+        return await GetResponseAsync<Referrers>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Stats> IFlickrStats.GetPhotosetStatsAsync(DateTime date, string photosetId, CancellationToken cancellationToken)
@@ -164,7 +164,7 @@ public sealed partial class FlickrClient : IFlickrStats
             { "photoset_id", photosetId }
         };
 
-        return await GetResponseAsync<Stats>(parameters, cancellationToken);
+        return await GetResponseAsync<Stats>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Stats> IFlickrStats.GetPhotoStatsAsync(DateTime date, string photoId, CancellationToken cancellationToken)
@@ -178,7 +178,7 @@ public sealed partial class FlickrClient : IFlickrStats
             { "photo_id", photoId }
         };
 
-        return await GetResponseAsync<Stats>(parameters, cancellationToken);
+        return await GetResponseAsync<Stats>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Domains> IFlickrStats.GetPhotostreamDomainsAsync(DateTime date, int page, int perPage, CancellationToken cancellationToken)
@@ -195,7 +195,7 @@ public sealed partial class FlickrClient : IFlickrStats
 
         parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<Domains>(parameters, cancellationToken);
+        return await GetResponseAsync<Domains>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Referrers> IFlickrStats.GetPhotostreamReferrersAsync(DateTime date, string domain, int page, int perPage, CancellationToken cancellationToken)
@@ -213,7 +213,7 @@ public sealed partial class FlickrClient : IFlickrStats
 
         parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<Referrers>(parameters, cancellationToken);
+        return await GetResponseAsync<Referrers>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Stats> IFlickrStats.GetPhotostreamStatsAsync(DateTime date, CancellationToken cancellationToken)
@@ -226,7 +226,7 @@ public sealed partial class FlickrClient : IFlickrStats
             { "date", UtilityMethods.DateToUnixTimestamp(date) }
         };
 
-        return await GetResponseAsync<Stats>(parameters, cancellationToken);
+        return await GetResponseAsync<Stats>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<StatsPhotos> IFlickrStats.GetPopularPhotosAsync(DateTime date, PopularitySort sort, int page, int perPage, CancellationToken cancellationToken)
@@ -246,7 +246,7 @@ public sealed partial class FlickrClient : IFlickrStats
 
         parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<StatsPhotos>(parameters, cancellationToken);
+        return await GetResponseAsync<StatsPhotos>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Views> IFlickrStats.GetTotalViewsAsync(DateTime date, CancellationToken cancellationToken)
@@ -260,7 +260,7 @@ public sealed partial class FlickrClient : IFlickrStats
 
         parameters.AppendIf("date", date, x => x != DateTime.MinValue, x => x.ToUnixTimestamp());
 
-        return await GetResponseAsync<Views>(parameters, cancellationToken);
+        return await GetResponseAsync<Views>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<PopularPhotoDateRange> IFlickrStats.GetMostPopularPhotoDateRangeAsync(CancellationToken cancellationToken)
@@ -272,7 +272,7 @@ public sealed partial class FlickrClient : IFlickrStats
             { "method", "flickr.stats.getMostPopularPhotoDateRange" }
         };
 
-        return await GetResponseAsync<PopularPhotoDateRange>(parameters, cancellationToken);
+        return await GetResponseAsync<PopularPhotoDateRange>(parameters, cancellationToken).ConfigureAwait(false);
     }
 }
 

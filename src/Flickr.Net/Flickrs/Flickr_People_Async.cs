@@ -18,7 +18,7 @@ public sealed partial class FlickrClient : IFlickrPeople
             { "find_email", emailAddress }
         };
 
-        return await GetResponseAsync<User>(parameters, cancellationToken);
+        return await GetResponseAsync<User>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<User> IFlickrPeople.FindByUserNameAsync(string userName, CancellationToken cancellationToken)
@@ -29,7 +29,7 @@ public sealed partial class FlickrClient : IFlickrPeople
             { "username", userName }
         };
 
-        return await GetResponseAsync<User>(parameters, cancellationToken);
+        return await GetResponseAsync<User>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Groups> IFlickrPeople.GetGroupsAsync(string userId, CancellationToken cancellationToken)
@@ -42,7 +42,7 @@ public sealed partial class FlickrClient : IFlickrPeople
             { "user_id", userId }
         };
 
-        return await GetResponseAsync<Groups>(parameters, cancellationToken);
+        return await GetResponseAsync<Groups>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Person> IFlickrPeople.GetInfoAsync(string userId, CancellationToken cancellationToken)
@@ -53,7 +53,7 @@ public sealed partial class FlickrClient : IFlickrPeople
             { "user_id", userId }
         };
 
-        return await GetResponseAsync<Person>(parameters, cancellationToken);
+        return await GetResponseAsync<Person>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Limits> IFlickrPeople.GetLimitsAsync(CancellationToken cancellationToken)
@@ -65,7 +65,7 @@ public sealed partial class FlickrClient : IFlickrPeople
             { "method", "flickr.people.getLimits" }
         };
 
-        return await GetResponseAsync<Limits>(parameters, cancellationToken);
+        return await GetResponseAsync<Limits>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<PagedPhotos> IFlickrPeople.GetPhotosAsync(string userId, SafetyLevel safeSearch, DateTime? minUploadDate, DateTime? maxUploadDate, DateTime? minTakenDate, DateTime? maxTakenDate, ContentTypeSearch contentType, PrivacyFilter privacyFilter, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken)
@@ -98,7 +98,7 @@ public sealed partial class FlickrClient : IFlickrPeople
 
         parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
+        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<PagedPhotos> IFlickrPeople.GetPhotosOfAsync(string userId, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken)
@@ -115,7 +115,7 @@ public sealed partial class FlickrClient : IFlickrPeople
 
         parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
+        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<UploadStatus> IFlickrPeople.GetUploadStatusAsync(CancellationToken cancellationToken)
@@ -125,7 +125,7 @@ public sealed partial class FlickrClient : IFlickrPeople
             { "method", "flickr.people.getUploadStatus" }
         };
 
-        return await GetResponseAsync<UploadStatus>(parameters, cancellationToken);
+        return await GetResponseAsync<UploadStatus>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Groups> IFlickrPeople.GetPublicGroupsAsync(string userId, CancellationToken cancellationToken)
@@ -136,7 +136,7 @@ public sealed partial class FlickrClient : IFlickrPeople
             { "user_id", userId }
         };
 
-        return await GetResponseAsync<Groups>(parameters, cancellationToken);
+        return await GetResponseAsync<Groups>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<PagedPhotos> IFlickrPeople.GetPublicPhotosAsync(string userId, SafetyLevel safeSearch, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken)
@@ -155,7 +155,7 @@ public sealed partial class FlickrClient : IFlickrPeople
 
         parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
+        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken).ConfigureAwait(false);
     }
 }
 

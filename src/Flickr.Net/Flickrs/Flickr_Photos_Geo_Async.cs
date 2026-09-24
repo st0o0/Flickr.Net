@@ -25,7 +25,7 @@ public sealed partial class FlickrClient : IFlickrPhotosGeo
 
         parameters.AppendIf("place_id", placeId, x => !string.IsNullOrEmpty(x), x => x);
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task IFlickrPhotosGeo.BatchCorrectLocationAsync(WoeId woeId, double latitude, double longitude, GeoAccuracy accuracy, CancellationToken cancellationToken)
@@ -42,7 +42,7 @@ public sealed partial class FlickrClient : IFlickrPhotosGeo
 
         parameters.AppendIf("woe_id", woeId, x => !string.IsNullOrEmpty(x), x => x);
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task IFlickrPhotosGeo.CorrectLocationAsync(string photoId, PlaceId placeId, CancellationToken cancellationToken)
@@ -57,7 +57,7 @@ public sealed partial class FlickrClient : IFlickrPhotosGeo
 
         parameters.AppendIf("place_id", placeId, x => !string.IsNullOrEmpty(x), x => x);
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task IFlickrPhotosGeo.CorrectLocationAsync(string photoId, WoeId woeId, CancellationToken cancellationToken)
@@ -72,7 +72,7 @@ public sealed partial class FlickrClient : IFlickrPhotosGeo
 
         parameters.AppendIf("woe_id", woeId, x => !string.IsNullOrEmpty(x), x => x);
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<PhotoLocation> IFlickrPhotosGeo.GetLocationAsync(string photoId, CancellationToken cancellationToken)
@@ -83,7 +83,7 @@ public sealed partial class FlickrClient : IFlickrPhotosGeo
             { "photo_id", photoId }
         };
 
-        return await GetResponseAsync<PhotoLocation>(parameters, cancellationToken);
+        return await GetResponseAsync<PhotoLocation>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<GeoPermissions> IFlickrPhotosGeo.GetPermsAsync(string photoId, CancellationToken cancellationToken)
@@ -94,7 +94,7 @@ public sealed partial class FlickrClient : IFlickrPhotosGeo
             { "photo_id", photoId }
         };
 
-        return await GetResponseAsync<GeoPermissions>(parameters, cancellationToken);
+        return await GetResponseAsync<GeoPermissions>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<PagedPhotos> IFlickrPhotosGeo.PhotosForLocationAsync(double latitude, double longitude, GeoAccuracy accuracy, PhotoSearchExtras extras, int perPage, int page, CancellationToken cancellationToken)
@@ -116,7 +116,7 @@ public sealed partial class FlickrClient : IFlickrPhotosGeo
 
         parameters.AppendIf("extras", extras, x => x != PhotoSearchExtras.None, x => x.ToFlickrString());
 
-        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
+        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task IFlickrPhotosGeo.RemoveLocationAsync(string photoId, CancellationToken cancellationToken)
@@ -127,7 +127,7 @@ public sealed partial class FlickrClient : IFlickrPhotosGeo
             { "photo_id", photoId }
         };
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task IFlickrPhotosGeo.SetContextAsync(string photoId, GeoContext context, CancellationToken cancellationToken)
@@ -139,7 +139,7 @@ public sealed partial class FlickrClient : IFlickrPhotosGeo
             { "context", context.ToString("D") }
         };
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task IFlickrPhotosGeo.SetLocationAsync(string photoId, double latitude, double longitude, GeoAccuracy accuracy, CancellationToken cancellationToken)
@@ -154,7 +154,7 @@ public sealed partial class FlickrClient : IFlickrPhotosGeo
 
         parameters.AppendIf("accuracy", accuracy, x => x != GeoAccuracy.None, x => x.ToString("D"));
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task IFlickrPhotosGeo.SetPermsAsync(string photoId, bool isPublic, bool isContact, bool isFamily, bool isFriend, CancellationToken cancellationToken)
@@ -169,7 +169,7 @@ public sealed partial class FlickrClient : IFlickrPhotosGeo
             { "is_family", isFamily ? "1" : "0" }
         };
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 }
 

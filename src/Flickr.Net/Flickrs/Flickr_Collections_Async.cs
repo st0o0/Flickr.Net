@@ -17,7 +17,7 @@ public sealed partial class FlickrClient : IFlickrCollections
             { "collection_id", collectionId }
         };
 
-        return await GetResponseAsync<Collection>(parameters, cancellationToken);
+        return await GetResponseAsync<Collection>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Collections> IFlickrCollections.GetTreeAsync(string collectionId, string userId, CancellationToken cancellationToken)
@@ -36,7 +36,7 @@ public sealed partial class FlickrClient : IFlickrCollections
 
         parameters.AppendIf("user_id", userId, x => x != null, x => x);
 
-        return await GetResponseAsync<Collections>(parameters, cancellationToken);
+        return await GetResponseAsync<Collections>(parameters, cancellationToken).ConfigureAwait(false);
     }
 }
 

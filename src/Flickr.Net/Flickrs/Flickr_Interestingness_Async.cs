@@ -24,7 +24,7 @@ public sealed partial class FlickrClient : IFlickrInterestingness
 
         parameters.AppendIf("extras", extras, x => x != PhotoSearchExtras.None, x => x.ToFlickrString());
 
-        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
+        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken).ConfigureAwait(false);
     }
 }
 

@@ -24,7 +24,7 @@ public sealed partial class FlickrClient : IFlickrContacts
 
         parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<Contacts>(parameters, cancellationToken);
+        return await GetResponseAsync<Contacts>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Contacts> IFlickrContacts.GetListRecentlyUploadedAsync(ContactSearch filter, DateTime? dateLastUpdated, CancellationToken cancellationToken)
@@ -40,7 +40,7 @@ public sealed partial class FlickrClient : IFlickrContacts
 
         parameters.AppendIf("filter", filter, x => x != ContactSearch.None, x => x == ContactSearch.AllContacts ? "all" : "ff");
 
-        return await GetResponseAsync<Contacts>(parameters, cancellationToken);
+        return await GetResponseAsync<Contacts>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Contacts> IFlickrContacts.GetPublicListAsync(string userId, int page, int perPage, CancellationToken cancellationToken)
@@ -55,7 +55,7 @@ public sealed partial class FlickrClient : IFlickrContacts
 
         parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<Contacts>(parameters, cancellationToken);
+        return await GetResponseAsync<Contacts>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Contacts> IFlickrContacts.GetTaggingSuggestionsAsync(int page, int perPage, CancellationToken cancellationToken)
@@ -71,7 +71,7 @@ public sealed partial class FlickrClient : IFlickrContacts
 
         parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<Contacts>(parameters, cancellationToken);
+        return await GetResponseAsync<Contacts>(parameters, cancellationToken).ConfigureAwait(false);
     }
 }
 

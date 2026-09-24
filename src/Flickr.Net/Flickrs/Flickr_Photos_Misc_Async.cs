@@ -23,7 +23,7 @@ public sealed partial class FlickrClient : IFlickrPhotosMisc
             { "degrees", degrees.ToString(NumberFormatInfo.InvariantInfo) }
         };
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Tickets> IFlickrPhotosMisc.CheckTicketsAsync(IEnumerable<string> tickets, CancellationToken cancellationToken)
@@ -34,7 +34,7 @@ public sealed partial class FlickrClient : IFlickrPhotosMisc
             { "tickets", string.Join(",", tickets.ToArray()) }
         };
 
-        return await GetResponseAsync<Tickets>(parameters, cancellationToken);
+        return await GetResponseAsync<Tickets>(parameters, cancellationToken).ConfigureAwait(false);
     }
 }
 

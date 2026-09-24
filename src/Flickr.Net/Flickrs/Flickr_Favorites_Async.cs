@@ -18,7 +18,7 @@ public sealed partial class FlickrClient : IFlickrFavorites
             { "photo_id", photoId }
         };
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<FlickrContextResult<NextPhoto, PrevPhoto>> IFlickrFavorites.GetContextAsync(string photoId, string userId, CancellationToken cancellationToken)
@@ -30,7 +30,7 @@ public sealed partial class FlickrClient : IFlickrFavorites
             { "photo_id", photoId },
         };
 
-        return await GetContextResponseAsync<NextPhoto, PrevPhoto>(parameters, cancellationToken);
+        return await GetContextResponseAsync<NextPhoto, PrevPhoto>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<PagedPhotos> IFlickrFavorites.GetListAsync(string userId, DateTime? minFavoriteDate, DateTime? maxFavoriteDate, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken)
@@ -54,7 +54,7 @@ public sealed partial class FlickrClient : IFlickrFavorites
 
         parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
+        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<PagedPhotos> IFlickrFavorites.GetPublicListAsync(string userId, int page, int perPage, CancellationToken cancellationToken)
@@ -69,7 +69,7 @@ public sealed partial class FlickrClient : IFlickrFavorites
 
         parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
+        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task IFlickrFavorites.RemoveAsync(string photoId, CancellationToken cancellationToken)
@@ -80,7 +80,7 @@ public sealed partial class FlickrClient : IFlickrFavorites
             { "photo_id", photoId }
         };
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 }
 

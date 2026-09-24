@@ -27,7 +27,7 @@ public sealed partial class FlickrClient : IFlickrPhotosPeople
 
         parameters.AppendIf("person_h", personHeight, x => x.HasValue, x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task IFlickrPhotosPeople.DeleteAsync(string photoId, string userId, CancellationToken cancellationToken)
@@ -41,7 +41,7 @@ public sealed partial class FlickrClient : IFlickrPhotosPeople
             { "user_id", userId }
         };
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task IFlickrPhotosPeople.DeleteCoordsAsync(string photoId, string userId, CancellationToken cancellationToken)
@@ -55,7 +55,7 @@ public sealed partial class FlickrClient : IFlickrPhotosPeople
             { "user_id", userId }
         };
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task IFlickrPhotosPeople.EditCoordsAsync(string photoId, string userId, int personX, int personY, int personWidth, int personHeight, CancellationToken cancellationToken)
@@ -73,7 +73,7 @@ public sealed partial class FlickrClient : IFlickrPhotosPeople
             { "person_h", personHeight.ToString(NumberFormatInfo.InvariantInfo) }
         };
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<PeoplePersons> IFlickrPhotosPeople.GetListAsync(string photoId, CancellationToken cancellationToken)
@@ -84,7 +84,7 @@ public sealed partial class FlickrClient : IFlickrPhotosPeople
             { "photo_id", photoId }
         };
 
-        return await GetResponseAsync<PeoplePersons>(parameters, cancellationToken);
+        return await GetResponseAsync<PeoplePersons>(parameters, cancellationToken).ConfigureAwait(false);
     }
 }
 

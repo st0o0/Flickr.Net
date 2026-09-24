@@ -25,7 +25,7 @@ public sealed partial class FlickrClient : IFlickrGroupsMembers
 
         parameters.AppendIf("membertypes", memberTypes, x => x != MemberType.None, x => x.ToFlickrString());
 
-        return await GetResponseAsync<Members>(parameters, cancellationToken);
+        return await GetResponseAsync<Members>(parameters, cancellationToken).ConfigureAwait(false);
     }
 }
 

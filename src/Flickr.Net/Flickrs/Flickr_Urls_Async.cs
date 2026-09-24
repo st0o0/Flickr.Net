@@ -15,7 +15,7 @@ public sealed partial class FlickrClient : IFlickrUrls
             { "group_id", groupId }
         };
 
-        var result = await GetResponseAsync<GroupUnknownResponse>(parameters, cancellationToken);
+        var result = await GetResponseAsync<GroupUnknownResponse>(parameters, cancellationToken).ConfigureAwait(false);
 
         return result.GetValueOrDefault("url", string.Empty);
     }
@@ -32,7 +32,7 @@ public sealed partial class FlickrClient : IFlickrUrls
             parameters.Add("user_id", userId);
         }
 
-        var result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
+        var result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken).ConfigureAwait(false);
 
         return result.GetValueOrDefault("url", string.Empty);
     }
@@ -46,7 +46,7 @@ public sealed partial class FlickrClient : IFlickrUrls
 
         parameters.AppendIf("user_id", userId, x => x != null, x => x);
 
-        var result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
+        var result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken).ConfigureAwait(false);
 
         return result.GetValueOrDefault("url", string.Empty);
     }
@@ -59,7 +59,7 @@ public sealed partial class FlickrClient : IFlickrUrls
             { "url", url }
         };
 
-        return await GetResponseAsync<Gallery>(parameters, cancellationToken);
+        return await GetResponseAsync<Gallery>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<string> IFlickrUrls.LookupGroupAsync(string urlToFind, CancellationToken cancellationToken)
@@ -70,7 +70,7 @@ public sealed partial class FlickrClient : IFlickrUrls
             { "url", urlToFind }
         };
 
-        var result = await GetResponseAsync<GroupUnknownResponse>(parameters, cancellationToken);
+        var result = await GetResponseAsync<GroupUnknownResponse>(parameters, cancellationToken).ConfigureAwait(false);
 
         return result.GetValueOrDefault("id", string.Empty);
     }
@@ -83,7 +83,7 @@ public sealed partial class FlickrClient : IFlickrUrls
             { "url", urlToFind }
         };
 
-        var result = await GetResponseAsync<UserUnknownResponse>(parameters, cancellationToken);
+        var result = await GetResponseAsync<UserUnknownResponse>(parameters, cancellationToken).ConfigureAwait(false);
 
         return result.GetValueOrDefault("id", string.Empty);
     }

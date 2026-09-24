@@ -21,7 +21,7 @@ public sealed partial class FlickrClient : IFlickrOAuth
             { "method", "flickr.auth.oauth.checkToken" }
         };
 
-        return await GetResponseAsync<OAuth>(parameters, cancellationToken);
+        return await GetResponseAsync<OAuth>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<OAuthRequestToken> IFlickrOAuth.GetRequestTokenAsync(string callbackUrl, CancellationToken cancellationToken)
@@ -38,11 +38,11 @@ public sealed partial class FlickrClient : IFlickrOAuth
 
         parameters.Add("oauth_signature", sig);
 
-        var result = await _responder.GetDataResponseAsync(this, url, parameters, cancellationToken);
+        var result = await _responder.GetDataResponseAsync(this, url, parameters, cancellationToken).ConfigureAwait(false);
 
         using var stream = new MemoryStream(result);
         using var streamReader = new StreamReader(stream);
-        var jsonstring = await streamReader.ReadToEndAsync(cancellationToken);
+        var jsonstring = await streamReader.ReadToEndAsync(cancellationToken).ConfigureAwait(false);
 
         return OAuthRequestToken.ParseResponse(jsonstring);
     }
@@ -63,11 +63,11 @@ public sealed partial class FlickrClient : IFlickrOAuth
 
         parameters.Add("oauth_signature", sig);
 
-        var result = await _responder.GetDataResponseAsync(this, url, parameters, cancellationToken);
+        var result = await _responder.GetDataResponseAsync(this, url, parameters, cancellationToken).ConfigureAwait(false);
 
         using var stream = new MemoryStream(result);
         using var streamReader = new StreamReader(stream);
-        var jsonstring = await streamReader.ReadToEndAsync(cancellationToken);
+        var jsonstring = await streamReader.ReadToEndAsync(cancellationToken).ConfigureAwait(false);
 
         return OAuthAccessToken.ParseResponse(jsonstring);
     }

@@ -13,7 +13,7 @@ public sealed partial class FlickrClient : IFlickrProfile
             { "user_id", userId }
         };
 
-        return await GetResponseAsync<Profile>(parameters, cancellationToken);
+        return await GetResponseAsync<Profile>(parameters, cancellationToken).ConfigureAwait(false);
     }
 }
 

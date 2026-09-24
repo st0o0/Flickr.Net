@@ -25,7 +25,7 @@ public sealed partial class FlickrClient : IFlickrPhotosSuggestions
             { "suggestion_id", suggestionId }
         };
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<UnknownResponse> IFlickrPhotosSuggestions.GetListAsync(string photoId, SuggestionStatus status, CancellationToken cancellationToken)
@@ -39,7 +39,7 @@ public sealed partial class FlickrClient : IFlickrPhotosSuggestions
             { "status_id", status.GetEnumMemberValue() }
         };
 
-        return await GetResponseAsync<UnknownResponse>(parameters, cancellationToken);
+        return await GetResponseAsync<UnknownResponse>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task IFlickrPhotosSuggestions.RejectSuggestionAsync(string suggestionId, CancellationToken cancellationToken)
@@ -57,7 +57,7 @@ public sealed partial class FlickrClient : IFlickrPhotosSuggestions
             { "suggestion_id", suggestionId }
         };
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task IFlickrPhotosSuggestions.RemoveSuggestionAsync(string suggestionId, CancellationToken cancellationToken)
@@ -72,7 +72,7 @@ public sealed partial class FlickrClient : IFlickrPhotosSuggestions
             { "suggestion_id", suggestionId }
         };
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task IFlickrPhotosSuggestions.SuggestLocationAsync(string photoId, double latitude, double longitude, GeoAccuracy accuracy, WoeId? woeId, PlaceId? placeId, string note, CancellationToken cancellationToken)
@@ -95,7 +95,7 @@ public sealed partial class FlickrClient : IFlickrPhotosSuggestions
 
         parameters.AppendIf("note", note, x => !string.IsNullOrEmpty(x), x => x);
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 }
 

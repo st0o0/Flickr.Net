@@ -26,7 +26,7 @@ public sealed partial class FlickrClient : IFlickrGroupsDiscussTopics
             { "message", message }
         };
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Topics> IFlickrGroupsDiscussTopics.TopicsGetListAsync(string groupId, int page, int perPage, CancellationToken cancellationToken)
@@ -43,7 +43,7 @@ public sealed partial class FlickrClient : IFlickrGroupsDiscussTopics
 
         parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<Topics>(parameters, cancellationToken);
+        return await GetResponseAsync<Topics>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Topic> IFlickrGroupsDiscussTopics.TopicsGetInfoAsync(string topicId, CancellationToken cancellationToken)
@@ -56,7 +56,7 @@ public sealed partial class FlickrClient : IFlickrGroupsDiscussTopics
             { "topic_id", topicId }
         };
 
-        return await GetResponseAsync<Topic>(parameters, cancellationToken);
+        return await GetResponseAsync<Topic>(parameters, cancellationToken).ConfigureAwait(false);
     }
 }
 

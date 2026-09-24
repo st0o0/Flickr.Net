@@ -12,7 +12,7 @@ public sealed partial class FlickrClient : IFlickrCameras
             { "method", "flickr.cameras.getBrands" }
         };
 
-        return await GetResponseAsync<Brands>(parameters, cancellationToken);
+        return await GetResponseAsync<Brands>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Cameras> IFlickrCameras.GetBrandModelsAsync(string brandId, CancellationToken cancellationToken)
@@ -23,7 +23,7 @@ public sealed partial class FlickrClient : IFlickrCameras
             { "brand", brandId }
         };
 
-        return await GetResponseAsync<Cameras>(parameters, cancellationToken);
+        return await GetResponseAsync<Cameras>(parameters, cancellationToken).ConfigureAwait(false);
     }
 }
 

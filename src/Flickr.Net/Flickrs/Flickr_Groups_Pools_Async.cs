@@ -21,7 +21,7 @@ public sealed partial class FlickrClient : IFlickrGroupsPools
             { "group_id", groupId }
         };
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<FlickrContextResult<NextPhoto, PrevPhoto>> IFlickrGroupsPools.GetContextAsync(string photoId, string groupId, CancellationToken cancellationToken)
@@ -33,7 +33,7 @@ public sealed partial class FlickrClient : IFlickrGroupsPools
             { "group_id", groupId }
         };
 
-        return await GetContextResponseAsync<NextPhoto, PrevPhoto>(parameters, cancellationToken);
+        return await GetContextResponseAsync<NextPhoto, PrevPhoto>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Groups> IFlickrGroupsPools.GetGroupsAsync(int page, int perPage, CancellationToken cancellationToken)
@@ -47,7 +47,7 @@ public sealed partial class FlickrClient : IFlickrGroupsPools
 
         parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<Groups>(parameters, cancellationToken);
+        return await GetResponseAsync<Groups>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<PagedPhotos> IFlickrGroupsPools.GetPhotosAsync(string groupId, string tags, string userId, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken)
@@ -68,7 +68,7 @@ public sealed partial class FlickrClient : IFlickrGroupsPools
 
         parameters.AppendIf("extras", extras, x => x != PhotoSearchExtras.None, x => x.ToFlickrString());
 
-        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
+        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task IFlickrGroupsPools.RemoveAsync(string photoId, string groupId, CancellationToken cancellationToken)
@@ -80,7 +80,7 @@ public sealed partial class FlickrClient : IFlickrGroupsPools
             { "group_id", groupId }
         };
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 }
 

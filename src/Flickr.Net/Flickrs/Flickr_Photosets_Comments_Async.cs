@@ -14,7 +14,7 @@ public sealed partial class FlickrClient : IFlickrPhotosetsComments
             { "comment_text", commentText }
         };
 
-        var result = await GetResponseAsync<CommentUnknownResponse>(parameters, cancellationToken);
+        var result = await GetResponseAsync<CommentUnknownResponse>(parameters, cancellationToken).ConfigureAwait(false);
 
         return result.GetValueOrDefault("id");
     }
@@ -27,7 +27,7 @@ public sealed partial class FlickrClient : IFlickrPhotosetsComments
             { "comment_id", commentId }
         };
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task IFlickrPhotosetsComments.EditCommentAsync(string commentId, string commentText, CancellationToken cancellationToken)
@@ -39,7 +39,7 @@ public sealed partial class FlickrClient : IFlickrPhotosetsComments
             { "comment_text", commentText }
         };
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<PhotosetComments> IFlickrPhotosetsComments.GetListAsync(string photosetId, CancellationToken cancellationToken)
@@ -50,7 +50,7 @@ public sealed partial class FlickrClient : IFlickrPhotosetsComments
             { "photoset_id", photosetId }
         };
 
-        return await GetResponseAsync<PhotosetComments>(parameters, cancellationToken);
+        return await GetResponseAsync<PhotosetComments>(parameters, cancellationToken).ConfigureAwait(false);
     }
 }
 

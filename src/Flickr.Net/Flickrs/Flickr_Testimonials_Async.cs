@@ -19,7 +19,7 @@ public sealed partial class FlickrClient : IFlickrTestimonials
             { "testimonial_text", text }
         };
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task IFlickrTestimonials.ApproveTestimonialAsync(string testimonialId, CancellationToken cancellationToken)
@@ -32,7 +32,7 @@ public sealed partial class FlickrClient : IFlickrTestimonials
             { "testimonial_id", testimonialId }
         };
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task IFlickrTestimonials.DeleteTestimonialAsync(string testimonialId, CancellationToken cancellationToken)
@@ -45,7 +45,7 @@ public sealed partial class FlickrClient : IFlickrTestimonials
             { "testimonial_id", testimonialId }
         };
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task IFlickrTestimonials.EditTestimonialAsync(string userId, string testimonialId, string text, CancellationToken cancellationToken)
@@ -60,7 +60,7 @@ public sealed partial class FlickrClient : IFlickrTestimonials
             { "testimonial_text", text }
         };
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Testimonials> IFlickrTestimonials.GetAllTestimonialsAboutAsync(string userId, int? page, int? perPage, CancellationToken cancellationToken)
@@ -74,7 +74,7 @@ public sealed partial class FlickrClient : IFlickrTestimonials
         parameters.AppendIf("page", page, x => x is > 0, x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
         parameters.AppendIf("per_page", perPage, x => x is > 0, x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<Testimonials>(parameters, cancellationToken);
+        return await GetResponseAsync<Testimonials>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Testimonials> IFlickrTestimonials.GetAllTestimonialsAboutByAsync(string userId, CancellationToken cancellationToken)
@@ -85,7 +85,7 @@ public sealed partial class FlickrClient : IFlickrTestimonials
             { "user_id", userId }
         };
 
-        return await GetResponseAsync<Testimonials>(parameters, cancellationToken);
+        return await GetResponseAsync<Testimonials>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Testimonials> IFlickrTestimonials.GetAllTestimonialsByAsync(string userId, CancellationToken cancellationToken)
@@ -96,7 +96,7 @@ public sealed partial class FlickrClient : IFlickrTestimonials
             { "user_id", userId }
         };
 
-        return await GetResponseAsync<Testimonials>(parameters, cancellationToken);
+        return await GetResponseAsync<Testimonials>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Testimonials> IFlickrTestimonials.GetPendingTestimonialsAboutAsync(int? page, int? perPage, CancellationToken cancellationToken)
@@ -111,7 +111,7 @@ public sealed partial class FlickrClient : IFlickrTestimonials
         parameters.AppendIf("page", page, x => x is > 0, x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
         parameters.AppendIf("per_page", perPage, x => x is > 0, x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<Testimonials>(parameters, cancellationToken);
+        return await GetResponseAsync<Testimonials>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Testimonials> IFlickrTestimonials.GetPendingTestimonialsAboutByAsync(string userId, CancellationToken cancellationToken)
@@ -124,7 +124,7 @@ public sealed partial class FlickrClient : IFlickrTestimonials
             { "user_id", userId }
         };
 
-        return await GetResponseAsync<Testimonials>(parameters, cancellationToken);
+        return await GetResponseAsync<Testimonials>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Testimonials> IFlickrTestimonials.GetPendingTestimonialsByAsync(int? page, int? perPage, CancellationToken cancellationToken)
@@ -139,7 +139,7 @@ public sealed partial class FlickrClient : IFlickrTestimonials
         parameters.AppendIf("page", page, x => x is > 0, x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
         parameters.AppendIf("per_page", perPage, x => x is > 0, x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<Testimonials>(parameters, cancellationToken);
+        return await GetResponseAsync<Testimonials>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Testimonials> IFlickrTestimonials.GetTestimonialsAboutAsync(string userId, int? page, int? perPage, CancellationToken cancellationToken)
@@ -153,7 +153,7 @@ public sealed partial class FlickrClient : IFlickrTestimonials
         parameters.AppendIf("page", page, x => x is > 0, x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
         parameters.AppendIf("per_page", perPage, x => x is > 0, x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<Testimonials>(parameters, cancellationToken);
+        return await GetResponseAsync<Testimonials>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Testimonials> IFlickrTestimonials.GetTestimonialsAboutByAsync(string userId, CancellationToken cancellationToken)
@@ -164,7 +164,7 @@ public sealed partial class FlickrClient : IFlickrTestimonials
             { "user_id", userId }
         };
 
-        return await GetResponseAsync<Testimonials>(parameters, cancellationToken);
+        return await GetResponseAsync<Testimonials>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Testimonials> IFlickrTestimonials.GetTestimonialsByAsync(string userId, int? page, int? perPage, CancellationToken cancellationToken)
@@ -178,7 +178,7 @@ public sealed partial class FlickrClient : IFlickrTestimonials
         parameters.AppendIf("page", page, x => x is > 0, x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
         parameters.AppendIf("per_page", perPage, x => x is > 0, x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<Testimonials>(parameters, cancellationToken);
+        return await GetResponseAsync<Testimonials>(parameters, cancellationToken).ConfigureAwait(false);
     }
 }
 

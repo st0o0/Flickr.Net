@@ -16,7 +16,7 @@ public sealed partial class FlickrClient
 
     private async Task<TResponse> GetGenericResponseAsync<T, TResponse>(Dictionary<string, string> parameters, CancellationToken cancellationToken = default) where T : FlickrResult<TResponse> where TResponse : IFlickrEntity
     {
-        var result = await GetGenericResponseAsync<T>(parameters, cancellationToken);
+        var result = await GetGenericResponseAsync<T>(parameters, cancellationToken).ConfigureAwait(false);
 
         if (result.Content is TResponse value)
         {
@@ -41,21 +41,22 @@ public sealed partial class FlickrClient
 
         var url = CalculateUri(parameters, !string.IsNullOrEmpty(FlickrSettings.ApiSecret));
 
-        byte[] resultArray;
+        T flickrResults;
 
         if (_cache is not null)
         {
-            resultArray = await _cache.GetOrCreateAsync(
+            var resultArray = await _cache.GetOrCreateAsync(
                 url,
-                async cancel => await _responder.GetDataResponseAsync(this, BaseUri.AbsoluteUri, parameters, cancel),
-                cancellationToken: cancellationToken);
+                async cancel => await _responder.GetDataResponseAsync(this, BaseUri.AbsoluteUri, parameters, cancel).ConfigureAwait(false),
+                cancellationToken: cancellationToken).ConfigureAwait(false);
+            flickrResults = FlickrConvert.DeserializeObject<T>(resultArray);
         }
         else
         {
-            resultArray = await _responder.GetDataResponseAsync(this, BaseUri.AbsoluteUri, parameters, cancellationToken);
+            await using var stream = await _responder.GetDataResponseStreamAsync(this, BaseUri.AbsoluteUri, parameters, cancellationToken).ConfigureAwait(false);
+            flickrResults = await FlickrConvert.DeserializeObjectAsync<T>(stream, cancellationToken).ConfigureAwait(false);
         }
 
-        var flickrResults = FlickrConvert.DeserializeObject<T>(resultArray);
         return flickrResults.EnsureSuccessStatusCode();
     }
 }

@@ -19,7 +19,7 @@ public sealed partial class FlickrClient : IFlickrPush
             { "method", "flickr.push.getSubscriptions" }
         };
 
-        return await GetResponseAsync<Subscriptions>(parameters, cancellationToken);
+        return await GetResponseAsync<Subscriptions>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<TopicNames> IFlickrPush.GetTopicsAsync(CancellationToken cancellationToken)
@@ -29,7 +29,7 @@ public sealed partial class FlickrClient : IFlickrPush
             { "method", "flickr.push.getTopics" }
         };
 
-        return await GetResponseAsync<TopicNames>(parameters, cancellationToken);
+        return await GetResponseAsync<TopicNames>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task IFlickrPush.SubscribeAsync(string topic, string callback, string verify, string verifyToken,
@@ -80,7 +80,7 @@ public sealed partial class FlickrClient : IFlickrPush
 
         parameters.AppendIf("tags", tags, x => x != null && x.Any() && topic == "tags", x => string.Join(",", x.ToArray()));
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task IFlickrPush.UnsubscribeAsync(string topic, string callback, string verify, string verifyToken, CancellationToken cancellationToken)
@@ -103,7 +103,7 @@ public sealed partial class FlickrClient : IFlickrPush
 
         parameters.AppendIf("verify_token", verifyToken, x => !string.IsNullOrEmpty(x), x => x);
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 }
 

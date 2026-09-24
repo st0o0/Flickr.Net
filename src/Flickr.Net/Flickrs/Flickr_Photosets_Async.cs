@@ -23,7 +23,7 @@ public sealed partial class FlickrClient : IFlickrPhotosets
             { "photo_id", photoId }
         };
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<string> IFlickrPhotosets.CreateAsync(string title, string primaryPhotoId, string description, CancellationToken cancellationToken)
@@ -39,7 +39,7 @@ public sealed partial class FlickrClient : IFlickrPhotosets
 
         parameters.AppendIf("description", description, x => !string.IsNullOrEmpty(x), x => x);
 
-        var result = await GetResponseAsync<PhotosetUnknownResponse>(parameters, cancellationToken);
+        var result = await GetResponseAsync<PhotosetUnknownResponse>(parameters, cancellationToken).ConfigureAwait(false);
 
         return result.GetValueOrDefault("id");
     }
@@ -54,7 +54,7 @@ public sealed partial class FlickrClient : IFlickrPhotosets
             { "photoset_id", photosetId }
         };
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task IFlickrPhotosets.EditMetaAsync(string photosetId, string title, string description, CancellationToken cancellationToken)
@@ -70,7 +70,7 @@ public sealed partial class FlickrClient : IFlickrPhotosets
 
         parameters.AppendIf("description", description, x => !string.IsNullOrEmpty(x), x => x);
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task IFlickrPhotosets.EditPhotosAsync(string photosetId, string primaryPhotoId, string[] photoIds, CancellationToken cancellationToken)
@@ -85,7 +85,7 @@ public sealed partial class FlickrClient : IFlickrPhotosets
             { "photo_ids", string.Join(",", photoIds) }
         };
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<FlickrContextResult<NextPhoto, PrevPhoto>> IFlickrPhotosets.GetContextAsync(string photoId, string photosetId, CancellationToken cancellationToken)
@@ -97,7 +97,7 @@ public sealed partial class FlickrClient : IFlickrPhotosets
             { "photoset_id", photosetId }
         };
 
-        return await GetResponseAsync<FlickrContextResult<NextPhoto, PrevPhoto>>(parameters, cancellationToken);
+        return await GetResponseAsync<FlickrContextResult<NextPhoto, PrevPhoto>>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Photoset> IFlickrPhotosets.GetInfoAsync(string photosetId, CancellationToken cancellationToken)
@@ -108,7 +108,7 @@ public sealed partial class FlickrClient : IFlickrPhotosets
             { "photoset_id", photosetId }
         };
 
-        return await GetResponseAsync<Photoset>(parameters, cancellationToken);
+        return await GetResponseAsync<Photoset>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<Photosets> IFlickrPhotosets.GetListAsync(string userId, int page, int perPage, CancellationToken cancellationToken)
@@ -124,7 +124,7 @@ public sealed partial class FlickrClient : IFlickrPhotosets
 
         parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        return await GetResponseAsync<Photosets>(parameters, cancellationToken);
+        return await GetResponseAsync<Photosets>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<PhotosetPhotos> IFlickrPhotosets.GetPhotosAsync(string photosetId, PhotoSearchExtras extras, PrivacyFilter privacyFilter, int page, int perPage, MediaType media, CancellationToken cancellationToken)
@@ -145,7 +145,7 @@ public sealed partial class FlickrClient : IFlickrPhotosets
 
         parameters.AppendIf("media", media, x => x != MediaType.None, x => media.ToFlickrString());
 
-        return await GetResponseAsync<PhotosetPhotos>(parameters, cancellationToken);
+        return await GetResponseAsync<PhotosetPhotos>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task IFlickrPhotosets.OrderSetsAsync(IEnumerable<string> photosetIds, CancellationToken cancellationToken)
@@ -156,7 +156,7 @@ public sealed partial class FlickrClient : IFlickrPhotosets
             { "photoset_ids", string.Join(",", photosetIds.ToArray()) }
         };
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task IFlickrPhotosets.RemovePhotoAsync(string photosetId, string photoId, CancellationToken cancellationToken)
@@ -168,7 +168,7 @@ public sealed partial class FlickrClient : IFlickrPhotosets
             { "photo_id", photoId }
         };
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task IFlickrPhotosets.RemovePhotosAsync(string photosetId, IEnumerable<string> photoIds, CancellationToken cancellationToken)
@@ -180,7 +180,7 @@ public sealed partial class FlickrClient : IFlickrPhotosets
             { "photo_ids", string.Join(",", photoIds.ToArray()) }
         };
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task IFlickrPhotosets.ReorderPhotosAsync(string photosetId, IEnumerable<string> photoIds, CancellationToken cancellationToken)
@@ -192,7 +192,7 @@ public sealed partial class FlickrClient : IFlickrPhotosets
             { "photo_ids", string.Join(",", photoIds.ToArray()) }
         };
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task IFlickrPhotosets.SetPrimaryPhotoAsync(string photosetId, string photoId, CancellationToken cancellationToken)
@@ -204,7 +204,7 @@ public sealed partial class FlickrClient : IFlickrPhotosets
             { "photo_id", photoId }
         };
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 }
 

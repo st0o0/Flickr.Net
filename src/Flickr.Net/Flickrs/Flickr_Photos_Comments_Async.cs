@@ -18,7 +18,7 @@ public sealed partial class FlickrClient : IFlickrPhotosComments
             { "comment_text", commentText }
         };
 
-        var response = await GetResponseAsync<CommentUnknownResponse>(parameters, cancellationToken);
+        var response = await GetResponseAsync<CommentUnknownResponse>(parameters, cancellationToken).ConfigureAwait(false);
 
         return response.GetValueOrDefault("id");
     }
@@ -31,7 +31,7 @@ public sealed partial class FlickrClient : IFlickrPhotosComments
             { "comment_id", commentId }
         };
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task IFlickrPhotosComments.EditCommentAsync(string commentId, string commentText, CancellationToken cancellationToken)
@@ -43,7 +43,7 @@ public sealed partial class FlickrClient : IFlickrPhotosComments
             { "comment_text", commentText }
         };
 
-        await GetResponseAsync(parameters, cancellationToken);
+        await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<PhotoComments> IFlickrPhotosComments.GetListAsync(string photoId, CancellationToken cancellationToken)
@@ -54,7 +54,7 @@ public sealed partial class FlickrClient : IFlickrPhotosComments
             { "photo_id", photoId }
         };
 
-        return await GetResponseAsync<PhotoComments>(parameters, cancellationToken);
+        return await GetResponseAsync<PhotoComments>(parameters, cancellationToken).ConfigureAwait(false);
     }
 
     async Task<PagedPhotos> IFlickrPhotosComments.GetRecentForContactsAsync(DateTime? dateLastComment, string[] contactsFilter, PhotoSearchExtras extras, int page, int perPage, CancellationToken cancellationToken)
@@ -76,7 +76,7 @@ public sealed partial class FlickrClient : IFlickrPhotosComments
 
         parameters.AppendIf("extras", extras, x => x != PhotoSearchExtras.None, x => x.ToFlickrString());
 
-        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken);
+        return await GetResponseAsync<PagedPhotos>(parameters, cancellationToken).ConfigureAwait(false);
     }
 }
 
