@@ -3,7 +3,7 @@ namespace Flickr.Net;
 /// <summary>
 /// Root interface for the Flickr API client, exposing all API sub-clients as properties.
 /// </summary>
-public interface IFlickrClient : IDisposable
+public interface IFlickrClient : IDisposable, IAsyncDisposable
 {
     /// <summary>Provides access to Flickr activity API methods.</summary>
     IFlickrActivity Activity { get; }

@@ -249,4 +249,12 @@ public sealed partial class FlickrClient : IFlickrClient
             _httpClient.Dispose();
         }
     }
+
+    /// <inheritdoc />
+    public ValueTask DisposeAsync()
+    {
+        Dispose();
+        GC.SuppressFinalize(this);
+        return ValueTask.CompletedTask;
+    }
 }
