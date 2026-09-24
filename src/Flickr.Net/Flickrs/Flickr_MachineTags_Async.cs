@@ -15,7 +15,7 @@ public sealed partial class FlickrClient : IFlickrMachineTags
             { "method", "flickr.machinetags.getNamespaces" }
         };
 
-        parameters.AppendIf("predicate", predicate, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("predicate", predicate, x => !string.IsNullOrEmpty(x), x => x!);
 
         parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
@@ -31,9 +31,9 @@ public sealed partial class FlickrClient : IFlickrMachineTags
             { "method", "flickr.machinetags.getPairs" }
         };
 
-        parameters.AppendIf("namespace", namespaceName, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("namespace", namespaceName, x => !string.IsNullOrEmpty(x), x => x!);
 
-        parameters.AppendIf("predicate", predicate, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("predicate", predicate, x => !string.IsNullOrEmpty(x), x => x!);
 
         parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
@@ -49,7 +49,7 @@ public sealed partial class FlickrClient : IFlickrMachineTags
             { "method", "flickr.machinetags.getPredicates" }
         };
 
-        parameters.AppendIf("namespace", namespaceName, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("namespace", namespaceName, x => !string.IsNullOrEmpty(x), x => x!);
 
         parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
@@ -70,11 +70,11 @@ public sealed partial class FlickrClient : IFlickrMachineTags
             { "method", "flickr.machinetags.getRecentValues" }
         };
 
-        parameters.AppendIf("namespace", namespaceName, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("namespace", namespaceName, x => !string.IsNullOrEmpty(x), x => x!);
 
-        parameters.AppendIf("predicate", predicate, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("predicate", predicate, x => !string.IsNullOrEmpty(x), x => x!);
 
-        parameters.AppendIf("added_since", addedSince, x => x.HasValue && x > DateTime.MinValue, x => x.Value.ToUnixTimestamp());
+        parameters.AppendIf("added_since", addedSince, x => x.HasValue && x > DateTime.MinValue, x => x!.Value.ToUnixTimestamp());
 
         return await GetResponseAsync<Values>(parameters, cancellationToken).ConfigureAwait(false);
     }

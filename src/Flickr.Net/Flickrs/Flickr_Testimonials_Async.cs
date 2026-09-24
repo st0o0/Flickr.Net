@@ -71,8 +71,8 @@ public sealed partial class FlickrClient : IFlickrTestimonials
             { "user_id", userId }
         };
 
-        parameters.AppendIf("page", page, x => x is > 0, x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
-        parameters.AppendIf("per_page", perPage, x => x is > 0, x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("page", page, x => x is > 0, x => x!.Value.ToString(NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("per_page", perPage, x => x is > 0, x => x!.Value.ToString(NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<Testimonials>(parameters, cancellationToken).ConfigureAwait(false);
     }
@@ -108,8 +108,8 @@ public sealed partial class FlickrClient : IFlickrTestimonials
             { "method", "flickr.testimonials.getPendingTestimonialsAbout" }
         };
 
-        parameters.AppendIf("page", page, x => x is > 0, x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
-        parameters.AppendIf("per_page", perPage, x => x is > 0, x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("page", page, x => x is > 0, x => x!.Value.ToString(NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("per_page", perPage, x => x is > 0, x => x!.Value.ToString(NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<Testimonials>(parameters, cancellationToken).ConfigureAwait(false);
     }
@@ -136,8 +136,8 @@ public sealed partial class FlickrClient : IFlickrTestimonials
             { "method", "flickr.testimonials.getPendingTestimonialsBy" }
         };
 
-        parameters.AppendIf("page", page, x => x is > 0, x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
-        parameters.AppendIf("per_page", perPage, x => x is > 0, x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("page", page, x => x is > 0, x => x!.Value.ToString(NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("per_page", perPage, x => x is > 0, x => x!.Value.ToString(NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<Testimonials>(parameters, cancellationToken).ConfigureAwait(false);
     }
@@ -150,8 +150,8 @@ public sealed partial class FlickrClient : IFlickrTestimonials
             { "user_id", userId }
         };
 
-        parameters.AppendIf("page", page, x => x is > 0, x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
-        parameters.AppendIf("per_page", perPage, x => x is > 0, x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("page", page, x => x is > 0, x => x!.Value.ToString(NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("per_page", perPage, x => x is > 0, x => x!.Value.ToString(NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<Testimonials>(parameters, cancellationToken).ConfigureAwait(false);
     }
@@ -175,8 +175,8 @@ public sealed partial class FlickrClient : IFlickrTestimonials
             { "user_id", userId }
         };
 
-        parameters.AppendIf("page", page, x => x is > 0, x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
-        parameters.AppendIf("per_page", perPage, x => x is > 0, x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("page", page, x => x is > 0, x => x!.Value.ToString(NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("per_page", perPage, x => x is > 0, x => x!.Value.ToString(NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<Testimonials>(parameters, cancellationToken).ConfigureAwait(false);
     }

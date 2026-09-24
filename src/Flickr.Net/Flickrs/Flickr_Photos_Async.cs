@@ -128,9 +128,9 @@ public sealed partial class FlickrClient : IFlickrPhotos
             { "method", "flickr.photos.getCounts" }
         };
 
-        parameters.AppendIf("dates", dates, x => x is { Length: > 0 }, x => string.Join(",", x.Select(Item => Item.ToUnixTimestamp())));
+        parameters.AppendIf("dates", dates, x => x is { Length: > 0 }, x => string.Join(",", x!.Select(Item => Item.ToUnixTimestamp())));
 
-        parameters.AppendIf("taken_dates", takenDates, x => x is { Length: > 0 }, x => string.Join(",", x.Select(Item => Item.ToUnixTimestamp())));
+        parameters.AppendIf("taken_dates", takenDates, x => x is { Length: > 0 }, x => string.Join(",", x!.Select(Item => Item.ToUnixTimestamp())));
 
         return await GetResponseAsync<PhotoCounts>(parameters, cancellationToken).ConfigureAwait(false);
     }
@@ -143,7 +143,7 @@ public sealed partial class FlickrClient : IFlickrPhotos
             { "photo_id", photoId }
         };
 
-        parameters.AppendIf("secret", secret, x => x != null, x => secret);
+        parameters.AppendIf("secret", secret, x => x != null, x => secret!);
 
         return await GetResponseAsync<PhotoExif>(parameters, cancellationToken).ConfigureAwait(false);
     }
@@ -171,7 +171,7 @@ public sealed partial class FlickrClient : IFlickrPhotos
             { "photo_id", photoId }
         };
 
-        parameters.AppendIf("secret", secret, x => x != null, x => secret);
+        parameters.AppendIf("secret", secret, x => x != null, x => secret!);
 
         return await GetResponseAsync<PhotoInfo>(parameters, cancellationToken).ConfigureAwait(false);
     }
@@ -213,7 +213,7 @@ public sealed partial class FlickrClient : IFlickrPhotos
             { "method", "flickr.photos.getPopular" }
         };
 
-        parameters.AppendIf("user_id", userId, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("user_id", userId, x => !string.IsNullOrEmpty(x), x => x!);
 
         parameters.AppendIf("sort", sort, x => x != PopularSorting.None, x => x.GetEnumMemberValue());
 
@@ -359,9 +359,9 @@ public sealed partial class FlickrClient : IFlickrPhotos
             { "photo_id", photoId }
         };
 
-        parameters.AppendIf("date_posted", datePosted, x => x.HasValue && x != DateTime.MinValue, x => x.Value.ToUnixTimestamp());
+        parameters.AppendIf("date_posted", datePosted, x => x.HasValue && x != DateTime.MinValue, x => x!.Value.ToUnixTimestamp());
 
-        parameters.AppendIf("date_taken", dateTaken, x => x.HasValue && x != DateTime.MinValue, x => x.Value.ToString("yyyy-MM-dd HH:mm:ss", DateTimeFormatInfo.InvariantInfo));
+        parameters.AppendIf("date_taken", dateTaken, x => x.HasValue && x != DateTime.MinValue, x => x!.Value.ToString("yyyy-MM-dd HH:mm:ss", DateTimeFormatInfo.InvariantInfo));
 
         parameters.AppendIf("date_taken_granularity", granularity, _ => dateTaken.HasValue && dateTaken != DateTime.MinValue, x => x.ToString("d"));
 
@@ -376,9 +376,9 @@ public sealed partial class FlickrClient : IFlickrPhotos
             { "photo_id", photoId },
         };
 
-        parameters.AppendIf("title", title, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("title", title, x => !string.IsNullOrEmpty(x), x => x!);
 
-        parameters.AppendIf("description", description, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("description", description, x => !string.IsNullOrEmpty(x), x => x!);
 
         await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
@@ -394,9 +394,9 @@ public sealed partial class FlickrClient : IFlickrPhotos
             { "is_family", (isFamily ? "1" : "0") }
         };
 
-        parameters.AppendIf("perm_comment", permComment, x => x.HasValue, x => x.Value.ToString("d"));
+        parameters.AppendIf("perm_comment", permComment, x => x.HasValue, x => x!.Value.ToString("d"));
 
-        parameters.AppendIf("perm_addmeta", permAddMeta, x => x.HasValue, x => x.Value.ToString("d"));
+        parameters.AppendIf("perm_addmeta", permAddMeta, x => x.HasValue, x => x!.Value.ToString("d"));
 
         await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }

@@ -42,7 +42,7 @@ public sealed partial class FlickrClient : IFlickrFavorites
             { "method", "flickr.favorites.getList" }
         };
 
-        parameters.AppendIf("user_id", userId, x => x != null, x => x);
+        parameters.AppendIf("user_id", userId, x => x != null, x => x!);
 
         parameters.AppendIf("min_fav_date", maxFavoriteDate, x => x.HasValue && x > DateTime.MinValue, x => x!.Value.ToUnixTimestamp());
 

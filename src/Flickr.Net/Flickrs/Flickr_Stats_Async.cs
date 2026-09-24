@@ -20,7 +20,7 @@ public sealed partial class FlickrClient : IFlickrStats
             { "date", UtilityMethods.DateToUnixTimestamp(date) }
         };
 
-        parameters.AppendIf("colletion_id", collectionId, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("colletion_id", collectionId, x => !string.IsNullOrEmpty(x), x => x!);
 
         parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
@@ -40,7 +40,7 @@ public sealed partial class FlickrClient : IFlickrStats
             { "domain", domain }
         };
 
-        parameters.AppendIf("colletion_id", collectionId, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("colletion_id", collectionId, x => !string.IsNullOrEmpty(x), x => x!);
 
         parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
@@ -85,7 +85,7 @@ public sealed partial class FlickrClient : IFlickrStats
             { "date", UtilityMethods.DateToUnixTimestamp(date) }
         };
 
-        parameters.AppendIf("photo_id", photoId, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("photo_id", photoId, x => !string.IsNullOrEmpty(x), x => x!);
 
         parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
@@ -105,7 +105,7 @@ public sealed partial class FlickrClient : IFlickrStats
             { "domain", domain }
         };
 
-        parameters.AppendIf("photo_id", photoId, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("photo_id", photoId, x => !string.IsNullOrEmpty(x), x => x!);
 
         parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
@@ -124,7 +124,7 @@ public sealed partial class FlickrClient : IFlickrStats
             { "date", UtilityMethods.DateToUnixTimestamp(date) }
         };
 
-        parameters.AppendIf("photoset_id", photosetId, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("photoset_id", photosetId, x => !string.IsNullOrEmpty(x), x => x!);
 
         parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
@@ -144,7 +144,7 @@ public sealed partial class FlickrClient : IFlickrStats
             { "domain", domain }
         };
 
-        parameters.AppendIf("photoset_id", photosetId, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("photoset_id", photosetId, x => !string.IsNullOrEmpty(x), x => x!);
 
         parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 

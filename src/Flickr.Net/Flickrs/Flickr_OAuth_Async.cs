@@ -57,7 +57,7 @@ public sealed partial class FlickrClient : IFlickrOAuth
 
         parameters.Add("oauth_verifier", verifier);
 
-        parameters.Add("oauth_token", requestToken.Token);
+        parameters.Add("oauth_token", requestToken.Token!);
 
         var sig = ((IFlickrOAuth)this).CalculateSignature("POST", url, parameters, requestToken.TokenSecret);
 
@@ -72,7 +72,7 @@ public sealed partial class FlickrClient : IFlickrOAuth
         return OAuthAccessToken.ParseResponse(jsonstring);
     }
 
-    string IFlickrOAuth.CalculateSignature(string method, string url, Dictionary<string, string> parameters, string tokenSecret)
+    string IFlickrOAuth.CalculateSignature(string method, string url, Dictionary<string, string> parameters, string? tokenSecret)
     {
         var key = FlickrSettings.ApiSecret + "&" + tokenSecret;
         var keyBytes = Encoding.UTF8.GetBytes(key);
@@ -183,7 +183,7 @@ public interface IFlickrOAuth
     /// The token secret (either request or access) for generating the SHA-1 key.
     /// </param>
     /// <returns>Base64 encoded SHA-1 hash.</returns>
-    string CalculateSignature(string method, string url, Dictionary<string, string> parameters, string tokenSecret);
+    string CalculateSignature(string method, string url, Dictionary<string, string> parameters, string? tokenSecret);
 
     /// <summary>
     /// Returns the authorization URL for OAuth authorization, based off the request token and

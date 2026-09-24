@@ -39,7 +39,7 @@ public sealed partial class FlickrClient : IFlickrPhotosLicenses
             { "method", "flickr.photos.licenses.getAvailable" }
         };
 
-        parameters.AppendIf("photo_id", photoId, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("photo_id", photoId, x => !string.IsNullOrEmpty(x), x => x!);
 
         return await GetResponseAsync<Licenses>(parameters, cancellationToken).ConfigureAwait(false);
     }

@@ -22,7 +22,7 @@ public sealed partial class FlickrClient : IFlickrPhotosNotes
 
         var result = await GetResponseAsync<NoteUnknownResponse>(parameters, cancellationToken).ConfigureAwait(false);
 
-        return result.GetValueOrDefault("id");
+        return result.GetValueOrDefault("id")!;
     }
 
     async Task IFlickrPhotosNotes.DeleteAsync(string noteId, CancellationToken cancellationToken)

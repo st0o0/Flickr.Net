@@ -58,13 +58,13 @@ public sealed partial class FlickrClient : IFlickrGroupsPools
             { "group_id", groupId }
         };
 
-        parameters.AppendIf("tags", tags, x => x is { Length: > 0 }, x => x);
+        parameters.AppendIf("tags", tags, x => x is { Length: > 0 }, x => x!);
 
         parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
         parameters.AppendIf("page", page, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("user_id", userId, x => x is { Length: > 0 }, x => x.ToString(NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("user_id", userId, x => x is { Length: > 0 }, x => x!.ToString(NumberFormatInfo.InvariantInfo));
 
         parameters.AppendIf("extras", extras, x => x != PhotoSearchExtras.None, x => x.ToFlickrString());
 

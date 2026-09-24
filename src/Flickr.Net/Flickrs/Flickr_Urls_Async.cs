@@ -44,7 +44,7 @@ public sealed partial class FlickrClient : IFlickrUrls
             { "method", "flickr.urls.getUserProfile" }
         };
 
-        parameters.AppendIf("user_id", userId, x => x != null, x => x);
+        parameters.AppendIf("user_id", userId, x => x != null, x => x!);
 
         var result = await GetResponseAsync<UnknownResponse>(parameters, cancellationToken).ConfigureAwait(false);
 

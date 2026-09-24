@@ -80,13 +80,13 @@ public sealed partial class FlickrClient : IFlickrPeople
 
         parameters.AppendIf("safe_search", safeSearch, x => x != SafetyLevel.None, x => x.ToString("d"));
 
-        parameters.AppendIf("min_upload_date", minUploadDate, x => x.HasValue, x => x.Value.ToUnixTimestamp());
+        parameters.AppendIf("min_upload_date", minUploadDate, x => x.HasValue, x => x!.Value.ToUnixTimestamp());
 
-        parameters.AppendIf("max_upload_date", maxUploadDate, x => x.HasValue, x => x.Value.ToUnixTimestamp());
+        parameters.AppendIf("max_upload_date", maxUploadDate, x => x.HasValue, x => x!.Value.ToUnixTimestamp());
 
-        parameters.AppendIf("min_taken_date", minTakenDate, x => x.HasValue, x => x.Value.ToMySql());
+        parameters.AppendIf("min_taken_date", minTakenDate, x => x.HasValue, x => x!.Value.ToMySql());
 
-        parameters.AppendIf("max_taken_date", maxTakenDate, x => x.HasValue, x => x.Value.ToMySql());
+        parameters.AppendIf("max_taken_date", maxTakenDate, x => x.HasValue, x => x!.Value.ToMySql());
 
         parameters.AppendIf("content_type", contentType, x => x != ContentTypeSearch.None, x => x.ToString("d"));
 

@@ -58,27 +58,27 @@ public sealed partial class FlickrClient : IFlickrPush
             { "verify", verify }
         };
 
-        parameters.AppendIf("verify_token", verifyToken, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("verify_token", verifyToken, x => !string.IsNullOrEmpty(x), x => x!);
 
-        parameters.AppendIf("lease_seconds", leaseSeconds, x => x != null && leaseSeconds > 0, x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("lease_seconds", leaseSeconds, x => x != null && leaseSeconds > 0, x => x!.Value.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("woe_ids", woeIds, x => x != null && x.Any(), x => string.Join(",", x));
+        parameters.AppendIf("woe_ids", woeIds, x => x != null && x.Any(), x => string.Join(",", x!));
 
-        parameters.AppendIf("place_ids", placeIds, x => x != null && x.Any(), x => string.Join(",", x));
+        parameters.AppendIf("place_ids", placeIds, x => x != null && x.Any(), x => string.Join(",", x!));
 
-        parameters.AppendIf("lat", latitude, x => x is > 0 && topic == "geo", x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("lat", latitude, x => x is > 0 && topic == "geo", x => x!.Value.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("lon", longitude, x => x is > 0 && topic == "geo", x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("lon", longitude, x => x is > 0 && topic == "geo", x => x!.Value.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("radius", radius, x => x is > 0 && topic == "geo", x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("radius", radius, x => x is > 0 && topic == "geo", x => x!.Value.ToString(NumberFormatInfo.InvariantInfo));
 
         parameters.AppendIf("radius_units", radiusUnits, x => x != RadiusUnit.None, x => radiusUnits.ToString("d"));
 
         parameters.AppendIf("accuracy", accuracy, x => x != GeoAccuracy.None, x => ((int)x).ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("nsids", nsids, x => x != null && x.Any() && topic == "commons", x => string.Join(",", x.ToArray()));
+        parameters.AppendIf("nsids", nsids, x => x != null && x.Any() && topic == "commons", x => string.Join(",", x!.ToArray()));
 
-        parameters.AppendIf("tags", tags, x => x != null && x.Any() && topic == "tags", x => string.Join(",", x.ToArray()));
+        parameters.AppendIf("tags", tags, x => x != null && x.Any() && topic == "tags", x => string.Join(",", x!.ToArray()));
 
         await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
@@ -101,7 +101,7 @@ public sealed partial class FlickrClient : IFlickrPush
             { "verify", verify }
         };
 
-        parameters.AppendIf("verify_token", verifyToken, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("verify_token", verifyToken, x => !string.IsNullOrEmpty(x), x => x!);
 
         await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }

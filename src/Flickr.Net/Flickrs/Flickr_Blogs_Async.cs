@@ -40,7 +40,7 @@ public sealed partial class FlickrClient : IFlickrBlogs
             { "description", description }
         };
 
-        parameters.AppendIf("blog_password", blogPassword, x => x != null, x => x);
+        parameters.AppendIf("blog_password", blogPassword, x => x != null, x => x!);
 
         await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }

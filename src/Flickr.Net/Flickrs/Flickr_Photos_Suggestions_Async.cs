@@ -89,11 +89,11 @@ public sealed partial class FlickrClient : IFlickrPhotosSuggestions
 
         parameters.AppendIf("accuracy", accuracy, x => x != GeoAccuracy.None, x => x.ToString("D"));
 
-        parameters.AppendIf("woe_id", woeId, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("woe_id", woeId, x => !string.IsNullOrEmpty(x), x => x!);
 
-        parameters.AppendIf("place_id", placeId, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("place_id", placeId, x => !string.IsNullOrEmpty(x), x => x!);
 
-        parameters.AppendIf("note", note, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("note", note, x => !string.IsNullOrEmpty(x), x => x!);
 
         await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }

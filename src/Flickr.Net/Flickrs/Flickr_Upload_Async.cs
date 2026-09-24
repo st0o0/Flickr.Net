@@ -22,11 +22,11 @@ public sealed partial class FlickrClient : IFlickrUpload
 
         Dictionary<string, string> parameters = [];
 
-        parameters.AppendIf("title", title, x => x is { Length: > 0 }, x => x);
+        parameters.AppendIf("title", title, x => x is { Length: > 0 }, x => x!);
 
-        parameters.AppendIf("description", description, x => x is { Length: > 0 }, x => x);
+        parameters.AppendIf("description", description, x => x is { Length: > 0 }, x => x!);
 
-        parameters.AppendIf("tags", tags, x => x is { Length: > 0 }, x => x);
+        parameters.AppendIf("tags", tags, x => x is { Length: > 0 }, x => x!);
 
         parameters.Add("is_public", isPublic ? "1" : "0");
 
@@ -42,7 +42,7 @@ public sealed partial class FlickrClient : IFlickrUpload
 
         SignUploadParameters(parameters, UploadUrl);
 
-        var result = await UploadDataAsync(stream, fileName, progress, new Uri(UploadUrl), parameters, cancellationToken).ConfigureAwait(false);
+        var result = await UploadDataAsync(stream, fileName, progress!, new Uri(UploadUrl), parameters, cancellationToken).ConfigureAwait(false);
 
         return result.GetString()!;
     }
@@ -58,15 +58,15 @@ public sealed partial class FlickrClient : IFlickrUpload
 
         SignUploadParameters(parameters, ReplaceUrl);
 
-        var result = await UploadDataAsync(stream, fileName, progress, new Uri(ReplaceUrl), parameters, cancellationToken).ConfigureAwait(false);
+        var result = await UploadDataAsync(stream, fileName, progress!, new Uri(ReplaceUrl), parameters, cancellationToken).ConfigureAwait(false);
         return result.GetProperty("_content").GetString()!;
     }
 
     private void SignUploadParameters(Dictionary<string, string> parameters, string url)
     {
         OAuthGetBasicParameters(parameters);
-        parameters.Add("oauth_token", FlickrSettings.OAuthAccessToken);
-        var sig = ((IFlickrOAuth)this).CalculateSignature("POST", url, parameters, FlickrSettings.OAuthAccessTokenSecret);
+        parameters.Add("oauth_token", FlickrSettings.OAuthAccessToken!);
+        var sig = ((IFlickrOAuth)this).CalculateSignature("POST", url, parameters, FlickrSettings.OAuthAccessTokenSecret!);
         parameters.Add("oauth_signature", sig);
     }
 

@@ -16,7 +16,7 @@ public sealed partial class FlickrClient : IFlickrPhotosetsComments
 
         var result = await GetResponseAsync<CommentUnknownResponse>(parameters, cancellationToken).ConfigureAwait(false);
 
-        return result.GetValueOrDefault("id");
+        return result.GetValueOrDefault("id")!;
     }
 
     async Task IFlickrPhotosetsComments.DeleteCommentAsync(string commentId, CancellationToken cancellationToken)

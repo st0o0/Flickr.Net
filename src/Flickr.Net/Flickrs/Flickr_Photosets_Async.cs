@@ -37,11 +37,11 @@ public sealed partial class FlickrClient : IFlickrPhotosets
             { "title", title }
         };
 
-        parameters.AppendIf("description", description, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("description", description, x => !string.IsNullOrEmpty(x), x => x!);
 
         var result = await GetResponseAsync<PhotosetUnknownResponse>(parameters, cancellationToken).ConfigureAwait(false);
 
-        return result.GetValueOrDefault("id");
+        return result.GetValueOrDefault("id")!;
     }
 
     async Task IFlickrPhotosets.DeleteAsync(string photosetId, CancellationToken cancellationToken)
@@ -68,7 +68,7 @@ public sealed partial class FlickrClient : IFlickrPhotosets
             { "title", title }
         };
 
-        parameters.AppendIf("description", description, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("description", description, x => !string.IsNullOrEmpty(x), x => x!);
 
         await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }

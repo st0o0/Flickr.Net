@@ -47,9 +47,9 @@ public sealed partial class FlickrClient : IFlickrTags
             { "method", "flickr.tags.getHotList" }
         };
 
-        parameters.AppendIf("period", period, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("period", period, x => !string.IsNullOrEmpty(x), x => x!);
 
-        parameters.AppendIf("count", count, x => x is > 0, x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("count", count, x => x is > 0, x => x!.Value.ToString(NumberFormatInfo.InvariantInfo));
 
         return await GetGenericResponseAsync<FlickrStatsResult<Hottags>>(parameters, cancellationToken).ConfigureAwait(false);
     }
@@ -84,9 +84,9 @@ public sealed partial class FlickrClient : IFlickrTags
             { "method", "flickr.tags.getListUserPopular" }
         };
 
-        parameters.AppendIf("user_id", userId, x => x is { Length: > 0 }, x => x);
+        parameters.AppendIf("user_id", userId, x => x is { Length: > 0 }, x => x!);
 
-        parameters.AppendIf("count", count, x => x is > 0, x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("count", count, x => x is > 0, x => x!.Value.ToString(NumberFormatInfo.InvariantInfo));
 
         return await GetResponseAsync<UserTags>(parameters, cancellationToken).ConfigureAwait(false);
     }
@@ -123,7 +123,7 @@ public sealed partial class FlickrClient : IFlickrTags
             { "method", "flickr.tags.getListUserRaw" }
         };
 
-        parameters.AppendIf("tag", tag, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("tag", tag, x => !string.IsNullOrEmpty(x), x => x!);
 
         return await GetResponseAsync<RawTags>(parameters, cancellationToken).ConfigureAwait(false);
     }

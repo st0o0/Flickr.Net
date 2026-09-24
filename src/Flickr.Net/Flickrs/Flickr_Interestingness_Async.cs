@@ -16,7 +16,7 @@ public sealed partial class FlickrClient : IFlickrInterestingness
             { "method", "flickr.interestingness.getList" }
         };
 
-        parameters.AppendIf("date", date, x => x.HasValue && x > DateTime.MinValue, x => x.Value.ToString("yyyy-MM-dd", DateTimeFormatInfo.InvariantInfo));
+        parameters.AppendIf("date", date, x => x.HasValue && x > DateTime.MinValue, x => x!.Value.ToString("yyyy-MM-dd", DateTimeFormatInfo.InvariantInfo));
 
         parameters.AppendIf("per_page", perPage, x => x > 0, x => x.ToString(NumberFormatInfo.InvariantInfo));
 

@@ -19,13 +19,13 @@ public sealed partial class FlickrClient : IFlickrPhotosPeople
             { "user_id", userId }
         };
 
-        parameters.AppendIf("person_x", personX, x => x.HasValue, x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("person_x", personX, x => x.HasValue, x => x!.Value.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("person_y", personY, x => x.HasValue, x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("person_y", personY, x => x.HasValue, x => x!.Value.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("person_w", personWidth, x => x.HasValue, x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("person_w", personWidth, x => x.HasValue, x => x!.Value.ToString(NumberFormatInfo.InvariantInfo));
 
-        parameters.AppendIf("person_h", personHeight, x => x.HasValue, x => x.Value.ToString(NumberFormatInfo.InvariantInfo));
+        parameters.AppendIf("person_h", personHeight, x => x.HasValue, x => x!.Value.ToString(NumberFormatInfo.InvariantInfo));
 
         await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }

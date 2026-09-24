@@ -32,9 +32,9 @@ public sealed partial class FlickrClient : IFlickrCollections
             { "method", "flickr.collections.getTree" }
         };
 
-        parameters.AppendIf("collection_id", collectionId, x => x != null, x => x);
+        parameters.AppendIf("collection_id", collectionId, x => x != null, x => x!);
 
-        parameters.AppendIf("user_id", userId, x => x != null, x => x);
+        parameters.AppendIf("user_id", userId, x => x != null, x => x!);
 
         return await GetResponseAsync<Collections>(parameters, cancellationToken).ConfigureAwait(false);
     }

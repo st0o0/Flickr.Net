@@ -18,7 +18,7 @@ public sealed partial class FlickrClient : IFlickrGalleries
             { "photo_id", photoId }
         };
 
-        parameters.AppendIf("comment", comment, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("comment", comment, x => !string.IsNullOrEmpty(x), x => x!);
 
         await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
@@ -34,7 +34,7 @@ public sealed partial class FlickrClient : IFlickrGalleries
             { "description", description }
         };
 
-        parameters.AppendIf("primary_photo_id", primaryPhotoId, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("primary_photo_id", primaryPhotoId, x => !string.IsNullOrEmpty(x), x => x!);
 
         await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
@@ -50,7 +50,7 @@ public sealed partial class FlickrClient : IFlickrGalleries
             { "title", title }
         };
 
-        parameters.AppendIf("description", description, x => !string.IsNullOrEmpty(x), x => x);
+        parameters.AppendIf("description", description, x => !string.IsNullOrEmpty(x), x => x!);
 
         await GetResponseAsync(parameters, cancellationToken).ConfigureAwait(false);
     }
