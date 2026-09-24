@@ -37,7 +37,7 @@ public class BlogTests
         Assert.False(result.HasError);
         var items = result.Content;
         Assert.IsType<Blogs>(items);
-        Assert.Equal(2, result.Content.Values.Count);
+        Assert.Equal(2, result.Content!.Values.Count);
     }
 
     [Fact]
@@ -104,6 +104,6 @@ public class BlogTests
         Assert.False(result.HasError);
         var items = result.Content;
         Assert.IsType<Services>(items);
-        Assert.Equal(11, result.Content.Values.Count);
+        Assert.Equal(11, result.Content!.Values.Count);
     }
 }

@@ -846,8 +846,8 @@ public class PhotoExifTests
         Assert.False(result.HasError);
         var items = result.Content;
         Assert.IsType<PhotoExif>(items);
-        Assert.NotEmpty(items.Exifs);
-        Assert.IsType<Exif>(items.Exifs[0]);
-        Assert.Equal(88, items.Exifs.Count);
+        Assert.NotEmpty(items.Exifs!);
+        Assert.IsType<Exif>(items.Exifs![0]);
+        Assert.Equal(88, items.Exifs!.Count);
     }
 }

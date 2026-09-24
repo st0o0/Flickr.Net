@@ -69,6 +69,6 @@ public class InstitutionTests
         var items = result.Content;
         Assert.IsType<Institutions>(items);
         Assert.IsType<Institution>(items.Values[0]);
-        Assert.IsType<UrlType>(items.Values[0].Urls.Values[0].Type);
+        Assert.IsType<UrlType>(items.Values[0].Urls!.Values[0].Type);
     }
 }

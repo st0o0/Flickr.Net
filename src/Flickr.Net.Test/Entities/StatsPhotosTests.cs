@@ -66,15 +66,15 @@ public class StatsPhotosTests
         Assert.True(items.Values[0].IsPublic);
         Assert.False(items.Values[0].IsFriend);
         Assert.False(items.Values[0].IsFamily);
-        Assert.Equal(941, items.Values[0].Stats.Views);
-        Assert.Equal(18, items.Values[0].Stats.Comments);
-        Assert.Equal(2, items.Values[0].Stats.Favorites);
+        Assert.Equal(941, items.Values[0].Stats!.Views);
+        Assert.Equal(18, items.Values[0].Stats!.Comments);
+        Assert.Equal(2, items.Values[0].Stats!.Favorites);
 
         Assert.False(items.Values[1].IsPublic);
         Assert.True(items.Values[1].IsFriend);
         Assert.True(items.Values[1].IsFamily);
-        Assert.Equal(141, items.Values[1].Stats.Views);
-        Assert.Equal(1, items.Values[1].Stats.Comments);
-        Assert.Equal(2, items.Values[1].Stats.Favorites);
+        Assert.Equal(141, items.Values[1].Stats!.Views);
+        Assert.Equal(1, items.Values[1].Stats!.Comments);
+        Assert.Equal(2, items.Values[1].Stats!.Favorites);
     }
 }

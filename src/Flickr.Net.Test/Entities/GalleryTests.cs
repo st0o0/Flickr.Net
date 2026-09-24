@@ -726,7 +726,7 @@ public class GalleryTests
         Assert.Equal(13, items.TotalCount);
         Assert.Equal(1576, items.ViewsCount);
         Assert.Equal(5, items.CommentsCount);
-        Assert.NotEmpty(items.CoverPhotos.Values);
+        Assert.NotEmpty(items.CoverPhotos!.Values);
 
         Assert.All(items.CoverPhotos.Values, item =>
         {

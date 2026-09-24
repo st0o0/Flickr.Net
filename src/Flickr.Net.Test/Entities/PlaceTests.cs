@@ -126,7 +126,7 @@ public class PlaceTests
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
-        var place = result.Content;
+        var place = result.Content!;
 
         Assert.NotNull(place.Locality);
         Assert.Equal("San Francisco", place.Locality!.Content);

@@ -65,7 +65,7 @@ public class PhotoInfoPermissionsTests
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
-        var photo = result.Content;
+        var photo = result.Content!;
         Assert.NotNull(photo.Permissions);
         Assert.Equal(3, photo.Permissions!.PermComment);
         Assert.Equal(2, photo.Permissions.PermAddMeta);
@@ -124,7 +124,7 @@ public class PhotoInfoPermissionsTests
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
-        var photo = result.Content;
+        var photo = result.Content!;
         Assert.Null(photo.Permissions);
     }
 }

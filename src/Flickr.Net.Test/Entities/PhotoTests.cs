@@ -36,7 +36,7 @@ public class PhotoTests
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
-        var photo = result.Content.Values[0];
+        var photo = result.Content!.Values[0];
         Assert.Equal("A test description", photo.Description.Content);
         Assert.Equal(new DateTime(2024, 3, 15, 14, 30, 0), photo.DateTaken);
     }
@@ -49,7 +49,7 @@ public class PhotoTests
         var result = FlickrConvert.DeserializeObject<FlickrResult<PagedPhotos>>(Encoding.UTF8.GetBytes(json));
 
         Assert.NotNull(result);
-        var photo = result.Content.Values[0];
+        var photo = result.Content!.Values[0];
         Assert.Equal(default(Description), photo.Description);
     }
 
@@ -60,7 +60,7 @@ public class PhotoTests
 
         var result = FlickrConvert.DeserializeObject<FlickrResult<PagedPhotos>>(Encoding.UTF8.GetBytes(json));
 
-        var photo = result.Content.Values[0];
+        var photo = result.Content!.Values[0];
         string description = photo.Description;
         Assert.Equal("A test description", description);
     }
@@ -74,7 +74,7 @@ public class PhotoTests
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
-        var photo = result.Content.Values[0];
+        var photo = result.Content!.Values[0];
         Assert.Equal("norge oslo sommer", photo.Tags);
     }
 
@@ -86,7 +86,7 @@ public class PhotoTests
         var result = FlickrConvert.DeserializeObject<FlickrResult<PagedPhotos>>(Encoding.UTF8.GetBytes(json));
 
         Assert.NotNull(result);
-        var photo = result.Content.Values[0];
+        var photo = result.Content!.Values[0];
         Assert.Null(photo.Tags);
     }
 
@@ -102,7 +102,7 @@ public class PhotoTests
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
-        var photo = result.Content.Values[0];
+        var photo = result.Content!.Values[0];
         Assert.Equal(48.858370, photo.Latitude);
         Assert.Equal(2.294485, photo.Longitude);
     }
@@ -120,7 +120,7 @@ public class PhotoTests
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
-        var photo = result.Content.Values[0];
+        var photo = result.Content!.Values[0];
         Assert.Equal(0d, photo.Latitude);
         Assert.Equal(0d, photo.Longitude);
     }
@@ -142,7 +142,7 @@ public class PhotoTests
 
             Assert.NotNull(result);
             Assert.False(result.HasError);
-            var photo = result.Content.Values[0];
+            var photo = result.Content!.Values[0];
             Assert.Equal(59.928958, photo.Latitude);
             Assert.Equal(10.704894, photo.Longitude);
         }
@@ -167,7 +167,7 @@ public class PhotoTests
 
             Assert.NotNull(result);
             Assert.False(result.HasError);
-            var photo = result.Content.Values[0];
+            var photo = result.Content!.Values[0];
             Assert.Equal(0d, photo.Latitude);
             Assert.Equal(0d, photo.Longitude);
         }
@@ -185,7 +185,7 @@ public class PhotoTests
         var result = FlickrConvert.DeserializeObject<FlickrResult<PagedPhotos>>(Encoding.UTF8.GetBytes(json));
 
         Assert.NotNull(result);
-        var photo = result.Content.Values[0];
+        var photo = result.Content!.Values[0];
         Assert.Null(photo.Latitude);
         Assert.Null(photo.Longitude);
     }
@@ -203,7 +203,7 @@ public class PhotoTests
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
-        var photo = result.Content.Values[0];
+        var photo = result.Content!.Values[0];
         Assert.Equal(new DateTime(2024, 8, 26, 0, 0, 0, DateTimeKind.Utc), photo.DateUploaded);
         Assert.Equal(new DateTime(2024, 8, 26, 14, 23, 11), photo.DateTaken);
     }
@@ -219,7 +219,7 @@ public class PhotoTests
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
-        var photo = result.Content.Values[0];
+        var photo = result.Content!.Values[0];
         Assert.Equal(default(DateTime), photo.DateUploaded);
     }
 
@@ -250,7 +250,7 @@ public class PhotoTests
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
-        var photo = result.Content.Values[0];
+        var photo = result.Content!.Values[0];
         Assert.Equal("5712", photo.OriginalWidth);
         Assert.Equal("4284", photo.OriginalHeight);
     }
@@ -265,7 +265,7 @@ public class PhotoTests
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
-        var photo = result.Content.Values[0];
+        var photo = result.Content!.Values[0];
         Assert.Equal("https://live.staticflickr.com/65535/55500000003_c3d4e5f6a7_s.jpg", photo.SquareUrl);
         Assert.Equal(75, photo.SquareWidth);
         Assert.Equal(75, photo.SquareHeight);
@@ -285,7 +285,7 @@ public class PhotoTests
         var result = FlickrConvert.DeserializeObject<FlickrResult<PagedPhotos>>(Encoding.UTF8.GetBytes(json));
 
         Assert.NotNull(result);
-        var photo = result.Content.Values[0];
+        var photo = result.Content!.Values[0];
         Assert.Equal(42, photo.CountFaves);
         Assert.Equal(7, photo.CountComments);
     }
@@ -298,7 +298,7 @@ public class PhotoTests
         var result = FlickrConvert.DeserializeObject<FlickrResult<PagedPhotos>>(Encoding.UTF8.GetBytes(json));
 
         Assert.NotNull(result);
-        var photo = result.Content.Values[0];
+        var photo = result.Content!.Values[0];
         Assert.Equal("video", photo.Media);
         Assert.Equal("ready", photo.MediaStatus);
         Assert.Equal("janedoe", photo.PathAlias);
@@ -315,7 +315,7 @@ public class PhotoTests
         var result = FlickrConvert.DeserializeObject<FlickrResult<PagedPhotos>>(Encoding.UTF8.GetBytes(json));
 
         Assert.NotNull(result);
-        var photo = result.Content.Values[0];
+        var photo = result.Content!.Values[0];
         Assert.True(photo.GeoIsFamily);
         Assert.True(photo.GeoIsFriend);
         Assert.False(photo.GeoIsContact);
@@ -330,7 +330,7 @@ public class PhotoTests
         var result = FlickrConvert.DeserializeObject<FlickrResult<PagedPhotos>>(Encoding.UTF8.GetBytes(json));
 
         Assert.NotNull(result);
-        var photo = result.Content.Values[0];
+        var photo = result.Content!.Values[0];
         Assert.Equal("jpg", photo.OriginalFormat);
         Assert.Equal("f6a7b8c9d0", photo.OriginalSecret);
         Assert.Equal("dc:author=flickr", photo.MachineTags);
@@ -347,7 +347,7 @@ public class PhotoTests
         var result = FlickrConvert.DeserializeObject<FlickrResult<PagedPhotos>>(Encoding.UTF8.GetBytes(json));
 
         Assert.NotNull(result);
-        var photo = result.Content.Values[0];
+        var photo = result.Content!.Values[0];
         Assert.Null(photo.CountFaves);
         Assert.Null(photo.CountComments);
         Assert.Null(photo.Media);
@@ -369,7 +369,7 @@ public class PhotoTests
         var result = FlickrConvert.DeserializeObject<FlickrResult<PagedPhotos>>(Encoding.UTF8.GetBytes(json));
 
         Assert.NotNull(result);
-        var photo = result.Content.Values[0];
+        var photo = result.Content!.Values[0];
         Assert.Null(photo.OriginalWidth);
         Assert.Null(photo.OriginalHeight);
         Assert.Null(photo.LargeUrl);

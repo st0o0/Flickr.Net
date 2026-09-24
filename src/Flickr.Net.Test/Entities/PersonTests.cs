@@ -116,7 +116,7 @@ public class PersonTests
         var result = FlickrConvert.DeserializeObject<FlickrResult<Person>>(Encoding.UTF8.GetBytes(json));
 
         Assert.NotNull(result);
-        var person = result.Content;
+        var person = result.Content!;
         Assert.Equal("janedoe", person.PathAlias);
         Assert.IsType<string>(person.PathAlias);
     }
@@ -157,7 +157,7 @@ public class PersonTests
         var result = FlickrConvert.DeserializeObject<FlickrResult<Person>>(Encoding.UTF8.GetBytes(json));
 
         Assert.NotNull(result);
-        var person = result.Content;
+        var person = result.Content!;
         Assert.True(person.Contact);
         Assert.True(person.Friend);
         Assert.False(person.Family);
@@ -196,7 +196,7 @@ public class PersonTests
         var result = FlickrConvert.DeserializeObject<FlickrResult<Person>>(Encoding.UTF8.GetBytes(json));
 
         Assert.NotNull(result);
-        var person = result.Content;
+        var person = result.Content!;
         Assert.Null(person.Contact);
         Assert.Null(person.Friend);
         Assert.Null(person.Family);

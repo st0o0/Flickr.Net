@@ -57,10 +57,10 @@ public class CameraTests
         Assert.IsType<Cameras>(items);
         Assert.IsType<Camera>(items.Values[0]);
         Assert.NotEmpty(items.Values[0].Name);
-        Assert.IsType<Details>(items.Values[0].Details);
-        Assert.NotEmpty(items.Values[0].Details.Zoom);
-        Assert.IsType<Image>(items.Values[0].Image);
-        Assert.NotEmpty(items.Values[0].Image.Large);
+        Assert.IsType<Details>(items.Values[0].Details!);
+        Assert.NotEmpty(items.Values[0].Details!.Zoom!);
+        Assert.IsType<Image>(items.Values[0].Image!);
+        Assert.NotEmpty(items.Values[0].Image!.Large!);
     }
 
     [Fact]

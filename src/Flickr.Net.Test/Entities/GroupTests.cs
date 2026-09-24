@@ -53,9 +53,9 @@ public class GroupTests
         Assert.Equal(69, items.Members);
         Assert.IsType<PoolPrivacy>(items.Privacy);
         Assert.Equal(PoolPrivacy.OpenPublic, items.Privacy);
-        Assert.IsType<ThrottleMode>(items.Throttle.Mode);
+        Assert.IsType<ThrottleMode>(items.Throttle!.Mode);
         Assert.Equal(ThrottleMode.PerMonth, items.Throttle.Mode);
-        Assert.True(items.Restrictions.PhotosOk);
+        Assert.True(items.Restrictions!.PhotosOk);
         Assert.True(items.Restrictions.VideosOk);
         Assert.True(items.Restrictions.ImagesOk);
         Assert.True(items.Restrictions.ScreensOk);
@@ -166,7 +166,7 @@ public class GroupTests
         Assert.NotNull(result);
         Assert.False(result.HasError);
         var group = result.Content;
-        Assert.Equal(500, group.PoolCount);
+        Assert.Equal(500, group!.PoolCount);
         Assert.Equal(25, group.TopicCount);
         Assert.Equal(100, group.Members);
     }

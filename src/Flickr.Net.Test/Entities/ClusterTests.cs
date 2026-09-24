@@ -2575,8 +2575,8 @@ public class ClusterTests
 
         Assert.All(items.Values, item =>
         {
-            Assert.NotEmpty(item.ThmData.Photos.Values);
-            Assert.All(item.ThmData.Photos.Values, value =>
+            Assert.NotEmpty(item.ThmData!.Photos!.Values);
+            Assert.All(item.ThmData.Photos!.Values, value =>
             {
                 Assert.True(value.IsPublic);
                 Assert.False(value.IsFriend);

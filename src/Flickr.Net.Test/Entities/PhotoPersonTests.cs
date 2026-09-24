@@ -416,6 +416,6 @@ public class PhotoPersonTests
         Assert.IsType<PhotoPersons>(items);
         Assert.NotEmpty(items.Values);
         Assert.IsType<PhotoPerson>(items.Values[0]);
-        Assert.Equal(10, result.Content.Values.Count);
+        Assert.Equal(10, result.Content!.Values.Count);
     }
 }

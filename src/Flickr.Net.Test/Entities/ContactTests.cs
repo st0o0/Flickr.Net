@@ -114,7 +114,7 @@ public class ContactTests
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
-        var contact = result.Content.Values[0];
+        var contact = result.Content!.Values[0];
         Assert.True(contact.Friend);
         Assert.True(contact.Family);
         Assert.True(contact.RevContact);

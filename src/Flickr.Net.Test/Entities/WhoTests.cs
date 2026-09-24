@@ -12238,7 +12238,7 @@ public class WhoTests
         Assert.False(result.HasError);
         var items = result.Content;
         Assert.IsType<Who>(items);
-        Assert.Equal(4070, items.Tags.Values.Count);
+        Assert.Equal(4070, items.Tags!.Values.Count);
     }
 
     [Fact]
@@ -13863,6 +13863,6 @@ public class WhoTests
         Assert.False(result.HasError);
         var items = result.Content;
         Assert.IsType<Who>(items);
-        Assert.Equal(400, items.Tags.Values.Count);
+        Assert.Equal(400, items.Tags!.Values.Count);
     }
 }

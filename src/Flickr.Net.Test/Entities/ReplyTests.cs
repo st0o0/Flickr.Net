@@ -136,8 +136,8 @@ public class ReplyTests
 
         Assert.NotNull(result);
         Assert.False(result.HasError);
-        var items = result.Content;
-        Assert.IsType<Topic>(items.Topic);
+        var items = result.Content!;
+        Assert.IsType<Topic>(items.Topic!);
         Assert.Equal(8, items.Topic.Total);
         Assert.False(items.Topic.IsSticky);
         Assert.False(items.Topic.IsLocked);

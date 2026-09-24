@@ -38,10 +38,10 @@ public class ViewsTests
         Assert.False(result.HasError);
         var items = result.Content;
         Assert.IsType<Views>(items);
-        Assert.Equal(469, items.Total.Views);
-        Assert.Equal(386, items.Photos.Views);
-        Assert.Equal(72, items.Photostream.Views);
-        Assert.Equal(11, items.Sets.Views);
-        Assert.Equal(0, items.Collections.Views);
+        Assert.Equal(469, items.Total!.Views);
+        Assert.Equal(386, items.Photos!.Views);
+        Assert.Equal(72, items.Photostream!.Views);
+        Assert.Equal(11, items.Sets!.Views);
+        Assert.Equal(0, items.Collections!.Views);
     }
 }

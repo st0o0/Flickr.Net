@@ -52,7 +52,7 @@ public class PhotoTagTests
         Assert.False(result.HasError);
         var items = result.Content;
         Assert.IsType<PhotoTags>(items);
-        Assert.NotEmpty(items.Tags.Values);
+        Assert.NotEmpty(items.Tags!.Values);
         Assert.Equal(3, items.Tags.Values.Count);
     }
 }

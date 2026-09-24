@@ -52,17 +52,17 @@ public class MethodTests
         Assert.False(result.HasError);
         var items = result.Content;
         Assert.IsType<MethodInfo>(items);
-        Assert.NotEmpty(items.Arguments);
-        Assert.NotEmpty(items.Errors);
+        Assert.NotEmpty(items.Arguments!);
+        Assert.NotEmpty(items.Errors!);
 
-        Assert.All(items.Arguments, argument =>
+        Assert.All(items.Arguments!, argument =>
         {
             Assert.IsType<string>(argument.Name);
             Assert.IsType<bool>(argument.Optional);
             Assert.IsType<string>(argument.Content);
         });
 
-        Assert.All(items.Errors, error =>
+        Assert.All(items.Errors!, error =>
         {
             Assert.IsType<int>(error.Code);
             Assert.IsType<string>(error.Message);
