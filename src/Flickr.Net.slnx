@@ -9,6 +9,7 @@
     <File Path="../README.md" />
     <File Path="global.json" />
   </Folder>
+  <Project Path="Flickr.Net.IntegrationTest/Flickr.Net.IntegrationTest.csproj" />
   <Project Path="Flickr.Net.Test/Flickr.Net.Test.csproj" />
   <Project Path="Flickr.Net/Flickr.Net.csproj" />
 </Solution>
