@@ -13,7 +13,7 @@ public class PrefsTests(WireMockFixture fixture) : IClassFixture<WireMockFixture
             """{"stat":"ok","person":{"nsid":"user1","content_type":"1"}}""");
 
         using var client = fixture.CreateAuthenticatedClient();
-        var result = await client.Prefs.GetContentTypeAsync();
+        var result = await client.Prefs.GetContentTypeAsync(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(ContentType.Photo, result);
     }
@@ -26,7 +26,7 @@ public class PrefsTests(WireMockFixture fixture) : IClassFixture<WireMockFixture
             """{"stat":"ok","geoperms":{"nsid":"user1","geoperms":"1","importgeoexif":"1"}}""");
 
         using var client = fixture.CreateAuthenticatedClient();
-        var result = await client.Prefs.GetGeoPermsAsync();
+        var result = await client.Prefs.GetGeoPermsAsync(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
     }
@@ -39,7 +39,7 @@ public class PrefsTests(WireMockFixture fixture) : IClassFixture<WireMockFixture
             """{"stat":"ok","person":{"nsid":"user1","hidden":"2"}}""");
 
         using var client = fixture.CreateAuthenticatedClient();
-        var result = await client.Prefs.GetHiddenAsync();
+        var result = await client.Prefs.GetHiddenAsync(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(HiddenFromSearch.Hidden, result);
     }
@@ -52,7 +52,7 @@ public class PrefsTests(WireMockFixture fixture) : IClassFixture<WireMockFixture
             """{"stat":"ok","person":{"nsid":"user1","privacy":"1"}}""");
 
         using var client = fixture.CreateAuthenticatedClient();
-        var result = await client.Prefs.GetPrivacyAsync();
+        var result = await client.Prefs.GetPrivacyAsync(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(PrivacyFilter.PublicPhotos, result);
     }
@@ -65,7 +65,7 @@ public class PrefsTests(WireMockFixture fixture) : IClassFixture<WireMockFixture
             """{"stat":"ok","unknownresponse":{"nsid":"user1","safety_level":"1"}}""");
 
         using var client = fixture.CreateAuthenticatedClient();
-        var result = await client.Prefs.GetSafetyLevelAsync();
+        var result = await client.Prefs.GetSafetyLevelAsync(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(SafetyLevel.Safe, result);
     }

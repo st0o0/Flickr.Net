@@ -12,7 +12,7 @@ public class PhotosNotesTests(WireMockFixture fixture) : IClassFixture<WireMockF
             """{"stat":"ok","note":{"id":"note-123"}}""");
 
         using var client = fixture.CreateClient();
-        var result = await client.PhotosNotes.AddAsync("photo1", 10, 20, 100, 50, "test note");
+        var result = await client.PhotosNotes.AddAsync("photo1", 10, 20, 100, 50, "test note", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal("note-123", result);
     }
@@ -25,7 +25,7 @@ public class PhotosNotesTests(WireMockFixture fixture) : IClassFixture<WireMockF
             """{"stat":"ok"}""");
 
         using var client = fixture.CreateClient();
-        await client.PhotosNotes.DeleteAsync("note-123");
+        await client.PhotosNotes.DeleteAsync("note-123", cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -36,6 +36,6 @@ public class PhotosNotesTests(WireMockFixture fixture) : IClassFixture<WireMockF
             """{"stat":"ok"}""");
 
         using var client = fixture.CreateClient();
-        await client.PhotosNotes.EditAsync("note-123", 10, 20, 100, 50, "updated note");
+        await client.PhotosNotes.EditAsync("note-123", 10, 20, 100, 50, "updated note", cancellationToken: TestContext.Current.CancellationToken);
     }
 }

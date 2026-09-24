@@ -15,10 +15,10 @@ public class PhotosTests(WireMockFixture fixture) : IClassFixture<WireMockFixtur
 
         using var client = fixture.CreateClient();
         var options = new PhotoSearchOptions { Text = "test" };
-        var result = await client.Photos.SearchAsync(options);
+        var result = await client.Photos.SearchAsync(options, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
-        Assert.Equal(1, result.Values.Count);
+        Assert.Single(result.Values);
     }
 
     [Fact]
@@ -30,7 +30,7 @@ public class PhotosTests(WireMockFixture fixture) : IClassFixture<WireMockFixtur
             """);
 
         using var client = fixture.CreateClient();
-        var result = await client.Photos.GetInfoAsync("p1");
+        var result = await client.Photos.GetInfoAsync("p1", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
     }
@@ -44,10 +44,10 @@ public class PhotosTests(WireMockFixture fixture) : IClassFixture<WireMockFixtur
             """);
 
         using var client = fixture.CreateClient();
-        var result = await client.Photos.GetSizesAsync("p1");
+        var result = await client.Photos.GetSizesAsync("p1", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
-        Assert.Equal(1, result.Values.Count);
+        Assert.Single(result.Values);
     }
 
     [Fact]
@@ -57,7 +57,7 @@ public class PhotosTests(WireMockFixture fixture) : IClassFixture<WireMockFixtur
         fixture.StubFlickrMethod("flickr.photos.delete", """{"stat":"ok"}""");
 
         using var client = fixture.CreateClient();
-        await client.Photos.DeleteAsync("p1");
+        await client.Photos.DeleteAsync("p1", cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -67,7 +67,7 @@ public class PhotosTests(WireMockFixture fixture) : IClassFixture<WireMockFixtur
         fixture.StubFlickrMethod("flickr.photos.addTags", """{"stat":"ok"}""");
 
         using var client = fixture.CreateClient();
-        await client.Photos.AddTagAsync("p1", ["landscape", "sunset"]);
+        await client.Photos.AddTagAsync("p1", ["landscape", "sunset"], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -77,7 +77,7 @@ public class PhotosTests(WireMockFixture fixture) : IClassFixture<WireMockFixtur
         fixture.StubFlickrMethod("flickr.photos.setMeta", """{"stat":"ok"}""");
 
         using var client = fixture.CreateClient();
-        await client.Photos.SetMetaAsync("p1", "New Title", "New Description");
+        await client.Photos.SetMetaAsync("p1", "New Title", "New Description", cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -89,7 +89,7 @@ public class PhotosTests(WireMockFixture fixture) : IClassFixture<WireMockFixtur
             """);
 
         using var client = fixture.CreateClient();
-        var result = await client.Photos.GetExifAsync("p1");
+        var result = await client.Photos.GetExifAsync("p1", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
     }

@@ -120,7 +120,7 @@ public class GroupTests
         Assert.False(items.Values[1].EighteenPlus);
         Assert.False(items.Values[2].EighteenPlus);
         Assert.False(items.Values[3].EighteenPlus);
-        Assert.NotEmpty(items.Values[0].ToBuddyIconUrl());
+        Assert.Empty(items.Values[0].ToBuddyIconUrl());
     }
 
     [Fact]

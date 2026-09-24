@@ -12,7 +12,7 @@ public class UrlsTests(WireMockFixture fixture) : IClassFixture<WireMockFixture>
             """{"stat":"ok","group":{"nsid":"group1","url":"https://www.flickr.com/groups/test/"}}""");
 
         using var client = fixture.CreateClient();
-        var result = await client.Urls.GetGroupAsync("group1");
+        var result = await client.Urls.GetGroupAsync("group1", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
         Assert.Contains("flickr.com", result);
@@ -26,7 +26,7 @@ public class UrlsTests(WireMockFixture fixture) : IClassFixture<WireMockFixture>
             """{"stat":"ok","unknownresponse":{"nsid":"user1","url":"https://www.flickr.com/photos/test/"}}""");
 
         using var client = fixture.CreateClient();
-        var result = await client.Urls.GetUserPhotosAsync("user1");
+        var result = await client.Urls.GetUserPhotosAsync("user1", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
         Assert.Contains("flickr.com", result);
@@ -40,7 +40,7 @@ public class UrlsTests(WireMockFixture fixture) : IClassFixture<WireMockFixture>
             """{"stat":"ok","unknownresponse":{"nsid":"user1","url":"https://www.flickr.com/people/test/"}}""");
 
         using var client = fixture.CreateClient();
-        var result = await client.Urls.GetUserProfileAsync("user1");
+        var result = await client.Urls.GetUserProfileAsync("user1", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
         Assert.Contains("flickr.com", result);
@@ -54,7 +54,7 @@ public class UrlsTests(WireMockFixture fixture) : IClassFixture<WireMockFixture>
             """{"stat":"ok","group":{"id":"group1","groupname":"Test Group"}}""");
 
         using var client = fixture.CreateClient();
-        var result = await client.Urls.LookupGroupAsync("https://www.flickr.com/groups/test/");
+        var result = await client.Urls.LookupGroupAsync("https://www.flickr.com/groups/test/", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
         Assert.Equal("group1", result);
@@ -68,7 +68,7 @@ public class UrlsTests(WireMockFixture fixture) : IClassFixture<WireMockFixture>
             """{"stat":"ok","user":{"id":"user1","username":"testuser"}}""");
 
         using var client = fixture.CreateClient();
-        var result = await client.Urls.LookupUserAsync("https://www.flickr.com/photos/test/");
+        var result = await client.Urls.LookupUserAsync("https://www.flickr.com/photos/test/", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
         Assert.Equal("user1", result);

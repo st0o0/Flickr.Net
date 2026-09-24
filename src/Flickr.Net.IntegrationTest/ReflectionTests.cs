@@ -23,7 +23,7 @@ public class ReflectionTests(WireMockFixture fixture) : IClassFixture<WireMockFi
             """);
 
         using var client = _fixture.CreateClient();
-        var result = await client.Reflection.GetMethodsAsync();
+        var result = await client.Reflection.GetMethodsAsync(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
         Assert.Equal(2, result.Values.Count);
@@ -44,13 +44,13 @@ public class ReflectionTests(WireMockFixture fixture) : IClassFixture<WireMockFi
             """);
 
         using var client = _fixture.CreateClient();
-        var result = await client.Reflection.GetMethodInfoAsync("flickr.test.echo");
+        var result = await client.Reflection.GetMethodInfoAsync("flickr.test.echo", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
         Assert.Equal("flickr.test.echo", result.Content);
 
         var logEntry = Assert.Single(_fixture.LogEntries);
-        var body = logEntry.RequestMessage.Body;
+        var body = logEntry.RequestMessage!.Body!;
         Assert.Contains("method_name=flickr.test.echo", body);
     }
 }

@@ -31,7 +31,7 @@ public class CommonsTests(WireMockFixture fixture) : IClassFixture<WireMockFixtu
             """);
 
         using var client = _fixture.CreateClient();
-        var result = await client.Commons.GetInstitutionsAsync();
+        var result = await client.Commons.GetInstitutionsAsync(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
         Assert.Single(result.Values);

@@ -13,7 +13,7 @@ public class StatsTests(WireMockFixture fixture) : IClassFixture<WireMockFixture
             """);
 
         using var client = fixture.CreateAuthenticatedClient();
-        var result = await client.Stats.GetPhotoStatsAsync(DateTime.UtcNow, "p1");
+        var result = await client.Stats.GetPhotoStatsAsync(DateTime.UtcNow, "p1", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
     }
@@ -27,7 +27,7 @@ public class StatsTests(WireMockFixture fixture) : IClassFixture<WireMockFixture
             """);
 
         using var client = fixture.CreateAuthenticatedClient();
-        var result = await client.Stats.GetTotalViewsAsync(DateTime.UtcNow);
+        var result = await client.Stats.GetTotalViewsAsync(DateTime.UtcNow, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
     }
@@ -41,7 +41,7 @@ public class StatsTests(WireMockFixture fixture) : IClassFixture<WireMockFixture
             """);
 
         using var client = fixture.CreateAuthenticatedClient();
-        var result = await client.Stats.GetCsvFilesAsync();
+        var result = await client.Stats.GetCsvFilesAsync(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
     }

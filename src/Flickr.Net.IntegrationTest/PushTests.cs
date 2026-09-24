@@ -12,7 +12,7 @@ public class PushTests(WireMockFixture fixture) : IClassFixture<WireMockFixture>
             """{"stat":"ok","subscriptions":{"subscription":[{"topic":"my_photos","callback":"http://example.com","pending":"0"}]}}""");
 
         using var client = fixture.CreateAuthenticatedClient();
-        var result = await client.Push.GetSubscriptionsAsync();
+        var result = await client.Push.GetSubscriptionsAsync(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
         Assert.Single(result.Values);
@@ -27,7 +27,7 @@ public class PushTests(WireMockFixture fixture) : IClassFixture<WireMockFixture>
             """{"stat":"ok","topics":{"topic":[{"name":"my_photos"}]}}""");
 
         using var client = fixture.CreateClient();
-        var result = await client.Push.GetTopicsAsync();
+        var result = await client.Push.GetTopicsAsync(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
         Assert.Single(result.Values);
@@ -42,6 +42,6 @@ public class PushTests(WireMockFixture fixture) : IClassFixture<WireMockFixture>
             """{"stat":"ok"}""");
 
         using var client = fixture.CreateAuthenticatedClient();
-        await client.Push.UnsubscribeAsync("my_photos", "http://example.com", "sync");
+        await client.Push.UnsubscribeAsync("my_photos", "http://example.com", "sync", cancellationToken: TestContext.Current.CancellationToken);
     }
 }

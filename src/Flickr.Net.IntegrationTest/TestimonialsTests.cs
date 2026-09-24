@@ -11,7 +11,7 @@ public class TestimonialsTests(WireMockFixture fixture) : IClassFixture<WireMock
         fixture.StubFlickrMethod("flickr.testimonials.addTestimonial", """{"stat":"ok"}""");
 
         using var client = fixture.CreateAuthenticatedClient();
-        await client.Testimonials.AddTestimonialAsync("user1", "Great photographer!");
+        await client.Testimonials.AddTestimonialAsync("user1", "Great photographer!", cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -23,10 +23,10 @@ public class TestimonialsTests(WireMockFixture fixture) : IClassFixture<WireMock
             """);
 
         using var client = fixture.CreateClient();
-        var result = await client.Testimonials.GetAllTestimonialsAboutAsync("user1");
+        var result = await client.Testimonials.GetAllTestimonialsAboutAsync("user1", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
-        Assert.Equal(1, result.Values.Count);
+        Assert.Single(result.Values);
     }
 
     [Fact]
@@ -36,6 +36,6 @@ public class TestimonialsTests(WireMockFixture fixture) : IClassFixture<WireMock
         fixture.StubFlickrMethod("flickr.testimonials.approveTestimonial", """{"stat":"ok"}""");
 
         using var client = fixture.CreateAuthenticatedClient();
-        await client.Testimonials.ApproveTestimonialAsync("t1");
+        await client.Testimonials.ApproveTestimonialAsync("t1", cancellationToken: TestContext.Current.CancellationToken);
     }
 }

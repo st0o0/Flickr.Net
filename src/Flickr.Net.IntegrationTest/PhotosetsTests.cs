@@ -13,7 +13,7 @@ public class PhotosetsTests(WireMockFixture fixture) : IClassFixture<WireMockFix
             """);
 
         using var client = fixture.CreateClient();
-        var result = await client.Photosets.GetInfoAsync("set1");
+        var result = await client.Photosets.GetInfoAsync("set1", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
     }
@@ -27,10 +27,10 @@ public class PhotosetsTests(WireMockFixture fixture) : IClassFixture<WireMockFix
             """);
 
         using var client = fixture.CreateClient();
-        var result = await client.Photosets.GetListAsync("user1");
+        var result = await client.Photosets.GetListAsync("user1", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
-        Assert.Equal(1, result.Values.Count);
+        Assert.Single(result.Values);
     }
 
     [Fact]
@@ -40,7 +40,7 @@ public class PhotosetsTests(WireMockFixture fixture) : IClassFixture<WireMockFix
         fixture.StubFlickrMethod("flickr.photosets.addPhoto", """{"stat":"ok"}""");
 
         using var client = fixture.CreateAuthenticatedClient();
-        await client.Photosets.AddPhotoAsync("set1", "p1");
+        await client.Photosets.AddPhotoAsync("set1", "p1", cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -50,7 +50,7 @@ public class PhotosetsTests(WireMockFixture fixture) : IClassFixture<WireMockFix
         fixture.StubFlickrMethod("flickr.photosets.removePhoto", """{"stat":"ok"}""");
 
         using var client = fixture.CreateClient();
-        await client.Photosets.RemovePhotoAsync("set1", "p1");
+        await client.Photosets.RemovePhotoAsync("set1", "p1", cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -62,9 +62,9 @@ public class PhotosetsTests(WireMockFixture fixture) : IClassFixture<WireMockFix
             """);
 
         using var client = fixture.CreateClient();
-        var result = await client.Photosets.GetPhotosAsync("set1");
+        var result = await client.Photosets.GetPhotosAsync("set1", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
-        Assert.Equal(1, result.Values.Count);
+        Assert.Single(result.Values);
     }
 }

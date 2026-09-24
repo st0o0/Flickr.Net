@@ -23,7 +23,7 @@ public class CamerasTests(WireMockFixture fixture) : IClassFixture<WireMockFixtu
             """);
 
         using var client = _fixture.CreateClient();
-        var result = await client.Cameras.GetBrandsAsync();
+        var result = await client.Cameras.GetBrandsAsync(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
         Assert.Equal(2, result.Values.Count);
@@ -53,7 +53,7 @@ public class CamerasTests(WireMockFixture fixture) : IClassFixture<WireMockFixtu
             """);
 
         using var client = _fixture.CreateClient();
-        var result = await client.Cameras.GetBrandModelsAsync("canon");
+        var result = await client.Cameras.GetBrandModelsAsync("canon", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
         Assert.Equal("canon", result.Brand);
@@ -61,7 +61,7 @@ public class CamerasTests(WireMockFixture fixture) : IClassFixture<WireMockFixtu
         Assert.Equal("EOS 5D", result.Values[0].Name);
 
         var logEntry = Assert.Single(_fixture.LogEntries);
-        var body = logEntry.RequestMessage.Body;
+        var body = logEntry.RequestMessage!.Body!;
         Assert.Contains("brand=canon", body);
     }
 }

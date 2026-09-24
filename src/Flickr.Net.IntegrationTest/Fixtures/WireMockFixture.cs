@@ -1,6 +1,5 @@
 using System.Net;
 using Flickr.Net.Configuration;
-using Flickr.Net.Internals;
 using WireMock.RequestBuilders;
 using WireMock.ResponseBuilders;
 using WireMock.Server;
@@ -31,7 +30,7 @@ public sealed class WireMockFixture : IAsyncLifetime
         var config = new FlickrConfiguration
         {
             ApiKey = apiKey,
-            SharedSecret = sharedSecret
+            SharedSecret = sharedSecret!
         };
 
         return new FlickrClient(config)

@@ -19,7 +19,7 @@ public class GroupsTests : IClassFixture<WireMockFixture>
             """{"stat":"ok","group":{"id":"group1","name":"Test Group","members":"100"}}""");
 
         using var client = _fixture.CreateClient();
-        var result = await client.Groups.GetInfoAsync("group1");
+        var result = await client.Groups.GetInfoAsync("group1", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
     }
@@ -31,7 +31,7 @@ public class GroupsTests : IClassFixture<WireMockFixture>
             """{"stat":"ok","groups":{"page":1,"pages":1,"perpage":10,"total":1,"group":[{"nsid":"group1","name":"Test Group"}]}}""");
 
         using var client = _fixture.CreateClient();
-        var result = await client.Groups.SearchAsync("test");
+        var result = await client.Groups.SearchAsync("test", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
         Assert.Single(result.Values);
@@ -43,7 +43,7 @@ public class GroupsTests : IClassFixture<WireMockFixture>
         _fixture.StubFlickrMethod("flickr.groups.join", """{"stat":"ok"}""");
 
         using var client = _fixture.CreateAuthenticatedClient();
-        await client.Groups.JoinAsync("group1");
+        await client.Groups.JoinAsync("group1", cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -52,6 +52,6 @@ public class GroupsTests : IClassFixture<WireMockFixture>
         _fixture.StubFlickrMethod("flickr.groups.leave", """{"stat":"ok"}""");
 
         using var client = _fixture.CreateAuthenticatedClient();
-        await client.Groups.LeaveAsync("group1");
+        await client.Groups.LeaveAsync("group1", cancellationToken: TestContext.Current.CancellationToken);
     }
 }

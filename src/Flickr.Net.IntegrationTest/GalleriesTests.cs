@@ -13,7 +13,7 @@ public class GalleriesTests(WireMockFixture fixture) : IClassFixture<WireMockFix
             """);
 
         using var client = fixture.CreateClient();
-        var result = await client.Galleries.GetInfoAsync("gallery1");
+        var result = await client.Galleries.GetInfoAsync("gallery1", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
     }
@@ -27,10 +27,10 @@ public class GalleriesTests(WireMockFixture fixture) : IClassFixture<WireMockFix
             """);
 
         using var client = fixture.CreateClient();
-        var result = await client.Galleries.GetListAsync("user1");
+        var result = await client.Galleries.GetListAsync("user1", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
-        Assert.Equal(1, result.Values.Count);
+        Assert.Single(result.Values);
     }
 
     [Fact]
@@ -40,7 +40,7 @@ public class GalleriesTests(WireMockFixture fixture) : IClassFixture<WireMockFix
         fixture.StubFlickrMethod("flickr.galleries.addPhoto", """{"stat":"ok"}""");
 
         using var client = fixture.CreateClient();
-        await client.Galleries.AddPhotoAsync("gallery1", "p1", "Nice photo!");
+        await client.Galleries.AddPhotoAsync("gallery1", "p1", "Nice photo!", cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -52,9 +52,9 @@ public class GalleriesTests(WireMockFixture fixture) : IClassFixture<WireMockFix
             """);
 
         using var client = fixture.CreateClient();
-        var result = await client.Galleries.GetPhotosAsync("gallery1");
+        var result = await client.Galleries.GetPhotosAsync("gallery1", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
-        Assert.Equal(1, result.Values.Count);
+        Assert.Single(result.Values);
     }
 }

@@ -13,7 +13,7 @@ public class TagsTests(WireMockFixture fixture) : IClassFixture<WireMockFixture>
             """);
 
         using var client = fixture.CreateClient();
-        var result = await client.Tags.GetClustersAsync("cat");
+        var result = await client.Tags.GetClustersAsync("cat", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
     }
@@ -27,7 +27,7 @@ public class TagsTests(WireMockFixture fixture) : IClassFixture<WireMockFixture>
             """);
 
         using var client = fixture.CreateClient();
-        var result = await client.Tags.GetHotListAsync();
+        var result = await client.Tags.GetHotListAsync(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
     }
@@ -41,7 +41,7 @@ public class TagsTests(WireMockFixture fixture) : IClassFixture<WireMockFixture>
             """);
 
         using var client = fixture.CreateClient();
-        var result = await client.Tags.GetRelatedAsync("cat");
+        var result = await client.Tags.GetRelatedAsync("cat", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
         Assert.Equal(2, result.Values.Count);
@@ -56,7 +56,7 @@ public class TagsTests(WireMockFixture fixture) : IClassFixture<WireMockFixture>
             """);
 
         using var client = fixture.CreateAuthenticatedClient();
-        var result = await client.Tags.GetListUserRawAsync();
+        var result = await client.Tags.GetListUserRawAsync(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
     }

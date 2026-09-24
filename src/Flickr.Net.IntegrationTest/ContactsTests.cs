@@ -1,4 +1,3 @@
-using Flickr.Net.Enums;
 using Flickr.Net.IntegrationTest.Fixtures;
 
 namespace Flickr.Net.IntegrationTest;
@@ -22,7 +21,7 @@ public class ContactsTests : IClassFixture<WireMockFixture>
         _fixture.StubFlickrMethod("flickr.contacts.getList", ContactsJson);
 
         using var client = _fixture.CreateAuthenticatedClient();
-        var result = await client.Contacts.GetListAsync();
+        var result = await client.Contacts.GetListAsync(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
         Assert.Single(result.Values);
@@ -35,7 +34,7 @@ public class ContactsTests : IClassFixture<WireMockFixture>
         _fixture.StubFlickrMethod("flickr.contacts.getPublicList", ContactsJson);
 
         using var client = _fixture.CreateClient();
-        var result = await client.Contacts.GetPublicListAsync("user1");
+        var result = await client.Contacts.GetPublicListAsync("user1", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
         Assert.Single(result.Values);
@@ -47,7 +46,7 @@ public class ContactsTests : IClassFixture<WireMockFixture>
         _fixture.StubFlickrMethod("flickr.contacts.getListRecentlyUploaded", ContactsJson);
 
         using var client = _fixture.CreateAuthenticatedClient();
-        var result = await client.Contacts.GetListRecentlyUploadedAsync();
+        var result = await client.Contacts.GetListRecentlyUploadedAsync(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
         Assert.Single(result.Values);
@@ -59,7 +58,7 @@ public class ContactsTests : IClassFixture<WireMockFixture>
         _fixture.StubFlickrMethod("flickr.contacts.getTaggingSuggestions", ContactsJson);
 
         using var client = _fixture.CreateAuthenticatedClient();
-        var result = await client.Contacts.GetTaggingSuggestionsAsync();
+        var result = await client.Contacts.GetTaggingSuggestionsAsync(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
         Assert.Single(result.Values);

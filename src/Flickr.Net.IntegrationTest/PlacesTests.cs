@@ -13,10 +13,10 @@ public class PlacesTests(WireMockFixture fixture) : IClassFixture<WireMockFixtur
             """);
 
         using var client = fixture.CreateClient();
-        var result = await client.Places.FindAsync("London");
+        var result = await client.Places.FindAsync("London", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
-        Assert.Equal(1, result.Values.Count);
+        Assert.Single(result.Values);
     }
 
     [Fact]
@@ -28,7 +28,7 @@ public class PlacesTests(WireMockFixture fixture) : IClassFixture<WireMockFixtur
             """);
 
         using var client = fixture.CreateClient();
-        var result = await client.Places.FindByLatLonAsync(51.5074, -0.1278);
+        var result = await client.Places.FindByLatLonAsync(51.5074, -0.1278, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
     }
@@ -42,7 +42,7 @@ public class PlacesTests(WireMockFixture fixture) : IClassFixture<WireMockFixtur
             """);
 
         using var client = fixture.CreateClient();
-        var result = await client.Places.GetInfoAsync("abc");
+        var result = await client.Places.GetInfoAsync("abc", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
     }

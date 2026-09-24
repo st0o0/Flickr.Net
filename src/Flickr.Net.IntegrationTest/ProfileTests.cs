@@ -25,14 +25,14 @@ public class ProfileTests(WireMockFixture fixture) : IClassFixture<WireMockFixtu
             """);
 
         using var client = _fixture.CreateClient();
-        var result = await client.Profile.GetProfileAsync("12345@N00");
+        var result = await client.Profile.GetProfileAsync("12345@N00", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
         Assert.Equal("12345@N00", result.Id);
         Assert.Equal("Developer", result.Occupation);
 
         var logEntry = Assert.Single(_fixture.LogEntries);
-        var body = logEntry.RequestMessage.Body;
+        var body = logEntry.RequestMessage!.Body!;
         Assert.Contains("user_id=12345%40N00", body);
     }
 }

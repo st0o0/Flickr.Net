@@ -21,7 +21,7 @@ public class TestTests(WireMockFixture fixture) : IClassFixture<WireMockFixture>
             """);
 
         using var client = _fixture.CreateClient();
-        var result = await client.Test.LoginAsync();
+        var result = await client.Test.LoginAsync(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
         Assert.Equal("12345@N00", result.Id);
@@ -35,7 +35,7 @@ public class TestTests(WireMockFixture fixture) : IClassFixture<WireMockFixture>
         _fixture.StubFlickrMethod("flickr.test.null", """{"stat":"ok"}""");
 
         using var client = _fixture.CreateClient();
-        await client.Test.NullAsync();
+        await client.Test.NullAsync(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Single(_fixture.LogEntries);
     }
@@ -56,12 +56,12 @@ public class TestTests(WireMockFixture fixture) : IClassFixture<WireMockFixture>
 
         using var client = _fixture.CreateClient();
         var parameters = new Dictionary<string, string> { { "foo", "bar" } };
-        var result = await client.Test.EchoAsync(parameters);
+        var result = await client.Test.EchoAsync(parameters, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
 
         var logEntry = Assert.Single(_fixture.LogEntries);
-        var body = logEntry.RequestMessage.Body;
+        var body = logEntry.RequestMessage!.Body!;
         Assert.Contains("foo=bar", body);
     }
 }

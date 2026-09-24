@@ -18,12 +18,12 @@ public class UploadTests(WireMockFixture fixture) : IClassFixture<WireMockFixtur
         using var client = fixture.CreateAuthenticatedClient();
         using var stream = new MemoryStream(new byte[] { 0xFF, 0xD8, 0xFF, 0xE0 });
 
-        var photoId = await client.Upload.UploadPictureAsync(stream, "test.jpg", "Test Photo");
+        var photoId = await client.Upload.UploadPictureAsync(stream, "test.jpg", "Test Photo", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal("12345", photoId);
 
         var logEntry = Assert.Single(fixture.LogEntries);
-        Assert.Contains("/services/upload/", logEntry.RequestMessage.Url);
+        Assert.Contains("/services/upload/", logEntry.RequestMessage!.Url!);
     }
 
     [Fact]
@@ -40,11 +40,11 @@ public class UploadTests(WireMockFixture fixture) : IClassFixture<WireMockFixtur
         using var client = fixture.CreateAuthenticatedClient();
         using var stream = new MemoryStream(new byte[] { 0xFF, 0xD8, 0xFF, 0xE0 });
 
-        var photoId = await client.Upload.ReplacePictureAsync(stream, "test.jpg", "12345");
+        var photoId = await client.Upload.ReplacePictureAsync(stream, "test.jpg", "12345", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal("12345", photoId);
 
         var logEntry = Assert.Single(fixture.LogEntries);
-        Assert.Contains("/services/replace/", logEntry.RequestMessage.Url);
+        Assert.Contains("/services/replace/", logEntry.RequestMessage!.Url!);
     }
 }

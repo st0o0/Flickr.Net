@@ -13,7 +13,7 @@ public class PeopleTests(WireMockFixture fixture) : IClassFixture<WireMockFixtur
             """);
 
         using var client = fixture.CreateClient();
-        var result = await client.People.FindByEmailAsync("test@example.com");
+        var result = await client.People.FindByEmailAsync("test@example.com", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
     }
@@ -27,7 +27,7 @@ public class PeopleTests(WireMockFixture fixture) : IClassFixture<WireMockFixtur
             """);
 
         using var client = fixture.CreateClient();
-        var result = await client.People.GetInfoAsync("user1");
+        var result = await client.People.GetInfoAsync("user1", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
     }
@@ -41,10 +41,10 @@ public class PeopleTests(WireMockFixture fixture) : IClassFixture<WireMockFixtur
             """);
 
         using var client = fixture.CreateClient();
-        var result = await client.People.GetPublicPhotosAsync("user1");
+        var result = await client.People.GetPublicPhotosAsync("user1", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
-        Assert.Equal(1, result.Values.Count);
+        Assert.Single(result.Values);
     }
 
     [Fact]
@@ -56,9 +56,9 @@ public class PeopleTests(WireMockFixture fixture) : IClassFixture<WireMockFixtur
             """);
 
         using var client = fixture.CreateClient();
-        var result = await client.People.GetPhotosOfAsync("user1");
+        var result = await client.People.GetPhotosOfAsync("user1", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
-        Assert.Equal(1, result.Values.Count);
+        Assert.Single(result.Values);
     }
 }

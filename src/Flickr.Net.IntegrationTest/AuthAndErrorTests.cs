@@ -14,7 +14,7 @@ public class AuthAndErrorTests(WireMockFixture fixture) : IClassFixture<WireMock
         using var client = fixture.CreateClient();
 
         var ex = await Assert.ThrowsAsync<FlickrApiException>(
-            () => client.Cameras.GetBrandsAsync());
+            () => client.Cameras.GetBrandsAsync(cancellationToken: TestContext.Current.CancellationToken));
 
         Assert.Equal(114, ex.Code);
         Assert.Contains("Bad request", ex.OriginalMessage);
@@ -28,7 +28,7 @@ public class AuthAndErrorTests(WireMockFixture fixture) : IClassFixture<WireMock
         using var client = fixture.CreateClient(apiKey: "");
 
         await Assert.ThrowsAsync<ApiKeyRequiredException>(
-            () => client.Cameras.GetBrandsAsync());
+            () => client.Cameras.GetBrandsAsync(cancellationToken: TestContext.Current.CancellationToken));
     }
 
     [Fact]
@@ -39,7 +39,7 @@ public class AuthAndErrorTests(WireMockFixture fixture) : IClassFixture<WireMock
         using var client = fixture.CreateClient("test-key", "test-secret");
 
         await Assert.ThrowsAsync<AuthenticationRequiredException>(
-            () => client.Activity.UserCommentsAsync());
+            () => client.Activity.UserCommentsAsync(cancellationToken: TestContext.Current.CancellationToken));
     }
 
     [Fact]
@@ -51,6 +51,6 @@ public class AuthAndErrorTests(WireMockFixture fixture) : IClassFixture<WireMock
         using var client = fixture.CreateClient();
 
         await Assert.ThrowsAsync<HttpRequestException>(
-            () => client.Cameras.GetBrandsAsync());
+            () => client.Cameras.GetBrandsAsync(cancellationToken: TestContext.Current.CancellationToken));
     }
 }

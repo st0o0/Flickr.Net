@@ -12,7 +12,7 @@ public class PhotosetsCommentsTests(WireMockFixture fixture) : IClassFixture<Wir
             """{"stat":"ok","comment":{"id":"comment-456"}}""");
 
         using var client = fixture.CreateClient();
-        var result = await client.PhotosetsComments.AddCommentAsync("set1", "nice set");
+        var result = await client.PhotosetsComments.AddCommentAsync("set1", "nice set", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal("comment-456", result);
     }
@@ -25,7 +25,7 @@ public class PhotosetsCommentsTests(WireMockFixture fixture) : IClassFixture<Wir
             """{"stat":"ok"}""");
 
         using var client = fixture.CreateClient();
-        await client.PhotosetsComments.DeleteCommentAsync("comment-456");
+        await client.PhotosetsComments.DeleteCommentAsync("comment-456", cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -36,7 +36,7 @@ public class PhotosetsCommentsTests(WireMockFixture fixture) : IClassFixture<Wir
             """{"stat":"ok"}""");
 
         using var client = fixture.CreateClient();
-        await client.PhotosetsComments.EditCommentAsync("comment-456", "updated text");
+        await client.PhotosetsComments.EditCommentAsync("comment-456", "updated text", cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -47,7 +47,7 @@ public class PhotosetsCommentsTests(WireMockFixture fixture) : IClassFixture<Wir
             """{"stat":"ok","comments":{"photoset_id":"set1","comment":[{"id":"c1","_content":"nice set"}]}}""");
 
         using var client = fixture.CreateClient();
-        var result = await client.PhotosetsComments.GetListAsync("set1");
+        var result = await client.PhotosetsComments.GetListAsync("set1", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
         Assert.Single(result.Values);

@@ -18,7 +18,7 @@ public class GroupsDiscussTopicsTests : IClassFixture<WireMockFixture>
         _fixture.StubFlickrMethod("flickr.groups.discuss.topics.add", """{"stat":"ok"}""");
 
         using var client = _fixture.CreateAuthenticatedClient();
-        await client.GroupsDiscussTopics.TopicsAddAsync("group1", "Subject", "Message");
+        await client.GroupsDiscussTopics.TopicsAddAsync("group1", "Subject", "Message", cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -28,7 +28,7 @@ public class GroupsDiscussTopicsTests : IClassFixture<WireMockFixture>
             """{"stat":"ok","topics":{"page":1,"pages":1,"perpage":10,"total":1,"topic":[{"id":"t1","subject":"Test Topic"}]}}""");
 
         using var client = _fixture.CreateClient();
-        var result = await client.GroupsDiscussTopics.TopicsGetListAsync("group1");
+        var result = await client.GroupsDiscussTopics.TopicsGetListAsync("group1", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
         Assert.Single(result.Values);
@@ -41,7 +41,7 @@ public class GroupsDiscussTopicsTests : IClassFixture<WireMockFixture>
             """{"stat":"ok","topic":{"id":"t1","subject":"Test Topic"}}""");
 
         using var client = _fixture.CreateClient();
-        var result = await client.GroupsDiscussTopics.TopicsGetInfoAsync("t1");
+        var result = await client.GroupsDiscussTopics.TopicsGetInfoAsync("t1", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
     }

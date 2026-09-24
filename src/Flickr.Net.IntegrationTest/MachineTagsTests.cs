@@ -12,7 +12,7 @@ public class MachineTagsTests(WireMockFixture fixture) : IClassFixture<WireMockF
             """{"stat":"ok","namespaces":{"page":1,"pages":1,"perpage":10,"total":1,"namespace":[{"_content":"dc","predicates":"5","usage":"100"}]}}""");
 
         using var client = fixture.CreateClient();
-        var result = await client.MachineTags.GetNamespacesAsync();
+        var result = await client.MachineTags.GetNamespacesAsync(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
         Assert.Single(result.Values);
@@ -26,7 +26,7 @@ public class MachineTagsTests(WireMockFixture fixture) : IClassFixture<WireMockF
             """{"stat":"ok","pairs":{"page":1,"pages":1,"perpage":10,"total":1,"pair":[{"_content":"dc:subject","usage":"50","namespace":"dc","predicate":"subject"}]}}""");
 
         using var client = fixture.CreateClient();
-        var result = await client.MachineTags.GetPairsAsync();
+        var result = await client.MachineTags.GetPairsAsync(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
         Assert.Single(result.Values);
@@ -40,7 +40,7 @@ public class MachineTagsTests(WireMockFixture fixture) : IClassFixture<WireMockF
             """{"stat":"ok","predicates":{"page":1,"pages":1,"perpage":10,"total":1,"predicate":[{"_content":"subject","namespaces":"3","usage":"80"}]}}""");
 
         using var client = fixture.CreateClient();
-        var result = await client.MachineTags.GetPredicatesAsync();
+        var result = await client.MachineTags.GetPredicatesAsync(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
         Assert.Single(result.Values);
@@ -54,7 +54,7 @@ public class MachineTagsTests(WireMockFixture fixture) : IClassFixture<WireMockF
             """{"stat":"ok","values":{"page":1,"pages":1,"perpage":10,"total":1,"namespace":"dc","predicate":"subject","value":[{"_content":"landscape","usage":"20"}]}}""");
 
         using var client = fixture.CreateClient();
-        var result = await client.MachineTags.GetValuesAsync("dc", "subject");
+        var result = await client.MachineTags.GetValuesAsync("dc", "subject", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
         Assert.Single(result.Values);

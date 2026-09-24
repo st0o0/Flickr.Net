@@ -24,7 +24,7 @@ public class PandaTests(WireMockFixture fixture) : IClassFixture<WireMockFixture
             """);
 
         using var client = _fixture.CreateClient();
-        var result = await client.Panda.GetListAsync();
+        var result = await client.Panda.GetListAsync(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
         Assert.Equal(3, result.Values.Count);
@@ -58,14 +58,14 @@ public class PandaTests(WireMockFixture fixture) : IClassFixture<WireMockFixture
             """);
 
         using var client = _fixture.CreateClient();
-        var result = await client.Panda.GetPhotosAsync("ling ling");
+        var result = await client.Panda.GetPhotosAsync("ling ling", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
         Assert.Equal("ling ling", result.Panda);
         Assert.Single(result.Values);
 
         var logEntry = Assert.Single(_fixture.LogEntries);
-        var body = logEntry.RequestMessage.Body;
+        var body = logEntry.RequestMessage!.Body!;
         Assert.Contains("panda_name=ling", body);
     }
 }

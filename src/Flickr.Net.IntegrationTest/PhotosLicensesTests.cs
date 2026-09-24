@@ -12,7 +12,7 @@ public class PhotosLicensesTests(WireMockFixture fixture) : IClassFixture<WireMo
             """{"stat":"ok","licenses":{"license":[{"id":"0","name":"All Rights Reserved","url":""}]}}""");
 
         using var client = fixture.CreateClient();
-        var result = await client.PhotosLicenses.GetInfoAsync();
+        var result = await client.PhotosLicenses.GetInfoAsync(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
         Assert.Single(result.Values);
@@ -26,7 +26,7 @@ public class PhotosLicensesTests(WireMockFixture fixture) : IClassFixture<WireMo
             """{"stat":"ok"}""");
 
         using var client = fixture.CreateAuthenticatedClient();
-        await client.PhotosLicenses.SetLicenseAsync("photo1", Enums.LicenseType.AllRightsReserved);
+        await client.PhotosLicenses.SetLicenseAsync("photo1", Enums.LicenseType.AllRightsReserved, cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -37,7 +37,7 @@ public class PhotosLicensesTests(WireMockFixture fixture) : IClassFixture<WireMo
             """{"stat":"ok","licenses":{"license":[{"id":"0","name":"All Rights Reserved","url":""},{"id":"4","name":"Attribution License","url":"https://creativecommons.org/licenses/by/2.0/"}]}}""");
 
         using var client = fixture.CreateClient();
-        var result = await client.PhotosLicenses.GetAvailableAsync("photo1");
+        var result = await client.PhotosLicenses.GetAvailableAsync("photo1", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
         Assert.Equal(2, result.Values.Count);
@@ -51,7 +51,7 @@ public class PhotosLicensesTests(WireMockFixture fixture) : IClassFixture<WireMo
             """{"stat":"ok","licenses":{"licensehistoryentry":[{"old_license":0,"new_license":4,"date_change":"2024-01-15"}]}}""");
 
         using var client = fixture.CreateAuthenticatedClient();
-        var result = await client.PhotosLicenses.GetLicenseHistoryAsync("photo1");
+        var result = await client.PhotosLicenses.GetLicenseHistoryAsync("photo1", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
         Assert.Single(result.Values);

@@ -20,7 +20,7 @@ public class ActivityTests : IClassFixture<WireMockFixture>
             """{"stat":"ok","items":{"item":[{"type":"photoset","id":"123"}]}}""");
 
         using var client = _fixture.CreateAuthenticatedClient();
-        var result = await client.Activity.UserCommentsAsync();
+        var result = await client.Activity.UserCommentsAsync(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
         Assert.Single(result.Values);
@@ -33,7 +33,7 @@ public class ActivityTests : IClassFixture<WireMockFixture>
             """{"stat":"ok","items":{"item":[{"type":"photo","id":"456"}]}}""");
 
         using var client = _fixture.CreateAuthenticatedClient();
-        var result = await client.Activity.UserPhotosAsync(1, TimeType.Days);
+        var result = await client.Activity.UserPhotosAsync(1, TimeType.Days, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
         Assert.Single(result.Values);

@@ -19,7 +19,7 @@ public class BlogsTests : IClassFixture<WireMockFixture>
             """{"stat":"ok","blogs":{"blog":[{"id":"73","name":"Test Blog","needspassword":"0","url":"http://example.com/"}]}}""");
 
         using var client = _fixture.CreateAuthenticatedClient();
-        var result = await client.Blogs.GetListAsync();
+        var result = await client.Blogs.GetListAsync(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
         Assert.Single(result.Values);
@@ -33,7 +33,7 @@ public class BlogsTests : IClassFixture<WireMockFixture>
             """{"stat":"ok","services":{"service":[{"id":"beta.blogger.com","_content":"Blogger"}]}}""");
 
         using var client = _fixture.CreateClient();
-        var result = await client.Blogs.GetServicesAsync();
+        var result = await client.Blogs.GetServicesAsync(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
         Assert.Single(result.Values);
@@ -45,6 +45,6 @@ public class BlogsTests : IClassFixture<WireMockFixture>
         _fixture.StubFlickrMethod("flickr.blogs.postPhoto", """{"stat":"ok"}""");
 
         using var client = _fixture.CreateClient();
-        await client.Blogs.PostPhotoAsync("blog1", "photo1", "Title", "Description");
+        await client.Blogs.PostPhotoAsync("blog1", "photo1", "Title", "Description", cancellationToken: TestContext.Current.CancellationToken);
     }
 }

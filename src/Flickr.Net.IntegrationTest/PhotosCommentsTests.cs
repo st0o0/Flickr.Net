@@ -12,7 +12,7 @@ public class PhotosCommentsTests(WireMockFixture fixture) : IClassFixture<WireMo
             """{"stat":"ok","comment":{"id":"comment-123"}}""");
 
         using var client = fixture.CreateClient();
-        var result = await client.PhotosComments.AddCommentAsync("photo1", "great photo");
+        var result = await client.PhotosComments.AddCommentAsync("photo1", "great photo", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal("comment-123", result);
     }
@@ -25,7 +25,7 @@ public class PhotosCommentsTests(WireMockFixture fixture) : IClassFixture<WireMo
             """{"stat":"ok"}""");
 
         using var client = fixture.CreateClient();
-        await client.PhotosComments.DeleteCommentAsync("comment-123");
+        await client.PhotosComments.DeleteCommentAsync("comment-123", cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -36,7 +36,7 @@ public class PhotosCommentsTests(WireMockFixture fixture) : IClassFixture<WireMo
             """{"stat":"ok"}""");
 
         using var client = fixture.CreateClient();
-        await client.PhotosComments.EditCommentAsync("comment-123", "updated text");
+        await client.PhotosComments.EditCommentAsync("comment-123", "updated text", cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -47,7 +47,7 @@ public class PhotosCommentsTests(WireMockFixture fixture) : IClassFixture<WireMo
             """{"stat":"ok","comments":{"photo_id":"photo1","comment":[{"id":"c1","author":"user1","_content":"great photo"}]}}""");
 
         using var client = fixture.CreateClient();
-        var result = await client.PhotosComments.GetListAsync("photo1");
+        var result = await client.PhotosComments.GetListAsync("photo1", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
         Assert.Single(result.Values);
@@ -61,7 +61,7 @@ public class PhotosCommentsTests(WireMockFixture fixture) : IClassFixture<WireMo
             """{"stat":"ok","photos":{"page":1,"pages":1,"perpage":10,"total":1,"photo":[{"id":"p1","owner":"user1","secret":"abc","server":"1","farm":1,"title":"test"}]}}""");
 
         using var client = fixture.CreateAuthenticatedClient();
-        var result = await client.PhotosComments.GetRecentForContactsAsync();
+        var result = await client.PhotosComments.GetRecentForContactsAsync(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
         Assert.Single(result.Values);

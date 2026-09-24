@@ -13,7 +13,7 @@ public class PhotosSuggestionsTests(WireMockFixture fixture) : IClassFixture<Wir
             """{"stat":"ok"}""");
 
         using var client = fixture.CreateAuthenticatedClient();
-        await client.PhotosSuggestions.ApproveSuggestionAsync("suggestion1");
+        await client.PhotosSuggestions.ApproveSuggestionAsync("suggestion1", cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -24,7 +24,7 @@ public class PhotosSuggestionsTests(WireMockFixture fixture) : IClassFixture<Wir
             """{"stat":"ok","unknownresponse":{"total":"0"}}""");
 
         using var client = fixture.CreateAuthenticatedClient();
-        var result = await client.PhotosSuggestions.GetListAsync("photo1", SuggestionStatus.Pending);
+        var result = await client.PhotosSuggestions.GetListAsync("photo1", SuggestionStatus.Pending, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
     }
@@ -37,7 +37,7 @@ public class PhotosSuggestionsTests(WireMockFixture fixture) : IClassFixture<Wir
             """{"stat":"ok"}""");
 
         using var client = fixture.CreateAuthenticatedClient();
-        await client.PhotosSuggestions.RejectSuggestionAsync("suggestion1");
+        await client.PhotosSuggestions.RejectSuggestionAsync("suggestion1", cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -48,6 +48,6 @@ public class PhotosSuggestionsTests(WireMockFixture fixture) : IClassFixture<Wir
             """{"stat":"ok"}""");
 
         using var client = fixture.CreateAuthenticatedClient();
-        await client.PhotosSuggestions.RemoveSuggestionAsync("suggestion1");
+        await client.PhotosSuggestions.RemoveSuggestionAsync("suggestion1", cancellationToken: TestContext.Current.CancellationToken);
     }
 }

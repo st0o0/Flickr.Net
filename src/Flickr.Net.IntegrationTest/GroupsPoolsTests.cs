@@ -21,7 +21,7 @@ public class GroupsPoolsTests : IClassFixture<WireMockFixture>
         _fixture.StubFlickrMethod("flickr.groups.pools.add", """{"stat":"ok"}""");
 
         using var client = _fixture.CreateAuthenticatedClient();
-        await client.GroupsPools.AddAsync("photo1", "group1");
+        await client.GroupsPools.AddAsync("photo1", "group1", cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -31,7 +31,7 @@ public class GroupsPoolsTests : IClassFixture<WireMockFixture>
             """{"stat":"ok","count":{"_content":"5"},"nextphoto":{"id":"next1"},"prevphoto":{"id":"prev1"}}""");
 
         using var client = _fixture.CreateClient();
-        var result = await client.GroupsPools.GetContextAsync("photo1", "group1");
+        var result = await client.GroupsPools.GetContextAsync("photo1", "group1", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
     }
@@ -43,7 +43,7 @@ public class GroupsPoolsTests : IClassFixture<WireMockFixture>
             """{"stat":"ok","groups":{"page":1,"pages":1,"perpage":10,"total":1,"group":[{"nsid":"group1","name":"Test Group"}]}}""");
 
         using var client = _fixture.CreateClient();
-        var result = await client.GroupsPools.GetGroupsAsync();
+        var result = await client.GroupsPools.GetGroupsAsync(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
         Assert.Single(result.Values);
@@ -55,7 +55,7 @@ public class GroupsPoolsTests : IClassFixture<WireMockFixture>
         _fixture.StubFlickrMethod("flickr.groups.pools.getPhotos", PagedPhotosJson);
 
         using var client = _fixture.CreateClient();
-        var result = await client.GroupsPools.GetPhotosAsync("group1");
+        var result = await client.GroupsPools.GetPhotosAsync("group1", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
         Assert.Single(result.Values);
@@ -67,6 +67,6 @@ public class GroupsPoolsTests : IClassFixture<WireMockFixture>
         _fixture.StubFlickrMethod("flickr.groups.pools.remove", """{"stat":"ok"}""");
 
         using var client = _fixture.CreateClient();
-        await client.GroupsPools.RemoveAsync("photo1", "group1");
+        await client.GroupsPools.RemoveAsync("photo1", "group1", cancellationToken: TestContext.Current.CancellationToken);
     }
 }

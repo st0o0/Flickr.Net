@@ -24,7 +24,7 @@ public class OAuthTests(WireMockFixture fixture) : IClassFixture<WireMockFixture
             """);
 
         using var client = fixture.CreateAuthenticatedClient();
-        var result = await client.OAuth.CheckTokenAsync();
+        var result = await client.OAuth.CheckTokenAsync(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
     }

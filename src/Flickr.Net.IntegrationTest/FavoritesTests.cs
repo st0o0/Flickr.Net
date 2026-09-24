@@ -21,7 +21,7 @@ public class FavoritesTests : IClassFixture<WireMockFixture>
         _fixture.StubFlickrMethod("flickr.favorites.add", """{"stat":"ok"}""");
 
         using var client = _fixture.CreateClient();
-        await client.Favorites.AddAsync("photo1");
+        await client.Favorites.AddAsync("photo1", cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -31,7 +31,7 @@ public class FavoritesTests : IClassFixture<WireMockFixture>
             """{"stat":"ok","count":{"_content":"5"},"nextphoto":{"id":"next1"},"prevphoto":{"id":"prev1"}}""");
 
         using var client = _fixture.CreateClient();
-        var result = await client.Favorites.GetContextAsync("photo1", "user1");
+        var result = await client.Favorites.GetContextAsync("photo1", "user1", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
     }
@@ -42,7 +42,7 @@ public class FavoritesTests : IClassFixture<WireMockFixture>
         _fixture.StubFlickrMethod("flickr.favorites.getList", PagedPhotosJson);
 
         using var client = _fixture.CreateAuthenticatedClient();
-        var result = await client.Favorites.GetListAsync("user1");
+        var result = await client.Favorites.GetListAsync("user1", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
         Assert.Single(result.Values);
@@ -55,7 +55,7 @@ public class FavoritesTests : IClassFixture<WireMockFixture>
         _fixture.StubFlickrMethod("flickr.favorites.getPublicList", PagedPhotosJson);
 
         using var client = _fixture.CreateClient();
-        var result = await client.Favorites.GetPublicListAsync("user1");
+        var result = await client.Favorites.GetPublicListAsync("user1", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
         Assert.Single(result.Values);
@@ -67,6 +67,6 @@ public class FavoritesTests : IClassFixture<WireMockFixture>
         _fixture.StubFlickrMethod("flickr.favorites.remove", """{"stat":"ok"}""");
 
         using var client = _fixture.CreateClient();
-        await client.Favorites.RemoveAsync("photo1");
+        await client.Favorites.RemoveAsync("photo1", cancellationToken: TestContext.Current.CancellationToken);
     }
 }

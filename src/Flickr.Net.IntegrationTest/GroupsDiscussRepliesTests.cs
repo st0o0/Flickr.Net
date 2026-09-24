@@ -18,7 +18,7 @@ public class GroupsDiscussRepliesTests : IClassFixture<WireMockFixture>
         _fixture.StubFlickrMethod("flickr.groups.discuss.replies.add", """{"stat":"ok"}""");
 
         using var client = _fixture.CreateAuthenticatedClient();
-        await client.GroupsDiscussReplies.AddAsync("topic1", "Hello");
+        await client.GroupsDiscussReplies.AddAsync("topic1", "Hello", cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -27,7 +27,7 @@ public class GroupsDiscussRepliesTests : IClassFixture<WireMockFixture>
         _fixture.StubFlickrMethod("flickr.groups.discuss.replies.delete", """{"stat":"ok"}""");
 
         using var client = _fixture.CreateAuthenticatedClient();
-        await client.GroupsDiscussReplies.DeleteAsync("topic1", "reply1");
+        await client.GroupsDiscussReplies.DeleteAsync("topic1", "reply1", cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -36,7 +36,7 @@ public class GroupsDiscussRepliesTests : IClassFixture<WireMockFixture>
         _fixture.StubFlickrMethod("flickr.groups.discuss.replies.edit", """{"stat":"ok"}""");
 
         using var client = _fixture.CreateAuthenticatedClient();
-        await client.GroupsDiscussReplies.EditAsync("topic1", "reply1", "Updated");
+        await client.GroupsDiscussReplies.EditAsync("topic1", "reply1", "Updated", cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -46,7 +46,7 @@ public class GroupsDiscussRepliesTests : IClassFixture<WireMockFixture>
             """{"stat":"ok","reply":{"id":"reply1","message":["test reply"]}}""");
 
         using var client = _fixture.CreateClient();
-        var result = await client.GroupsDiscussReplies.GetInfoAsync("topic1", "reply1");
+        var result = await client.GroupsDiscussReplies.GetInfoAsync("topic1", "reply1", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
     }
@@ -58,7 +58,7 @@ public class GroupsDiscussRepliesTests : IClassFixture<WireMockFixture>
             """{"stat":"ok","replies":{"reply":[{"id":"r1","message":["hello"]}]}}""");
 
         using var client = _fixture.CreateClient();
-        var result = await client.GroupsDiscussReplies.GetListAsync("topic1", 10);
+        var result = await client.GroupsDiscussReplies.GetListAsync("topic1", 10, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
         Assert.Single(result.Values);

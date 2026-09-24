@@ -1,4 +1,3 @@
-using Flickr.Net.Enums;
 using Flickr.Net.IntegrationTest.Fixtures;
 
 namespace Flickr.Net.IntegrationTest;
@@ -14,7 +13,7 @@ public class PhotosGeoTests(WireMockFixture fixture) : IClassFixture<WireMockFix
             """);
 
         using var client = fixture.CreateClient();
-        var result = await client.Photos.Geo.GetLocationAsync("p1");
+        var result = await client.Photos.Geo.GetLocationAsync("p1", cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(result);
     }
@@ -26,7 +25,7 @@ public class PhotosGeoTests(WireMockFixture fixture) : IClassFixture<WireMockFix
         fixture.StubFlickrMethod("flickr.photos.geo.setLocation", """{"stat":"ok"}""");
 
         using var client = fixture.CreateClient();
-        await client.Photos.Geo.SetLocationAsync("p1", 48.858, 2.294);
+        await client.Photos.Geo.SetLocationAsync("p1", 48.858, 2.294, cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -36,6 +35,6 @@ public class PhotosGeoTests(WireMockFixture fixture) : IClassFixture<WireMockFix
         fixture.StubFlickrMethod("flickr.photos.geo.removeLocation", """{"stat":"ok"}""");
 
         using var client = fixture.CreateClient();
-        await client.Photos.Geo.RemoveLocationAsync("p1");
+        await client.Photos.Geo.RemoveLocationAsync("p1", cancellationToken: TestContext.Current.CancellationToken);
     }
 }
