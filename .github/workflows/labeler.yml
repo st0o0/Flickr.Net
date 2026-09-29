@@ -1,0 +1,9 @@
+name: PR Labeler
+
+on:
+  pull_request_target:
+    types: [opened, synchronize]
+
+jobs:
+  label:
+    uses: st0o0/github-workflows/.github/workflows/labeler.yml@main

@@ -1,0 +1,10 @@
+name: Sync Labels
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 6 * * 1"
+
+jobs:
+  labels:
+    uses: st0o0/github-workflows/.github/workflows/labels.yml@main
