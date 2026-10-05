@@ -7,3 +7,6 @@ on:
 jobs:
   label:
     uses: st0o0/github-workflows/.github/workflows/labeler.yml@main
+    permissions:
+      contents: read
+      pull-requests: write
