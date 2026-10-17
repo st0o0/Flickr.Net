@@ -113,7 +113,7 @@ public class PhotoTests
         // Verified against the live API: when extras=geo is requested and the
         // photo has NO geo data, Flickr emits unquoted numeric zeros (while
         // real coordinates come back as strings). The mapping stays faithful
-        // to the payload — consumers should treat 0/0 as "no geolocation".
+        // to the payload, so consumers should treat 0/0 as "no geolocation".
         const string json = """{"photos":{"page":1,"pages":1,"perpage":10,"total":1,"photo":[{"id":"200500001","owner":"12345678@N00","secret":"***","server":"123","farm":1,"title":"Old photo without geo","ispublic":1,"isfriend":0,"isfamily":0,"latitude":0,"longitude":0,"accuracy":"0","context":0,"place_id":null,"woeid":null,"geo_is_public":1,"geo_is_contact":0,"geo_is_friend":0,"geo_is_family":0}]},"stat":"ok"}""";
 
         var result = FlickrConvert.DeserializeObject<FlickrResult<PagedPhotos>>(Encoding.UTF8.GetBytes(json));
@@ -212,7 +212,7 @@ public class PhotoTests
     public void PhotoDateUploadedIsDefaultWhenExtraNotRequested()
     {
         // Without extras=date_upload, flickr.photos.search simply omits the
-        // attribute — non-nullable DateTime stays at its default.
+        // attribute: non-nullable DateTime stays at its default.
         const string json = """{"photos":{"page":1,"pages":1,"perpage":10,"total":1,"photo":[{"id":"55500000002","owner":"12345678@N00","secret":"b2c3d4e5f6","server":"65535","farm":66,"title":"Stroll by the Sea","ispublic":1,"isfriend":0,"isfamily":0}]},"stat":"ok"}""";
 
         var result = FlickrConvert.DeserializeObject<FlickrResult<PagedPhotos>>(Encoding.UTF8.GetBytes(json));
@@ -228,8 +228,8 @@ public class PhotoTests
     {
         // AddedDate ("dateadded") is a dead field: no endpoint deserialized
         // into Photo ever returns that attribute (photos.search returns
-        // dateupload; photosets.getPhotos — the endpoint that does return
-        // dateadded — deserializes into PhotosetPhoto : PhotoBase, which
+        // dateupload; photosets.getPhotos, the endpoint that does return
+        // dateadded, deserializes into PhotosetPhoto : PhotoBase, which
         // doesn't map it). Locked in via [Obsolete] pointing at DateUploaded
         // until outright removal in a future major version.
         var property = typeof(Photo).GetProperty("AddedDate");

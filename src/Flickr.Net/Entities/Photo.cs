@@ -12,7 +12,7 @@ public record Photo : UltraDeluxePhotoBase
     /// Dead field: no current Flickr API response that deserializes into
     /// <see cref="Photo"/> includes the "dateadded" attribute
     /// (flickr.photos.search returns dateupload, and the endpoint that does
-    /// return dateadded — flickr.photosets.getPhotos — deserializes into
+    /// return dateadded (flickr.photosets.getPhotos) deserializes into
     /// <see cref="PhotosetPhoto"/>, which does not map it). This property
     /// is therefore never populated and always returns
     /// <see langword="default"/>(<see cref="DateTime"/>). Use

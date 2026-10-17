@@ -5,7 +5,7 @@ using Flickr.Net.Internals.Attributes;
 namespace Flickr.Net;
 
 [FlickrJsonPropertyName("gallery")]
-/// <summary>Represents a Flickr gallery — a curated collection of other users' photos.</summary>
+/// <summary>Represents a Flickr gallery: a curated collection of other users' photos.</summary>
 public record Gallery : FlickrEntityBase<Id>, IBuddyIcon, IThumbnailUrl, ISquareUrl, ISmallUrl, IMediumUrl
 {
     [JsonPropertyName("gallery_id")]

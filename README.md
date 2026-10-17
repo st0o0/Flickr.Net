@@ -4,7 +4,7 @@
 [![NuGet Downloads](https://img.shields.io/nuget/dt/Flickr.Net.svg?style=flat-square)](https://www.nuget.org/packages/Flickr.Net/)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue.svg?style=flat-square)](LICENSE)
 
-A modern, fully-featured .NET client library for the Flickr API with dependency injection, `IHttpClientFactory` integration, and optional `HybridCache` support.
+A .NET client library for the Flickr API with dependency injection, `IHttpClientFactory` integration, and optional `HybridCache` support.
 
 ## ✨ Features
 
@@ -12,12 +12,12 @@ A modern, fully-featured .NET client library for the Flickr API with dependency 
 - 📚 **Albums & Collections** - Create and manage photo albums and collections
 - 🎨 **Galleries** - Browse and interact with Flickr galleries
 - 👥 **User Management** - Access user profiles, contacts, and favorites
-- 🔍 **Advanced Search** - Powerful search capabilities with filtering
+- 🔍 **Advanced Search** - Search with filtering
 - 🏷️ **Tags & Metadata** - Full support for tags, EXIF data, and metadata
 - 🔐 **OAuth Authentication** - Secure authentication with OAuth 1.0a
-- ⚡ **Async/Await** - Modern async API throughout
-- 📦 **Strongly Typed** - Type-safe API with comprehensive models
-- 💉 **Dependency Injection** - First-class DI support with `IHttpClientFactory`
+- ⚡ **Async/Await** - Async API throughout
+- 📦 **Strongly Typed** - Type-safe API with typed models
+- 💉 **Dependency Injection** - DI support with `IHttpClientFactory`
 - 🗄️ **Optional Caching** - Opt-in response caching via `HybridCache`
 
 ## 📦 Installation
@@ -199,7 +199,7 @@ services.AddFlickrCaching();
 services.AddStackExchangeRedisCache(o => o.Configuration = "localhost:6379");
 ```
 
-Without `AddFlickrCaching()`, every API call goes directly to Flickr — no caching overhead.
+Without `AddFlickrCaching()`, every API call goes directly to Flickr, with no caching overhead.
 
 ## 🔧 Configuration
 

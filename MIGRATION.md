@@ -56,40 +56,40 @@ All leaf exception classes (e.g. `PhotoNotFoundException`, `UserNotFoundExceptio
 + await using var flickr = new FlickrClient("apiKey", "secret");
 ```
 
-`using` still works — this is additive, not a removal.
+`using` still works (this is additive, not a removal).
 
 ### Removed types
 
-- `SafeNativeMethods` — unused internal class, removed entirely.
+- `SafeNativeMethods`: unused internal class, removed entirely.
 
 ### New API coverage
 
 New sub-interfaces added to `IFlickrClient`:
 
 ```csharp
-flickr.Places         // flickr.places.* — 15 methods
-flickr.Testimonials   // flickr.testimonials.* — 13 methods
+flickr.Places         // flickr.places.* - 15 methods
+flickr.Testimonials   // flickr.testimonials.* - 13 methods
 ```
 
 New methods on existing interfaces:
 
-- `IFlickrTags.GetListUserRawAsync()` — `flickr.tags.getListUserRaw`
-- `IFlickrPhotosLicenses.GetAvailableAsync()` — `flickr.photos.licenses.getAvailable`
-- `IFlickrPhotosLicenses.GetLicenseHistoryAsync()` — `flickr.photos.licenses.getLicenseHistory`
-- `IFlickrPeople.GetPublicPhotosAsync()` — `flickr.people.getPublicPhotos`
-- `IFlickrStats.GetMostPopularPhotoDateRangeAsync()` — `flickr.stats.getMostPopularPhotoDateRange`
+- `IFlickrTags.GetListUserRawAsync()`: `flickr.tags.getListUserRaw`
+- `IFlickrPhotosLicenses.GetAvailableAsync()`: `flickr.photos.licenses.getAvailable`
+- `IFlickrPhotosLicenses.GetLicenseHistoryAsync()`: `flickr.photos.licenses.getLicenseHistory`
+- `IFlickrPeople.GetPublicPhotosAsync()`: `flickr.people.getPublicPhotos`
+- `IFlickrStats.GetMostPopularPhotoDateRangeAsync()`: `flickr.stats.getMostPopularPhotoDateRange`
 
 ### New entity properties
 
-**Photo** — 22 new extras properties: `CountFaves`, `CountComments`, `Media`, `MediaStatus`, `PathAlias`, `OwnerName`, `Views`, `License`, `MachineTags`, `OriginalFormat`, `OriginalSecret`, `Rotation`, `LastUpdate`, `Accuracy`, `Context`, `PlaceId`, `WoeId`, `GeoIsFamily`, `GeoIsFriend`, `GeoIsContact`, `GeoIsPublic`, `IconServer`, `IconFarm`.
+**Photo**: 22 new extras properties: `CountFaves`, `CountComments`, `Media`, `MediaStatus`, `PathAlias`, `OwnerName`, `Views`, `License`, `MachineTags`, `OriginalFormat`, `OriginalSecret`, `Rotation`, `LastUpdate`, `Accuracy`, `Context`, `PlaceId`, `WoeId`, `GeoIsFamily`, `GeoIsFriend`, `GeoIsContact`, `GeoIsPublic`, `IconServer`, `IconFarm`.
 
-**Person** — `PathAlias` type fixed (`object` → `string?`), 6 new relationship fields: `Contact`, `Friend`, `Family`, `RevContact`, `RevFriend`, `RevFamily`.
+**Person**: `PathAlias` type fixed (`object` → `string?`), 6 new relationship fields: `Contact`, `Friend`, `Family`, `RevContact`, `RevFriend`, `RevFamily`.
 
-**Contact** — 3 new fields: `RevContact`, `RevFriend`, `RevFamily`.
+**Contact**: 3 new fields: `RevContact`, `RevFriend`, `RevFamily`.
 
-**GroupInfo** — 2 new fields: `PoolCount`, `TopicCount`.
+**GroupInfo**: 2 new fields: `PoolCount`, `TopicCount`.
 
-**PhotoInfo** — new `Permissions` property (`PhotoPermissions` record).
+**PhotoInfo**: new `Permissions` property (`PhotoPermissions` record).
 
 ### Naming consistency fixes
 
@@ -173,16 +173,16 @@ The custom file-based cache (`PersistentCache`, `LockFile`, `.dat` files) has be
 ```
 
 **Removed properties** from `FlickrConfiguration`:
-- `CacheDisabled` — caching is now opt-in, not opt-out
-- `CacheTimeout` — use `HybridCacheEntryOptions.Expiration` instead
-- `CacheLocation` — no longer file-based
-- `CacheSize` — managed automatically by `HybridCache`
+- `CacheDisabled`: caching is now opt-in, not opt-out
+- `CacheTimeout`: use `HybridCacheEntryOptions.Expiration` instead
+- `CacheLocation`: no longer file-based
+- `CacheSize`: managed automatically by `HybridCache`
 
 **Removed types:**
 - `FlickrCachingSettings`
 - `Cache`, `PersistentCache`, `LockFile`, `ICacheItem`, `ResponseCacheItem`
 
-**No caching by default.** Call `AddFlickrCaching()` to enable it. Without DI, there is no caching — this matches the old behavior where `CacheTimeout` defaulted to `TimeSpan.MinValue` (effectively always expired).
+**No caching by default.** Call `AddFlickrCaching()` to enable it. Without DI, there is no caching. This matches the old behavior where `CacheTimeout` defaulted to `TimeSpan.MinValue` (effectively always expired).
 
 ### New Sub-Interface Properties
 

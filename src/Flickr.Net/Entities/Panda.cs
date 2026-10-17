@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 using Flickr.Net.Bases;
 
 namespace Flickr.Net;
-/// <summary>Represents a Flickr Panda — a content discovery agent.</summary>
+/// <summary>Represents a Flickr Panda: a content discovery agent.</summary>
 public record Panda : FlickrEntityBase
 {
     [JsonPropertyName("_content")]
