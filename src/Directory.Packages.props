@@ -6,10 +6,10 @@
 
     <ItemGroup>
         <PackageVersion Include="Microsoft.Extensions.Caching.Hybrid" Version="10.11.0"/>
-        <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="10.0.13"/>
-        <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.13"/>
-        <PackageVersion Include="Microsoft.Extensions.Http" Version="10.0.13"/>
-        <PackageVersion Include="Microsoft.Extensions.Options" Version="10.0.13"/>
+        <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="10.0.14"/>
+        <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.14"/>
+        <PackageVersion Include="Microsoft.Extensions.Http" Version="10.0.14"/>
+        <PackageVersion Include="Microsoft.Extensions.Options" Version="10.0.14"/>
         <!--- Testing -->
         <PackageVersion Include="Microsoft.Testing.Extensions.CodeCoverage" Version="18.12.0"/>
         <PackageVersion Include="NSubstitute" Version="6.2.0"/>
