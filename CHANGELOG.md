@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.5.1](https://github.com/st0o0/Flickr.Net/compare/v0.5.0...v0.5.1) (2026-10-29)
+
+
+### Bug Fixes
+
+* grant pull-requests/issues write permission to labeler and label-sync callers ([63aa4d2](https://github.com/st0o0/Flickr.Net/commit/63aa4d27a3a2614369b6e02fc6da1f4d4635882c))
+
+
+### Documentation
+
+* remove em dashes and simplify wording ([1ea96d0](https://github.com/st0o0/Flickr.Net/commit/1ea96d03e4dc98824edb5049cef47c5f5f94897c))
+
 ## [0.5.0](https://github.com/st0o0/Flickr.Net/compare/v0.4.0...v0.5.0) (2026-09-24)
 
 
