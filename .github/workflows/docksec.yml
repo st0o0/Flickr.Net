@@ -1,4 +1,4 @@
-name: Security
+name: DockSec
 
 on:
   pull_request:
@@ -10,12 +10,12 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: security-${{ github.ref }}
+  group: docksec-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   scan:
-    uses: st0o0/github-workflows/.github/workflows/security.yml@main
+    uses: st0o0/github-workflows/.github/workflows/docksec.yml@main
     with:
       scan-type: fs
     permissions:
