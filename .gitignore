@@ -37,8 +37,10 @@ BenchmarkDotNet.Artifacts/
 coverage-results/
 results/
 
-# Claude Code
-.claude/
+# Claude Code (skills and commands are tracked explicitly)
+.claude/*
+!.claude/skills/
+!.claude/commands/
 
 # OpenSpec
 openspec/
