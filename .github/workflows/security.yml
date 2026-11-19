@@ -5,6 +5,11 @@ on:
     paths:
       - 'src/Directory.Packages.props'
       - 'src/**/*.csproj'
+  push:
+    branches: [main]
+    paths:
+      - 'src/Directory.Packages.props'
+      - 'src/**/*.csproj'
   schedule:
     - cron: '0 6 * * 1'
   workflow_dispatch:
