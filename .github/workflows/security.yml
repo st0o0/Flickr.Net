@@ -25,4 +25,5 @@ jobs:
       scan-type: fs
     permissions:
       contents: read
+      packages: read
       security-events: write
