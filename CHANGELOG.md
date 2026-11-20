@@ -1,5 +1,31 @@
 # Changelog
 
+## [0.5.1](https://github.com/st0o0/Flickr.Net/compare/v0.5.0...v0.5.1) (2026-11-20)
+
+
+### Features
+
+* integrate slopwatch analysis with proper error handling ([3f72890](https://github.com/st0o0/Flickr.Net/commit/3f7289007a13236160e5596f99052147e55cdc1b))
+* **security:** add push trigger for source scan on main ([c1d280a](https://github.com/st0o0/Flickr.Net/commit/c1d280a419c2856247592ba34f468a77d5871b00))
+
+
+### Bug Fixes
+
+* grant pull-requests/issues write permission to labeler and label-sync callers ([63aa4d2](https://github.com/st0o0/Flickr.Net/commit/63aa4d27a3a2614369b6e02fc6da1f4d4635882c))
+* **security:** add packages:read permission for reusable workflow compatibility ([5752e74](https://github.com/st0o0/Flickr.Net/commit/5752e7437e71fd3afcfb2fb62b283fc3f5107418))
+* **security:** wire trivy-config in security workflow ([2375b65](https://github.com/st0o0/Flickr.Net/commit/2375b657f6cc50d19d90321036d0afddeb9edc76))
+
+
+### Documentation
+
+* remove em dashes and simplify wording ([1ea96d0](https://github.com/st0o0/Flickr.Net/commit/1ea96d03e4dc98824edb5049cef47c5f5f94897c))
+
+
+### Refactoring
+
+* **security:** remove unused trivy.yaml placeholder ([2945d2b](https://github.com/st0o0/Flickr.Net/commit/2945d2b39661427c2c4ef5e05bfce171fa6513e3))
+* **security:** simplify permissions, add push trigger ([816da53](https://github.com/st0o0/Flickr.Net/commit/816da53e6417008dd65897e91bffc2513df9ebe5))
+
 ## [0.5.0](https://github.com/st0o0/Flickr.Net/compare/v0.4.0...v0.5.0) (2026-09-24)
 
 
