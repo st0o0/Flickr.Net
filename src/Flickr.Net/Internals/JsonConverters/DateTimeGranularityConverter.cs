@@ -32,11 +32,11 @@ public sealed class DateTimeGranularityConverter : JsonConverter<DateTime>
         }
 
         var format = "yyyy-MM-dd HH:mm:ss";
-        try
+        if (DateTime.TryParseExact(date, format, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None, out var parsed))
         {
-            output = DateTime.ParseExact(date, format, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None);
+            output = parsed;
         }
-        catch { }
+
         return output;
     }
 }

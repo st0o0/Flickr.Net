@@ -16,6 +16,7 @@ jobs:
     with:
       solution-file: Flickr.Net.slnx
       has-dockerfile: false
+      slopwatch: true
 
   commits:
     uses: st0o0/github-workflows/.github/workflows/commitlint.yml@main

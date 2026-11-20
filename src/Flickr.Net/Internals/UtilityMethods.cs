@@ -244,20 +244,14 @@ public static class UtilityMethods
         var format2 = "yyyy-MM-dd hh:mm:ss";
         var iformat = DateTimeFormatInfo.InvariantInfo;
 
-        try
+        if (DateTime.TryParseExact(p, format1, iformat, DateTimeStyles.None, out var result1))
         {
-            return DateTime.ParseExact(p, format1, iformat, DateTimeStyles.None);
-        }
-        catch (FormatException)
-        {
+            return result1;
         }
 
-        try
+        if (DateTime.TryParseExact(p, format2, iformat, DateTimeStyles.None, out var result2))
         {
-            return DateTime.ParseExact(p, format2, iformat, DateTimeStyles.None);
-        }
-        catch (FormatException)
-        {
+            return result2;
         }
 
         return DateTime.MinValue;

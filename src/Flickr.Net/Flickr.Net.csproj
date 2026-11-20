@@ -14,8 +14,7 @@
     </PropertyGroup>
     <PropertyGroup>
         <IsPackable>true</IsPackable>
-        <GenerateDocumentationFile>true</GenerateDocumentationFile>
-        <NoWarn>CS1591;CS1587</NoWarn>
+        <GenerateDocumentationFile>false</GenerateDocumentationFile>
         <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
     </PropertyGroup>
     <PropertyGroup>
