@@ -5,13 +5,11 @@ on:
     paths:
       - 'src/Directory.Packages.props'
       - 'src/**/*.csproj'
-      - 'trivy.yaml'
   push:
     branches: [main]
     paths:
       - 'src/Directory.Packages.props'
       - 'src/**/*.csproj'
-      - 'trivy.yaml'
   schedule:
     - cron: '0 6 * * 1'
   workflow_dispatch:
@@ -25,7 +23,6 @@ jobs:
     uses: st0o0/github-workflows/.github/workflows/security.yml@main
     with:
       scan-type: fs
-      trivy-config: trivy.yaml
     permissions:
       contents: read
       security-events: write

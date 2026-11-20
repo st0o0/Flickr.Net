@@ -1,3 +1,0 @@
-# trivy.yaml — project-level Trivy scan configuration
-# Note: severity, scanners, and ignore-unfixed are set by the CI workflow
-# and take precedence over this file.
