@@ -41,6 +41,7 @@ results/
 .claude/*
 !.claude/skills/
 !.claude/commands/
+!.claude/settings.json
 
 # OpenSpec
 openspec/
