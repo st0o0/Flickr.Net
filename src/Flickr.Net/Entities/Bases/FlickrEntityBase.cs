@@ -18,7 +18,7 @@ public interface IFlickrEntity<T> : IFlickrEntity where T : IIdentifierType
 {
     [JsonPropertyGenericTypeName(0)]
     /// <summary>The unique identifier.</summary>
-    public T Id { get; init; }
+    T Id { get; init; }
 }
 /// <summary>Marker interface for all Flickr API entity types.</summary>
 public interface IFlickrEntity;

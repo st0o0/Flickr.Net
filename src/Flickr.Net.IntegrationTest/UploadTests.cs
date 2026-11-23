@@ -16,7 +16,7 @@ public class UploadTests(WireMockFixture fixture) : IClassFixture<WireMockFixtur
             """);
 
         using var client = fixture.CreateAuthenticatedClient();
-        using var stream = new MemoryStream(new byte[] { 0xFF, 0xD8, 0xFF, 0xE0 });
+        using var stream = new MemoryStream([0xFF, 0xD8, 0xFF, 0xE0]);
 
         var photoId = await client.Upload.UploadPictureAsync(stream, "test.jpg", "Test Photo", cancellationToken: TestContext.Current.CancellationToken);
 
@@ -38,7 +38,7 @@ public class UploadTests(WireMockFixture fixture) : IClassFixture<WireMockFixtur
             """);
 
         using var client = fixture.CreateAuthenticatedClient();
-        using var stream = new MemoryStream(new byte[] { 0xFF, 0xD8, 0xFF, 0xE0 });
+        using var stream = new MemoryStream([0xFF, 0xD8, 0xFF, 0xE0]);
 
         var photoId = await client.Upload.ReplacePictureAsync(stream, "test.jpg", "12345", cancellationToken: TestContext.Current.CancellationToken);
 

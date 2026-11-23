@@ -8,7 +8,10 @@ public sealed class AutoNumberToStringConverter : JsonConverter<string>
     public static AutoNumberToStringConverter Instance { get; } = new();
     public override string Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        if (reader.TokenType != JsonTokenType.Number) return reader.GetString()!;
+        if (reader.TokenType != JsonTokenType.Number)
+        {
+            return reader.GetString()!;
+        }
         var value = reader.TryGetInt64(out var l) ? l : reader.GetDouble();
         return value.ToString();
     }

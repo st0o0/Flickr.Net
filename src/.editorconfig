@@ -148,6 +148,6 @@ dotnet_style_prefer_compound_assignment = true:suggestion
 dotnet_diagnostic.CA2007.severity = warning
 dotnet_diagnostic.CA1852.severity = warning
 dotnet_diagnostic.CA1052.severity = warning
-dotnet_diagnostic.IDE0130.severity = warning
+dotnet_diagnostic.IDE0130.severity = suggestion
 dotnet_diagnostic.CA1510.severity = warning
 dotnet_diagnostic.CA2016.severity = warning

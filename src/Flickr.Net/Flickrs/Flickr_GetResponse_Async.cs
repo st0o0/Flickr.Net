@@ -52,8 +52,11 @@ public sealed partial class FlickrClient
         }
         else
         {
-            await using var stream = await _responder.GetDataResponseStreamAsync(this, BaseUri.AbsoluteUri, parameters, cancellationToken).ConfigureAwait(false);
-            flickrResults = await FlickrConvert.DeserializeObjectAsync<T>(stream, cancellationToken).ConfigureAwait(false);
+            var stream = await _responder.GetDataResponseStreamAsync(this, BaseUri.AbsoluteUri, parameters, cancellationToken).ConfigureAwait(false);
+            await using (stream.ConfigureAwait(false))
+            {
+                flickrResults = await FlickrConvert.DeserializeObjectAsync<T>(stream, cancellationToken).ConfigureAwait(false);
+            }
         }
 
         return flickrResults.EnsureSuccessStatusCode();
