@@ -1,4 +1,4 @@
-﻿using Flickr.Net.Flickrs.Results;
+using Flickr.Net.Flickrs.Results;
 
 namespace Flickr.Net.Exceptions.Handlers;
 

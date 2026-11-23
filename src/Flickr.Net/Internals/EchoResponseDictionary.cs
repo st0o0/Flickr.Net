@@ -1,4 +1,4 @@
-﻿using Flickr.Net.Bases;
+using Flickr.Net.Bases;
 
 namespace Flickr.Net.Internals;
 

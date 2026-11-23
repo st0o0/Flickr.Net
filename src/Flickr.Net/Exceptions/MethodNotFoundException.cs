@@ -1,4 +1,4 @@
-﻿namespace Flickr.Net.Exceptions;
+namespace Flickr.Net.Exceptions;
 
 /// <summary>
 /// The method name supplied was not recognised by Flickr.

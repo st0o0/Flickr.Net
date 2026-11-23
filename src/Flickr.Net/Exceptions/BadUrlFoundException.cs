@@ -1,4 +1,4 @@
-﻿namespace Flickr.Net.Exceptions;
+namespace Flickr.Net.Exceptions;
 
 /// <summary>
 /// A user was included in a description or comment which Flickr rejected.

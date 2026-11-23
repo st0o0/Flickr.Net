@@ -1,4 +1,4 @@
-﻿namespace Flickr.Net.Exceptions;
+namespace Flickr.Net.Exceptions;
 
 /// <summary>
 /// The exception thrown when an error occurred while trying to parse the response from Flickr.

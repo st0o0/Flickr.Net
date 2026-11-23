@@ -1,4 +1,4 @@
-﻿namespace Flickr.Net.Exceptions;
+namespace Flickr.Net.Exceptions;
 
 /// <summary>
 /// An internal class used for catching caching exceptions.

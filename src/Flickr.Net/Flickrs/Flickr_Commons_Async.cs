@@ -1,4 +1,4 @@
-﻿namespace Flickr.Net;
+namespace Flickr.Net;
 
 /// <summary>
 /// The flickr.

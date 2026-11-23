@@ -1,4 +1,4 @@
-﻿namespace Flickr.Net.Enums;
+namespace Flickr.Net.Enums;
 
 /// <summary>
 /// The values for a content type search.
